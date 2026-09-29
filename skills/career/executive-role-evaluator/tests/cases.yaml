@@ -1,0 +1,93 @@
+cases:
+  - id: executive-role-001
+    case: inflated-cto-title
+    input: |
+      Evaluate this opportunity. CTO at a 150-person company, reports to COO, no direct reports initially,
+      technology delivered mostly by vendors. Candidate targets broad executive technology ownership.
+    expected:
+      should_trigger: true
+      must:
+        - detect title inflation risk
+        - investigate decision authority
+        - avoid treating CTO title as proof of executive scope
+        - keep confidence below high while mandate is unclear
+      must_not:
+        - assume CIO-level authority
+
+  - id: executive-role-002
+    case: deputy-cio-major-enterprise
+    input: |
+      Evaluate a Deputy CIO role reporting directly to Group CIO. Owns technology strategy, IT performance
+      and architecture in an enterprise with 3000+ IT employees, without direct infrastructure operations.
+    expected:
+      should_trigger: true
+      must:
+        - recognize bridge-to-CIO potential
+        - assess scale mandate and executive exposure separately
+        - avoid over-penalizing absence of full CIO scope
+
+  - id: executive-role-003
+    case: high-paying-narrow-role
+    input: |
+      Evaluate a role paying 30% above expectations. It owns one technology platform, team of 20,
+      reports three levels below CIO.
+    expected:
+      should_trigger: true
+      must:
+        - separate compensation attractiveness from career value
+        - flag risk of narrowing executive trajectory
+
+  - id: executive-role-004
+    case: lower-title-larger-mandate
+    input: |
+      Head of Technology reporting to CEO, 150-person organization, full technology budget,
+      member of executive committee.
+    expected:
+      should_trigger: true
+      must:
+        - recognize executive substance beyond title
+        - assess mandate and career value strongly
+
+  - id: executive-role-005
+    case: transformation-without-authority
+    input: |
+      Technology Transformation Director responsible for modernization. Functional teams remain controlled
+      by separate directors and budget is approved elsewhere.
+    expected:
+      should_trigger: true
+      must:
+        - identify accountability-authority mismatch
+        - treat the mismatch as a structural risk
+        - generate questions about governance and escalation rights
+
+  - id: executive-role-006
+    case: incomplete-recruiter-message
+    input: |
+      Recruiter says: Looking for a senior technology leader for a major international company.
+      Assess whether this is worth pursuing.
+    expected:
+      should_trigger: true
+      must:
+        - avoid scoring unsupported dimensions as known
+        - use low confidence
+        - identify decision-critical discovery questions
+      must_not:
+        - invent role scope
+
+  - id: executive-role-007
+    case: should-not-trigger-company-research-only
+    input: |
+      Research Kelvion's revenue, ownership, employee count and recent acquisitions.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform a role-fit decision
+
+  - id: executive-role-008
+    case: should-not-trigger-cv-tailoring
+    input: |
+      Tailor my CV to this CTO job description and rewrite the executive summary.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform a full executive role evaluation
