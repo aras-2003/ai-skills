@@ -5,10 +5,10 @@ description: >
   candidate fit, career value, risk and evidence quality. Use when assessing whether an executive technology
   role is worth pursuing, comparing opportunities, updating an assessment after recruiter/interview evidence,
   or identifying decision-critical unknowns. Do not use for company research alone, CV tailoring alone,
-  interview preparation alone, or generic job matching.
+  interview preparation alone, generic job matching, or factual company research that does not explicitly ask for role implications.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.0.1"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -34,6 +34,11 @@ Use a current candidate profile from the active project/context when available. 
 Work with incomplete information, but keep unsupported fields as `UNKNOWN`.
 
 ## Procedure
+
+0. **Confirm task intent before evaluating**
+   - Trigger this skill only when the user asks to assess a role, mandate, fit, career value, risk, or what company context means for a specific opportunity.
+   - If the user asks only for company facts (for example revenue, headcount, ownership, acquisitions, leadership or technology context), do not perform role evaluation and do not append career implications.
+   - If company research reveals potentially relevant facts, preserve them as context but wait for an explicit role-evaluation request before interpreting attractiveness, mandate quality or candidate fit.
 
 1. **Normalize the opportunity**
    - Extract company, title, location/work model, reporting line, team/organization size, budget authority,
@@ -87,6 +92,8 @@ Work with incomplete information, but keep unsupported fields as `UNKNOWN`.
 
 12. **Return the structured result**
     - Follow `references/output-template.md`.
+    - For simple or low-evidence cases, use the compact executive summary first and do not force every long-form section.
+    - Always make decision state and confidence explicit when this skill triggers.
     - If this is an update, preserve previous evidence and show what changed.
 
 ## Decision rules
@@ -153,6 +160,7 @@ Always include:
 - If candidate context is missing, evaluate role quality and career value generically, and mark personal fit as limited/unknown.
 - If sources conflict, surface the conflict and identify what must be validated.
 - If the task is only company research, CV tailoring or interview prep, route to the appropriate specialist skill instead of expanding this skill.
+- Do not add unsolicited role/career interpretation to a factual company-research answer, even when the conversation contains prior job-search context.
 
 ## Quality checks
 
@@ -167,6 +175,9 @@ Before returning:
 - [ ] Recommended action follows from evidence.
 - [ ] No unsupported candidate experience is claimed.
 - [ ] No generic SWOT-style filler was added.
+- [ ] The user explicitly asked for role evaluation or role implications.
+- [ ] Pure company research was not extended into career advice without an explicit request.
+- [ ] Decision and confidence are explicit whenever this skill triggers.
 
 ## References
 

@@ -91,3 +91,41 @@ cases:
       should_trigger: false
       must_not:
         - perform a full executive role evaluation
+
+  - id: executive-role-009
+    case: real-regression-company-research-context-leak
+    input: |
+      Sprawdź przychody i zatrudnienie Kelvion. Wcześniej rozmawialiśmy też o jednej z ich ról.
+    expected:
+      should_trigger: false
+      must_not:
+        - infer whether a Kelvion role is attractive
+        - discuss candidate fit
+        - discuss career value
+        - recommend recruitment actions
+
+  - id: executive-role-010
+    case: explicit-company-context-to-role-evaluation
+    input: |
+      Sprawdziłem strukturę Kelvion i widzę globalne funkcje Digital & Information Technology oraz Technology.
+      Co to oznacza dla oceny lokalnej roli CTO, o której rozmawiamy?
+    expected:
+      should_trigger: true
+      must:
+        - interpret company context only in relation to the role
+        - make decision state explicit
+        - make confidence explicit
+        - identify reporting and decision-rights unknowns
+
+  - id: executive-role-011
+    case: compact-output-discipline
+    input: |
+      CTO, 150-person company, reports to COO, no team initially, vendor-heavy IT. Is it worth continuing?
+    expected:
+      should_trigger: true
+      must:
+        - make decision state explicit
+        - make confidence explicit
+        - identify authority and team as critical unknowns
+      must_not:
+        - force irrelevant long-form sections
