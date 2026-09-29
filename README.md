@@ -37,3 +37,15 @@ The detailed process is defined in `workflows/skill-development/WORKFLOW.md`.
 Development happens on `main`. Accepted production-ready skills are promoted to `production`.
 
 This branch contains the first catalog proposal only. Individual skills will be specified and polished in later iterations.
+
+
+## Skill engineering
+
+- Process: `workflows/skill-development/WORKFLOW.md`
+- Architecture: `docs/ARCHITECTURE.md`
+- Lifecycle: `docs/LIFECYCLE.md`
+- Testing: `docs/TESTING.md`
+- ChatGPT usage: `docs/GPT-USAGE.md`
+- Generated catalog: `CATALOG.md`
+
+Static validation is enforced in GitHub Actions by `.github/workflows/validate-skills.yml`.
