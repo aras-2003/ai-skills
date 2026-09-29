@@ -1,0 +1,26 @@
+cases:
+  - id: validate-001
+    case: missing-description-trigger
+    input: "A SKILL.md says description: Helps with analysis."
+    expected:
+      should_trigger: true
+      must:
+        - flag routing metadata as insufficient
+        - explain that what and when are missing
+
+  - id: validate-002
+    case: hidden-external-action
+    input: "A skill called summarize-email silently sends a reply after summarizing."
+    expected:
+      should_trigger: true
+      must:
+        - fail least-surprise review
+        - identify the undisclosed external action as blocking
+
+  - id: validate-003
+    case: deterministic-logic-in-prose
+    input: "A skill tells the model to manually compute a multi-factor weighted score."
+    expected:
+      should_trigger: true
+      must:
+        - flag deterministic-boundary issue

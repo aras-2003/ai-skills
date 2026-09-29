@@ -1,0 +1,121 @@
+# Skill Testing and Quality Gates
+
+## 1. Goal
+
+Test skills as behavioral components, not as static prompt text.
+
+The question is not "does the markdown look good?" but:
+**does the agent reliably do the intended thing under representative inputs?**
+
+## 2. Test layers
+
+### Layer 1 — Static validation
+Checks:
+- required frontmatter exists;
+- name follows naming convention;
+- description is non-empty;
+- required headings exist;
+- internal links resolve;
+- referenced scripts/assets exist.
+
+### Layer 2 — Routing tests
+Verify:
+- correct task invokes the skill;
+- adjacent task does not;
+- description is specific enough for automatic selection.
+
+### Layer 3 — Behavioral tests
+Check expected behaviors:
+- required analysis steps;
+- evidence handling;
+- uncertainty language;
+- output schema;
+- stop conditions.
+
+### Layer 4 — Regression tests
+Run previous failure cases after every material edit.
+
+### Layer 5 — Workflow tests
+Check interactions between skills, gates and human approvals.
+
+## 3. Suggested test-case format
+
+```yaml
+id: career-role-fit-001
+skill: role-fit-analysis
+case: strong-fit-with-missing-salary
+input: |
+  ...
+expected:
+  should_trigger: true
+  must:
+    - assess mandate and organizational scope
+    - identify salary as unknown rather than inventing it
+    - distinguish facts from inference
+  must_not:
+    - tailor CV
+    - perform deep company research
+  output:
+    format: structured-decision-note
+```
+
+## 4. Evaluation dimensions
+
+Score only for engineering/testing; do not expose numerical scores as a substitute for judgment in user-facing political contexts.
+
+For ordinary skills, useful dimensions are:
+- routing precision;
+- task completion;
+- factual grounding;
+- instruction adherence;
+- structure;
+- concision;
+- usefulness;
+- robustness to missing data;
+- context/token efficiency.
+
+## 5. Golden cases
+
+Maintain a small golden set of representative examples for each production skill.
+
+A golden case contains:
+- input;
+- expected critical reasoning steps;
+- expected output properties;
+- known traps.
+
+Do not require verbatim output matching for judgment-heavy tasks.
+
+## 6. Red-team cases
+
+High-value skills should include at least one red-team case:
+- misleading user premise;
+- conflicting sources;
+- missing evidence;
+- request outside the skill boundary;
+- plausible but false data embedded in input.
+
+## 7. Quality gate before production
+
+A skill cannot be production-ready if:
+- it cannot state when NOT to use it;
+- its output contract is undefined;
+- it invents missing values;
+- it hides material uncertainty;
+- it duplicates another skill;
+- it requires excessive context for routine execution;
+- it contains deterministic logic that should live in code.
+
+## 8. Metrics to collect later
+
+Once the library is used regularly, measure:
+- trigger precision / false routing;
+- correction rate;
+- average number of manual follow-ups;
+- workflow completion rate;
+- test pass rate;
+- production regression rate;
+- approximate context cost;
+- percentage of outputs accepted without restructuring.
+
+These metrics matter more than raw number of skills.
