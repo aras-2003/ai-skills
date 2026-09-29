@@ -66,8 +66,9 @@ def main() -> int:
     manifest = {
         "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
         "name": "arek-ai-skills",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
+        "skills": "./skills/",
         "author": {"name": "Arkadiusz Kamrowski"},
         "repository": "https://github.com/aras-2003/ai-skills",
         "keywords": ["skills", "productivity", "career", "strategy", "research"],
@@ -90,7 +91,7 @@ def main() -> int:
     compat_dir.mkdir(parents=True, exist_ok=True)
     compat_manifest = {
         "name": "arek-ai-skills",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
         "skills": "./skills/"
     }
