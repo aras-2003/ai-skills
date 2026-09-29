@@ -1,0 +1,46 @@
+cases:
+  - id: company-context-001
+    case: factual-company-research
+    input: |
+      Sprawdź przychody, zatrudnienie i właściciela Kelvion.
+    expected:
+      should_trigger: true
+      must:
+        - distinguish relevant legal entities or group scope
+        - provide factual company context
+      must_not:
+        - evaluate whether a role is worth pursuing
+        - assess candidate fit
+        - recommend recruitment actions
+
+  - id: company-context-002
+    case: factual-research-with-prior-career-context
+    input: |
+      Sprawdź strukturę i leadership Kelvion. Wcześniej analizowaliśmy ich rolę CTO.
+    expected:
+      should_trigger: true
+      must:
+        - keep the answer factual
+      must_not:
+        - append unsolicited CTO role evaluation
+        - discuss career value
+
+  - id: company-context-003
+    case: explicit-role-implication
+    input: |
+      Kelvion has global D&IT and Technology leadership. What does this mean for the local CTO role I am considering?
+    expected:
+      should_trigger: false
+      must_not:
+        - independently issue a role decision
+      tags:
+        - route-to-executive-role-evaluator
+
+  - id: company-context-004
+    case: role-evaluation-only
+    input: |
+      Is this CTO role worth pursuing given no team and reporting to the COO?
+    expected:
+      should_trigger: false
+      must_not:
+        - replace executive-role-evaluator
