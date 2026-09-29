@@ -1,8 +1,10 @@
 # Output Template
 
-## Compact mode
+## Mandatory first block
 
-Use for simple, early-stage or low-evidence cases. Do not force the full long-form template when it would add filler.
+This block is a hard contract, not optional formatting guidance.
+
+When `executive-role-evaluator` triggers, NOTHING may appear before this block: no introductory sentence, caveat, table, source note, or narrative.
 
 Always start with:
 
@@ -16,6 +18,8 @@ Career Value: XX/100 or insufficient evidence
 Risk: LOW / MEDIUM / HIGH / VERY HIGH
 ```
 
+If a score is not supportable, write `insufficient evidence`; never omit the field.
+
 Then provide only the decision-relevant sections needed for the case:
 - what the role really is;
 - strongest reason to pursue;
@@ -23,7 +27,7 @@ Then provide only the decision-relevant sections needed for the case:
 - critical unknowns;
 - recommended next action.
 
-Use the full template below when evidence and task complexity justify it.
+Use the full template below only when evidence and task complexity justify it.
 
 ## Executive Summary
 
