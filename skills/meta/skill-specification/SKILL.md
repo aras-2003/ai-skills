@@ -4,10 +4,10 @@ description: >
   Decide whether a repeatable task should become an Agent Skill and define its behavioral contract before implementation. Use when proposing a new skill, splitting/merging skills, or when an existing skill has unclear scope, trigger conditions, inputs, outputs or boundaries.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
-  maturity: draft
+  version: "1.0.0"
+  maturity: production
   risk: low
-  last_reviewed: 2026-09-29
+  last_reviewed: 2026-09-30
 ---
 
 # Skill Specification
