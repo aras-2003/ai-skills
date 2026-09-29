@@ -6,8 +6,8 @@ Repeatable skills for job discovery, role evaluation, application tailoring and 
 |---|---|
 | `job-discovery` | Find relevant executive / senior technology roles from approved sources. |
 | `job-validity-check` | Confirm that an offer is active, current and not a duplicate. |
-| `role-fit-analysis` | Compare role scope, mandate and requirements with the target profile. |
-| `career-trajectory-check` | Evaluate how a role changes future career options and breadth of responsibility. |
+| `executive-role-evaluator` | Decision engine for executive technology opportunities: role substance, mandate, candidate fit, career value, risk and unknowns. |
+| `career-trajectory-check` | Optional future specialist skill for deeper career-path analysis outside a full opportunity evaluation. |
 | `company-context-research` | Research company scale, ownership, technology context, transformation and leadership. |
 | `cv-gap-analysis` | Identify missing evidence or weak alignment between CV and role. |
 | `cv-tailoring` | Tailor a mastery CV to one role without inventing experience. |
@@ -15,6 +15,6 @@ Repeatable skills for job discovery, role evaluation, application tailoring and 
 | `process-update` | Convert new recruitment information into a structured tracker update. |
 
 Suggested workflow:
-`job-discovery -> job-validity-check -> role-fit-analysis -> company-context-research -> cv-gap-analysis -> cv-tailoring`
+`job-discovery -> job-validity-check -> executive-role-evaluator -> company-context-research (when needed) -> cv-gap-analysis -> cv-tailoring`
 
 Use progressive depth: expensive research should start only after basic validity and fit checks pass.
