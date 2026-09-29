@@ -8,8 +8,8 @@ description: >
   interview preparation alone, or generic job matching.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
-  maturity: candidate
+  version: "1.0.0"
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
 ---
