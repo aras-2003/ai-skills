@@ -66,7 +66,7 @@ def main() -> int:
     manifest = {
         "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
         "name": "arek-ai-skills",
-        "version": "0.1.0",
+        "version": "1.0.1",
         "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
         "author": {"name": "Arkadiusz Kamrowski"},
         "repository": "https://github.com/aras-2003/ai-skills",
@@ -82,6 +82,22 @@ def main() -> int:
         }
     }
     (out / "plugin.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+    # Compatibility overlay for ChatGPT/Codex clients that still rely on
+    # the legacy plugin manifest. The root portable plugin.json remains
+    # canonical, while this explicitly exposes the bundled skills directory.
+    compat_dir = out / ".codex-plugin"
+    compat_dir.mkdir(parents=True, exist_ok=True)
+    compat_manifest = {
+        "name": "arek-ai-skills",
+        "version": "1.0.1",
+        "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
+        "skills": "./skills/"
+    }
+    (compat_dir / "plugin.json").write_text(
+        json.dumps(compat_manifest, indent=2) + "\n",
+        encoding="utf-8"
+    )
 
     print(f"Packaged {len(selected)} production skills into {out}")
     for item in selected:
