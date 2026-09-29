@@ -1,5 +1,30 @@
 # Output Template
 
+## Compact mode
+
+Use for simple, early-stage or low-evidence cases. Do not force the full long-form template when it would add filler.
+
+Always start with:
+
+```
+Decision: PURSUE / INVESTIGATE / LOW PRIORITY / SKIP
+Confidence: HIGH / MEDIUM / LOW
+Role archetype: ...
+Role Quality: XX/100 or insufficient evidence
+Candidate Fit: XX/100 or insufficient evidence
+Career Value: XX/100 or insufficient evidence
+Risk: LOW / MEDIUM / HIGH / VERY HIGH
+```
+
+Then provide only the decision-relevant sections needed for the case:
+- what the role really is;
+- strongest reason to pursue;
+- strongest reason not to pursue;
+- critical unknowns;
+- recommended next action.
+
+Use the full template below when evidence and task complexity justify it.
+
 ## Executive Summary
 
 **Decision:** PURSUE / INVESTIGATE / LOW PRIORITY / SKIP  
