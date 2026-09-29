@@ -1,0 +1,22 @@
+{
+  "name": "arek-ai-skills",
+  "interface": {
+    "displayName": "Arek AI Skills"
+  },
+  "plugins": [
+    {
+      "name": "arek-ai-skills",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/aras-2003/ai-skills.git",
+        "path": "./plugins/arek-ai-skills",
+        "ref": "production"
+      },
+      "policy": {
+        "installation": "INSTALLED_BY_DEFAULT",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
