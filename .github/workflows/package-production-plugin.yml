@@ -32,7 +32,7 @@ jobs:
 
       - name: Commit generated plugin package
         run: |
-          if git diff --quiet -- plugins/arek-ai-skills; then
+          if [ -z "$(git status --porcelain -- plugins/arek-ai-skills)" ]; then
             echo "Plugin package already up to date."
             exit 0
           fi
