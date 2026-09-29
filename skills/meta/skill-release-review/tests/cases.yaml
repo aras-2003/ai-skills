@@ -1,0 +1,24 @@
+cases:
+  - id: release-001
+    case: all-gates-pass
+    input: "Candidate passes validation, routing, behavior and regression tests; owner/version are current."
+    expected:
+      should_trigger: true
+      must:
+        - allow approval subject to human promotion decision
+
+  - id: release-002
+    case: severe-routing-collision
+    input: "Candidate often triggers instead of another production skill."
+    expected:
+      should_trigger: true
+      must:
+        - reject or require iteration
+
+  - id: release-003
+    case: no-added-value
+    input: "Candidate behaves essentially the same as the no-skill baseline across representative cases."
+    expected:
+      should_trigger: true
+      must:
+        - question whether the skill should exist
