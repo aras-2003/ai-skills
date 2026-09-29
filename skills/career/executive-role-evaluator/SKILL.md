@@ -8,7 +8,7 @@ description: >
   interview preparation alone, generic job matching, or factual company research that does not explicitly ask for role implications.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.1"
+  version: "1.0.2"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -141,14 +141,27 @@ Do not treat recruiter statements about future authority as guaranteed reality.
 
 Use the structure in `references/output-template.md`.
 
-Always include:
-- decision;
-- confidence;
-- role archetype;
-- role quality;
-- candidate fit;
-- career value;
-- risk;
+### HARD OUTPUT GATE
+
+When this skill triggers, the response MUST begin with the decision header below before any narrative, caveat, table, explanation or source discussion:
+
+```
+Decision: PURSUE / INVESTIGATE / LOW PRIORITY / SKIP
+Confidence: HIGH / MEDIUM / LOW
+Role archetype: ...
+Role Quality: XX/100 or insufficient evidence
+Candidate Fit: XX/100 or insufficient evidence
+Career Value: XX/100 or insufficient evidence
+Risk: LOW / MEDIUM / HIGH / VERY HIGH
+```
+
+Do not draft the rest of the answer until this header is complete.
+
+If evidence is insufficient, use `insufficient evidence` rather than omitting a field or inventing a score.
+
+After the mandatory header, include only the decision-relevant sections needed for the case.
+
+Always include somewhere in the response:
 - strongest reason to pursue;
 - strongest reason not to pursue;
 - critical unknowns;
@@ -177,7 +190,9 @@ Before returning:
 - [ ] No generic SWOT-style filler was added.
 - [ ] The user explicitly asked for role evaluation or role implications.
 - [ ] Pure company research was not extended into career advice without an explicit request.
+- [ ] The response begins with the mandatory decision header.
 - [ ] Decision and confidence are explicit whenever this skill triggers.
+- [ ] No prose, table, caveat or source discussion appears before the mandatory header.
 
 ## References
 
