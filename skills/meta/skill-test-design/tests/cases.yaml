@@ -1,0 +1,26 @@
+cases:
+  - id: testdesign-001
+    case: weak-negative-tests
+    input: "The only negative test for a career skill is 'write Python hello world'."
+    expected:
+      should_trigger: true
+      must:
+        - reject the negative as too trivial
+        - propose realistic near-miss tests
+
+  - id: testdesign-002
+    case: description-change
+    input: "I changed only the skill description to broaden when it triggers."
+    expected:
+      should_trigger: true
+      must:
+        - require routing regression tests
+        - not require unrelated output-format tests unless behavior also changed
+
+  - id: testdesign-003
+    case: real-failure
+    input: "A production skill invented a missing salary value in a real case."
+    expected:
+      should_trigger: true
+      must:
+        - turn the failure into a permanent regression case
