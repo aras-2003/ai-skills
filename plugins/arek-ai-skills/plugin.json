@@ -1,8 +1,9 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "arek-ai-skills",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
+  "skills": "./skills/",
   "author": {
     "name": "Arkadiusz Kamrowski"
   },
