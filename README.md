@@ -15,6 +15,7 @@ Reusable AI skills library for repeatable work across projects.
 
 ## Repository structure
 
+- `skills/meta/` — skills for designing, writing, validating, testing and releasing other skills
 - `skills/core/` — cross-domain skills used everywhere
 - `skills/career/` — executive job market and career management
 - `skills/product-research/` — product discovery and validation
@@ -29,7 +30,9 @@ Reusable AI skills library for repeatable work across projects.
 
 Suggested lifecycle:
 
-`idea -> draft -> test -> accepted -> production`
+`idea -> specification -> authoring -> validation -> test design -> evaluation -> release review -> production`
+
+The detailed process is defined in `workflows/skill-development/WORKFLOW.md`.
 
 Development happens on `main`. Accepted production-ready skills are promoted to `production`.
 
