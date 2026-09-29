@@ -2,15 +2,15 @@
 
 ## Goal
 
-Keep GitHub as the source of truth and expose only production-ready skills through one installable plugin.
+Keep GitHub as the source of truth and expose only production-ready skills through two delivery paths: one installable plugin for Work/Codex-style plugin runtimes, plus individually packaged native ChatGPT Skill bundles for ordinary Chat where the Skills feature is available.
 
-## Why one plugin
+## Why dual deployment
 
-Bundling related skills into one plugin gives:
-- one installation surface instead of one install per skill;
-- simpler routing and lifecycle management;
-- a stable plugin identity while individual skills evolve;
-- cleaner separation between development skills and production skills.
+The plugin remains the preferred bundled distribution for Work/Codex because it provides one installation surface and one stable plugin identity.
+
+Ordinary Chat can expose skills differently from Work/Codex. To avoid coupling daily Chat usage to local-marketplace plugin runtime behavior, production also generates one native skill ZIP per production skill.
+
+See `DEPLOYMENT-CHATGPT-CHAT.md` for the ordinary-Chat installation path.
 
 ## Production packaging flow
 
@@ -89,7 +89,9 @@ Therefore:
 
 ## Native Skills page
 
-The Skills UI can still be used for individually created/uploaded skills. For this repository, prefer the plugin bundle for production distribution because it keeps lifecycle/versioning centralized.
+When the active account exposes the native Skills page, use the generated bundles in `dist/chatgpt-skills/` for ordinary Chat.
+
+Lifecycle and versioning remain centralized in GitHub; the uploaded ChatGPT copy is a deployment target, not the source of truth.
 
 ## Release rule
 
