@@ -1,0 +1,27 @@
+cases:
+  - id: eval-001
+    case: new-skill-without-baseline
+    input: "The new skill gives a strong result on one example, so let's ship it."
+    expected:
+      should_trigger: true
+      must:
+        - reject one-example evidence as insufficient
+        - recommend representative cases
+        - consider a no-skill baseline
+
+  - id: eval-002
+    case: existing-version-regression
+    input: "Version 0.2 improves formatting but misses a mandatory evidence check that 0.1 performed."
+    expected:
+      should_trigger: true
+      must:
+        - classify as behavioral regression
+        - prevent release until resolved
+
+  - id: eval-003
+    case: subjective-output
+    input: "Two versions of a design critique skill both look plausible."
+    expected:
+      should_trigger: true
+      must:
+        - recommend blind comparison when feasible

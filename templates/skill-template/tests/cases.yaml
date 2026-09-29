@@ -1,0 +1,18 @@
+cases:
+  - id: replace-me-001
+    case: happy-path
+    input: |
+      Replace with representative input.
+    expected:
+      should_trigger: true
+      must:
+        - follow the defined procedure
+      must_not:
+        - invent missing facts
+
+  - id: replace-me-002
+    case: should-not-trigger
+    input: |
+      Replace with a nearby but different task.
+    expected:
+      should_trigger: false
