@@ -1,0 +1,28 @@
+cases:
+  - id: spec-001
+    case: valid-repeatable-task
+    input: "I repeatedly compare executive job offers using the same scope, mandate and trajectory criteria."
+    expected:
+      should_trigger: true
+      must:
+        - distinguish skill from project context
+        - define trigger and non-trigger cases
+        - define an output contract
+
+  - id: spec-002
+    case: one-off-project-fact
+    input: "Remember that this project's budget is 2 million PLN."
+    expected:
+      should_trigger: true
+      must:
+        - reject skill creation
+        - route the fact to project context or memory
+
+  - id: spec-003
+    case: deterministic-calculation
+    input: "I want a skill that sums weighted scores exactly."
+    expected:
+      should_trigger: true
+      must:
+        - recommend deterministic code for arithmetic
+        - limit any skill to interpretation or orchestration

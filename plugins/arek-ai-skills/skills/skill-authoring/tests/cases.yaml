@@ -1,0 +1,28 @@
+cases:
+  - id: author-001
+    case: from-approved-contract
+    input: "Create SKILL.md from a specification with clear trigger, inputs, procedure and output."
+    expected:
+      should_trigger: true
+      must:
+        - write name and description frontmatter
+        - keep routing information in description
+        - define procedure and output
+        - avoid empty optional directories
+
+  - id: author-002
+    case: huge-reference-material
+    input: "The skill needs 900 lines of vendor documentation for only one branch."
+    expected:
+      should_trigger: true
+      must:
+        - move deep material to references
+        - keep the core procedure in SKILL.md
+
+  - id: author-003
+    case: exact-scoring
+    input: "The skill includes a weighted score with exact thresholds."
+    expected:
+      should_trigger: true
+      must:
+        - recommend script or deterministic implementation for arithmetic
