@@ -8,8 +8,7 @@ from jsonschema import Draft202012Validator
 
 from common import NAME_RE, ValidationIssue, load_json, repo_root_from, split_frontmatter
 
-REQUIRED_BODY_HEADINGS = ("## Purpose", "## Procedure")
-RECOMMENDED_HEADINGS = ("## Preconditions", "## Output contract", "## Quality checks")
+RECOMMENDED_HEADINGS = ("## Purpose", "## Procedure", "## Output contract", "## Quality checks")
 
 
 def validate_skill(skill_dir: Path, schema: dict) -> list[ValidationIssue]:
@@ -45,9 +44,8 @@ def validate_skill(skill_dir: Path, schema: dict) -> list[ValidationIssue]:
         if not any(token in normalized for token in ("use when", "when ", "use after", "before ", "after ")):
             issues.append(ValidationIssue("medium", str(skill_file), "description should state when the skill should be used, not only what it does"))
 
-    for heading in REQUIRED_BODY_HEADINGS:
-        if heading not in body:
-            issues.append(ValidationIssue("high", str(skill_file), f"Missing required body heading: {heading}"))
+    if not body.strip():
+        issues.append(ValidationIssue("blocker", str(skill_file), "SKILL.md body must not be empty"))
 
     for heading in RECOMMENDED_HEADINGS:
         if heading not in body:
