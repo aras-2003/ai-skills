@@ -4,10 +4,10 @@ description: >
   Create or refactor an Agent Skill package from an approved skill specification. Use when writing SKILL.md, splitting instructions into references/scripts/assets, improving progressive disclosure, or aligning a skill with repository and current Agent Skills authoring conventions.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
-  maturity: draft
+  version: "1.0.0"
+  maturity: production
   risk: medium
-  last_reviewed: 2026-09-29
+  last_reviewed: 2026-09-30
 ---
 
 # Skill Authoring
