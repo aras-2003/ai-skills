@@ -5,9 +5,8 @@ Orchestrate the minimum evidence-backed commerce path for discovering, screening
 
 ## Entry modes
 
-### Discovery mode
-Use when the user asks for new product ideas or categories.
-Start with `product-opportunity-discovery`, then apply only fast kill screens needed to reduce to 3–5 hypotheses.
+### Discovery mode — candidate only
+Broad product-idea discovery is not yet production-validated. In the lab, use `product-opportunity-discovery`; in production, do not claim discovery-mode validation until a dedicated runtime eval passes.
 
 ### Known-product mode
 Use when the user provides a concrete product or benchmark.
