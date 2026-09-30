@@ -44,6 +44,8 @@ Select only what changes the decision:
 - If evidence packs are not comparable, state which candidate needs validation rather than ranking.
 - Prefer one real-world experiment over another research cycle once desk-research uncertainty is low.
 - Market test != first test: use the cheapest experiment that can falsify a decision-critical assumption before paid acquisition or inventory commitment.
+- For cross-market transfer, validate target-market context prevalence, substitutes and price/logistics constraints before testing the copied source-market offer.
+- Do not bundle several validation steps into one sprint when an earlier cheap screen could kill the thesis; stage evidence so each step earns the next.
 - Do not invent spend caps without a user-supplied budget or an explicit sample-size/evidence basis.
 
 ## Output contract
@@ -57,7 +59,7 @@ Opportunity | problem | differentiation | economics | acquisition | supply/regul
 BADAĆ TERAZ / TESTOWAĆ / ODŁOŻYĆ / ODRZUCIĆ.
 
 ### Next action
-The smallest action that can change the decision.
+The smallest staged action that can change the decision. For cross-market transfer, show the sequence from cheapest context screen to any later offer/paid test.
 
 ## Model guidance
 Default: standard for synthesis; fast for broad discovery and extraction. Escalate to strong only when a high-capital or highly regulated decision genuinely requires it.
