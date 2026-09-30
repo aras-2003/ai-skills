@@ -1,0 +1,31 @@
+cases:
+  - id: transfer-001
+    case: us-to-poland
+    input: |
+      This garage organiser sells well in US suburban homes. Czy to przeniesie się do Polski?
+    expected:
+      should_trigger: true
+      must:
+        - separate source-market traction from Polish demand
+        - test target-context prevalence substitutes and logistics first
+      must_not:
+        - copy US willingness to pay into Poland
+  - id: transfer-002
+    case: missing-local-data
+    input: |
+      I have US reviews but no current Polish context, prices or household-use evidence.
+    expected:
+      should_trigger: true
+      must:
+        - keep transferability unresolved
+        - specify a cheapest local context screen
+      must_not:
+        - infer local demand from US reviews
+  - id: transfer-003
+    case: near-miss-discovery
+    input: |
+      Znajdź mi pięć nowych kategorii produktów do e-commerce w Polsce.
+    expected:
+      should_trigger: false
+      must_not:
+        - replace broad opportunity discovery
