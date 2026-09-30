@@ -33,6 +33,16 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
         raise ValueError(f"invalid status: {status}")
     if status in {"PASS", "FAIL", "REVIEW_REQUIRED"} and not args.output:
         raise ValueError(f"{status} requires --output")
+    if status in {"PASS", "FAIL", "REVIEW_REQUIRED"}:
+        required_runtime = {
+            "component_version": args.component_version,
+            "component_digest": args.component_digest,
+            "provider": args.provider,
+            "model_id": args.model_id,
+        }
+        missing = [name for name, value in required_runtime.items() if not value]
+        if missing:
+            raise ValueError(f"{status} requires runtime/component identity: {', '.join(missing)}")
     if status == "PASS" and args.assisted:
         raise ValueError("assisted runs cannot be recorded as PASS")
 
