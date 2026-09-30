@@ -1,0 +1,27 @@
+cases:
+  - id: capability-map-review-001
+    case: positive
+    input: |
+      Apply capability-map-review to a realistic organisational architecture problem with incomplete but usable evidence.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
+        - preserve uncertainty
+  - id: capability-map-review-002
+    case: near-miss
+    input: |
+      Give me a generic explanation unrelated to this skill.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform the full capability-map-review workflow
+  - id: capability-map-review-003
+    case: evidence-boundary
+    input: |
+      The organisation has conflicting stakeholder accounts and missing ownership data. Use capability-map-review without inventing facts.
+    expected:
+      should_trigger: true
+      must:
+        - distinguish evidence from inference
+        - surface material unknowns
