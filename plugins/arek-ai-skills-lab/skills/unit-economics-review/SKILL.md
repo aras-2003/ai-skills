@@ -30,6 +30,8 @@ Determine whether the product can support acquisition and operational costs with
 - High markup != healthy paid-acquisition economics.
 - If break-even CAC leaves no realistic margin of safety, fail the gate.
 - Do not hide unknown fulfilment or return costs inside COGS.
+- If landed cost is incomplete, label break-even CAC as provisional and do not treat it as reliable test headroom.
+- Break-even CAC is a ceiling, not a target CAC.
 - Use code/calculation where exact inputs are available; LLM interpretation should not replace arithmetic.
 
 ## Output contract
