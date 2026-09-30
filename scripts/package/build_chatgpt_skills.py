@@ -47,6 +47,14 @@ def _zip_bytes(files: list[tuple[str, bytes]]) -> bytes:
     return buf.getvalue()
 
 
+def _write_deterministic_zip(source_dir: Path, zip_path: Path, top_level: str) -> None:
+    files: list[tuple[str, bytes]] = []
+    for path in sorted(p for p in source_dir.rglob("*") if p.is_file()):
+        arcname = (Path(top_level) / path.relative_to(source_dir)).as_posix()
+        files.append((arcname, path.read_bytes()))
+    zip_path.write_bytes(_zip_bytes(files))
+
+
 def build_skill_bundle(skill_dir: Path, output_dir: Path) -> dict:
     fm, _ = read_frontmatter(skill_dir / "SKILL.md")
     name = fm.get("name")
