@@ -38,5 +38,27 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_yaml(path: Path) -> Any:
+    return yaml.safe_load(path.read_text(encoding="utf-8"))
+
+
+def load_waivers(root: Path) -> list[dict[str, Any]]:
+    path = root / "scripts" / "validate" / "waivers.yaml"
+    if not path.exists():
+        return []
+    data = load_yaml(path) or {}
+    waivers = data.get("waivers") or []
+    if not isinstance(waivers, list):
+        raise ValueError(f"{path}: waivers must be a list")
+    return [w for w in waivers if isinstance(w, dict)]
+
+
+def waiver_for(root: Path, rule: str, skill_name: str) -> dict[str, Any] | None:
+    for waiver in load_waivers(root):
+        if waiver.get("rule") == rule and skill_name in (waiver.get("skills") or []):
+            return waiver
+    return None
+
+
 def repo_root_from(script_file: str) -> Path:
     return Path(script_file).resolve().parents[2]
