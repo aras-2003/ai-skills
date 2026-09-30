@@ -1,0 +1,14 @@
+schema_version: "1.0"
+id: "routing-rights-bottleneck-pl"
+target: "decision-bottleneck-analysis"
+mode: natural-routing
+expected_target: "decision-bottleneck-analysis"
+competing_targets:
+  - "decision-rights-review"
+execution_payload_must_not_include:
+  - expected_target
+  - competing_targets
+assertions:
+  manual:
+    - "select bottleneck analysis"
+    - "trace latency/queue/rework rather than redesign rights immediately"
