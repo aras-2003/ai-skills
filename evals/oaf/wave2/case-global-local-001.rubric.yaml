@@ -1,0 +1,43 @@
+schema_version: "1.0"
+id: "case-global-local-001"
+target: "global-local-model-review"
+mode: explicit
+source_legacy: "evals/oaf/wave2/case-global-local-001.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## Test objective
+  
+  Evaluate whether `global-local-model-review`:
+  1. avoids defaulting to centralisation;
+  2. distinguishes scale/risk/interoperability from context/speed/regulation;
+  3. treats local workarounds as evidence, not automatically noncompliance;
+  4. identifies where standards should be mandatory/configurable/advisory;
+  5. separates structural design issues from poor implementation of current standards;
+  6. ends with design implications rather than a final target model.
+  
+  ## Expected behaviors
+  
+  PASS if the skill:
+  - maps representative decisions/capabilities across global/local ownership;
+  - identifies enterprise and local consequences;
+  - surfaces decision criteria for placement;
+  - preserves uncertainty;
+  - proposes evidence needed before redesign.
+  
+  FAIL if the skill:
+  - recommends “centralise everything”;
+  - treats all deviations as governance failure;
+  - designs a full global operating model without evidence.
+assertions:
+  manual:
+    - "maps representative decisions/capabilities across global/local ownership;"
+    - "identifies enterprise and local consequences;"
+    - "surfaces decision criteria for placement;"
+    - "preserves uncertainty;"
+    - "proposes evidence needed before redesign."
+    - "recommends “centralise everything”;"
+    - "treats all deviations as governance failure;"
+    - "designs a full global operating model without evidence."
