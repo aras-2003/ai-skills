@@ -98,7 +98,7 @@ class EvalProtocolTests(unittest.TestCase):
                 "deterministic": [
                     {"contains": "UNKNOWN"},
                     {"not_contains": "guaranteed"},
-                    {"regex": r"Decision:\\s+INVESTIGATE"},
+                    {"regex": r"Decision:\s+INVESTIGATE"},
                 ]
             }
         }
