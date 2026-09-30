@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: oaf-architecture-workflow-pl
+mode: natural-routing
+expected_target: oaf-enterprise-architecture-review
+language: pl
+competing_intents:
+  - architecture-review
+assertions:
+  manual:
+    - enterprise architecture workflow is selected for the multi-stage cross-domain review
+    - specialist architecture review is not treated as the full workflow
