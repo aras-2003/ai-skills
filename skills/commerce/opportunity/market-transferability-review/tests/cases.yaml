@@ -1,0 +1,29 @@
+cases:
+  - id: transfer-001
+    case: staged-local-evidence
+    input: |
+      A premium garage wall system sells well in the US, mostly in large suburban garages. For Poland we have no data on relevant garage prevalence, local price acceptance or delivery cost.
+    expected:
+      should_trigger: true
+      must:
+        - separate universal storage need from source-market use context
+        - start with local context and substitutes before offer or paid tests
+        - keep Polish demand unresolved
+  - id: transfer-002
+    case: false-demographic-equivalence
+    input: |
+      US and Polish buyers are similar ages, so assume the same 350 PLN willingness to pay and creator channel will transfer.
+    expected:
+      should_trigger: true
+      must:
+        - reject demographic similarity as sufficient transfer evidence
+      must_not:
+        - infer local willingness to pay
+  - id: transfer-003
+    case: near-miss-local-demand-only
+    input: |
+      Ignore the US case. We have Polish customer interviews and purchases for this exact offer. Assess local demand strength.
+    expected:
+      should_trigger: false
+      must_not:
+        - force a cross-market transfer analysis
