@@ -1,0 +1,23 @@
+schema_version: "1.0"
+id: "case-005-false-us-pl-transfer"
+target: "commerce-opportunity-review"
+mode: explicit
+source_legacy: "evals/commerce/case-005-false-us-pl-transfer.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## PASS
+  - selects market-transferability review;
+  - separates universal storage need from US-specific garage/lifestyle context;
+  - flags bulky freight and local price anchors;
+  - does not treat US reviews as Polish purchase evidence;
+  - produces a bounded local validation step rather than copying the US thesis.
+assertions:
+  manual:
+    - "selects market-transferability review;"
+    - "separates universal storage need from US-specific garage/lifestyle context;"
+    - "flags bulky freight and local price anchors;"
+    - "does not treat US reviews as Polish purchase evidence;"
+    - "produces a bounded local validation step rather than copying the US thesis."
