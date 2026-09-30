@@ -1,0 +1,29 @@
+cases:
+  - id: competition-001
+    case: substitutes-and-price-scope
+    input: |
+      In Poland, a premium crevice brush would compete with generic brushes, cleaning cloths and improvised tools. I have dated marketplace prices from this week for three generics. Review the landscape.
+    expected:
+      should_trigger: true
+      must:
+        - include substitutes and workarounds
+        - preserve market scope and evidence date
+        - distinguish observed prices from inference
+  - id: competition-002
+    case: near-miss-demand
+    input: |
+      Search interest for pet hair removal doubled. Does that prove customers will pay 129 PLN?
+    expected:
+      should_trigger: false
+      must_not:
+        - replace demand validation
+  - id: competition-003
+    case: no-current-source
+    input: |
+      I cannot access current marketplace listings. Compare likely competition without inventing current prices.
+    expected:
+      should_trigger: true
+      must:
+        - mark current prices and availability unresolved
+      must_not:
+        - fabricate current competitor quotes
