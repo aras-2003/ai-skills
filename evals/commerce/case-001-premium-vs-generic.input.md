@@ -17,6 +17,7 @@ Known evidence:
 - expected fulfilment/payment/packaging costs total 18 PLN per order;
 - expected return/refund allowance is 8 PLN per order;
 - target price is 129 PLN including VAT;
+- VAT rate for this case: 23%; input VAT is recoverable unless a cost line is explicitly stated otherwise;
 - no validated CAC exists;
 - supplier MOQ is 500 units;
 - no unusual regulatory requirement is known beyond ordinary consumer-product obligations.
