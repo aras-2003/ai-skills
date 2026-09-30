@@ -5,12 +5,27 @@ description: Run an evidence-gated OAF transformation design workflow from valid
   and adaptive stage gates.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
-  maturity: candidate
+  version: 1.0.0
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
   execution:
     default_model_class: standard
+    validated_models:
+      luna:
+        status: pass
+        validated_on: 2026-09-30
+        validated_use:
+        - bounded 90-day mobilisation
+        - critical-path and capacity sequencing
+        - reversible pilot design
+        - stage-gate and service-continuity design
+      sol:
+        status: comparative-pass
+        validated_on: 2026-09-30
+        incremental_value:
+        - slightly stronger decision framing
+        material_decision_change: false
 ---
 
 # Oaf Transformation Design Runtime Entrypoint

@@ -4,12 +4,21 @@ description: Run an OAF governance redesign workflow that starts from material d
   and bottlenecks rather than existing committees.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
-  maturity: candidate
+  version: 1.0.0
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
   execution:
     default_model_class: standard
+    validated_models:
+      luna:
+        status: pass
+        validated_on: 2026-09-30
+        validated_use:
+        - bounded governance redesign
+        - rights-vs-mechanism separation
+        - forum minimisation
+        - pilot and effectiveness design
 ---
 
 # Oaf Governance Redesign Runtime Entrypoint
