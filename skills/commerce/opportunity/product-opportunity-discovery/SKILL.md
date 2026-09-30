@@ -4,7 +4,7 @@ description: >
   Discover product opportunity hypotheses from customer problems, category signals and market gaps. Use for broad e-commerce idea generation before deep validation; do not treat trend popularity as proof of business viability.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: low
   last_reviewed: 2026-09-30
@@ -16,6 +16,16 @@ metadata:
 
 ## Purpose
 Generate a small set of evidence-linked product hypotheses worth validating.
+
+
+## Preconditions
+Require a target market and at least a problem/category signal set. Discovery is for hypothesis reduction, not final business verdicts.
+
+## Inputs and evidence
+Label each signal as problem, trend, demand, purchase, operational or regulatory evidence. Prefer testable, operationally manageable hypotheses and preserve the evidence boundary.
+
+## Uncertainty and tool failure
+If live data is unavailable, shortlist only from supplied evidence and mark freshness/current demand unknown. Do not invent TAM, sales, CAC, sample sizes or market certainty.
 
 ## Procedure
 1. Start from customer problems or category signals, not products alone.
