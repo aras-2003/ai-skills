@@ -27,7 +27,7 @@ class EvalProtocolTests(unittest.TestCase):
             source_revision="abcdef1234567",
             component="commerce-product-deep-dive",
             component_version="1.0.0",
-            component_digest=None,
+            component_digest="1" * 64,
             provider="test",
             model_id="test",
             reasoning="none",
@@ -98,7 +98,7 @@ class EvalProtocolTests(unittest.TestCase):
                 "deterministic": [
                     {"contains": "UNKNOWN"},
                     {"not_contains": "guaranteed"},
-                    {"regex": r"Decision:\\s+INVESTIGATE"},
+                    {"regex": r"Decision:\s+INVESTIGATE"},
                 ]
             }
         }
