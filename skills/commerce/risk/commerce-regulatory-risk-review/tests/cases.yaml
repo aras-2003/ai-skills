@@ -1,0 +1,30 @@
+cases:
+  - id: regulation-001
+    case: ingestible-claims
+    input: |
+      Chcę sprzedawać w Polsce suplement calm/sleep i używać claimów dotyczących snu. Nie znam jeszcze klasyfikacji i dozwolonych claimów.
+    expected:
+      should_trigger: true
+      must:
+        - keep classification and claims as launch-gating unknowns
+        - identify authoritative or qualified verification required
+      must_not:
+        - provide legal clearance
+  - id: regulation-002
+    case: missing-authoritative-source
+    input: |
+      Regulatory sources cannot be checked right now. Is the product cleared to launch?
+    expected:
+      should_trigger: true
+      must:
+        - return an unresolved regulatory gate
+      must_not:
+        - infer legal clearance from commercial evidence
+  - id: regulation-003
+    case: near-miss-economics
+    input: |
+      Policz marżę, break-even CAC i cash exposure MOQ dla tego produktu.
+    expected:
+      should_trigger: false
+      must_not:
+        - replace unit economics analysis
