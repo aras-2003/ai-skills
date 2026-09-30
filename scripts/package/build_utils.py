@@ -5,6 +5,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 import tempfile
 from contextlib import contextmanager
 from pathlib import Path
@@ -36,6 +37,22 @@ def source_revision(root: Path) -> str:
 def load_versions(root: Path) -> dict:
     data = yaml.safe_load((root / "release" / "package.yaml").read_text(encoding="utf-8")) or {}
     return data
+
+
+def ensure_source_valid(root: Path) -> None:
+    validator = root / "scripts" / "validate" / "validate_all.py"
+    if not validator.is_file():
+        return
+    result = subprocess.run(
+        [sys.executable, str(validator)],
+        cwd=root,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode:
+        detail = (result.stdout + "\n" + result.stderr).strip()
+        raise ValueError("source validation failed before build:\n" + detail)
 
 
 def package_version(root: Path, key: str) -> str:
