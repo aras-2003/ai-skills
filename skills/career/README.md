@@ -15,6 +15,15 @@ Repeatable skills for job discovery, role evaluation, application tailoring and 
 | `process-update` | Convert new recruitment information into a structured tracker update. |
 
 Suggested workflow:
-`job-discovery -> job-validity-check -> executive-role-evaluator -> company-context-research (when needed) -> cv-gap-analysis -> cv-tailoring`
+`job-discovery -> job-validity-check -> executive-role-evaluator -> company-context-research (when needed) -> cv-gap-analysis -> cv-tailoring -> interview-brief -> process-update`
 
 Use progressive depth: expensive research should start only after basic validity and fit checks pass.
+
+
+## Model-class defaults
+
+- **fast:** job-discovery, job-validity-check, process-update
+- **standard:** company-context-research, executive-role-evaluator, cv-gap-analysis, cv-tailoring, interview-brief
+- **strong:** escalation only when ambiguity, novelty, conflicting evidence or decision impact justify it
+
+See `docs/MODEL-ROUTING.md`.

@@ -1,0 +1,25 @@
+cases:
+  - id: cv-gap-analysis-001
+    case: positive
+    input: |
+      Compare my mastery CV with this CIO job and tell me what I fail to prove.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
+  - id: cv-gap-analysis-002
+    case: negative
+    input: |
+      Rewrite my CV for this role.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform this skill's core task
+  - id: cv-gap-analysis-003
+    case: truth
+    input: |
+      The role asks for 500-person leadership; my CV shows 120. Assess the gap without inflating it.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
