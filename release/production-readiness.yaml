@@ -1,0 +1,430 @@
+schema_version: "1.0"
+generated_for: "AIS-21"
+owner: arkadiusz-kamrowski
+review_by: "2026-10-14"
+policy:
+  note: "This record reviews existing production maturity; it does not promote components."
+  current_runtime_receipt_required: true
+  historical_summary_is_not_current_receipt: true
+  no_exception_for_known_high_severity_failure: true
+components:
+  - name: company-context-research
+    kind: skill
+    version: "1.0.0"
+    source: skills/career/company-context-research/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: executive-role-evaluator
+    kind: skill
+    version: "1.1.0"
+    source: skills/career/executive-role-evaluator/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: problem-demand-validation
+    kind: skill
+    version: "1.1.0"
+    source: skills/commerce/demand/problem-demand-validation/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: unit-economics-review
+    kind: skill
+    version: "1.1.0"
+    source: skills/commerce/economics/unit-economics-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: acquisition-fit-review
+    kind: skill
+    version: "1.1.0"
+    source: skills/commerce/growth/acquisition-fit-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: competition-landscape-review
+    kind: skill
+    version: "1.1.0"
+    source: skills/commerce/market/competition-landscape-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: supplier-viability-review
+    kind: skill
+    version: "1.1.0"
+    source: skills/commerce/operations/supplier-viability-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: market-transferability-review
+    kind: skill
+    version: "1.1.0"
+    source: skills/commerce/opportunity/market-transferability-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: product-opportunity-discovery
+    kind: skill
+    version: "1.1.0"
+    source: skills/commerce/opportunity/product-opportunity-discovery/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: differentiation-review
+    kind: skill
+    version: "1.1.0"
+    source: skills/commerce/product/differentiation-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: commerce-regulatory-risk-review
+    kind: skill
+    version: "1.1.0"
+    source: skills/commerce/risk/commerce-regulatory-risk-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: arek-skills-diagnostic
+    kind: skill
+    version: "1.0.0"
+    source: skills/meta/arek-skills-diagnostic/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: skill-authoring
+    kind: skill
+    version: "1.0.0"
+    source: skills/meta/skill-authoring/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: skill-specification
+    kind: skill
+    version: "1.0.0"
+    source: skills/meta/skill-specification/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: skill-validation
+    kind: skill
+    version: "1.0.0"
+    source: skills/meta/skill-validation/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: decision-bottleneck-analysis
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/decision-governance/decision-bottleneck-analysis/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: decision-rights-review
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/decision-governance/decision-rights-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: governance-design
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/decision-governance/governance-design/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: architecture-review
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/enterprise-architecture/architecture-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: capability-gap-analysis
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/enterprise-architecture/capability-gap-analysis/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: capability-map-review
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/enterprise-architecture/capability-map-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: evidence-loop-review
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/evidence-adaptation/evidence-loop-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: global-local-model-review
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/operating-model/global-local-model-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: operating-model-review
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/operating-model/operating-model-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: portfolio-health-review
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/portfolio-execution/portfolio-health-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: portfolio-prioritization
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/portfolio-execution/portfolio-prioritization/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: transformation-blueprint
+    kind: skill
+    version: "1.0.0"
+    source: skills/oaf/portfolio-execution/transformation-blueprint/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: oaf-health-check
+    kind: workflow
+    version: "1.0.0"
+    source: workflows/oaf-health-check/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: oaf-operating-model-redesign
+    kind: workflow
+    version: "1.0.0"
+    source: workflows/oaf-operating-model-redesign/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: oaf-governance-redesign
+    kind: workflow
+    version: "1.0.0"
+    source: workflows/oaf-governance-redesign/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: oaf-transformation-design
+    kind: workflow
+    version: "1.0.0"
+    source: workflows/oaf-transformation-design/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: oaf-enterprise-architecture-review
+    kind: workflow
+    version: "1.0.0"
+    source: workflows/oaf-enterprise-architecture-review/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: oaf-enterprise-change-review
+    kind: workflow
+    version: "1.0.0"
+    source: workflows/oaf-enterprise-change-review/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: commerce-product-deep-dive
+    kind: workflow
+    version: "1.0.0"
+    source: workflows/commerce-product-deep-dive/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+  - name: commerce-opportunity-review
+    kind: workflow
+    version: "1.0.0"
+    source: workflows/commerce-opportunity-review/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
+    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
