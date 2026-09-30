@@ -1,0 +1,12 @@
+schema_version: "1.0"
+id: commerce-regulatory-en
+mode: natural-routing
+expected_target: commerce-regulatory-risk-review
+language: en
+competing_intents:
+  - demand validation
+  - acquisition fit
+assertions:
+  manual:
+    - regulatory triage is selected
+    - no legal clearance is invented
