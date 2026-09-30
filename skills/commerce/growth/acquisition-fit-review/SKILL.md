@@ -4,7 +4,7 @@ description: >
   Assess whether a product is suitable for paid social and other direct-response acquisition based on demo strength, hooks, creative depth and CAC headroom.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -16,6 +16,16 @@ metadata:
 
 ## Purpose
 Test whether the product can be explained and sold efficiently through the intended acquisition channel.
+
+
+## Preconditions
+Require an intended acquisition channel, target audience and an explicit economics basis for allowable CAC. If CAC headroom is unresolved, acquisition economics remain provisional.
+
+## Inputs and evidence
+Separate creative demonstrability and engagement from profitable conversion. Use explicit break-even/required-contribution economics; never treat virality as CAC evidence.
+
+## Uncertainty and tool failure
+If channel benchmarks or live campaign evidence are unavailable, assess creative/channel fit qualitatively and keep CAC/conversion unknown. Do not invent target CAC or spend caps.
 
 ## Procedure
 1. State primary channel and target audience.
