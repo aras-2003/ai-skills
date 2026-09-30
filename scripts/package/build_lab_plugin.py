@@ -99,22 +99,30 @@ def main() -> int:
         shutil.rmtree(out)
     skills_out.mkdir(parents=True, exist_ok=True)
 
-    selected = discover_skills(root, "candidate")
-    if not selected:
+    candidate_skills = discover_skills(root, "candidate")
+    production_skills = discover_skills(root, "production")
+    if not candidate_skills:
         raise SystemExit("No candidate skills found; refusing to build empty lab plugin")
 
+    selected = candidate_skills + production_skills
     for skill_dir in selected:
         copy_skill(skill_dir, skills_out)
 
-    candidate_workflows = add_workflow_entrypoints(root, "candidate", skills_out)
-    production_workflows = add_workflow_entrypoints(root, "production", skills_out)
+    available_names = {p.name for p in skills_out.iterdir() if p.is_dir()}
+    candidate_workflows = add_workflow_entrypoints(
+        root, "candidate", skills_out, channel="lab", available_names=available_names
+    )
+    available_names.update(candidate_workflows)
+    production_workflows = add_workflow_entrypoints(
+        root, "production", skills_out, channel="lab", available_names=available_names
+    )
     runtime_eval_fixtures = add_runtime_eval_fixtures(root, skills_out)
 
     manifest = {
         "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
         "name": PLUGIN_NAME,
         "version": PLUGIN_VERSION,
-        "description": "Candidate skills and workflow entrypoints for controlled behavioral testing.",
+        "description": "Isolated lab package with candidate targets plus their production dependencies for controlled behavioral testing.",
         "skills": "./skills/",
         "author": {"name": "Arkadiusz Kamrowski"},
         "repository": "https://github.com/aras-2003/ai-skills",
@@ -124,7 +132,7 @@ def main() -> int:
                 "interface": {
                     "displayName": "Arek AI Skills Lab",
                     "shortDescription": "Candidate skills for runtime evaluation before production.",
-                    "longDescription": "A non-production lab package built from candidate skills on main for controlled Work/Codex behavioral and workflow testing."
+                    "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing. Do not enable it in the same session as the production plugin because duplicate capability names may compete."
                 }
             }
         }
@@ -146,7 +154,7 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    print(f"Packaged {len(selected)} candidate skills + {len(candidate_workflows) + len(production_workflows)} workflow entrypoints + {runtime_eval_fixtures} runtime eval fixtures into {out}")
+    print(f"Packaged {len(candidate_skills)} candidate + {len(production_skills)} production dependency skills + {len(candidate_workflows) + len(production_workflows)} workflow entrypoints + {runtime_eval_fixtures} runtime eval inputs into {out}")
     return 0
 
 
