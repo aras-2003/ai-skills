@@ -3,45 +3,51 @@ name: Package candidate skill lab
 on:
   push:
     branches: [main]
-    paths:
-      - "skills/**"
-      - "workflows/**"
-      - "evals/**"
-      - "workflows/oaf-health-check/**"
-      - "scripts/package/build_plugin.py"
-      - "scripts/package/build_lab_plugin.py"
-      - ".github/workflows/package-main-lab-plugin.yml"
 
 permissions:
   contents: write
+
+concurrency:
+  group: main-lab-packaging
+  cancel-in-progress: false
 
 jobs:
   package:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
+    env:
+      SOURCE_REVISION: ${{ github.sha }}
     steps:
-      - name: Checkout main
+      - name: Checkout exact main source
         uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install packaging dependencies
-        run: python -m pip install "PyYAML>=6.0,<7"
-
-      - name: Build candidate lab plugin
-        run: python scripts/package/build_lab_plugin.py --output plugins/arek-ai-skills-lab
-
-      - name: Commit generated lab package
+      - name: Install dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Build and validate isolated Lab
+        run: |
+          python scripts/package/build_lab_plugin.py --output plugins/arek-ai-skills-lab
+          python scripts/package/artifact_validation.py plugins/arek-ai-skills-lab
+          python scripts/eval/validate_isolation.py --artifact plugins/arek-ai-skills-lab
+      - name: Refuse stale Lab publication
+        run: |
+          REMOTE_SHA="$(git ls-remote origin refs/heads/main | cut -f1)"
+          test "$REMOTE_SHA" = "$SOURCE_REVISION" || {
+            echo "main moved from $SOURCE_REVISION to $REMOTE_SHA; refusing stale Lab publication"
+            exit 1
+          }
+      - name: Commit generated Lab
         run: |
           if [ -z "$(git status --porcelain -- plugins/arek-ai-skills-lab)" ]; then
-            echo "Lab plugin already up to date."
+            echo "Lab already current."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add plugins/arek-ai-skills-lab
-          git commit -m "build: refresh candidate skill lab [skip ci]"
-          git push
+          git commit -m "build: refresh isolated Lab from $SOURCE_REVISION [skip ci]"
+          git push origin HEAD:main
