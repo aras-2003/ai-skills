@@ -64,7 +64,7 @@ def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
             shutil.copy2(src, dst)
             copied += 1
             packaged_names.append(src.name)
-            lines.append(f"- \`{src.name}\` — case: \`{case_id}\`, mode: \`{mode}\`")
+            lines.append(f"- `{src.name}` — case: `{case_id}`, mode: `{mode}`")
 
         (refs / "INDEX.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -74,10 +74,10 @@ def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
                 "",
                 "## Lab runtime eval inputs",
                 "",
-                "When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from \`references/evals/\`. The evaluator rubric is intentionally unavailable to the executor.",
+                "When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.",
                 "",
             ]
-            appendix.extend(f"- \`references/evals/{name}\`" for name in packaged_names)
+            appendix.extend(f"- `references/evals/{name}`" for name in packaged_names)
             appendix.append("")
             skill_md.write_text(
                 skill_md.read_text(encoding="utf-8").rstrip() + "\n" + "\n".join(appendix),
