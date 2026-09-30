@@ -8,7 +8,7 @@
       "maturity": "production",
       "description": "Research factual company context relevant to executive technology opportunities, including scale, revenue, headcount, ownership, leadership, transactions, strategy and technology organization. Use when the user asks for company facts or organizational context. Do not evaluate role attractiveness, candidate fit, career value, mandate quality or recommended recruitment actions unless the user explicitly asks what the company context means for a specific role; in that case hand off to executive-role-evaluator.",
       "zip": "company-context-research.zip",
-      "sha256": "21c1fce1ea30a1003c2c247240ca8b75d2b69fe3edd93d8776eae8794116aeb1"
+      "sha256": "812b42c53206d068b648a2190eae2e105891d248a047170ff82aa40299672fc6"
     },
     {
       "name": "executive-role-evaluator",
@@ -16,7 +16,7 @@
       "maturity": "production",
       "description": "Evaluate senior and executive technology job opportunities based on real mandate, organizational scope, candidate fit, career value, risk and evidence quality. Use when assessing whether an executive technology role is worth pursuing, comparing opportunities, updating an assessment after recruiter/interview evidence, or identifying decision-critical unknowns. Do not use for company research alone, CV tailoring alone, interview preparation alone, generic job matching, or factual company research that does not explicitly ask for role implications.",
       "zip": "executive-role-evaluator.zip",
-      "sha256": "8179264588eb938e64f7e9fd8fa8bf8f6181e2eb2193f8b2820c45301a5b5657"
+      "sha256": "81e51c6c8e995a1970f6b8f38f5e2e965e386a4d8185c1558e1103329c36d73a"
     },
     {
       "name": "arek-skills-diagnostic",
@@ -24,7 +24,7 @@
       "maturity": "production",
       "description": "Confirm that the Arek AI Skills plugin is exposing bundled skills to ChatGPT or Codex. Use when the user explicitly asks to test, verify, diagnose, or confirm whether Arek AI Skills is active.",
       "zip": "arek-skills-diagnostic.zip",
-      "sha256": "4b96166e6e98f9a478d2e3b376735645c45fe39ae4275863c77a9211e0fd3156"
+      "sha256": "61cc76c942d95724e9553f7656655c4aa6c24a4dca2b8346b04a35aa009c0a2f"
     },
     {
       "name": "skill-authoring",
@@ -32,7 +32,7 @@
       "maturity": "production",
       "description": "Create or refactor an Agent Skill package from an approved skill specification. Use when writing SKILL.md, splitting instructions into references/scripts/assets, improving progressive disclosure, or aligning a skill with repository and current Agent Skills authoring conventions.",
       "zip": "skill-authoring.zip",
-      "sha256": "0ab34faa788f99a6dbb09b7bceba4bf2ca6486478a490fb5e4ae932baf955ba5"
+      "sha256": "074d1d54cd7cc1e8a4093289c4db8620207ca4e97120cf7853a6390c900f6480"
     },
     {
       "name": "skill-specification",
@@ -40,7 +40,7 @@
       "maturity": "production",
       "description": "Decide whether a repeatable task should become an Agent Skill and define its behavioral contract before implementation. Use when proposing a new skill, splitting/merging skills, or when an existing skill has unclear scope, trigger conditions, inputs, outputs or boundaries.",
       "zip": "skill-specification.zip",
-      "sha256": "c6fef83a7cc9db65bca68aa7c6169aacc371b90e6af070960d3c44a8935b0757"
+      "sha256": "c2075e67f671d72144540104cfb129e8f7af798e14089c420da4b48fc9ef00be"
     },
     {
       "name": "skill-validation",
@@ -48,7 +48,7 @@
       "maturity": "production",
       "description": "Validate an Agent Skill package for structural correctness, routing clarity, standards alignment, security, portability, duplication and maintainability. Use after authoring or modifying a skill and before behavioral evaluation or release.",
       "zip": "skill-validation.zip",
-      "sha256": "9eeb712bc1826d28c315f6ebab9339821a135ade944df6dc1e23513659fd4963"
+      "sha256": "95a71a490a2f63cefc6280b74b3a40a4bbdf81027916d9894fb0b41eff027f15"
     },
     {
       "name": "decision-bottleneck-analysis",
@@ -56,7 +56,7 @@
       "maturity": "production",
       "description": "Diagnose why specific material decisions are slow, repeatedly escalated or duplicated by tracing decision steps, waits, vetoes, evidence gaps and authority boundaries. Use after identifying a problematic decision class.",
       "zip": "decision-bottleneck-analysis.zip",
-      "sha256": "8921443160573d0fc21cecabb4eacdfaee04847f2c13451fc4bae28e602c452b"
+      "sha256": "5bbf551966d241abe58771ebfb87da9edd1fa0500b77807ae4800886cdf5ba83"
     },
     {
       "name": "decision-rights-review",
@@ -64,7 +64,7 @@
       "maturity": "production",
       "description": "Map and review critical organisational decision rights, including who proposes, decides, executes, advises and escalates. Use when decisions are slow, duplicated, political or unclear; do not use merely to create a generic RACI.",
       "zip": "decision-rights-review.zip",
-      "sha256": "ad7c7051e01012b25b5519f3d15d3dc4499c40c20d32c683c3441fb01b123de5"
+      "sha256": "8e077633297be1f7d8c2ab1ec985e1253639a29422210c6089745a4fb654fb11"
     },
     {
       "name": "architecture-review",
@@ -72,7 +72,7 @@
       "maturity": "production",
       "description": "Review alignment across business direction, capabilities, organisational design, information and technology architecture. Use for enterprise or organisational architecture decisions; do not use as a low-level software design review.",
       "zip": "architecture-review.zip",
-      "sha256": "759c704d897199aa23ef4b9cb6d4007f915f469ea20a8468cdf5adcd656558e3"
+      "sha256": "b9fdebbdd6665257e37a2777fee114bf46e1daff50c5b1ccafe0d043186a09c7"
     },
     {
       "name": "evidence-loop-review",
@@ -80,7 +80,7 @@
       "maturity": "production",
       "description": "Review whether organisational KPIs, outcomes, reviews and feedback loops actually inform decisions and adaptation. Use when governance produces reporting but weak learning; do not use as a generic KPI-design task.",
       "zip": "evidence-loop-review.zip",
-      "sha256": "ecd3484b9131e258f8b7735481c429bcb9b622e4344b506f14f0e6e8c3f92f3a"
+      "sha256": "a383ba3fa6177c0f6b7137c7f871a4f2daf82f4650885c24cb63545729e33058"
     },
     {
       "name": "global-local-model-review",
@@ -88,7 +88,7 @@
       "maturity": "production",
       "description": "Review how responsibilities, standards, capabilities and decisions are split between global/central and local units. Use when the organisation needs to balance scale and consistency against local context and speed; do not default to centralisation.",
       "zip": "global-local-model-review.zip",
-      "sha256": "d0f7a335344348c086175834456f3504274704db222c03985751d484de30dde4"
+      "sha256": "6ba85967eed1c70c05346e0fe891766d4d4f87cf6f75f445b2bf7ace4e443ef0"
     },
     {
       "name": "operating-model-review",
@@ -96,7 +96,7 @@
       "maturity": "production",
       "description": "Review an operating model for role clarity, global/local split, interfaces, autonomy, coordination and accountability. Use when organisational structure or collaboration inhibits strategy execution; do not reduce the review to an org chart.",
       "zip": "operating-model-review.zip",
-      "sha256": "33499d2e8c6a9a7ec7702b1075709ca980e9a6db3ac514acdd6f6bb23680745f"
+      "sha256": "03a8ddfa97be4b68e0e36ff9497f82d45a65098809c6ef47d64f8b84b20629e7"
     },
     {
       "name": "portfolio-health-review",
@@ -104,7 +104,7 @@
       "maturity": "production",
       "description": "Review whether an initiative portfolio is coherent, affordable, capacity-feasible, dependency-aware and aligned to strategic outcomes. Use for portfolio health diagnosis; do not force ranking when comparable evidence is missing.",
       "zip": "portfolio-health-review.zip",
-      "sha256": "423b76dae857341820557b7fa7c9d4583ef0f5f5274f7df5f39682a22541b919"
+      "sha256": "912353dab4025f2f5e886f423e423898e30b38222f6b0169b4d4c296dbfb8a1a"
     },
     {
       "name": "portfolio-prioritization",
@@ -112,7 +112,7 @@
       "maturity": "production",
       "description": "Structure transparent prioritisation of initiatives using agreed strategic, value, risk, capacity and dependency criteria. Use when a portfolio needs comparable decisions; use deterministic calculation for scoring where possible.",
       "zip": "portfolio-prioritization.zip",
-      "sha256": "54378f0183a36699c0ea4c132bbdf3e6d5f99b6ac96081939f003221b92ab222"
+      "sha256": "6250be85f3affc63a86acdba79b69b202cf4187a9962fd346f058962aff6dc38"
     }
   ]
 }
