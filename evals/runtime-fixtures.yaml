@@ -25,3 +25,5 @@ targets:
   oaf-enterprise-architecture-review:
     - evals/oaf/wave4/case-enterprise-architecture-review-001.md
     - evals/oaf/wave4/case-enterprise-architecture-stop-001.md
+  oaf-enterprise-change-review:
+    - evals/oaf/e2e/case-001-enterprise-change.md

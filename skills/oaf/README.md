@@ -103,6 +103,7 @@ Production:
 
 Candidate:
 - `oaf-strategy-execution-reset`
+- `oaf-enterprise-change-review` — end-to-end OAF orchestration; runtime validation pending
 
 ## Routing principle
 
