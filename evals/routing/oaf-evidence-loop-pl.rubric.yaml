@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: oaf-evidence-loop-pl
+mode: natural-routing
+expected_target: evidence-loop-review
+language: pl
+competing_intents:
+  - kpi-quality-review
+assertions:
+  manual:
+    - evidence-to-decision loop is selected
+    - the answer does not stop at rating individual KPI definitions
