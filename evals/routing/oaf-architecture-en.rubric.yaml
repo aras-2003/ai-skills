@@ -1,0 +1,12 @@
+schema_version: "1.0"
+id: oaf-architecture-en
+mode: natural-routing
+expected_target: architecture-review
+language: en
+competing_intents:
+  - transformation blueprint
+  - platform retirement decision
+assertions:
+  manual:
+    - architecture review is selected
+    - final consolidation is not invented from missing evidence
