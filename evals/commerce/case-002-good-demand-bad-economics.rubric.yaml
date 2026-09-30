@@ -1,0 +1,21 @@
+schema_version: "1.0"
+id: "case-002-good-demand-bad-economics"
+target: "commerce-product-deep-dive"
+mode: explicit
+source_legacy: "evals/commerce/case-002-good-demand-bad-economics.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## PASS
+  - recognizes real demand but separates it from business viability;
+  - calculates that CAC headroom is weak or negative under realistic scenarios;
+  - inventory/returns/logistics are treated as structural risks;
+  - avoids recommending a market test simply because the category is attractive.
+assertions:
+  manual:
+    - "recognizes real demand but separates it from business viability;"
+    - "calculates that CAC headroom is weak or negative under realistic scenarios;"
+    - "inventory/returns/logistics are treated as structural risks;"
+    - "avoids recommending a market test simply because the category is attractive."
