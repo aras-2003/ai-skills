@@ -36,6 +36,8 @@ jobs:
         run: python -m unittest discover -s scripts/package/tests -p 'test_*.py'
       - name: Commerce calculator tests
         run: python -m unittest discover -s skills/commerce/economics/unit-economics-review/tests -p 'test_*.py'
+      - name: Production readiness registry
+        run: python scripts/readiness/validate_readiness.py
       - name: Verify generated catalog is current
         run: |
           python scripts/catalog/generate_catalog.py
