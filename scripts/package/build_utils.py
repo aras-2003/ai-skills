@@ -142,6 +142,8 @@ def copy_runtime_support(src_skill: Path, dst_skill: Path) -> list[str]:
         if not source.exists():
             continue
         for path in sorted(p for p in source.rglob("*") if p.is_file()):
+            if path.is_symlink():
+                raise ValueError(f"runtime support symlinks are not allowed: {path}")
             rel = path.relative_to(src_skill)
             if not include_runtime_file(rel):
                 continue
