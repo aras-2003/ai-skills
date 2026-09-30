@@ -73,3 +73,15 @@ workflows:
       last_reviewed: 2026-09-30
       execution:
         default_model_class: standard
+  - name: oaf-transformation-design
+    workflow: workflows/oaf-transformation-design/WORKFLOW.md
+    description: >
+      Run an evidence-gated OAF transformation design workflow from validated diagnosis and target direction into bounded workstreams, sequencing, mobilisation and adaptive stage gates.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: medium
+      last_reviewed: 2026-09-30
+      execution:
+        default_model_class: standard
