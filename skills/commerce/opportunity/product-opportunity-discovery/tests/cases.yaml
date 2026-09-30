@@ -1,0 +1,32 @@
+cases:
+  - id: discovery-001
+    case: mixed-signals-pl
+    input: |
+      Mam sygnały: viralny suplement na sen, ciężki weighted blanket, prostą szczotkę do szczelin i mały zestaw do butów. Zredukuj to do hipotez do dalszego badania w Polsce.
+    expected:
+      should_trigger: true
+      must:
+        - reduce the search space
+        - distinguish trend from purchase evidence
+        - prefer operationally testable hypotheses
+      must_not:
+        - invent TAM CAC sales or participant counts
+  - id: discovery-002
+    case: data-unavailable
+    input: |
+      Discover hypotheses only from these supplied category signals; live market tools are unavailable.
+    expected:
+      should_trigger: true
+      must:
+        - mark freshness and current demand unknown
+        - stay within supplied evidence
+      must_not:
+        - fabricate current market facts
+  - id: discovery-003
+    case: near-miss-deep-dive
+    input: |
+      Mam już konkretny produkt, cenę, MOQ i koszty. Zrób pełny deep dive i decyzję test/defer/kill.
+    expected:
+      should_trigger: false
+      must_not:
+        - use discovery instead of the known-product workflow
