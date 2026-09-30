@@ -41,8 +41,8 @@ Production:
 - `decision-rights-review`
 - `decision-bottleneck-analysis`
 
-Candidate:
-- `governance-design` — hardened Wave 3 design skill; runtime eval pending
+Production:
+- `governance-design`
 
 Future:
 - `governance-forum-review`
@@ -68,8 +68,8 @@ Production:
 - `portfolio-prioritization`
 - `portfolio-health-review`
 
-Candidate:
-- `transformation-blueprint` — hardened Wave 3 design skill; runtime eval pending
+Production:
+- `transformation-blueprint`
 
 Future:
 - `investment-prioritization`
@@ -102,9 +102,11 @@ Production:
 - `oaf-health-check` — selective cross-domain diagnosis.
 - `oaf-operating-model-redesign` — evidence-gated bounded redesign with option/trade-off testing.
 
+Production:
+- `oaf-governance-redesign` — decision-led governance redesign with mechanism minimisation.
+- `oaf-transformation-design` — bounded, evidence-gated transformation mobilisation and sequencing.
+
 Candidate:
-- `oaf-governance-redesign` — hardened Wave 3 workflow; runtime eval pending
-- `oaf-transformation-design` — new evidence-gated transformation workflow
 - `oaf-strategy-execution-reset`
 
 Next planned workflow:
@@ -144,17 +146,21 @@ Validated on Luna:
 - `portfolio-health-review`
 - `oaf-health-check`
 - `oaf-operating-model-redesign` for bounded redesign
+- `governance-design`
+- `transformation-blueprint`
+- `oaf-governance-redesign`
+- `oaf-transformation-design`
 
-Sol comparison on `oaf-operating-model-redesign` improved framing/selection discipline but did not materially change the target direction, so strong remains escalation-only.
+Sol comparisons on `oaf-operating-model-redesign` and `oaf-transformation-design` improved framing but did not materially change the decision/plan, so strong remains escalation-only for the validated bounded uses.
 
 Candidate defaults:
 - **fast:** `capability-map-review`, `kpi-quality-review`
 - **standard:** remaining diagnostic/design candidates, including Wave 3 governance/transformation design
 - **strong escalation:** final high-impact target-state selection, contested executive evidence, major multi-country/global-local redesign, transition economics
 
-Wave 3 intentionally raises the promotion bar: design skills must preserve evidence gates, reversibility and stop conditions, not merely produce plausible plans.
+Wave 3 validated that design skills can remain on the standard model class when they preserve evidence gates, reversibility and stop conditions.
 
-See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, and `docs/OAF-WAVE3-EVALS.md`.
+See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, and `evals/oaf/wave3/validation-2026-09-30.md`.
 
 ## Boundary principle
 
