@@ -1,0 +1,45 @@
+name: Package candidate skill lab
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "workflows/oaf-health-check/**"
+      - "scripts/package/build_plugin.py"
+      - "scripts/package/build_lab_plugin.py"
+      - ".github/workflows/package-main-lab-plugin.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install packaging dependencies
+        run: python -m pip install "PyYAML>=6.0,<7"
+
+      - name: Build candidate lab plugin
+        run: python scripts/package/build_lab_plugin.py --output plugins/arek-ai-skills-lab
+
+      - name: Commit generated lab package
+        run: |
+          if [ -z "$(git status --porcelain -- plugins/arek-ai-skills-lab)" ]; then
+            echo "Lab plugin already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add plugins/arek-ai-skills-lab
+          git commit -m "build: refresh candidate skill lab [skip ci]"
+          git push
