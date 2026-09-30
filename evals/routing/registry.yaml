@@ -24,3 +24,27 @@ cases:
   - id: oaf-architecture-en
     input: evals/routing/oaf-architecture-en.input.md
     rubric: evals/routing/oaf-architecture-en.rubric.yaml
+  - id: career-cv-gaps-en
+    input: evals/routing/career-cv-gaps-en.input.md
+    rubric: evals/routing/career-cv-gaps-en.rubric.yaml
+  - id: career-cv-tailor-pl
+    input: evals/routing/career-cv-tailor-pl.input.md
+    rubric: evals/routing/career-cv-tailor-pl.rubric.yaml
+  - id: oaf-portfolio-health-en
+    input: evals/routing/oaf-portfolio-health-en.input.md
+    rubric: evals/routing/oaf-portfolio-health-en.rubric.yaml
+  - id: oaf-portfolio-priority-pl
+    input: evals/routing/oaf-portfolio-priority-pl.input.md
+    rubric: evals/routing/oaf-portfolio-priority-pl.rubric.yaml
+  - id: oaf-kpi-quality-en
+    input: evals/routing/oaf-kpi-quality-en.input.md
+    rubric: evals/routing/oaf-kpi-quality-en.rubric.yaml
+  - id: oaf-evidence-loop-pl
+    input: evals/routing/oaf-evidence-loop-pl.input.md
+    rubric: evals/routing/oaf-evidence-loop-pl.rubric.yaml
+  - id: commerce-deep-dive-en
+    input: evals/routing/commerce-deep-dive-en.input.md
+    rubric: evals/routing/commerce-deep-dive-en.rubric.yaml
+  - id: oaf-architecture-workflow-pl
+    input: evals/routing/oaf-architecture-workflow-pl.input.md
+    rubric: evals/routing/oaf-architecture-workflow-pl.rubric.yaml
