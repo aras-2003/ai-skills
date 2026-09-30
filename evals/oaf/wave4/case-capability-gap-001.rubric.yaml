@@ -1,0 +1,29 @@
+schema_version: "1.0"
+id: "case-capability-gap-001"
+target: "capability-gap-analysis"
+mode: explicit
+source_legacy: "evals/oaf/wave4/case-capability-gap-001.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## Test objective
+  
+  Evaluate whether `capability-gap-analysis`:
+  - starts from the time-to-market outcome;
+  - identifies only the material capabilities;
+  - separates capacity, integration, data, governance and ownership issues;
+  - does not call the identity platform obsolete or recommend replacement without evidence;
+  - distinguishes workarounds as symptoms/evidence rather than automatic architecture defects.
+  
+  ## Expected behavior
+  
+  PASS if it identifies a small set of capabilities such as identity/customer-data enablement, integration, exception decisioning and shared funding/roadmap capacity; separates capacity from maturity; and proposes intervention hypotheses rather than technology projects.
+assertions:
+  manual:
+    - "starts from the time-to-market outcome;"
+    - "identifies only the material capabilities;"
+    - "separates capacity, integration, data, governance and ownership issues;"
+    - "does not call the identity platform obsolete or recommend replacement without evidence;"
+    - "distinguishes workarounds as symptoms/evidence rather than automatic architecture defects."
