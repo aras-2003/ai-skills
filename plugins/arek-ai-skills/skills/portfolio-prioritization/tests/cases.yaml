@@ -1,0 +1,27 @@
+cases:
+  - id: portfolio-prioritization-001
+    case: positive
+    input: |
+      Apply portfolio-prioritization to a realistic organisational architecture problem with incomplete but usable evidence.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
+        - preserve uncertainty
+  - id: portfolio-prioritization-002
+    case: near-miss
+    input: |
+      Summarize this project list without prioritizing.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform the full portfolio-prioritization workflow
+  - id: portfolio-prioritization-003
+    case: evidence-boundary
+    input: |
+      The organisation has conflicting stakeholder accounts and missing ownership data. Use portfolio-prioritization without inventing facts.
+    expected:
+      should_trigger: true
+      must:
+        - distinguish evidence from inference
+        - surface material unknowns
