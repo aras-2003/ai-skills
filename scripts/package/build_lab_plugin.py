@@ -61,6 +61,13 @@ def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
             if not rubric.name.endswith(".rubric.yaml"):
                 raise ValueError(f"Runtime eval rubric must use .rubric.yaml suffix: {rubric}")
 
+            if mode == "natural-routing":
+                lines.append(
+                    f"- `{src.name}` — case: `{case_id}`, mode: `{mode}`; "
+                    "intentionally not packaged under the target capability to avoid routing leakage"
+                )
+                continue
+
             dst = refs / src.name
             shutil.copy2(src, dst)
             copied += 1
