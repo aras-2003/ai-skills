@@ -13,6 +13,7 @@ sys.path.insert(0, str(HERE.parents[1]))
 import assertions
 import receipt
 import validate_isolation
+import validate_routing
 
 
 class EvalProtocolTests(unittest.TestCase):
@@ -109,6 +110,20 @@ class EvalProtocolTests(unittest.TestCase):
         self.assertTrue(good_ok, good_failures)
         self.assertFalse(bad_ok)
         self.assertGreaterEqual(len(bad_failures), 1)
+
+    def test_natural_routing_bad_control_leaks_target_and_fails(self) -> None:
+        leaked = validate_routing.leaked_capabilities(
+            "Please use unit-economics-review for this request.",
+            {"unit-economics-review", "supplier-viability-review"},
+        )
+        self.assertEqual(["unit-economics-review"], leaked)
+
+    def test_natural_routing_plain_language_does_not_leak_target(self) -> None:
+        leaked = validate_routing.leaked_capabilities(
+            "Policz economics i break-even CAC dla tego produktu.",
+            {"unit-economics-review", "supplier-viability-review"},
+        )
+        self.assertEqual([], leaked)
 
 
 if __name__ == "__main__":
