@@ -19,3 +19,24 @@ cases:
   - id: case-006-product-discovery
     status: NOT_RUN
     required_next_test: "Unassisted explicit behavior run using only the packaged .input.md and recorded catalog."
+  - id: routing-company-facts-pl
+    status: NOT_RUN
+    required_next_test: "Natural-routing run with full current catalog; company facts must select company-context-research."
+  - id: routing-cv-gap-en
+    status: NOT_RUN
+    required_next_test: "Natural-routing run with full current catalog; gap analysis must not route to tailoring."
+  - id: routing-ea-workflow-en
+    status: NOT_RUN
+    required_next_test: "Natural-routing run with full current catalog; enterprise EA workflow vs architecture specialist."
+  - id: routing-rights-bottleneck-pl
+    status: NOT_RUN
+    required_next_test: "Natural-routing run with full current catalog; bottleneck vs rights review."
+  - id: routing-portfolio-health-en
+    status: NOT_RUN
+    required_next_test: "Natural-routing run with full current catalog; health vs prioritization."
+  - id: routing-kpi-quality-en
+    status: NOT_RUN
+    required_next_test: "Natural-routing run with full current catalog; KPI quality vs evidence loop."
+  - id: routing-commerce-discovery-pl
+    status: NOT_RUN
+    required_next_test: "Natural-routing run with full current catalog; discovery vs deep dive."
