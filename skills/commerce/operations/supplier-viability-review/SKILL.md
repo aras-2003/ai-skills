@@ -4,7 +4,7 @@ description: >
   Assess whether sourcing, MOQ, lead time, quality, packaging and supplier concentration make a product viable to test and scale.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -16,6 +16,16 @@ metadata:
 
 ## Purpose
 Separate attractive product economics from sourcing and inventory reality.
+
+
+## Preconditions
+Require a defined product specification and target market. Quote-based conclusions require quote scope, date/currency and what freight/duty/packaging are included.
+
+## Inputs and evidence
+Separate sample evidence from production reliability. Capture MOQ, lead time, landed-cost scope, certifications where relevant, defect/quality evidence, backup suppliers and inventory exposure.
+
+## Uncertainty and tool failure
+If current supplier/quote evidence is unavailable, keep cost, MOQ and lead time unresolved. Never convert a sample result or one marketplace listing into proven scale reliability.
 
 ## Procedure
 1. Capture supplier options, MOQ, sample availability, lead time and landed-cost evidence.
