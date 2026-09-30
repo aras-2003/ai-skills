@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: career-cv-tailor-pl
+mode: natural-routing
+expected_target: cv-tailoring
+language: pl
+competing_intents:
+  - cv-gap-analysis
+assertions:
+  manual:
+    - CV tailoring is selected
+    - unsupported experience is not added
