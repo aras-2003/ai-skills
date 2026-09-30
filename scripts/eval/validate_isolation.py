@@ -55,10 +55,17 @@ def validate_registry(root: Path) -> list[str]:
     return errors
 
 
-def validate_artifact(path: Path) -> list[str]:
+def validate_artifact(path: Path, root: Path | None = None) -> list[str]:
     errors: list[str] = []
     if not path.exists():
         return [f"artifact does not exist: {path}"]
+    forbidden_routing_inputs: set[str] = set()
+    if root is not None:
+        for _target, cases in load_registry(root).items():
+            for case in cases:
+                if isinstance(case, dict) and case.get("mode") == "natural-routing":
+                    forbidden_routing_inputs.add(Path(str(case.get("input"))).name)
+
     for p in path.rglob("*"):
         if not p.is_file():
             continue
@@ -66,6 +73,8 @@ def validate_artifact(path: Path) -> list[str]:
             errors.append(f"rubric leaked into executor artifact: {p}")
         if p.name.endswith(".input.md") and FORBIDDEN_INPUT_HEADINGS.search(p.read_text(encoding="utf-8")):
             errors.append(f"packaged executor input leaks evaluator headings: {p}")
+        if p.name in forbidden_routing_inputs:
+            errors.append(f"natural-routing input leaked under a target capability: {p}")
     return errors
 
 
@@ -76,7 +85,7 @@ def main() -> int:
     root = repo_root()
     errors = validate_registry(root)
     if args.artifact:
-        errors.extend(validate_artifact(args.artifact.resolve()))
+        errors.extend(validate_artifact(args.artifact.resolve(), root=root))
     for err in errors:
         print(f"[BLOCKER] {err}")
     if not errors:
