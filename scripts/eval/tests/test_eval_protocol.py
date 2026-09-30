@@ -10,6 +10,7 @@ import sys
 HERE = Path(__file__).resolve()
 sys.path.insert(0, str(HERE.parents[1]))
 
+import assertions
 import receipt
 import validate_isolation
 
@@ -90,6 +91,24 @@ class EvalProtocolTests(unittest.TestCase):
             p.write_text(json.dumps(record), encoding="utf-8")
             errors = receipt.validate_receipt(p)
         self.assertTrue(any("input digest mismatch" in e for e in errors))
+
+    def test_deterministic_assertions_distinguish_good_and_bad_output(self) -> None:
+        rubric = {
+            "assertions": {
+                "deterministic": [
+                    {"contains": "UNKNOWN"},
+                    {"not_contains": "guaranteed"},
+                    {"regex": r"Decision:\\s+INVESTIGATE"},
+                ]
+            }
+        }
+        good = "Decision: INVESTIGATE\nCandidate Fit: UNKNOWN\n"
+        bad = "Decision: PURSUE\nCandidate Fit: 100/100 guaranteed\n"
+        good_ok, good_failures = assertions.evaluate(good, rubric)
+        bad_ok, bad_failures = assertions.evaluate(bad, rubric)
+        self.assertTrue(good_ok, good_failures)
+        self.assertFalse(bad_ok)
+        self.assertGreaterEqual(len(bad_failures), 1)
 
 
 if __name__ == "__main__":
