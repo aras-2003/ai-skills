@@ -44,6 +44,16 @@ def validate_cases(path: Path, schema: dict) -> list[ValidationIssue]:
             trigger = expected.get("should_trigger")
             has_positive = has_positive or trigger is True
             has_negative = has_negative or trigger is False
+            must = expected.get("must") or []
+            must_not = expected.get("must_not") or []
+            if not must and not must_not:
+                issues.append(
+                    ValidationIssue(
+                        "high",
+                        str(path),
+                        f"{cid or '<unknown>'}: behavioral case must include non-empty must or must_not assertions",
+                    )
+                )
 
     if not has_positive:
         issues.append(ValidationIssue("high", str(path), "Test suite has no should-trigger case"))
