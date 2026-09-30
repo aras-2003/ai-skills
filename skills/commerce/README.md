@@ -22,6 +22,7 @@ Signal -> Problem -> Product/Offer -> Demand -> Competition -> Economics -> Supp
 ## Production skills
 
 ### Opportunity
+- product-opportunity-discovery
 - market-transferability-review
 
 ### Demand
@@ -45,14 +46,9 @@ Signal -> Problem -> Product/Offer -> Demand -> Competition -> Economics -> Supp
 ### Risk
 - commerce-regulatory-risk-review
 
-## Candidate skills
-
-### Opportunity
-- product-opportunity-discovery — broad discovery mode; dedicated runtime eval still pending
-
 ## Production workflows
 - commerce-product-deep-dive
-- commerce-opportunity-review — validated for screening/selection; broad discovery remains candidate-only
+- commerce-opportunity-review — validated for discovery, screening and selection
 
 ## Decision states
 - BADAĆ TERAZ

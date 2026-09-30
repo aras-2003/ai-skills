@@ -5,8 +5,8 @@ Orchestrate the minimum evidence-backed commerce path for discovering, screening
 
 ## Entry modes
 
-### Discovery mode — candidate only
-Broad product-idea discovery is not yet production-validated. In the lab, use `product-opportunity-discovery`; in production, do not claim discovery-mode validation until a dedicated runtime eval passes.
+### Discovery mode
+Use `product-opportunity-discovery` to reduce noisy market signals to 3–5 evidence-linked hypotheses before deeper validation. Do not rank numerically or treat interview intent as purchase evidence.
 
 ### Known-product mode
 Use when the user provides a concrete product or benchmark.
@@ -61,7 +61,7 @@ BADAĆ TERAZ / TESTOWAĆ / ODŁOŻYĆ / ODRZUCIĆ.
 The smallest staged action that can change the decision. For cross-market transfer, show the sequence from cheapest context screen to any later offer/paid test.
 
 ## Model guidance
-Default: standard for synthesis; fast for broad discovery and extraction. Escalate to strong only when a high-capital or highly regulated decision genuinely requires it.
+Default: standard for synthesis; fast for broad discovery and extraction. Broad discovery is validated on Luna for shortlist reduction from mixed signals. Escalate to strong only when a high-capital or highly regulated decision genuinely requires it.
 
 ## Stop conditions
 Stop discovery when 3–5 credible hypotheses remain.

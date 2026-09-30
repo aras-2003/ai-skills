@@ -100,3 +100,15 @@ Do not promote `product-opportunity-discovery` before Case 006 passes on Luna wi
 - clear signal-vs-evidence distinction;
 - no full deep dive;
 - next steps staged by cheapest decision-changing experiment.
+
+
+## Case 006 result
+
+Luna result: PASS+ after minor hardening.
+
+Hardening retained:
+- do not invent participant counts, budgets or thresholds without an explicit basis;
+- stated willingness to buy remains qualitative evidence, not purchase evidence;
+- actual costly commitment is stronger evidence than interview intent.
+
+Promotion: `product-opportunity-discovery` -> production 1.0.0.
