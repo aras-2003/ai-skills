@@ -5,12 +5,43 @@ import json
 import shutil
 from pathlib import Path
 
+import yaml
+
 from build_plugin import copy_skill, discover_skills
 from workflow_entrypoints import add_workflow_entrypoints
 
 
 PLUGIN_NAME = "arek-ai-skills-lab"
-PLUGIN_VERSION = "0.1.0"
+PLUGIN_VERSION = "0.2.0"
+
+def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
+    registry = root / "evals" / "runtime-fixtures.yaml"
+    if not registry.exists():
+        return 0
+
+    data = yaml.safe_load(registry.read_text(encoding="utf-8")) or {}
+    targets = data.get("targets") or {}
+    if not isinstance(targets, dict):
+        raise ValueError("evals/runtime-fixtures.yaml: targets must be a mapping")
+
+    copied = 0
+    for target, fixtures in targets.items():
+        target_dir = skills_out / target
+        if not target_dir.exists():
+            continue
+        refs = target_dir / "references" / "evals"
+        refs.mkdir(parents=True, exist_ok=True)
+        lines = ["# Runtime Eval Fixtures", "", "Canonical source files are copied from the repository for lab-only runtime testing.", ""]
+        for rel in fixtures or []:
+            src = root / rel
+            if not src.exists():
+                raise FileNotFoundError(f"Missing runtime eval fixture: {src}")
+            dst = refs / src.name
+            shutil.copy2(src, dst)
+            copied += 1
+            lines.append(f"- \`{src.name}\` — source: \`{rel}\`")
+        (refs / "INDEX.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return copied
 
 
 def main() -> int:
@@ -35,6 +66,7 @@ def main() -> int:
 
     candidate_workflows = add_workflow_entrypoints(root, "candidate", skills_out)
     production_workflows = add_workflow_entrypoints(root, "production", skills_out)
+    runtime_eval_fixtures = add_runtime_eval_fixtures(root, skills_out)
 
     manifest = {
         "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
@@ -72,7 +104,7 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    print(f"Packaged {len(selected)} candidate skills + {len(candidate_workflows) + len(production_workflows)} workflow entrypoints into {out}")
+    print(f"Packaged {len(selected)} candidate skills + {len(candidate_workflows) + len(production_workflows)} workflow entrypoints + {runtime_eval_fixtures} runtime eval fixtures into {out}")
     return 0
 
 
