@@ -26,9 +26,9 @@ Planned/deferred:
 ### 2. Operating model
 Production:
 - `operating-model-review`
+- `global-local-model-review`
 
 Candidate:
-- `global-local-model-review`
 - `organizational-interface-review`
 
 Future:
@@ -39,9 +39,9 @@ Future:
 ### 3. Decision architecture & governance
 Production:
 - `decision-rights-review`
+- `decision-bottleneck-analysis`
 
 Candidate:
-- `decision-bottleneck-analysis`
 - `governance-design`
 
 Future:
@@ -66,9 +66,9 @@ Future:
 ### 5. Portfolio & execution
 Production:
 - `portfolio-prioritization`
+- `portfolio-health-review`
 
 Candidate:
-- `portfolio-health-review`
 - `transformation-blueprint`
 
 Future:
@@ -100,9 +100,9 @@ Future — intentionally deferred until core OAF is stable:
 
 Production:
 - `oaf-health-check` — selective cross-domain diagnosis.
+- `oaf-operating-model-redesign` — evidence-gated bounded redesign with option/trade-off testing.
 
 Candidate:
-- `oaf-operating-model-redesign`
 - `oaf-governance-redesign`
 - `oaf-strategy-execution-reset`
 
@@ -133,20 +133,26 @@ Examples:
 
 ## Model-class defaults
 
-Validated on Luna for structured diagnosis:
+Validated on Luna:
 - `decision-rights-review`
 - `portfolio-prioritization`
 - `operating-model-review`
 - `architecture-review`
 - `evidence-loop-review`
+- `global-local-model-review`
+- `decision-bottleneck-analysis`
+- `portfolio-health-review`
 - `oaf-health-check`
+- `oaf-operating-model-redesign` for bounded redesign
+
+Sol comparison on `oaf-operating-model-redesign` improved framing/selection discipline but did not materially change the target direction, so strong remains escalation-only.
 
 Candidate defaults:
 - **fast:** `capability-map-review`, `kpi-quality-review`
-- **standard:** most diagnostic and redesign skills
-- **strong escalation:** novel cross-domain target-state design, contested executive evidence, major global/local redesign
+- **standard:** remaining diagnostic/design candidates
+- **strong escalation:** final high-impact target-state selection, contested executive evidence, major multi-country/global-local redesign, transition economics
 
-See `docs/MODEL-ROUTING.md` and `evals/oaf/core-validation-2026-09-30.md`.
+See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, and `evals/oaf/wave2/validation-2026-09-30.md`.
 
 ## Boundary principle
 
