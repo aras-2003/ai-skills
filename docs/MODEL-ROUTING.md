@@ -81,18 +81,26 @@ Validated on Luna for structured diagnosis:
 - `evidence-loop-review` — standard
 - `oaf-health-check` — standard workflow synthesis
 
+Validated on Luna in Wave 2:
+- `global-local-model-review` — standard
+- `decision-bottleneck-analysis` — standard
+- `portfolio-health-review` — standard
+- `oaf-operating-model-redesign` — standard for bounded redesign, option generation, trade-off analysis and pilot design
+
+Sol comparison for `oaf-operating-model-redesign`:
+- improved alternative framing and selection discipline;
+- did not materially change the recommended direction;
+- keep as escalation, not default.
+
 Candidate defaults:
 - `capability-map-review` — fast
 - `kpi-quality-review` — fast
-- `global-local-model-review` — standard
 - `organizational-interface-review` — standard
-- `decision-bottleneck-analysis` — standard
 - `capability-gap-analysis` — standard
-- `portfolio-health-review` — standard
 - `strategy-to-execution-diagnostic` — standard
 - `governance-design` — standard
 - `transformation-blueprint` — standard
 
-Use strong only when the task becomes genuinely novel target-state design, politically contested executive decision architecture, major global/local redesign, or high-impact enterprise transformation design.
+Use strong for final high-impact target-state selection, materially conflicting executive evidence, major multi-country/global-local redesign, material transition economics, politically contested authority/funding choices, or novel enterprise transformation design.
 
-A successful Luna result validates the tested use case, not every possible use of the skill. See `evals/oaf/core-validation-2026-09-30.md`.
+A successful Luna result validates the tested use case, not every possible use of the skill. See `evals/oaf/core-validation-2026-09-30.md` and `evals/oaf/wave2/validation-2026-09-30.md`.
