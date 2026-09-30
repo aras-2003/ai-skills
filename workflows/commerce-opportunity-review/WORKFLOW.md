@@ -42,7 +42,9 @@ Select only what changes the decision:
 - Popularity, TAM or US success cannot compensate for a failed economics or compliance gate.
 - A boring product can outperform a trendy one when economics, logistics and acquisition are stronger.
 - If evidence packs are not comparable, state which candidate needs validation rather than ranking.
-- Prefer one real market test over another research cycle once desk-research uncertainty is low.
+- Prefer one real-world experiment over another research cycle once desk-research uncertainty is low.
+- Market test != first test: use the cheapest experiment that can falsify a decision-critical assumption before paid acquisition or inventory commitment.
+- Do not invent spend caps without a user-supplied budget or an explicit sample-size/evidence basis.
 
 ## Output contract
 ### Selected path
@@ -63,4 +65,4 @@ Default: standard for synthesis; fast for broad discovery and extraction. Escala
 ## Stop conditions
 Stop discovery when 3–5 credible hypotheses remain.
 Stop analysis when a fatal gate fails.
-Stop research and test when the remaining uncertainty is conversion/CAC/offer response.
+Stop research and test when the remaining uncertainty is conversion/CAC/offer response and cheaper pre-market blockers have already been cleared.
