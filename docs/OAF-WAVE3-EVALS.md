@@ -6,16 +6,20 @@ Validate the first OAF governance and transformation design layer on Luna, while
 
 The design layer has a higher promotion threshold because plausible prose is not enough: options, mechanisms and sequencing can directly shape high-impact organisational choices.
 
+## Runtime fixture location
+
+In Arek AI Skills Lab, canonical eval fixtures are packaged into the selected skill/workflow under `references/evals/`. The repository source remains under `evals/`; runtime prompts must use the packaged reference path.
+
 ## Test order
 
 ### 1. Governance design
 
 Fixture:
-`evals/oaf/wave3/case-governance-design-001.md`
+`references/evals/case-governance-design-001.md`
 
 Prompt:
 
-> Use the `governance-design` skill on the exact case in `evals/oaf/wave3/case-governance-design-001.md`. Start from the confirmed material decision set. Design the minimum governance needed, preferring direct decision rights, standing rules, asynchronous mechanisms or event-triggered escalation over new forums where they are sufficient. Explicitly identify mechanisms to remove, merge or narrow. Do not invent decision owners.
+> Use the `governance-design` skill on the exact case in `references/evals/case-governance-design-001.md`. Start from the confirmed material decision set. Design the minimum governance needed, preferring direct decision rights, standing rules, asynchronous mechanisms or event-triggered escalation over new forums where they are sufficient. Explicitly identify mechanisms to remove, merge or narrow. Do not invent decision owners.
 
 Pass focus:
 - decision-led, not committee-led;
@@ -28,11 +32,11 @@ Pass focus:
 ### 2. Transformation blueprint — positive
 
 Fixture:
-`evals/oaf/wave3/case-transformation-blueprint-001.md`
+`references/evals/case-transformation-blueprint-001.md`
 
 Prompt:
 
-> Use the `transformation-blueprint` skill on the exact case in `evals/oaf/wave3/case-transformation-blueprint-001.md`. Convert the agreed federated target direction into an evidence-gated blueprint. Separate 30–90 day mobilisation from longer-term rollout, trace each workstream to the diagnosis and target principles, make capacity/dependencies explicit, preserve unresolved ownership as owner-to-confirm, and define continue/adjust/stop gates. Do not invent a fixed multi-year roadmap.
+> Use the `transformation-blueprint` skill on the exact case in `references/evals/case-transformation-blueprint-001.md`. Convert the agreed federated target direction into an evidence-gated blueprint. Separate 30–90 day mobilisation from longer-term rollout, trace each workstream to the diagnosis and target principles, make capacity/dependencies explicit, preserve unresolved ownership as owner-to-confirm, and define continue/adjust/stop gates. Do not invent a fixed multi-year roadmap.
 
 Pass focus:
 - diagnosis-to-workstream traceability;
@@ -45,11 +49,11 @@ Pass focus:
 ### 3. Transformation blueprint — stop condition
 
 Fixture:
-`evals/oaf/wave3/case-transformation-blueprint-stop-001.md`
+`references/evals/case-transformation-blueprint-stop-001.md`
 
 Prompt:
 
-> Use the `transformation-blueprint` skill on the exact stop-condition case in `evals/oaf/wave3/case-transformation-blueprint-stop-001.md`. The user requested a full three-year roadmap. Apply the skill's preconditions and stop conditions strictly.
+> Use the `transformation-blueprint` skill on the exact stop-condition case in `references/evals/case-transformation-blueprint-stop-001.md`. The user requested a full three-year roadmap. Apply the skill's preconditions and stop conditions strictly.
 
 Pass focus:
 - refuses to pretend target state is selected;
@@ -62,11 +66,11 @@ Pass focus:
 Run after governance-design passes.
 
 Fixture:
-`evals/oaf/wave3/case-governance-redesign-001.md`
+`references/evals/case-governance-redesign-001.md`
 
 Prompt:
 
-> Use the `oaf-governance-redesign` workflow on the exact case in `evals/oaf/wave3/case-governance-redesign-001.md`. Reuse the confirmed diagnosis, distinguish decision-rights fixes from governance mechanisms, remove or merge before adding, and design the lightest mechanisms that preserve risk control. Include a bounded pilot and evidence of effectiveness.
+> Use the `oaf-governance-redesign` workflow on the exact case in `references/evals/case-governance-redesign-001.md`. Reuse the confirmed diagnosis, distinguish decision-rights fixes from governance mechanisms, remove or merge before adding, and design the lightest mechanisms that preserve risk control. Include a bounded pilot and evidence of effectiveness.
 
 Pass focus:
 - diagnosis reuse;
@@ -81,11 +85,11 @@ Pass focus:
 Run after transformation-blueprint positive + stop cases pass.
 
 Fixture:
-`evals/oaf/wave3/case-transformation-design-001.md`
+`references/evals/case-transformation-design-001.md`
 
 Prompt:
 
-> Use the `oaf-transformation-design` workflow on the exact case in `evals/oaf/wave3/case-transformation-design-001.md`. Reuse the selected target direction, define the transformation boundary, sequence foundations and pilots before scale, make the constrained data capacity part of the critical path, define continue/adjust/stop gates, protect service continuity, and limit detailed commitment to the approved 90-day mobilisation horizon.
+> Use the `oaf-transformation-design` workflow on the exact case in `references/evals/case-transformation-design-001.md`. Reuse the selected target direction, define the transformation boundary, sequence foundations and pilots before scale, make the constrained data capacity part of the critical path, define continue/adjust/stop gates, protect service continuity, and limit detailed commitment to the approved 90-day mobilisation horizon.
 
 Pass focus:
 - no restart of strategy/design;
