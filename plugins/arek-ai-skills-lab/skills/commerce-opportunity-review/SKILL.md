@@ -1,16 +1,25 @@
 ---
 name: commerce-opportunity-review
-description: Orchestrate the minimum evidence-backed path for discovering, screening
-  or selecting e-commerce product opportunities without running the full commerce
-  catalog by default.
+description: Orchestrate the minimum evidence-backed path for screening and selecting
+  e-commerce product opportunities without running the full commerce catalog by default.
+  Broad discovery remains candidate-only.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
-  maturity: candidate
+  version: 1.0.0
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
   execution:
     default_model_class: standard
+    validated_models:
+      luna:
+        status: pass
+        validated_on: 2026-09-30
+        validated_use:
+        - regulation-first opportunity screening
+        - cross-market transferability review
+        - selective routing
+        - staged evidence gating
 ---
 
 # Commerce Opportunity Review Runtime Entrypoint

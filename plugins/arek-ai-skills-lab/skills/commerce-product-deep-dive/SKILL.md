@@ -5,12 +5,21 @@ description: Evaluate one e-commerce product opportunity end-to-end across probl
   before deciding whether to test, research, defer or kill.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
-  maturity: candidate
+  version: 1.0.0
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
   execution:
     default_model_class: standard
+    validated_models:
+      luna:
+        status: pass
+        validated_on: 2026-09-30
+        validated_use:
+        - premium-versus-generic screening
+        - failed-economics kill decisions
+        - boring-product paid-test readiness
+        - cheapest-falsifying-experiment sequencing
 ---
 
 # Commerce Product Deep Dive Runtime Entrypoint
