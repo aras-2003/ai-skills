@@ -1,0 +1,20 @@
+targets:
+  oaf-health-check:
+    - evals/oaf-health-check/case-001-enterprise-it.md
+  global-local-model-review:
+    - evals/oaf/wave2/case-global-local-001.md
+  decision-bottleneck-analysis:
+    - evals/oaf/wave2/case-decision-bottleneck-001.md
+  portfolio-health-review:
+    - evals/oaf/wave2/case-portfolio-health-001.md
+  oaf-operating-model-redesign:
+    - evals/oaf/wave2/case-operating-model-redesign-001.md
+  governance-design:
+    - evals/oaf/wave3/case-governance-design-001.md
+  transformation-blueprint:
+    - evals/oaf/wave3/case-transformation-blueprint-001.md
+    - evals/oaf/wave3/case-transformation-blueprint-stop-001.md
+  oaf-governance-redesign:
+    - evals/oaf/wave3/case-governance-redesign-001.md
+  oaf-transformation-design:
+    - evals/oaf/wave3/case-transformation-design-001.md
