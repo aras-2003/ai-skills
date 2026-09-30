@@ -4,7 +4,7 @@ description: >
   Triage regulatory, claims, safety and compliance risk for consumer e-commerce products. Use to decide whether complexity is proportionate before deeper legal review.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: high
   last_reviewed: 2026-09-30
@@ -16,6 +16,16 @@ metadata:
 
 ## Purpose
 Identify whether regulatory burden or claims risk can invalidate an otherwise attractive product thesis.
+
+
+## Preconditions
+Require target jurisdiction, product type/formulation where relevant, intended claims and sales/import route. Missing classification inputs make the gate unresolved.
+
+## Inputs and evidence
+Identify the source and jurisdiction of material obligations. Separate product classification, safety/labelling/import duties and advertising/claims requirements.
+
+## Uncertainty and tool failure
+If authoritative regulatory sources or qualified review are unavailable, return an unresolved gate and the verification needed. Never present commercial screening as legal clearance.
 
 ## Procedure
 1. Classify product and intended claims.
