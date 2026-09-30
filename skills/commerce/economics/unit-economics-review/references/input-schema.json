@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Unit economics calculator input",
+  "type": "object",
+  "required": ["currency", "quantity_per_order", "sale_price", "vat_rate", "input_vat_recoverable", "costs"],
+  "properties": {
+    "currency": {"type": "string", "minLength": 1},
+    "quantity_per_order": {"type": "number", "exclusiveMinimum": 0},
+    "sale_price": {
+      "type": "object",
+      "required": ["amount", "basis"],
+      "properties": {
+        "amount": {"type": "number", "minimum": 0},
+        "basis": {"enum": ["gross", "net"]}
+      }
+    },
+    "vat_rate": {"type": "number", "minimum": 0, "exclusiveMaximum": 1},
+    "input_vat_recoverable": {"type": "boolean"},
+    "costs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "amount", "basis", "scope"],
+        "properties": {
+          "name": {"type": "string"},
+          "amount": {"type": "number", "minimum": 0},
+          "basis": {"enum": ["gross", "net"]},
+          "scope": {"enum": ["unit", "order"]}
+        }
+      }
+    },
+    "payment_fee": {
+      "type": "object",
+      "properties": {
+        "fixed": {"type": "number", "minimum": 0},
+        "rate": {"type": "number", "minimum": 0},
+        "base": {"enum": ["gross", "net"]}
+      }
+    },
+    "returns": {
+      "type": "object",
+      "required": ["mode"],
+      "properties": {
+        "mode": {"enum": ["none", "expected_loss_per_order", "rate_x_loss"]},
+        "amount": {"type": "number", "minimum": 0},
+        "return_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "loss_per_return": {"type": "number", "minimum": 0}
+      }
+    },
+    "cac": {"type": "number", "minimum": 0},
+    "required_contribution_after_cac": {"type": "number"},
+    "moq_units": {"type": "number", "minimum": 0}
+  },
+  "additionalProperties": false
+}
