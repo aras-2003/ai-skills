@@ -1,0 +1,1 @@
+I already have a concrete product, target price, supplier MOQ, logistics assumptions and an intended Meta Ads channel. Review whether this specific offer should be tested, deferred or killed; do not generate new product ideas.
