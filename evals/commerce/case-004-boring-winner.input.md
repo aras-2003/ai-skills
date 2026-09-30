@@ -16,6 +16,7 @@ Evidence:
 - no unusual regulatory burden is identified;
 - at least four distinct creative/demo angles are plausible;
 - no validated CAC exists.
+- for this synthetic case, use an explicit VAT rate of 23%; listed COGS/freight, fulfilment/packaging/fees and return allowance are net economic variable costs per order; the 3 PLN return allowance is expected loss per order.
 
 ## User request
 Use the `commerce-product-deep-dive` workflow.
