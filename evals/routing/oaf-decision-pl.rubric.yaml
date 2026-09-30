@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: oaf-decision-pl
+mode: natural-routing
+expected_target: decision-rights-review
+language: pl
+competing_intents:
+  - governance design
+  - operating model redesign
+assertions:
+  manual:
+    - decision-rights diagnosis is selected before governance design
