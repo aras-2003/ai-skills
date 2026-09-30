@@ -100,3 +100,18 @@ targets:
       mode: explicit
       input: evals/commerce/case-006-product-discovery.input.md
       rubric: evals/commerce/case-006-product-discovery.rubric.yaml
+  company-context-research:
+    - id: "routing-company-facts-pl"
+      mode: natural-routing
+      input: "evals/routing/routing-company-facts-pl.input.md"
+      rubric: "evals/routing/routing-company-facts-pl.rubric.yaml"
+  cv-gap-analysis:
+    - id: "routing-cv-gap-en"
+      mode: natural-routing
+      input: "evals/routing/routing-cv-gap-en.input.md"
+      rubric: "evals/routing/routing-cv-gap-en.rubric.yaml"
+  kpi-quality-review:
+    - id: "routing-kpi-quality-en"
+      mode: natural-routing
+      input: "evals/routing/routing-kpi-quality-en.input.md"
+      rubric: "evals/routing/routing-kpi-quality-en.rubric.yaml"
