@@ -5,25 +5,11 @@ import json
 import shutil
 from pathlib import Path
 
-import yaml
-
+from portable import read_frontmatter, render_portable_skill
 from workflow_entrypoints import add_workflow_entrypoints
 
 PLUGIN_NAME = "arek-ai-skills"
 PLUGIN_VERSION = "1.7.1"
-
-
-def read_frontmatter(skill_md: Path) -> dict:
-    text = skill_md.read_text(encoding="utf-8")
-    if not text.startswith("---\n"):
-        raise ValueError(f"{skill_md}: missing frontmatter")
-    end = text.find("\n---\n", 4)
-    if end < 0:
-        raise ValueError(f"{skill_md}: unterminated frontmatter")
-    data = yaml.safe_load(text[4:end]) or {}
-    if not isinstance(data, dict):
-        raise ValueError(f"{skill_md}: frontmatter must be a mapping")
-    return data
 
 
 def discover_skills(root: Path, maturity: str) -> list[Path]:
@@ -44,6 +30,7 @@ def copy_skill(src: Path, dst_root: Path) -> None:
     if dst.exists():
         raise ValueError(f"duplicate packaged skill name: {name}")
     shutil.copytree(src, dst)
+    (dst / "SKILL.md").write_text(render_portable_skill(src / "SKILL.md"), encoding="utf-8")
 
 
 def main() -> int:
