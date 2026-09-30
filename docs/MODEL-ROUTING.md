@@ -92,16 +92,23 @@ Sol comparison for `oaf-operating-model-redesign`:
 - did not materially change the recommended direction;
 - keep as escalation, not default.
 
+Validated on Luna in Wave 3:
+- `governance-design` — standard for bounded decision-led governance design
+- `transformation-blueprint` — standard for bounded blueprints and strict stop-condition enforcement
+- `oaf-governance-redesign` — standard for bounded governance redesign
+- `oaf-transformation-design` — standard for bounded 90-day transformation design
+
+Sol comparison for `oaf-transformation-design`:
+- slightly stronger narrative/selection framing;
+- no material change in sequence, risk posture or recommended plan;
+- strong remains escalation-only.
+
 Candidate defaults:
 - `capability-map-review` — fast
 - `kpi-quality-review` — fast
 - `organizational-interface-review` — standard
 - `capability-gap-analysis` — standard
 - `strategy-to-execution-diagnostic` — standard
-- `governance-design` — standard; Wave 3 runtime eval pending
-- `transformation-blueprint` — standard; Wave 3 positive + stop-condition eval pending
-- `oaf-governance-redesign` — standard; Wave 3 runtime eval pending
-- `oaf-transformation-design` — standard; Wave 3 runtime eval pending
 
 Use strong for final high-impact target-state selection, materially conflicting executive evidence, major multi-country/global-local redesign, material transition economics, politically contested authority/funding choices, or novel enterprise transformation design.
 
@@ -124,4 +131,4 @@ Escalate to strong/Sol for:
 - politically contested mandates;
 - unresolved target-state choices that could change the plan.
 
-See `docs/OAF-WAVE3-EVALS.md`.
+See `docs/OAF-WAVE3-EVALS.md` and `evals/oaf/wave3/validation-2026-09-30.md`.
