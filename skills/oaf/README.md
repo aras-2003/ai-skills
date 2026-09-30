@@ -96,10 +96,9 @@ Production:
 - `oaf-health-check` — selective cross-domain diagnosis.
 - `oaf-operating-model-redesign` — evidence-gated bounded redesign with option/trade-off testing.
 - `oaf-governance-redesign` — decision-led governance redesign with mechanism minimisation.
-- `oaf-transformation-design` — bounded, evidence-gated transformation mobilisation and sequencing.
-
-Production:
 - `oaf-enterprise-architecture-review` — evidence-gated enterprise architecture review.
+- `oaf-transformation-design` — bounded, evidence-gated transformation mobilisation and sequencing.
+- `oaf-enterprise-change-review` — selective end-to-end orchestration across OAF domains.
 
 Candidate:
 - `oaf-strategy-execution-reset`
@@ -145,6 +144,7 @@ Validated on Luna:
 - `capability-map-review`
 - `capability-gap-analysis`
 - `oaf-enterprise-architecture-review`
+- `oaf-enterprise-change-review`
 
 Sol comparisons on `oaf-operating-model-redesign` and `oaf-transformation-design` improved framing but did not materially change the decision/plan, so strong remains escalation-only for the validated bounded uses.
 
@@ -155,7 +155,7 @@ Candidate defaults:
 
 Wave 3 validated that design skills can remain on the standard model class when they preserve evidence gates, reversibility and stop conditions.
 
-See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, `evals/oaf/wave3/validation-2026-09-30.md`, and `evals/oaf/wave4/validation-2026-09-30.md`.
+See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, `evals/oaf/wave3/validation-2026-09-30.md`, `evals/oaf/wave4/validation-2026-09-30.md`, and `evals/oaf/e2e/validation-2026-09-30.md`.
 
 ## Boundary principle
 
