@@ -29,6 +29,8 @@ If these are not met, stop and route back to `decision-rights-review` or `decisi
 - Advice must not silently become approval.
 - Governance redesign should remove at least as much ambiguity/ceremony as it adds.
 - Do not redesign the whole committee landscape if a narrower decision-rights change resolves the problem.
+- Retain/merge an existing forum only when its formal mandate and material decision need justify it.
+- Risk control should be preserved through explicit evidence, ownership, thresholds, expiry/review and escalation—not extra approvals by default.
 - Do not claim governance success from meeting cadence or attendance alone.
 
 ## Output contract
@@ -45,6 +47,7 @@ If these are not met, stop and route back to `decision-rights-review` or `decisi
 
 ## Model guidance
 Default: **standard** for bounded governance redesign.
+Validated on Luna for diagnosis reuse, rights-vs-mechanism separation, forum minimisation, bounded pilot and effectiveness measures.
 Escalate to strong for enterprise-wide executive authority redesign, politically contested mandates or high-impact final governance architecture selection.
 
 ## Stop conditions

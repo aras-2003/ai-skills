@@ -4,12 +4,21 @@ description: >
   Convert an approved organisational diagnosis and target direction into a sequenced transformation blueprint with workstreams, dependencies, decision gates, capacity needs and evidence checkpoints. Use after diagnosis and target-state direction are sufficiently agreed; do not roadmap unresolved design choices as facts.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.2.0"
-  maturity: candidate
+  version: "1.0.0"
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
   execution:
     default_model_class: standard
+    validated_models:
+      luna:
+        status: pass
+        validated_on: 2026-09-30
+        validated_use:
+          - bounded transformation blueprint
+          - 30-90 day mobilisation
+          - capacity/dependency sequencing
+          - stop-condition enforcement
 ---
 
 # Transformation Blueprint
@@ -55,6 +64,7 @@ If target direction is not sufficiently decided, stop and return to the relevant
 - Activity completion is not the same as transformation outcome.
 - Capacity and dependency constraints can override desired sequencing.
 - Do not assign named owners where ownership is not evidenced; use owner-to-confirm.
+- Prefer the minimum coherent workstream set; do not create separate workstreams when one decision/control loop can manage the issue.
 - Pilots should be used where reversibility materially reduces risk.
 - Do not create a multi-year roadmap when evidence only supports the next mobilisation phase.
 
@@ -76,10 +86,12 @@ Then:
 
 ## Model guidance
 Default: **standard** for bounded, evidence-backed blueprints.
+Validated on Luna for positive blueprinting and a strict stop-condition case.
 Escalate to strong for enterprise-wide sequencing, large transition economics, contested target-state choices or major multi-country transformation.
 
 ## Quality checks
 - [ ] Every workstream traces to diagnosis and target principle.
+- [ ] Minimum coherent workstream set used.
 - [ ] Dependencies and critical path explicit.
 - [ ] Capacity constraints explicit.
 - [ ] Mobilisation separated from long-term rollout.
