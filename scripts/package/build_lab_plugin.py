@@ -7,6 +7,7 @@ from pathlib import Path
 
 import yaml
 
+from build_utils import atomic_output, package_version, sha256_tree, source_revision, write_json
 from build_plugin import copy_skill, discover_skills
 from workflow_entrypoints import add_workflow_entrypoints
 
@@ -93,68 +94,112 @@ def main() -> int:
 
     root = Path(__file__).resolve().parents[2]
     out = root / args.output
-    skills_out = out / "skills"
-
-    if out.exists():
-        shutil.rmtree(out)
-    skills_out.mkdir(parents=True, exist_ok=True)
 
     candidate_skills = discover_skills(root, "candidate")
     production_skills = discover_skills(root, "production")
     if not candidate_skills:
         raise SystemExit("No candidate skills found; refusing to build empty lab plugin")
 
-    selected = candidate_skills + production_skills
-    for skill_dir in selected:
-        copy_skill(skill_dir, skills_out)
+    with atomic_output(root, out) as stage:
+        skills_out = stage / "skills"
+        skills_out.mkdir(parents=True)
 
-    available_names = {p.name for p in skills_out.iterdir() if p.is_dir()}
-    candidate_workflows = add_workflow_entrypoints(
-        root, "candidate", skills_out, channel="lab", available_names=available_names
-    )
-    available_names.update(candidate_workflows)
-    production_workflows = add_workflow_entrypoints(
-        root, "production", skills_out, channel="lab", available_names=available_names
-    )
-    runtime_eval_fixtures = add_runtime_eval_fixtures(root, skills_out)
+        capabilities = []
+        for skill_dir in candidate_skills + production_skills:
+            item = copy_skill(skill_dir, skills_out)
+            capabilities.append(item)
 
-    manifest = {
-        "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-        "name": PLUGIN_NAME,
-        "version": PLUGIN_VERSION,
-        "description": "Isolated lab package with candidate targets plus their production dependencies for controlled behavioral testing.",
-        "skills": "./skills/",
-        "author": {"name": "Arkadiusz Kamrowski"},
-        "repository": "https://github.com/aras-2003/ai-skills",
-        "keywords": ["skills", "lab", "candidate", "oaf", "career"],
-        "extensions": {
-            "com.openai": {
-                "interface": {
-                    "displayName": "Arek AI Skills Lab",
-                    "shortDescription": "Candidate skills for runtime evaluation before production.",
-                    "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing. Do not enable it in the same session as the production plugin because duplicate capability names may compete."
+        available_names = {p.name for p in skills_out.iterdir() if p.is_dir()}
+        candidate_workflows = add_workflow_entrypoints(
+            root, "candidate", skills_out, channel="lab", available_names=available_names
+        )
+        available_names.update(candidate_workflows)
+        production_workflows = add_workflow_entrypoints(
+            root, "production", skills_out, channel="lab", available_names=available_names
+        )
+        workflow_names = candidate_workflows + production_workflows
+        capabilities.extend(
+            {"name": name, "kind": "workflow", "maturity": "candidate" if name in candidate_workflows else "production"}
+            for name in workflow_names
+        )
+        runtime_eval_fixtures = add_runtime_eval_fixtures(root, skills_out)
+
+        version = package_version(root, "lab")
+        manifest = {
+            "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+            "name": PLUGIN_NAME,
+            "version": version,
+            "description": "Isolated lab package with candidate targets plus their production dependencies for controlled behavioral testing.",
+            "skills": "./skills/",
+            "author": {"name": "Arkadiusz Kamrowski"},
+            "repository": "https://github.com/aras-2003/ai-skills",
+            "keywords": ["skills", "lab", "candidate", "oaf", "career"],
+            "extensions": {
+                "com.openai": {
+                    "interface": {
+                        "displayName": "Arek AI Skills Lab",
+                        "shortDescription": "Candidate skills for runtime evaluation before production.",
+                        "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing. Do not enable it in the same session as the production plugin because duplicate capability names may compete."
+                    }
                 }
             }
         }
-    }
-    (out / "plugin.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-
-    compat_dir = out / ".codex-plugin"
-    compat_dir.mkdir(parents=True, exist_ok=True)
-    (compat_dir / "plugin.json").write_text(
-        json.dumps(
+        write_json(stage / "plugin.json", manifest)
+        compat_dir = stage / ".codex-plugin"
+        compat_dir.mkdir(parents=True)
+        write_json(
+            compat_dir / "plugin.json",
             {
                 "name": PLUGIN_NAME,
-                "version": PLUGIN_VERSION,
+                "version": version,
                 "description": manifest["description"],
-                "skills": "./skills/"
+                "skills": "./skills/",
             },
-            indent=2,
-        ) + "\n",
-        encoding="utf-8",
-    )
+        )
+        revision = source_revision(root)
+        fixture_registry = yaml.safe_load((root / "evals" / "runtime-fixtures.yaml").read_text(encoding="utf-8")) or {}
+        fixture_targets = set((fixture_registry.get("targets") or {}).keys())
+        packaged_names = {item["name"] for item in capabilities}
+        fixture_status = [
+            {
+                "target": target,
+                "status": "packaged" if target in packaged_names else "error",
+            }
+            for target in sorted(fixture_targets)
+        ]
+        if any(item["status"] == "error" for item in fixture_status):
+            missing = [item["target"] for item in fixture_status if item["status"] == "error"]
+            raise ValueError("runtime fixture target not packaged in lab: " + ", ".join(missing))
 
-    print(f"Packaged {len(candidate_skills)} candidate + {len(production_skills)} production dependency skills + {len(candidate_workflows) + len(production_workflows)} workflow entrypoints + {runtime_eval_fixtures} runtime eval inputs into {out}")
+        write_json(
+            stage / "capabilities.json",
+            {
+                "schema_version": "1.0",
+                "channel": "lab",
+                "source_revision": revision,
+                "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
+                "capabilities": sorted(capabilities, key=lambda x: x["name"]),
+                "runtime_fixture_targets": fixture_status,
+            },
+        )
+        digest = sha256_tree(stage)
+        write_json(
+            stage / "release-manifest.json",
+            {
+                "schema_version": "1.0",
+                "package": PLUGIN_NAME,
+                "version": version,
+                "channel": "lab",
+                "source_revision": revision,
+                "artifact_content_sha256": digest,
+            },
+        )
+
+    print(
+        f"Packaged {len(candidate_skills)} candidate + {len(production_skills)} production dependency skills + "
+        f"{len(candidate_workflows) + len(production_workflows)} workflow entrypoints + "
+        f"{runtime_eval_fixtures} runtime eval inputs into {out}"
+    )
     return 0
 
 
