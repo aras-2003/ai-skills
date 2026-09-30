@@ -4,7 +4,7 @@ description: >
   Test whether an e-commerce offer has a credible reason to win versus cheap generics and established brands. Use when premium pricing, brand positioning or commodity risk matters.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: low
   last_reviewed: 2026-09-30
@@ -16,6 +16,11 @@ metadata:
 
 ## Purpose
 Determine why a customer should choose this offer rather than a cheaper or better-known alternative.
+
+## Preconditions and evidence contract
+Require a target customer, competing alternative and a claimed advantage. Separate product/offer proof from brand language. State whether the advantage is observed, demonstrated, inferred or unproven.
+
+If no sample/comparison proof exists, the differentiation verdict cannot exceed a hypothesis-level conclusion.
 
 ## Procedure
 1. State the target customer and competing alternatives.
@@ -30,6 +35,13 @@ Determine why a customer should choose this offer rather than a cheaper or bette
 - Better packaging does not justify a 4x price unless it changes perceived or delivered value.
 - A difference that cannot be communicated cheaply may not help paid acquisition.
 - Commodity products require offer-level or audience-level differentiation.
+
+- A premium story without observable customer value is not differentiation.
+- Claims about superiority require proof against a relevant alternative, not only attractive creative.
+
+## Failure / uncertainty handling
+- Do not fill missing evidence with remembered market facts.
+- If evidence is insufficient for the requested verdict, return the unresolved question and the cheapest evidence step that could change it.
 
 ## Output contract
 Differentiator | customer value | proof | visibility | copyability | price-support effect.
