@@ -7,6 +7,7 @@ Evidence:
 - visible dirt/problem is easy to demonstrate in video;
 - generic alternatives exist but many reviews complain about weak bristles and poor grip;
 - target bundle price: 69 PLN including VAT;
+- VAT rate for this case: 23%; input VAT is recoverable; COGS/inbound and fulfilment/fees amounts are net/order amounts;
 - COGS plus inbound freight: 11 PLN;
 - fulfilment, packaging and fees: 14 PLN;
 - returns allowance: 3 PLN;
