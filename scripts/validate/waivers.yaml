@@ -1,16 +1,1 @@
-waivers:
-  - id: AIS-14-commerce-suites
-    rule: production-suite-required
-    owner: arkadiusz-kamrowski
-    expires: "2026-10-07"
-    disposition: "Remove in PR D when discriminating Commerce specialist suites are added."
-    skills:
-      - product-opportunity-discovery
-      - market-transferability-review
-      - problem-demand-validation
-      - competition-landscape-review
-      - differentiation-review
-      - unit-economics-review
-      - supplier-viability-review
-      - acquisition-fit-review
-      - commerce-regulatory-risk-review
+waivers: []
