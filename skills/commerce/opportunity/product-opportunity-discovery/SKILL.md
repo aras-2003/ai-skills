@@ -1,51 +1,51 @@
 ---
 name: product-opportunity-discovery
 description: >
-  Discover product opportunity hypotheses from customer problems, category signals and market gaps. Use for broad e-commerce idea generation before deep validation; do not treat trend popularity as proof of business viability.
+  Discover product opportunity hypotheses from customer problems, category signals and market gaps. Use for broad e-commerce idea generation before deep validation; do not use when a concrete product already needs an end-to-end business decision.
 metadata:
   owner: arkadiusz-kamrowski
   version: "1.1.0"
   maturity: production
   risk: low
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: fast
+  last_reviewed: "2026-09-30"
 ---
 
 # Product Opportunity Discovery
 
 ## Purpose
-Generate a small set of evidence-linked product hypotheses worth validating.
-
+Generate a small set of evidence-linked product hypotheses worth validating, without turning weak signals into a business verdict.
 
 ## Preconditions
-Require a target market and at least a problem/category signal set. Discovery is for hypothesis reduction, not final business verdicts.
+Require a target market and discovery constraints, or mark them unresolved. If the user already has a concrete product, price/cost/supply thesis and wants test/defer/kill, route to the product deep dive.
 
 ## Inputs and evidence
-Label each signal as problem, trend, demand, purchase, operational or regulatory evidence. Prefer testable, operationally manageable hypotheses and preserve the evidence boundary.
+Use customer problems, current workarounds, trend/category signals, purchase evidence, operational constraints and channel hypotheses. Keep trend, engagement, stated intent and purchase evidence distinct.
 
 ## Uncertainty and tool failure
-If live data is unavailable, shortlist only from supplied evidence and mark freshness/current demand unknown. Do not invent TAM, sales, CAC, sample sizes or market certainty.
+If live market tools are unavailable, stay within supplied evidence and mark freshness/current demand unknown. Do not fabricate TAM, sales, CAC, prices, sample sizes or participant counts.
 
 ## Procedure
 1. Start from customer problems or category signals, not products alone.
-2. Capture target customer, problem, current workaround, candidate product, why-now signal and likely channel.
+2. Capture target customer, problem, workaround, candidate product, why-now signal and likely channel.
 3. Distinguish demand signal, trend signal and purchase evidence.
-4. Prefer opportunities with visible problems, simple explanation, testable offers and operationally manageable products.
-5. Apply fast kill screens: weak problem, impossible economics, obvious regulatory burden, poor logistics or pure commodity with no plausible differentiation.
-6. Return only the strongest 3–5 hypotheses for deeper review.
+4. Prefer opportunities with visible problems, simple explanation, testable offers and manageable operations.
+5. Apply fast kill/defer screens: weak problem, impossible economics, disproportionate regulation/logistics or pure commodity with no plausible differentiation.
+6. Return only the strongest 3–5 hypotheses for deeper validation; keep fewer if the evidence does not support 3.
 
 ## Decision rules
 - Popular product != good business.
 - Search/social attention != purchase intent.
 - US traction != PL transferability.
-- Do not invent sales volume from reviews, followers or ad visibility.
-- Discovery should reduce the search space, not produce a ranked business case.
-- Do not invent sample sizes, response thresholds or test budgets without an explicit evidence basis; describe the validation method and stopping logic instead.
-- Interview or survey intent is qualitative evidence, not purchase evidence. Treat actual deposits, reservations, purchases or other costly commitment as stronger evidence.
+- Discovery reduces the search space; it does not produce a final business verdict.
+- Do not invent sample sizes, response thresholds or test budgets without an evidence basis.
+- Interview/survey intent is qualitative evidence, not purchase evidence. Deposits, reservations, purchases or other costly commitments are stronger.
 
 ## Output contract
-Problem | target customer | candidate product | why now | evidence signal | key unknown | next validation step.
+Problem | target customer | candidate product | why now | evidence signal | purchase evidence | key unknown | cheapest next validation.
+Also state deliberate rejects/defers and why. No numerical ranking.
 
-## Model guidance
-Default: fast. Validated on Luna for broad mixed-signal discovery and shortlist reduction. Escalate only when interpreting conflicting category signals materially changes the shortlist.
+## Quality checks
+- [ ] Shortlist is 3–5 maximum, not quota-filled.
+- [ ] Signals and purchase evidence are separated.
+- [ ] Regulatory/logistics/commodity risks can remove ideas early.
+- [ ] Next validation is cheapest decision-changing evidence, not paid ads by default.
