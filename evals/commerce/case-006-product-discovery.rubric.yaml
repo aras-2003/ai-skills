@@ -1,0 +1,35 @@
+schema_version: "1.0"
+id: "case-006-product-discovery"
+target: "product-opportunity-discovery"
+mode: explicit
+source_legacy: "evals/commerce/case-006-product-discovery.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## PASS criteria
+  
+  A strong result should:
+  - return no more than 5 shortlisted hypotheses;
+  - prefer decision-testable, operationally manageable opportunities;
+  - recognize boring but strong candidates such as the crevice-cleaning tool;
+  - avoid overvaluing weighted blankets merely because demand is visible;
+  - defer or reject ingestibles because regulatory complexity dominates early-stage discovery;
+  - treat garage-storage US traction as a transferability question rather than Polish demand evidence;
+  - flag commodity risk for cable clips;
+  - distinguish demand/trend signals from purchase evidence;
+  - propose cheap next-validation steps rather than paid tests by default;
+  - make at least one deliberate rejection/defer decision.
+assertions:
+  manual:
+    - "return no more than 5 shortlisted hypotheses;"
+    - "prefer decision-testable, operationally manageable opportunities;"
+    - "recognize boring but strong candidates such as the crevice-cleaning tool;"
+    - "avoid overvaluing weighted blankets merely because demand is visible;"
+    - "defer or reject ingestibles because regulatory complexity dominates early-stage discovery;"
+    - "treat garage-storage US traction as a transferability question rather than Polish demand evidence;"
+    - "flag commodity risk for cable clips;"
+    - "distinguish demand/trend signals from purchase evidence;"
+    - "propose cheap next-validation steps rather than paid tests by default;"
+    - "make at least one deliberate rejection/defer decision."
