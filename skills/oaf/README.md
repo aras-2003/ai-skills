@@ -40,8 +40,6 @@ Future:
 Production:
 - `decision-rights-review`
 - `decision-bottleneck-analysis`
-
-Production:
 - `governance-design`
 
 Future:
@@ -67,8 +65,6 @@ Future:
 Production:
 - `portfolio-prioritization`
 - `portfolio-health-review`
-
-Production:
 - `transformation-blueprint`
 
 Future:
@@ -101,8 +97,6 @@ Future — intentionally deferred until core OAF is stable:
 Production:
 - `oaf-health-check` — selective cross-domain diagnosis.
 - `oaf-operating-model-redesign` — evidence-gated bounded redesign with option/trade-off testing.
-
-Production:
 - `oaf-governance-redesign` — decision-led governance redesign with mechanism minimisation.
 - `oaf-transformation-design` — bounded, evidence-gated transformation mobilisation and sequencing.
 
@@ -155,7 +149,7 @@ Sol comparisons on `oaf-operating-model-redesign` and `oaf-transformation-design
 
 Candidate defaults:
 - **fast:** `capability-map-review`, `kpi-quality-review`
-- **standard:** remaining diagnostic/design candidates, including Wave 3 governance/transformation design
+- **standard:** remaining diagnostic/design candidates
 - **strong escalation:** final high-impact target-state selection, contested executive evidence, major multi-country/global-local redesign, transition economics
 
 Wave 3 validated that design skills can remain on the standard model class when they preserve evidence gates, reversibility and stop conditions.
