@@ -14,7 +14,8 @@ sys.path.insert(0, str(PACKAGE_DIR))
 
 import build_chatgpt_skills
 import build_plugin
-from build_utils import validate_output_path
+from build_utils import assert_source_revision, validate_output_path
+from workflow_entrypoints import dependency_availability
 
 
 class PackagingTests(unittest.TestCase):
@@ -27,6 +28,53 @@ class PackagingTests(unittest.TestCase):
             os.environ.pop("SOURCE_REVISION", None)
         else:
             os.environ["SOURCE_REVISION"] = self.old_revision
+
+    def test_optional_dependency_has_explicit_missing_behavior(self) -> None:
+        item = {
+            "name": "workflow-x",
+            "dependencies": {
+                "required": ["required-skill"],
+                "optional": [
+                    {
+                        "name": "optional-skill",
+                        "on_missing": "Continue in reduced scope and disclose that optional-skill did not run.",
+                    }
+                ],
+            },
+        }
+        missing_required, missing_optional = dependency_availability(item, {"required-skill"})
+        self.assertEqual([], missing_required)
+        self.assertEqual("optional-skill", missing_optional[0]["name"])
+        self.assertIn("reduced scope", missing_optional[0]["on_missing"])
+
+    def test_required_dependency_is_detected(self) -> None:
+        item = {
+            "name": "workflow-x",
+            "dependencies": {"required": ["required-skill"], "optional": []},
+        }
+        missing_required, missing_optional = dependency_availability(item, set())
+        self.assertEqual(["required-skill"], missing_required)
+        self.assertEqual([], missing_optional)
+
+    def test_stale_source_revision_is_rejected(self) -> None:
+        assert_source_revision("abc", "abc")
+        with self.assertRaises(RuntimeError):
+            assert_source_revision("abc", "def")
+
+    def test_prebuild_failure_preserves_previous_output(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as td:
+            out = Path(td) / "plugin"
+            out.mkdir()
+            sentinel = out / "sentinel.txt"
+            sentinel.write_text("keep", encoding="utf-8")
+            original = build_plugin.ensure_source_valid
+            build_plugin.ensure_source_valid = lambda _root: (_ for _ in ()).throw(ValueError("broken reference"))
+            try:
+                with self.assertRaisesRegex(ValueError, "broken reference"):
+                    build_plugin.build(ROOT, out, "production")
+            finally:
+                build_plugin.ensure_source_valid = original
+            self.assertEqual("keep", sentinel.read_text(encoding="utf-8"))
 
     def test_invalid_maturity_preserves_previous_plugin_output(self) -> None:
         with tempfile.TemporaryDirectory(dir=ROOT) as td:
