@@ -24,6 +24,11 @@ def known_capability_names(root: Path) -> set[str]:
     return names
 
 
+def leaked_capabilities(input_text: str, known: set[str]) -> list[str]:
+    lowered = input_text.lower()
+    return sorted(name for name in known if name.lower() in lowered)
+
+
 def validate(root: Path) -> list[str]:
     path = root / "evals/routing/registry.yaml"
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
@@ -63,7 +68,7 @@ def validate(root: Path) -> list[str]:
             errors.append(f"{cid}: unknown expected_target {target!r}")
         if target and str(target).lower() in input_text:
             errors.append(f"{cid}: input leaks expected target name")
-        leaked = [name for name in known if name.lower() in input_text]
+        leaked = leaked_capabilities(input_text, known)
         if leaked:
             errors.append(f"{cid}: input names runtime capabilities: {', '.join(sorted(leaked))}")
         language = rubric.get("language")
