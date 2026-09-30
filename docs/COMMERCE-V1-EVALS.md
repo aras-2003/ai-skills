@@ -62,6 +62,8 @@ Prompt:
 Focus:
 - source-market success != target-market success;
 - lifestyle, price anchor, logistics and channel context can break transfer.
+- validate target-context prevalence and substitutes before copying the source-market offer into a landing/paid test.
+- evidence steps should be staged; do not run interviews, offer tests and paid acquisition in parallel if a cheaper context screen could already kill the thesis.
 
 ## Promotion threshold
 Do not promote before:
