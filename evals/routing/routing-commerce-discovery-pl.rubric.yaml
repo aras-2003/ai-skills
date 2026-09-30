@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: "routing-commerce-discovery-pl"
+target: "product-opportunity-discovery"
+mode: natural-routing
+expected_target: "product-opportunity-discovery"
+competing_targets:
+  - "commerce-product-deep-dive"
+  - "commerce-opportunity-review"
+execution_payload_must_not_include:
+  - expected_target
+  - competing_targets
+assertions:
+  manual:
+    - "select broad discovery"
+    - "return hypotheses/shortlist rather than a full deep dive"
