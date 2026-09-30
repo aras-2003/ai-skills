@@ -1,0 +1,14 @@
+schema_version: "1.0"
+id: "routing-cv-gap-en"
+target: "cv-gap-analysis"
+mode: natural-routing
+expected_target: "cv-gap-analysis"
+competing_targets:
+  - "cv-tailoring"
+execution_payload_must_not_include:
+  - expected_target
+  - competing_targets
+assertions:
+  manual:
+    - "select cv-gap-analysis"
+    - "identify evidence gaps without rewriting the CV"
