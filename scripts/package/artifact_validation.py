@@ -9,7 +9,7 @@ from pathlib import Path
 FORBIDDEN_PARTS = {"tests", "__pycache__"}
 
 
-def validate_tree(path: Path) -> list[str]:
+def validate_tree(path: Path, allow_lab_evals: bool = False) -> list[str]:
     errors: list[str] = []
     if not path.exists():
         return [f"missing artifact: {path}"]
@@ -18,7 +18,14 @@ def validate_tree(path: Path) -> list[str]:
             continue
         rel = file.relative_to(path)
         if any(part in FORBIDDEN_PARTS for part in rel.parts):
-            errors.append(f"forbidden runtime content: {rel}")
+            is_lab_eval = (
+                allow_lab_evals
+                and "evals" in rel.parts
+                and "references" in rel.parts
+                and (file.name.endswith(".input.md") or file.name == "INDEX.md")
+            )
+            if not is_lab_eval:
+                errors.append(f"forbidden runtime content: {rel}")
         if file.name.endswith(".rubric.yaml"):
             errors.append(f"rubric leaked into runtime artifact: {rel}")
     return errors
@@ -55,8 +62,9 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("path", type=Path)
     parser.add_argument("--zips", action="store_true")
+    parser.add_argument("--lab", action="store_true", help="allow executor-only references/evals/*.input.md in isolated Lab")
     args = parser.parse_args()
-    errors = validate_zips(args.path) if args.zips else validate_tree(args.path)
+    errors = validate_zips(args.path) if args.zips else validate_tree(args.path, allow_lab_evals=args.lab)
     for error in errors:
         print(f"[BLOCKER] {error}")
     return 1 if errors else 0
