@@ -2,78 +2,89 @@
 
 ## Goal
 
-Test candidate skills and workflows in the actual skill runtime before promoting them to production.
+Test skills and workflows in the actual runtime without leaking evaluator expectations into the executor.
 
-Static CI proves package quality. Runtime evals prove behavior.
+Static CI proves repository/package integrity. Runtime evidence proves behavior.
 
-## Lab plugin
+## Isolation boundary
 
-`Arek AI Skills Lab` packages:
-- every skill with `metadata.maturity: candidate` from `main`;
-- selected workflow entrypoints needed for runtime orchestration.
+Every runtime case registered in `evals/runtime-fixtures.yaml` has:
+- a stable case ID;
+- an execution mode: `explicit` or `natural-routing`;
+- an executor-only `.input.md`;
+- an evaluator-only `.rubric.yaml`.
 
-The lab plugin is intentionally separate from `Arek AI Skills` production.
+The executor may receive the input, the intended runtime catalog, tools and ordinary project context required by the case. It must not receive the rubric, expected routing, PASS/FAIL criteria, expected answer or evaluator notes.
 
-## Recommended evaluation sequence
+The Lab packager copies only executor inputs into `references/evals/`. Run:
 
-### 1. Explicit skill execution
-Invoke the exact skill by name and run one positive case.
+```bash
+python scripts/eval/validate_isolation.py --artifact plugins/arek-ai-skills-lab
+```
 
-Check:
-- procedure adherence;
-- output contract;
-- evidence discipline;
-- model-class adequacy.
+to check the registry and built artifact.
 
-### 2. Boundary test
-Run a near-miss case.
+## Evidence receipts
 
-Check that the skill does not expand into adjacent tasks.
+Narrative validation summaries are historical context, not evidence receipts for a changed component version.
 
-### 3. Missing/conflicting evidence
-Run the uncertainty/regression case.
+A runtime receipt records:
+- case ID plus input/rubric digests;
+- component version/content digest and source revision;
+- exact provider/model/reasoning settings;
+- available catalog and prompt;
+- actual output and relevant tool/resource trace;
+- reviewer and assisted/unassisted state;
+- explicit status.
 
-Check that the runtime does not invent facts.
+`NOT_RUN` is required when runtime/model access is unavailable. An assisted run cannot be recorded as PASS.
 
-### 4. Workflow orchestration
-Invoke the workflow entrypoint explicitly.
+Use:
 
-Check:
-- selective routing;
-- ordering of skills/gates;
-- cross-domain synthesis;
-- stop conditions.
+```bash
+python scripts/eval/receipt.py create ...
+python scripts/eval/receipt.py validate evals/results/<record>.json
+```
 
-### 5. Model-class comparison
-For skills tagged `fast` or `standard`, run the same case on the intended cheaper model and on the stronger reference model when possible.
+Provider adapters are deliberately separate from this minimum harness.
 
-Compare observable output on:
-- task completion;
-- evidence accuracy;
-- routing/boundary discipline;
-- output contract;
-- correction required;
-- concision/context cost.
+## Evaluation modes
 
-Do not promote a cheaper model class merely because it produces plausible prose.
+### Explicit behavior
+
+The executor is explicitly asked to use a named skill/workflow. This tests procedure adherence, evidence discipline, stop conditions and output contract. It does not prove natural routing.
+
+### Natural routing
+
+The user intent does not name a skill. The recorded runtime catalog is part of the receipt. This mode tests capability selection separately from task quality.
+
+### Real-use evidence
+
+Real work can supplement synthetic evals. Store only safe/redacted inputs or a controlled reference plus digest. Do not commit secrets or private CV/material.
+
+## Evaluation sequence
+
+1. Validate source and package integrity.
+2. Validate rubric isolation.
+3. Run explicit behavior cases.
+4. Run near-miss / missing / conflicting-evidence cases.
+5. Run natural-routing cases where routing matters.
+6. Evaluate actual output against the evaluator-only rubric.
+7. Record the receipt and any regression.
+8. Promote only after the required evidence matches the exact component version.
+
+## Current migration status
+
+Critical OAF and Commerce runtime fixtures have been split into executor inputs and evaluator rubrics. Historical PASS/PASS++ summaries remain historical only.
+
+Fresh unassisted runtime execution is pending where no current receipt exists. See `evals/results/runtime-status.yaml`.
 
 ## Promotion rule
 
-Promote a candidate only when:
-- static validation passes;
-- representative positive/negative/uncertainty cases pass;
-- no severe routing or evidence regression exists;
-- the intended model class is adequate for normal cases;
-- runtime failures have been converted into regression tests.
+Do not report runtime PASS merely because:
+- static validation passed;
+- a previous version passed;
+- a narrative summary says PASS;
+- the model produced plausible prose.
 
-## OAF first implementation case
-
-Use:
-`evals/oaf-health-check/case-001-enterprise-it.md`
-
-Recommended first pass:
-1. explicit `oaf-health-check`;
-2. observe which OAF skills are selected;
-3. rerun one selected skill independently;
-4. compare its finding with the workflow synthesis;
-5. record PASS / ITERATE / REJECT and smallest fix.
+Promotion requires the evidence policy defined for the component/maturity and no unresolved high-severity failure.
