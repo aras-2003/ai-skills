@@ -1,0 +1,12 @@
+schema_version: "1.0"
+id: commerce-discovery-pl
+mode: natural-routing
+expected_target: product-opportunity-discovery
+language: pl
+competing_intents:
+  - product deep dive
+  - regulatory review
+assertions:
+  manual:
+    - broad discovery is selected
+    - search space is reduced without final business verdict
