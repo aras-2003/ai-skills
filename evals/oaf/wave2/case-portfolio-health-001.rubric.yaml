@@ -1,0 +1,39 @@
+schema_version: "1.0"
+id: "case-portfolio-health-001"
+target: "portfolio-health-review"
+mode: explicit
+source_legacy: "evals/oaf/wave2/case-portfolio-health-001.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## Test objective
+  
+  Evaluate whether `portfolio-health-review`:
+  1. diagnoses the portfolio as a system rather than averaging project status;
+  2. identifies capacity and dependency overload;
+  3. separates mandatory/discretionary work;
+  4. identifies outcome-traceability gaps and duplication;
+  5. assesses whether the portfolio is ready for prioritisation;
+  6. avoids generating a ranking unless evidence supports it.
+  
+  ## Expected behaviors
+  
+  PASS if the skill identifies that:
+  - green project status does not imply a healthy portfolio;
+  - 128% capacity commitment is a system constraint;
+  - shared bottleneck resources create sequencing risk;
+  - no-stop behavior is a portfolio governance signal;
+  - duplicate initiative intent should be validated;
+  - prioritisation is needed, but only after comparable evidence is normalized.
+  
+  FAIL if it concludes the portfolio is mostly healthy because most projects are green.
+assertions:
+  manual:
+    - "green project status does not imply a healthy portfolio;"
+    - "128% capacity commitment is a system constraint;"
+    - "shared bottleneck resources create sequencing risk;"
+    - "no-stop behavior is a portfolio governance signal;"
+    - "duplicate initiative intent should be validated;"
+    - "prioritisation is needed, but only after comparable evidence is normalized."
