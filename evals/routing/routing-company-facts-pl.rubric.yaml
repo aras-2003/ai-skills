@@ -1,0 +1,14 @@
+schema_version: "1.0"
+id: "routing-company-facts-pl"
+target: "company-context-research"
+mode: natural-routing
+expected_target: "company-context-research"
+competing_targets:
+  - "executive-role-evaluator"
+execution_payload_must_not_include:
+  - expected_target
+  - competing_targets
+assertions:
+  manual:
+    - "select company-context-research"
+    - "do not add role/career evaluation"
