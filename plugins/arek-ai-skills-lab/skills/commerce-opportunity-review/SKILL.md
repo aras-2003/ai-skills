@@ -1,8 +1,8 @@
 ---
 name: commerce-opportunity-review
-description: Orchestrate the minimum evidence-backed path for screening and selecting
-  e-commerce product opportunities without running the full commerce catalog by default.
-  Broad discovery remains candidate-only.
+description: Orchestrate the minimum evidence-backed path for discovering, screening
+  and selecting e-commerce product opportunities without running the full commerce
+  catalog by default.
 metadata:
   owner: arkadiusz-kamrowski
   version: 1.0.0
