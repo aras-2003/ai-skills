@@ -2,200 +2,161 @@
 name: executive-role-evaluator
 description: >
   Evaluate senior and executive technology job opportunities based on real mandate, organizational scope,
-  candidate fit, career value, risk and evidence quality. Use when assessing whether an executive technology
-  role is worth pursuing, comparing opportunities, updating an assessment after recruiter/interview evidence,
-  or identifying decision-critical unknowns. Do not use for company research alone, CV tailoring alone,
-  interview preparation alone, generic job matching, or factual company research that does not explicitly ask for role implications.
+  candidate fit, career value, risk and evidence quality. Use when the user asks whether a role is worth
+  pursuing, compares opportunities, or asks what new company/interview evidence means for a specific role.
+  Do not use for company facts alone, CV tailoring, interview preparation or generic job matching.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.2"
+  version: "1.1.0"
   maturity: production
   risk: medium
-  last_reviewed: 2026-09-30
+  last_reviewed: "2026-09-30"
 ---
 
 # Executive Role Evaluator
 
 ## Purpose
 
-Support better executive-career decisions by evaluating the substance of a technology leadership opportunity rather than title or keyword overlap.
+Support executive-career decisions by evaluating the substance of a technology leadership opportunity rather than its title.
 
-The skill must answer separately:
-1. What is the role in substance?
-2. How strong is the role itself?
-3. How credible is the candidate for it?
-4. How much career value does it create?
-5. What material risks and unknowns could change the decision?
+Keep three dimensions separate:
+- **Role Quality** — mandate, authority, scope and executive positioning;
+- **Candidate Fit** — evidence-backed credibility for this role;
+- **Career Value** — whether the move expands the capabilities/scope relevant to the candidate's direction.
 
-## Preconditions
+## Boundary
 
-Use a current candidate profile from the active project/context when available. Do not embed personal profile data in this reusable skill.
+Use this skill only when the user asks for role evaluation, role implications, fit, career value or a pursue/investigate/skip decision.
 
-Work with incomplete information, but keep unsupported fields as `UNKNOWN`.
+If the request is factual company research only, stay factual and route elsewhere. Do not append unsolicited career advice merely because prior conversation context contains a role. If the request asks to rewrite a CV, prepare an interview or research company facts without evaluating the role, route to the corresponding specialist.
+
+## Preconditions and evidence
+
+At least one meaningful source about the opportunity is required: job description, recruiter message, interview notes, offer details or a concrete role summary.
+
+Use candidate/project context when available, but never invent missing experience. Mark important claims as:
+- FACT
+- STRONG INFERENCE
+- HYPOTHESIS
+- UNKNOWN
+
+Missing evidence lowers confidence; it does not become a zero score.
 
 ## Procedure
 
-0. **Confirm task intent before evaluating**
-   - Trigger this skill only when the user asks to assess a role, mandate, fit, career value, risk, or what company context means for a specific opportunity.
-   - If the user asks only for company facts (for example revenue, headcount, ownership, acquisitions, leadership or technology context), do not perform role evaluation and do not append career implications.
-   - If company research reveals potentially relevant facts, preserve them as context but wait for an explicit role-evaluation request before interpreting attractiveness, mandate quality or candidate fit.
-
 1. **Normalize the opportunity**
-   - Extract company, title, location/work model, reporting line, team/organization size, budget authority,
-     geographic/business/technology scope, transformation mandate, executive exposure, compensation, travel,
-     hiring reason and source.
-   - Never invent missing values.
+   - company, title, location/work model, reporting line, team, budget authority, geographic/business/technology scope, mandate, executive exposure, compensation/travel where relevant;
+   - keep missing fields UNKNOWN.
 
-2. **Classify evidence**
-   - Mark important claims as `FACT`, `STRONG INFERENCE`, `HYPOTHESIS`, or `UNKNOWN`.
-   - Never present inference as fact.
+2. **Classify the real role archetype**
+   - use `references/evaluation-model.md`;
+   - if uncertain, show the two most plausible archetypes.
 
-3. **Determine the real role archetype**
-   - Use the archetypes in `references/evaluation-model.md`.
-   - If uncertain, provide the two most plausible archetypes and explain the uncertainty.
+3. **Assess Role Quality**
+   - mandate and decision authority;
+   - organizational ownership;
+   - technology breadth;
+   - strategic influence;
+   - budget/investment authority;
+   - transformation leverage;
+   - business accountability;
+   - executive positioning.
 
-4. **Evaluate role quality**
-   - Assess mandate/decision authority, organizational ownership, technology scope, strategic influence,
-     budget/investment authority, transformation leverage, business accountability and executive positioning.
-   - Responsibility without authority is a negative signal.
+4. **Assess Candidate Fit separately**
+   - evidence-backed strengths;
+   - material gaps;
+   - credible narrative bridge;
+   - never claim unsupported experience.
 
-5. **Evaluate candidate fit separately**
-   - Assess current credibility, evidence-backed strengths, gaps and narrative bridge.
-   - Never recommend claiming unsupported experience.
+5. **Assess Career Value separately**
+   - scope expansion;
+   - organizational scale;
+   - executive exposure;
+   - budget ownership;
+   - global complexity;
+   - technology breadth;
+   - market signalling;
+   - learning density.
 
-6. **Evaluate career value separately**
-   - Assess scope expansion, organizational scale, executive exposure, budget ownership, global complexity,
-     technology breadth, market signaling and learning density.
+6. **Apply structural gates**
+   - responsibility without authority;
+   - title inflation;
+   - promised future mandate without current sponsor/governance;
+   - transformation accountability without decision rights;
+   - hard lifestyle constraint conflicts.
 
-7. **Identify material risks**
-   - Focus on strategic, organizational, delivery, career, compensation and lifestyle risks that could materially
-     change the decision.
-   - Do not generate long generic risk lists.
+7. **Challenge the preferred interpretation**
+   - strongest reason to pursue;
+   - strongest reason not to pursue;
+   - test title/prestige/compensation/confirmation bias.
 
-8. **Apply critical gates**
-   - A severe authority/scope contradiction can override otherwise attractive scores.
-   - Do not let weighted averages hide structural problems.
-   - See `references/evaluation-model.md`.
+8. **Identify decision-critical unknowns**
+   - ask only questions whose answers could change the decision.
 
-9. **Challenge the preferred interpretation**
-   - Identify the strongest reason to pursue and the strongest reason not to pursue.
-   - Test for title inflation, prestige bias, compensation bias, confirmation bias and promised-future-authority risk.
+9. **Assign decision and confidence**
+   - Decision: PURSUE / INVESTIGATE / LOW PRIORITY / SKIP;
+   - Confidence: HIGH / MEDIUM / LOW;
+   - do not mechanically map dimension assessments to the decision.
 
-10. **Identify decision-critical unknowns**
-    - Ask only questions whose answers could materially change the assessment.
-    - Prioritize `Critical` before `Important`.
-
-11. **Assign decision state and confidence**
-    - Decision: `PURSUE`, `INVESTIGATE`, `LOW PRIORITY`, or `SKIP`.
-    - Confidence: `HIGH`, `MEDIUM`, or `LOW`.
-    - Do not mechanically map scores to decisions.
-
-12. **Return the structured result**
-    - Follow `references/output-template.md`.
-    - For simple or low-evidence cases, use the compact executive summary first and do not force every long-form section.
-    - Always make decision state and confidence explicit when this skill triggers.
-    - If this is an update, preserve previous evidence and show what changed.
+10. **Return the result**
+    - default structure: `references/output-template.md`;
+    - keep simple cases compact;
+    - if the user explicitly requests another format, honor that format while preserving decision, confidence, material risks, strongest counterargument and critical unknowns.
 
 ## Decision rules
 
 - Role substance outranks title.
-- Candidate fit, role quality and career value are independent dimensions.
-- High compensation must not compensate for a structurally narrow role.
-- High prestige must not compensate for weak mandate.
-- High score with one critical unresolved structural risk can still be `INVESTIGATE`.
-- Missing evidence lowers confidence; it does not justify invented values.
-- For comparison mode, show trade-offs instead of collapsing all opportunities into one ranking.
-- For update mode, change only dimensions affected by new evidence and show a change log.
-
-## Inputs
-
-### Required
-At least one meaningful source describing the opportunity, such as:
-- job advertisement;
-- recruiter message;
-- role description;
-- interview/recruiter notes;
-- offer details.
-
-### Optional
-- company name;
-- candidate CV/profile from project context;
-- compensation;
-- reporting line;
-- team size;
-- org chart;
-- prior assessment;
-- company research.
-
-## Evidence requirements
-
-When external research is requested or required:
-1. prioritize official company/IR/regulatory sources;
-2. use reputable business media for context;
-3. use LinkedIn or employee-review sources as secondary evidence;
-4. distinguish sourced fact from interpretation.
-
-Do not treat recruiter statements about future authority as guaranteed reality.
+- Responsibility without authority is a negative structural signal.
+- Compensation and prestige do not repair a structurally narrow mandate.
+- UNKNOWN is not zero and is not silently averaged away.
+- Comparison mode compares the same qualitative dimensions and evidence/confidence; it does not require a numeric ranking.
+- A critical unresolved gate can keep an otherwise attractive role at INVESTIGATE.
+- Company facts alone do not trigger role evaluation.
 
 ## Output contract
 
-Use the structure in `references/output-template.md`.
+Default first block:
 
-### HARD OUTPUT GATE
-
-When this skill triggers, the response MUST begin with the decision header below before any narrative, caveat, table, explanation or source discussion:
-
-```
 Decision: PURSUE / INVESTIGATE / LOW PRIORITY / SKIP
 Confidence: HIGH / MEDIUM / LOW
 Role archetype: ...
-Role Quality: XX/100 or insufficient evidence
-Candidate Fit: XX/100 or insufficient evidence
-Career Value: XX/100 or insufficient evidence
+Role Quality: STRONG / ADEQUATE / WEAK / UNKNOWN
+Candidate Fit: STRONG / GOOD / PARTIAL / GAP / UNKNOWN
+Career Value: HIGH / MEDIUM / LOW / UNKNOWN
 Risk: LOW / MEDIUM / HIGH / VERY HIGH
-```
 
-Do not draft the rest of the answer until this header is complete.
+Then include only decision-relevant sections needed for the case.
 
-If evidence is insufficient, use `insufficient evidence` rather than omitting a field or inventing a score.
-
-After the mandatory header, include only the decision-relevant sections needed for the case.
-
-Always include somewhere in the response:
+Always preserve:
 - strongest reason to pursue;
 - strongest reason not to pursue;
 - critical unknowns;
 - recommended next action.
 
+If the user requests a table, bullets, one-paragraph answer or another layout, that requested layout may replace the default block order, but the required decision facts above must remain present. Do not fabricate numeric /100 scores unless the user explicitly requests a scored model and an explicit scoring contract is supplied.
+
 ## Failure and uncertainty handling
 
-- If the opportunity is too vague to score responsibly, return an `INVESTIGATE`-style discovery assessment with low confidence rather than inventing detail.
-- If candidate context is missing, evaluate role quality and career value generically, and mark personal fit as limited/unknown.
+- If the role is too vague, use INVESTIGATE with LOW confidence rather than inventing scope.
+- If candidate context is missing, Candidate Fit is UNKNOWN/limited-evidence.
 - If sources conflict, surface the conflict and identify what must be validated.
-- If the task is only company research, CV tailoring or interview prep, route to the appropriate specialist skill instead of expanding this skill.
-- Do not add unsolicited role/career interpretation to a factual company-research answer, even when the conversation contains prior job-search context.
+- If only factual company research is requested, do not trigger this skill.
+- If the user asks for a numeric score without a defined scoring method, explain that the default model is qualitative and ask whether a separately anchored scoring model is wanted.
 
 ## Quality checks
 
-Before returning:
 - [ ] Evidence is separated from inference.
-- [ ] Responsibility is distinguished from authority.
+- [ ] Authority is distinguished from responsibility.
 - [ ] Title does not drive the conclusion.
-- [ ] Role quality, fit and career value remain separate.
-- [ ] Critical gates were checked.
-- [ ] Material unknowns are visible.
-- [ ] Strongest counterargument was considered.
-- [ ] Recommended action follows from evidence.
+- [ ] Role Quality, Candidate Fit and Career Value remain separate.
+- [ ] UNKNOWN was not treated as zero.
+- [ ] Material unknowns and strongest counterargument are visible.
 - [ ] No unsupported candidate experience is claimed.
-- [ ] No generic SWOT-style filler was added.
-- [ ] The user explicitly asked for role evaluation or role implications.
-- [ ] Pure company research was not extended into career advice without an explicit request.
-- [ ] The response begins with the mandatory decision header.
-- [ ] Decision and confidence are explicit whenever this skill triggers.
-- [ ] No prose, table, caveat or source discussion appears before the mandatory header.
+- [ ] Pure company research was not extended into unsolicited career advice.
+- [ ] User-requested format was respected without dropping decision-critical facts.
 
 ## References
 
-- `references/evaluation-model.md` — archetypes, dimensions, weights and critical gates.
-- `references/output-template.md` — required response structure and update/comparison modes.
-- `references/candidate-profile-schema.yaml` — generic profile schema; actual personal profile belongs in project/private context.
+- `references/evaluation-model.md` — qualitative dimensions, archetypes and structural gates.
+- `references/output-template.md` — default, compact, comparison and update layouts.
+- `references/candidate-profile-schema.yaml` — generic profile schema; personal data belongs in private/project context.
