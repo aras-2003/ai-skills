@@ -97,9 +97,27 @@ class SkillMutationTests(unittest.TestCase):
     def test_missing_release_metadata_is_blocker(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
-            d = self._skill_dir(root, skill_text(metadata=False))
+            broken = """---
+name: good-skill
+description: Use for a concrete repeatable task when the user needs this bounded procedure.
+metadata:
+  version: "1.0.0"
+  maturity: production
+  risk: low
+  last_reviewed: "2026-09-30"
+---
+## Purpose
+P
+
+## Procedure
+1. Do.
+
+## Output contract
+Return result.
+"""
+            d = self._skill_dir(root, broken)
             issues = validate_skill(d, self.schema, root=root)
-            self.assertTrue(any("release metadata is required" in i.message for i in issues))
+            self.assertTrue(any("release metadata missing required field: owner" in i.message for i in issues))
 
     def test_overlong_description_is_blocker(self) -> None:
         with tempfile.TemporaryDirectory() as td:
