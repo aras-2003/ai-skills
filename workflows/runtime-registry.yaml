@@ -174,7 +174,7 @@ workflows:
   - name: commerce-opportunity-review
     workflow: workflows/commerce-opportunity-review/WORKFLOW.md
     description: >
-      Orchestrate the minimum evidence-backed path for screening and selecting e-commerce product opportunities without running the full commerce catalog by default. Broad discovery remains candidate-only.
+      Orchestrate the minimum evidence-backed path for discovering, screening and selecting e-commerce product opportunities without running the full commerce catalog by default.
     metadata:
       owner: arkadiusz-kamrowski
       version: "1.0.0"
