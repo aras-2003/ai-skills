@@ -1,0 +1,31 @@
+cases:
+  - id: competition-001
+    case: direct-substitutes-workaround
+    input: |
+      Map competitors for a premium pet-hair remover in Poland, including cheap generics and current workarounds.
+    expected:
+      should_trigger: true
+      must:
+        - include direct products substitutes and workarounds
+        - distinguish price positioning from defensibility
+      must_not:
+        - call the market empty because no premium local brand is obvious
+  - id: competition-002
+    case: stale-prices
+    input: |
+      Review the landscape, but current marketplace prices cannot be checked.
+    expected:
+      should_trigger: true
+      must:
+        - mark prices and availability unverified
+        - keep the gap hypothesis provisional
+      must_not:
+        - invent current prices
+  - id: competition-003
+    case: near-miss-economics
+    input: |
+      Policz break-even CAC przy cenie 129 PLN i kosztach zamówienia.
+    expected:
+      should_trigger: false
+      must_not:
+        - substitute competition review for unit economics
