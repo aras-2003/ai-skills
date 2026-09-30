@@ -1,0 +1,27 @@
+cases:
+  - id: global-local-model-review-001
+    case: positive
+    input: |
+      Apply global-local-model-review to an enterprise IT organisational architecture problem with incomplete but usable evidence.
+    expected:
+      should_trigger: true
+      must:
+        - distinguish evidence from inference
+        - follow the skill output contract
+  - id: global-local-model-review-002
+    case: boundary
+    input: |
+      Give me a generic management best-practice answer without the specific problem this skill addresses.
+    expected:
+      should_trigger: false
+      must_not:
+        - run the full global-local-model-review procedure
+  - id: global-local-model-review-003
+    case: missing-evidence
+    input: |
+      Use global-local-model-review, but several owners, thresholds or decision facts are unknown.
+    expected:
+      should_trigger: true
+      must:
+        - preserve unknowns
+        - avoid inventing missing organisational facts

@@ -1,28 +1,18 @@
 ---
-name: oaf-health-check
-description: Run the OAF Health Check workflow as a selective cross-domain organisational
-  architecture diagnostic. Use when the user asks for a broad diagnosis spanning strategy
-  execution, operating model, decision rights, enterprise architecture, portfolio/execution
-  or evidence loops. Do not use for a narrow issue that should route directly to one
-  specialist OAF skill.
+name: oaf-strategy-execution-reset
+description: Run an OAF strategy-execution reset linking strategic outcomes, capabilities,
+  portfolio, decision rights, funding and evidence loops.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 1.0.0
-  maturity: production
+  version: 0.1.0
+  maturity: candidate
   risk: medium
   last_reviewed: 2026-09-30
   execution:
     default_model_class: standard
-    validated_models:
-      luna:
-        status: pass
-        validated_on: 2026-09-30
-        validated_use:
-        - cross-domain diagnosis
-        - workflow synthesis
 ---
 
-# Oaf Health Check Runtime Entrypoint
+# Oaf Strategy Execution Reset Runtime Entrypoint
 
 ## Purpose
 
