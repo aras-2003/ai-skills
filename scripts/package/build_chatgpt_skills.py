@@ -7,23 +7,10 @@ import shutil
 import zipfile
 from pathlib import Path
 
-import yaml
+from portable import read_frontmatter, render_portable_skill
 
 
 ALLOWED_SUPPORT_DIRS = ("references", "scripts", "assets")
-
-
-def read_frontmatter(skill_md: Path) -> dict:
-    text = skill_md.read_text(encoding="utf-8")
-    if not text.startswith("---\n"):
-        raise ValueError(f"{skill_md}: missing frontmatter")
-    end = text.find("\n---\n", 4)
-    if end < 0:
-        raise ValueError(f"{skill_md}: unterminated frontmatter")
-    data = yaml.safe_load(text[4:end]) or {}
-    if not isinstance(data, dict):
-        raise ValueError(f"{skill_md}: frontmatter must be a mapping")
-    return data
 
 
 def discover_skills(root: Path, maturity: str) -> list[Path]:
@@ -48,7 +35,10 @@ def build_skill_bundle(skill_dir: Path, output_dir: Path) -> dict:
         shutil.rmtree(staging)
     staging.mkdir(parents=True, exist_ok=True)
 
-    shutil.copy2(skill_dir / "SKILL.md", staging / "SKILL.md")
+    (staging / "SKILL.md").write_text(
+        render_portable_skill(skill_dir / "SKILL.md"),
+        encoding="utf-8",
+    )
     for dirname in ALLOWED_SUPPORT_DIRS:
         src = skill_dir / dirname
         if src.exists():
