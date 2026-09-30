@@ -1,0 +1,1 @@
+Compare my base CV against this CIO role and tell me what the CV fails to prove. Do not rewrite it yet. The role expects leadership of 500 people; the CV explicitly shows 120.
