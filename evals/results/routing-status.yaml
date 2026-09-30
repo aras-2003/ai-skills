@@ -1,0 +1,20 @@
+schema_version: "1.0"
+source_note: "Natural routing fixtures are structurally validated, but provider/runtime routing execution is not available in repository CI. Do not claim PASS from static inspection."
+cases:
+  - id: career-company-facts-pl
+    status: NOT_RUN
+  - id: career-role-eval-en
+    status: NOT_RUN
+  - id: commerce-economics-pl
+    status: NOT_RUN
+  - id: commerce-supplier-en
+    status: NOT_RUN
+  - id: commerce-discovery-pl
+    status: NOT_RUN
+  - id: commerce-regulatory-en
+    status: NOT_RUN
+  - id: oaf-decision-pl
+    status: NOT_RUN
+  - id: oaf-architecture-en
+    status: NOT_RUN
+required_next_test: "Run each input through an isolated real runtime catalog without naming the target skill; record selected capability/model/tool trace and evaluate against its .rubric.yaml."
