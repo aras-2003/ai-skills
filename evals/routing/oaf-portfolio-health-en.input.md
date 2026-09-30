@@ -1,0 +1,1 @@
+We have 47 initiatives, all marked priority, shared ERP/data specialists are overloaded, milestones move because people are unavailable, and benefit cases use incompatible assumptions. Diagnose portfolio health before anyone ranks the initiatives.
