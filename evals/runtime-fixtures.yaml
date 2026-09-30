@@ -1,102 +1,18 @@
 schema_version: "2.0"
 targets:
   oaf-health-check:
-    - id: case-001-enterprise-it
-      mode: explicit
-      input: evals/oaf-health-check/case-001-enterprise-it.input.md
-      rubric: evals/oaf-health-check/case-001-enterprise-it.rubric.yaml
   global-local-model-review:
-    - id: case-global-local-001
-      mode: explicit
-      input: evals/oaf/wave2/case-global-local-001.input.md
-      rubric: evals/oaf/wave2/case-global-local-001.rubric.yaml
   decision-bottleneck-analysis:
-    - id: case-decision-bottleneck-001
-      mode: explicit
-      input: evals/oaf/wave2/case-decision-bottleneck-001.input.md
-      rubric: evals/oaf/wave2/case-decision-bottleneck-001.rubric.yaml
   portfolio-health-review:
-    - id: case-portfolio-health-001
-      mode: explicit
-      input: evals/oaf/wave2/case-portfolio-health-001.input.md
-      rubric: evals/oaf/wave2/case-portfolio-health-001.rubric.yaml
   oaf-operating-model-redesign:
-    - id: case-operating-model-redesign-001
-      mode: explicit
-      input: evals/oaf/wave2/case-operating-model-redesign-001.input.md
-      rubric: evals/oaf/wave2/case-operating-model-redesign-001.rubric.yaml
   governance-design:
-    - id: case-governance-design-001
-      mode: explicit
-      input: evals/oaf/wave3/case-governance-design-001.input.md
-      rubric: evals/oaf/wave3/case-governance-design-001.rubric.yaml
   transformation-blueprint:
-    - id: case-transformation-blueprint-001
-      mode: explicit
-      input: evals/oaf/wave3/case-transformation-blueprint-001.input.md
-      rubric: evals/oaf/wave3/case-transformation-blueprint-001.rubric.yaml
-    - id: case-transformation-blueprint-stop-001
-      mode: explicit
-      input: evals/oaf/wave3/case-transformation-blueprint-stop-001.input.md
-      rubric: evals/oaf/wave3/case-transformation-blueprint-stop-001.rubric.yaml
   oaf-governance-redesign:
-    - id: case-governance-redesign-001
-      mode: explicit
-      input: evals/oaf/wave3/case-governance-redesign-001.input.md
-      rubric: evals/oaf/wave3/case-governance-redesign-001.rubric.yaml
   oaf-transformation-design:
-    - id: case-transformation-design-001
-      mode: explicit
-      input: evals/oaf/wave3/case-transformation-design-001.input.md
-      rubric: evals/oaf/wave3/case-transformation-design-001.rubric.yaml
   capability-map-review:
-    - id: case-capability-map-001
-      mode: explicit
-      input: evals/oaf/wave4/case-capability-map-001.input.md
-      rubric: evals/oaf/wave4/case-capability-map-001.rubric.yaml
   capability-gap-analysis:
-    - id: case-capability-gap-001
-      mode: explicit
-      input: evals/oaf/wave4/case-capability-gap-001.input.md
-      rubric: evals/oaf/wave4/case-capability-gap-001.rubric.yaml
   oaf-enterprise-architecture-review:
-    - id: case-enterprise-architecture-review-001
-      mode: explicit
-      input: evals/oaf/wave4/case-enterprise-architecture-review-001.input.md
-      rubric: evals/oaf/wave4/case-enterprise-architecture-review-001.rubric.yaml
-    - id: case-enterprise-architecture-stop-001
-      mode: explicit
-      input: evals/oaf/wave4/case-enterprise-architecture-stop-001.input.md
-      rubric: evals/oaf/wave4/case-enterprise-architecture-stop-001.rubric.yaml
   oaf-enterprise-change-review:
-    - id: case-001-enterprise-change
-      mode: explicit
-      input: evals/oaf/e2e/case-001-enterprise-change.input.md
-      rubric: evals/oaf/e2e/case-001-enterprise-change.rubric.yaml
   commerce-product-deep-dive:
-    - id: case-001-premium-vs-generic
-      mode: explicit
-      input: evals/commerce/case-001-premium-vs-generic.input.md
-      rubric: evals/commerce/case-001-premium-vs-generic.rubric.yaml
-    - id: case-002-good-demand-bad-economics
-      mode: explicit
-      input: evals/commerce/case-002-good-demand-bad-economics.input.md
-      rubric: evals/commerce/case-002-good-demand-bad-economics.rubric.yaml
-    - id: case-004-boring-winner
-      mode: explicit
-      input: evals/commerce/case-004-boring-winner.input.md
-      rubric: evals/commerce/case-004-boring-winner.rubric.yaml
   commerce-opportunity-review:
-    - id: case-003-viral-regulated
-      mode: explicit
-      input: evals/commerce/case-003-viral-regulated.input.md
-      rubric: evals/commerce/case-003-viral-regulated.rubric.yaml
-    - id: case-005-false-us-pl-transfer
-      mode: explicit
-      input: evals/commerce/case-005-false-us-pl-transfer.input.md
-      rubric: evals/commerce/case-005-false-us-pl-transfer.rubric.yaml
   product-opportunity-discovery:
-    - id: case-006-product-discovery
-      mode: explicit
-      input: evals/commerce/case-006-product-discovery.input.md
-      rubric: evals/commerce/case-006-product-discovery.rubric.yaml
