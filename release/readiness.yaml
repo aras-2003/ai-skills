@@ -1,0 +1,463 @@
+schema_version: "1.0"
+owner: arkadiusz-kamrowski
+review_due: "2026-10-07"
+policy: >
+  Existing production maturity is preserved during the audit remediation. Historical narrative summaries are
+  context only, not current isolated runtime receipts. Missing repository evidence is recorded as evidence debt,
+  not interpreted as proof that no pilot ever occurred.
+components:
+  - name: company-context-research
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: executive-role-evaluator
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: problem-demand-validation
+    kind: skill
+    maturity: production
+    static_suite: present-after-AIS-14
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: unit-economics-review
+    kind: skill
+    maturity: production
+    static_suite: present-after-AIS-14
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: acquisition-fit-review
+    kind: skill
+    maturity: production
+    static_suite: present-after-AIS-14
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: competition-landscape-review
+    kind: skill
+    maturity: production
+    static_suite: present-after-AIS-14
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: supplier-viability-review
+    kind: skill
+    maturity: production
+    static_suite: present-after-AIS-14
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: market-transferability-review
+    kind: skill
+    maturity: production
+    static_suite: present-after-AIS-14
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: product-opportunity-discovery
+    kind: skill
+    maturity: production
+    static_suite: present-after-AIS-14
+    current_runtime_receipt: pending
+    historical_evidence:
+      - evals/commerce/validation-case006-2026-09-30.md
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: differentiation-review
+    kind: skill
+    maturity: production
+    static_suite: present-after-AIS-14
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: commerce-regulatory-risk-review
+    kind: skill
+    maturity: production
+    static_suite: present-after-AIS-14
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: arek-skills-diagnostic
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: skill-authoring
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: skill-specification
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: skill-validation
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: decision-bottleneck-analysis
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: decision-rights-review
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: governance-design
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: architecture-review
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: capability-gap-analysis
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: capability-map-review
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: evidence-loop-review
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: global-local-model-review
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: operating-model-review
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: portfolio-health-review
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: portfolio-prioritization
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: transformation-blueprint
+    kind: skill
+    maturity: production
+    static_suite: present
+    current_runtime_receipt: pending
+    historical_evidence:
+      []
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Production maturity predates isolated receipt protocol; run current-version natural/explicit regressions where relevant before the next promotion."
+  - name: oaf-health-check
+    kind: workflow
+    maturity: production
+    static_suite: workflow-registry-and-fixture-validation
+    current_runtime_receipt: pending
+    historical_evidence:
+      - evals/oaf/core-validation-2026-09-30.md
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Historical summaries are not current isolated receipts; rerun critical workflow cases before the next promotion."
+  - name: oaf-operating-model-redesign
+    kind: workflow
+    maturity: production
+    static_suite: workflow-registry-and-fixture-validation
+    current_runtime_receipt: pending
+    historical_evidence:
+      - evals/oaf/wave2/validation-2026-09-30.md
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Historical summaries are not current isolated receipts; rerun critical workflow cases before the next promotion."
+  - name: oaf-governance-redesign
+    kind: workflow
+    maturity: production
+    static_suite: workflow-registry-and-fixture-validation
+    current_runtime_receipt: pending
+    historical_evidence:
+      - evals/oaf/wave3/validation-2026-09-30.md
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Historical summaries are not current isolated receipts; rerun critical workflow cases before the next promotion."
+  - name: oaf-transformation-design
+    kind: workflow
+    maturity: production
+    static_suite: workflow-registry-and-fixture-validation
+    current_runtime_receipt: pending
+    historical_evidence:
+      - evals/oaf/wave3/validation-2026-09-30.md
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Historical summaries are not current isolated receipts; rerun critical workflow cases before the next promotion."
+  - name: oaf-enterprise-architecture-review
+    kind: workflow
+    maturity: production
+    static_suite: workflow-registry-and-fixture-validation
+    current_runtime_receipt: pending
+    historical_evidence:
+      - evals/oaf/wave4/validation-2026-09-30.md
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Historical summaries are not current isolated receipts; rerun critical workflow cases before the next promotion."
+  - name: oaf-enterprise-change-review
+    kind: workflow
+    maturity: production
+    static_suite: workflow-registry-and-fixture-validation
+    current_runtime_receipt: pending
+    historical_evidence:
+      - evals/oaf/e2e/validation-2026-09-30.md
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Historical summaries are not current isolated receipts; rerun critical workflow cases before the next promotion."
+  - name: commerce-product-deep-dive
+    kind: workflow
+    maturity: production
+    static_suite: workflow-registry-and-fixture-validation
+    current_runtime_receipt: pending
+    historical_evidence:
+      - evals/commerce/validation-v1-2026-09-30.md
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Historical summaries are not current isolated receipts; rerun critical workflow cases before the next promotion."
+  - name: commerce-opportunity-review
+    kind: workflow
+    maturity: production
+    static_suite: workflow-registry-and-fixture-validation
+    current_runtime_receipt: pending
+    historical_evidence:
+      - evals/commerce/validation-v1-2026-09-30.md
+    real_work_pilot_evidence: not_documented_in_repo
+    exception:
+      status: evidence-debt
+      owner: arkadiusz-kamrowski
+      review_due: "2026-10-07"
+      limitation: "Historical summaries are not current isolated receipts; rerun critical workflow cases before the next promotion."
