@@ -1,0 +1,12 @@
+schema_version: "1.0"
+id: commerce-economics-pl
+mode: natural-routing
+expected_target: unit-economics-review
+language: pl
+competing_intents:
+  - supplier viability
+  - acquisition fit
+assertions:
+  manual:
+    - economics review is selected
+    - explicit quantity and VAT conventions are used
