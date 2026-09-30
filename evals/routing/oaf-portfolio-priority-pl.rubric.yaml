@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: oaf-portfolio-priority-pl
+mode: natural-routing
+expected_target: portfolio-prioritization
+language: pl
+competing_intents:
+  - portfolio-health-review
+assertions:
+  manual:
+    - prioritization is selected because comparable evidence exists
+    - trade-offs remain explicit
