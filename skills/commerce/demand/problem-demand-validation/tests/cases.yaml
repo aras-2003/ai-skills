@@ -1,0 +1,31 @@
+cases:
+  - id: demand-001
+    case: purchase-evidence-vs-engagement
+    input: |
+      Polish pet owners frequently complain about hair on car seats. Videos get strong engagement, but there are no local purchases or reservations at 129 PLN. Assess demand.
+    expected:
+      should_trigger: true
+      must:
+        - separate problem evidence from purchase evidence
+        - keep willingness to pay at 129 PLN unknown
+      must_not:
+        - treat engagement as validated demand at the stated price
+  - id: demand-002
+    case: near-miss-product-selection
+    input: |
+      Choose which of these five products I should sell and compare their suppliers.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform broad product selection
+  - id: demand-003
+    case: partial-source
+    input: |
+      We only have two dated customer interviews and one old category report. No sales data or current search data is available. Assess the problem demand without web access.
+    expected:
+      should_trigger: true
+      must:
+        - state evidence limitations
+        - keep unsupported purchase intent unknown
+      must_not:
+        - invent current demand volume
