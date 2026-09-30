@@ -1,0 +1,66 @@
+name: Package production channels
+
+on:
+  push:
+    branches: [production]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: production-packaging
+  cancel-in-progress: false
+
+jobs:
+  package:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    env:
+      SOURCE_REVISION: ${{ github.sha }}
+    steps:
+      - name: Checkout exact production source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Validate exact publication source
+        run: |
+          python scripts/validate/validate_all.py
+          python -m unittest discover -s scripts/validate/tests -p "test_*.py"
+          python -m unittest discover -s scripts/eval/tests -p "test_*.py"
+          python -m unittest discover -s scripts/package/tests -p "test_*.py"
+      - name: Build all production channels from one source revision
+        run: |
+          python scripts/package/build_plugin.py --maturity production --output plugins/arek-ai-skills
+          python scripts/package/build_chatgpt_skills.py --maturity production --output dist/chatgpt-skills
+          python scripts/package/artifact_validation.py plugins/arek-ai-skills
+          python scripts/package/artifact_validation.py dist/chatgpt-skills --zips
+      - name: Refuse stale publication
+        run: |
+          REMOTE_SHA="$(git ls-remote origin refs/heads/production | cut -f1)"
+          test "$REMOTE_SHA" = "$SOURCE_REVISION" || {
+            echo "production moved from $SOURCE_REVISION to $REMOTE_SHA; refusing stale publication"
+            exit 1
+          }
+      - name: Commit generated channels atomically
+        run: |
+          if [ -z "$(git status --porcelain -- plugins/arek-ai-skills dist/chatgpt-skills)" ]; then
+            echo "Generated production channels already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add plugins/arek-ai-skills dist/chatgpt-skills
+          git commit -m "build: refresh production channels from $SOURCE_REVISION [skip ci]"
+          git push origin HEAD:production
+      - name: Upload immutable ZIP build copy
+        uses: actions/upload-artifact@v4
+        with:
+          name: chatgpt-personal-skills-${{ github.sha }}
+          path: dist/chatgpt-skills
+          if-no-files-found: error
