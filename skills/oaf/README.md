@@ -42,7 +42,7 @@ Production:
 - `decision-bottleneck-analysis`
 
 Candidate:
-- `governance-design`
+- `governance-design` — hardened Wave 3 design skill; runtime eval pending
 
 Future:
 - `governance-forum-review`
@@ -69,7 +69,7 @@ Production:
 - `portfolio-health-review`
 
 Candidate:
-- `transformation-blueprint`
+- `transformation-blueprint` — hardened Wave 3 design skill; runtime eval pending
 
 Future:
 - `investment-prioritization`
@@ -103,12 +103,12 @@ Production:
 - `oaf-operating-model-redesign` — evidence-gated bounded redesign with option/trade-off testing.
 
 Candidate:
-- `oaf-governance-redesign`
+- `oaf-governance-redesign` — hardened Wave 3 workflow; runtime eval pending
+- `oaf-transformation-design` — new evidence-gated transformation workflow
 - `oaf-strategy-execution-reset`
 
-Next planned workflows:
+Next planned workflow:
 - `oaf-enterprise-architecture-review`
-- `oaf-transformation-design`
 
 ## Routing principle
 
@@ -149,10 +149,12 @@ Sol comparison on `oaf-operating-model-redesign` improved framing/selection disc
 
 Candidate defaults:
 - **fast:** `capability-map-review`, `kpi-quality-review`
-- **standard:** remaining diagnostic/design candidates
+- **standard:** remaining diagnostic/design candidates, including Wave 3 governance/transformation design
 - **strong escalation:** final high-impact target-state selection, contested executive evidence, major multi-country/global-local redesign, transition economics
 
-See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, and `evals/oaf/wave2/validation-2026-09-30.md`.
+Wave 3 intentionally raises the promotion bar: design skills must preserve evidence gates, reversibility and stop conditions, not merely produce plausible plans.
+
+See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, and `docs/OAF-WAVE3-EVALS.md`.
 
 ## Boundary principle
 
