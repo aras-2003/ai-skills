@@ -109,3 +109,23 @@ workflows:
             incremental_value:
               - slightly stronger decision framing
             material_decision_change: false
+  - name: oaf-enterprise-architecture-review
+    workflow: workflows/oaf-enterprise-architecture-review/WORKFLOW.md
+    description: >
+      Run an evidence-gated OAF enterprise architecture review linking business outcomes, capabilities, operating model, architecture decisions and portfolio implications without inventing technology defects.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "1.0.0"
+      maturity: production
+      risk: medium
+      last_reviewed: 2026-09-30
+      execution:
+        default_model_class: standard
+        validated_models:
+          luna:
+            status: pass
+            validated_on: 2026-09-30
+            validated_use:
+              - evidence-disciplined enterprise architecture review
+              - bounded architecture option comparison
+              - architecture stop-condition enforcement

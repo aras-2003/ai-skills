@@ -18,3 +18,10 @@ targets:
     - evals/oaf/wave3/case-governance-redesign-001.md
   oaf-transformation-design:
     - evals/oaf/wave3/case-transformation-design-001.md
+  capability-map-review:
+    - evals/oaf/wave4/case-capability-map-001.md
+  capability-gap-analysis:
+    - evals/oaf/wave4/case-capability-gap-001.md
+  oaf-enterprise-architecture-review:
+    - evals/oaf/wave4/case-enterprise-architecture-review-001.md
+    - evals/oaf/wave4/case-enterprise-architecture-stop-001.md

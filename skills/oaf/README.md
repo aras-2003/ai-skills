@@ -50,8 +50,6 @@ Future:
 ### 4. Enterprise & organisational architecture
 Production:
 - `architecture-review`
-
-Candidate:
 - `capability-map-review`
 - `capability-gap-analysis`
 
@@ -100,11 +98,11 @@ Production:
 - `oaf-governance-redesign` — decision-led governance redesign with mechanism minimisation.
 - `oaf-transformation-design` — bounded, evidence-gated transformation mobilisation and sequencing.
 
+Production:
+- `oaf-enterprise-architecture-review` — evidence-gated enterprise architecture review.
+
 Candidate:
 - `oaf-strategy-execution-reset`
-
-Next planned workflow:
-- `oaf-enterprise-architecture-review`
 
 ## Routing principle
 
@@ -144,17 +142,20 @@ Validated on Luna:
 - `transformation-blueprint`
 - `oaf-governance-redesign`
 - `oaf-transformation-design`
+- `capability-map-review`
+- `capability-gap-analysis`
+- `oaf-enterprise-architecture-review`
 
 Sol comparisons on `oaf-operating-model-redesign` and `oaf-transformation-design` improved framing but did not materially change the decision/plan, so strong remains escalation-only for the validated bounded uses.
 
 Candidate defaults:
-- **fast:** `capability-map-review`, `kpi-quality-review`
+- **fast:** `kpi-quality-review`
 - **standard:** remaining diagnostic/design candidates
 - **strong escalation:** final high-impact target-state selection, contested executive evidence, major multi-country/global-local redesign, transition economics
 
 Wave 3 validated that design skills can remain on the standard model class when they preserve evidence gates, reversibility and stop conditions.
 
-See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, and `evals/oaf/wave3/validation-2026-09-30.md`.
+See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, `evals/oaf/wave3/validation-2026-09-30.md`, and `evals/oaf/wave4/validation-2026-09-30.md`.
 
 ## Boundary principle
 
