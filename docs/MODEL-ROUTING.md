@@ -160,3 +160,23 @@ Use standard when specialist evidence can be reused and the resulting design rem
 Escalate to strong for final irreversible cross-enterprise target-state selection, materially conflicting executive evidence, tightly coupled operating-model/architecture trade-offs, or material transition economics.
 
 See `docs/OAF-END-TO-END-EVAL.md` and `evals/oaf/e2e/validation-2026-09-30.md`.
+
+
+## Commerce Opportunity Framework
+
+Candidate defaults:
+- `product-opportunity-discovery` — fast
+- `competition-landscape-review` — fast
+- `supplier-viability-review` — fast
+- `market-transferability-review` — standard
+- `problem-demand-validation` — standard
+- `differentiation-review` — standard
+- `unit-economics-review` — standard with deterministic arithmetic preferred
+- `acquisition-fit-review` — standard
+- `commerce-regulatory-risk-review` — standard
+- `commerce-product-deep-dive` — standard
+- `commerce-opportunity-review` — standard synthesis, fast for broad discovery
+
+Use strong only for high-capital, highly regulated or strategically coupled decisions where conflicting evidence changes a consequential commitment.
+
+See `docs/COMMERCE-OPPORTUNITY-FRAMEWORK.md` and `docs/COMMERCE-V1-EVALS.md`.
