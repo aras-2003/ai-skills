@@ -146,7 +146,7 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    print(f"Packaged {len(selected)} candidate skills + {len(candidate_workflows) + len(production_workflows)} workflow entrypoints + {runtime_eval_fixtures} runtime eval fixtures into {out}")
+    print(f"Packaged {len(selected)} candidate skills + {len(candidate_workflows) + len(production_workflows)} workflow entrypoints + {runtime_eval_fixtures} runtime eval inputs into {out}")
     return 0
 
 
