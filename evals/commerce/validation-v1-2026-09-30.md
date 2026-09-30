@@ -11,6 +11,7 @@ Validated runtime patterns on Luna:
 
 ## Production-validated capabilities
 
+- broad mixed-signal product discovery and shortlist reduction
 - problem-demand validation
 - competition/substitute framing
 - premium differentiation discipline
@@ -40,9 +41,9 @@ Validated runtime patterns on Luna:
 
 ## Production boundary
 
-`product-opportunity-discovery` remains candidate 0.1.0 because broad discovery mode has not yet received a dedicated runtime behavioral eval.
+`product-opportunity-discovery` is production-valid for broad mixed-signal discovery and shortlist reduction after Case 006 PASS+ with minor hardening.
 
-`commerce-opportunity-review` is production-valid for screening/selection of known opportunities, regulation-first triage and cross-market transferability. Its broad discovery mode remains candidate-only.
+`commerce-opportunity-review` is production-valid for discovery, screening/selection of known opportunities, regulation-first triage and cross-market transferability.
 
 ## Model routing
 
@@ -54,6 +55,4 @@ Strong is escalation-only for high-capital, highly regulated or strategically co
 
 ## Promotion decision
 
-Promote the validated Commerce V1 screening/selection stack to production 1.0.0.
-
-Do not promote `product-opportunity-discovery` until a dedicated discovery eval passes.
+Promote the validated Commerce V1 discovery + screening/selection stack to production 1.0.0.

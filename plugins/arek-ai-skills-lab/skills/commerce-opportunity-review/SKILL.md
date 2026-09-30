@@ -20,6 +20,7 @@ metadata:
         - cross-market transferability review
         - selective routing
         - staged evidence gating
+        - broad mixed-signal discovery and shortlist reduction
 ---
 
 # Commerce Opportunity Review Runtime Entrypoint

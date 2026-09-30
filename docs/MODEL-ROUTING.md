@@ -165,6 +165,7 @@ See `docs/OAF-END-TO-END-EVAL.md` and `evals/oaf/e2e/validation-2026-09-30.md`.
 ## Commerce Opportunity Framework
 
 Validated on Luna:
+- `product-opportunity-discovery` — fast for broad mixed-signal discovery and shortlist reduction
 - `competition-landscape-review` — fast for narrow competition/substitute extraction and structuring
 - `supplier-viability-review` — fast for narrow supplier/MOQ/logistics screening
 - `market-transferability-review` — standard
@@ -174,11 +175,8 @@ Validated on Luna:
 - `acquisition-fit-review` — standard
 - `commerce-regulatory-risk-review` — standard
 - `commerce-product-deep-dive` — standard for known-product end-to-end screening
-- `commerce-opportunity-review` — standard for validated screening/selection modes
+- `commerce-opportunity-review` — standard for validated discovery, screening and selection modes
 
-Candidate:
-- `product-opportunity-discovery` — fast; dedicated broad-discovery runtime eval pending
-- broad discovery mode of `commerce-opportunity-review` remains candidate-only
 
 Use strong only for high-capital, highly regulated or strategically coupled decisions where conflicting evidence changes a consequential commitment.
 

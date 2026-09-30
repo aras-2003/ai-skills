@@ -74,3 +74,41 @@ Do not promote before:
 - opportunity workflow can stop discovery/research at the right time.
 
 A passing case validates the tested pattern only.
+
+
+## Case 006 — Broad product discovery
+Target: `product-opportunity-discovery`
+Fixture: `references/evals/case-006-product-discovery.md`
+
+Prompt:
+> Use the `product-opportunity-discovery` skill on the exact lab fixture `references/evals/case-006-product-discovery.md`. Reduce the raw signals to the strongest 3–5 hypotheses worth deeper validation. Separate signal from purchase evidence, state deliberate rejects/defers, and choose the cheapest next validation step for each shortlisted idea. Do not rank numerically or run a full product deep dive.
+
+Focus:
+- discovery must reduce the search space;
+- boring but testable can beat trendy but operationally weak;
+- trend/US traction != purchase evidence;
+- regulatory/logistics/commodity risks can remove ideas early;
+- cheapest falsifying validation step first;
+- no more than 5 shortlisted hypotheses.
+
+## Discovery promotion threshold
+Do not promote `product-opportunity-discovery` before Case 006 passes on Luna with:
+- 3–5 hypotheses maximum;
+- at least one explicit reject/defer;
+- no invented TAM, sales, CAC or demand certainty;
+- no numeric ranking;
+- clear signal-vs-evidence distinction;
+- no full deep dive;
+- next steps staged by cheapest decision-changing experiment.
+
+
+## Case 006 result
+
+Luna result: PASS+ after minor hardening.
+
+Hardening retained:
+- do not invent participant counts, budgets or thresholds without an explicit basis;
+- stated willingness to buy remains qualitative evidence, not purchase evidence;
+- actual costly commitment is stronger evidence than interview intent.
+
+Promotion: `product-opportunity-discovery` -> production 1.0.0.

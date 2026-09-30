@@ -4,8 +4,8 @@ description: >
   Discover product opportunity hypotheses from customer problems, category signals and market gaps. Use for broad e-commerce idea generation before deep validation; do not treat trend popularity as proof of business viability.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
-  maturity: candidate
+  version: "1.0.0"
+  maturity: production
   risk: low
   last_reviewed: 2026-09-30
   execution:
@@ -31,9 +31,11 @@ Generate a small set of evidence-linked product hypotheses worth validating.
 - US traction != PL transferability.
 - Do not invent sales volume from reviews, followers or ad visibility.
 - Discovery should reduce the search space, not produce a ranked business case.
+- Do not invent sample sizes, response thresholds or test budgets without an explicit evidence basis; describe the validation method and stopping logic instead.
+- Interview or survey intent is qualitative evidence, not purchase evidence. Treat actual deposits, reservations, purchases or other costly commitment as stronger evidence.
 
 ## Output contract
 Problem | target customer | candidate product | why now | evidence signal | key unknown | next validation step.
 
 ## Model guidance
-Default: fast. Escalate only when interpreting conflicting category signals materially changes the shortlist.
+Default: fast. Validated on Luna for broad mixed-signal discovery and shortlist reduction. Escalate only when interpreting conflicting category signals materially changes the shortlist.
