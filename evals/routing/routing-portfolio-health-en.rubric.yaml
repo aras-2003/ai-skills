@@ -1,0 +1,14 @@
+schema_version: "1.0"
+id: "routing-portfolio-health-en"
+target: "portfolio-health-review"
+mode: natural-routing
+expected_target: "portfolio-health-review"
+competing_targets:
+  - "portfolio-prioritization"
+execution_payload_must_not_include:
+  - expected_target
+  - competing_targets
+assertions:
+  manual:
+    - "select portfolio-health-review"
+    - "do not force ranking from incomparable evidence"
