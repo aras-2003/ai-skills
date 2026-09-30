@@ -1,51 +1,84 @@
 # ai-skills
 
-Reusable AI skills library for repeatable work across projects.
+Reusable AI capability library for repeatable work across projects.
 
-## Principles
+## Operating model
 
-- A **Project** stores context and long-lived knowledge.
-- A **Skill** stores a reusable method for performing one repeatable task.
-- A **Workflow** composes several skills into an end-to-end process.
-- An **Agent / bot** owns a role and decides when to invoke skills.
-- **Connectors / plugins** provide access to external systems and data.
-- **Automations** trigger workflows on a schedule or when a condition is met.
-- Use deterministic code/tests for calculations, validation and checks that do not need model judgment.
-- Promote a skill only after the procedure is repeatable and useful in real work.
+- A **Project** stores long-lived context and project-specific constraints.
+- A **Skill** stores one reusable procedure.
+- A **Workflow** composes skills with gates and stop conditions.
+- **Scripts** calculate and validate deterministic logic.
+- **Runtime packages** expose a maturity/channel-specific subset of source capabilities.
+- GitHub source is authoritative; generated plugins/ZIPs are build outputs, not editing targets.
 
-## Repository structure
+Rule: **LLM interprets; code calculates and validates.**
 
-- `skills/meta/` — skills for designing, writing, validating, testing and releasing other skills
-- `skills/core/` — cross-domain skills used everywhere
-- `skills/career/` — executive job market and career management
-- `skills/product-research/` — product discovery and validation
-- `skills/strategy-ea/` — strategy, enterprise architecture and executive work
-- `skills/web-design/` — website, visual concept and implementation review
-- `skills/ecommerce/` — ecommerce, UX and conversion
-- `skills/tender/` — tender / RFP analysis
-- `skills/learning/` — Learning OS
-- `workflows/` — compositions of skills into end-to-end processes
+## Current source domains
+
+- `skills/career/` — executive role/company/CV/interview workflows
+- `skills/commerce/` — product discovery, demand, competition, economics, sourcing, acquisition and regulatory screening
+- `skills/oaf/` — Organisational Architecture Framework specialists
+- `skills/meta/` — skill engineering/control skills
+- `skills/core/`, `skills/ecommerce/`, `skills/learning/`, `skills/product-research/`, `skills/strategy-ea/`, `skills/tender/`, `skills/web-design/` — additional source domains at mixed maturity
+
+The source tree is not the runtime allow-list.
+
+## Branches, maturity and installed capability
+
+These are separate concepts:
+
+- `main` — development source branch.
+- `production` — promoted source/release branch. It can contain source components of mixed maturity because branch history is promoted as a repository change set.
+- `metadata.maturity` — component-level lifecycle state used by builders.
+- generated `capabilities.json` — actual capability availability for a built channel/version.
+- generated `release-manifest.json` — package version, source revision and provenance.
+- `CATALOG.md` — generated source catalog, useful for discovery but not a substitute for a channel manifest.
+
+Do not infer installed availability from branch membership alone.
+
+## Delivery channels
+
+Production builders currently support:
+
+1. **Plugin channel** — production skills plus workflow entrypoints allowed by `workflows/runtime-registry.yaml`.
+2. **Lab channel** — isolated evaluation package containing candidate targets plus required production dependencies and executor-only eval inputs.
+3. **ChatGPT ZIP channel** — individual production skill ZIPs. Workflow availability is declared explicitly in the channel manifest; unsupported workflows are not silently implied.
+
+Runtime packages use an allow-list: `SKILL.md`, required `references/`, `scripts/` and `assets/`. Test definitions, eval summaries and evaluator rubrics stay outside production runtime payloads.
 
 ## Lifecycle
 
-Suggested lifecycle:
+`idea -> specification -> authoring -> static validation -> isolated evaluation -> candidate -> real-use evidence -> release review -> production -> monitor`
 
-`idea -> specification -> authoring -> validation -> test design -> evaluation -> release review -> production`
+Details:
+- `workflows/skill-development/WORKFLOW.md`
+- `docs/LIFECYCLE.md`
+- `docs/TESTING.md`
+- `docs/RUNTIME-EVALS.md`
+- `release/production-readiness.yaml`
 
-The detailed process is defined in `workflows/skill-development/WORKFLOW.md`.
+A narrative historical PASS is not a current-version runtime receipt. When runtime evidence is unavailable, record `NOT_RUN`/pending rather than assuming success.
 
-Development happens on `main`. Accepted production-ready skills are promoted to `production`.
+## Quality and build
 
-This branch contains the first catalog proposal only. Individual skills will be specified and polished in later iterations.
+Required PR validation is defined in `.github/workflows/validate-skills.yml` and covers:
+- source/static contracts;
+- validator mutation tests;
+- eval input/rubric isolation;
+- package safety/reproducibility;
+- catalog freshness;
+- production plugin, Lab and ChatGPT ZIP builds plus artifact validation;
+- deterministic Commerce unit-economics tests.
 
+Generated artifacts are built atomically and include source provenance.
 
-## Skill engineering
+## Key docs
 
-- Process: `workflows/skill-development/WORKFLOW.md`
 - Architecture: `docs/ARCHITECTURE.md`
 - Lifecycle: `docs/LIFECYCLE.md`
 - Testing: `docs/TESTING.md`
-- ChatGPT usage: `docs/GPT-USAGE.md`
+- Runtime evals: `docs/RUNTIME-EVALS.md`
+- Channel usage: `docs/GPT-USAGE.md`
+- Branch-rules proposal: `docs/GITHUB-BRANCH-RULES-PROPOSAL.md`
+- Distribution/license decision: `docs/DISTRIBUTION-LICENSE-DECISION.md`
 - Generated catalog: `CATALOG.md`
-
-Static validation is enforced in GitHub Actions by `.github/workflows/validate-skills.yml`.
