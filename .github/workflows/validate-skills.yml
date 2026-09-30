@@ -2,7 +2,6 @@ name: Validate skills
 
 on:
   pull_request:
-    branches: [main, production]
     paths:
       - "skills/**"
       - "scripts/validate/**"
