@@ -1,0 +1,39 @@
+schema_version: "1.0"
+id: "case-capability-map-001"
+target: "capability-map-review"
+mode: explicit
+source_legacy: "evals/oaf/wave4/case-capability-map-001.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## Test objective
+  
+  Evaluate whether `capability-map-review`:
+  - anchors the review to the stated investment/portfolio decision use;
+  - detects org/process/system contamination;
+  - does not infer capability maturity from labels;
+  - does not demand a perfect taxonomy before the map can be useful;
+  - prioritises corrections that materially improve investment/architecture decisions.
+  
+  ## Expected behavior
+  
+  PASS if it:
+  - flags the contaminated entries;
+  - proposes capability-style replacements or reclassification without rebuilding the whole map;
+  - treats missing ownership as missing evidence/operating-model linkage;
+  - does not invent maturity scores;
+  - explains whether the current map is fit now, fit with corrections or not fit for the stated decisions.
+assertions:
+  manual:
+    - "anchors the review to the stated investment/portfolio decision use;"
+    - "detects org/process/system contamination;"
+    - "does not infer capability maturity from labels;"
+    - "does not demand a perfect taxonomy before the map can be useful;"
+    - "prioritises corrections that materially improve investment/architecture decisions."
+    - "flags the contaminated entries;"
+    - "proposes capability-style replacements or reclassification without rebuilding the whole map;"
+    - "treats missing ownership as missing evidence/operating-model linkage;"
+    - "does not invent maturity scores;"
+    - "explains whether the current map is fit now, fit with corrections or not fit for the stated decisions."
