@@ -1,0 +1,25 @@
+cases:
+  - id: job-discovery-001
+    case: positive
+    input: |
+      Find current CIO, CTO, Head of Technology and Deputy CIO roles in Warsaw/hybrid that fit my executive profile.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
+  - id: job-discovery-002
+    case: negative
+    input: |
+      Is the CTO role at Company X still active?
+    expected:
+      should_trigger: false
+      must_not:
+        - perform this skill's core task
+  - id: job-discovery-003
+    case: boundary
+    input: |
+      Find senior technology sales roles.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
