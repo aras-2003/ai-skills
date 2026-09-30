@@ -5,12 +5,21 @@ description: Orchestrate the minimum evidence-backed OAF path across multiple do
   supported by evidence.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
-  maturity: candidate
+  version: 1.0.0
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
   execution:
     default_model_class: standard
+    validated_models:
+      luna:
+        status: pass
+        validated_on: 2026-09-30
+        validated_use:
+        - selective cross-domain routing
+        - cross-domain causal synthesis
+        - design-readiness separation
+        - bounded 30-90 day mobilisation
 ---
 
 # Oaf Enterprise Change Review Runtime Entrypoint

@@ -44,9 +44,12 @@ Use when the problem spans at least three OAF domains and the user wants an inte
 - Governance redesign does not imply new forums.
 - Architecture duplication does not imply consolidation.
 - Transformation design does not imply multi-year commitment.
+- A successful operating-model or shared-capability pilot does not by itself justify platform consolidation or retirement.
+- A pilot capability owner or owner-to-confirm does not automatically become a permanent enterprise capability owner.
 
 ## Model guidance
 Default: standard for bounded end-to-end orchestration when specialist evidence is strong and design remains reversible or evidence-gated.
+Validated on Luna for selective cross-domain routing, causal synthesis, design-readiness separation and bounded 30–90 day mobilisation.
 
 Escalate to strong for final cross-enterprise target-state selection, materially conflicting executive evidence, tightly coupled irreversible global operating-model/architecture choices, material transition economics, or major authority/funding/platform-retirement commitments.
 
