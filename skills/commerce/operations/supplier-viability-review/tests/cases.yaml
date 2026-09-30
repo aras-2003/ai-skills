@@ -1,0 +1,29 @@
+cases:
+  - id: supplier-001
+    case: quote-scope-and-moq
+    input: |
+      Supplier A quotes 18 PLN/unit EXW, MOQ 500, sample available; freight, duty and packaging are excluded. Supplier B has MOQ 1000 with no sample yet. Assess test and scale viability.
+    expected:
+      should_trigger: true
+      must:
+        - identify quote scope and excluded landed-cost elements
+        - separate sample-stage from production-stage confidence
+        - surface MOQ cash exposure
+  - id: supplier-002
+    case: no-quote
+    input: |
+      We only know that several Asian suppliers seem to exist. No current quote, MOQ or lead time is available.
+    expected:
+      should_trigger: true
+      must:
+        - keep cost MOQ and lead time unresolved
+      must_not:
+        - invent supplier terms
+  - id: supplier-003
+    case: near-miss-unit-economics
+    input: |
+      Here are final landed costs and CAC. Calculate break-even CAC and contribution.
+    expected:
+      should_trigger: false
+      must_not:
+        - replace unit economics calculation
