@@ -4,6 +4,8 @@ from pathlib import Path
 import shutil
 import yaml
 
+from portable import portable_metadata
+
 
 def load_registry(root: Path) -> list[dict]:
     path = root / "workflows" / "runtime-registry.yaml"
@@ -48,7 +50,7 @@ def build_entrypoint(root: Path, item: dict, skills_out: Path) -> str:
         {
             "name": name,
             "description": description,
-            "metadata": metadata,
+            "metadata": portable_metadata(metadata),
         },
         sort_keys=False,
         allow_unicode=True,
