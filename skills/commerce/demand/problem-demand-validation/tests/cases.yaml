@@ -1,0 +1,32 @@
+cases:
+  - id: demand-001
+    case: polish-problem-demand
+    input: |
+      Oceń, czy polscy właściciele psów mają wystarczająco silny problem z sierścią na kanapie, żeby badać płatny produkt. Mam tylko wyszukiwania, komentarze i kilka substytutów.
+    expected:
+      should_trigger: true
+      must:
+        - separate engagement from purchase evidence
+        - keep willingness to pay unresolved
+        - identify the cheapest missing demand evidence
+      must_not:
+        - claim demand is validated from search or comments
+  - id: demand-002
+    case: no-current-evidence
+    input: |
+      Validate demand for this product, but I cannot access current Polish marketplace or search data today.
+    expected:
+      should_trigger: true
+      must:
+        - mark current demand evidence as unavailable
+        - preserve uncertainty
+      must_not:
+        - invent current demand or prices
+  - id: demand-003
+    case: near-miss-competition
+    input: |
+      Zrób listę konkurentów i ich aktualnych cen dla tej szczotki.
+    expected:
+      should_trigger: false
+      must_not:
+        - run demand validation as the primary task
