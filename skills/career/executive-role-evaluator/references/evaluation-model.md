@@ -7,9 +7,9 @@
 - **HYPOTHESIS** — plausible explanation requiring validation.
 - **UNKNOWN** — insufficient evidence.
 
-## Role archetypes
+UNKNOWN is not a negative score. It lowers confidence and creates a validation question.
 
-Use one primary archetype when evidence is sufficient:
+## Role archetypes
 
 - **Enterprise CIO** — broad technology/IT ownership, budget, operating model and business alignment.
 - **Product / Engineering CTO** — software engineering, product/platform and technical leadership.
@@ -25,134 +25,64 @@ If uncertain, show the two most plausible archetypes.
 
 ## Role Quality
 
-Use a 0–5 assessment per dimension. Scores are decision-support signals, not objective truth.
+Assess each dimension with evidence and confidence. Use:
+- **STRONG** — clearly supports broad executive technology ownership;
+- **ADEQUATE** — meaningful scope but bounded or with material gaps;
+- **WEAK** — structurally limited for the role's stated accountability;
+- **UNKNOWN** — insufficient evidence.
 
-| Dimension | Weight |
-|---|---:|
-| Mandate & decision authority | 20% |
-| Organizational ownership | 15% |
-| Technology scope | 15% |
-| Strategic influence | 10% |
-| Budget / investment authority | 10% |
-| Transformation leverage | 10% |
-| Business accountability | 10% |
-| Executive positioning | 10% |
+Dimensions:
+- mandate & decision authority;
+- organizational ownership;
+- technology scope;
+- strategic influence;
+- budget/investment authority;
+- transformation leverage;
+- business accountability;
+- executive positioning.
 
-For each dimension include:
-- score;
-- confidence;
-- evidence;
-- material unknowns.
+The overall Role Quality label is a reasoned synthesis, not an arithmetic average.
 
 ## Candidate Fit
 
-Evaluate separately from role quality.
+Assess scope experience, leadership scale, transformation experience, technology breadth, executive stakeholder management, industry relevance where material, international exposure where material, budget/financial ownership, delivery credibility and role-specific technical credibility.
 
-| Dimension | Weight |
-|---|---:|
-| Scope experience | 20% |
-| Leadership scale | 15% |
-| Transformation experience | 15% |
-| Technology breadth | 15% |
-| Executive stakeholder management | 10% |
-| Industry relevance | 5% |
-| International exposure | 5% |
-| Financial / budget ownership | 5% |
-| Delivery credibility | 5% |
-| Role-specific technical credibility | 5% |
+Use: STRONG / GOOD / PARTIAL / GAP / UNKNOWN.
 
-Classify each as:
-- STRONG
-- GOOD
-- PARTIAL
-- GAP
-- UNKNOWN
-
-Always identify:
-- credibility strengths;
-- credibility gaps;
-- evidence-backed narrative bridge.
+Always identify credibility strengths, material gaps and an evidence-backed bridge.
 
 ## Career Value
 
-Assess:
-- scope expansion;
-- organizational scale;
-- executive exposure;
-- budget ownership;
-- global complexity;
-- technology breadth;
-- market signaling;
-- learning density.
+Assess scope expansion, organizational scale, executive exposure, budget ownership, global complexity, technology breadth, market signalling and learning density.
 
-## Risk classes
+Use:
+- **HIGH** — materially advances several target capabilities or scope dimensions;
+- **MEDIUM** — useful development but bounded or mixed;
+- **LOW** — little relevant expansion or a likely narrowing move;
+- **UNKNOWN** — insufficient evidence.
 
-Focus only on material risks:
-- strategic;
-- organizational;
-- delivery;
-- career;
-- compensation;
-- lifestyle.
+## Risk
+
+Focus on material strategic, organizational, delivery, career, compensation and lifestyle risks.
+Overall risk: LOW / MEDIUM / HIGH / VERY HIGH.
 
 ## Critical gates
 
-Weighted averages must not hide structural problems.
+Do not let a broad set of positives hide a structural contradiction.
 
-Treat the following as critical or potentially critical when material to the candidate's goal:
+Potential critical gates:
 - no meaningful decision authority;
-- responsibility without control of people/budget/priorities;
-- role structurally much narrower than title implies;
-- no team where organizational leadership is a core career objective;
-- promised future mandate with no current governance or sponsor;
-- transformation accountability without escalation or decision rights;
-- extreme lifestyle/travel requirement conflicting with a hard constraint.
+- responsibility without people/budget/priority control;
+- role materially narrower than title;
+- no team where organizational leadership is core to the target;
+- promised future mandate with no current sponsor/governance;
+- transformation accountability without escalation/decision rights;
+- lifestyle/travel conflict with a hard constraint.
 
-A critical gate does not automatically mean `SKIP`. It can force `INVESTIGATE` when evidence is incomplete.
+A critical gate does not mechanically determine the decision. It must be surfaced and reflected in confidence/risk.
 
-## Decision states
+## Numeric scoring
 
-- **PURSUE** — evidence supports active investment in the opportunity.
-- **INVESTIGATE** — potentially attractive, but key unknowns could change the decision.
-- **LOW PRIORITY** — some value, but opportunity should receive less attention than stronger alternatives.
-- **SKIP** — structural mismatch/downside is sufficiently clear that more effort is unlikely to be worthwhile.
+The default contract is qualitative because the repository does not define calibrated numeric anchors and aggregation for all three dimensions.
 
-Do not mechanically map numerical ranges to these states.
-
-## Confidence
-
-- **HIGH** — key structural facts are well supported.
-- **MEDIUM** — some important uncertainties remain.
-- **LOW** — critical structural facts are missing or contradictory.
-
-Confidence depends on evidence completeness, not conviction.
-
-## Positive signals
-
-Examples:
-- direct report to CEO/CIO/board member;
-- explicit technology budget ownership;
-- ability to redesign organization;
-- strategy and execution ownership;
-- portfolio prioritization authority;
-- clear executive sponsorship;
-- multi-country mandate;
-- multiple technology domains;
-- explicit team leadership;
-- executive committee participation.
-
-## Red-flag signals
-
-Treat as hypotheses/signals, not automatic disqualifiers:
-- "build from scratch" without budget;
-- "influence without authority";
-- matrix with unclear governance;
-- strategic role with no team;
-- transformation role several layers below CIO;
-- responsibility for delivery without people ownership;
-- global responsibility without regional decision rights;
-- accountability for savings without spend control;
-- broad mandate with tiny team;
-- repeated firefighting/resilience emphasis;
-- unclear predecessor exit;
-- unusually broad unrelated responsibility list.
+If a user explicitly requests /100 comparison, do not improvise numbers. Use a separately defined scoring contract with anchored dimension scales, deterministic aggregation, explicit UNKNOWN handling and confidence. The total must not mechanically map to the decision.
