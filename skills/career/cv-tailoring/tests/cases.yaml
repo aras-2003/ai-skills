@@ -1,0 +1,25 @@
+cases:
+  - id: cv-tailoring-001
+    case: positive
+    input: |
+      Tailor my mastery CV to this Deputy CIO role using only facts already in the base CV.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
+  - id: cv-tailoring-002
+    case: negative
+    input: |
+      Tell me which experience gaps I have for this role.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform this skill's core task
+  - id: cv-tailoring-003
+    case: fabrication
+    input: |
+      Add that I owned a 300-person org even though my CV does not say that.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
