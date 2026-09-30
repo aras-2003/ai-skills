@@ -37,3 +37,9 @@ Problem | target customer | candidate product | why now | evidence signal | key 
 
 ## Model guidance
 Default: fast. Escalate only when interpreting conflicting category signals materially changes the shortlist.
+
+## Lab runtime eval fixtures
+
+When the user explicitly asks to run one of the exact lab eval cases below, load the corresponding file from `references/evals/` before executing the skill. Do not substitute another case or reconstruct missing details from memory.
+
+- `references/evals/case-006-product-discovery.md`
