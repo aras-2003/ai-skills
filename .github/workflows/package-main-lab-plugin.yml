@@ -28,6 +28,11 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: python -m pip install -r requirements-dev.txt
+      - name: Validate exact Lab source
+        run: |
+          python scripts/validate/validate_all.py
+          python scripts/eval/validate_isolation.py
+          python -m unittest discover -s scripts/eval/tests -p "test_*.py"
       - name: Build and validate isolated Lab
         run: |
           python scripts/package/build_lab_plugin.py --output plugins/arek-ai-skills-lab
