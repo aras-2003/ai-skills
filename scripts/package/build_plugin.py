@@ -2,35 +2,136 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
 from pathlib import Path
 
+from build_utils import (
+    atomic_output,
+    copy_runtime_support,
+    package_version,
+    sha256_tree,
+    source_revision,
+    write_json,
+)
 from portable import read_frontmatter, render_portable_skill
 from workflow_entrypoints import add_workflow_entrypoints
 
 PLUGIN_NAME = "arek-ai-skills"
-PLUGIN_VERSION = "1.7.1"
 
 
 def discover_skills(root: Path, maturity: str) -> list[Path]:
     skills = []
     for skill_md in sorted((root / "skills").rglob("SKILL.md")):
-        fm = read_frontmatter(skill_md)
+        fm, _ = read_frontmatter(skill_md)
         metadata = fm.get("metadata") or {}
         if metadata.get("maturity") == maturity:
             skills.append(skill_md.parent)
     return skills
 
 
-def copy_skill(src: Path, dst_root: Path) -> None:
-    name = read_frontmatter(src / "SKILL.md").get("name")
+def copy_skill(src: Path, dst_root: Path) -> dict:
+    fm, _ = read_frontmatter(src / "SKILL.md")
+    name = fm.get("name")
+    metadata = fm.get("metadata") or {}
     if not isinstance(name, str) or not name:
         raise ValueError(f"{src}: missing skill name")
     dst = dst_root / name
     if dst.exists():
         raise ValueError(f"duplicate packaged skill name: {name}")
-    shutil.copytree(src, dst)
+    dst.mkdir(parents=True)
     (dst / "SKILL.md").write_text(render_portable_skill(src / "SKILL.md"), encoding="utf-8")
+    inventory = ["SKILL.md"] + copy_runtime_support(src, dst)
+    return {
+        "name": name,
+        "kind": "skill",
+        "version": str(metadata.get("version", "unknown")),
+        "maturity": str(metadata.get("maturity", "unknown")),
+        "inventory": sorted(inventory),
+    }
+
+
+def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> dict:
+    selected = discover_skills(root, maturity)
+    if not selected and not allow_empty:
+        raise ValueError(f"No skills with maturity={maturity!r}; refusing to build empty plugin")
+
+    with atomic_output(root, out) as stage:
+        skills_out = stage / "skills"
+        skills_out.mkdir(parents=True)
+        capabilities = [copy_skill(skill_dir, skills_out) for skill_dir in selected]
+        available_names = {item["name"] for item in capabilities}
+        workflow_names = add_workflow_entrypoints(
+            root,
+            maturity,
+            skills_out,
+            channel="plugin",
+            available_names=available_names,
+        )
+        capabilities.extend(
+            {"name": name, "kind": "workflow", "maturity": maturity}
+            for name in workflow_names
+        )
+
+        version = package_version(root, "package")
+        manifest = {
+            "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+            "name": PLUGIN_NAME,
+            "version": version,
+            "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
+            "skills": "./skills/",
+            "author": {"name": "Arkadiusz Kamrowski"},
+            "repository": "https://github.com/aras-2003/ai-skills",
+            "keywords": ["skills", "productivity", "career", "strategy", "research"],
+            "extensions": {
+                "com.openai": {
+                    "interface": {
+                        "displayName": "Arek AI Skills",
+                        "shortDescription": "Validated reusable workflows from the ai-skills production catalog.",
+                        "longDescription": "A governed collection of production-ready reusable AI skills maintained in GitHub and packaged for ChatGPT/Codex."
+                    }
+                }
+            }
+        }
+        write_json(stage / "plugin.json", manifest)
+        compat_dir = stage / ".codex-plugin"
+        compat_dir.mkdir(parents=True)
+        write_json(
+            compat_dir / "plugin.json",
+            {
+                "name": PLUGIN_NAME,
+                "version": version,
+                "description": manifest["description"],
+                "skills": "./skills/",
+            },
+        )
+        revision = source_revision(root)
+        write_json(
+            stage / "capabilities.json",
+            {
+                "schema_version": "1.0",
+                "channel": "plugin",
+                "source_revision": revision,
+                "capabilities": sorted(capabilities, key=lambda x: x["name"]),
+            },
+        )
+        artifact_digest = sha256_tree(stage)
+        write_json(
+            stage / "release-manifest.json",
+            {
+                "schema_version": "1.0",
+                "package": PLUGIN_NAME,
+                "version": version,
+                "channel": "plugin",
+                "source_revision": revision,
+                "artifact_content_sha256": artifact_digest,
+            },
+        )
+
+    return {
+        "skills": len(selected),
+        "workflows": len(workflow_names),
+        "version": package_version(root, "package"),
+        "source_revision": source_revision(root),
+    }
 
 
 def main() -> int:
@@ -42,63 +143,11 @@ def main() -> int:
 
     root = Path(__file__).resolve().parents[2]
     out = root / args.output
-    skills_out = out / "skills"
-
-    if out.exists():
-        shutil.rmtree(out)
-    skills_out.mkdir(parents=True, exist_ok=True)
-
-    selected = discover_skills(root, args.maturity)
-    if not selected and not args.allow_empty:
-        raise SystemExit(f"No skills with maturity={args.maturity!r}; refusing to build empty plugin")
-
-    for skill_dir in selected:
-        copy_skill(skill_dir, skills_out)
-
-    workflow_entrypoints = add_workflow_entrypoints(root, args.maturity, skills_out)
-
-    manifest = {
-        "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-        "name": PLUGIN_NAME,
-        "version": PLUGIN_VERSION,
-        "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
-        "skills": "./skills/",
-        "author": {"name": "Arkadiusz Kamrowski"},
-        "repository": "https://github.com/aras-2003/ai-skills",
-        "keywords": ["skills", "productivity", "career", "strategy", "research"],
-        "extensions": {
-            "com.openai": {
-                "interface": {
-                    "displayName": "Arek AI Skills",
-                    "shortDescription": "Validated reusable workflows from the ai-skills production catalog.",
-                    "longDescription": "A governed collection of production-ready reusable AI skills maintained in GitHub and packaged for ChatGPT/Codex."
-                }
-            }
-        }
-    }
-    (out / "plugin.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-
-    # Compatibility overlay for ChatGPT/Codex clients that still rely on
-    # the legacy plugin manifest. The root portable plugin.json remains
-    # canonical, while this explicitly exposes the bundled skills directory.
-    compat_dir = out / ".codex-plugin"
-    compat_dir.mkdir(parents=True, exist_ok=True)
-    compat_manifest = {
-        "name": PLUGIN_NAME,
-        "version": PLUGIN_VERSION,
-        "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
-        "skills": "./skills/"
-    }
-    (compat_dir / "plugin.json").write_text(
-        json.dumps(compat_manifest, indent=2) + "\n",
-        encoding="utf-8"
+    result = build(root, out, args.maturity, allow_empty=args.allow_empty)
+    print(
+        f"Packaged {result['skills']} skills + {result['workflows']} workflow entrypoints "
+        f"as {result['version']} from {result['source_revision']} into {out}"
     )
-
-    print(f"Packaged {len(selected)} skills + {len(workflow_entrypoints)} workflow entrypoints into {out}")
-    for item in selected:
-        print(f" - skill: {item}")
-    for name in workflow_entrypoints:
-        print(f" - workflow: {name}")
     return 0
 
 
