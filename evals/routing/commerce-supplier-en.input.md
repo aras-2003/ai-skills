@@ -1,0 +1,1 @@
+A supplier offers 500 units at USD 4 each, but the quote is unclear on freight, duty and packaging. I have one good sample. Tell me what I can actually conclude about sourcing viability.
