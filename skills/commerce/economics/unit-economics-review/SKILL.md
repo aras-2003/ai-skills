@@ -28,12 +28,13 @@ Keep net/gross cost basis, unit/order scope, fees, return-loss model, CAC and re
 Missing conventions make the result unresolved/provisional. If the calculator cannot be executed, state that arithmetic was not tool-verified and do not claim it ran. Never invent target CAC or spend caps.
 
 ## Procedure
-1. Normalize price inclusive/exclusive of VAT.
-2. Calculate or estimate separately: COGS, inbound freight/duty, fulfilment, payment fees, returns/refunds, packaging and CAC.
-3. Derive gross margin, pre-CAC contribution, break-even CAC and target CAC headroom.
-4. Run sensitivity at minimum for CAC, COGS and returns.
-5. Flag cash/MOQ/inventory exposure separately from per-order margin.
-6. Mark assumptions explicitly.
+1. Verify the explicit input conventions in `references/input-contract.md`; do not fill missing VAT, recoverability, cost basis or quantity assumptions.
+2. For exact inputs, run `scripts/calculator.py` and preserve its normalized net/gross basis in the analysis.
+3. Keep COGS, inbound freight/duty, fulfilment, payment fees, returns/refunds and packaging separate.
+4. Derive pre-CAC contribution and break-even CAC. Derive target CAC only when a required contribution after CAC is supplied.
+5. Run only user/evidence-supplied sensitivity scenarios; do not invent scenario ranges.
+6. Flag cash/MOQ/inventory exposure separately from per-order margin.
+7. Mark assumptions, unresolved inputs and whether calculator execution succeeded explicitly.
 
 ## Decision rules
 - Gross margin != contribution margin.
@@ -46,8 +47,10 @@ Missing conventions make the result unresolved/provisional. If the calculator ca
 - Use code/calculation where exact inputs are available; LLM interpretation should not replace arithmetic.
 
 ## Output contract
-Price | VAT | COGS | freight/duty | fulfilment | fees | returns | pre-CAC contribution | break-even CAC | target CAC | sensitivity.
-Then: economics gate = pass / conditional / fail.
+State calculator status: executed / not executed / unresolved inputs.
+Then report: currency | quantity/order | gross/net price | VAT convention | COGS | freight/duty | fulfilment | fees | returns | pre-CAC contribution | break-even CAC | target CAC (only if derived from required contribution) | supplied sensitivity.
+Keep MOQ/cash exposure in a separate block.
+Then: economics gate = pass / conditional / fail / unresolved.
 
 ## Model guidance
 Default: standard; deterministic calculation preferred.
