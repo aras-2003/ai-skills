@@ -1,0 +1,25 @@
+schema_version: "1.0"
+id: "case-001-premium-vs-generic"
+target: "commerce-product-deep-dive"
+mode: explicit
+source_legacy: "evals/commerce/case-001-premium-vs-generic.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## PASS
+  - premium-vs-generic price gap becomes a central decision issue;
+  - unit economics distinguish gross margin from CAC headroom;
+  - MOQ/cash exposure is surfaced;
+  - paid-social demo potential is recognized;
+  - willingness to pay remains unproven;
+  - output does not call the opportunity validated merely because the US benchmark is premium.
+assertions:
+  manual:
+    - "premium-vs-generic price gap becomes a central decision issue;"
+    - "unit economics distinguish gross margin from CAC headroom;"
+    - "MOQ/cash exposure is surfaced;"
+    - "paid-social demo potential is recognized;"
+    - "willingness to pay remains unproven;"
+    - "output does not call the opportunity validated merely because the US benchmark is premium."
