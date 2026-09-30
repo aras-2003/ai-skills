@@ -10,7 +10,7 @@ import yaml
 from workflow_entrypoints import add_workflow_entrypoints
 
 PLUGIN_NAME = "arek-ai-skills"
-PLUGIN_VERSION = "1.7.0"
+PLUGIN_VERSION = "1.7.1"
 
 
 def read_frontmatter(skill_md: Path) -> dict:
