@@ -1,54 +1,165 @@
 # OAF / Organisational Architecture Framework
 
-OAF is a practical synthesis for connecting strategy, operating model, governance, enterprise architecture, portfolio/execution and evidence feedback.
+OAF is a practical synthesis for connecting strategy, operating model, decision architecture, enterprise architecture, portfolio/execution and evidence feedback.
 
-It is treated here as a **thinking and decision framework**, not as a new theory or a monolithic product.
+It is treated as a **thinking and decision framework**, not a monolithic prompt or a new theory.
 
 Core loop:
 
 ```
-Direction -> Architecture -> Priorities -> Execution -> Evidence -> next decision
+Direction -> Operating Model -> Decisions -> Architecture -> Portfolio/Execution -> Evidence -> next decision
 ```
 
-The skill library decomposes OAF into reusable decision procedures rather than one giant "OAF skill".
+The library decomposes OAF into specialist skills and evidence-gated workflows.
 
-## Subdomains
+## Domain architecture
 
 ### 1. Direction & strategy execution
-- `strategy-to-execution-diagnostic` — test whether strategic intent is translated into accountable execution.
+Core:
+- `strategy-to-execution-diagnostic`
+
+Planned/deferred:
+- `strategy-traceability-review`
+- `strategic-priority-review`
+- `outcome-ownership-review`
 
 ### 2. Operating model
-- `operating-model-review` — review global/local split, role clarity, interfaces, autonomy and coordination.
+Production:
+- `operating-model-review`
+
+Candidate:
+- `global-local-model-review`
+- `organizational-interface-review`
+
+Future:
+- `organizational-layering-review`
+- `span-of-control-review`
+- `shared-services-model-review`
 
 ### 3. Decision architecture & governance
-- `decision-rights-review` — map who decides, recommends, executes and escalates.
-- `governance-design` — design governance forums, decision cadence, escalation and information flows.
+Production:
+- `decision-rights-review`
+
+Candidate:
+- `decision-bottleneck-analysis`
+- `governance-design`
+
+Future:
+- `governance-forum-review`
+- `governance-overlap-review`
+- `decision-quality-review`
 
 ### 4. Enterprise & organisational architecture
-- `architecture-review` — review alignment between business direction, capabilities, organisation and technology.
-- `capability-map-review` — assess capability-map quality, ownership, gaps and decision usefulness.
+Production:
+- `architecture-review`
+
+Candidate:
+- `capability-map-review`
+- `capability-gap-analysis`
+
+Future:
+- `architecture-alignment-review`
+- `architecture-debt-review`
+- `technology-enablement-review`
+- `data-capability-review`
 
 ### 5. Portfolio & execution
-- `portfolio-prioritization` — structure evidence-based prioritisation across initiatives.
-- `transformation-blueprint` — convert diagnosis into sequenced target-state changes and mobilisation plan.
+Production:
+- `portfolio-prioritization`
+
+Candidate:
+- `portfolio-health-review`
+- `transformation-blueprint`
+
+Future:
+- `investment-prioritization`
+- `capacity-funding-review`
+- `execution-model-review`
+- `delivery-bottleneck-analysis`
 
 ### 6. Evidence & adaptation
-- `evidence-loop-review` — test whether KPIs, outcomes and feedback actually influence decisions.
+Production:
+- `evidence-loop-review`
 
-## OAF diagnostic workflow
+Candidate:
+- `kpi-quality-review`
 
-Use `workflows/oaf-health-check/WORKFLOW.md` for a multi-stage diagnostic.
+Future:
+- `performance-review-design`
+- `learning-loop-review`
+- `adaptive-governance-review`
 
-The workflow must not blindly execute every skill. It should route only to the subdomains where evidence indicates a meaningful problem.
+### 7. Leadership & change enablement
+Future — intentionally deferred until core OAF is stable:
+- `leadership-model-review`
+- `leadership-accountability-review`
+- `change-readiness-review`
+- `stakeholder-alignment-review`
+
+## Workflows
+
+Production:
+- `oaf-health-check` — selective cross-domain diagnosis.
+
+Candidate:
+- `oaf-operating-model-redesign`
+- `oaf-governance-redesign`
+- `oaf-strategy-execution-reset`
+
+Next planned workflows:
+- `oaf-enterprise-architecture-review`
+- `oaf-transformation-design`
+
+## Routing principle
+
+Do not run every OAF skill.
+
+```
+symptom/problem
+   -> narrow diagnostic skill if possible
+   -> specialist evidence
+   -> cross-domain synthesis only when needed
+   -> design skill/workflow only after diagnosis gate
+```
+
+Examples:
+- slow/unclear decisions -> `decision-rights-review`
+- repeated escalations -> `decision-bottleneck-analysis`
+- global/local tension -> `global-local-model-review`
+- cross-unit handoff failure -> `organizational-interface-review`
+- initiative overload -> `portfolio-health-review` then `portfolio-prioritization` when ready
+- reporting without action -> `evidence-loop-review`
+- KPI set quality -> `kpi-quality-review`
 
 ## Model-class defaults
 
-- **fast:** capability-map-review, portfolio-prioritization
-- **standard:** strategy-to-execution-diagnostic, operating-model-review, decision-rights-review, governance-design, architecture-review, evidence-loop-review, transformation-blueprint
-- **strong:** escalation only for novel cross-domain redesign, conflicting executive evidence, or high-impact structural choices
+Validated on Luna for structured diagnosis:
+- `decision-rights-review`
+- `portfolio-prioritization`
+- `operating-model-review`
+- `architecture-review`
+- `evidence-loop-review`
+- `oaf-health-check`
 
-See `docs/MODEL-ROUTING.md`.
+Candidate defaults:
+- **fast:** `capability-map-review`, `kpi-quality-review`
+- **standard:** most diagnostic and redesign skills
+- **strong escalation:** novel cross-domain target-state design, contested executive evidence, major global/local redesign
+
+See `docs/MODEL-ROUTING.md` and `evals/oaf/core-validation-2026-09-30.md`.
 
 ## Boundary principle
 
-OAF skills diagnose and design organisational decision systems. They should not become generic strategy, HR, software architecture, PMO or transformation prompts without an explicit OAF-relevant decision problem.
+OAF skills diagnose and design organisational decision systems. They should not silently become generic strategy, HR, software architecture, PMO or transformation prompts.
+
+The preferred sequence is:
+
+```
+evidence -> diagnosis -> design implication -> design choice -> pilot -> evidence loop
+```
+
+Not:
+
+```
+symptom -> best-practice redesign
+```
