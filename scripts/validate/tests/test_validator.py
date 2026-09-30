@@ -219,5 +219,48 @@ assertions:
             issues = validate_runtime(root)
             self.assertTrue(any("collides with skill" in i.message for i in issues))
 
+
+class OptionalDependencyEntrypointTests(unittest.TestCase):
+    def test_missing_optional_dependency_is_disclosed_not_simulated(self) -> None:
+        package_dir = Path(__file__).resolve().parents[2] / "package"
+        if str(package_dir) not in sys.path:
+            sys.path.insert(0, str(package_dir))
+        from workflow_entrypoints import build_entrypoint
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            wf = root / "workflows" / "demo"
+            wf.mkdir(parents=True)
+            (wf / "WORKFLOW.md").write_text("# Demo workflow\n", encoding="utf-8")
+            skills_out = root / "out"
+            skills_out.mkdir()
+            item = {
+                "name": "demo-workflow",
+                "workflow": "workflows/demo/WORKFLOW.md",
+                "description": "Use when the demo workflow is requested.",
+                "dependencies": {
+                    "required": [],
+                    "optional": [
+                        {
+                            "name": "optional-specialist",
+                            "on_missing": "Skip that specialist branch, disclose the limitation and continue only with supported scope.",
+                        }
+                    ],
+                },
+                "metadata": {
+                    "owner": "owner",
+                    "version": "1.0.0",
+                    "maturity": "production",
+                    "risk": "medium",
+                    "last_reviewed": "2026-09-30",
+                },
+            }
+            build_entrypoint(root, item, skills_out, available_names=set())
+            text_out = (skills_out / "demo-workflow" / "SKILL.md").read_text(encoding="utf-8")
+            self.assertIn("optional-specialist", text_out)
+            self.assertIn("Skip that specialist branch", text_out)
+            self.assertIn("did not run", text_out.lower())
+
+
 if __name__ == "__main__":
     unittest.main()
