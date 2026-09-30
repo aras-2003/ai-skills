@@ -4,7 +4,7 @@ description: >
   Review whether a product or business model proven in one market is plausibly transferable to another market, especially US-to-Poland, without assuming foreign traction will repeat locally.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -16,6 +16,11 @@ metadata:
 
 ## Purpose
 Test whether the reasons a product works in the source market exist in the target market.
+
+## Preconditions and evidence contract
+Required: source market, target market, source success evidence and the key use context/offer being transferred. Local evidence should be staged: context prevalence -> substitutes/price anchors -> basic logistics/regulation -> offer response -> paid acquisition.
+
+If target-market evidence is missing, transferability remains unresolved even when source-market traction is strong.
 
 ## Procedure
 1. State source-market success hypothesis.
@@ -33,6 +38,13 @@ Test whether the reasons a product works in the source market exist in the targe
 - Do not use TAM alone as transfer evidence.
 - Validate whether the source-market use environment is sufficiently prevalent in the target market before testing the copied offer.
 - A landing page or paid test should not precede cheaper validation of target context, substitutes and basic logistics when those can invalidate transferability.
+
+- Do not copy source-market price, channel or form factor before target-context fit is established.
+- Universal need does not prove that the source use environment is prevalent locally.
+
+## Failure / uncertainty handling
+- If required source/tool evidence is unavailable, report the unresolved field explicitly.
+- Do not substitute generic market knowledge for a missing current quote, channel result or target-market fact.
 
 ## Output contract
 Source success driver | target-market match | mismatch | confidence | local test required.
