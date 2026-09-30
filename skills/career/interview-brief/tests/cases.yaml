@@ -1,0 +1,25 @@
+cases:
+  - id: interview-brief-001
+    case: positive
+    input: |
+      Prepare me for tomorrow's CIO interview for the Symfonia role using what we know.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
+  - id: interview-brief-002
+    case: negative
+    input: |
+      Research Kelvion's revenue and ownership.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform this skill's core task
+  - id: interview-brief-003
+    case: stage
+    input: |
+      I have a recruiter screening, not the hiring manager. Prepare the brief accordingly.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract

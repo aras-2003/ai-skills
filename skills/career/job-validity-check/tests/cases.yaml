@@ -1,0 +1,25 @@
+cases:
+  - id: job-validity-check-001
+    case: positive
+    input: |
+      Check whether this Symfonia Head of Group IT posting is still active and give me the current employer/ATS link.
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
+  - id: job-validity-check-002
+    case: negative
+    input: |
+      Find me new executive technology jobs.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform this skill's core task
+  - id: job-validity-check-003
+    case: conflict
+    input: |
+      LinkedIn says closed but the employer ATS page still accepts applications. Is it active?
+    expected:
+      should_trigger: true
+      must:
+        - follow the skill boundary and output contract
