@@ -4,12 +4,19 @@ description: >
   Review how responsibilities, standards, capabilities and decisions are split between global/central and local units. Use when the organisation needs to balance scale and consistency against local context and speed; do not default to centralisation.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
-  maturity: candidate
+  version: "1.0.0"
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
   execution:
     default_model_class: standard
+    validated_models:
+      luna:
+        status: pass
+        validated_on: 2026-09-30
+        validated_use:
+          - global-local diagnosis
+          - standards placement review
 ---
 
 # Global Local Model Review
@@ -29,17 +36,31 @@ Diagnose whether the global/local split supports enterprise outcomes without unn
 ## Decision rules
 - Centralise for material scale, consistency, interoperability or enterprise risk.
 - Localise where context, responsiveness or regulation materially matter.
-- A global standard without feedback/adaptation can create hidden local workarounds.
+- Global consistency does not automatically require one global implementation.
+- Treat local workarounds as diagnostic evidence, not automatic noncompliance.
+- A global standard that is routinely bypassed may indicate poor implementation, unsuitable scope or legitimate local need.
 - Autonomy without enterprise guardrails can externalise cost and risk.
+- Distinguish structural design failure from poor execution of the current model.
 
 ## Output contract
 Current split | rationale | observed friction | enterprise consequence | local consequence | evidence needed | design implication.
 
+Then:
+- global-consistency vs local-autonomy analysis;
+- standards classification: mandatory / configurable / advisory;
+- local-workaround evidence;
+- structural vs implementation issues;
+- minimum evidence before target-model selection.
+
 ## Model guidance
-Default: **standard**. Escalate for multi-country redesign or highly contested sovereignty/autonomy choices.
+Default: **standard**.
+Validated on Luna for global/local diagnosis and standards-placement review.
+Escalate for multi-country target-model selection, highly contested sovereignty/autonomy choices, or material funding/authority redesign.
 
 ## Quality checks
 - [ ] Centralisation/autonomy rationale explicit.
+- [ ] Global consistency separated from single global implementation.
 - [ ] Local workarounds treated as evidence, not automatically noncompliance.
-- [ ] Design implication separated from redesign.
-
+- [ ] Mandatory/configurable/advisory distinction considered.
+- [ ] Structural problem separated from implementation problem.
+- [ ] Design implication separated from final redesign.
