@@ -34,3 +34,5 @@ targets:
   commerce-opportunity-review:
     - evals/commerce/case-003-viral-regulated.md
     - evals/commerce/case-005-false-us-pl-transfer.md
+  product-opportunity-discovery:
+    - evals/commerce/case-006-product-discovery.md
