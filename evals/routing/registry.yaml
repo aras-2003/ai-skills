@@ -1,0 +1,26 @@
+schema_version: "1.0"
+cases:
+  - id: career-company-facts-pl
+    input: evals/routing/career-company-facts-pl.input.md
+    rubric: evals/routing/career-company-facts-pl.rubric.yaml
+  - id: career-role-eval-en
+    input: evals/routing/career-role-eval-en.input.md
+    rubric: evals/routing/career-role-eval-en.rubric.yaml
+  - id: commerce-economics-pl
+    input: evals/routing/commerce-economics-pl.input.md
+    rubric: evals/routing/commerce-economics-pl.rubric.yaml
+  - id: commerce-supplier-en
+    input: evals/routing/commerce-supplier-en.input.md
+    rubric: evals/routing/commerce-supplier-en.rubric.yaml
+  - id: commerce-discovery-pl
+    input: evals/routing/commerce-discovery-pl.input.md
+    rubric: evals/routing/commerce-discovery-pl.rubric.yaml
+  - id: commerce-regulatory-en
+    input: evals/routing/commerce-regulatory-en.input.md
+    rubric: evals/routing/commerce-regulatory-en.rubric.yaml
+  - id: oaf-decision-pl
+    input: evals/routing/oaf-decision-pl.input.md
+    rubric: evals/routing/oaf-decision-pl.rubric.yaml
+  - id: oaf-architecture-en
+    input: evals/routing/oaf-architecture-en.input.md
+    rubric: evals/routing/oaf-architecture-en.rubric.yaml
