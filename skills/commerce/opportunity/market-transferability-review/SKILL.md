@@ -4,7 +4,7 @@ description: >
   Review whether a product or business model proven in one market is plausibly transferable to another market, especially US-to-Poland, without assuming foreign traction will repeat locally.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -16,6 +16,16 @@ metadata:
 
 ## Purpose
 Test whether the reasons a product works in the source market exist in the target market.
+
+
+## Preconditions
+Require a source market, target market and explicit source-market success evidence. If target-market use context is unknown, transferability cannot be treated as established.
+
+## Inputs and evidence
+Test local prevalence of the use environment, substitutes, price anchors, logistics, regulation and channel behavior in stages. Source-market reviews remain source-market evidence only.
+
+## Uncertainty and tool failure
+If target-market evidence cannot be retrieved, keep transferability unresolved and specify the cheapest context screen needed next. Do not copy source-market price/channel assumptions.
 
 ## Procedure
 1. State source-market success hypothesis.
