@@ -69,3 +69,20 @@ A mature skill should reduce the amount of method invention required from the mo
 | process-update | fast |
 
 These defaults should be validated empirically with behavioral evals before they are treated as cost/quality commitments.
+
+
+## OAF defaults
+
+| Skill | Default class |
+|---|---|
+| strategy-to-execution-diagnostic | standard |
+| operating-model-review | standard |
+| decision-rights-review | standard |
+| governance-design | standard |
+| architecture-review | standard |
+| capability-map-review | fast |
+| portfolio-prioritization | fast + deterministic calculation |
+| transformation-blueprint | standard |
+| evidence-loop-review | standard |
+
+The OAF Health Check workflow should prefer selective routing over escalating model class. Use strong only when the cross-domain design problem is genuinely novel, contested or high-impact.
