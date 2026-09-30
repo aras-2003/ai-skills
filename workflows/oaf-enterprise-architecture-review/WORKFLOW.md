@@ -44,6 +44,7 @@ If the evidence cannot support technology conclusions, keep those conclusions un
 - Do not create a target-state diagram merely because the user asked for “architecture”.
 - Prefer reversible architecture decisions where uncertainty is material.
 - Technology recommendations must identify the business/capability problem they solve.
+- A working architecture direction must remain provisional until evidence supports final target-state selection.
 
 ## Output contract
 - architecture decision framing;
@@ -58,6 +59,7 @@ If the evidence cannot support technology conclusions, keep those conclusions un
 
 ## Model guidance
 Default: **standard** for evidence-backed enterprise architecture review.
+Validated on Luna for evidence-disciplined architecture review, bounded option comparison and strict stop-condition enforcement.
 Escalate to strong for novel target architecture, major platform/data boundary redesign, highly coupled global architectures, contested target-state trade-offs or material transition economics.
 
 ## Stop conditions
