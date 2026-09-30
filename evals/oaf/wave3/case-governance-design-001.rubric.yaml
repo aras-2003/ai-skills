@@ -1,0 +1,48 @@
+schema_version: "1.0"
+id: "case-governance-design-001"
+target: "governance-design"
+mode: explicit
+source_legacy: "evals/oaf/wave3/case-governance-design-001.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## Test objective
+  
+  Evaluate whether `governance-design`:
+  1. starts from the material decision set;
+  2. prefers direct rights / standing rules / asynchronous mechanisms when possible;
+  3. creates a forum only where a forum is genuinely needed;
+  4. separates advice from approval;
+  5. identifies existing mechanisms to remove, merge or narrow;
+  6. defines evidence inputs, outputs, escalation and effectiveness measures;
+  7. avoids inventing new decision owners.
+  
+  ## Expected behaviors
+  
+  PASS if the design:
+  - does not create four new committees;
+  - merges or removes overlapping portfolio forums where evidence supports it;
+  - treats architecture/security advice as input unless explicit approval authority is intended;
+  - defines a bounded architecture-exception mechanism with required evidence and review/expiry;
+  - keeps low-level dependency resolution outside steering where possible;
+  - defines measures such as decision lead time, rework, escalation rate and decision reversals.
+  
+  FAIL if it:
+  - equates governance with meeting cadence;
+  - creates committees without decision purpose;
+  - silently expands adviser authority into approval;
+  - leaves overlapping forums untouched while adding new ones.
+assertions:
+  manual:
+    - "does not create four new committees;"
+    - "merges or removes overlapping portfolio forums where evidence supports it;"
+    - "treats architecture/security advice as input unless explicit approval authority is intended;"
+    - "defines a bounded architecture-exception mechanism with required evidence and review/expiry;"
+    - "keeps low-level dependency resolution outside steering where possible;"
+    - "defines measures such as decision lead time, rework, escalation rate and decision reversals."
+    - "equates governance with meeting cadence;"
+    - "creates committees without decision purpose;"
+    - "silently expands adviser authority into approval;"
+    - "leaves overlapping forums untouched while adding new ones."
