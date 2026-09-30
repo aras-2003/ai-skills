@@ -1,164 +1,66 @@
-# Efficient use of ai-skills in ChatGPT
-
-## Current ChatGPT availability
-
-As of 2026-09-29, OpenAI documents native ChatGPT Skills for eligible Business, Enterprise, Healthcare and Edu workspaces. Availability differs by plan and surface.
-
-For ChatGPT Plus, treat this Git repository as the canonical skills source and use the **Project + router + on-demand GitHub loading** pattern below. If native Skills become available on the account later, production skills can be installed selectively without changing their core design.
-
-## Recommended architecture for ChatGPT Plus
-
-```
-ChatGPT Project
-   |
-   +-- project context / files / instructions
-   |
-   +-- small skill router
-          |
-          +-- CATALOG.md metadata
-          |
-          +-- fetch one production SKILL.md from GitHub only when needed
-                 |
-                 +-- optional references/scripts only when required
-```
-
-Do not load the entire repository into every conversation.
+# Using ai-skills by runtime channel
 
 ## Source of truth
 
-- `main` = development/candidate skills.
-- `production` = accepted skills only.
-- `CATALOG.md` = lightweight discovery metadata.
-- Individual `SKILL.md` files = execution instructions.
-- GitHub remains canonical; avoid manually diverging copies in ChatGPT.
+GitHub source defines procedures. Runtime availability is determined by the generated package, not by a hand-maintained allow-list in this document.
 
-## Project routing pattern
+Check:
+- `CATALOG.md` for source discovery;
+- `workflows/runtime-registry.yaml` for workflow dependencies/channel constraints;
+- the installed artifact's `capabilities.json` for what that exact channel contains;
+- `release-manifest.json` for source revision and release identity.
 
-Each ChatGPT Project should contain a short router instruction, not full skill bodies.
+## Plugin channel
 
-Example:
+The production plugin packages production-maturity skills plus production workflow entrypoints whose `plugin` channel is `supported`.
 
-```text
-Use reusable procedures from aras-2003/ai-skills when they materially improve a repeatable task.
+Optional workflow dependencies carry an explicit reduced-scope behavior. Missing required dependencies fail the build.
 
-Source:
-- production branch for normal work
-- main only when explicitly testing a candidate skill
+## Lab channel
 
-Routing:
-1. Identify whether the request matches a listed production skill.
-2. Prefer the smallest relevant skill; do not load unrelated skills.
-3. Fetch that SKILL.md from GitHub only when needed.
-4. Load references/scripts only if the skill procedure requires them.
-5. Project instructions and current user intent provide context; the skill provides method.
-6. For high-impact decisions, apply an appropriate control skill such as evidence-validator or red-team-review when justified.
-7. Do not run meta-skills during normal domain work unless the task is creating or changing a skill.
-```
+Use the Lab for isolated behavioral evaluation. It intentionally packages:
+- candidate targets;
+- required production dependencies;
+- registered executor-only `.input.md` eval fixtures.
 
-## Recommended project-to-skill mapping
+Do **not** enable the Lab and production plugin together for the same evaluation session when they expose duplicate names. The Lab manifest records this session rule.
 
-### Career project
-Router allow-list:
-- job-validity-check
-- role-fit-analysis
-- career-trajectory-check
-- company-context-research
-- cv-gap-analysis
-- cv-tailoring
-- interview-brief
-- evidence-validator
-- decision-brief
+Evaluator rubrics are repository-side only and must not be loaded into the executor context.
 
-### Product Hunter
-Router allow-list:
-- signal-scout
-- problem-validation
-- poland-demand-check
-- competition-landscape
-- why-would-they-buy
-- supplier-feasibility
-- unit-economics
-- regulatory-screen
-- meta-ad-test-design
-- investment-decision
-- evidence-validator
-- red-team-review
+## ChatGPT ZIP channel
 
-### Strategy / EA
-Router allow-list:
-- strategy-challenge
-- architecture-review
-- architecture-decision-record
-- business-case-review
-- operating-model-review
-- portfolio-prioritization
-- governance-design
-- kpi-design
-- vendor-evaluation
-- executive-decision-brief
-- evidence-validator
-- red-team-review
+This channel packages individual production skills as deterministic ZIPs.
 
-### Web / design
-Router allow-list:
-- reference-analysis
-- concept-to-metaphor
-- motion-storyboard
-- design-critique
-- implementation-brief
-- visual-regression-review
-- quality-gate
+Workflow availability is not assumed. Check the ZIP channel `capabilities.json`/index: workflows marked `unavailable` require a plugin/workflow-capable channel instead of being silently omitted.
 
-### Skill development
-Router allow-list:
-- skill-specification
-- skill-authoring
-- skill-validation
-- skill-test-design
-- skill-evaluation
-- skill-release-review
+## Routing
 
-Meta-skills should remain isolated here so they do not compete with normal task routing.
+For normal work, describe the goal rather than a skill name. The runtime should choose the smallest suitable capability.
 
-## User interaction
-
-The user should normally describe the goal rather than name implementation details.
-
-Preferred:
-> Evaluate this role against my target profile and highlight the material gaps.
-
-Avoid requiring:
-> Run role-fit-analysis, then evidence-validator, then decision-brief.
-
-A well-configured router should select the procedure automatically.
-
-Explicit skill names are useful for:
-- testing;
+Explicit names are appropriate for:
+- behavior regression tests;
 - debugging;
-- forcing a known workflow;
-- comparing versions;
-- developing a skill.
+- forcing a known procedure;
+- version comparison;
+- skill development.
 
-## Context-efficiency rules
+Natural-routing evidence is a separate test mode. A description-only selector or deterministic expected-target check is a proxy, not proof that a native runtime selected correctly.
 
-1. Keep CATALOG metadata short.
-2. Fetch only one or a few matching skills.
-3. Avoid loading references before a branch needs them.
-4. Keep project-specific facts in the Project, not in skills.
-5. Do not repeat skill bodies in project instructions.
-6. Do not use meta-skills outside skill engineering.
-7. Prefer workflows with stop gates so expensive research happens only after cheap checks pass.
+## Context economy
 
-## Native Skills migration
+1. Load only the capability needed for the current task.
+2. Load references/scripts only when the procedure calls for them.
+3. Keep project facts in the Project/context, not reusable skills.
+4. Use workflow stop gates before expensive research.
+5. Do not use evaluator rubrics as executor context.
 
-When native ChatGPT Skills are available for the account/workspace:
+## Version verification
 
-1. Install only `production` skills.
-2. Start with core skills and the active project's domain skills.
-3. Do not globally install overlapping candidates.
-4. Keep GitHub as source of truth and version/release through the repository.
-5. Use ChatGPT's automatic selection for normal work; explicitly invoke only for tests/debugging.
+Before comparing behavior, record:
+- package/release ID;
+- source revision;
+- component version/content digest;
+- runtime/model identity;
+- available catalog.
 
-## Recommended next automation
-
-Later, add a publish/sync job that packages production skill folders for the target runtime. Keep this separate from validation and release approval so CI cannot silently publish behavioral changes.
+See `docs/RUNTIME-EVALS.md`.
