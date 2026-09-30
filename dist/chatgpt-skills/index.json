@@ -8,7 +8,7 @@
       "maturity": "production",
       "description": "Research factual company context relevant to executive technology opportunities, including scale, revenue, headcount, ownership, leadership, transactions, strategy and technology organization. Use when the user asks for company facts or organizational context. Do not evaluate role attractiveness, candidate fit, career value, mandate quality or recommended recruitment actions unless the user explicitly asks what the company context means for a specific role; in that case hand off to executive-role-evaluator.",
       "zip": "company-context-research.zip",
-      "sha256": "53fb8161c0c4bc25815e56c9ff6adb09505cd1a4a84f45edb07f74436a921dc9"
+      "sha256": "9187dacfed411bd17c7ed9d776b2d06f45dfaa5406d9658142c959aa3351d359"
     },
     {
       "name": "executive-role-evaluator",
@@ -16,7 +16,7 @@
       "maturity": "production",
       "description": "Evaluate senior and executive technology job opportunities based on real mandate, organizational scope, candidate fit, career value, risk and evidence quality. Use when assessing whether an executive technology role is worth pursuing, comparing opportunities, updating an assessment after recruiter/interview evidence, or identifying decision-critical unknowns. Do not use for company research alone, CV tailoring alone, interview preparation alone, generic job matching, or factual company research that does not explicitly ask for role implications.",
       "zip": "executive-role-evaluator.zip",
-      "sha256": "ead65d89da790dea9534c4089bf97aae633214d25d99a9acdb644c7d53f4f134"
+      "sha256": "3a09f6078669ed98f77aedc5813d158ebd05169d14a510a57901de43c67983bb"
     },
     {
       "name": "arek-skills-diagnostic",
@@ -24,7 +24,7 @@
       "maturity": "production",
       "description": "Confirm that the Arek AI Skills plugin is exposing bundled skills to ChatGPT or Codex. Use when the user explicitly asks to test, verify, diagnose, or confirm whether Arek AI Skills is active.",
       "zip": "arek-skills-diagnostic.zip",
-      "sha256": "8e87e7d0b8e611b7b09ac6320244c0b1d154df19be60cb8a6f967372bb827da2"
+      "sha256": "ececc540cb47740836c3744c6dbd121b4c49e364ce8e7e9951308350b4eaba22"
     },
     {
       "name": "skill-authoring",
@@ -32,7 +32,7 @@
       "maturity": "production",
       "description": "Create or refactor an Agent Skill package from an approved skill specification. Use when writing SKILL.md, splitting instructions into references/scripts/assets, improving progressive disclosure, or aligning a skill with repository and current Agent Skills authoring conventions.",
       "zip": "skill-authoring.zip",
-      "sha256": "baa01953db559f3aed92c9064779f5e686a9ba7e09db7a6f87d1970169621191"
+      "sha256": "da25d08ff4f36d91f4c1519deb04e561639a0bc5d062699b655b273a65559be7"
     },
     {
       "name": "skill-specification",
@@ -40,7 +40,7 @@
       "maturity": "production",
       "description": "Decide whether a repeatable task should become an Agent Skill and define its behavioral contract before implementation. Use when proposing a new skill, splitting/merging skills, or when an existing skill has unclear scope, trigger conditions, inputs, outputs or boundaries.",
       "zip": "skill-specification.zip",
-      "sha256": "49e694047a09c211badb11d40074566000f82d095b847624f41073d2e37d3017"
+      "sha256": "819885b3d688f2cb2aced098488143fe0532ab21820c7194eadc463b594d5d1f"
     },
     {
       "name": "skill-validation",
@@ -48,7 +48,7 @@
       "maturity": "production",
       "description": "Validate an Agent Skill package for structural correctness, routing clarity, standards alignment, security, portability, duplication and maintainability. Use after authoring or modifying a skill and before behavioral evaluation or release.",
       "zip": "skill-validation.zip",
-      "sha256": "7664840bdfd2d93a68469f54f71940a5a9cd0db50c601537345c1c3516747cb5"
+      "sha256": "3d1b7c93025cbf0643c2ebdf4d77b1b4ff60edb34211ec253d72403a8842e2cb"
     },
     {
       "name": "decision-bottleneck-analysis",
@@ -56,7 +56,7 @@
       "maturity": "production",
       "description": "Diagnose why specific material decisions are slow, repeatedly escalated or duplicated by tracing decision steps, waits, vetoes, evidence gaps and authority boundaries. Use after identifying a problematic decision class.",
       "zip": "decision-bottleneck-analysis.zip",
-      "sha256": "0e5e18068611d60eee2e5432e8c3f3f19aa06a283b4d8b1017085e6dd5c8045f"
+      "sha256": "259801d8517a22bce1436fa25c3ea79c5bbced16aa802b73d3c0b08653144349"
     },
     {
       "name": "decision-rights-review",
@@ -64,7 +64,7 @@
       "maturity": "production",
       "description": "Map and review critical organisational decision rights, including who proposes, decides, executes, advises and escalates. Use when decisions are slow, duplicated, political or unclear; do not use merely to create a generic RACI.",
       "zip": "decision-rights-review.zip",
-      "sha256": "06c65d6e584ce8eadbbd1c40eb60dfff1b9d4ba7f8a31c6926ca8ad488ede3a1"
+      "sha256": "812e3337d98b041eca4fc93e54db1f31d143127507cce6a8f5315c0fc04cd47d"
     },
     {
       "name": "governance-design",
@@ -72,7 +72,7 @@
       "maturity": "production",
       "description": "Design the minimum governance mechanisms needed for a defined set of material decisions, including ownership, evidence, cadence and escalation. Use only after decision-rights or operating-model problems are sufficiently diagnosed; do not create committees as a default response.",
       "zip": "governance-design.zip",
-      "sha256": "7b5f864ece6c1f3ecd12856eb6b440a37b9559c77023c096541ff9343030b03d"
+      "sha256": "ab337720211b691c7eddd178ccfd5c6f3e2c0e2798e867ebcf74f23f2bb43461"
     },
     {
       "name": "architecture-review",
@@ -80,7 +80,23 @@
       "maturity": "production",
       "description": "Review alignment across business direction, capabilities, organisational design, information and technology architecture. Use for enterprise or organisational architecture decisions; do not use as a low-level software design review.",
       "zip": "architecture-review.zip",
-      "sha256": "61ff696e33aa0ca0da3116a26672d31222a5b9e2f69e59c99a8ea59960a2aec3"
+      "sha256": "2863465696884ee81d8732029e62bf7b895a8819491e39fafe261af1729aca59"
+    },
+    {
+      "name": "capability-gap-analysis",
+      "version": "1.0.0",
+      "maturity": "production",
+      "description": "Identify material gaps between required business capabilities and current organisational, process, information, technology, governance or capacity enablement. Use after strategic outcomes are sufficiently clear; do not translate every capability gap directly into a technology project.",
+      "zip": "capability-gap-analysis.zip",
+      "sha256": "6f7242d082c96f715b368b5d332b95660b0beb90ed9cb0dc1e1f97ad8451595c"
+    },
+    {
+      "name": "capability-map-review",
+      "version": "1.0.0",
+      "maturity": "production",
+      "description": "Assess whether a business capability map is coherent and decision-useful, including level consistency, overlap, gaps, ownership and linkage to strategy, investments, applications, risks or performance. Use to improve a map for a defined decision; do not infer detailed processes or technology defects from capability names alone.",
+      "zip": "capability-map-review.zip",
+      "sha256": "e6b1499f5762964304872649ff892ca9e57eef3f8d341790757fb52ce8ea0663"
     },
     {
       "name": "evidence-loop-review",
@@ -88,7 +104,7 @@
       "maturity": "production",
       "description": "Review whether organisational KPIs, outcomes, reviews and feedback loops actually inform decisions and adaptation. Use when governance produces reporting but weak learning; do not use as a generic KPI-design task.",
       "zip": "evidence-loop-review.zip",
-      "sha256": "cfc9a869f54f5fc681f8f5a316fbafb897c62a60e7397c230ac570fbedb34017"
+      "sha256": "949d0742f4de4832286965c15b5c8844e34b9d091f2ae04c57aae7156398960b"
     },
     {
       "name": "global-local-model-review",
@@ -96,7 +112,7 @@
       "maturity": "production",
       "description": "Review how responsibilities, standards, capabilities and decisions are split between global/central and local units. Use when the organisation needs to balance scale and consistency against local context and speed; do not default to centralisation.",
       "zip": "global-local-model-review.zip",
-      "sha256": "92af65a449f5ff215bd574aef4bc2531531ed088b411f323632dbfd73de61bd8"
+      "sha256": "28bffef2c0a6af113293aefcdc0950d8b36699baba58ed00be26b7a9c3e6ed3a"
     },
     {
       "name": "operating-model-review",
@@ -104,7 +120,7 @@
       "maturity": "production",
       "description": "Review an operating model for role clarity, global/local split, interfaces, autonomy, coordination and accountability. Use when organisational structure or collaboration inhibits strategy execution; do not reduce the review to an org chart.",
       "zip": "operating-model-review.zip",
-      "sha256": "4207805f70e7ed1e5f2553ef3f216e1eb103b466b6d8f633ab89995e43a0b6dd"
+      "sha256": "b1670a97cf83f393dd9bca985c5888962e67ff74a587c078b7d186c0c663ec74"
     },
     {
       "name": "portfolio-health-review",
@@ -112,7 +128,7 @@
       "maturity": "production",
       "description": "Review whether an initiative portfolio is coherent, affordable, capacity-feasible, dependency-aware and aligned to strategic outcomes. Use for portfolio health diagnosis; do not force ranking when comparable evidence is missing.",
       "zip": "portfolio-health-review.zip",
-      "sha256": "dd1230039abaca083bb5525cbaeea4887755f27e8446dfdfd4b26153e97abf97"
+      "sha256": "21b37fec2c0dac9ee7bbefec85d6cd8796aa2fe42dba25b4da6a02843a6c43c0"
     },
     {
       "name": "portfolio-prioritization",
@@ -120,7 +136,7 @@
       "maturity": "production",
       "description": "Structure transparent prioritisation of initiatives using agreed strategic, value, risk, capacity and dependency criteria. Use when a portfolio needs comparable decisions; use deterministic calculation for scoring where possible.",
       "zip": "portfolio-prioritization.zip",
-      "sha256": "57a8e777ba0b5ccc212ec9d9f3155d5c0ae7d6ecdc875ef0a86a448bc5a086a4"
+      "sha256": "4c5ebca4cf5f0e00ca35fac076f5f13bebbb66716482d2a8590fbfc4ce71b740"
     },
     {
       "name": "transformation-blueprint",
@@ -128,7 +144,7 @@
       "maturity": "production",
       "description": "Convert an approved organisational diagnosis and target direction into a sequenced transformation blueprint with workstreams, dependencies, decision gates, capacity needs and evidence checkpoints. Use after diagnosis and target-state direction are sufficiently agreed; do not roadmap unresolved design choices as facts.",
       "zip": "transformation-blueprint.zip",
-      "sha256": "b02b9b077307cba3b3c2f8dd573aae3e86091cd4f56aea4f2460219f9f9dbfe3"
+      "sha256": "05fa7740f7e459aa1476c255b55f02a3f7eb523e5be72ac36f0bc66adddefa90"
     }
   ]
 }
