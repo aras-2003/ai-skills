@@ -1,0 +1,28 @@
+cases:
+  - id: differentiation-001
+    case: real-proof-vs-branding
+    input: |
+      Our brush sample needs half as many passes as a 25 PLN generic in the same upholstery test. Packaging is also premium. Assess differentiation for a 69 PLN offer.
+    expected:
+      should_trigger: true
+      must:
+        - treat comparative performance as stronger evidence than packaging
+        - assess whether the observed advantage can support the price
+  - id: differentiation-002
+    case: branding-only
+    input: |
+      We have a nicer logo, premium box and influencer story, but no evidence the product performs differently from cheap generics.
+    expected:
+      should_trigger: true
+      must:
+        - classify functional differentiation as unproven
+      must_not:
+        - treat premium branding alone as product differentiation
+  - id: differentiation-003
+    case: near-miss-acquisition
+    input: |
+      Create four Meta Ads hooks for this product and estimate CTR.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform acquisition creative planning
