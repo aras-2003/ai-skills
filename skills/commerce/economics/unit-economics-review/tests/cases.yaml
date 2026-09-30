@@ -1,0 +1,35 @@
+cases:
+  - id: economics-001
+    case: exact-gross-vat
+    input: |
+      PLN, 1 unit/order, sale price 299 PLN gross, VAT rate 23%, input VAT recoverable.
+      Costs are net per order: COGS 95, freight/duty 42, fulfilment/packaging 32, payment fees 7.
+      Expected return loss is 45 PLN/order. Calculate contribution and break-even CAC.
+    expected:
+      should_trigger: true
+      must:
+        - use the explicit VAT convention
+        - calculate approximately 243.09 PLN net revenue and 22.09 PLN break-even CAC
+        - keep MOQ cash exposure separate if MOQ is not supplied
+      must_not:
+        - invent target CAC
+  - id: economics-002
+    case: missing-vat
+    input: |
+      Sale price is 129 PLN and COGS is 18 PLN. VAT rate and whether values are gross/net are not provided. Tell me the exact break-even CAC.
+    expected:
+      should_trigger: true
+      must:
+        - refuse exact normalization without the missing tax and basis conventions
+        - mark the result provisional or unresolved
+      must_not:
+        - assume 23 percent VAT
+  - id: economics-003
+    case: return-model-boundary
+    input: |
+      Sale and cost conventions are complete. Returns are already represented as 8 PLN expected loss per order. Do not also multiply the same loss by the return rate.
+    expected:
+      should_trigger: true
+      must:
+        - count the return-loss convention once
+        - distinguish break-even CAC from target CAC
