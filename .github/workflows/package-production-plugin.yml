@@ -5,6 +5,7 @@ on:
     branches: [production]
     paths:
       - "skills/**"
+      - "workflows/**"
       - "scripts/package/**"
       - ".agents/plugins/marketplace.json"
 

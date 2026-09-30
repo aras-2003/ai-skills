@@ -1,0 +1,59 @@
+workflows:
+  - name: oaf-health-check
+    workflow: workflows/oaf-health-check/WORKFLOW.md
+    description: >
+      Run the OAF Health Check workflow as a selective cross-domain organisational architecture diagnostic.
+      Use when the user asks for a broad diagnosis spanning strategy execution, operating model, decision rights,
+      enterprise architecture, portfolio/execution or evidence loops. Do not use for a narrow issue that should
+      route directly to one specialist OAF skill.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "1.0.0"
+      maturity: production
+      risk: medium
+      last_reviewed: 2026-09-30
+      execution:
+        default_model_class: standard
+        validated_models:
+          luna:
+            status: pass
+            validated_on: 2026-09-30
+            validated_use:
+              - cross-domain diagnosis
+              - workflow synthesis
+  - name: oaf-operating-model-redesign
+    workflow: workflows/oaf-operating-model-redesign/WORKFLOW.md
+    description: >
+      Run an evidence-gated OAF operating-model redesign workflow from diagnosis through options, decision architecture and bounded transition design.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: medium
+      last_reviewed: 2026-09-30
+      execution:
+        default_model_class: standard
+  - name: oaf-governance-redesign
+    workflow: workflows/oaf-governance-redesign/WORKFLOW.md
+    description: >
+      Run an OAF governance redesign workflow that starts from material decisions and bottlenecks rather than existing committees.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: medium
+      last_reviewed: 2026-09-30
+      execution:
+        default_model_class: standard
+  - name: oaf-strategy-execution-reset
+    workflow: workflows/oaf-strategy-execution-reset/WORKFLOW.md
+    description: >
+      Run an OAF strategy-execution reset linking strategic outcomes, capabilities, portfolio, decision rights, funding and evidence loops.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: medium
+      last_reviewed: 2026-09-30
+      execution:
+        default_model_class: standard
