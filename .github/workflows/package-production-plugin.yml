@@ -8,6 +8,7 @@ on:
       - "workflows/**"
       - "scripts/package/**"
       - ".agents/plugins/marketplace.json"
+      - ".github/workflows/package-production-plugin.yml"
 
 permissions:
   contents: write
