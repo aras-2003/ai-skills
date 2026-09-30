@@ -1,0 +1,28 @@
+cases:
+  - id: acquisition-001
+    case: explicit-cac-headroom
+    input: |
+      Meta is the intended channel. The product has a visual before/after demo and four distinct hooks. Verified break-even CAC is 28 PLN; there is no observed campaign CAC yet.
+    expected:
+      should_trigger: true
+      must:
+        - distinguish creative fit from validated acquisition economics
+        - use the supplied CAC ceiling without inventing a target CAC
+        - keep observed CAC unknown
+  - id: acquisition-002
+    case: viral-not-proof
+    input: |
+      A creator video got 2 million views, but we do not know unit economics or purchases. Is paid social acquisition validated?
+    expected:
+      should_trigger: true
+      must:
+        - reject virality as proof of profitable acquisition
+        - mark CAC headroom unresolved
+  - id: acquisition-003
+    case: near-miss-demand
+    input: |
+      Customers complain about this problem frequently. Validate willingness to pay at 129 PLN.
+    expected:
+      should_trigger: false
+      must_not:
+        - replace problem-demand validation
