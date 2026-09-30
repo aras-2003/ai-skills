@@ -1,0 +1,97 @@
+schema_version: "1.0"
+id: "case-001-enterprise-change"
+target: "oaf-enterprise-change-review"
+mode: explicit
+source_legacy: "evals/oaf/e2e/case-001-enterprise-change.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## Test objective
+  
+  Evaluate whether OAF:
+  - selects only materially relevant domains;
+  - diagnoses before designing;
+  - reuses findings across domains;
+  - separates root causes, reinforcing factors and symptoms;
+  - separates operating/funding/capacity issues from unproven technology defects;
+  - avoids ranking without comparable evidence;
+  - avoids default centralisation, new committees and platform consolidation;
+  - produces only evidence-supported bounded design;
+  - leaves unsupported retirement decisions unresolved;
+  - ends with a 30–90 day mobilisation and evidence gates, not a fixed multi-year roadmap.
+  
+  ## Expected routing
+  
+  Likely relevant:
+  - operating-model-review
+  - global-local-model-review
+  - decision-rights-review
+  - decision-bottleneck-analysis
+  - portfolio-health-review
+  - architecture-review or oaf-enterprise-architecture-review
+  - evidence-loop-review
+  - oaf-operating-model-redesign
+  - oaf-governance-redesign
+  - oaf-transformation-design
+  
+  Use only if needed:
+  - capability-gap-analysis
+  - portfolio-prioritization
+  
+  Likely unnecessary:
+  - capability-map-review
+  - kpi-quality-review
+  
+  ## Expected design discipline
+  
+  A strong answer should surface a reinforcing system across local funding, shared capacity, slow decisions, workarounds, overlapping forums and weak evidence-to-decision feedback.
+  
+  It must not claim that shared platforms are technically defective without evidence.
+  
+  A provisional federated/shared-capability direction is acceptable if it remains evidence-gated. Final target architecture, platform retirement and fixed multi-year sequencing are not yet justified.
+  
+  ## Expected mobilisation
+  
+  A 30–90 day horizon should focus on:
+  - global/local capability boundaries and decision rights;
+  - shared funding/capacity rules for one bounded capability;
+  - reducing overlapping governance;
+  - baselining shared-team demand, queue and capacity;
+  - piloting one federated shared-capability path;
+  - architecture exception evidence and response rules;
+  - continue/adjust/stop evidence gates.
+assertions:
+  manual:
+    - "selects only materially relevant domains;"
+    - "diagnoses before designing;"
+    - "reuses findings across domains;"
+    - "separates root causes, reinforcing factors and symptoms;"
+    - "separates operating/funding/capacity issues from unproven technology defects;"
+    - "avoids ranking without comparable evidence;"
+    - "avoids default centralisation, new committees and platform consolidation;"
+    - "produces only evidence-supported bounded design;"
+    - "leaves unsupported retirement decisions unresolved;"
+    - "ends with a 30–90 day mobilisation and evidence gates, not a fixed multi-year roadmap."
+    - "operating-model-review"
+    - "global-local-model-review"
+    - "decision-rights-review"
+    - "decision-bottleneck-analysis"
+    - "portfolio-health-review"
+    - "architecture-review or oaf-enterprise-architecture-review"
+    - "evidence-loop-review"
+    - "oaf-operating-model-redesign"
+    - "oaf-governance-redesign"
+    - "oaf-transformation-design"
+    - "capability-gap-analysis"
+    - "portfolio-prioritization"
+    - "capability-map-review"
+    - "kpi-quality-review"
+    - "global/local capability boundaries and decision rights;"
+    - "shared funding/capacity rules for one bounded capability;"
+    - "reducing overlapping governance;"
+    - "baselining shared-team demand, queue and capacity;"
+    - "piloting one federated shared-capability path;"
+    - "architecture exception evidence and response rules;"
+    - "continue/adjust/stop evidence gates."
