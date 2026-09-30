@@ -4,16 +4,20 @@
 
 Validate the next OAF specialist layer on Luna before production promotion, then test the first design workflow where diagnosis transitions into target-state options.
 
+## Runtime fixture location
+
+In Arek AI Skills Lab, canonical eval fixtures are packaged into the selected skill/workflow under `references/evals/`. The repository source remains under `evals/`; runtime prompts must use the packaged reference path.
+
 ## Test order
 
 ### 1. Global / local model review
 
 Fixture:
-`evals/oaf/wave2/case-global-local-001.md`
+`references/evals/case-global-local-001.md`
 
 Prompt:
 
-> Use the `global-local-model-review` skill on the exact case in `evals/oaf/wave2/case-global-local-001.md`. Diagnose the current global/local split. Do not redesign the organisation yet. Explicitly distinguish which decisions or capabilities benefit from global consistency versus local autonomy, identify evidence behind local workarounds, and end with design implications plus the minimum evidence needed before a target model.
+> Use the `global-local-model-review` skill on the exact case in `references/evals/case-global-local-001.md`. Diagnose the current global/local split. Do not redesign the organisation yet. Explicitly distinguish which decisions or capabilities benefit from global consistency versus local autonomy, identify evidence behind local workarounds, and end with design implications plus the minimum evidence needed before a target model.
 
 Pass focus:
 - no centralisation bias;
@@ -25,11 +29,11 @@ Pass focus:
 ### 2. Decision bottleneck analysis
 
 Fixture:
-`evals/oaf/wave2/case-decision-bottleneck-001.md`
+`references/evals/case-decision-bottleneck-001.md`
 
 Prompt:
 
-> Use the `decision-bottleneck-analysis` skill on the exact 47-day investment decision case in `evals/oaf/wave2/case-decision-bottleneck-001.md`. Reconstruct formal versus actual decision paths, distinguish active decision work from waiting/rework, identify hidden vetoes or duplicate reviews, and propose only the smallest bottleneck-removal experiment. Do not redesign governance.
+> Use the `decision-bottleneck-analysis` skill on the exact 47-day investment decision case in `references/evals/case-decision-bottleneck-001.md`. Reconstruct formal versus actual decision paths, distinguish active decision work from waiting/rework, identify hidden vetoes or duplicate reviews, and propose only the smallest bottleneck-removal experiment. Do not redesign governance.
 
 Pass focus:
 - identifies evidence rework delay;
@@ -41,11 +45,11 @@ Pass focus:
 ### 3. Portfolio health review
 
 Fixture:
-`evals/oaf/wave2/case-portfolio-health-001.md`
+`references/evals/case-portfolio-health-001.md`
 
 Prompt:
 
-> Use the `portfolio-health-review` skill on the exact portfolio case in `evals/oaf/wave2/case-portfolio-health-001.md`. Assess the portfolio as a system, not as an average of individual project statuses. Focus on capacity, shared bottlenecks, dependencies, mandatory work, outcome traceability, overlap and stop/reprioritisation behavior. Do not rank initiatives unless the evidence is sufficient.
+> Use the `portfolio-health-review` skill on the exact portfolio case in `references/evals/case-portfolio-health-001.md`. Assess the portfolio as a system, not as an average of individual project statuses. Focus on capacity, shared bottlenecks, dependencies, mandatory work, outcome traceability, overlap and stop/reprioritisation behavior. Do not rank initiatives unless the evidence is sufficient.
 
 Pass focus:
 - "green projects" do not imply healthy portfolio;
@@ -59,11 +63,11 @@ Pass focus:
 Run only after 1–3 are evaluated.
 
 Fixture:
-`evals/oaf/wave2/case-operating-model-redesign-001.md`
+`references/evals/case-operating-model-redesign-001.md`
 
 Prompt:
 
-> Use the `oaf-operating-model-redesign` workflow on the exact case in `evals/oaf/wave2/case-operating-model-redesign-001.md`. Reuse the supplied diagnosis rather than restarting from generic analysis. Define design principles first, then compare 2–3 bounded operating-model options. Test each option against authority/accountability/resources, global/local interfaces, funding, architecture, decision latency and transition risk. Do not design governance forums until a target direction is selected.
+> Use the `oaf-operating-model-redesign` workflow on the exact case in `references/evals/case-operating-model-redesign-001.md`. Reuse the supplied diagnosis rather than restarting from generic analysis. Define design principles first, then compare 2–3 bounded operating-model options. Test each option against authority/accountability/resources, global/local interfaces, funding, architecture, decision latency and transition risk. Do not design governance forums until a target direction is selected.
 
 Pass focus:
 - diagnosis reused;

@@ -1,10 +1,8 @@
 ---
-name: oaf-health-check
-description: Run the OAF Health Check workflow as a selective cross-domain organisational
-  architecture diagnostic. Use when the user asks for a broad diagnosis spanning strategy
-  execution, operating model, decision rights, enterprise architecture, portfolio/execution
-  or evidence loops. Do not use for a narrow issue that should route directly to one
-  specialist OAF skill.
+name: oaf-transformation-design
+description: Run an evidence-gated OAF transformation design workflow from validated
+  diagnosis and target direction into bounded workstreams, sequencing, mobilisation
+  and adaptive stage gates.
 metadata:
   owner: arkadiusz-kamrowski
   version: 1.0.0
@@ -18,11 +16,19 @@ metadata:
         status: pass
         validated_on: 2026-09-30
         validated_use:
-        - cross-domain diagnosis
-        - workflow synthesis
+        - bounded 90-day mobilisation
+        - critical-path and capacity sequencing
+        - reversible pilot design
+        - stage-gate and service-continuity design
+      sol:
+        status: comparative-pass
+        validated_on: 2026-09-30
+        incremental_value:
+        - slightly stronger decision framing
+        material_decision_change: false
 ---
 
-# Oaf Health Check Runtime Entrypoint
+# Oaf Transformation Design Runtime Entrypoint
 
 ## Purpose
 
@@ -52,4 +58,4 @@ Use the output contract defined in `references/WORKFLOW.md`.
 
 When the user explicitly asks to run one of the exact lab eval cases below, load the corresponding file from `references/evals/` before executing the skill. Do not substitute another case or reconstruct missing details from memory.
 
-- `references/evals/case-001-enterprise-it.md`
+- `references/evals/case-transformation-design-001.md`

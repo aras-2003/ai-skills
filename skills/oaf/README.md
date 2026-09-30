@@ -40,8 +40,6 @@ Future:
 Production:
 - `decision-rights-review`
 - `decision-bottleneck-analysis`
-
-Candidate:
 - `governance-design`
 
 Future:
@@ -67,8 +65,6 @@ Future:
 Production:
 - `portfolio-prioritization`
 - `portfolio-health-review`
-
-Candidate:
 - `transformation-blueprint`
 
 Future:
@@ -101,14 +97,14 @@ Future — intentionally deferred until core OAF is stable:
 Production:
 - `oaf-health-check` — selective cross-domain diagnosis.
 - `oaf-operating-model-redesign` — evidence-gated bounded redesign with option/trade-off testing.
+- `oaf-governance-redesign` — decision-led governance redesign with mechanism minimisation.
+- `oaf-transformation-design` — bounded, evidence-gated transformation mobilisation and sequencing.
 
 Candidate:
-- `oaf-governance-redesign`
 - `oaf-strategy-execution-reset`
 
-Next planned workflows:
+Next planned workflow:
 - `oaf-enterprise-architecture-review`
-- `oaf-transformation-design`
 
 ## Routing principle
 
@@ -144,15 +140,21 @@ Validated on Luna:
 - `portfolio-health-review`
 - `oaf-health-check`
 - `oaf-operating-model-redesign` for bounded redesign
+- `governance-design`
+- `transformation-blueprint`
+- `oaf-governance-redesign`
+- `oaf-transformation-design`
 
-Sol comparison on `oaf-operating-model-redesign` improved framing/selection discipline but did not materially change the target direction, so strong remains escalation-only.
+Sol comparisons on `oaf-operating-model-redesign` and `oaf-transformation-design` improved framing but did not materially change the decision/plan, so strong remains escalation-only for the validated bounded uses.
 
 Candidate defaults:
 - **fast:** `capability-map-review`, `kpi-quality-review`
 - **standard:** remaining diagnostic/design candidates
 - **strong escalation:** final high-impact target-state selection, contested executive evidence, major multi-country/global-local redesign, transition economics
 
-See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, and `evals/oaf/wave2/validation-2026-09-30.md`.
+Wave 3 validated that design skills can remain on the standard model class when they preserve evidence gates, reversibility and stop conditions.
+
+See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, and `evals/oaf/wave3/validation-2026-09-30.md`.
 
 ## Boundary principle
 

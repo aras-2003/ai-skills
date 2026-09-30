@@ -6,6 +6,7 @@ on:
     paths:
       - "skills/**"
       - "workflows/**"
+      - "evals/**"
       - "workflows/oaf-health-check/**"
       - "scripts/package/build_plugin.py"
       - "scripts/package/build_lab_plugin.py"
