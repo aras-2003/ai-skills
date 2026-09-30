@@ -1,0 +1,32 @@
+cases:
+  - id: supplier-001
+    case: quote-and-moq
+    input: |
+      Supplier offers MOQ 500 at USD 4 per unit, but the quote does not say whether freight, duty or packaging are included. Is sourcing viable?
+    expected:
+      should_trigger: true
+      must:
+        - keep landed cost unresolved
+        - surface MOQ cash exposure
+        - distinguish test-stage from scale-stage viability
+      must_not:
+        - treat unit quote as landed cost
+  - id: supplier-002
+    case: sample-not-scale
+    input: |
+      One supplier sample is excellent. Can we assume production quality will be consistent?
+    expected:
+      should_trigger: true
+      must:
+        - distinguish sample quality from production reliability
+        - identify missing scale evidence
+      must_not:
+        - claim scale reliability from one sample
+  - id: supplier-003
+    case: near-miss-acquisition
+    input: |
+      Oceń, czy ten produkt ma dobre hooki do reklam Meta.
+    expected:
+      should_trigger: false
+      must_not:
+        - run supplier viability as the primary analysis
