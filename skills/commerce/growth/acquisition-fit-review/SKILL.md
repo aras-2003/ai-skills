@@ -4,7 +4,7 @@ description: >
   Assess whether a product is suitable for paid social and other direct-response acquisition based on demo strength, hooks, creative depth and CAC headroom.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -16,6 +16,11 @@ metadata:
 
 ## Purpose
 Test whether the product can be explained and sold efficiently through the intended acquisition channel.
+
+## Preconditions and evidence contract
+Required: intended acquisition channel, target audience, product/offer hypothesis and either explicit CAC headroom from unit economics or a statement that headroom is unresolved. Treat creative engagement as channel signal, not proof of profitable acquisition.
+
+If platform data or prior campaign evidence is unavailable, do not invent CPM, CTR, CVR or CAC.
 
 ## Procedure
 1. State primary channel and target audience.
@@ -30,6 +35,13 @@ Test whether the product can be explained and sold efficiently through the inten
 - Viral content != profitable acquisition.
 - One strong creative angle is fragile.
 - Acquisition fit must be judged against CAC headroom, not engagement alone.
+
+- Acquisition fit cannot be called strong when allowable CAC is unknown for a paid channel.
+- Virality or creator engagement is not evidence of profitable conversion.
+
+## Failure / uncertainty handling
+- If required source/tool evidence is unavailable, report the unresolved field explicitly.
+- Do not substitute generic market knowledge for a missing current quote, channel result or target-market fact.
 
 ## Output contract
 Angle | hook | proof/demo | audience | likely friction | test creative.
