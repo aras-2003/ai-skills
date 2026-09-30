@@ -14,6 +14,8 @@ Focus:
 - premium branding != differentiation;
 - gross margin != contribution;
 - US benchmark != local willingness to pay.
+- market test != first test; if a cheaper sample/landed-cost experiment can invalidate the thesis, choose RESEARCH ONE BLOCKER first.
+- no invented ad-spend cap without budget or evidence basis.
 
 ## Case 002 — Good demand, bad economics
 Target: `commerce-product-deep-dive`
