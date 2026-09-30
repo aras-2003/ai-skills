@@ -25,34 +25,59 @@ def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
         raise ValueError("evals/runtime-fixtures.yaml: targets must be a mapping")
 
     copied = 0
-    for target, fixtures in targets.items():
+    for target, cases in targets.items():
         target_dir = skills_out / target
         if not target_dir.exists():
             continue
+
         refs = target_dir / "references" / "evals"
         refs.mkdir(parents=True, exist_ok=True)
-        lines = ["# Runtime Eval Fixtures", "", "Canonical source files are copied from the repository for lab-only runtime testing.", ""]
-        for rel in fixtures or []:
-            src = root / rel
+        lines = [
+            "# Runtime Eval Inputs",
+            "",
+            "Only executor inputs are packaged here. Rubrics remain repository-side and must never be loaded into the executor context.",
+            "",
+        ]
+        packaged_names: list[str] = []
+        for case in cases or []:
+            if not isinstance(case, dict):
+                raise ValueError(f"evals/runtime-fixtures.yaml: {target} entries must be mappings")
+            case_id = str(case.get("id") or "").strip()
+            input_rel = str(case.get("input") or "").strip()
+            rubric_rel = str(case.get("rubric") or "").strip()
+            mode = str(case.get("mode") or "").strip()
+            if not case_id or not input_rel or not rubric_rel or mode not in {"explicit", "natural-routing"}:
+                raise ValueError(f"evals/runtime-fixtures.yaml: invalid case for {target}: {case}")
+
+            src = root / input_rel
+            rubric = root / rubric_rel
             if not src.exists():
-                raise FileNotFoundError(f"Missing runtime eval fixture: {src}")
+                raise FileNotFoundError(f"Missing runtime eval input: {src}")
+            if not rubric.exists():
+                raise FileNotFoundError(f"Missing runtime eval rubric: {rubric}")
+            if not src.name.endswith(".input.md"):
+                raise ValueError(f"Runtime eval input must use .input.md suffix: {src}")
+            if not rubric.name.endswith(".rubric.yaml"):
+                raise ValueError(f"Runtime eval rubric must use .rubric.yaml suffix: {rubric}")
+
             dst = refs / src.name
             shutil.copy2(src, dst)
             copied += 1
-            lines.append(f"- \`{src.name}\` — source: \`{rel}\`")
+            packaged_names.append(src.name)
+            lines.append(f"- \`{src.name}\` — case: \`{case_id}\`, mode: \`{mode}\`")
+
         (refs / "INDEX.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
         skill_md = target_dir / "SKILL.md"
-        if skill_md.exists():
+        if skill_md.exists() and packaged_names:
             appendix = [
                 "",
-                "## Lab runtime eval fixtures",
+                "## Lab runtime eval inputs",
                 "",
-                "When the user explicitly asks to run one of the exact lab eval cases below, load the corresponding file from `references/evals/` before executing the skill. Do not substitute another case or reconstruct missing details from memory.",
+                "When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from \`references/evals/\`. The evaluator rubric is intentionally unavailable to the executor.",
                 "",
             ]
-            for rel in fixtures or []:
-                appendix.append(f"- `references/evals/{Path(rel).name}`")
+            appendix.extend(f"- \`references/evals/{name}\`" for name in packaged_names)
             appendix.append("")
             skill_md.write_text(
                 skill_md.read_text(encoding="utf-8").rstrip() + "\n" + "\n".join(appendix),
