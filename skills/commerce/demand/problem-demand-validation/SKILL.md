@@ -4,8 +4,8 @@ description: >
   Validate whether a target customer problem is frequent, painful and purchase-relevant enough to justify product testing. Use before assuming category interest equals demand.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
-  maturity: candidate
+  version: "1.0.0"
+  maturity: production
   risk: low
   last_reviewed: 2026-09-30
   execution:

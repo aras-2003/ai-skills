@@ -53,7 +53,7 @@ TEST NOW / RESEARCH ONE BLOCKER / DEFER / KILL
 Only when justified: hypothesis, setup, spend/stock cap, metrics, success threshold, stop condition.
 
 ## Model guidance
-Default: standard. Strong is escalation-only for high-capital, highly regulated or strategically coupled decisions.
+Default: standard. Validated on Luna for premium-vs-generic, failed-economics and boring-winner cases after regression hardening. Strong is escalation-only for high-capital, highly regulated or strategically coupled decisions.
 
 ## Stop conditions
 Stop and KILL when a fatal economics, regulatory, logistics or differentiation constraint is evidenced and not plausibly fixable.

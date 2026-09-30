@@ -4,8 +4,8 @@ description: >
   Assess whether sourcing, MOQ, lead time, quality, packaging and supplier concentration make a product viable to test and scale.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
-  maturity: candidate
+  version: "1.0.0"
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
   execution:

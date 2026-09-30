@@ -4,8 +4,8 @@ description: >
   Review whether a product or business model proven in one market is plausibly transferable to another market, especially US-to-Poland, without assuming foreign traction will repeat locally.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
-  maturity: candidate
+  version: "1.0.0"
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
   execution:

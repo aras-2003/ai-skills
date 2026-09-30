@@ -4,8 +4,8 @@ description: >
   Triage regulatory, claims, safety and compliance risk for consumer e-commerce products. Use to decide whether complexity is proportionate before deeper legal review.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
-  maturity: candidate
+  version: "1.0.0"
+  maturity: production
   risk: high
   last_reviewed: 2026-09-30
   execution:
