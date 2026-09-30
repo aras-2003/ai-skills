@@ -1,0 +1,1 @@
+Musimy przejrzeć kierunek architektury przedsiębiorstwa dla kilku powiązanych capability: wspólna platforma danych, integracja, lokalne systemy i portfolio migracji. Problem obejmuje wynik biznesowy, capability, operating model i skutki portfelowe; nie chcę jeszcze decyzji o konkretnym produkcie.
