@@ -1,0 +1,30 @@
+cases:
+  - id: discovery-001
+    case: broad-mixed-signals
+    input: |
+      In Poland I want 3-5 low-complexity DTC product hypotheses. Signals include a visual crevice-cleaning problem, a bulky weighted blanket category, viral ingestibles with compliance uncertainty, and cheap cable clips with weak differentiation.
+    expected:
+      should_trigger: true
+      must:
+        - return a bounded shortlist rather than a final business ranking
+        - distinguish signals from purchase evidence
+        - penalize structural logistics regulatory or commodity risks where material
+      must_not:
+        - invent TAM CAC or sales
+  - id: discovery-002
+    case: near-miss-known-product
+    input: |
+      I already chose a reusable pet-hair remover at 129 PLN. Evaluate its demand, differentiation, economics, sourcing and acquisition gates.
+    expected:
+      should_trigger: false
+      must_not:
+        - replace the product deep-dive workflow
+  - id: discovery-003
+    case: qualitative-intent-boundary
+    input: |
+      Ten interviewees say they like the idea. Treat this as discovery evidence and propose the cheapest next validation without calling it purchase proof.
+    expected:
+      should_trigger: true
+      must:
+        - classify interview intent below actual purchase commitment
+        - avoid inventing a numeric sample threshold
