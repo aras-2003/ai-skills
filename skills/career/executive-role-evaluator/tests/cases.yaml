@@ -13,6 +13,7 @@ cases:
         - keep confidence below high while mandate is unclear
       must_not:
         - assume CIO-level authority
+        - invent numeric scores
 
   - id: executive-role-002
     case: deputy-cio-major-enterprise
@@ -27,28 +28,95 @@ cases:
         - avoid over-penalizing absence of full CIO scope
 
   - id: executive-role-003
-    case: high-paying-narrow-role
+    case: incomplete-recruiter-message
     input: |
-      Evaluate a role paying 30% above expectations. It owns one technology platform, team of 20,
-      reports three levels below CIO.
+      Recruiter says: Looking for a senior technology leader for a major international company.
+      Assess whether this is worth pursuing.
     expected:
       should_trigger: true
       must:
-        - separate compensation attractiveness from career value
-        - flag risk of narrowing executive trajectory
+        - keep unsupported dimensions UNKNOWN
+        - use low confidence
+        - identify decision-critical discovery questions
+      must_not:
+        - invent role scope
+        - turn UNKNOWN into zero
 
   - id: executive-role-004
-    case: lower-title-larger-mandate
+    case: company-research-only-pl
     input: |
-      Head of Technology reporting to CEO, 150-person organization, full technology budget,
-      member of executive committee.
+      Sprawdź przychody, zatrudnienie, właściciela i ostatnie przejęcia Kelvion.
+      Wcześniej rozmawialiśmy też o jednej z ich ról.
+    expected:
+      should_trigger: false
+      must_not:
+        - infer whether the role is attractive
+        - discuss candidate fit
+        - recommend recruitment actions
+
+  - id: executive-role-005
+    case: company-context-to-role-evaluation-en
+    input: |
+      Kelvion has separate global D&IT and Technology leadership. What does that imply for the local CTO role I am considering?
     expected:
       should_trigger: true
       must:
-        - recognize executive substance beyond title
-        - assess mandate and career value strongly
+        - interpret company context only in relation to the role
+        - make decision and confidence explicit
+        - identify reporting and decision-rights unknowns
 
-  - id: executive-role-005
+  - id: executive-role-006
+    case: compact-output
+    input: |
+      CTO, 150-person company, reports to COO, no team initially, vendor-heavy IT. Is it worth continuing?
+      Keep it compact.
+    expected:
+      should_trigger: true
+      must:
+        - make decision state explicit
+        - make confidence explicit
+        - identify authority and team as critical unknowns
+      must_not:
+        - force irrelevant long-form sections
+        - invent numeric scores
+
+  - id: executive-role-007
+    case: requested-table-format
+    input: |
+      Compare these two executive technology roles in a compact table. Include decision, confidence, role quality,
+      candidate fit, career value, risk, strongest counterargument and critical unknowns. Do not add prose before the table.
+    expected:
+      should_trigger: true
+      must:
+        - respect the requested table format
+        - preserve decision and confidence
+        - preserve material risks and critical unknowns
+      must_not:
+        - force the default header before the requested table
+        - invent numeric scores
+
+  - id: executive-role-008
+    case: unsupported-score-request
+    input: |
+      Give this vague CTO role a score out of 100 even though reporting line, team and budget are unknown.
+    expected:
+      should_trigger: true
+      must:
+        - explain that the default model is qualitative
+        - keep missing mandate evidence unknown
+      must_not:
+        - improvise a numeric total without a defined scoring contract
+
+  - id: executive-role-009
+    case: cv-tailoring-near-miss
+    input: |
+      Tailor my CV to this CTO job description and rewrite the executive summary.
+    expected:
+      should_trigger: false
+      must_not:
+        - perform a full executive role evaluation
+
+  - id: executive-role-010
     case: transformation-without-authority
     input: |
       Technology Transformation Director responsible for modernization. Functional teams remain controlled
@@ -58,103 +126,4 @@ cases:
       must:
         - identify accountability-authority mismatch
         - treat the mismatch as a structural risk
-        - generate questions about governance and escalation rights
-
-  - id: executive-role-006
-    case: incomplete-recruiter-message
-    input: |
-      Recruiter says: Looking for a senior technology leader for a major international company.
-      Assess whether this is worth pursuing.
-    expected:
-      should_trigger: true
-      must:
-        - avoid scoring unsupported dimensions as known
-        - use low confidence
-        - identify decision-critical discovery questions
-      must_not:
-        - invent role scope
-
-  - id: executive-role-007
-    case: should-not-trigger-company-research-only
-    input: |
-      Research Kelvion's revenue, ownership, employee count and recent acquisitions.
-    expected:
-      should_trigger: false
-      must_not:
-        - perform a role-fit decision
-
-  - id: executive-role-008
-    case: should-not-trigger-cv-tailoring
-    input: |
-      Tailor my CV to this CTO job description and rewrite the executive summary.
-    expected:
-      should_trigger: false
-      must_not:
-        - perform a full executive role evaluation
-
-  - id: executive-role-009
-    case: real-regression-company-research-context-leak
-    input: |
-      Sprawdź przychody i zatrudnienie Kelvion. Wcześniej rozmawialiśmy też o jednej z ich ról.
-    expected:
-      should_trigger: false
-      must_not:
-        - infer whether a Kelvion role is attractive
-        - discuss candidate fit
-        - discuss career value
-        - recommend recruitment actions
-
-  - id: executive-role-010
-    case: explicit-company-context-to-role-evaluation
-    input: |
-      Sprawdziłem strukturę Kelvion i widzę globalne funkcje Digital & Information Technology oraz Technology.
-      Co to oznacza dla oceny lokalnej roli CTO, o której rozmawiamy?
-    expected:
-      should_trigger: true
-      must:
-        - interpret company context only in relation to the role
-        - make decision state explicit
-        - make confidence explicit
-        - identify reporting and decision-rights unknowns
-
-  - id: executive-role-011
-    case: compact-output-discipline
-    input: |
-      CTO, 150-person company, reports to COO, no team initially, vendor-heavy IT. Is it worth continuing?
-    expected:
-      should_trigger: true
-      must:
-        - make decision state explicit
-        - make confidence explicit
-        - identify authority and team as critical unknowns
-      must_not:
-        - force irrelevant long-form sections
-
-  - id: executive-role-012
-    case: hard-first-block-after-context-research
-    input: |
-      Kelvion has global D&IT and Technology leadership. What does this mean for the local CTO role I am considering?
-    expected:
-      should_trigger: true
-      must:
-        - start response with Decision
-        - place Confidence before any narrative
-        - include Role archetype before any narrative
-        - use insufficient evidence instead of omitting unsupported score fields
-      must_not:
-        - place an introductory paragraph before Decision
-        - place a source discussion before Decision
-        - place a table before Decision
-
-  - id: executive-role-013
-    case: hard-first-block-simple-role-question
-    input: |
-      CTO, 150-person company, reports to COO, no team initially, vendor-heavy IT. Is it worth continuing?
-    expected:
-      should_trigger: true
-      must:
-        - start response with Decision
-        - include Confidence in the first block
-        - include Risk in the first block
-      must_not:
-        - answer with narrative before the decision header
+        - generate decision-critical questions about governance and escalation rights
