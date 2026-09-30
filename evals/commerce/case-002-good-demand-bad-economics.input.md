@@ -5,6 +5,7 @@ A weighted sensory blanket has strong search interest and positive reviews in th
 
 Target offer:
 - selling price: 299 PLN including VAT;
+- VAT rate for this case: 23%; input VAT is recoverable; listed COGS/freight/fulfilment/payment/returns amounts are net/order amounts;
 - COGS: 95 PLN;
 - inbound freight/duty: 42 PLN;
 - fulfilment and packaging: 32 PLN;
