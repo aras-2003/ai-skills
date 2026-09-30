@@ -22,6 +22,13 @@ def repo_root() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
+def assert_source_revision(expected: str, actual: str) -> None:
+    if not expected or not actual:
+        raise ValueError("source revisions must be non-empty")
+    if expected != actual:
+        raise RuntimeError(f"source moved from {expected} to {actual}; refusing stale publication")
+
+
 def source_revision(root: Path) -> str:
     override = os.environ.get("SOURCE_REVISION")
     if override:
