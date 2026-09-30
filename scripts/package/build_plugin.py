@@ -7,6 +7,7 @@ from pathlib import Path
 from build_utils import (
     atomic_output,
     copy_runtime_support,
+    ensure_source_valid,
     package_version,
     sha256_tree,
     source_revision,
@@ -51,6 +52,7 @@ def copy_skill(src: Path, dst_root: Path) -> dict:
 
 
 def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> dict:
+    ensure_source_valid(root)
     selected = discover_skills(root, maturity)
     if not selected and not allow_empty:
         raise ValueError(f"No skills with maturity={maturity!r}; refusing to build empty plugin")
