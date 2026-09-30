@@ -86,3 +86,10 @@ Escalate to strong for enterprise-wide sequencing, large transition economics, c
 - [ ] Unresolved decisions remain unresolved.
 - [ ] Stage gates can change the plan.
 - [ ] Outcomes distinguished from activity.
+
+## Lab runtime eval fixtures
+
+When the user explicitly asks to run one of the exact lab eval cases below, load the corresponding file from `references/evals/` before executing the skill. Do not substitute another case or reconstruct missing details from memory.
+
+- `references/evals/case-transformation-blueprint-001.md`
+- `references/evals/case-transformation-blueprint-stop-001.md`

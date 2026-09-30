@@ -37,3 +37,9 @@ Use the output contract defined in `references/WORKFLOW.md`.
 - [ ] Workflow stage order and gates were preserved.
 - [ ] Evidence and uncertainty remain explicit.
 - [ ] No extra domain was added merely for completeness.
+
+## Lab runtime eval fixtures
+
+When the user explicitly asks to run one of the exact lab eval cases below, load the corresponding file from `references/evals/` before executing the skill. Do not substitute another case or reconstruct missing details from memory.
+
+- `references/evals/case-governance-redesign-001.md`
