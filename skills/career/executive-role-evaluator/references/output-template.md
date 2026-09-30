@@ -1,59 +1,29 @@
-# Output Template
+# Executive Role Evaluator — Output Templates
 
-## Mandatory first block
+The user-requested format has priority. The templates below are defaults, not a reason to ignore an explicit request for a table, compact answer or another layout.
 
-This block is a hard contract, not optional formatting guidance.
+## Compact default
 
-When `executive-role-evaluator` triggers, NOTHING may appear before this block: no introductory sentence, caveat, table, source note, or narrative.
-
-Always start with:
-
-```
 Decision: PURSUE / INVESTIGATE / LOW PRIORITY / SKIP
 Confidence: HIGH / MEDIUM / LOW
 Role archetype: ...
-Role Quality: XX/100 or insufficient evidence
-Candidate Fit: XX/100 or insufficient evidence
-Career Value: XX/100 or insufficient evidence
+Role Quality: STRONG / ADEQUATE / WEAK / UNKNOWN
+Candidate Fit: STRONG / GOOD / PARTIAL / GAP / UNKNOWN
+Career Value: HIGH / MEDIUM / LOW / UNKNOWN
 Risk: LOW / MEDIUM / HIGH / VERY HIGH
-```
 
-If a score is not supportable, write `insufficient evidence`; never omit the field.
-
-Then provide only the decision-relevant sections needed for the case:
-- what the role really is;
+Then include only decision-relevant sections needed for the case:
 - strongest reason to pursue;
 - strongest reason not to pursue;
 - critical unknowns;
 - recommended next action.
 
-Use the full template below only when evidence and task complexity justify it.
+## Full decision note
 
-## Executive Summary
+### What this role really is
+Reporting line, mandate, scope, organization, technology ownership, executive exposure and material unknowns.
 
-**Decision:** PURSUE / INVESTIGATE / LOW PRIORITY / SKIP  
-**Confidence:** HIGH / MEDIUM / LOW  
-**Role archetype:** ...  
-**Role Quality:** XX/100 or insufficient evidence  
-**Candidate Fit:** XX/100 or insufficient evidence  
-**Career Value:** XX/100 or insufficient evidence  
-**Risk:** LOW / MEDIUM / HIGH / VERY HIGH
-
-One short paragraph explaining the conclusion.
-
-## What this role really is
-
-Explain the role behind the title:
-- reporting relationship;
-- mandate;
-- scope;
-- organization;
-- technology ownership;
-- executive exposure;
-- material unknowns.
-
-## Role Quality Scorecard
-
+### Role Quality
 | Dimension | Assessment | Confidence | Evidence / unknowns |
 |---|---|---|---|
 | Mandate & authority | | | |
@@ -65,80 +35,30 @@ Explain the role behind the title:
 | Business accountability | | | |
 | Executive positioning | | | |
 
-## Candidate Fit
+### Candidate Fit
+Strengths, partial fit/gaps and evidence-backed bridge.
 
-### Strong fit
-...
+### Career Value
+Explain whether the move expands scope, scale, board exposure, budget/global operating model or other target capabilities.
 
-### Partial fit
-...
+### Material Risks
+Only risks capable of changing the decision.
 
-### Gaps
-...
+### Strongest counterargument
+State the strongest reason to pursue and strongest reason not to pursue. Do not manufacture symmetry.
 
-### Narrative bridge
-Only evidence-backed adjacent experience.
+### Critical unknowns
+Only questions whose answers could change the decision.
 
-## Career Impact
+### Recommended next action
+One evidence-consistent action.
 
-State whether the opportunity is primarily:
-- step up;
-- lateral move;
-- bridge move;
-- specialist move;
-- potential step backward.
+## Comparison mode
 
-Explain why based on substance, not title.
-
-## Material Risks
-
-Only the few risks that can change the decision.
-
-## Strongest Counterargument
-
-**Strongest reason to pursue:** ...  
-**Strongest reason not to pursue:** ...
-
-Do not manufacture symmetry.
-
-## Unknowns That Could Change the Decision
-
-### Critical
-...
-
-### Important
-...
-
-## Recruiter / Hiring Manager Questions
-
-Generate 5–8 non-generic questions focused on:
-- decision rights;
-- mandate;
-- organization;
-- budget;
-- success criteria;
-- hidden problems;
-- reason the role is open.
-
-Avoid questions answerable from public sources.
-
-## Recommended Next Action
-
-Choose an evidence-consistent action such as:
-- accept recruiter call;
-- request compensation range;
-- validate reporting line/team/budget;
-- speak with CIO/hiring manager;
-- proceed to interview;
-- keep warm but deprioritize;
-- withdraw.
-
-# Comparison mode
-
-When multiple opportunities are provided, compare trade-offs rather than producing a simplistic overall ranking.
+Use the same qualitative method across roles:
 
 | Dimension | Role A | Role B | Role C |
-|---|---:|---:|---:|
+|---|---|---|---|
 | Role Quality | | | |
 | Candidate Fit | | | |
 | Career Value | | | |
@@ -150,25 +70,27 @@ When multiple opportunities are provided, compare trade-offs rather than produci
 | Lifestyle | | | |
 | Risk | | | |
 
-Explain uncertainty and trade-offs.
+UNKNOWN remains UNKNOWN, not zero. Explain trade-offs rather than forcing an overall ranking.
 
-# Update mode
+## Update mode
 
 When new recruiter/interview evidence arrives:
-1. retrieve/use the prior assessment if available;
+1. retrieve/use prior assessment if available;
 2. update only affected dimensions;
-3. show changed assumptions/evidence;
-4. explain decision impact;
+3. show changed evidence/assumptions;
+4. explain impact on decision/confidence;
 5. preserve prior evidence rather than silently replacing it.
 
-Use a short change log:
+## Requested-format override
 
-```
-CHANGE LOG
+If the user requests a specific layout, follow it. Preserve these facts somewhere in the answer:
+- decision;
+- confidence;
+- role archetype when supportable;
+- Role Quality / Candidate Fit / Career Value qualitative states;
+- material risk;
+- strongest counterargument;
+- critical unknowns;
+- next action.
 
-Mandate
-Previous: UNKNOWN
-New: strong decision authority
-Source: CIO interview
-Impact: Risk HIGH -> MEDIUM
-```
+Do not inject unsupported /100 scores merely to fill a template.
