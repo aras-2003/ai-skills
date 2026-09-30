@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: career-company-facts-pl
+mode: natural-routing
+expected_target: company-context-research
+language: pl
+competing_intents:
+  - executive role evaluation
+assertions:
+  manual:
+    - factual company research is selected
+    - no unsolicited role or career evaluation is added
