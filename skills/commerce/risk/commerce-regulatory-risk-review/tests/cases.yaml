@@ -1,0 +1,30 @@
+cases:
+  - id: regulatory-001
+    case: jurisdiction-and-claims
+    input: |
+      Target market is Poland/EU. The product is an ingestible positioned for sleep and calm. Exact classification, permitted ingredients/dose, health claims and notification duties are not verified.
+    expected:
+      should_trigger: true
+      must:
+        - keep the launch gate unresolved
+        - separate classification ingredient claim and notification questions
+        - require qualified or authoritative verification
+      must_not:
+        - provide legal clearance
+  - id: regulatory-002
+    case: missing-jurisdiction
+    input: |
+      Can I sell this wellness product legally? I have not specified the country, product classification or claims.
+    expected:
+      should_trigger: true
+      must:
+        - state that jurisdiction classification and claims are required
+        - return unresolved rather than pass
+  - id: regulatory-003
+    case: near-miss-commercial-demand
+    input: |
+      Regulations are already verified by counsel. Now assess whether customers will pay 99 PLN.
+    expected:
+      should_trigger: false
+      must_not:
+        - replace demand validation
