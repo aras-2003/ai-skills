@@ -152,11 +152,11 @@ Do not escalate merely because the user asks for an architecture diagram. See `d
 
 ## End-to-end OAF orchestration
 
-Candidate:
-- `oaf-enterprise-change-review` — standard; runtime validation pending.
+Validated on Luna:
+- `oaf-enterprise-change-review` — standard for selective cross-domain routing, causal synthesis, design-readiness separation and bounded 30–90 day mobilisation.
 
-Use standard only when specialist evidence can be reused and the resulting design remains bounded and reversible.
+Use standard when specialist evidence can be reused and the resulting design remains bounded and reversible.
 
 Escalate to strong for final irreversible cross-enterprise target-state selection, materially conflicting executive evidence, tightly coupled operating-model/architecture trade-offs, or material transition economics.
 
-See `docs/OAF-END-TO-END-EVAL.md`.
+See `docs/OAF-END-TO-END-EVAL.md` and `evals/oaf/e2e/validation-2026-09-30.md`.
