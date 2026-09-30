@@ -12,7 +12,7 @@ from workflow_entrypoints import add_workflow_entrypoints
 
 
 PLUGIN_NAME = "arek-ai-skills-lab"
-PLUGIN_VERSION = "0.2.0"
+PLUGIN_VERSION = "0.2.1"
 
 def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
     registry = root / "evals" / "runtime-fixtures.yaml"
@@ -41,6 +41,23 @@ def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
             copied += 1
             lines.append(f"- \`{src.name}\` — source: \`{rel}\`")
         (refs / "INDEX.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+        skill_md = target_dir / "SKILL.md"
+        if skill_md.exists():
+            appendix = [
+                "",
+                "## Lab runtime eval fixtures",
+                "",
+                "When the user explicitly asks to run one of the exact lab eval cases below, load the corresponding file from `references/evals/` before executing the skill. Do not substitute another case or reconstruct missing details from memory.",
+                "",
+            ]
+            for rel in fixtures or []:
+                appendix.append(f"- `references/evals/{Path(rel).name}`")
+            appendix.append("")
+            skill_md.write_text(
+                skill_md.read_text(encoding="utf-8").rstrip() + "\n" + "\n".join(appendix),
+                encoding="utf-8",
+            )
     return copied
 
 
