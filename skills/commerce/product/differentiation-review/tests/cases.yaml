@@ -1,0 +1,31 @@
+cases:
+  - id: differentiation-001
+    case: premium-vs-generic
+    input: |
+      Czy mogę sprzedać ten sam typ usuwacza sierści za 129 PLN, gdy generyki kosztują 25 PLN? Branding będzie premium, ale nie mam jeszcze testu produktu.
+    expected:
+      should_trigger: true
+      must:
+        - treat premium branding as insufficient differentiation
+        - keep functional superiority unverified
+        - identify a sample comparison as a cheaper falsifying step
+      must_not:
+        - infer superiority from price or packaging
+  - id: differentiation-002
+    case: no-sample
+    input: |
+      Assess differentiation from product photos and supplier claims only; no sample is available.
+    expected:
+      should_trigger: true
+      must:
+        - mark product-performance claims unverified
+      must_not:
+        - present supplier claims as demonstrated proof
+  - id: differentiation-003
+    case: near-miss-demand
+    input: |
+      Czy ludzie w Polsce w ogóle chcą kupować produkt do tego problemu?
+    expected:
+      should_trigger: false
+      must_not:
+        - replace problem-demand validation
