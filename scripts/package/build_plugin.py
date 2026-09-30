@@ -46,6 +46,7 @@ def copy_skill(src: Path, dst_root: Path) -> dict:
         "version": str(metadata.get("version", "unknown")),
         "maturity": str(metadata.get("maturity", "unknown")),
         "inventory": sorted(inventory),
+        "content_sha256": sha256_tree(dst),
     }
 
 
@@ -67,7 +68,12 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
             available_names=available_names,
         )
         capabilities.extend(
-            {"name": name, "kind": "workflow", "maturity": maturity}
+            {
+                "name": name,
+                "kind": "workflow",
+                "maturity": maturity,
+                "content_sha256": sha256_tree(skills_out / name),
+            }
             for name in workflow_names
         )
 
@@ -113,16 +119,26 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                 "capabilities": sorted(capabilities, key=lambda x: x["name"]),
             },
         )
-        artifact_digest = sha256_tree(stage)
+        payload_digest = sha256_tree(stage)
         write_json(
             stage / "release-manifest.json",
             {
                 "schema_version": "1.0",
+                "release_id": f"{version}+{revision[:12]}",
                 "package": PLUGIN_NAME,
                 "version": version,
                 "channel": "plugin",
                 "source_revision": revision,
-                "artifact_content_sha256": artifact_digest,
+                "payload_content_sha256": payload_digest,
+                "components": [
+                    {
+                        "name": item["name"],
+                        "kind": item["kind"],
+                        "version": item.get("version"),
+                        "content_sha256": item.get("content_sha256"),
+                    }
+                    for item in sorted(capabilities, key=lambda x: x["name"])
+                ],
             },
         )
 
