@@ -4,7 +4,7 @@ description: >
   Evaluate e-commerce unit economics including VAT, COGS, freight, fulfilment, fees, returns and CAC headroom. Use before recommending a product test or scale decision.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -16,6 +16,16 @@ metadata:
 
 ## Purpose
 Determine whether the product can support acquisition and operational costs with acceptable downside.
+
+
+## Preconditions
+Use the deterministic calculator when exact arithmetic is requested and the required conventions in `references/input-contract.md` are supplied. Currency, quantity/order, sale-price basis, VAT rate and recoverability must be explicit; never assume a jurisdictional VAT rate.
+
+## Inputs and evidence
+Keep net/gross cost basis, unit/order scope, fees, return-loss model, CAC and required contribution explicit. Treat MOQ/cash exposure separately from per-order economics.
+
+## Uncertainty and tool failure
+Missing conventions make the result unresolved/provisional. If the calculator cannot be executed, state that arithmetic was not tool-verified and do not claim it ran. Never invent target CAC or spend caps.
 
 ## Procedure
 1. Normalize price inclusive/exclusive of VAT.
