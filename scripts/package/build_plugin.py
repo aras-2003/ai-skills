@@ -9,6 +9,9 @@ import yaml
 
 from workflow_entrypoints import add_workflow_entrypoints
 
+PLUGIN_NAME = "arek-ai-skills"
+PLUGIN_VERSION = "1.1.0"
+
 
 def read_frontmatter(skill_md: Path) -> dict:
     text = skill_md.read_text(encoding="utf-8")
@@ -69,8 +72,8 @@ def main() -> int:
 
     manifest = {
         "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-        "name": "arek-ai-skills",
-        "version": "1.0.2",
+        "name": PLUGIN_NAME,
+        "version": PLUGIN_VERSION,
         "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
         "skills": "./skills/",
         "author": {"name": "Arkadiusz Kamrowski"},
@@ -94,8 +97,8 @@ def main() -> int:
     compat_dir = out / ".codex-plugin"
     compat_dir.mkdir(parents=True, exist_ok=True)
     compat_manifest = {
-        "name": "arek-ai-skills",
-        "version": "1.0.2",
+        "name": PLUGIN_NAME,
+        "version": PLUGIN_VERSION,
         "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
         "skills": "./skills/"
     }
