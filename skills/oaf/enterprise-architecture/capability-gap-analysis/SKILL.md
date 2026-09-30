@@ -4,12 +4,20 @@ description: >
   Identify material gaps between required business capabilities and current organisational, process, information, technology, governance or capacity enablement. Use after strategic outcomes are sufficiently clear; do not translate every capability gap directly into a technology project.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.2.0"
-  maturity: candidate
+  version: "1.0.0"
+  maturity: production
   risk: medium
   last_reviewed: 2026-09-30
   execution:
     default_model_class: standard
+    validated_models:
+      luna:
+        status: pass
+        validated_on: 2026-09-30
+        validated_use:
+          - outcome-led capability gap analysis
+          - capacity-vs-maturity separation
+          - cross-capability bottleneck analysis
 ---
 
 # Capability Gap Analysis
@@ -57,6 +65,7 @@ If these are missing, stop before prescribing interventions.
 - Integration failure is different from capability absence.
 - Do not assign target maturity scores without a decision need and evidence.
 - Do not recommend a project portfolio until intervention hypotheses are comparable and dependencies understood.
+- Shared queues or workarounds do not prove platform defects; test capacity, ownership, data and decision-system causes first.
 
 ## Output contract
 Capability | required outcome | current evidence | gap type | affected dimension | dependency | consequence | confidence | intervention hypothesis | evidence needed.

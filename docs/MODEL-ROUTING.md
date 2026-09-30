@@ -103,12 +103,14 @@ Sol comparison for `oaf-transformation-design`:
 - no material change in sequence, risk posture or recommended plan;
 - strong remains escalation-only.
 
+Validated on Luna in Wave 4:
+- `capability-map-review` — fast for decision-use map review and contamination detection
+- `capability-gap-analysis` — standard for outcome-led gap analysis and capacity-vs-maturity separation
+- `oaf-enterprise-architecture-review` — standard for bounded evidence-disciplined EA review and stop-condition enforcement
+
 Candidate defaults:
-- `capability-map-review` — fast; Wave 4 runtime eval pending
 - `kpi-quality-review` — fast
 - `organizational-interface-review` — standard
-- `capability-gap-analysis` — standard; Wave 4 runtime eval pending
-- `oaf-enterprise-architecture-review` — standard; Wave 4 runtime eval pending
 - `strategy-to-execution-diagnostic` — standard
 
 Use strong for final high-impact target-state selection, materially conflicting executive evidence, major multi-country/global-local redesign, material transition economics, politically contested authority/funding choices, or novel enterprise transformation design.
@@ -145,4 +147,4 @@ Escalate to strong when the task requires:
 - irreversible consolidation/retirement decisions;
 - material transition economics or contested global/local architecture trade-offs.
 
-Do not escalate merely because the user asks for an architecture diagram. See `docs/OAF-WAVE4-EVALS.md`.
+Do not escalate merely because the user asks for an architecture diagram. See `docs/OAF-WAVE4-EVALS.md` and `evals/oaf/wave4/validation-2026-09-30.md`.

@@ -4,12 +4,20 @@ description: >
   Assess whether a business capability map is coherent and decision-useful, including level consistency, overlap, gaps, ownership and linkage to strategy, investments, applications, risks or performance. Use to improve a map for a defined decision; do not infer detailed processes or technology defects from capability names alone.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.2.0"
-  maturity: candidate
+  version: "1.0.0"
+  maturity: production
   risk: low
   last_reviewed: 2026-09-30
   execution:
     default_model_class: fast
+    validated_models:
+      luna:
+        status: pass
+        validated_on: 2026-09-30
+        validated_use:
+          - decision-use capability map review
+          - taxonomy contamination detection
+          - fit-for-purpose assessment
 ---
 
 # Capability Map Review
@@ -48,6 +56,8 @@ If the decision use is unknown, first clarify or infer the narrowest plausible d
 - Do not infer maturity, performance or technology quality from capability labels alone.
 - Avoid re-leveling the entire map when a local correction is sufficient.
 - Prefer decision usefulness over taxonomy purity.
+- Treat many-to-many application mappings as relationships to understand, not automatic duplication.
+- If duplicate-investment analysis depends on missing application/investment relationships, state that limitation explicitly.
 
 ## Output contract
 Finding | affected capability | defect type | severity for stated decision | evidence | recommended correction.
