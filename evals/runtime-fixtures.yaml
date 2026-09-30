@@ -27,3 +27,10 @@ targets:
     - evals/oaf/wave4/case-enterprise-architecture-stop-001.md
   oaf-enterprise-change-review:
     - evals/oaf/e2e/case-001-enterprise-change.md
+  commerce-product-deep-dive:
+    - evals/commerce/case-001-premium-vs-generic.md
+    - evals/commerce/case-002-good-demand-bad-economics.md
+    - evals/commerce/case-004-boring-winner.md
+  commerce-opportunity-review:
+    - evals/commerce/case-003-viral-regulated.md
+    - evals/commerce/case-005-false-us-pl-transfer.md

@@ -150,3 +150,27 @@ workflows:
               - cross-domain causal synthesis
               - design-readiness separation
               - bounded 30-90 day mobilisation
+  - name: commerce-product-deep-dive
+    workflow: workflows/commerce-product-deep-dive/WORKFLOW.md
+    description: >
+      Evaluate one e-commerce product opportunity end-to-end across problem demand, competition, differentiation, economics, sourcing, regulation and acquisition before deciding whether to test, research, defer or kill.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: medium
+      last_reviewed: 2026-09-30
+      execution:
+        default_model_class: standard
+  - name: commerce-opportunity-review
+    workflow: workflows/commerce-opportunity-review/WORKFLOW.md
+    description: >
+      Orchestrate the minimum evidence-backed path for discovering, screening or selecting e-commerce product opportunities without running the full commerce catalog by default.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: medium
+      last_reviewed: 2026-09-30
+      execution:
+        default_model_class: standard
