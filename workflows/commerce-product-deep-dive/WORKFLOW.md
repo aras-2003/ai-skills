@@ -26,6 +26,9 @@ Require a concrete product or product concept, target market and intended sales 
 - A premium price must have an observable reason to buy.
 - Do not recommend a market test when a fatal gate is already evidenced.
 - Do not extend desk research when a cheap real-world test would resolve the main uncertainty.
+- Choose the cheapest experiment that can invalidate the thesis before a more expensive market test. Examples: sample-vs-generic comparison, landed-cost confirmation, shipping test or regulatory classification.
+- TEST NOW does not automatically mean paid ads; use RESEARCH ONE BLOCKER when one cheaper pre-market experiment can materially change the decision.
+- Do not invent a test budget. If no budget or sample-size basis is supplied, state a budget principle or request an owner-defined cap rather than fabricating a number.
 - Keep Evidence / Hypothesis / Unknown distinct.
 
 ## Output contract
@@ -53,3 +56,4 @@ Default: standard. Strong is escalation-only for high-capital, highly regulated 
 ## Stop conditions
 Stop and KILL when a fatal economics, regulatory, logistics or differentiation constraint is evidenced and not plausibly fixable.
 Stop research and move to testing when the major remaining uncertainty is empirical conversion/CAC rather than desk-research evidence.
+Before paid acquisition, run any cheaper pre-market experiment that can invalidate differentiation, landed-cost, logistics or compliance assumptions.
