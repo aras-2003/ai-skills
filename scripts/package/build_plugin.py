@@ -7,6 +7,8 @@ from pathlib import Path
 
 import yaml
 
+from workflow_entrypoints import add_workflow_entrypoints
+
 
 def read_frontmatter(skill_md: Path) -> dict:
     text = skill_md.read_text(encoding="utf-8")
@@ -63,6 +65,8 @@ def main() -> int:
     for skill_dir in selected:
         copy_skill(skill_dir, skills_out)
 
+    workflow_entrypoints = add_workflow_entrypoints(root, args.maturity, skills_out)
+
     manifest = {
         "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
         "name": "arek-ai-skills",
@@ -100,9 +104,11 @@ def main() -> int:
         encoding="utf-8"
     )
 
-    print(f"Packaged {len(selected)} production skills into {out}")
+    print(f"Packaged {len(selected)} skills + {len(workflow_entrypoints)} workflow entrypoints into {out}")
     for item in selected:
-        print(f" - {item}")
+        print(f" - skill: {item}")
+    for name in workflow_entrypoints:
+        print(f" - workflow: {name}")
     return 0
 
 
