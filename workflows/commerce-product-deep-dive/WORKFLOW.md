@@ -28,7 +28,9 @@ Require a concrete product or product concept, target market and intended sales 
 - Do not extend desk research when a cheap real-world test would resolve the main uncertainty.
 - Choose the cheapest experiment that can invalidate the thesis before a more expensive market test. Examples: sample-vs-generic comparison, landed-cost confirmation, shipping test or regulatory classification.
 - TEST NOW does not automatically mean paid ads; use RESEARCH ONE BLOCKER when one cheaper pre-market experiment can materially change the decision.
+- A product sample must clear any decision-critical performance/differentiation claim before paid acquisition when that claim can be tested directly against a cheap alternative.
 - Do not invent a test budget. If no budget or sample-size basis is supplied, state a budget principle or request an owner-defined cap rather than fabricating a number.
+- Do not invent a target CAC merely by applying an arbitrary discount to break-even CAC; derive a target from required contribution/margin or label it unresolved.
 - Keep Evidence / Hypothesis / Unknown distinct.
 
 ## Output contract
