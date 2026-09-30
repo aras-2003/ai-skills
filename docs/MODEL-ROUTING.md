@@ -73,16 +73,26 @@ These defaults should be validated empirically with behavioral evals before they
 
 ## OAF defaults
 
-| Skill | Default class |
-|---|---|
-| strategy-to-execution-diagnostic | standard |
-| operating-model-review | standard |
-| decision-rights-review | standard |
-| governance-design | standard |
-| architecture-review | standard |
-| capability-map-review | fast |
-| portfolio-prioritization | fast + deterministic calculation |
-| transformation-blueprint | standard |
-| evidence-loop-review | standard |
+Validated on Luna for structured diagnosis:
+- `decision-rights-review` — standard
+- `portfolio-prioritization` — fast/standard boundary; Luna passed the tested evidence-readiness case
+- `operating-model-review` — standard
+- `architecture-review` — standard
+- `evidence-loop-review` — standard
+- `oaf-health-check` — standard workflow synthesis
 
-The OAF Health Check workflow should prefer selective routing over escalating model class. Use strong only when the cross-domain design problem is genuinely novel, contested or high-impact.
+Candidate defaults:
+- `capability-map-review` — fast
+- `kpi-quality-review` — fast
+- `global-local-model-review` — standard
+- `organizational-interface-review` — standard
+- `decision-bottleneck-analysis` — standard
+- `capability-gap-analysis` — standard
+- `portfolio-health-review` — standard
+- `strategy-to-execution-diagnostic` — standard
+- `governance-design` — standard
+- `transformation-blueprint` — standard
+
+Use strong only when the task becomes genuinely novel target-state design, politically contested executive decision architecture, major global/local redesign, or high-impact enterprise transformation design.
+
+A successful Luna result validates the tested use case, not every possible use of the skill. See `evals/oaf/core-validation-2026-09-30.md`.
