@@ -7,7 +7,7 @@ from pathlib import Path
 
 import yaml
 
-from build_utils import atomic_output, package_version, sha256_tree, source_revision, write_json
+from build_utils import atomic_output, ensure_source_valid, package_version, sha256_tree, source_revision, write_json
 from build_plugin import copy_skill, discover_skills
 from workflow_entrypoints import add_workflow_entrypoints
 
@@ -93,6 +93,7 @@ def main() -> int:
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parents[2]
+    ensure_source_valid(root)
     out = root / args.output
 
     candidate_skills = discover_skills(root, "candidate")
