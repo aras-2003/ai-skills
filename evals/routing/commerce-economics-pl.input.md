@@ -1,0 +1,1 @@
+Cena to 199 PLN brutto za zestaw dwóch sztuk. VAT 23%, koszty zakupowe są netto i VAT mogę odliczyć. COGS 30 PLN netto za sztukę, fulfilment 15 PLN netto za zamówienie, opłata 2,5% od ceny brutto, oczekiwana strata na zwrotach 8 PLN, CAC 35 PLN. Policz economics i break-even CAC.
