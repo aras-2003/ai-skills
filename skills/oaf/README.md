@@ -52,8 +52,8 @@ Production:
 - `architecture-review`
 
 Candidate:
-- `capability-map-review`
-- `capability-gap-analysis`
+- `capability-map-review` — hardened Wave 4 candidate
+- `capability-gap-analysis` — hardened Wave 4 candidate
 
 Future:
 - `architecture-alignment-review`
@@ -103,8 +103,8 @@ Production:
 Candidate:
 - `oaf-strategy-execution-reset`
 
-Next planned workflow:
-- `oaf-enterprise-architecture-review`
+Candidate:
+- `oaf-enterprise-architecture-review` — evidence-gated enterprise architecture review
 
 ## Routing principle
 
@@ -149,12 +149,12 @@ Sol comparisons on `oaf-operating-model-redesign` and `oaf-transformation-design
 
 Candidate defaults:
 - **fast:** `capability-map-review`, `kpi-quality-review`
-- **standard:** remaining diagnostic/design candidates
+- **standard:** `capability-gap-analysis`, `oaf-enterprise-architecture-review`, and remaining diagnostic/design candidates
 - **strong escalation:** final high-impact target-state selection, contested executive evidence, major multi-country/global-local redesign, transition economics
 
 Wave 3 validated that design skills can remain on the standard model class when they preserve evidence gates, reversibility and stop conditions.
 
-See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, and `evals/oaf/wave3/validation-2026-09-30.md`.
+See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, `evals/oaf/wave3/validation-2026-09-30.md`, and `docs/OAF-WAVE4-EVALS.md`.
 
 ## Boundary principle
 
