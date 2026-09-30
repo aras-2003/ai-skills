@@ -11,6 +11,7 @@ Target offer:
 - payment fees: 7 PLN;
 - expected returns/refunds allowance: 45 PLN;
 - expected paid-social CAC range: 70–110 PLN.
+- for this synthetic case, use an explicit VAT rate of 23%; all listed COGS, freight/duty, fulfilment/packaging and payment-fee amounts are net economic variable costs; the 45 PLN returns/refunds allowance is expected loss per order, not a second return-rate model.
 
 Other evidence:
 - the product solves a meaningful sleep/comfort problem for some customers;
