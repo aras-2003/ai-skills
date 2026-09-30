@@ -119,7 +119,12 @@ def main() -> int:
         )
         workflow_names = candidate_workflows + production_workflows
         capabilities.extend(
-            {"name": name, "kind": "workflow", "maturity": "candidate" if name in candidate_workflows else "production"}
+            {
+                "name": name,
+                "kind": "workflow",
+                "maturity": "candidate" if name in candidate_workflows else "production",
+                "content_sha256": sha256_tree(skills_out / name),
+            }
             for name in workflow_names
         )
         runtime_eval_fixtures = add_runtime_eval_fixtures(root, skills_out)
@@ -187,11 +192,22 @@ def main() -> int:
             stage / "release-manifest.json",
             {
                 "schema_version": "1.0",
+                "release_id": f"{version}+{revision[:12]}",
                 "package": PLUGIN_NAME,
                 "version": version,
                 "channel": "lab",
                 "source_revision": revision,
-                "artifact_content_sha256": digest,
+                "payload_content_sha256": digest,
+                "components": [
+                    {
+                        "name": item["name"],
+                        "kind": item["kind"],
+                        "maturity": item.get("maturity"),
+                        "version": item.get("version"),
+                        "content_sha256": item.get("content_sha256"),
+                    }
+                    for item in sorted(capabilities, key=lambda x: x["name"])
+                ],
             },
         )
 
