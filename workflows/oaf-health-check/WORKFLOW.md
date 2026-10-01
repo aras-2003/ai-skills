@@ -41,32 +41,25 @@ Do not use `governance-design` or `transformation-blueprint` until the relevant 
 
 ## Stage 4 — Cross-domain synthesis
 
-For each finding record:
-- observed symptom or direct evidence;
-- OAF domain;
-- possible structural cause;
-- consequence;
-- dependency on other findings;
-- claim-level confidence and the evidence that supports that confidence.
+Build a short claim ledger before writing prose. Every material statement must be one atomic claim with four fields:
 
-Keep observation and causality separate:
-- an observation must be a direct paraphrase of a concrete statement in the input or of evidence actually collected during the review;
-- do not add an unobserved mechanism, missing owner, process failure, absence claim or downstream effect inside an observation;
-- symptoms stated in the input may be treated as observed for the purpose of the review;
-- a cause is not observed merely because it is a plausible explanation of those symptoms;
-- without relevant initiative records, decision traces, review-cycle evidence, interface traces or equivalent data, causal explanations remain hypotheses;
-- do not label an unverified causal hypothesis as a confirmed critical gap;
-- each claim has exactly one epistemic type: observed/supported or hypothesis/implication; if a sentence or table row contains both, split it into separate claims;
-- confidence belongs to one atomic claim and its evidence, not to a compound "observation + hypothesis", an entire domain or section;
-- high confidence is appropriate when the relevant mechanism is directly evidenced, not merely because the symptom is severe or common;
-- downstream consequences are separate claims: unless the consequence is stated in the input or directly evidenced, label it as an implication/hypothesis with its own confidence;
-- inability to link a roadmap to measurable strategic outcomes supports only that linkage symptom; by itself it does not establish that an evidence-to-action loop fails, lacks an owner, or that decision ownership is missing.
+`claim | epistemic status | evidence | confidence rationale`
 
-Look for reinforcing loops, for example:
-- unclear strategy -> overloaded portfolio;
-- unclear decision rights -> governance proliferation;
-- fragmented operating model -> duplicate technology/capabilities;
-- weak evidence loop -> repeated low-quality prioritisation.
+Allowed epistemic status:
+- `observed` — direct paraphrase of the input or evidence actually collected;
+- `supported` — mechanism directly supported by reviewed evidence;
+- `hypothesis` — plausible mechanism not yet established;
+- `implication` — possible consequence not directly observed.
+
+Do not combine an observation with a hypothesis or implication in the same claim. Unknown reviewer knowledge is not evidence that the organisation lacks an owner, mandate, mechanism or process.
+
+A roadmap/outcome disconnect establishes only that disconnect. It does not by itself establish:
+- absence of a common evaluation mechanism;
+- missing ownership;
+- failed evidence-to-action process;
+- unclear organisational mandate.
+
+Cross-domain synthesis may connect claims, but the connection itself is a hypothesis unless directly evidenced.
 
 ## Stage 5 — Prioritise structural changes
 
@@ -90,23 +83,50 @@ When diagnosis is sufficient:
 
 ## Output contract
 
+Keep the answer compact. Reuse the same epistemic structure in every section.
+
 ### Executive diagnosis
-3–5 sentences on what is structurally wrong and why it matters.
+
+Write 2–4 atomic claims. For each use:
+
+`[status | confidence] claim — evidence: <specific input/evidence>; confidence because: <why this evidence is sufficient/limited>`
+
+Do not write an unlabeled narrative summary that introduces new mechanisms.
 
 ### OAF heatmap
-| Domain | Status | Finding type | Evidence confidence | Main issue | Consequence |
-|---|---|---|---|---|---|
 
-Use only domains actually reviewed. Use `observed` for supported findings and `hypothesis` for plausible causes that still need evidence. Do not use compound labels such as `observed + hypothesis`; split them into separate rows/claims with separate confidence. A hypothesis may be material, but must not be presented as a confirmed critical gap.
+| Domain | Claim | Epistemic status | Confidence | Evidence / confidence rationale |
+|---|---|---|---|---|
 
-### Cross-domain causes
-List the few structural causes connecting multiple symptoms. Mark each as observed/supported or hypothesis and state what evidence would raise or lower confidence.
+Use one claim per row. If an observed symptom suggests a causal mechanism or consequence, put that mechanism/consequence in a separate row with its own status and confidence.
 
-### Critical unknowns
-Questions whose answers could materially change the diagnosis.
+### Leading hypotheses
+
+List only hypotheses that materially change the next evidence step. For each state what evidence would strengthen or weaken it.
 
 ### Recommended next action
-Route to the next OAF skill/design step, or stop if evidence is insufficient. For symptom-only diagnosis, prefer the smallest representative evidence sample that can test the leading hypotheses before portfolio-wide process or action changes.
+
+Define the smallest evidence sample that can test the leading hypotheses. State:
+- what will be sampled;
+- which hypotheses it can discriminate;
+- what evidence would support/weaken each;
+- that the sample may remain inconclusive and may need expansion.
+
+Do not claim that a bounded sample will resolve the mechanism before seeing its evidence.
+
+## Pre-finalization epistemic check
+
+Before returning the answer, inspect every material sentence and every heatmap cell:
+
+1. Can this claim be traced to a specific input statement or collected evidence? If yes, cite that basis and use `observed/supported`.
+2. If not, is it a mechanism? Use `hypothesis`.
+3. If not, is it a downstream effect? Use `implication`.
+4. Does one sentence contain more than one epistemic type? Split it.
+5. Does confidence apply to exactly one claim and have an evidence rationale? If not, rewrite it.
+6. Does any statement convert “reviewer does not know X” into “organisation lacks/has unclear X”? Rewrite as an unknown/hypothesis.
+7. Does next action promise that a sample will decide the issue? Rewrite as a test that may remain inconclusive.
+
+If any material claim cannot pass this check, do not finalize it as fact.
 
 ## Stop conditions
 
