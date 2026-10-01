@@ -12,7 +12,9 @@ PACKAGE_DIR = HERE.parents[1]
 ROOT = HERE.parents[3]
 sys.path.insert(0, str(PACKAGE_DIR))
 
+import artifact_validation
 import build_chatgpt_skills
+import build_lab_plugin
 import build_plugin
 from build_utils import assert_source_revision, validate_output_path
 from workflow_entrypoints import dependency_availability
@@ -132,6 +134,34 @@ class PackagingTests(unittest.TestCase):
             self.assertFalse(any(p.endswith(".rubric.yaml") for p in paths))
             self.assertTrue((out / "capabilities.json").is_file())
             self.assertTrue((out / "release-manifest.json").is_file())
+
+    def test_lab_manifests_match_final_fixture_mutated_artifact(self) -> None:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            out = Path(td) / "lab"
+            old_argv = sys.argv
+            try:
+                sys.argv = ["build_lab_plugin.py", "--output", str(out.relative_to(ROOT))]
+                self.assertEqual(0, build_lab_plugin.main())
+            finally:
+                sys.argv = old_argv
+
+            errors = artifact_validation.validate_tree(out, allow_lab_evals=True)
+            self.assertEqual([], errors)
+
+            import json
+            capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
+            workflows = [x for x in capabilities["capabilities"] if x.get("kind") == "workflow"]
+            self.assertTrue(workflows)
+            self.assertTrue(all(x.get("version") for x in workflows))
+
+            fixture_component = next(
+                x for x in capabilities["capabilities"]
+                if (out / "skills" / x["name"] / "references" / "evals").is_dir()
+            )
+            skill_md = out / "skills" / fixture_component["name"] / "SKILL.md"
+            skill_md.write_text(skill_md.read_text(encoding="utf-8") + "\nmutation\n", encoding="utf-8")
+            errors = artifact_validation.validate_tree(out, allow_lab_evals=True)
+            self.assertTrue(any("content_sha256 mismatch" in e for e in errors))
 
     def test_chatgpt_channel_manifest_declares_workflow_limitations(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
