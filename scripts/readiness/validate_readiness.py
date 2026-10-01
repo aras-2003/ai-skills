@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import datetime as dt
+import json
 import sys
 from pathlib import Path
 from typing import Any
@@ -8,8 +10,13 @@ import yaml
 
 HERE = Path(__file__).resolve()
 VALIDATE = HERE.parents[1] / "validate"
+EVAL = HERE.parents[1] / "eval"
 sys.path.insert(0, str(VALIDATE))
+sys.path.insert(0, str(EVAL))
 from common import split_frontmatter  # noqa: E402
+import receipt as eval_receipt  # noqa: E402
+
+MAX_EXCEPTION_DAYS = 30
 
 
 def production_components(root: Path) -> dict[str, tuple[str, str, str]]:
@@ -38,13 +45,113 @@ def production_components(root: Path) -> dict[str, tuple[str, str, str]]:
     return result
 
 
-def validate(root: Path) -> list[str]:
+def _date(value: Any, label: str, errors: list[str]) -> dt.date | None:
+    if not isinstance(value, str) or not value:
+        errors.append(f"{label}: missing date")
+        return None
+    try:
+        return dt.date.fromisoformat(value)
+    except ValueError:
+        errors.append(f"{label}: invalid ISO date {value!r}")
+        return None
+
+
+def _validate_verified_receipt(root: Path, name: str, version: str, rec: dict[str, Any]) -> list[str]:
     errors: list[str] = []
+    raw = rec.get("receipt")
+    if not isinstance(raw, str) or not raw:
+        return [f"{name}: verified requires receipt"]
+    receipt_path = root / raw
+    if not receipt_path.is_file():
+        return [f"{name}: verified receipt missing: {raw}"]
+    try:
+        data = json.loads(receipt_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return [f"{name}: verified receipt unreadable: {exc}"]
+
+    # The receipt's source revision is the exact tested revision. A later evidence-only
+    # commit may contain the receipt; current-version status is anchored by component
+    # version/content identity, while source_revision remains immutable provenance.
+    errors.extend(
+        f"{name}: receipt {err}"
+        for err in eval_receipt.validate_receipt_data(
+            data,
+            root=root,
+            current_revision=str(data.get("source_revision") or ""),
+        )
+    )
+    if data.get("evidence_scope") != "current-version":
+        errors.append(f"{name}: verified receipt must have evidence_scope=current-version")
+    if data.get("evaluation", {}).get("status") != "PASS":
+        errors.append(f"{name}: verified receipt must be PASS")
+    component = data.get("component", {})
+    if component.get("name") != name:
+        errors.append(f"{name}: verified receipt component name mismatch")
+    if str(component.get("version") or "") != version:
+        errors.append(f"{name}: verified receipt component version mismatch")
+    return errors
+
+
+def validate_record(
+    root: Path,
+    name: str,
+    version: str,
+    rec: dict[str, Any],
+    *,
+    review_by: dt.date,
+    today: dt.date,
+) -> list[str]:
+    errors: list[str] = []
+    status = rec.get("current_runtime_receipt")
+    if status not in {"pending", "verified", "not-required"}:
+        return [f"{name}: invalid current_runtime_receipt"]
+    if not rec.get("maturity_disposition"):
+        errors.append(f"{name}: missing maturity_disposition")
+
+    if status == "verified":
+        errors.extend(_validate_verified_receipt(root, name, version, rec))
+        if rec.get("exception_owner") or rec.get("exception_expires"):
+            errors.append(f"{name}: verified must not rely on an exception")
+
+    elif status == "pending":
+        for field in ("evidence_gap", "limitation", "exception_owner", "exception_expires"):
+            if not rec.get(field):
+                errors.append(f"{name}: pending evidence requires {field}")
+        if rec.get("maturity_disposition") != "retain-existing-pending-evidence-review":
+            errors.append(f"{name}: pending may only retain existing maturity pending evidence review")
+        expiry = _date(rec.get("exception_expires"), f"{name}: exception_expires", errors)
+        if expiry is not None:
+            if expiry < today:
+                errors.append(f"{name}: pending exception expired on {expiry.isoformat()}")
+            if expiry > review_by:
+                errors.append(f"{name}: exception_expires must not exceed review_by")
+            if (expiry - today).days > MAX_EXCEPTION_DAYS:
+                errors.append(f"{name}: pending exception exceeds {MAX_EXCEPTION_DAYS}-day limit")
+        if rec.get("known_high_severity_failure") is True:
+            errors.append(f"{name}: pending exception forbidden for known high-severity failure")
+
+    elif status == "not-required":
+        if not rec.get("not_required_reason"):
+            errors.append(f"{name}: not-required requires not_required_reason")
+        if rec.get("exception_owner") or rec.get("exception_expires"):
+            errors.append(f"{name}: not-required must not use an exception")
+    return errors
+
+
+def validate(root: Path, *, today: dt.date | None = None) -> list[str]:
+    errors: list[str] = []
+    today = today or dt.datetime.now(dt.timezone.utc).date()
     path = root / "release" / "production-readiness.yaml"
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     records = data.get("components") or []
     if not isinstance(records, list):
         return ["components must be a list"]
+
+    review_by = _date(data.get("review_by"), "review_by", errors)
+    if review_by is None:
+        review_by = today
+    elif review_by < today:
+        errors.append(f"review_by expired on {review_by.isoformat()}")
 
     actual = production_components(root)
     seen: dict[str, dict[str, Any]] = {}
@@ -59,15 +166,6 @@ def validate(root: Path) -> list[str]:
         if name in seen:
             errors.append(f"duplicate readiness record: {name}")
         seen[name] = rec
-
-        if rec.get("current_runtime_receipt") not in {"pending", "verified", "not-required"}:
-            errors.append(f"{name}: invalid current_runtime_receipt")
-        if not rec.get("maturity_disposition"):
-            errors.append(f"{name}: missing maturity_disposition")
-        if rec.get("current_runtime_receipt") == "pending":
-            for field in ("evidence_gap", "limitation", "exception_owner", "exception_expires"):
-                if not rec.get(field):
-                    errors.append(f"{name}: pending evidence requires {field}")
 
     missing = sorted(set(actual) - set(seen))
     extra = sorted(set(seen) - set(actual))
@@ -86,6 +184,7 @@ def validate(root: Path) -> list[str]:
             errors.append(f"{name}: version mismatch ({rec.get('version')} != {version})")
         if rec.get("source") != source:
             errors.append(f"{name}: source mismatch")
+        errors.extend(validate_record(root, name, version, rec, review_by=review_by, today=today))
     return errors
 
 
