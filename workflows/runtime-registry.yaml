@@ -34,10 +34,10 @@ workflows:
       route directly to one specialist OAF skill.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "1.0.0"
+      version: "1.1.0"
       maturity: production
       risk: medium
-      last_reviewed: 2026-09-30
+      last_reviewed: 2026-10-01
       execution:
         default_model_class: standard
         validated_models:
