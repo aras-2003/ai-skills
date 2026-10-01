@@ -368,15 +368,20 @@ def validate_receipt_data(
         try:
             version, digest = component_identity_at_revision(root, component_name, identity_revision)
         except (KeyError, ValueError) as exc:
-            errors.append(str(exc))
             try:
                 version, digest = current_component_identity(root, component_name)
             except (KeyError, ValueError) as current_exc:
+                errors.append(str(exc))
                 errors.append(str(current_exc))
             else:
-                if component.get("version") != version:
+                version_matches = component.get("version") == version
+                digest_matches = component.get("content_sha256") == digest
+                revision_matches = current_revision == identity_revision if current_revision is not None else False
+                if not (version_matches and digest_matches and revision_matches):
+                    errors.append(str(exc))
+                if not version_matches:
                     errors.append("stale evidence: component version mismatch")
-                if component.get("content_sha256") != digest:
+                if not digest_matches:
                     errors.append("stale evidence: component content digest mismatch")
         else:
             if component.get("version") != version:
