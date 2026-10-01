@@ -81,10 +81,10 @@ Two real production fallback runs against behavior source `ff012e494f5b2f71803f8
 - strategy fallback: overconfident causal diagnosis from symptom-only evidence;
 - interface fallback: the old test mislabeled a natural prompt as explicit workflow execution.
 
-R2 produced one explicit-interface PASS and two residual FAIL findings. Behavior was revised again under source identity `cde46f59c20a0d4313528185e5df079335633b10` and active campaign `runtime-validation-2026-10-r3`. No R3 runtime PASS is claimed yet.
+R2 produced one explicit-interface PASS and two residual FAIL findings. Behavior was revised again under source identity `cde46f59c20a0d4313528185e5df079335633b10` and R3 retained four PASS results and one residual strategy FAIL. The health-check synthesis contract was narrowed again under behavior source `28a7681cf024bb7aaad7a979e7ce7253139d5bd4`; active campaign `runtime-validation-2026-10-r4` requires only a focused strategy fallback retest.
 
 See:
 - `workflows/runtime-registry.yaml`
-- `evals/campaigns/runtime-validation-2026-10-r3/RUNBOOK.md`
+- `evals/campaigns/runtime-validation-2026-10-r4/RUNBOOK.md`
 - `docs/MODEL-ROUTING.md`
 - `release/production-readiness.yaml`
