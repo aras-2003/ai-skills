@@ -13,7 +13,7 @@ from typing import Any
 import yaml
 from jsonschema import Draft202012Validator
 
-from common import load_registry, repo_root, sha256_file
+from common import load_campaign_cases, load_registry, repo_root, sha256_file
 
 VALID_STATUSES = {"NOT_RUN", "REVIEW_REQUIRED", "PASS", "FAIL"}
 VALID_EVIDENCE_SCOPES = {"current-version", "historical"}
@@ -25,6 +25,10 @@ def find_case(root: Path, case_id: str) -> tuple[str, dict[str, Any]]:
         for case in cases:
             if case.get("id") == case_id:
                 return target, case
+    campaign = load_campaign_cases(root)
+    if case_id in campaign:
+        case = campaign[case_id]
+        return str(case["target"]), case
     raise KeyError(f"unknown case id: {case_id}")
 
 
@@ -131,6 +135,23 @@ def _validate_status_contract(data: dict[str, Any], errors: list[str]) -> None:
         errors.append("assisted run cannot be PASS")
 
 
+def _stored_path(root: Path, path: Path | None) -> str | None:
+    if path is None:
+        return None
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(root.resolve()).as_posix()
+    except ValueError:
+        return str(resolved)
+
+
+def _resolve_stored_path(root: Path, raw: str | None) -> Path | None:
+    if not raw:
+        return None
+    path = Path(raw)
+    return path if path.is_absolute() else root / path
+
+
 def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
     root = repo_root()
     target, case = find_case(root, args.case_id)
@@ -174,6 +195,7 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
             )
 
     output_path = Path(args.output).resolve() if args.output else None
+    trace_path = Path(args.tool_trace).resolve() if args.tool_trace else None
     record = {
         "schema_version": "1.0",
         "evidence_scope": evidence_scope,
@@ -197,13 +219,15 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
             "model_id": args.model_id,
             "reasoning": args.reasoning,
             "catalog": args.catalog,
+            "tools": list(getattr(args, "tools", []) or []),
         },
         "execution": {
             "assisted": bool(args.assisted),
             "prompt": args.prompt,
-            "actual_output_path": str(output_path) if output_path else None,
+            "actual_output_path": _stored_path(root, output_path),
             "actual_output_sha256": sha256_file(output_path) if output_path else None,
-            "tool_trace_path": args.tool_trace,
+            "tool_trace_path": _stored_path(root, trace_path),
+            "tool_trace_sha256": sha256_file(trace_path) if trace_path else None,
         },
         "evaluation": {
             "status": status,
@@ -254,11 +278,18 @@ def validate_receipt_data(
     if status in RUNTIME_STATUSES:
         raw_output = execution.get("actual_output_path")
         if raw_output:
-            output_path = Path(raw_output)
-            if not output_path.is_file():
+            output_path = _resolve_stored_path(root, raw_output)
+            if output_path is None or not output_path.is_file():
                 errors.append("runtime evidence output is missing")
             elif execution.get("actual_output_sha256") != sha256_file(output_path):
                 errors.append("runtime evidence output digest mismatch")
+        raw_trace = execution.get("tool_trace_path")
+        if raw_trace:
+            trace_path = _resolve_stored_path(root, raw_trace)
+            if trace_path is None or not trace_path.is_file():
+                errors.append("runtime evidence tool trace is missing")
+            elif execution.get("tool_trace_sha256") != sha256_file(trace_path):
+                errors.append("runtime evidence tool trace digest mismatch")
 
     scope = data.get("evidence_scope")
     if scope == "current-version" and status in RUNTIME_STATUSES:
@@ -300,6 +331,7 @@ def main() -> int:
     create.add_argument("--model-id")
     create.add_argument("--reasoning")
     create.add_argument("--catalog", nargs="*", default=[])
+    create.add_argument("--tools", nargs="*", default=[])
     create.add_argument("--prompt")
     create.add_argument("--output")
     create.add_argument("--tool-trace")
