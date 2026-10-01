@@ -22,7 +22,7 @@ import validate_routing
 import build_plugin
 import artifact_validation
 
-CONFIG_REL = Path("evals/campaigns/runtime-validation-2026-10-r2/campaign.yaml")
+CONFIG_REL = Path("evals/campaigns/runtime-validation-2026-10-r3/campaign.yaml")
 CONFIG = ROOT / CONFIG_REL
 
 
@@ -106,8 +106,11 @@ def validate_campaign() -> list[str]:
             errors.append(f"{suite}: expected {count}, got {counts[suite]}")
 
     supplemental = load_supplemental_cases(ROOT)
-    if len(supplemental) != 1:
-        errors.append(f"supplemental routing: expected 1 case, got {len(supplemental)}")
+    expected_supplemental = len(cfg.get("supplemental_routing_case_ids") or [])
+    if len(supplemental) != expected_supplemental:
+        errors.append(
+            f"supplemental routing: expected {expected_supplemental} cases, got {len(supplemental)}"
+        )
     for cid, case in supplemental.items():
         ip = ROOT / str(case.get("input") or "")
         rp = ROOT / str(case.get("rubric") or "")
@@ -183,6 +186,7 @@ def queue_text(include_supplemental: bool = False) -> str:
 LOCK_SCHEMA_VERSION = "2.0"
 HISTORICAL_RECEIPT_COMPATIBILITY = {
     "ff012e494f5b2f71803f850d71d20f54a3315e2b": "runtime-validation-2026-10",
+    "c0772e2e3727971b2e3fe8f9d56eccf6bdd87129": "runtime-validation-2026-10-r2",
 }
 
 
@@ -599,7 +603,7 @@ def evidence_compatibility_profile(source_revision: str, root: Path = ROOT) -> s
             raise ValueError(
                 f"historical compatibility campaign is missing: {historical_campaign}"
             )
-        return "historical-r1"
+        return "historical-r1" if historical_campaign == "runtime-validation-2026-10" else "historical-r2"
     raise ValueError(f"unsupported evidence source revision: {source_revision}")
 
 
