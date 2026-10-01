@@ -81,7 +81,12 @@ class RuntimeCampaignTests(unittest.TestCase):
         ):
             target, case = receipt.find_case(ROOT, case_id)
             self.assertEqual(component_name, target)
-            version, digest = receipt.component_identity_at_revision(ROOT, component_name, old_revision)
+            try:
+                version, digest = receipt.component_identity_at_revision(ROOT, component_name, old_revision)
+            except ValueError as exc:
+                if "source revision unavailable in checkout" in str(exc):
+                    self.skipTest("historical source commit unavailable in shallow checkout")
+                raise
             self.assertEqual(expected_version, version)
             self.assertEqual(64, len(digest))
             current_version, current_digest = receipt.current_component_identity(ROOT, component_name)
