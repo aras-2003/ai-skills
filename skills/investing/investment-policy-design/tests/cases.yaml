@@ -16,3 +16,4 @@ cases:
     input: "Is Micron attractive after earnings?"
     expected:
       should_trigger: false
+      must_not: ["portfolio buckets", "sizing rules"]
