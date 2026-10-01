@@ -66,6 +66,7 @@ In the fresh session, capture the actual package/runtime state into a copy of \`
 
 ~~~json
 {
+  "channel": "production",
   "package": {
     "name": "arek-ai-skills",
     "version": "1.8.0"
@@ -93,11 +94,11 @@ python scripts/eval/campaign.py verify-smoke \
 
 The smoke gate rejects:
 
-- wrong package name/version;
-- production package not enabled;
+- wrong package name/version for the declared channel;
+- the required package not enabled;
 - production and Lab simultaneously enabled;
 - duplicate capability names;
-- a runtime catalog different from the locked production artifact;
+- a runtime catalog different from the locked catalog for that channel;
 - missing provider/model/reasoning/tool metadata.
 
 If the installed production version cannot match the lock without publishing or merging, stop. Record the campaign as NOT_RUN; do not substitute the currently published version.
@@ -108,8 +109,8 @@ Default order minimizes wasted work:
 
 1. Commerce 001–006 — explicit behavioral regression first;
 2. two production fallback cases — verify missing optional-specialist behavior;
-3. 16 natural-routing cases — only after production catalog smoke is stable;
-4. executive-role-001…014 — positive and negative trigger regressions last.
+3. 16 natural-routing cases — execute each against the channel assigned in `lock.json`; some candidate-target cases require an isolated Lab-only session;
+4. executive-role-001…014 — positive and negative trigger regressions last, normally production-only.
 
 Generate the exact queue at any time with:
 
