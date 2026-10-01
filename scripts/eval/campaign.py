@@ -16,7 +16,7 @@ PACKAGE_DIR = ROOT / "scripts" / "package"
 if str(PACKAGE_DIR) not in sys.path:
     sys.path.insert(0, str(PACKAGE_DIR))
 
-from common import load_campaign_cases, load_supplemental_cases
+from common import load_campaign_cases, load_supplemental_cases, sha256_file
 import receipt
 import validate_routing
 import build_plugin
@@ -56,6 +56,17 @@ def behavior_changes(pinned: str, *, require_commit: bool = False) -> list[str]:
     return changed
 
 
+def explicit_fallback_input_errors(case: dict, input_text: str) -> list[str]:
+    if case.get("suite") != "production-fallback" or case.get("mode") != "explicit":
+        return []
+    target = str(case.get("target") or "").strip()
+    if not target:
+        return ["explicit production fallback has no target"]
+    if target.lower() not in input_text.lower():
+        return [f"explicit production fallback input must name target workflow {target}"]
+    return []
+
+
 def validate_campaign() -> list[str]:
     errors = []
     cfg = config()
@@ -81,10 +92,13 @@ def validate_campaign() -> list[str]:
         if not rp.is_file() or not rp.name.endswith(".rubric.yaml"):
             errors.append(f"{cid}: missing/invalid evaluator rubric")
             continue
+        input_text = ip.read_text(encoding="utf-8")
         if case.get("mode") == "natural-routing":
-            leaked = validate_routing.leaked_capabilities(ip.read_text(encoding="utf-8"), known)
+            leaked = validate_routing.leaked_capabilities(input_text, known)
             if leaked:
                 errors.append(f"{cid}: executor input leaks capability names: {', '.join(leaked)}")
+        for error in explicit_fallback_input_errors(case, input_text):
+            errors.append(f"{cid}: {error}")
 
     for suite, count in expected.items():
         if counts[suite] != count:
@@ -239,15 +253,32 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
         else:
             raise ValueError(f"campaign subject absent from both package catalogs: {target}")
 
+    case_definitions = []
+    for case in all_cases.values():
+        input_path = ROOT / case["input"]
+        rubric_path = ROOT / case["rubric"]
+        case_definitions.append({
+            "id": case["id"],
+            "suite": case["suite"],
+            "mode": case["mode"],
+            "target": case["target"],
+            "input_path": case["input"],
+            "input_sha256": sha256_file(input_path),
+            "rubric_path": case["rubric"],
+            "rubric_sha256": sha256_file(rubric_path),
+        })
+
     lock = {
         "schema_version": "1.0",
         "campaign": cfg["campaign"],
+        "campaign_definition_sha256": sha256_file(CONFIG),
         "behavior_source_revision": pinned,
         "packages": packages,
         "expected_catalogs": {name: sorted(items) for name, items in catalogs.items()},
         "case_channels": case_channels,
         "core_case_count": len(load_campaign_cases(ROOT)),
         "supplemental_case_ids": sorted(load_supplemental_cases(ROOT)),
+        "case_definitions": sorted(case_definitions, key=lambda x: x["id"]),
         "components": components,
     }
     (out / "lock.json").write_text(json.dumps(lock, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
