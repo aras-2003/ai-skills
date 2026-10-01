@@ -615,7 +615,9 @@ def evidence_compatibility_profile(source_revision: str, root: Path = ROOT) -> s
             return "historical-r3"
         if historical_campaign == "runtime-validation-2026-10-r4":
             return "historical-r4"
-        return "historical-r5"
+        if historical_campaign == "runtime-validation-2026-10-r5":
+            return "historical-r5"
+        return "historical-r6"
     raise ValueError(f"unsupported evidence source revision: {source_revision}")
 
 
