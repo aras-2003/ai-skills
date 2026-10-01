@@ -23,6 +23,8 @@ Rule: **LLM interprets; code calculates and validates.**
 
 The source tree is not the runtime allow-list.
 
+Current implemented source skills: **39**. Only `career`, `commerce`, `meta` and `oaf` currently contain `SKILL.md` implementations. The other domain README files describe design/backlog intent unless stated otherwise.
+
 ## Branches, maturity and installed capability
 
 These are separate concepts:
@@ -59,12 +61,15 @@ Details:
 
 A narrative historical PASS is not a current-version runtime receipt. When runtime evidence is unavailable, record `NOT_RUN`/pending rather than assuming success.
 
+Current runtime follow-up campaign on this branch: `runtime-validation-2026-10-r2`, behavior source `c0772e2e3727971b2e3fe8f9d56eccf6bdd87129`, core count 38. The two imported fallback runs from the prior behavior source `ff012e494f5b2f71803f850d71d20f54a3315e2b` remain historical **FAIL** evidence; no R2 runtime PASS is claimed by offline checks.
+
 ## Quality and build
 
 Required PR validation is defined in `.github/workflows/validate-skills.yml` and covers:
 - source/static contracts;
 - validator mutation tests;
 - eval input/rubric isolation;
+- active runtime campaign definition, imported evidence validation and offline campaign regressions;
 - package safety/reproducibility;
 - catalog freshness;
 - production plugin, Lab and ChatGPT ZIP builds plus artifact validation;
@@ -78,6 +83,7 @@ Generated artifacts are built atomically and include source provenance.
 - Lifecycle: `docs/LIFECYCLE.md`
 - Testing: `docs/TESTING.md`
 - Runtime evals: `docs/RUNTIME-EVALS.md`
+- Active R2 runbook: `evals/campaigns/runtime-validation-2026-10-r2/RUNBOOK.md`
 - Channel usage: `docs/GPT-USAGE.md`
 - Branch-rules proposal: `docs/GITHUB-BRANCH-RULES-PROPOSAL.md`
 - Distribution/license decision: `docs/DISTRIBUTION-LICENSE-DECISION.md`
