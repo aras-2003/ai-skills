@@ -72,10 +72,10 @@ workflows:
       Run an evidence-gated OAF operating-model redesign workflow from diagnosis through options, decision architecture and bounded transition design.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "1.0.0"
+      version: "1.1.0"
       maturity: production
       risk: medium
-      last_reviewed: 2026-09-30
+      last_reviewed: 2026-10-01
       execution:
         default_model_class: standard
         validated_models:
