@@ -1,15 +1,16 @@
-case: investment-theme-discovery
-expected_routing:
-  workflow: investment-theme-discovery
-must:
-  - map the economic value chain and bottlenecks
-  - separate secular demand, cyclical capacity and narrative effects
-  - require evidence of economic capture for second-order beneficiaries
-  - identify invalidation conditions and crowded assumptions
-  - separate theme exposure from valuation/security attractiveness
-  - intersect research queue with XTB availability
-must_not:
-  - treat theme popularity as investment evidence
-  - underwrite every company in the value chain
-failure_if:
-  - second-order beneficiaries are storytelling without an economic mechanism
+schema_version: "1.0"
+id: "case-004-theme-discovery"
+target: "investment-theme-discovery"
+mode: explicit
+execution_payload_must_not_include: [expected routing, pass/fail criteria, expected answer]
+criteria_text: |-
+  PASS maps value-chain economics and bottlenecks, separates secular/cyclical/narrative effects, requires economic capture for beneficiaries and narrows to XTB research candidates.
+assertions:
+  manual:
+    - "map the economic value chain and bottlenecks"
+    - "separate secular demand, cyclical capacity and narrative effects"
+    - "require evidence of economic capture for second-order beneficiaries"
+    - "identify invalidation conditions and crowded assumptions"
+    - "intersect research queue with XTB availability"
+  manual_not:
+    - "treat theme popularity as investment evidence"
