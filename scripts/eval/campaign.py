@@ -154,6 +154,9 @@ def prepare(out: Path) -> None:
     rel = json.loads((package / "release-manifest.json").read_text(encoding="utf-8"))
     plugin = json.loads((package / "plugin.json").read_text(encoding="utf-8"))
     by_name = {x["name"]: x for x in caps.get("capabilities", [])}
+    for unavailable in ("strategy-to-execution-diagnostic", "organizational-interface-review"):
+        if unavailable in by_name:
+            raise ValueError(f"fallback campaign precondition changed: {unavailable} is now in production")
     subjects = sorted({x["target"] for x in load_campaign_cases(ROOT).values()})
     locked = []
     for name in subjects:
