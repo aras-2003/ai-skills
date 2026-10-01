@@ -16,7 +16,7 @@ if str(VALIDATE_DIR) not in sys.path:
 from common import load_json
 from validate_runtime import validate_portable, validate_runtime
 from validate_skill import validate_skill
-from validate_tests import validate_cases
+from validate_tests import discover_case_paths, validate_cases
 
 
 def skill_text(
@@ -141,6 +141,33 @@ Return result.
             )
             issues = validate_cases(p, self.test_schema)
             self.assertTrue(any(i.severity in {"blocker", "high"} for i in issues))
+
+
+    def test_workflow_suite_is_discovered_and_invalid_yaml_is_blocked(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            p = root / "workflows" / "demo" / "tests" / "cases.yaml"
+            p.parent.mkdir(parents=True)
+            p.write_text("cases:\n  - id: broken\n    expected: [\n", encoding="utf-8")
+            self.assertIn(p, discover_case_paths(root))
+            issues = validate_cases(p, self.test_schema)
+            self.assertTrue(any(i.severity == "blocker" and "Invalid YAML" in i.message for i in issues))
+
+    def test_workflow_suite_missing_required_fields_is_blocked(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            p = root / "workflows" / "demo" / "tests" / "cases.yaml"
+            p.parent.mkdir(parents=True)
+            p.write_text(
+                """cases:
+  - id: workflow-001
+    case: missing-input-and-expected
+""",
+                encoding="utf-8",
+            )
+            self.assertIn(p, discover_case_paths(root))
+            issues = validate_cases(p, self.test_schema)
+            self.assertTrue(any(i.severity == "blocker" and "Test schema violation" in i.message for i in issues))
 
     def test_use_for_description_is_not_high_severity(self) -> None:
         with tempfile.TemporaryDirectory() as td:
