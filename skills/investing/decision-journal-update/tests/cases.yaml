@@ -16,3 +16,4 @@ cases:
     input: "Find semiconductor stocks with improving margins."
     expected:
       should_trigger: false
+      must_not: ["decision record", "append"]
