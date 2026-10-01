@@ -241,21 +241,25 @@ def verify_smoke(lock_path: Path, observed_path: Path) -> list[str]:
     lock = json.loads(lock_path.read_text(encoding="utf-8"))
     obs = json.loads(observed_path.read_text(encoding="utf-8"))
     errors = []
+    channel = obs.get("channel")
+    if channel not in lock.get("packages", {}):
+        return [f"unknown smoke channel: {channel}"]
+    expected_package = lock["packages"][channel]
     pkg = obs.get("package") or {}
     runtime = obs.get("runtime") or {}
     enabled = list(obs.get("enabled_packages") or [])
     catalog = list(obs.get("catalog") or [])
 
-    if pkg.get("name") != lock["package"]["name"] or pkg.get("version") != lock["package"]["version"]:
-        errors.append("installed package name/version does not match lock")
-    if "arek-ai-skills" not in enabled:
-        errors.append("production package is not enabled")
-    if "arek-ai-skills-lab" in enabled:
+    if pkg.get("name") != expected_package["name"] or pkg.get("version") != expected_package["version"]:
+        errors.append("installed package name/version does not match channel lock")
+    if expected_package["name"] not in enabled:
+        errors.append(f"{channel} package is not enabled")
+    if "arek-ai-skills" in enabled and "arek-ai-skills-lab" in enabled:
         errors.append("production and Lab are simultaneously enabled")
     if len(catalog) != len(set(catalog)):
         errors.append("observed catalog contains duplicate capability names")
-    if set(catalog) != set(lock.get("expected_catalog") or []):
-        errors.append("observed catalog differs from locked production catalog")
+    if set(catalog) != set(lock.get("expected_catalogs", {}).get(channel, [])):
+        errors.append(f"observed catalog differs from locked {channel} catalog")
     for field in ("provider", "model_id", "reasoning"):
         if not runtime.get(field):
             errors.append(f"runtime metadata missing {field}")
@@ -289,14 +293,19 @@ def import_run(args) -> Path:
     smoke_errors = verify_smoke(Path(args.lock), Path(args.smoke))
     if smoke_errors:
         raise ValueError("; ".join(smoke_errors))
+    lock = json.loads(Path(args.lock).read_text(encoding="utf-8"))
+    obs = json.loads(Path(args.smoke).read_text(encoding="utf-8"))
+    required_channel = lock["case_channels"][args.case_id]
+    if obs.get("channel") != required_channel:
+        raise ValueError(f"case {args.case_id} requires {required_channel} session")
     trace = json.loads(Path(args.trace).read_text(encoding="utf-8"))
     sel_errors = selection_errors(case, trace)
     if sel_errors:
         raise ValueError("; ".join(sel_errors))
 
-    lock = json.loads(Path(args.lock).read_text(encoding="utf-8"))
-    obs = json.loads(Path(args.smoke).read_text(encoding="utf-8"))
-    component = {x["name"]: x for x in lock["components"]}[case["target"]]
+    component = {
+        (x["channel"], x["name"]): x for x in lock["components"]
+    }[(required_channel, case["target"])]
     dest = ROOT / cfg["evidence_root"] / args.case_id / args.run_id
     dest.mkdir(parents=True, exist_ok=False)
     out_dest = dest / "output.md"
