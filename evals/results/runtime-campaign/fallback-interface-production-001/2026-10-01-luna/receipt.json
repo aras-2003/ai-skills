@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "evidence_scope": "current-version",
+  "case": {
+    "id": "fallback-interface-production-001",
+    "target": "oaf-operating-model-redesign",
+    "mode": "explicit",
+    "input_path": "evals/campaigns/runtime-validation-2026-10/fallback/fallback-interface-production-001.input.md",
+    "input_sha256": "a0cbd0dcfc7a1d3ca5322fb737ea6624324598e01063c6bd792c70ad1519a1b7",
+    "rubric_path": "evals/campaigns/runtime-validation-2026-10/fallback/fallback-interface-production-001.rubric.yaml",
+    "rubric_sha256": "e9f198b5d5ff03cc346bf7832d9771d64a7f612c6ea5641834b148b325e43146"
+  },
+  "component": {
+    "name": "oaf-operating-model-redesign",
+    "version": "1.0.0",
+    "content_sha256": "76810ebb073402253362c2b9aae68a50cc66fb2305a1919d1709f0f589164a00"
+  },
+  "source_revision": "ff012e494f5b2f71803f850d71d20f54a3315e2b",
+  "runtime_artifact": {
+    "channel": "production",
+    "package_name": "arek-ai-skills",
+    "package_version": "1.8.0",
+    "release_id": "1.8.0+ff012e494f5b",
+    "source_revision": "ff012e494f5b2f71803f850d71d20f54a3315e2b",
+    "payload_content_sha256": "0ce65516e149f5d66d77ca5ac968e932196a5e6435983ede1676b39b7b603387",
+    "component_content_sha256": "495859895c5903130bb6ed69b0c7a8926c7ff8fdddc2de87f8f07eb7098bc7eb"
+  },
+  "runtime": {
+    "provider": "openai",
+    "model_id": "gpt-5.6-luna",
+    "reasoning": "medium",
+    "catalog": [
+      "acquisition-fit-review",
+      "architecture-review",
+      "arek-skills-diagnostic",
+      "capability-gap-analysis",
+      "capability-map-review",
+      "commerce-opportunity-review",
+      "commerce-product-deep-dive",
+      "commerce-regulatory-risk-review",
+      "company-context-research",
+      "competition-landscape-review",
+      "decision-bottleneck-analysis",
+      "decision-rights-review",
+      "differentiation-review",
+      "evidence-loop-review",
+      "executive-role-evaluator",
+      "global-local-model-review",
+      "governance-design",
+      "market-transferability-review",
+      "oaf-enterprise-architecture-review",
+      "oaf-enterprise-change-review",
+      "oaf-governance-redesign",
+      "oaf-health-check",
+      "oaf-operating-model-redesign",
+      "oaf-transformation-design",
+      "operating-model-review",
+      "portfolio-health-review",
+      "portfolio-prioritization",
+      "problem-demand-validation",
+      "product-opportunity-discovery",
+      "skill-authoring",
+      "skill-specification",
+      "skill-validation",
+      "supplier-viability-review",
+      "transformation-blueprint",
+      "unit-economics-review"
+    ],
+    "tools": []
+  },
+  "execution": {
+    "assisted": false,
+    "prompt": "Organizacja chce przeprojektować operating model. Największy problem występuje na styku produktu, sprzedaży i IT: handoffy są niejasne, odpowiedzialność ginie między jednostkami, a decyzje eskalują między dyrektorami. Mamy wystarczająco dużo danych, by opisać objawy, ale nie mamy osobnej analizy interfejsów organizacyjnych. Przygotuj tylko taki zakres redesignu, jaki da się obronić na dostępnych capability.\n",
+    "actual_output_path": "evals/results/runtime-campaign/fallback-interface-production-001/2026-10-01-luna/output.md",
+    "actual_output_sha256": "901d68ee180ad8c137d445a4e91ae66222863e296405abec9cfba19f422ee181",
+    "tool_trace_path": "evals/results/runtime-campaign/fallback-interface-production-001/2026-10-01-luna/trace.json",
+    "tool_trace_sha256": "79a801184e46c401f18b70e4a060fc492c78cb5def1e61aa02b2a8c0e06d0293",
+    "selection_findings": [
+      "invoked subject absent from trace: oaf-operating-model-redesign"
+    ],
+    "evidence_origin": "runtime"
+  },
+  "evaluation": {
+    "status": "FAIL",
+    "rubric_version": "1.0",
+    "reviewer": "codex-independent-evaluator",
+    "timestamp_utc": "2026-10-01T14:24:31.819387+00:00",
+    "note": "Missing organizational-interface-review availability disclosure. Trace selected operating-model-review, not required subject workflow; preserve selection finding. Bounded uncertainty and low-disruption scope otherwise good. Campaign labels explicit but input does not name workflow; see evaluation.md."
+  }
+}
