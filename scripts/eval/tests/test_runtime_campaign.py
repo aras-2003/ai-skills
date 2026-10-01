@@ -49,6 +49,7 @@ class RuntimeCampaignTests(unittest.TestCase):
         self.assertEqual("operating-model-review", supplemental["oaf-interface-natural-pl"]["target"])
         self.assertEqual("decision-bottleneck-analysis", supplemental["oaf-decision-bottleneck-natural-pl"]["target"])
         self.assertEqual("decision-rights-review", supplemental["oaf-decision-rights-natural-pl"]["target"])
+        self.assertEqual(["fallback-strategy-production-002"], campaign.config().get("retest_focus_case_ids"))
 
 
     def test_explicit_fallback_requires_target_name_in_executor_input(self) -> None:
@@ -135,7 +136,7 @@ class RuntimeCampaignTests(unittest.TestCase):
     def test_historical_receipt_identity_uses_recorded_behavior_revision(self) -> None:
         old_revision = "ff012e494f5b2f71803f850d71d20f54a3315e2b"
         for case_id, component_name, expected_version, current_expected_version in (
-            ("fallback-strategy-production-001", "oaf-health-check", "1.0.0", "1.2.0"),
+            ("fallback-strategy-production-001", "oaf-health-check", "1.0.0", "1.3.0"),
             ("fallback-interface-production-001", "oaf-operating-model-redesign", "1.0.0", "1.1.0"),
         ):
             target, case = receipt.find_case(ROOT, case_id)
