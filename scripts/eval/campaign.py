@@ -22,11 +22,12 @@ import validate_routing
 import build_plugin
 import artifact_validation
 
-CONFIG = ROOT / "evals/campaigns/runtime-validation-2026-10-r2/campaign.yaml"
+CONFIG_REL = Path("evals/campaigns/runtime-validation-2026-10-r2/campaign.yaml")
+CONFIG = ROOT / CONFIG_REL
 
 
-def config():
-    return yaml.safe_load(CONFIG.read_text(encoding="utf-8")) or {}
+def config(root: Path = ROOT):
+    return yaml.safe_load((root / CONFIG_REL).read_text(encoding="utf-8")) or {}
 
 
 def behavior_changes(pinned: str, *, require_commit: bool = False) -> list[str]:
@@ -206,7 +207,7 @@ def current_case_definitions(root: Path = ROOT) -> list[dict]:
 
 def validate_lock_data(lock: dict, root: Path = ROOT) -> list[str]:
     errors: list[str] = []
-    cfg = config()
+    cfg = config(root)
 
     required_top = {
         "schema_version",
@@ -233,7 +234,7 @@ def validate_lock_data(lock: dict, root: Path = ROOT) -> list[str]:
     if lock.get("behavior_source_revision") != cfg.get("behavior_source_revision"):
         errors.append("lock behavior source mismatch")
 
-    expected_campaign_digest = sha256_file(CONFIG)
+    expected_campaign_digest = sha256_file(root / CONFIG_REL)
     if lock.get("campaign_definition_sha256") != expected_campaign_digest:
         errors.append("lock campaign definition digest mismatch")
 
