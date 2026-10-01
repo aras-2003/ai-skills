@@ -1,5 +1,7 @@
 # Ecommerce
 
+> **Status:** design/backlog documentation only. This domain currently contains no implemented `SKILL.md` files. The items below are proposed capability names, not current source or runtime availability.
+
 Skills for customer journey, merchandising, conversion and release quality.
 
 | Skill | Purpose |
