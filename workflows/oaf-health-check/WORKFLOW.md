@@ -55,7 +55,8 @@ Keep observation and causality separate:
 - without relevant initiative records, decision traces, review-cycle evidence, interface traces or equivalent data, causal explanations remain hypotheses;
 - do not label an unverified causal hypothesis as a confirmed critical gap;
 - confidence belongs to a specific claim and its evidence, not to an entire domain or section;
-- high confidence is appropriate when the relevant mechanism is directly evidenced, not merely because the symptom is severe or common.
+- high confidence is appropriate when the relevant mechanism is directly evidenced, not merely because the symptom is severe or common;
+- downstream consequences are also claims: unless the consequence is stated in the input or directly evidenced, label it as an implication/hypothesis rather than an observation.
 
 Look for reinforcing loops, for example:
 - unclear strategy -> overloaded portfolio;
@@ -70,6 +71,10 @@ Separate:
 2. foundational changes;
 3. local improvements;
 4. unresolved questions.
+
+When the input contains symptoms but not mechanism evidence, the next step is a bounded evidence sample that can discriminate between the leading hypotheses. Select a small representative set of recent initiatives, priority changes, decisions, reviews or interface events and inspect only the evidence needed to test the suspected mechanism.
+
+Do not require complete initiative cards, decision maps or action decisions for the whole portfolio before identifying the mechanism. Expand the sample only when the first bounded review cannot distinguish the plausible causes.
 
 Avoid producing a long transformation backlog from weak evidence.
 
@@ -97,7 +102,7 @@ List the few structural causes connecting multiple symptoms. Mark each as observ
 Questions whose answers could materially change the diagnosis.
 
 ### Recommended next action
-Route to the next OAF skill/design step, or stop if evidence is insufficient.
+Route to the next OAF skill/design step, or stop if evidence is insufficient. For symptom-only diagnosis, prefer the smallest representative evidence sample that can test the leading hypotheses before portfolio-wide process or action changes.
 
 ## Stop conditions
 
