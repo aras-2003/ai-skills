@@ -14,7 +14,7 @@ from build_utils import (
     write_json,
 )
 from portable import read_frontmatter, render_portable_skill
-from workflow_entrypoints import add_workflow_entrypoints
+from workflow_entrypoints import add_workflow_entrypoints, load_registry
 
 PLUGIN_NAME = "arek-ai-skills"
 
@@ -69,11 +69,17 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
             channel="plugin",
             available_names=available_names,
         )
+        registry_by_name = {
+            str(item.get("name")): item
+            for item in load_registry(root)
+            if isinstance(item, dict) and item.get("name")
+        }
         capabilities.extend(
             {
                 "name": name,
                 "kind": "workflow",
                 "maturity": maturity,
+                "version": str((registry_by_name[name].get("metadata") or {}).get("version") or ""),
                 "content_sha256": sha256_tree(skills_out / name),
             }
             for name in workflow_names
@@ -136,6 +142,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                     {
                         "name": item["name"],
                         "kind": item["kind"],
+                        "maturity": item.get("maturity"),
                         "version": item.get("version"),
                         "content_sha256": item.get("content_sha256"),
                     }
