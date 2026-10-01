@@ -23,3 +23,4 @@ cases:
     input: "Explain what free cash flow yield means."
     expected:
       should_trigger: false
+      must_not: ["persist", "APPEND", "SNAPSHOT"]
