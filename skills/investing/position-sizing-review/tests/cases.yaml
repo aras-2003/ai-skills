@@ -18,3 +18,9 @@ cases:
       should_trigger: true
       must: ["missing", "policy"]
       must_not: ["invent an exact percentage"]
+
+  - id: sizing-near-miss
+    case: Generic position sizing education without a live portfolio decision
+    input: "Explain the Kelly criterion and common position-sizing methods."
+    expected:
+      should_trigger: false
