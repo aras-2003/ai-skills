@@ -1,16 +1,18 @@
-case: investment-opportunity-hunter
-expected_routing:
-  workflow: investment-opportunity-hunter
-must:
-  - constrain actionable queue to confirmed or explicitly unverified XTB availability
-  - distinguish fundamental, valuation and market/trend signals
-  - prefer change versus prior state when history exists
-  - return a bounded research queue rather than buy instructions
-  - persist or explicitly report inability to persist opportunities/signals/sources
-must_not:
-  - use social popularity as sufficient evidence
-  - label candidates BUY or SELL
-  - invent historical changes when no history is available
-failure_if:
-  - static score is presented as if it were historical change
-  - broker availability is silently assumed
+schema_version: "1.0"
+id: "case-001-opportunity-hunter"
+target: "investment-opportunity-hunter"
+mode: explicit
+execution_payload_must_not_include: [expected routing, pass/fail criteria, expected answer]
+criteria_text: |-
+  PASS requires XTB availability handling, changed-signal analysis, separated fundamental/valuation/trend signals, bounded research queue, and durable evidence persistence without buy/sell labeling.
+assertions:
+  manual:
+    - "constrain actionable queue to confirmed or explicitly unverified XTB availability"
+    - "distinguish fundamental, valuation and market/trend signals"
+    - "prefer change versus prior state when history exists"
+    - "return a bounded research queue rather than buy instructions"
+    - "persist or explicitly report inability to persist opportunities/signals/sources"
+  manual_not:
+    - "use social popularity as sufficient evidence"
+    - "label candidates BUY or SELL"
+    - "invent historical changes when no history is available"
