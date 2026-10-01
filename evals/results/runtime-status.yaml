@@ -19,3 +19,27 @@ cases:
   - id: case-006-product-discovery
     status: NOT_RUN
     required_next_test: "Unassisted explicit behavior run using only the packaged .input.md and recorded catalog."
+  - id: case-001-opportunity-hunter
+    status: NOT_RUN
+    required_next_test: "Fresh unassisted production runtime run using executor-only input and the R7 package identity."
+
+  - id: case-002-security-sizing
+    status: NOT_RUN
+    required_next_test: "Fresh unassisted production runtime run using executor-only input and the R7 package identity."
+
+  - id: case-003-portfolio-review
+    status: NOT_RUN
+    required_next_test: "Fresh unassisted production runtime run using executor-only input and the R7 package identity."
+
+  - id: case-004-theme-discovery
+    status: NOT_RUN
+    required_next_test: "Fresh unassisted production runtime run using executor-only input and the R7 package identity."
+
+  - id: case-005-policy-learning
+    status: NOT_RUN
+    required_next_test: "Fresh unassisted production runtime run using executor-only input and the R7 package identity."
+
+  - id: case-006-attention-acn
+    status: NOT_RUN
+    required_next_test: "Fresh unassisted production runtime run using executor-only input and the R7 package identity."
+
