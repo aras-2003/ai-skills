@@ -110,6 +110,11 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual(64, len(lock["campaign_definition_sha256"]))
             definitions = {item["id"]: item for item in lock["case_definitions"]}
             self.assertEqual(41, len(definitions))
+            components = {(item["channel"], item["name"]): item for item in lock["components"]}
+            self.assertEqual("1.2.0", components[("production", "oaf-health-check")]["version"])
+            self.assertEqual("1.1.0", components[("production", "operating-model-review")]["version"])
+            self.assertEqual("1.1.0", components[("production", "decision-bottleneck-analysis")]["version"])
+            self.assertEqual("1.1.0", components[("production", "decision-rights-review")]["version"])
             strategy = definitions["fallback-strategy-production-002"]
             self.assertEqual("explicit", strategy["mode"])
             self.assertEqual("oaf-health-check", strategy["target"])
@@ -129,9 +134,9 @@ class RuntimeCampaignTests(unittest.TestCase):
 
     def test_historical_receipt_identity_uses_recorded_behavior_revision(self) -> None:
         old_revision = "ff012e494f5b2f71803f850d71d20f54a3315e2b"
-        for case_id, component_name, expected_version in (
-            ("fallback-strategy-production-001", "oaf-health-check", "1.0.0"),
-            ("fallback-interface-production-001", "oaf-operating-model-redesign", "1.0.0"),
+        for case_id, component_name, expected_version, current_expected_version in (
+            ("fallback-strategy-production-001", "oaf-health-check", "1.0.0", "1.2.0"),
+            ("fallback-interface-production-001", "oaf-operating-model-redesign", "1.0.0", "1.1.0"),
         ):
             target, case = receipt.find_case(ROOT, case_id)
             self.assertEqual(component_name, target)
@@ -144,9 +149,27 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual(expected_version, version)
             self.assertEqual(64, len(digest))
             current_version, current_digest = receipt.current_component_identity(ROOT, component_name)
-            self.assertEqual("1.1.0", current_version)
+            self.assertEqual(current_expected_version, current_version)
             self.assertNotEqual(digest, current_digest)
 
+
+    def test_imported_r2_runtime_statuses_remain_frozen(self) -> None:
+        expected = {
+            "fallback-strategy-production-002": "FAIL",
+            "fallback-interface-explicit-production-002": "PASS",
+            "oaf-interface-natural-pl": "FAIL",
+        }
+        for case_id, status in expected.items():
+            path = (
+                ROOT / "evals/results/runtime-campaign" / case_id
+                / "2026-10-01-luna-r2" / "receipt.json"
+            )
+            data = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(status, data["evaluation"]["status"])
+            self.assertEqual(
+                "c0772e2e3727971b2e3fe8f9d56eccf6bdd87129",
+                data["source_revision"],
+            )
 
     def test_historical_receipts_use_explicit_compatibility_profiles(self) -> None:
         self.assertEqual(
