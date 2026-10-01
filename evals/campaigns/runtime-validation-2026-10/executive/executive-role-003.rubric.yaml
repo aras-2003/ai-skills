@@ -1,0 +1,14 @@
+{
+  "id": "executive-role-003",
+  "mode": "natural-routing",
+  "subject": "executive-role-evaluator",
+  "case": "high-paying-narrow-role",
+  "should_trigger": true,
+  "assertions": {
+    "manual": [
+      "separate compensation attractiveness from career value",
+      "flag risk of narrowing executive trajectory"
+    ],
+    "manual_not": []
+  }
+}

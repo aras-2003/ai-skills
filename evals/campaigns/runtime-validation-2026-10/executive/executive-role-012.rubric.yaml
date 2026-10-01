@@ -1,0 +1,20 @@
+{
+  "id": "executive-role-012",
+  "mode": "natural-routing",
+  "subject": "executive-role-evaluator",
+  "case": "compact-default-after-context-research",
+  "should_trigger": true,
+  "assertions": {
+    "manual": [
+      "make Decision explicit",
+      "make Confidence explicit",
+      "include Role archetype",
+      "preserve UNKNOWN where evidence is missing"
+    ],
+    "manual_not": [
+      "invent Role Quality out of 100",
+      "invent Candidate Fit out of 100",
+      "add company facts unrelated to role implications"
+    ]
+  }
+}

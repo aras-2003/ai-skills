@@ -1,0 +1,19 @@
+{
+  "id": "executive-role-014",
+  "mode": "natural-routing",
+  "subject": "executive-role-evaluator",
+  "case": "user-requested-format-override",
+  "should_trigger": true,
+  "assertions": {
+    "manual": [
+      "respect the requested table format",
+      "preserve decision and confidence",
+      "preserve material authority risk",
+      "preserve the critical unknown"
+    ],
+    "manual_not": [
+      "force the default prose layout",
+      "invent a score out of 100"
+    ]
+  }
+}

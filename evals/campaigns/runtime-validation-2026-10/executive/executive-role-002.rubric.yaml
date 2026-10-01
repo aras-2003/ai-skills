@@ -1,0 +1,15 @@
+{
+  "id": "executive-role-002",
+  "mode": "natural-routing",
+  "subject": "executive-role-evaluator",
+  "case": "deputy-cio-major-enterprise",
+  "should_trigger": true,
+  "assertions": {
+    "manual": [
+      "recognize bridge-to-CIO potential",
+      "assess scale mandate and executive exposure separately",
+      "avoid over-penalizing absence of full CIO scope"
+    ],
+    "manual_not": []
+  }
+}

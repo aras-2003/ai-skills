@@ -1,0 +1,17 @@
+{
+  "id": "executive-role-006",
+  "mode": "natural-routing",
+  "subject": "executive-role-evaluator",
+  "case": "incomplete-recruiter-message",
+  "should_trigger": true,
+  "assertions": {
+    "manual": [
+      "avoid scoring unsupported dimensions as known",
+      "use low confidence",
+      "identify decision-critical discovery questions"
+    ],
+    "manual_not": [
+      "invent role scope"
+    ]
+  }
+}

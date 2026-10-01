@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10",
+  "behavior_source_revision": "ff012e494f5b2f71803f850d71d20f54a3315e2b",
+  "package": {
+    "name": "arek-ai-skills",
+    "version": "1.8.0",
+    "channel": "plugin"
+  },
+  "commerce_case_ids": [
+    "case-001-premium-vs-generic",
+    "case-002-good-demand-bad-economics",
+    "case-003-viral-regulated",
+    "case-004-boring-winner",
+    "case-005-false-us-pl-transfer",
+    "case-006-product-discovery"
+  ],
+  "routing_registry": "evals/routing/registry.yaml",
+  "executive_source": "skills/career/executive-role-evaluator/tests/cases.yaml",
+  "executive_case_ids": [
+    "executive-role-001",
+    "executive-role-002",
+    "executive-role-003",
+    "executive-role-004",
+    "executive-role-005",
+    "executive-role-006",
+    "executive-role-007",
+    "executive-role-008",
+    "executive-role-009",
+    "executive-role-010",
+    "executive-role-011",
+    "executive-role-012",
+    "executive-role-013",
+    "executive-role-014"
+  ],
+  "fallback_cases": [
+    {
+      "id": "fallback-strategy-production-001",
+      "target": "oaf-health-check",
+      "input": "evals/campaigns/runtime-validation-2026-10/fallback/fallback-strategy-production-001.input.md",
+      "rubric": "evals/campaigns/runtime-validation-2026-10/fallback/fallback-strategy-production-001.rubric.yaml"
+    },
+    {
+      "id": "fallback-interface-production-001",
+      "target": "oaf-operating-model-redesign",
+      "input": "evals/campaigns/runtime-validation-2026-10/fallback/fallback-interface-production-001.input.md",
+      "rubric": "evals/campaigns/runtime-validation-2026-10/fallback/fallback-interface-production-001.rubric.yaml"
+    }
+  ],
+  "execution_order": [
+    "commerce",
+    "production-fallback",
+    "routing",
+    "executive-role"
+  ],
+  "runtime_fields_required": [
+    "provider",
+    "model_id",
+    "reasoning",
+    "available_tools",
+    "observed_catalog",
+    "package_version"
+  ],
+  "evidence_root": "evals/results/runtime-campaign",
+  "unassisted_rule": "Executor must run in a fresh session that has not seen evaluator rubrics. This conversation is evaluator-aware and cannot produce independent unassisted evidence."
+}
