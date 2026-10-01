@@ -179,6 +179,142 @@ def queue_text(include_supplemental: bool = False) -> str:
     return "\n".join(out)
 
 
+LOCK_SCHEMA_VERSION = "2.0"
+HISTORICAL_RECEIPT_COMPATIBILITY = {
+    "ff012e494f5b2f71803f850d71d20f54a3315e2b": "runtime-validation-2026-10",
+}
+
+
+def current_case_definitions(root: Path = ROOT) -> list[dict]:
+    all_cases = {**load_campaign_cases(root), **load_supplemental_cases(root)}
+    definitions = []
+    for case in all_cases.values():
+        input_path = root / case["input"]
+        rubric_path = root / case["rubric"]
+        definitions.append({
+            "id": case["id"],
+            "suite": case["suite"],
+            "mode": case["mode"],
+            "target": case["target"],
+            "input_path": case["input"],
+            "input_sha256": sha256_file(input_path),
+            "rubric_path": case["rubric"],
+            "rubric_sha256": sha256_file(rubric_path),
+        })
+    return sorted(definitions, key=lambda x: x["id"])
+
+
+def validate_lock_data(lock: dict, root: Path = ROOT) -> list[str]:
+    errors: list[str] = []
+    cfg = config()
+
+    required_top = {
+        "schema_version",
+        "campaign",
+        "campaign_definition_sha256",
+        "behavior_source_revision",
+        "case_definitions",
+        "case_channels",
+        "packages",
+        "expected_catalogs",
+        "components",
+    }
+    missing = sorted(required_top - set(lock))
+    if missing:
+        errors.append("lock missing required fields: " + ", ".join(missing))
+        return errors
+
+    if lock.get("schema_version") != LOCK_SCHEMA_VERSION:
+        errors.append(
+            f"unsupported lock schema_version: {lock.get('schema_version')!r}; expected {LOCK_SCHEMA_VERSION}"
+        )
+    if lock.get("campaign") != cfg.get("campaign"):
+        errors.append("lock campaign identity mismatch")
+    if lock.get("behavior_source_revision") != cfg.get("behavior_source_revision"):
+        errors.append("lock behavior source mismatch")
+
+    expected_campaign_digest = sha256_file(CONFIG)
+    if lock.get("campaign_definition_sha256") != expected_campaign_digest:
+        errors.append("lock campaign definition digest mismatch")
+
+    raw_defs = lock.get("case_definitions")
+    if not isinstance(raw_defs, list):
+        errors.append("lock case_definitions must be a list")
+        return errors
+
+    required_case_fields = {
+        "id", "suite", "mode", "target",
+        "input_path", "input_sha256", "rubric_path", "rubric_sha256",
+    }
+    seen: set[str] = set()
+    normalized: list[dict] = []
+    for index, item in enumerate(raw_defs):
+        if not isinstance(item, dict):
+            errors.append(f"lock case_definitions[{index}] must be an object")
+            continue
+        missing_case = sorted(required_case_fields - set(item))
+        if missing_case:
+            errors.append(
+                f"lock case_definitions[{index}] missing fields: {', '.join(missing_case)}"
+            )
+            continue
+        cid = str(item.get("id"))
+        if cid in seen:
+            errors.append(f"lock has duplicate case definition: {cid}")
+        seen.add(cid)
+        normalized.append({key: item.get(key) for key in sorted(required_case_fields)})
+
+    expected_defs = current_case_definitions(root)
+    expected_by_id = {item["id"]: item for item in expected_defs}
+    actual_by_id = {item["id"]: item for item in raw_defs if isinstance(item, dict) and item.get("id")}
+    expected_ids = set(expected_by_id)
+    actual_ids = set(actual_by_id)
+    missing_ids = sorted(expected_ids - actual_ids)
+    unknown_ids = sorted(actual_ids - expected_ids)
+    if missing_ids:
+        errors.append("lock missing case definitions: " + ", ".join(missing_ids))
+    if unknown_ids:
+        errors.append("lock contains unknown case definitions: " + ", ".join(unknown_ids))
+
+    for cid in sorted(expected_ids & actual_ids):
+        expected = expected_by_id[cid]
+        actual = actual_by_id[cid]
+        for field in (
+            "suite", "mode", "target",
+            "input_path", "input_sha256", "rubric_path", "rubric_sha256",
+        ):
+            if actual.get(field) != expected.get(field):
+                errors.append(f"lock case {cid} {field} mismatch")
+
+    channels = lock.get("case_channels")
+    if not isinstance(channels, dict):
+        errors.append("lock case_channels must be an object")
+    else:
+        channel_ids = set(channels)
+        if channel_ids != expected_ids:
+            missing_channels = sorted(expected_ids - channel_ids)
+            unknown_channels = sorted(channel_ids - expected_ids)
+            if missing_channels:
+                errors.append("lock case_channels missing cases: " + ", ".join(missing_channels))
+            if unknown_channels:
+                errors.append("lock case_channels contains unknown cases: " + ", ".join(unknown_channels))
+
+    return errors
+
+
+def validate_lock_file(path: Path, root: Path = ROOT) -> dict:
+    try:
+        lock = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise ValueError(f"invalid lock JSON: {exc}") from exc
+    if not isinstance(lock, dict):
+        raise ValueError("lock must be a JSON object")
+    errors = validate_lock_data(lock, root=root)
+    if errors:
+        raise ValueError("invalid campaign lock: " + "; ".join(errors))
+    return lock
+
+
 def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
     errors = validate_campaign()
     if errors:
@@ -253,23 +389,10 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
         else:
             raise ValueError(f"campaign subject absent from both package catalogs: {target}")
 
-    case_definitions = []
-    for case in all_cases.values():
-        input_path = ROOT / case["input"]
-        rubric_path = ROOT / case["rubric"]
-        case_definitions.append({
-            "id": case["id"],
-            "suite": case["suite"],
-            "mode": case["mode"],
-            "target": case["target"],
-            "input_path": case["input"],
-            "input_sha256": sha256_file(input_path),
-            "rubric_path": case["rubric"],
-            "rubric_sha256": sha256_file(rubric_path),
-        })
+    case_definitions = current_case_definitions(ROOT)
 
     lock = {
-        "schema_version": "1.0",
+        "schema_version": LOCK_SCHEMA_VERSION,
         "campaign": cfg["campaign"],
         "campaign_definition_sha256": sha256_file(CONFIG),
         "behavior_source_revision": pinned,
@@ -388,12 +511,16 @@ def selection_errors(case: dict, trace: dict) -> list[str]:
 
 def import_run(args) -> Path:
     cfg = config()
+    lock = validate_lock_file(Path(args.lock), root=ROOT)
     cases = {**load_campaign_cases(ROOT), **load_supplemental_cases(ROOT)}
+    if args.case_id not in cases:
+        raise ValueError(f"unknown active campaign case: {args.case_id}")
     case = cases[args.case_id]
+
+    # Lock validation is intentionally separate from installed-artifact smoke.
     smoke_errors = verify_smoke(Path(args.lock), Path(args.smoke))
     if smoke_errors:
         raise ValueError("; ".join(smoke_errors))
-    lock = json.loads(Path(args.lock).read_text(encoding="utf-8"))
     obs = json.loads(Path(args.smoke).read_text(encoding="utf-8"))
     required_channel = lock["case_channels"][args.case_id]
     if obs.get("channel") != required_channel:
@@ -465,12 +592,23 @@ def validate_evidence() -> list[str]:
     if not root.exists():
         return []
     errors = []
+    active_revision = str(config().get("behavior_source_revision") or "")
     for path in sorted(root.rglob("receipt.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
+        source_revision = str(data.get("source_revision") or "")
+        if source_revision == active_revision:
+            compatibility = "active-r2"
+        elif source_revision in HISTORICAL_RECEIPT_COMPATIBILITY:
+            compatibility = "historical-r1"
+        else:
+            errors.append(
+                f"{path.relative_to(ROOT)}: unsupported evidence source revision: {source_revision}"
+            )
+            continue
         for err in receipt.validate_receipt_data(
-            data, root=ROOT, current_revision=str(data.get("source_revision") or "")
+            data, root=ROOT, current_revision=source_revision
         ):
-            errors.append(f"{path.relative_to(ROOT)}: {err}")
+            errors.append(f"{path.relative_to(ROOT)} [{compatibility}]: {err}")
     return errors
 
 
@@ -483,6 +621,8 @@ def main() -> int:
     q.add_argument("--include-supplemental", action="store_true")
     prep = s.add_parser("prepare")
     prep.add_argument("--output", type=Path, default=ROOT / ".tmp/runtime-campaign")
+    lock_cmd = s.add_parser("validate-lock")
+    lock_cmd.add_argument("--lock", required=True, type=Path)
     smoke = s.add_parser("verify-smoke")
     smoke.add_argument("--lock", required=True, type=Path)
     smoke.add_argument("--observed", required=True, type=Path)
@@ -519,6 +659,14 @@ def main() -> int:
     if args.cmd == "prepare":
         prepare(args.output)
         print(args.output)
+        return 0
+    if args.cmd == "validate-lock":
+        try:
+            validate_lock_file(args.lock, root=ROOT)
+        except ValueError as exc:
+            print("[BLOCKER]", exc)
+            return 1
+        print("Campaign lock: OK")
         return 0
     if args.cmd == "verify-smoke":
         errors = verify_smoke(args.lock, args.observed)
