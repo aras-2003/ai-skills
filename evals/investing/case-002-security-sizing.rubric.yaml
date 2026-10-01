@@ -1,17 +1,18 @@
-case: investment-security-review
-expected_routing:
-  workflow: investment-security-review
-must:
-  - separate company thesis, security valuation and portfolio fit
-  - challenge the HBM thesis with a plausible countercase and priced-in expectations
-  - treat 9.5 percent concentration as a sizing constraint despite intact thesis
-  - distinguish market-driven position drift from a new trade
-  - use policy review threshold rather than inventing a new limit
-  - preserve a new thesis/decision record instead of rewriting history
-must_not:
-  - equate strong momentum with permission to add
-  - recommend a larger position merely because thesis survives
-  - overwrite the original thesis rationale with hindsight
-failure_if:
-  - concentration is ignored
-  - conviction and sizing are collapsed into one score
+schema_version: "1.0"
+id: "case-002-security-sizing"
+target: "investment-security-review"
+mode: explicit
+execution_payload_must_not_include: [expected routing, pass/fail criteria, expected answer]
+criteria_text: |-
+  PASS separates company thesis, valuation and portfolio fit; challenges confirmation bias; respects concentration policy; and preserves decision history.
+assertions:
+  manual:
+    - "separate company thesis, security valuation and portfolio fit"
+    - "challenge the HBM thesis with a plausible countercase and priced-in expectations"
+    - "treat 9.5 percent concentration as a sizing constraint despite intact thesis"
+    - "distinguish market-driven position drift from a new trade"
+    - "use policy review threshold rather than inventing a new limit"
+    - "preserve a new thesis/decision record instead of rewriting history"
+  manual_not:
+    - "equate strong momentum with permission to add"
+    - "recommend a larger position merely because thesis survives"
