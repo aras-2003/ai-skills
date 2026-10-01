@@ -61,7 +61,7 @@ Details:
 
 A narrative historical PASS is not a current-version runtime receipt. When runtime evidence is unavailable, record `NOT_RUN`/pending rather than assuming success.
 
-Current runtime follow-up campaign on this branch: `runtime-validation-2026-10-r6`, behavior source `a924f3ba9fe964ff3aeaa2e5570b7a718d29d38c`, core count 38. Historical R1 and R2 runtime receipts remain bound to their original behavior sources and statuses. R3 is frozen historical evidence. R4 remains historical FAIL evidence for the strategy fallback. R5 remains historical FAIL evidence for the strategy fallback. The active R6 campaign has no runtime PASS until the focused health-check retest runs on the exact R6 artifact.
+Current runtime follow-up campaign on this branch: `runtime-validation-2026-10-r6`, behavior source `a924f3ba9fe964ff3aeaa2e5570b7a718d29d38c`, core count 38. Historical R1 and R2 runtime receipts remain bound to their original behavior sources and statuses. R3 is frozen historical evidence. R4 remains historical FAIL evidence for the strategy fallback. R5 remains historical FAIL evidence for the strategy fallback. The active R6 campaign has one targeted current-version PASS for the focused health-check strategy fallback. Remaining campaign cases are not implied PASS, and this does not establish full readiness.
 
 ## Quality and build
 
