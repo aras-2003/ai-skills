@@ -1,0 +1,16 @@
+case: investment-policy-learning
+expected_routing:
+  primary_skill: investment-policy-design
+  supporting_skill: investor-pattern-research
+must:
+  - distinguish risk capacity from preference
+  - extract principles from investors rather than copy holdings
+  - preserve conflicts between investment schools where assumptions differ
+  - propose portfolio buckets and starter/build logic as policy choices
+  - label numeric limits as provisional unless user-set or evidence-based
+  - identify what evidence would justify future policy changes
+must_not:
+  - claim one investor archetype is universally best
+  - invent exact concentration limits without provenance
+failure_if:
+  - famous-investor holdings are treated as recommendations

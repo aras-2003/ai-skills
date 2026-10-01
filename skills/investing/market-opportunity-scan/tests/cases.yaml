@@ -1,0 +1,18 @@
+cases:
+  - id: scan-direct
+    case: Broad XTB opportunity hunt
+    input: "Scan XTB for stocks where estimates improved but valuation has not rerated much."
+    expected:
+      should_trigger: true
+      must: ["XTB", "research candidates", "valuation"]
+  - id: scan-change
+    case: Detect changes in tracked names
+    input: "What names on my watchlist became materially more interesting since last month?"
+    expected:
+      should_trigger: true
+      must: ["change", "prior"]
+  - id: scan-near-miss
+    case: Deep dive on one known stock
+    input: "Build a full investment thesis for MU."
+    expected:
+      should_trigger: false

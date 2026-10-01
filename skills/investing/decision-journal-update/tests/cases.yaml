@@ -1,0 +1,18 @@
+cases:
+  - id: journal-entry
+    case: Record new starter decision
+    input: "I opened a 1% starter in MU today. Record why, what would prove me wrong and what I knew at entry."
+    expected:
+      should_trigger: true
+      must: ["decision timestamp", "invalidation", "append"]
+  - id: journal-review
+    case: Review a closed decision
+    input: "Review my old trade: was the thesis wrong, timing wrong, sizing wrong, or was it just a bad outcome?"
+    expected:
+      should_trigger: true
+      must: ["process", "outcome"]
+  - id: journal-near-miss
+    case: Pure market research
+    input: "Find semiconductor stocks with improving margins."
+    expected:
+      should_trigger: false

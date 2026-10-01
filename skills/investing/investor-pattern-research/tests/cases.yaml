@@ -1,0 +1,17 @@
+cases:
+  - id: investor-direct
+    case: Learn from several investors
+    input: "Research Buffett, Marks and Druckenmiller and extract what I can use in my own investment policy."
+    expected:
+      should_trigger: true
+      must: ["principles", "context", "transferable"]
+  - id: investor-single
+    case: Understand a decision pattern
+    input: "How does Howard Marks think about risk changing with price? Use his own material."
+    expected:
+      should_trigger: true
+  - id: investor-near-miss
+    case: Copy a fund holding
+    input: "Just tell me what Buffett owns today so I can buy the same stocks."
+    expected:
+      should_trigger: false

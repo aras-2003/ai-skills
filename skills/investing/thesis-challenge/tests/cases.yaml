@@ -1,0 +1,17 @@
+cases:
+  - id: challenge-direct
+    case: Challenge existing bullish thesis
+    input: "My thesis is that HBM demand will rerate Micron. Try to break it before I add."
+    expected:
+      should_trigger: true
+      must: ["countercase", "priced-in", "revised thesis state"]
+  - id: challenge-confirmation
+    case: Confirmation bias explicit
+    input: "I like this stock a lot; find the strongest evidence that I may be wrong."
+    expected:
+      should_trigger: true
+  - id: challenge-near-miss
+    case: No thesis exists
+    input: "What does Micron do?"
+    expected:
+      should_trigger: false

@@ -1,0 +1,18 @@
+cases:
+  - id: policy-direct
+    case: User asks to build investment policy
+    input: "Build my investment policy from my portfolio, liquidity needs and appetite for an opportunity bucket."
+    expected:
+      should_trigger: true
+      must: ["risk capacity", "portfolio buckets", "numeric limit provenance"]
+  - id: policy-indirect
+    case: User asks for concentration and sizing rules
+    input: "I need rules for starter positions, full positions, max concentration and when to rebalance."
+    expected:
+      should_trigger: true
+      must: ["sizing", "concentration"]
+  - id: policy-near-miss
+    case: One stock assessment should not trigger policy design
+    input: "Is Micron attractive after earnings?"
+    expected:
+      should_trigger: false

@@ -12,7 +12,7 @@ def run(script: Path) -> int:
 
 def main() -> int:
     here = Path(__file__).resolve().parent
-    scripts = [here / "validate_skill.py", here / "validate_tests.py", here / "validate_catalog.py"]
+    scripts = [here / "validate_skill.py", here / "validate_tests.py", here / "validate_catalog.py", here / "validate_investing.py"]
     results = [run(script) for script in scripts]
     return 1 if any(results) else 0
 

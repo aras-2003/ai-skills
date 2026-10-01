@@ -1,0 +1,18 @@
+cases:
+  - id: portfolio-direct
+    case: Portfolio concentration review
+    input: "Review my current XTB portfolio and tell me what changed since the last snapshot."
+    expected:
+      should_trigger: true
+      must: ["as-of date", "changes since prior snapshot", "concentration"]
+  - id: portfolio-market-drift
+    case: Position grew without a trade
+    input: "I did not buy more, but one holding is now 11% after a rally. Check portfolio risk."
+    expected:
+      should_trigger: true
+      must: ["market-driven", "policy"]
+  - id: portfolio-near-miss
+    case: Single security research
+    input: "Analyze ASML's competitive moat."
+    expected:
+      should_trigger: false

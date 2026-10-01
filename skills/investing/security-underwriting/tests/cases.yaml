@@ -1,0 +1,17 @@
+cases:
+  - id: underwriting-direct
+    case: Full stock thesis
+    input: "Build a full investment case for Micron for a 6-18 month and 2-5 year horizon."
+    expected:
+      should_trigger: true
+      must: ["valuation", "kill criteria", "evidence"]
+  - id: underwriting-etf
+    case: ETF underwriting
+    input: "Underwrite this semiconductor ETF as a long-term holding, including concentration and valuation context."
+    expected:
+      should_trigger: true
+  - id: underwriting-near-miss
+    case: Broad scan
+    input: "Find 10 cheap stocks on XTB with improving estimates."
+    expected:
+      should_trigger: false
