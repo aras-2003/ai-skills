@@ -16,3 +16,4 @@ cases:
     input: "Build a full investment thesis for MU."
     expected:
       should_trigger: false
+      must_not: ["broad XTB scan", "research queue"]
