@@ -38,8 +38,17 @@ class RuntimeCampaignTests(unittest.TestCase):
             counts,
         )
         supplemental = load_supplemental_cases(ROOT)
-        self.assertEqual(["oaf-interface-natural-pl"], sorted(supplemental))
+        self.assertEqual(
+            [
+                "oaf-decision-bottleneck-natural-pl",
+                "oaf-decision-rights-natural-pl",
+                "oaf-interface-natural-pl",
+            ],
+            sorted(supplemental),
+        )
         self.assertEqual("operating-model-review", supplemental["oaf-interface-natural-pl"]["target"])
+        self.assertEqual("decision-bottleneck-analysis", supplemental["oaf-decision-bottleneck-natural-pl"]["target"])
+        self.assertEqual("decision-rights-review", supplemental["oaf-decision-rights-natural-pl"]["target"])
 
 
     def test_explicit_fallback_requires_target_name_in_executor_input(self) -> None:
@@ -76,7 +85,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("c0772e2e3727971b2e3fe8f9d56eccf6bdd87129", lock["behavior_source_revision"])
+            self.assertEqual("cde46f59c20a0d4313528185e5df079335633b10", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
             self.assertEqual("1.8.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
@@ -90,10 +99,17 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual("production", lock["case_channels"]["fallback-interface-explicit-production-002"])
             self.assertEqual("production", lock["case_channels"]["oaf-interface-natural-pl"])
             self.assertEqual(38, lock["core_case_count"])
-            self.assertEqual(["oaf-interface-natural-pl"], lock["supplemental_case_ids"])
+            self.assertEqual(
+                [
+                    "oaf-decision-bottleneck-natural-pl",
+                    "oaf-decision-rights-natural-pl",
+                    "oaf-interface-natural-pl",
+                ],
+                lock["supplemental_case_ids"],
+            )
             self.assertEqual(64, len(lock["campaign_definition_sha256"]))
             definitions = {item["id"]: item for item in lock["case_definitions"]}
-            self.assertEqual(39, len(definitions))
+            self.assertEqual(41, len(definitions))
             strategy = definitions["fallback-strategy-production-002"]
             self.assertEqual("explicit", strategy["mode"])
             self.assertEqual("oaf-health-check", strategy["target"])
@@ -132,11 +148,17 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertNotEqual(digest, current_digest)
 
 
-    def test_historical_r1_receipts_use_explicit_compatibility_profile(self) -> None:
+    def test_historical_receipts_use_explicit_compatibility_profiles(self) -> None:
         self.assertEqual(
             "historical-r1",
             campaign.evidence_compatibility_profile(
                 "ff012e494f5b2f71803f850d71d20f54a3315e2b"
+            ),
+        )
+        self.assertEqual(
+            "historical-r2",
+            campaign.evidence_compatibility_profile(
+                "c0772e2e3727971b2e3fe8f9d56eccf6bdd87129"
             ),
         )
         with self.assertRaisesRegex(ValueError, "unsupported evidence source revision"):
