@@ -1,0 +1,1 @@
+Konkretna klasa decyzji o niestandardowych zobowiązaniach wobec klienta regularnie czeka kilka dni i często jest eskalowana. Właściciel i zaangażowane jednostki są znane. Chcę odtworzyć formalną i faktyczną ścieżkę decyzji, miejsca oczekiwania, ukryte veto i rework oraz znaleźć najmniejszy eksperyment usuwający wąskie gardło.
