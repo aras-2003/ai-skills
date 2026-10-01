@@ -19,7 +19,7 @@ if str(EVAL_DIR) not in sys.path:
 
 import campaign
 import receipt
-from common import load_campaign_cases
+from common import load_campaign_cases, load_supplemental_cases
 
 
 class RuntimeCampaignTests(unittest.TestCase):
@@ -37,13 +37,16 @@ class RuntimeCampaignTests(unittest.TestCase):
             {"commerce": 6, "routing": 16, "executive-role": 14, "production-fallback": 2},
             counts,
         )
+        supplemental = load_supplemental_cases(ROOT)
+        self.assertEqual(["oaf-interface-natural-pl"], sorted(supplemental))
+        self.assertEqual("operating-model-review", supplemental["oaf-interface-natural-pl"]["target"])
 
     def test_prepare_locks_package_catalog_components_and_fallback_absence(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("ff012e494f5b2f71803f850d71d20f54a3315e2b", lock["behavior_source_revision"])
+            self.assertEqual("c0772e2e3727971b2e3fe8f9d56eccf6bdd87129", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
             self.assertEqual("1.8.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
@@ -53,8 +56,22 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
             self.assertTrue(lock["components"])
             self.assertTrue(all(x.get("version") and x.get("content_sha256") for x in lock["components"]))
-            self.assertEqual("production", lock["case_channels"]["fallback-strategy-production-001"])
-            self.assertEqual("production", lock["case_channels"]["fallback-interface-production-001"])
+            self.assertEqual("production", lock["case_channels"]["fallback-strategy-production-002"])
+            self.assertEqual("production", lock["case_channels"]["fallback-interface-explicit-production-002"])
+            self.assertEqual("production", lock["case_channels"]["oaf-interface-natural-pl"])
+            self.assertEqual(38, lock["core_case_count"])
+            self.assertEqual(["oaf-interface-natural-pl"], lock["supplemental_case_ids"])
+
+    def test_revised_fallback_identities_do_not_rewrite_historical_001_cases(self) -> None:
+        active = load_campaign_cases(ROOT)
+        self.assertIn("fallback-strategy-production-002", active)
+        self.assertIn("fallback-interface-explicit-production-002", active)
+        self.assertNotIn("fallback-strategy-production-001", active)
+        self.assertNotIn("fallback-interface-production-001", active)
+        historical_strategy = receipt.find_case(ROOT, "fallback-strategy-production-001")
+        historical_interface = receipt.find_case(ROOT, "fallback-interface-production-001")
+        self.assertEqual("oaf-health-check", historical_strategy[0])
+        self.assertEqual("oaf-operating-model-redesign", historical_interface[0])
 
     def test_smoke_rejects_simultaneous_production_and_lab(self) -> None:
         lock = {
