@@ -8,6 +8,8 @@ from pathlib import Path
 
 import yaml
 
+from build_utils import sha256_tree
+
 FORBIDDEN_PARTS = {"tests", "__pycache__", "evals"}
 ZIP_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
 
@@ -38,6 +40,14 @@ def validate_skill_text(text: str, label: str) -> list[str]:
     return errors
 
 
+def _inventory(component_dir: Path) -> list[str]:
+    return sorted(
+        p.relative_to(component_dir).as_posix()
+        for p in component_dir.rglob("*")
+        if p.is_file()
+    )
+
+
 def validate_manifests(path: Path) -> list[str]:
     errors: list[str] = []
     release = path / "release-manifest.json"
@@ -53,6 +63,43 @@ def validate_manifests(path: Path) -> list[str]:
             errors.append("release/capabilities source_revision mismatch")
         if not r.get("release_id"):
             errors.append("release manifest missing immutable release_id")
+
+        capability_items = c.get("capabilities") or []
+        release_items = r.get("components") or []
+        release_by_name = {
+            item.get("name"): item
+            for item in release_items
+            if isinstance(item, dict) and item.get("name")
+        }
+        for item in capability_items:
+            if not isinstance(item, dict) or not item.get("name"):
+                errors.append("invalid capability manifest item")
+                continue
+            name = item["name"]
+            component_dir = path / "skills" / name
+            if not component_dir.is_dir():
+                errors.append(f"{name}: capability directory missing")
+                continue
+            actual_digest = sha256_tree(component_dir)
+            if item.get("content_sha256") != actual_digest:
+                errors.append(f"{name}: capabilities content_sha256 mismatch")
+            if "inventory" in item and item.get("inventory") != _inventory(component_dir):
+                errors.append(f"{name}: capabilities inventory mismatch")
+
+            release_item = release_by_name.get(name)
+            if release_item is None:
+                errors.append(f"{name}: missing from release manifest")
+                continue
+            for field in ("kind", "maturity", "version", "content_sha256"):
+                if release_item.get(field) != item.get(field):
+                    errors.append(f"{name}: release/capabilities {field} mismatch")
+
+        capability_names = {
+            item.get("name") for item in capability_items if isinstance(item, dict) and item.get("name")
+        }
+        extra_release = sorted(set(release_by_name) - capability_names)
+        if extra_release:
+            errors.append("release manifest has unknown components: " + ", ".join(extra_release))
     return errors
 
 
