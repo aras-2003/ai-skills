@@ -61,7 +61,7 @@ Details:
 
 A narrative historical PASS is not a current-version runtime receipt. When runtime evidence is unavailable, record `NOT_RUN`/pending rather than assuming success.
 
-Current runtime follow-up campaign on this branch: `runtime-validation-2026-10-r5`, behavior source `a5c4001d28f45d3fb799f07a2c880f406f58cc65`, core count 38. Historical R1 and R2 runtime receipts remain bound to their original behavior sources and statuses. R3 is frozen historical evidence. R4 remains historical FAIL evidence for the strategy fallback. The active R5 campaign has no runtime PASS until the focused health-check retest runs on the exact R5 artifact.
+Current runtime follow-up campaign on this branch: `runtime-validation-2026-10-r6`, behavior source `a924f3ba9fe964ff3aeaa2e5570b7a718d29d38c`, core count 38. Historical R1 and R2 runtime receipts remain bound to their original behavior sources and statuses. R3 is frozen historical evidence. R4 remains historical FAIL evidence for the strategy fallback. R5 remains historical FAIL evidence for the strategy fallback. The active R6 campaign has no runtime PASS until the focused health-check retest runs on the exact R6 artifact.
 
 ## Quality and build
 
@@ -83,7 +83,7 @@ Generated artifacts are built atomically and include source provenance.
 - Lifecycle: `docs/LIFECYCLE.md`
 - Testing: `docs/TESTING.md`
 - Runtime evals: `docs/RUNTIME-EVALS.md`
-- Active R5 runbook: `evals/campaigns/runtime-validation-2026-10-r5/RUNBOOK.md`
+- Active R6 runbook: `evals/campaigns/runtime-validation-2026-10-r6/RUNBOOK.md`
 - Channel usage: `docs/GPT-USAGE.md`
 - Branch-rules proposal: `docs/GITHUB-BRANCH-RULES-PROPOSAL.md`
 - Distribution/license decision: `docs/DISTRIBUTION-LICENSE-DECISION.md`
