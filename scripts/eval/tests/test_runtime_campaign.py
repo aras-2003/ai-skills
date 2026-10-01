@@ -85,7 +85,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("cde46f59c20a0d4313528185e5df079335633b10", lock["behavior_source_revision"])
+            self.assertEqual("28a7681cf024bb7aaad7a979e7ce7253139d5bd4", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
             self.assertEqual("1.8.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
@@ -111,7 +111,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             definitions = {item["id"]: item for item in lock["case_definitions"]}
             self.assertEqual(41, len(definitions))
             components = {(item["channel"], item["name"]): item for item in lock["components"]}
-            self.assertEqual("1.2.0", components[("production", "oaf-health-check")]["version"])
+            self.assertEqual("1.3.0", components[("production", "oaf-health-check")]["version"])
             self.assertEqual("1.1.0", components[("production", "operating-model-review")]["version"])
             self.assertEqual("1.1.0", components[("production", "decision-bottleneck-analysis")]["version"])
             self.assertEqual("1.1.0", components[("production", "decision-rights-review")]["version"])
@@ -153,23 +153,30 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertNotEqual(digest, current_digest)
 
 
-    def test_imported_r2_runtime_statuses_remain_frozen(self) -> None:
-        expected = {
+    def test_imported_r2_and_r3_runtime_statuses_remain_frozen(self) -> None:
+        r2 = {
             "fallback-strategy-production-002": "FAIL",
             "fallback-interface-explicit-production-002": "PASS",
             "oaf-interface-natural-pl": "FAIL",
         }
-        for case_id, status in expected.items():
-            path = (
-                ROOT / "evals/results/runtime-campaign" / case_id
-                / "2026-10-01-luna-r2" / "receipt.json"
-            )
+        for case_id, status in r2.items():
+            path = ROOT / "evals/results/runtime-campaign" / case_id / "2026-10-01-luna-r2" / "receipt.json"
             data = json.loads(path.read_text(encoding="utf-8"))
             self.assertEqual(status, data["evaluation"]["status"])
-            self.assertEqual(
-                "c0772e2e3727971b2e3fe8f9d56eccf6bdd87129",
-                data["source_revision"],
-            )
+            self.assertEqual("c0772e2e3727971b2e3fe8f9d56eccf6bdd87129", data["source_revision"])
+
+        r3 = {
+            "fallback-strategy-production-002": "FAIL",
+            "fallback-interface-explicit-production-002": "PASS",
+            "oaf-interface-natural-pl": "PASS",
+            "oaf-decision-bottleneck-natural-pl": "PASS",
+            "oaf-decision-rights-natural-pl": "PASS",
+        }
+        for case_id, status in r3.items():
+            path = ROOT / "evals/results/runtime-campaign" / case_id / "2026-10-01-luna-r3" / "receipt.json"
+            data = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(status, data["evaluation"]["status"])
+            self.assertEqual("cde46f59c20a0d4313528185e5df079335633b10", data["source_revision"])
 
     def test_historical_receipts_use_explicit_compatibility_profiles(self) -> None:
         self.assertEqual(
@@ -182,6 +189,12 @@ class RuntimeCampaignTests(unittest.TestCase):
             "historical-r2",
             campaign.evidence_compatibility_profile(
                 "c0772e2e3727971b2e3fe8f9d56eccf6bdd87129"
+            ),
+        )
+        self.assertEqual(
+            "historical-r3",
+            campaign.evidence_compatibility_profile(
+                "cde46f59c20a0d4313528185e5df079335633b10"
             ),
         )
         with self.assertRaisesRegex(ValueError, "unsupported evidence source revision"):
