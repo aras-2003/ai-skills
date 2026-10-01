@@ -24,9 +24,11 @@ Reduce a broad investable universe to a small research queue by looking for mean
 2. Compare current signals with prior observations when history exists.
 3. Look for valuation dislocation, estimate revisions, margin/FCF inflection, cyclical normalization, quality temporarily mispriced and structural growth.
 4. Separate fundamental, valuation and market/trend signals.
-5. Detect both positive candidates and portfolio-risk review candidates.
-6. Remove ideas supported only by price momentum, social attention or narrative.
-7. Return 3-10 research candidates with the evidence gap that must be closed next.
+5. Evaluate signal materiality and decision relevance before promoting a name to the research queue.
+6. Detect both positive candidates and portfolio-risk review candidates.
+7. Remove ideas supported only by price momentum, social attention or narrative.
+8. Route ambiguous-but-material changes through investment-attention-triage when the key question is whether the new information matters.
+9. Return 3-10 research candidates with the evidence gap that must be closed next.
 
 ## Decision rules
 - Discovery can be broad; conviction must be narrow.
@@ -35,10 +37,11 @@ Reduce a broad investable universe to a small research queue by looking for mean
 - XTB availability is a gate for the v1 actionable queue.
 
 ## Output contract
-Ticker | setup | changed signal | evidence | valuation context | main risk | XTB status | next research step.
+Ticker | setup | changed signal | materiality | evidence | valuation context | main risk | XTB status | next research step.
 
 ## Quality checks
 - [ ] Change versus prior state is preferred over static score.
+- [ ] Materiality is explicit before escalation.
 - [ ] Fundamental, valuation and trend signals are distinct.
 - [ ] No candidate is labeled a buy.
 - [ ] Broker availability status is explicit.
