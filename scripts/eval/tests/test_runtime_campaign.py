@@ -41,6 +41,28 @@ class RuntimeCampaignTests(unittest.TestCase):
         self.assertEqual(["oaf-interface-natural-pl"], sorted(supplemental))
         self.assertEqual("operating-model-review", supplemental["oaf-interface-natural-pl"]["target"])
 
+
+    def test_explicit_fallback_requires_target_name_in_executor_input(self) -> None:
+        case = {
+            "id": "synthetic-explicit",
+            "suite": "production-fallback",
+            "mode": "explicit",
+            "target": "oaf-health-check",
+        }
+        errors = campaign.explicit_fallback_input_errors(
+            case,
+            "Zrób przekrojową diagnozę problemu bez wskazywania workflow.",
+        )
+        self.assertTrue(any("must name target workflow oaf-health-check" in e for e in errors))
+
+        self.assertEqual(
+            [],
+            campaign.explicit_fallback_input_errors(
+                case,
+                "Uruchom workflow oaf-health-check dla tej sytuacji.",
+            ),
+        )
+
     def test_prepare_locks_package_catalog_components_and_fallback_absence(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out = Path(td) / "campaign"
@@ -61,6 +83,14 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual("production", lock["case_channels"]["oaf-interface-natural-pl"])
             self.assertEqual(38, lock["core_case_count"])
             self.assertEqual(["oaf-interface-natural-pl"], lock["supplemental_case_ids"])
+            self.assertEqual(64, len(lock["campaign_definition_sha256"]))
+            definitions = {item["id"]: item for item in lock["case_definitions"]}
+            self.assertEqual(39, len(definitions))
+            strategy = definitions["fallback-strategy-production-002"]
+            self.assertEqual("explicit", strategy["mode"])
+            self.assertEqual("oaf-health-check", strategy["target"])
+            self.assertEqual(64, len(strategy["input_sha256"]))
+            self.assertEqual(64, len(strategy["rubric_sha256"]))
 
     def test_revised_fallback_identities_do_not_rewrite_historical_001_cases(self) -> None:
         active = load_campaign_cases(ROOT)
