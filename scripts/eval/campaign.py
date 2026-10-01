@@ -42,7 +42,16 @@ def behavior_changes(pinned: str, *, require_commit: bool = False) -> list[str]:
         ["git", "diff", "--name-only", pinned, "HEAD", "--", "skills", "workflows", "release/package.yaml"],
         cwd=ROOT, text=True,
     ).strip()
-    return [x for x in out.splitlines() if x]
+    changed = []
+    for raw in out.splitlines():
+        path = raw.strip()
+        if not path:
+            continue
+        parts = Path(path).parts
+        if "tests" in parts or "evals" in parts:
+            continue
+        changed.append(path)
+    return changed
 
 
 def validate_campaign() -> list[str]:
