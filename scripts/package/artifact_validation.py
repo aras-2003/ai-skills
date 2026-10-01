@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import yaml
 
@@ -64,42 +65,43 @@ def validate_manifests(path: Path) -> list[str]:
         if not r.get("release_id"):
             errors.append("release manifest missing immutable release_id")
 
-        capability_items = c.get("capabilities") or []
-        release_items = r.get("components") or []
-        release_by_name = {
-            item.get("name"): item
-            for item in release_items
-            if isinstance(item, dict) and item.get("name")
-        }
-        for item in capability_items:
-            if not isinstance(item, dict) or not item.get("name"):
-                errors.append("invalid capability manifest item")
-                continue
-            name = item["name"]
-            component_dir = path / "skills" / name
-            if not component_dir.is_dir():
-                errors.append(f"{name}: capability directory missing")
-                continue
-            actual_digest = sha256_tree(component_dir)
-            if item.get("content_sha256") != actual_digest:
-                errors.append(f"{name}: capabilities content_sha256 mismatch")
-            if "inventory" in item and item.get("inventory") != _inventory(component_dir):
-                errors.append(f"{name}: capabilities inventory mismatch")
+        if "capabilities" in c:
+            capability_items = c.get("capabilities") or []
+            release_items = r.get("components") or []
+            release_by_name = {
+                item.get("name"): item
+                for item in release_items
+                if isinstance(item, dict) and item.get("name")
+            }
+            for item in capability_items:
+                if not isinstance(item, dict) or not item.get("name"):
+                    errors.append("invalid capability manifest item")
+                    continue
+                name = item["name"]
+                component_dir = path / "skills" / name
+                if not component_dir.is_dir():
+                    errors.append(f"{name}: capability directory missing")
+                    continue
+                actual_digest = sha256_tree(component_dir)
+                if item.get("content_sha256") != actual_digest:
+                    errors.append(f"{name}: capabilities content_sha256 mismatch")
+                if "inventory" in item and item.get("inventory") != _inventory(component_dir):
+                    errors.append(f"{name}: capabilities inventory mismatch")
 
-            release_item = release_by_name.get(name)
-            if release_item is None:
-                errors.append(f"{name}: missing from release manifest")
-                continue
-            for field in ("kind", "maturity", "version", "content_sha256"):
-                if release_item.get(field) != item.get(field):
-                    errors.append(f"{name}: release/capabilities {field} mismatch")
+                release_item = release_by_name.get(name)
+                if release_item is None:
+                    errors.append(f"{name}: missing from release manifest")
+                    continue
+                for field in ("kind", "maturity", "version", "content_sha256"):
+                    if release_item.get(field) != item.get(field):
+                        errors.append(f"{name}: release/capabilities {field} mismatch")
 
-        capability_names = {
-            item.get("name") for item in capability_items if isinstance(item, dict) and item.get("name")
-        }
-        extra_release = sorted(set(release_by_name) - capability_names)
-        if extra_release:
-            errors.append("release manifest has unknown components: " + ", ".join(extra_release))
+            capability_names = {
+                item.get("name") for item in capability_items if isinstance(item, dict) and item.get("name")
+            }
+            extra_release = sorted(set(release_by_name) - capability_names)
+            if extra_release:
+                errors.append("release manifest has unknown components: " + ", ".join(extra_release))
     return errors
 
 
@@ -128,46 +130,177 @@ def validate_tree(path: Path, allow_lab_evals: bool = False) -> list[str]:
     return errors
 
 
+def _unique_by_name(items: list[dict], label: str, errors: list[str]) -> dict[str, dict]:
+    result: dict[str, dict] = {}
+    for item in items:
+        if not isinstance(item, dict):
+            errors.append(f"{label}: item must be a mapping")
+            continue
+        name = item.get("name")
+        if not isinstance(name, str) or not name:
+            errors.append(f"{label}: item missing name")
+            continue
+        if name in result:
+            errors.append(f"{label}: duplicate component name {name}")
+            continue
+        result[name] = item
+    return result
+
+
+def _zip_member_errors(zip_name: str, item_name: str, infos: list[zipfile.ZipInfo]) -> list[str]:
+    errors: list[str] = []
+    names = [info.filename for info in infos]
+    if len(names) != len(set(names)):
+        errors.append(f"{zip_name}: duplicate ZIP entries")
+    if names != sorted(names):
+        errors.append(f"{zip_name}: ZIP entries are not sorted")
+    for info in infos:
+        name = info.filename
+        if info.is_dir():
+            errors.append(f"{zip_name}: directory entries are not allowed: {name}")
+            continue
+        if "\\" in name or name.startswith("/"):
+            errors.append(f"{zip_name}: unsafe ZIP entry name {name}")
+            continue
+        raw_parts = name.split("/")
+        if any(part in {"", ".", ".."} for part in raw_parts):
+            errors.append(f"{zip_name}: unsafe ZIP entry name {name}")
+            continue
+        posix = PurePosixPath(name)
+        if posix.is_absolute() or not posix.parts or posix.parts[0] != item_name:
+            errors.append(f"{zip_name}: ZIP entry outside matching top-level folder: {name}")
+            continue
+        if len(posix.parts) < 2:
+            errors.append(f"{zip_name}: ZIP entry missing component-relative path: {name}")
+    return errors
+
+
+def _zip_content_digest(zf: zipfile.ZipFile, infos: list[zipfile.ZipInfo]) -> tuple[str, list[str]]:
+    h = hashlib.sha256()
+    inventory: list[str] = []
+    for info in sorted(infos, key=lambda x: x.filename):
+        parts = PurePosixPath(info.filename).parts
+        rel = PurePosixPath(*parts[1:]).as_posix()
+        inventory.append(rel)
+        rel_bytes = rel.encode()
+        h.update(len(rel_bytes).to_bytes(4, "big"))
+        h.update(rel_bytes)
+        data = zf.read(info)
+        h.update(len(data).to_bytes(8, "big"))
+        h.update(data)
+    return h.hexdigest(), inventory
+
+
 def validate_zips(path: Path) -> list[str]:
     errors: list[str] = []
-    index = path / "index.json"
-    if not index.is_file():
+    index_path = path / "index.json"
+    capabilities_path = path / "capabilities.json"
+    release_path = path / "release-manifest.json"
+    if not index_path.is_file():
         return [f"missing index.json in {path}"]
     errors.extend(validate_manifests(path))
-    data = json.loads(index.read_text(encoding="utf-8"))
-    if data.get("source_revision") is None:
+    if not capabilities_path.is_file() or not release_path.is_file():
+        return errors
+
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+    capabilities = json.loads(capabilities_path.read_text(encoding="utf-8"))
+    release = json.loads(release_path.read_text(encoding="utf-8"))
+    if index.get("source_revision") is None:
         errors.append("index.json missing source_revision")
-    for item in data.get("skills", []):
+    if index.get("source_revision") != capabilities.get("source_revision"):
+        errors.append("index/capabilities source_revision mismatch")
+    if index.get("source_revision") != release.get("source_revision"):
+        errors.append("index/release source_revision mismatch")
+    if index.get("package_version") != capabilities.get("package_version"):
+        errors.append("index/capabilities package_version mismatch")
+    if index.get("package_version") != release.get("version"):
+        errors.append("index/release package version mismatch")
+
+    index_by_name = _unique_by_name(index.get("skills") or [], "index", errors)
+    capabilities_by_name = _unique_by_name(capabilities.get("skills") or [], "capabilities", errors)
+    release_by_name = _unique_by_name(release.get("components") or [], "release manifest", errors)
+    if set(index_by_name) != set(capabilities_by_name):
+        errors.append("index/capabilities component set mismatch")
+    if set(index_by_name) != set(release_by_name):
+        errors.append("index/release component set mismatch")
+    if release.get("component_count") != len(index_by_name):
+        errors.append("release component_count mismatch")
+
+    zip_names: set[str] = set()
+    for name, item in index_by_name.items():
         zip_name = item.get("zip")
-        if not zip_name:
-            errors.append(f"{item.get('name')}: missing zip name")
+        if not isinstance(zip_name, str) or not zip_name:
+            errors.append(f"{name}: missing zip name")
             continue
+        if zip_name in zip_names:
+            errors.append(f"duplicate ZIP filename in index: {zip_name}")
+        zip_names.add(zip_name)
+
+        capability = capabilities_by_name.get(name)
+        release_item = release_by_name.get(name)
+        identity_fields = ("version", "maturity", "zip", "content_sha256", "archive_sha256", "inventory")
+        if capability is not None:
+            for field in identity_fields:
+                if capability.get(field) != item.get(field):
+                    errors.append(f"{name}: index/capabilities {field} mismatch")
+        if release_item is not None:
+            if release_item.get("kind") != item.get("kind"):
+                errors.append(f"{name}: index/release kind mismatch")
+            for field in identity_fields:
+                if release_item.get(field) != item.get(field):
+                    errors.append(f"{name}: index/release {field} mismatch")
+
         zp = path / zip_name
         if not zp.is_file():
             errors.append(f"missing ZIP {zip_name}")
             continue
-        with zipfile.ZipFile(zp) as zf:
-            infos = zf.infolist()
-            names = [x.filename for x in infos]
-            if names != sorted(names):
-                errors.append(f"{zip_name}: ZIP entries are not sorted")
-            top = {Path(name).parts[0] for name in names if Path(name).parts}
-            if top != {item.get("name")}:
-                errors.append(f"{zip_name}: ZIP must have exactly one matching top-level folder")
-            for info in infos:
-                name = info.filename
-                parts = Path(name).parts
-                if any(p in FORBIDDEN_PARTS for p in parts):
-                    errors.append(f"{zip_name}: forbidden path {name}")
-                if name.endswith(".rubric.yaml"):
-                    errors.append(f"{zip_name}: rubric leaked: {name}")
-                if info.date_time != ZIP_TIMESTAMP:
-                    errors.append(f"{zip_name}: non-deterministic timestamp on {name}")
-                if name.endswith("/SKILL.md"):
-                    text = zf.read(name).decode("utf-8")
-                    errors.extend(validate_skill_text(text, f"{zip_name}:{name}"))
-    return errors
+        actual_archive_digest = hashlib.sha256(zp.read_bytes()).hexdigest()
+        if item.get("archive_sha256") != actual_archive_digest:
+            errors.append(f"{zip_name}: archive_sha256 mismatch")
 
+        try:
+            with zipfile.ZipFile(zp) as zf:
+                infos = zf.infolist()
+                member_errors = _zip_member_errors(zip_name, name, infos)
+                errors.extend(member_errors)
+                if member_errors:
+                    continue
+                actual_content_digest, actual_inventory = _zip_content_digest(zf, infos)
+                if item.get("content_sha256") != actual_content_digest:
+                    errors.append(f"{zip_name}: content_sha256 mismatch")
+                if item.get("inventory") != actual_inventory:
+                    errors.append(f"{zip_name}: inventory mismatch")
+
+                skill_member = f"{name}/SKILL.md"
+                skill_entries = [info for info in infos if info.filename == skill_member]
+                if len(skill_entries) != 1:
+                    errors.append(f"{zip_name}: expected exactly one {skill_member}")
+                else:
+                    skill_text = zf.read(skill_entries[0]).decode("utf-8")
+                    errors.extend(validate_skill_text(skill_text, f"{zip_name}:{skill_member}"))
+                    fm_end = skill_text.find("\n---\n", 4)
+                    if skill_text.startswith("---\n") and fm_end >= 0:
+                        fm = yaml.safe_load(skill_text[4:fm_end]) or {}
+                        metadata = fm.get("metadata") or {}
+                        if fm.get("name") != name:
+                            errors.append(f"{zip_name}: SKILL.md name mismatch")
+                        if str(metadata.get("version") or "") != str(item.get("version") or ""):
+                            errors.append(f"{zip_name}: SKILL.md version mismatch")
+                        if str(metadata.get("maturity") or "") != str(item.get("maturity") or ""):
+                            errors.append(f"{zip_name}: SKILL.md maturity mismatch")
+
+                for info in infos:
+                    entry_name = info.filename
+                    parts = PurePosixPath(entry_name).parts
+                    if any(part in FORBIDDEN_PARTS for part in parts):
+                        errors.append(f"{zip_name}: forbidden path {entry_name}")
+                    if entry_name.endswith(".rubric.yaml"):
+                        errors.append(f"{zip_name}: rubric leaked: {entry_name}")
+                    if info.date_time != ZIP_TIMESTAMP:
+                        errors.append(f"{zip_name}: non-deterministic timestamp on {entry_name}")
+        except zipfile.BadZipFile as exc:
+            errors.append(f"{zip_name}: invalid ZIP: {exc}")
+    return errors
 
 def main() -> int:
     parser = argparse.ArgumentParser()
