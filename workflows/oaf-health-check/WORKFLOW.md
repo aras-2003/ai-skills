@@ -41,6 +41,17 @@ Do not use `governance-design` or `transformation-blueprint` until the relevant 
 
 ## Stage 4 — Cross-domain synthesis
 
+### Normalize specialist findings to the evidence scope
+
+Before creating any organisational claim, translate each specialist finding into the scope actually supported by its evidence:
+
+- `not supplied / not verified / insufficient for this review` is a **review-state limitation**, not an organisational absence;
+- a specialist's minimum evidence list identifies what the review needs next; it is not evidence that the organisation lacks those fields, owners, mechanisms or records;
+- `organisation lacks X` requires evidence about the organisation showing that X is absent in the reviewed scope;
+- when organisational absence is plausible but not established, keep it as a hypothesis to test.
+
+Example: if `portfolio-prioritization` cannot rank because comparable outcome, owner, cost, capacity or dependency evidence was not supplied, the supported conclusion is: **this review cannot rank the initiatives from the available evidence**. It is not: **the portfolio has no comparable data**.
+
 Build a short claim ledger before writing prose. Every material statement must be one atomic claim with four fields:
 
 `claim | epistemic status | evidence | confidence rationale`
@@ -123,7 +134,7 @@ Before returning the answer, inspect every material sentence and every heatmap c
 3. If not, is it a downstream effect? Use `implication`.
 4. Does one sentence contain more than one epistemic type? Split it.
 5. Does confidence apply to exactly one claim and have an evidence rationale? If not, rewrite it.
-6. Does any statement convert “reviewer does not know X” into “organisation lacks/has unclear X”? Rewrite as an unknown/hypothesis.
+6. Does any specialist evidence-readiness gap describe what was not supplied or verified? Keep it as a review-state limitation unless organisation-level evidence proves absence; otherwise express organisational absence only as a hypothesis.
 7. Does next action promise that a sample will decide the issue? Rewrite as a test that may remain inconclusive.
 
 If any material claim cannot pass this check, do not finalize it as fact.
