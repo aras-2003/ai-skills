@@ -3,7 +3,7 @@
 ## Purpose
 Answer one recurring question: **what changed since the last review, what actually matters, and where is deeper research worth the time?**
 
-This is the default monitoring workflow for existing holdings, watchlist names and tracked themes. It is not a news digest.
+This is the default monitoring workflow for existing holdings, watchlist names and tracked themes. In v1, actionable security follow-up is constrained to the XTB-investable universe, while existing non-XTB holdings such as IKE/IKZE/employee-plan positions may still be monitored for thesis, valuation and portfolio implications. It is not a news digest.
 
 ## Required skills
 - investment-attention-triage
