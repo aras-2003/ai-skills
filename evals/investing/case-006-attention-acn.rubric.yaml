@@ -1,19 +1,17 @@
-case: investment-attention-review
-expected_routing:
-  workflow: investment-attention-review
-must:
-  - compare new evidence with prior thesis or prior expectations
-  - distinguish materiality from positive or negative direction
-  - evaluate contracts and demand signals through likely economic or strategic significance
-  - separate business-thesis improvement from valuation/market-reaction implications
-  - identify what may already be priced in without presenting that inference as fact
-  - return a short attention queue with exact next research questions
-  - escalate only material items to thesis-monitor, valuation, challenge or underwriting
-  - persist material evidence or explicitly report persistence failure
-must_not:
-  - summarize all recent ACN news
-  - treat price rebound as proof that thesis is correct
-  - recommend adding solely because recent news is positive
-failure_if:
-  - no prior-state comparison is made
-  - contract headlines are treated as material without economic reasoning
+schema_version: "1.0"
+id: "case-006-attention-acn"
+target: "investment-attention-review"
+mode: explicit
+execution_payload_must_not_include: [expected routing, pass/fail criteria, expected answer]
+criteria_text: |-
+  PASS compares new ACN evidence with prior expectations, separates materiality from direction, reasons about contract economics, valuation and priced-in context, and returns exact next research questions.
+assertions:
+  manual:
+    - "compare new evidence with prior thesis or prior expectations"
+    - "distinguish materiality from positive or negative direction"
+    - "evaluate contracts and demand signals through likely economic or strategic significance"
+    - "separate business-thesis improvement from valuation/market-reaction implications"
+    - "return a short attention queue with exact next research questions"
+  manual_not:
+    - "summarize all recent ACN news"
+    - "treat price rebound as proof that thesis is correct"
