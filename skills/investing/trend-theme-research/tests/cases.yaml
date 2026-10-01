@@ -16,3 +16,4 @@ cases:
     input: "Value Micron under bear, base and bull scenarios."
     expected:
       should_trigger: false
+      must_not: ["value chain", "theme invalidation"]
