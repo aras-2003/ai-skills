@@ -22,7 +22,7 @@ import validate_routing
 import build_plugin
 import artifact_validation
 
-CONFIG_REL = Path("evals/campaigns/runtime-validation-2026-10-r6/campaign.yaml")
+CONFIG_REL = Path("evals/campaigns/runtime-validation-2026-10-r7/campaign.yaml")
 CONFIG = ROOT / CONFIG_REL
 
 
@@ -190,6 +190,7 @@ HISTORICAL_RECEIPT_COMPATIBILITY = {
     "cde46f59c20a0d4313528185e5df079335633b10": "runtime-validation-2026-10-r3",
     "28a7681cf024bb7aaad7a979e7ce7253139d5bd4": "runtime-validation-2026-10-r4",
     "a5c4001d28f45d3fb799f07a2c880f406f58cc65": "runtime-validation-2026-10-r5",
+    "a924f3ba9fe964ff3aeaa2e5570b7a718d29d38c": "runtime-validation-2026-10-r6",
 }
 
 
