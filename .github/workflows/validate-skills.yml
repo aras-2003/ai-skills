@@ -33,8 +33,60 @@ jobs:
           python scripts/eval/validate_isolation.py
           python scripts/eval/campaign.py validate
           python -m unittest discover -s scripts/eval/tests -p 'test_*.py'
-          python scripts/eval/campaign.py prepare --output .tmp/runtime-campaign
+          python scripts/eval/campaign.py prepare --output .tmp/runtime-campaign-r2
           python scripts/eval/campaign.py validate-evidence
+      - name: Assemble executor-only runtime retest pack
+        run: |
+          mkdir -p .tmp/runtime-retest-pack/executor-inputs
+          cp -R .tmp/runtime-campaign-r2/production-plugin .tmp/runtime-retest-pack/production
+          cp -R .tmp/runtime-campaign-r2/lab-plugin .tmp/runtime-retest-pack/lab
+          cp .tmp/runtime-campaign-r2/lock.json .tmp/runtime-retest-pack/lock.json
+          cp .tmp/runtime-campaign-r2/smoke-production-template.json .tmp/runtime-retest-pack/smoke-production-template.json
+          cp .tmp/runtime-campaign-r2/smoke-lab-template.json .tmp/runtime-retest-pack/smoke-lab-template.json
+          cp evals/campaigns/runtime-validation-2026-10-r2/fallback/fallback-strategy-production-002.input.md .tmp/runtime-retest-pack/executor-inputs/01-fallback-strategy-explicit.input.md
+          cp evals/campaigns/runtime-validation-2026-10-r2/fallback/fallback-interface-explicit-production-002.input.md .tmp/runtime-retest-pack/executor-inputs/02-fallback-interface-explicit.input.md
+          cp evals/routing/supplemental/oaf-interface-natural-pl.input.md .tmp/runtime-retest-pack/executor-inputs/03-interface-natural-routing.input.md
+          find .tmp/runtime-retest-pack -type f | sort | grep -E '\\.(rubric\\.yaml|rubric\\.yml)      - name: Packaging safety and reproducibility tests
+        run: python -m unittest discover -s scripts/package/tests -p 'test_*.py'
+      - name: Commerce calculator tests
+        run: python -m unittest discover -s skills/commerce/economics/unit-economics-review/tests -p 'test_*.py'
+      - name: Production readiness registry
+        run: |
+          python -m unittest discover -s scripts/readiness/tests -p 'test_*.py'
+          python scripts/readiness/validate_readiness.py
+      - name: Verify generated catalog is current
+        run: |
+          python scripts/catalog/generate_catalog.py
+          git diff --exit-code -- CATALOG.md
+      - name: Build production plugin
+        run: python scripts/package/build_plugin.py --maturity production --output .tmp/plugin
+      - name: Validate production plugin
+        run: python scripts/package/artifact_validation.py .tmp/plugin
+      - name: Build isolated Lab
+        run: python scripts/package/build_lab_plugin.py --output .tmp/lab
+      - name: Validate Lab and rubric isolation
+        run: |
+          python scripts/package/artifact_validation.py .tmp/lab --lab
+          python scripts/eval/validate_isolation.py --artifact .tmp/lab
+      - name: Build ChatGPT ZIP channel
+        run: python scripts/package/build_chatgpt_skills.py --maturity production --output .tmp/chatgpt-skills
+      - name: Validate ZIP channel
+        run: python scripts/package/artifact_validation.py .tmp/chatgpt-skills --zips
+      - name: Rebuild ZIP channel and compare bytes
+        run: |
+          cp -R .tmp/chatgpt-skills .tmp/chatgpt-skills-first
+          python scripts/package/build_chatgpt_skills.py --maturity production --output .tmp/chatgpt-skills
+          diff -qr .tmp/chatgpt-skills-first .tmp/chatgpt-skills
+      - name: Runtime eval status
+        run: echo "Provider runtime is not claimed by this offline gate; see evals/results/runtime-status.yaml."
+ && exit 1 || true
+      - name: Upload executor-only runtime retest pack
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-retest-pack-r2
+          path: .tmp/runtime-retest-pack
+          if-no-files-found: error
+          retention-days: 14
       - name: Packaging safety and reproducibility tests
         run: python -m unittest discover -s scripts/package/tests -p 'test_*.py'
       - name: Commerce calculator tests
