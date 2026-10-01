@@ -194,6 +194,19 @@ workflows:
               - staged evidence gating
               - broad mixed-signal discovery and shortlist reduction
 
+  - name: investment-attention-review
+    workflow: workflows/investment-attention-review/WORKFLOW.md
+    description: >
+      Review new company, industry, market and portfolio information against existing theses and prior expectations,
+      suppress noise, classify materiality and surface only the few items worth deeper research now.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: high
+      last_reviewed: 2026-10-02
+      execution:
+        default_model_class: standard
   - name: investment-opportunity-hunter
     workflow: workflows/investment-opportunity-hunter/WORKFLOW.md
     description: >
