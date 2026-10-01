@@ -379,7 +379,7 @@ def import_run(args) -> Path:
             "component_content_sha256": component["content_sha256"],
         },
         selection_findings=sel_errors,
-        evidence_origin="runtime",
+        evidence_origin=str(getattr(args, "evidence_origin", "runtime")),
         note=args.note,
     )
     old = os.environ.get("SOURCE_REVISION")
@@ -431,6 +431,7 @@ def main() -> int:
     imp.add_argument("--status", required=True, choices=["REVIEW_REQUIRED", "PASS", "FAIL"])
     imp.add_argument("--reviewer", required=True)
     imp.add_argument("--assisted", action="store_true")
+    imp.add_argument("--evidence-origin", choices=["runtime", "offline"], default="runtime")
     imp.add_argument("--note")
     s.add_parser("validate-evidence")
     args = p.parse_args()
