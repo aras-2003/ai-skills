@@ -28,10 +28,12 @@ jobs:
         run: python scripts/validate/validate_all.py
       - name: Validator mutation tests
         run: python -m unittest discover -s scripts/validate/tests -p 'test_*.py'
-      - name: Eval isolation and evidence tests
+      - name: Eval isolation, evidence and runtime campaign tests
         run: |
           python scripts/eval/validate_isolation.py
+          python scripts/eval/campaign.py validate
           python -m unittest discover -s scripts/eval/tests -p 'test_*.py'
+          python scripts/eval/campaign.py prepare --output .tmp/runtime-campaign
       - name: Packaging safety and reproducibility tests
         run: python -m unittest discover -s scripts/package/tests -p 'test_*.py'
       - name: Commerce calculator tests
