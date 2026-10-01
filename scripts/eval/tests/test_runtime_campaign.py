@@ -63,6 +63,14 @@ class RuntimeCampaignTests(unittest.TestCase):
             ),
         )
 
+
+    def test_generated_queue_uses_current_explicit_strategy_input(self) -> None:
+        queue = campaign.queue_text(include_supplemental=True)
+        self.assertIn(
+            "Uruchom workflow oaf-health-check dla tej sytuacji.",
+            queue,
+        )
+
     def test_prepare_locks_package_catalog_components_and_fallback_absence(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out = Path(td) / "campaign"
