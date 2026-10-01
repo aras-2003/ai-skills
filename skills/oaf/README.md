@@ -1,174 +1,90 @@
 # OAF / Organisational Architecture Framework
 
-OAF is a practical synthesis for connecting strategy, operating model, decision architecture, enterprise architecture, portfolio/execution and evidence feedback.
-
-It is treated as a **thinking and decision framework**, not a monolithic prompt or a new theory.
+OAF connects strategy, operating model, decision architecture, enterprise architecture, portfolio/execution and evidence feedback. It is a thinking and decision framework, not one monolithic prompt.
 
 Core loop:
 
-```
-Direction -> Operating Model -> Decisions -> Architecture -> Portfolio/Execution -> Evidence -> next decision
-```
+`Direction -> Operating Model -> Decisions -> Architecture -> Portfolio/Execution -> Evidence -> next decision`
 
-The library decomposes OAF into specialist skills and evidence-gated workflows.
+## Current implemented source skills
 
-## Domain architecture
-
-### 1. Direction & strategy execution
-Core:
-- `strategy-to-execution-diagnostic`
-
-Planned/deferred:
-- `strategy-traceability-review`
-- `strategic-priority-review`
-- `outcome-ownership-review`
-
-### 2. Operating model
-Production:
+### Production maturity
 - `operating-model-review`
 - `global-local-model-review`
-
-Candidate:
-- `organizational-interface-review`
-
-Future:
-- `organizational-layering-review`
-- `span-of-control-review`
-- `shared-services-model-review`
-
-### 3. Decision architecture & governance
-Production:
 - `decision-rights-review`
 - `decision-bottleneck-analysis`
 - `governance-design`
-
-Future:
-- `governance-forum-review`
-- `governance-overlap-review`
-- `decision-quality-review`
-
-### 4. Enterprise & organisational architecture
-Production:
 - `architecture-review`
 - `capability-map-review`
 - `capability-gap-analysis`
-
-Future:
-- `architecture-alignment-review`
-- `architecture-debt-review`
-- `technology-enablement-review`
-- `data-capability-review`
-
-### 5. Portfolio & execution
-Production:
 - `portfolio-prioritization`
 - `portfolio-health-review`
 - `transformation-blueprint`
-
-Future:
-- `investment-prioritization`
-- `capacity-funding-review`
-- `execution-model-review`
-- `delivery-bottleneck-analysis`
-
-### 6. Evidence & adaptation
-Production:
 - `evidence-loop-review`
 
-Candidate:
+### Candidate maturity
+- `strategy-to-execution-diagnostic`
+- `organizational-interface-review`
 - `kpi-quality-review`
 
-Future:
-- `performance-review-design`
-- `learning-loop-review`
-- `adaptive-governance-review`
+Source presence does not equal production runtime availability. Candidate skills may appear in Lab while being absent from the production plugin.
 
-### 7. Leadership & change enablement
-Future — intentionally deferred until core OAF is stable:
-- `leadership-model-review`
-- `leadership-accountability-review`
-- `change-readiness-review`
-- `stakeholder-alignment-review`
+## Current workflows
 
-## Workflows
-
-Production:
+Production runtime workflows:
 - `oaf-health-check` — selective cross-domain diagnosis.
-- `oaf-operating-model-redesign` — evidence-gated bounded redesign with option/trade-off testing.
-- `oaf-governance-redesign` — decision-led governance redesign with mechanism minimisation.
+- `oaf-operating-model-redesign` — evidence-gated bounded redesign.
+- `oaf-governance-redesign` — decision-led governance redesign.
 - `oaf-enterprise-architecture-review` — evidence-gated enterprise architecture review.
-- `oaf-transformation-design` — bounded, evidence-gated transformation mobilisation and sequencing.
-- `oaf-enterprise-change-review` — selective end-to-end orchestration across OAF domains.
+- `oaf-transformation-design` — bounded transformation mobilisation/sequencing.
+- `oaf-enterprise-change-review` — selective end-to-end orchestration.
 
-Candidate:
+Candidate workflow:
 - `oaf-strategy-execution-reset`
 
 ## Routing principle
 
-Do not run every OAF skill.
+Prefer the narrowest production capability that matches the problem.
 
-```
-symptom/problem
-   -> narrow diagnostic skill if possible
-   -> specialist evidence
-   -> cross-domain synthesis only when needed
-   -> design skill/workflow only after diagnosis gate
-```
+`symptom/problem -> narrow diagnostic -> specialist evidence -> cross-domain synthesis when needed -> design only after evidence gate`
 
-Examples:
-- slow/unclear decisions -> `decision-rights-review`
-- repeated escalations -> `decision-bottleneck-analysis`
-- global/local tension -> `global-local-model-review`
-- cross-unit handoff failure -> `organizational-interface-review`
-- initiative overload -> `portfolio-health-review` then `portfolio-prioritization` when ready
-- reporting without action -> `evidence-loop-review`
-- KPI set quality -> `kpi-quality-review`
+Examples in the current production catalog:
+- slow/unclear decisions -> `decision-rights-review`;
+- repeated escalations/latency -> `decision-bottleneck-analysis` when the problem is decision flow;
+- global/local tension -> `global-local-model-review`;
+- cross-unit handoff/accountability/interface symptoms -> `operating-model-review` in production;
+- initiative overload -> `portfolio-health-review`, then `portfolio-prioritization` when comparable evidence exists;
+- reporting without action -> `evidence-loop-review`.
 
-## Model-class defaults
+`organizational-interface-review` is currently candidate maturity. Do not assume a production session can invoke it. If an explicitly invoked workflow depends on it and it is unavailable, disclose the limitation and narrow the conclusion rather than simulating the specialist.
 
-Validated on Luna:
-- `decision-rights-review`
-- `portfolio-prioritization`
-- `operating-model-review`
-- `architecture-review`
-- `evidence-loop-review`
-- `global-local-model-review`
-- `decision-bottleneck-analysis`
-- `portfolio-health-review`
-- `oaf-health-check`
-- `oaf-operating-model-redesign` for bounded redesign
-- `governance-design`
-- `transformation-blueprint`
-- `oaf-governance-redesign`
-- `oaf-transformation-design`
-- `capability-map-review`
-- `capability-gap-analysis`
-- `oaf-enterprise-architecture-review`
-- `oaf-enterprise-change-review`
+## Evidence and confidence discipline
 
-Sol comparisons on `oaf-operating-model-redesign` and `oaf-transformation-design` improved framing but did not materially change the decision/plan, so strong remains escalation-only for the validated bounded uses.
-
-Candidate defaults:
-- **fast:** `kpi-quality-review`
-- **standard:** remaining diagnostic/design candidates
-- **strong escalation:** final high-impact target-state selection, contested executive evidence, major multi-country/global-local redesign, transition economics
-
-Wave 3 validated that design skills can remain on the standard model class when they preserve evidence gates, reversibility and stop conditions.
-
-See `docs/MODEL-ROUTING.md`, `evals/oaf/core-validation-2026-09-30.md`, `evals/oaf/wave2/validation-2026-09-30.md`, `evals/oaf/wave3/validation-2026-09-30.md`, `evals/oaf/wave4/validation-2026-09-30.md`, and `evals/oaf/e2e/validation-2026-09-30.md`.
-
-## Boundary principle
-
-OAF skills diagnose and design organisational decision systems. They should not silently become generic strategy, HR, software architecture, PMO or transformation prompts.
+For OAF diagnosis:
+- separate observed symptoms/direct evidence from possible causes;
+- attach confidence to a specific claim and its supporting evidence;
+- causal mechanisms remain hypotheses when initiative records, decision traces, interface traces or equivalent evidence are missing;
+- do not label an unverified causal hypothesis as a confirmed critical gap;
+- directly evidenced mechanisms may still justify high confidence; uncertainty is not forced everywhere.
 
 The preferred sequence is:
 
-```
-evidence -> diagnosis -> design implication -> design choice -> pilot -> evidence loop
-```
+`evidence -> diagnosis -> design implication -> design choice -> pilot -> evidence loop`
 
 Not:
 
-```
-symptom -> best-practice redesign
-```
+`symptom -> best-practice redesign`
+
+## Current runtime finding status
+
+Two real production fallback runs against behavior source `ff012e494f5b2f71803f850d71d20f54a3315e2b` are retained as historical FAIL evidence:
+- strategy fallback: overconfident causal diagnosis from symptom-only evidence;
+- interface fallback: the old test mislabeled a natural prompt as explicit workflow execution.
+
+Behavior was revised under source identity `c0772e2e3727971b2e3fe8f9d56eccf6bdd87129` and retest campaign `runtime-validation-2026-10-r2`. No R2 runtime PASS is claimed yet.
+
+See:
+- `workflows/runtime-registry.yaml`
+- `evals/campaigns/runtime-validation-2026-10-r2/RUNBOOK.md`
+- `docs/MODEL-ROUTING.md`
+- `release/production-readiness.yaml`
