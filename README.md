@@ -83,7 +83,7 @@ Generated artifacts are built atomically and include source provenance.
 - Lifecycle: `docs/LIFECYCLE.md`
 - Testing: `docs/TESTING.md`
 - Runtime evals: `docs/RUNTIME-EVALS.md`
-- Active R2 runbook: `evals/campaigns/runtime-validation-2026-10-r3/RUNBOOK.md`
+- Active R3 runbook: `evals/campaigns/runtime-validation-2026-10-r3/RUNBOOK.md`
 - Channel usage: `docs/GPT-USAGE.md`
 - Branch-rules proposal: `docs/GITHUB-BRANCH-RULES-PROPOSAL.md`
 - Distribution/license decision: `docs/DISTRIBUTION-LICENSE-DECISION.md`
