@@ -10,8 +10,10 @@ cases:
     input: "Underwrite this semiconductor ETF as a long-term holding, including concentration and valuation context."
     expected:
       should_trigger: true
+      must: ["concentration", "valuation", "thesis"]
   - id: underwriting-near-miss
     case: Broad scan
     input: "Find 10 cheap stocks on XTB with improving estimates."
     expected:
       should_trigger: false
+      must_not: ["full investment case", "kill criteria"]
