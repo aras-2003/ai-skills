@@ -428,3 +428,237 @@ components:
     limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
+  - name: decision-journal-update
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/decision-journal-update/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: investment-attention-triage
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/investment-attention-triage/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: investment-policy-design
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/investment-policy-design/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: investment-record-store
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/investment-record-store/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: investor-pattern-research
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/investor-pattern-research/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: market-opportunity-scan
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/market-opportunity-scan/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: portfolio-state-review
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/portfolio-state-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: position-sizing-review
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/position-sizing-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: security-underwriting
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/security-underwriting/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: thesis-challenge
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/thesis-challenge/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: thesis-monitor
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/thesis-monitor/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: trend-theme-research
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/trend-theme-research/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: valuation-scenario-review
+    kind: skill
+    version: "0.1.0"
+    source: skills/investing/valuation-scenario-review/SKILL.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: investment-attention-review
+    kind: workflow
+    version: "0.1.0"
+    source: workflows/investment-attention-review/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: investment-opportunity-hunter
+    kind: workflow
+    version: "0.1.0"
+    source: workflows/investment-opportunity-hunter/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: investment-security-review
+    kind: workflow
+    version: "0.1.0"
+    source: workflows/investment-security-review/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: investment-portfolio-review
+    kind: workflow
+    version: "0.1.0"
+    source: workflows/investment-portfolio-review/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: investment-theme-discovery
+    kind: workflow
+    version: "0.1.0"
+    source: workflows/investment-theme-discovery/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
