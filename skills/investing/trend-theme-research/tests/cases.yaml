@@ -1,0 +1,18 @@
+cases:
+  - id: theme-direct
+    case: AI infrastructure value chain
+    input: "Map the AI datacenter investment chain and find second-order beneficiaries available at XTB."
+    expected:
+      should_trigger: true
+      must: ["value chain", "second-order", "invalidation"]
+  - id: theme-cyclical
+    case: Separate cycle from secular growth
+    input: "Is memory a secular AI story or mostly a cycle? Map both mechanisms."
+    expected:
+      should_trigger: true
+      must: ["cyclical", "secular"]
+  - id: theme-near-miss
+    case: One company valuation
+    input: "Value Micron under bear, base and bull scenarios."
+    expected:
+      should_trigger: false

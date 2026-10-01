@@ -1,0 +1,19 @@
+cases:
+  - id: attention-acn-positive
+    case: Positive company developments after a weak period
+    input: "ACN announced meaningful new contracts and better demand signals and the stock started rebounding. Tell me whether this actually strengthens my thesis and whether I should look deeper."
+    expected:
+      should_trigger: true
+      must: ["what changed", "materiality", "thesis impact", "next research question"]
+      must_not: ["price reaction proves the thesis"]
+  - id: attention-noise
+    case: Lots of headlines but unclear importance
+    input: "There are many headlines across my holdings today. Filter them and tell me only what can actually change a decision."
+    expected:
+      should_trigger: true
+      must: ["NOISE", "MONITOR", "REVIEW", "ESCALATE"]
+  - id: attention-near-miss
+    case: Full initial underwriting belongs elsewhere
+    input: "I have never researched ServiceNow. Build a full investment thesis and valuation."
+    expected:
+      should_trigger: false

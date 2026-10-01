@@ -1,0 +1,14 @@
+case: investment-portfolio-review
+expected_routing:
+  workflow: investment-portfolio-review
+must:
+  - compare current state with prior snapshot
+  - identify price-driven concentration and correlated cycle exposure
+  - suppress headline noise that does not change thesis or policy state
+  - create or require Portfolio_History snapshot before current-state mutation
+  - keep append-only research/thesis/decision history
+must_not:
+  - infer transactions from weight changes
+  - propose activity for every holding
+failure_if:
+  - current state overwrites the only historical record

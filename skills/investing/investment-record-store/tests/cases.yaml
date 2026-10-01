@@ -1,0 +1,25 @@
+cases:
+  - id: store-snapshot
+    case: Current state update requires history
+    input: "Update Portfolio_Current after today's XTB import and preserve the previous state."
+    expected:
+      should_trigger: true
+      must: ["SNAPSHOT", "Portfolio_History", "as_of_date"]
+  - id: store-research-append
+    case: Append research with evidence provenance
+    input: "Persist today's MU thesis update and the sources used."
+    expected:
+      should_trigger: true
+      must: ["APPEND", "source", "thesis"]
+  - id: store-hindsight
+    case: User asks to rewrite old thesis after outcome
+    input: "Edit my old decision so it reflects what we know now."
+    expected:
+      should_trigger: true
+      must: ["append", "historical"]
+      must_not: ["rewrite the original rationale"]
+  - id: store-near-miss
+    case: Pure explanation needs no persistence
+    input: "Explain what free cash flow yield means."
+    expected:
+      should_trigger: false

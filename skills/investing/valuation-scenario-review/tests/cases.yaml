@@ -1,0 +1,18 @@
+cases:
+  - id: valuation-direct
+    case: Scenario valuation
+    input: "Value MU under bear, base and bull assumptions and show what the current price implies."
+    expected:
+      should_trigger: true
+      must: ["bear", "base", "bull", "implies"]
+  - id: valuation-cycle
+    case: Cyclical normalization
+    input: "Do not use peak EPS mechanically; normalize the cycle and show valuation sensitivity."
+    expected:
+      should_trigger: true
+      must: ["cycle", "sensitivity"]
+  - id: valuation-near-miss
+    case: Theme discovery
+    input: "Map the datacenter power value chain."
+    expected:
+      should_trigger: false

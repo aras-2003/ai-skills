@@ -1,0 +1,26 @@
+cases:
+  - id: sizing-starter
+    case: Strong idea still uncertain
+    input: "The thesis survives, valuation is attractive, but execution risk is still high. My policy allows 0.5-1.5% starters. Size it."
+    expected:
+      should_trigger: true
+      must: ["starter", "policy"]
+  - id: sizing-concentration
+    case: Good thesis but oversized
+    input: "The company thesis is intact but the position drifted to 10% and breaches my review threshold."
+    expected:
+      should_trigger: true
+      must: ["concentration", "reduction"]
+  - id: sizing-no-context
+    case: No portfolio or policy
+    input: "I like MU. Tell me exactly what percent of my money to put in it."
+    expected:
+      should_trigger: true
+      must: ["missing", "policy"]
+      must_not: ["invent an exact percentage"]
+
+  - id: sizing-near-miss
+    case: Generic position sizing education without a live portfolio decision
+    input: "Explain the Kelly criterion and common position-sizing methods."
+    expected:
+      should_trigger: false

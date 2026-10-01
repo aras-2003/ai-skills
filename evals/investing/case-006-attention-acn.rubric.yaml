@@ -1,0 +1,19 @@
+case: investment-attention-review
+expected_routing:
+  workflow: investment-attention-review
+must:
+  - compare new evidence with prior thesis or prior expectations
+  - distinguish materiality from positive or negative direction
+  - evaluate contracts and demand signals through likely economic or strategic significance
+  - separate business-thesis improvement from valuation/market-reaction implications
+  - identify what may already be priced in without presenting that inference as fact
+  - return a short attention queue with exact next research questions
+  - escalate only material items to thesis-monitor, valuation, challenge or underwriting
+  - persist material evidence or explicitly report persistence failure
+must_not:
+  - summarize all recent ACN news
+  - treat price rebound as proof that thesis is correct
+  - recommend adding solely because recent news is positive
+failure_if:
+  - no prior-state comparison is made
+  - contract headlines are treated as material without economic reasoning

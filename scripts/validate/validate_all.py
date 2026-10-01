@@ -16,6 +16,7 @@ def main() -> int:
         here / "validate_skill.py",
         here / "validate_tests.py",
         here / "validate_catalog.py",
+        here / "validate_investing.py",
         here / "validate_runtime.py",
     ]
     results = [run(script) for script in scripts]

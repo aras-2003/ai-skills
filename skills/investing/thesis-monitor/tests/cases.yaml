@@ -1,0 +1,18 @@
+cases:
+  - id: monitor-earnings
+    case: Earnings update on existing thesis
+    input: "Update my MU thesis after earnings. Compare against the assumptions we recorded before the release."
+    expected:
+      should_trigger: true
+      must: ["prior thesis", "new evidence", "kill criteria"]
+  - id: monitor-noise
+    case: Headline with no thesis impact
+    input: "There was a minor analyst downgrade. Check whether anything material changed versus my thesis."
+    expected:
+      should_trigger: true
+      must: ["NO MATERIAL CHANGE"]
+  - id: monitor-near-miss
+    case: New unresearched company
+    input: "I have never looked at this company. Build the first thesis."
+    expected:
+      should_trigger: false

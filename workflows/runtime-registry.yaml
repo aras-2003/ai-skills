@@ -371,3 +371,167 @@ workflows:
               - selective routing
               - staged evidence gating
               - broad mixed-signal discovery and shortlist reduction
+  - name: investment-attention-review
+    workflow: workflows/investment-attention-review/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - investment-attention-triage
+        - investment-record-store
+      optional:
+        - name: thesis-monitor
+          on_missing: "Do not claim thesis monitoring; keep the item at attention-triage level."
+        - name: market-opportunity-scan
+          on_missing: "Do not expand the event into broader opportunity discovery."
+        - name: trend-theme-research
+          on_missing: "Keep theme implications unresolved."
+        - name: security-underwriting
+          on_missing: "Do not escalate to full company underwriting."
+        - name: valuation-scenario-review
+          on_missing: "Keep valuation implications qualitative and unresolved."
+        - name: thesis-challenge
+          on_missing: "Disclose that independent falsification was not run."
+        - name: portfolio-state-review
+          on_missing: "Do not make portfolio-fit claims."
+    description: >
+      Review new company, industry, market and portfolio information against prior theses and expectations,
+      suppress noise, classify materiality and surface only the few items worth deeper research now.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: high
+      last_reviewed: 2026-10-02
+      execution:
+        default_model_class: standard
+  - name: investment-opportunity-hunter
+    workflow: workflows/investment-opportunity-hunter/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - market-opportunity-scan
+        - investment-record-store
+      optional:
+        - name: investment-attention-triage
+          on_missing: "Use scanner materiality only; do not claim dedicated attention triage."
+        - name: trend-theme-research
+          on_missing: "Do not make value-chain or second-order theme claims."
+        - name: portfolio-state-review
+          on_missing: "Do not make portfolio-fit claims."
+        - name: security-underwriting
+          on_missing: "Return a research queue only; do not claim full underwriting."
+        - name: valuation-scenario-review
+          on_missing: "Keep valuation follow-up unresolved."
+        - name: thesis-challenge
+          on_missing: "Do not promote to a conviction queue without falsification."
+    description: >
+      Scan the XTB-investable universe and tracked history for evidence-backed research candidates using changed
+      fundamentals, valuation, expectations, trend and portfolio context without issuing automatic buy or sell instructions.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: high
+      last_reviewed: 2026-10-02
+      execution:
+        default_model_class: standard
+  - name: investment-security-review
+    workflow: workflows/investment-security-review/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - security-underwriting
+        - valuation-scenario-review
+        - thesis-challenge
+        - investment-record-store
+      optional:
+        - name: trend-theme-research
+          on_missing: "Keep broader theme implications unresolved."
+        - name: portfolio-state-review
+          on_missing: "Do not make portfolio-fit claims."
+        - name: position-sizing-review
+          on_missing: "Stop before sizing."
+        - name: decision-journal-update
+          on_missing: "Return the decision record for manual persistence."
+    description: >
+      Review one investment security end-to-end across underwriting, valuation scenarios, thesis challenge,
+      portfolio fit, lifecycle sizing and durable decision records.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: high
+      last_reviewed: 2026-10-02
+      execution:
+        default_model_class: strong
+  - name: investment-portfolio-review
+    workflow: workflows/investment-portfolio-review/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - portfolio-state-review
+        - thesis-monitor
+        - investment-record-store
+      optional:
+        - name: investment-attention-triage
+          on_missing: "Review only already-material evidence; do not claim broad attention triage."
+        - name: position-sizing-review
+          on_missing: "Do not make sizing-band recommendations."
+        - name: valuation-scenario-review
+          on_missing: "Do not update valuation scenarios."
+        - name: thesis-challenge
+          on_missing: "Disclose that independent thesis challenge was not run."
+        - name: decision-journal-update
+          on_missing: "Return decisions for manual persistence."
+    description: >
+      Review the current portfolio against policy, prior snapshots and active theses, surfacing only material
+      concentration, thesis, valuation or policy changes while preserving append-only history.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: high
+      last_reviewed: 2026-10-02
+      execution:
+        default_model_class: standard
+  - name: investment-theme-discovery
+    workflow: workflows/investment-theme-discovery/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - trend-theme-research
+        - market-opportunity-scan
+        - investment-record-store
+      optional:
+        - name: investor-pattern-research
+          on_missing: "Do not add investor-archetype context."
+        - name: security-underwriting
+          on_missing: "Return theme candidates only; do not claim company underwriting."
+        - name: thesis-challenge
+          on_missing: "Keep theme candidates pre-conviction."
+    description: >
+      Research structural or cyclical investment themes through value-chain economics, bottlenecks, indicators
+      and invalidation, then create an XTB-focused research queue without treating theme exposure as security attractiveness.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: candidate
+      risk: medium
+      last_reviewed: 2026-10-02
+      execution:
+        default_model_class: standard
