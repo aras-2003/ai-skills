@@ -100,3 +100,33 @@ targets:
       mode: explicit
       input: evals/commerce/case-006-product-discovery.input.md
       rubric: evals/commerce/case-006-product-discovery.rubric.yaml
+  investment-opportunity-hunter:
+    - id: case-001-opportunity-hunter
+      mode: explicit
+      input: evals/investing/case-001-opportunity-hunter.input.md
+      rubric: evals/investing/case-001-opportunity-hunter.rubric.yaml
+  investment-security-review:
+    - id: case-002-security-sizing
+      mode: explicit
+      input: evals/investing/case-002-security-sizing.input.md
+      rubric: evals/investing/case-002-security-sizing.rubric.yaml
+  investment-portfolio-review:
+    - id: case-003-portfolio-review
+      mode: explicit
+      input: evals/investing/case-003-portfolio-review.input.md
+      rubric: evals/investing/case-003-portfolio-review.rubric.yaml
+  investment-theme-discovery:
+    - id: case-004-theme-discovery
+      mode: explicit
+      input: evals/investing/case-004-theme-discovery.input.md
+      rubric: evals/investing/case-004-theme-discovery.rubric.yaml
+  investment-policy-design:
+    - id: case-005-policy-learning
+      mode: explicit
+      input: evals/investing/case-005-policy-learning.input.md
+      rubric: evals/investing/case-005-policy-learning.rubric.yaml
+  investment-attention-review:
+    - id: case-006-attention-acn
+      mode: explicit
+      input: evals/investing/case-006-attention-acn.input.md
+      rubric: evals/investing/case-006-attention-acn.rubric.yaml
