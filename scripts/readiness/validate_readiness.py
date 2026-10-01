@@ -9,14 +9,23 @@ from typing import Any
 import yaml
 
 HERE = Path(__file__).resolve()
-VALIDATE = HERE.parents[1] / "validate"
 EVAL = HERE.parents[1] / "eval"
-sys.path.insert(0, str(VALIDATE))
 sys.path.insert(0, str(EVAL))
-from common import split_frontmatter  # noqa: E402
 import receipt as eval_receipt  # noqa: E402
 
 MAX_EXCEPTION_DAYS = 30
+
+
+def split_frontmatter(text: str) -> tuple[dict[str, Any], str]:
+    if not text.startswith("---\n"):
+        raise ValueError("missing frontmatter")
+    end = text.find("\n---\n", 4)
+    if end < 0:
+        raise ValueError("unterminated frontmatter")
+    data = yaml.safe_load(text[4:end]) or {}
+    if not isinstance(data, dict):
+        raise ValueError("frontmatter must be a mapping")
+    return data, text[end + 5:]
 
 
 def production_components(root: Path) -> dict[str, tuple[str, str, str]]:
