@@ -86,7 +86,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("28a7681cf024bb7aaad7a979e7ce7253139d5bd4", lock["behavior_source_revision"])
+            self.assertEqual("a5c4001d28f45d3fb799f07a2c880f406f58cc65", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
             self.assertEqual("1.8.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
@@ -112,7 +112,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             definitions = {item["id"]: item for item in lock["case_definitions"]}
             self.assertEqual(41, len(definitions))
             components = {(item["channel"], item["name"]): item for item in lock["components"]}
-            self.assertEqual("1.3.0", components[("production", "oaf-health-check")]["version"])
+            self.assertEqual("1.4.0", components[("production", "oaf-health-check")]["version"])
             self.assertEqual("1.1.0", components[("production", "operating-model-review")]["version"])
             self.assertEqual("1.1.0", components[("production", "decision-bottleneck-analysis")]["version"])
             self.assertEqual("1.1.0", components[("production", "decision-rights-review")]["version"])
@@ -136,7 +136,7 @@ class RuntimeCampaignTests(unittest.TestCase):
     def test_historical_receipt_identity_uses_recorded_behavior_revision(self) -> None:
         old_revision = "ff012e494f5b2f71803f850d71d20f54a3315e2b"
         for case_id, component_name, expected_version, current_expected_version in (
-            ("fallback-strategy-production-001", "oaf-health-check", "1.0.0", "1.3.0"),
+            ("fallback-strategy-production-001", "oaf-health-check", "1.0.0", "1.4.0"),
             ("fallback-interface-production-001", "oaf-operating-model-redesign", "1.0.0", "1.1.0"),
         ):
             target, case = receipt.find_case(ROOT, case_id)
@@ -154,7 +154,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertNotEqual(digest, current_digest)
 
 
-    def test_imported_r2_and_r3_runtime_statuses_remain_frozen(self) -> None:
+    def test_imported_r2_r3_and_r4_runtime_statuses_remain_frozen(self) -> None:
         r2 = {
             "fallback-strategy-production-002": "FAIL",
             "fallback-interface-explicit-production-002": "PASS",
@@ -179,6 +179,14 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual(status, data["evaluation"]["status"])
             self.assertEqual("cde46f59c20a0d4313528185e5df079335633b10", data["source_revision"])
 
+        r4_path = (
+            ROOT / "evals/results/runtime-campaign/fallback-strategy-production-002"
+            / "2026-10-01-luna-r4/receipt.json"
+        )
+        r4 = json.loads(r4_path.read_text(encoding="utf-8"))
+        self.assertEqual("FAIL", r4["evaluation"]["status"])
+        self.assertEqual("28a7681cf024bb7aaad7a979e7ce7253139d5bd4", r4["source_revision"])
+
     def test_historical_receipts_use_explicit_compatibility_profiles(self) -> None:
         self.assertEqual(
             "historical-r1",
@@ -196,6 +204,12 @@ class RuntimeCampaignTests(unittest.TestCase):
             "historical-r3",
             campaign.evidence_compatibility_profile(
                 "cde46f59c20a0d4313528185e5df079335633b10"
+            ),
+        )
+        self.assertEqual(
+            "historical-r4",
+            campaign.evidence_compatibility_profile(
+                "28a7681cf024bb7aaad7a979e7ce7253139d5bd4"
             ),
         )
         with self.assertRaisesRegex(ValueError, "unsupported evidence source revision"):
