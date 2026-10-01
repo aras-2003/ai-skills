@@ -4,6 +4,7 @@ import datetime as dt
 import json
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 import sys
 
@@ -57,10 +58,11 @@ class ReadinessPolicyTests(unittest.TestCase):
                 "maturity_disposition": "verified-current-version",
                 "receipt": "receipt.json",
             }
-            errors = validate_readiness.validate_record(
-                root, "demo", "1.0.0", rec,
-                review_by=self.review_by, today=self.today,
-            )
+            with patch.object(validate_readiness.eval_receipt, "validate_receipt_data", return_value=[]):
+                errors = validate_readiness.validate_record(
+                    root, "demo", "1.0.0", rec,
+                    review_by=self.review_by, today=self.today,
+                )
         self.assertTrue(any("evidence_scope=current-version" in e for e in errors))
 
     def test_expired_pending_exception_is_blocked(self) -> None:
