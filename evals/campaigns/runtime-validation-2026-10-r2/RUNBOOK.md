@@ -77,7 +77,7 @@ python scripts/eval/campaign.py verify-smoke   --lock .tmp/runtime-campaign-r2/l
 ### fallback-strategy-production-002 — explicit `oaf-health-check`
 
 ~~~text
-Firma ma strategię wzrostu i transformacji, ale inicjatywy są wybierane reaktywnie, priorytety zmieniają się co kwartał, a zespoły nie potrafią połączyć roadmap z mierzalnymi wynikami strategicznymi. Zrób przekrojową diagnozę problemu i wskaż najkrótszy sensowny następny krok. Korzystaj wyłącznie z capability faktycznie dostępnych w tej sesji.
+Uruchom workflow oaf-health-check dla tej sytuacji. Firma ma strategię wzrostu i transformacji, ale inicjatywy są wybierane reaktywnie, priorytety zmieniają się co kwartał, a zespoły nie potrafią połączyć roadmap z mierzalnymi wynikami strategicznymi. Zrób przekrojową diagnozę problemu i wskaż najkrótszy sensowny następny krok. Korzystaj wyłącznie z capability faktycznie dostępnych w tej sesji.
 ~~~
 
 ### fallback-interface-explicit-production-002 — explicit workflow fallback
