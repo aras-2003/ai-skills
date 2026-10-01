@@ -10,8 +10,10 @@ cases:
     input: "I like this stock a lot; find the strongest evidence that I may be wrong."
     expected:
       should_trigger: true
+      must: ["contradictory evidence", "countercase"]
   - id: challenge-near-miss
     case: No thesis exists
     input: "What does Micron do?"
     expected:
       should_trigger: false
+      must_not: ["revised thesis state", "priced-in analysis"]
