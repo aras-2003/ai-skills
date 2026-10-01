@@ -41,19 +41,28 @@ class RuntimeCampaignTests(unittest.TestCase):
             campaign.prepare(out)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
             self.assertEqual("ff012e494f5b2f71803f850d71d20f54a3315e2b", lock["behavior_source_revision"])
-            self.assertEqual("arek-ai-skills", lock["package"]["name"])
-            self.assertEqual("1.8.0", lock["package"]["version"])
-            self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalog"])
-            self.assertNotIn("organizational-interface-review", lock["expected_catalog"])
+            self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
+            self.assertEqual("1.8.0", lock["packages"]["production"]["version"])
+            self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
+            self.assertEqual("0.3.0", lock["packages"]["lab"]["version"])
+            self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
+            self.assertNotIn("organizational-interface-review", lock["expected_catalogs"]["production"])
+            self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
             self.assertTrue(lock["components"])
             self.assertTrue(all(x.get("version") and x.get("content_sha256") for x in lock["components"]))
+            self.assertEqual("production", lock["case_channels"]["fallback-strategy-production-001"])
+            self.assertEqual("production", lock["case_channels"]["fallback-interface-production-001"])
 
     def test_smoke_rejects_simultaneous_production_and_lab(self) -> None:
         lock = {
-            "package": {"name": "arek-ai-skills", "version": "1.8.0"},
-            "expected_catalog": ["a", "b"],
+            "packages": {
+                "production": {"name": "arek-ai-skills", "version": "1.8.0"},
+                "lab": {"name": "arek-ai-skills-lab", "version": "0.3.0"},
+            },
+            "expected_catalogs": {"production": ["a", "b"], "lab": ["c"]},
         }
         observed = {
+            "channel": "production",
             "package": {"name": "arek-ai-skills", "version": "1.8.0"},
             "enabled_packages": ["arek-ai-skills", "arek-ai-skills-lab"],
             "catalog": ["a", "b"],
