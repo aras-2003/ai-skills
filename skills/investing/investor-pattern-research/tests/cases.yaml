@@ -10,8 +10,10 @@ cases:
     input: "How does Howard Marks think about risk changing with price? Use his own material."
     expected:
       should_trigger: true
+      must: ["primary", "risk", "price"]
   - id: investor-near-miss
     case: Copy a fund holding
     input: "Just tell me what Buffett owns today so I can buy the same stocks."
     expected:
       should_trigger: false
+      must_not: ["copy holdings", "buy the same stocks"]
