@@ -147,7 +147,9 @@
         "prompt",
         "actual_output_path",
         "actual_output_sha256",
-        "tool_trace_path"
+        "tool_trace_path",
+        "selection_findings",
+        "evidence_origin"
       ],
       "properties": {
         "assisted": {
@@ -184,6 +186,18 @@
             "null"
           ],
           "pattern": "^[a-f0-9]{64}$"
+        },
+        "selection_findings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_origin": {
+          "enum": [
+            "runtime",
+            "offline"
+          ]
         }
       },
       "additionalProperties": false
@@ -225,6 +239,43 @@
             "string",
             "null"
           ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "runtime_artifact": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "channel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "package_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "package_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "release_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_revision": {
+          "type": "string",
+          "minLength": 7
+        },
+        "payload_content_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "component_content_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
         }
       },
       "additionalProperties": false
