@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import json
 import os
 import shutil
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 import sys
 
@@ -163,6 +165,59 @@ class PackagingTests(unittest.TestCase):
             errors = artifact_validation.validate_tree(out, allow_lab_evals=True)
             self.assertTrue(any("content_sha256 mismatch" in e for e in errors))
 
+    def _build_zip_channel(self, parent: Path) -> Path:
+        out = parent / "zips"
+        build_chatgpt_skills.build(ROOT, out, "production")
+        self.assertEqual([], artifact_validation.validate_zips(out))
+        return out
+
+    def test_zip_skill_content_mutation_with_unchanged_index_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            out = self._build_zip_channel(Path(td))
+            index = json.loads((out / "index.json").read_text(encoding="utf-8"))
+            item = index["skills"][0]
+            zp = out / item["zip"]
+            with zipfile.ZipFile(zp) as zf:
+                files = [(info.filename, zf.read(info)) for info in zf.infolist()]
+            skill_member = f"{item['name']}/SKILL.md"
+            mutated = [
+                (name, data + b"\n# mutation\n" if name == skill_member else data)
+                for name, data in files
+            ]
+            zp.write_bytes(build_chatgpt_skills._zip_bytes(mutated))
+            errors = artifact_validation.validate_zips(out)
+        self.assertTrue(any("archive_sha256 mismatch" in e for e in errors), errors)
+        self.assertTrue(any("content_sha256 mismatch" in e for e in errors), errors)
+
+    def test_zip_manifest_identity_mismatches_are_rejected(self) -> None:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            out = self._build_zip_channel(Path(td))
+            capabilities_path = out / "capabilities.json"
+            capabilities = json.loads(capabilities_path.read_text(encoding="utf-8"))
+            capabilities["skills"][0]["version"] = "0.0.0-mutated"
+            capabilities_path.write_text(json.dumps(capabilities, indent=2) + "\n", encoding="utf-8")
+            errors = artifact_validation.validate_zips(out)
+            self.assertTrue(any("index/capabilities version mismatch" in e for e in errors), errors)
+
+            build_chatgpt_skills.build(ROOT, out, "production")
+            release_path = out / "release-manifest.json"
+            release = json.loads(release_path.read_text(encoding="utf-8"))
+            release["components"][0]["content_sha256"] = "0" * 64
+            release_path.write_text(json.dumps(release, indent=2) + "\n", encoding="utf-8")
+            errors = artifact_validation.validate_zips(out)
+        self.assertTrue(any("index/release content_sha256 mismatch" in e for e in errors), errors)
+
+    def test_duplicate_and_unsafe_zip_entries_are_rejected(self) -> None:
+        duplicate_infos = [
+            zipfile.ZipInfo("demo/SKILL.md"),
+            zipfile.ZipInfo("demo/SKILL.md"),
+        ]
+        errors = artifact_validation._zip_member_errors("demo.zip", "demo", duplicate_infos)
+        self.assertTrue(any("duplicate ZIP entries" in e for e in errors), errors)
+
+        unsafe_infos = [zipfile.ZipInfo("demo/../escape.txt")]
+        errors = artifact_validation._zip_member_errors("demo.zip", "demo", unsafe_infos)
+        self.assertTrue(any("unsafe ZIP entry name" in e for e in errors), errors)
     def test_chatgpt_channel_manifest_declares_workflow_limitations(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out1 = Path(td) / "zip1"
