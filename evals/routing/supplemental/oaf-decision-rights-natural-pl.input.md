@@ -1,0 +1,1 @@
+Dla decyzji o terminie uruchomienia produktu formalnie decyduje Product, ale Sales i IT wyglądają na faktycznych współdecydentów. Chcę ustalić, kto naprawdę proponuje, decyduje, doradza, wykonuje i eskaluje oraz czy ktoś ma ukryte prawo weta.
