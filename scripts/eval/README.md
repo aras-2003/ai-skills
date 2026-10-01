@@ -6,7 +6,7 @@ This directory defines the evidence boundary for runtime evaluations.
 
 The executor receives only files ending in `.input.md` plus the runtime catalog needed for the case. It must never receive files ending in `.rubric.yaml`, expected routing, expected answer, PASS/FAIL criteria, or evaluator notes.
 
-There is no single universal runtime registry. The active campaign composes Commerce cases from `evals/runtime-fixtures.yaml`, natural-routing cases from `evals/routing/registry.yaml`, split executive-role cases, and campaign-specific fallback cases. The active definition is `evals/campaigns/runtime-validation-2026-10-r4/campaign.yaml`; the supplemental interface-routing regression is outside the core-38 count.
+There is no single universal runtime registry. The active campaign composes Commerce cases from `evals/runtime-fixtures.yaml`, natural-routing cases from `evals/routing/registry.yaml`, split executive-role cases, and campaign-specific fallback cases. The active definition is `evals/campaigns/runtime-validation-2026-10-r5/campaign.yaml`; the supplemental interface-routing regression is outside the core-38 count.
 
 The Lab packager copies only executor inputs.
 
@@ -30,7 +30,7 @@ An assisted run cannot be recorded as PASS.
 - `python scripts/eval/validate_isolation.py --artifact <built-lab-dir>`
 - `python -m unittest discover -s scripts/eval/tests -p 'test_*.py'`
 - `python scripts/eval/campaign.py validate`
-- `python scripts/eval/campaign.py prepare --output .tmp/runtime-campaign-r4`
+- `python scripts/eval/campaign.py prepare --output .tmp/runtime-campaign-r5`
 - `python scripts/eval/campaign.py queue --include-supplemental`
 - `python scripts/eval/campaign.py validate-evidence`
 - `python scripts/eval/receipt.py validate evals/results/<record>.json`
