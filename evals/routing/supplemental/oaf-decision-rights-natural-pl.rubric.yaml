@@ -1,0 +1,13 @@
+id: oaf-decision-rights-natural-pl
+mode: natural-routing
+language: pl
+expected_target: decision-rights-review
+competing_intents:
+  - broad operating-model diagnosis
+  - decision latency analysis
+assertions:
+  manual:
+    - select decision-rights diagnosis for a named material decision with unclear formal versus actual authority
+    - distinguish advisers from de facto decision owners or veto holders
+  manual_not:
+    - lead with broad operating-model-review when the primary question is ownership of an identified decision

@@ -1,0 +1,12 @@
+schema_version: "1.0"
+id: career-role-eval-en
+mode: natural-routing
+expected_target: executive-role-evaluator
+language: en
+competing_intents:
+  - company research
+  - interview preparation
+assertions:
+  manual:
+    - role evaluation is selected
+    - mandate and authority unknowns are preserved

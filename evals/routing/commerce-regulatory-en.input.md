@@ -1,0 +1,1 @@
+I want to sell a calm-and-sleep ingestible in Poland and use sleep-related claims. I do not yet know the legal classification, allowed ingredients or permitted claims. What has to be verified before launch?

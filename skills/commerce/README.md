@@ -1,5 +1,7 @@
 # Commerce Opportunity Framework
 
+Status: **implemented source domain**. The nine listed specialist skills are production-maturity source components; runtime PASS is tracked separately from source maturity.
+
 A practical framework for validating and selecting e-commerce product opportunities.
 
 Core loop:
@@ -48,7 +50,7 @@ Signal -> Problem -> Product/Offer -> Demand -> Competition -> Economics -> Supp
 
 ## Production workflows
 - commerce-product-deep-dive
-- commerce-opportunity-review — validated for discovery, screening and selection
+- commerce-opportunity-review — production workflow for discovery, screening and selection
 
 ## Decision states
 - BADAĆ TERAZ
@@ -57,4 +59,4 @@ Signal -> Problem -> Product/Offer -> Demand -> Competition -> Economics -> Supp
 - ODRZUCIĆ
 
 ## Validation
-See `docs/COMMERCE-V1-EVALS.md` and `evals/commerce/validation-v1-2026-09-30.md`.
+See `docs/COMMERCE-V1-EVALS.md`, `evals/commerce/validation-v1-2026-09-30.md` and the active runtime campaign. Offline validation or historical narrative PASS does not substitute for an exact-version runtime receipt.

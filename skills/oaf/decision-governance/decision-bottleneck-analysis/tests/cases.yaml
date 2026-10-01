@@ -25,3 +25,24 @@ cases:
       must:
         - preserve unknowns
         - avoid inventing missing organisational facts
+  - id: decision-bottleneck-analysis-004
+    case: identified-decision-class
+    input: |
+      Customer commitment exceptions are repeatedly escalated and wait several days.
+      Trace the formal and actual path for this specific decision class, including waits,
+      vetoes, missing evidence and rework.
+    expected:
+      should_trigger: true
+      must:
+        - trace the identified decision class rather than broaden to the whole operating model
+        - distinguish wait time, vetoes, evidence gaps and authority ambiguity
+  - id: decision-bottleneck-analysis-005
+    case: mixed-interface-near-miss
+    input: |
+      Product, Sales and IT have unclear handoffs, accountability gaps and uncertain capacity authority.
+      We do not yet know whether the main failure is structure, ownership or decision latency.
+    expected:
+      should_trigger: false
+      must_not:
+        - lead with decision-bottleneck analysis before a problematic decision class is identified
+

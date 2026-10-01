@@ -1,0 +1,16 @@
+{
+  "id": "executive-role-009",
+  "mode": "natural-routing",
+  "subject": "executive-role-evaluator",
+  "case": "real-regression-company-research-context-leak",
+  "should_trigger": false,
+  "assertions": {
+    "manual": [],
+    "manual_not": [
+      "infer whether a Kelvion role is attractive",
+      "discuss candidate fit",
+      "discuss career value",
+      "recommend recruitment actions"
+    ]
+  }
+}

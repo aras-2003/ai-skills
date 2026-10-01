@@ -1,0 +1,1 @@
+Mam pięć inicjatyw z porównywalnym business case, wspólnymi definicjami wartości, znaną pojemnością zespołów i zależnościami. Potrzebuję zdecydować, co finansować najpierw i jakie trade-offy akceptujemy.

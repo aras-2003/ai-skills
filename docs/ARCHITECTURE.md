@@ -1,303 +1,148 @@
 # AI Skills Architecture
 
-## 1. Objective
+## Objective
 
-Build a portable, testable library of reusable AI procedures that can be used by agents across projects without duplicating project context.
+Build a portable, testable library of reusable AI procedures without duplicating project context.
 
-The repository is a **capability library**, not a prompt dump.
+The repository is a capability library, not a prompt dump.
 
-A good skill:
-- solves one repeatable class of task;
-- has explicit trigger conditions;
-- defines inputs and outputs;
-- contains a stable procedure;
-- separates judgment from deterministic logic;
-- can be tested independently;
-- composes cleanly into workflows.
-
-## 2. Conceptual model
-
-```
-USER GOAL
-   |
-   v
-PROJECT / AGENT CONTEXT
-   |
-   v
-ROUTER
-   |
-   +--> SKILL A -----+
-   |                 |
-   +--> SKILL B -----+--> WORKFLOW --> QUALITY GATE --> OUTPUT / ACTION
-   |                 |
-   +--> SKILL C -----+
-          |
-          +--> tools/connectors
-          +--> scripts
-          +--> references
-          +--> templates/assets
-```
-
-### Responsibility boundaries
+## Layers
 
 | Layer | Owns | Must not own |
 |---|---|---|
-| Project | long-lived context, goals, files, project-specific constraints | generic reusable procedure |
-| Agent / bot | role, responsibilities, routing, tool authority | detailed domain procedure duplicated across agents |
-| Skill | reusable method for one task | global personal context or orchestration of unrelated tasks |
-| Workflow | sequence, gates, branching, human checkpoints | deep instructions that belong in individual skills |
-| Connector / tool | external data and actions | reasoning policy |
-| Script | deterministic calculation, parsing, validation, transformation | judgment-heavy reasoning |
-| Automation | trigger and recurrence | business logic duplicated from workflows |
-| Quality gate | acceptance criteria and release decision | producing the substantive work itself |
+| Project/context | goals, private/current facts, files, constraints | generic reusable method |
+| Router/runtime | intent recognition, capability selection, tool authority | duplicated domain procedure |
+| Skill | reusable method for one task | unrelated orchestration or personal profile |
+| Workflow | sequence, gates, branching, dependency handling | duplicated specialist instructions |
+| Script | deterministic calculation/parsing/validation | judgment-heavy reasoning |
+| Connector/tool | external data/actions | reasoning policy |
+| Eval harness | isolated input, evidence receipt, evaluator assertions | leaked answers/rubrics in executor context |
+| Quality gate | source/package integrity and release checks | substantive domain result |
 
-## 3. Repository architecture
+## Repository layout
 
 ```
 ai-skills/
-├── README.md
-├── docs/
-│   ├── ARCHITECTURE.md
-│   ├── LIFECYCLE.md
-│   ├── TESTING.md
-│   └── CATALOG-BENCHMARKS.md
-├── templates/
-│   └── skill-template/
-│       ├── SKILL.md
-│       ├── tests/
-│       │   └── cases.yaml
-│       ├── references/
-│       ├── scripts/
-│       └── assets/
 ├── skills/
-│   ├── core/
 │   ├── career/
-│   ├── product-research/
-│   ├── strategy-ea/
-│   ├── web-design/
-│   ├── ecommerce/
-│   ├── tender/
-│   └── learning/
+│   ├── commerce/
+│   ├── oaf/
+│   ├── meta/
+│   └── ...other mixed-maturity source domains
 ├── workflows/
-│   ├── README.md
-│   └── <workflow-name>/
-│       └── WORKFLOW.md
-└── scripts/
-    ├── validate_catalog.py
-    ├── validate_skills.py
-    └── generate_catalog.py
+│   ├── runtime-registry.yaml
+│   └── <workflow>/WORKFLOW.md
+├── evals/
+│   ├── runtime-fixtures.yaml
+│   ├── routing/
+│   └── results/
+├── scripts/
+│   ├── validate/
+│   ├── package/
+│   ├── eval/
+│   ├── readiness/
+│   └── catalog/
+├── release/
+│   ├── package.yaml
+│   └── production-readiness.yaml
+├── docs/
+└── CATALOG.md
 ```
 
-### Skill package
+Generated `plugins/` and `dist/` artifacts are outputs, not source editing targets.
 
-Each production skill should be self-contained:
+## Skill package
 
 ```
 skills/<domain>/<skill-name>/
-├── SKILL.md          # required
-├── tests/            # expected behavior and edge cases
-├── references/       # only material needed while executing the skill
-├── scripts/          # deterministic helpers
-└── assets/           # templates or output artifacts
+├── SKILL.md
+├── tests/          # source-side behavioral definitions
+├── references/     # runtime support when needed
+├── scripts/        # deterministic helpers
+└── assets/         # runtime templates/assets
 ```
 
-Do not create empty folders. Add optional directories only when they contain useful material.
+Optional directories exist only when useful. Production runtime packagers use an explicit allow-list and exclude `tests/`, eval summaries and evaluator rubrics.
 
-## 4. SKILL.md contract
+## SKILL.md contract
 
-Use the open Agent Skills convention so the same library can be reused across compatible runtimes.
+Routing metadata should answer:
+1. what task the skill performs;
+2. when to invoke it;
+3. what nearby tasks route elsewhere.
 
-Minimum frontmatter:
+Source metadata may contain repository-internal information. Exported portable SKILL frontmatter is intentionally reduced to the portable subset; nested execution/eval history remains repository-side.
 
-```yaml
----
-name: role-fit-analysis
-description: >
-  Evaluate a senior or executive job opportunity against the target role profile,
-  mandate, scope, career trajectory and constraints. Use after offer validity has
-  been confirmed and before expensive company research or CV tailoring.
----
-```
+Do not infer cross-runtime compatibility solely from successful YAML parsing. Runtime import/execution is a separate evidence claim.
 
-Recommended body:
+## Workflow dependency contract
 
-```markdown
-# Role Fit Analysis
+`workflows/runtime-registry.yaml` defines:
+- workflow source;
+- maturity/version;
+- channel support;
+- required execution dependencies;
+- optional dependencies and explicit `on_missing` behavior.
 
-## Purpose
-## Use when
-## Do not use when
-## Inputs
-## Preconditions
-## Procedure
-## Decision rules
-## Output contract
-## Evidence requirements
-## Failure / uncertainty handling
-## Quality checks
-## Examples
-## References
-```
+Required missing dependencies block a supported package. Optional missing dependencies must narrow scope or stop the affected branch; an entrypoint must not simulate a specialist that is not available.
 
-### Design rule: description is routing metadata
+Execution dependency cycles are invalid. Ordinary references to another method are not automatically execution dependencies.
 
-The description must answer:
-1. What task does this skill perform?
-2. When should an agent invoke it?
-3. What nearby tasks should route elsewhere?
-
-A vague description such as "helps with careers" is a routing bug.
-
-## 5. Skill granularity
-
-Prefer a skill when all are true:
-- the task repeats;
-- the method is stable enough to describe;
-- quality improves when the same procedure is reused;
-- the task has a meaningful independent output;
-- it can be tested separately.
-
-Keep logic in the project/agent when:
-- it is unique to one project;
-- it changes constantly;
-- it is mostly personal context;
-- it is a one-off instruction.
-
-Use a workflow rather than one giant skill when:
-- there are multiple independent stages;
-- stages have stop conditions;
-- only some cases need deeper analysis;
-- stages can be reused elsewhere.
-
-## 6. Three classes of skills
-
-### A. Reasoning skills
-Examples: `red-team-review`, `architecture-review`, `role-fit-analysis`.
-
-Primary content: decision process, evidence rules, trade-offs, output schema.
-
-### B. Execution skills
-Examples: `cv-tailoring`, `rfp-extraction`, `implementation-brief`.
-
-Primary content: procedural steps, tools, templates, transformations.
-
-### C. Control skills
-Examples: `evidence-validator`, `quality-gate`, `change-review`.
-
-Primary content: acceptance criteria, verification, regression and uncertainty handling.
-
-A mature workflow usually combines all three.
-
-## 7. Routing architecture
-
-Routing should happen in this order:
+## Routing
 
 1. Identify user intent.
 2. Identify domain.
 3. Check preconditions.
-4. Select the smallest skill that fully addresses the task.
-5. Load only the supporting references needed by that skill.
+4. Select the smallest capability that fully addresses the task.
+5. Load only required support.
 6. Execute.
-7. Run an appropriate control skill if risk/impact warrants it.
-8. Escalate to a workflow only if multiple stages are actually needed.
+7. Apply control/review when risk warrants it.
+8. Escalate to a workflow only when multiple stages/gates are needed.
 
-Avoid loading the whole library into context.
+Natural routing and explicit invocation are tested separately.
 
-## 8. Progressive-depth architecture
+## Progressive depth
 
-Expensive work should happen only after cheap gates pass.
-
-Example:
-
-```
-job-discovery
-  -> job-validity-check
-     -> role-fit-analysis
-        -> [STOP if weak]
-        -> company-context-research
-           -> cv-gap-analysis
-              -> cv-tailoring
-```
-
-This principle applies across domains:
-- product validation before sourcing;
+Do cheap gates before expensive work. Examples:
+- discovery before known-product deep dive;
+- sample/landed-cost validation before paid acquisition when those can falsify the thesis;
 - eligibility before tender deep dive;
-- concept approval before implementation;
-- evidence validation before executive recommendation.
+- evidence validation before high-impact recommendations;
+- diagnosis before operating-model/governance redesign.
 
-## 9. Deterministic vs model logic
+## Deterministic vs model logic
 
-Use code/scripts for:
-- scoring arithmetic;
-- thresholds;
-- schema validation;
-- duplicate detection;
-- deterministic parsing;
-- file checks;
-- regression tests;
-- formatting where exactness matters.
+Use code for arithmetic, schemas, duplicate detection, digests, packaging, deterministic assertions and regression checks.
 
-Use model reasoning for:
-- interpretation;
-- prioritization;
-- ambiguity;
-- qualitative trade-offs;
-- counterarguments;
-- executive synthesis;
-- semantic matching.
+Use model reasoning for interpretation, ambiguity, qualitative trade-offs, counterarguments and synthesis.
 
-Rule: **LLM interprets; code calculates and validates.**
+**LLM interprets; code calculates and validates.**
 
-## 10. Context economy
+## Evaluation integrity
 
-Use progressive disclosure:
-- the agent first sees only skill metadata;
-- it loads `SKILL.md` when relevant;
-- it loads references/scripts only when the procedure calls for them.
+Runtime cases separate:
+- executor-only `.input.md`;
+- evaluator-only `.rubric.yaml`.
 
-Do not embed large research packs or project files directly in SKILL.md.
+The Lab packages only executor inputs. Evidence receipts record source/component identity, runtime/model, available catalog, actual output/trace and review result. If execution is unavailable, status is `NOT_RUN`, not PASS.
 
-## 11. Portability
+## Channels and provenance
 
-Keep skill content independent from one model whenever possible.
+Every built channel exposes a generated capability manifest and release provenance. Channel support is explicit; functionality absent from a channel is marked unavailable rather than implied.
 
-Runtime-specific instructions should live in a small adapter section or runtime-specific helper, not in the core procedure.
+Build outputs are staged, validated and atomically replaced. ZIP content is deterministic for the same source/content.
 
-Target portability:
-- ChatGPT / OpenAI agent environments
-- Codex
-- Claude / Claude Code
-- other Agent Skills-compatible runtimes
+## Lifecycle and maturity
 
-## 12. Versioning model
+- `draft` — experimental source procedure;
+- `candidate` — under representative testing;
+- `production` — accepted for the declared scope;
+- `deprecated` — retained for migration/history.
 
-Recommended metadata:
+Maturity is a component property, not a branch-membership guarantee. Production readiness is reviewed in `release/production-readiness.yaml`.
 
-```yaml
-metadata:
-  owner: arkadiusz-kamrowski
-  version: "0.1.0"
-  maturity: draft
-  risk: medium
-  last_reviewed: 2026-09-29
-```
+A historical narrative PASS does not automatically prove a changed component version.
 
-Maturity:
-- `draft` — usable for experiments;
-- `candidate` — tested on representative cases;
-- `production` — accepted and stable;
-- `deprecated` — retained only for migration/history.
+## Human approval boundaries
 
-Version the skill when its behavior contract changes, not for typo-only edits.
-
-## 13. Human decision points
-
-Human approval is required when a workflow:
-- commits money;
-- publishes externally;
-- sends messages on behalf of the user;
-- changes production systems;
-- makes irreversible repository changes;
-- relies on materially uncertain evidence for a high-impact decision.
-
-The workflow may prepare the action, but the approval boundary should be explicit.
+Human approval remains required for money commitments, external publication/messages, production-system changes, irreversible repository/release changes, branch-protection changes, license/distribution decisions and high-impact actions based on materially uncertain evidence.

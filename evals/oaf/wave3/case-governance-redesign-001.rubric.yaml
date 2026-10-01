@@ -1,0 +1,46 @@
+schema_version: "1.0"
+id: "case-governance-redesign-001"
+target: "oaf-governance-redesign"
+mode: explicit
+source_legacy: "evals/oaf/wave3/case-governance-redesign-001.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## Test objective
+  
+  Evaluate whether `oaf-governance-redesign`:
+  1. reuses the diagnosis;
+  2. distinguishes decision-rights fixes from governance mechanisms;
+  3. removes/merges before adding;
+  4. uses `governance-design` selectively;
+  5. proposes a bounded pilot;
+  6. defines evidence of effectiveness;
+  7. does not equate risk control with more approvals.
+  
+  ## Expected behaviors
+  
+  PASS if:
+  - overlapping portfolio forums are candidates for merge/removal;
+  - low-threshold funding escalation is treated partly as accountability/risk behavior, not a missing committee;
+  - architecture exception governance is made explicit and bounded;
+  - operational dependencies are delegated where possible;
+  - pilot measures include lead time, rework, escalation and control exceptions.
+  
+  FAIL if:
+  - it creates a new enterprise governance board;
+  - leaves all existing forums and adds new ones;
+  - increases approval layers to improve risk control;
+  - ignores formal vs actual decision behavior.
+assertions:
+  manual:
+    - "overlapping portfolio forums are candidates for merge/removal;"
+    - "low-threshold funding escalation is treated partly as accountability/risk behavior, not a missing committee;"
+    - "architecture exception governance is made explicit and bounded;"
+    - "operational dependencies are delegated where possible;"
+    - "pilot measures include lead time, rework, escalation and control exceptions."
+    - "it creates a new enterprise governance board;"
+    - "leaves all existing forums and adds new ones;"
+    - "increases approval layers to improve risk control;"
+    - "ignores formal vs actual decision behavior."

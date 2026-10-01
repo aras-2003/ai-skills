@@ -1,0 +1,20 @@
+{
+  "selected_capabilities": [
+    "decision-bottleneck-analysis",
+    "operating-model-review"
+  ],
+  "tool_calls": [
+    {
+      "name": "exec",
+      "input": "const r = await tools.exec_command({cmd:\"sed -n '1,260p' /Users/arkadiuszkamrowski/.codex/plugins/cache/arek-ai-skills-runtime-r3/arek-ai-skills/1.8.0/skills/decision-bottleneck-analysis/SKILL.md\",\"workdir\":\"/Users/arkadiuszkamrowski/Documents/Codex/2026-10-01/wykonaj-wy-cznie-smoke-bie-cej-3\",\"yield_time_ms\":10000,\"max_output_tokens\":12000}); text(r.output);",
+      "call_id": "call_g3y6IP70pVFCHYQr1BbG5ZpK"
+    },
+    {
+      "name": "exec",
+      "input": "const r = await tools.exec_command({cmd:\"sed -n '1,300p' /Users/arkadiuszkamrowski/.codex/plugins/cache/arek-ai-skills-runtime-r3/arek-ai-skills/1.8.0/skills/operating-model-review/SKILL.md\",\"workdir\":\"/Users/arkadiuszkamrowski/Documents/Codex/2026-10-01/wykonaj-wy-cznie-smoke-bie-cej-3\",\"yield_time_ms\":10000,\"max_output_tokens\":14000}); text(r.output);",
+      "call_id": "call_GdndoYK1078lMSk0WrNgkpmJ"
+    }
+  ],
+  "conversation_id": "01a0f8a7-0b15-72d2-889f-fbe0fb74cfbd",
+  "notes": "Actual session rollout; initial decision-bottleneck-analysis read prompted autonomous routing correction to operating-model-review before final diagnosis. Both installed R3 skill reads observed; no coaching or rubric supplied. No case rubric or audit material provided to executor. Host confirms openai/gpt-5.6-luna/medium for business turn."
+}

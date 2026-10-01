@@ -1,6 +1,32 @@
 workflows:
   - name: oaf-health-check
     workflow: workflows/oaf-health-check/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        []
+      optional:
+        - name: strategy-to-execution-diagnostic
+          on_missing: "Strategy/execution diagnosis is unavailable in production; disclose reduced scope and stop/narrow if that branch is material."
+        - name: operating-model-review
+          on_missing: "Skip operating-model branch and disclose reduced scope."
+        - name: decision-rights-review
+          on_missing: "Skip decision-rights branch and disclose reduced scope."
+        - name: governance-design
+          on_missing: "Do not design governance; keep finding diagnostic only."
+        - name: architecture-review
+          on_missing: "Skip architecture branch and disclose reduced scope."
+        - name: capability-map-review
+          on_missing: "Skip capability-map branch."
+        - name: portfolio-prioritization
+          on_missing: "Do not rank initiatives; keep portfolio prioritisation unresolved."
+        - name: evidence-loop-review
+          on_missing: "Skip evidence-loop branch and disclose reduced scope."
+        - name: transformation-blueprint
+          on_missing: "Do not produce a transformation blueprint."
     description: >
       Run the OAF Health Check workflow as a selective cross-domain organisational architecture diagnostic.
       Use when the user asks for a broad diagnosis spanning strategy execution, operating model, decision rights,
@@ -8,10 +34,10 @@ workflows:
       route directly to one specialist OAF skill.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "1.0.0"
+      version: "1.5.0"
       maturity: production
       risk: medium
-      last_reviewed: 2026-09-30
+      last_reviewed: 2026-10-01
       execution:
         default_model_class: standard
         validated_models:
@@ -23,14 +49,33 @@ workflows:
               - workflow synthesis
   - name: oaf-operating-model-redesign
     workflow: workflows/oaf-operating-model-redesign/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - operating-model-review
+        - decision-rights-review
+      optional:
+        - name: global-local-model-review
+          on_missing: "Do not claim global/local redesign; limit the option set."
+        - name: organizational-interface-review
+          on_missing: "Interface-specialist analysis is unavailable; disclose the gap and do not pretend it ran."
+        - name: decision-bottleneck-analysis
+          on_missing: "Do not make bottleneck-specific claims without direct evidence."
+        - name: governance-design
+          on_missing: "Stop before governance mechanism design."
+        - name: transformation-blueprint
+          on_missing: "Stop before sequencing into a transformation blueprint."
     description: >
       Run an evidence-gated OAF operating-model redesign workflow from diagnosis through options, decision architecture and bounded transition design.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "1.0.0"
+      version: "1.1.0"
       maturity: production
       risk: medium
-      last_reviewed: 2026-09-30
+      last_reviewed: 2026-10-01
       execution:
         default_model_class: standard
         validated_models:
@@ -51,6 +96,17 @@ workflows:
             material_decision_change: false
   - name: oaf-governance-redesign
     workflow: workflows/oaf-governance-redesign/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - decision-rights-review
+        - governance-design
+      optional:
+        - name: decision-bottleneck-analysis
+          on_missing: "Proceed only with rights evidence; disclose that latency tracing was not run."
     description: >
       Run an OAF governance redesign workflow that starts from material decisions and bottlenecks rather than existing committees.
     metadata:
@@ -72,6 +128,22 @@ workflows:
               - pilot and effectiveness design
   - name: oaf-strategy-execution-reset
     workflow: workflows/oaf-strategy-execution-reset/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - strategy-to-execution-diagnostic
+        - capability-gap-analysis
+        - portfolio-health-review
+        - decision-rights-review
+        - evidence-loop-review
+      optional:
+        - name: portfolio-prioritization
+          on_missing: "Do not rank initiatives without the specialist and comparable evidence."
+        - name: transformation-blueprint
+          on_missing: "Stop before transformation sequencing."
     description: >
       Run an OAF strategy-execution reset linking strategic outcomes, capabilities, portfolio, decision rights, funding and evidence loops.
     metadata:
@@ -84,6 +156,15 @@ workflows:
         default_model_class: standard
   - name: oaf-transformation-design
     workflow: workflows/oaf-transformation-design/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - transformation-blueprint
+      optional:
+        []
     description: >
       Run an evidence-gated OAF transformation design workflow from validated diagnosis and target direction into bounded workstreams, sequencing, mobilisation and adaptive stage gates.
     metadata:
@@ -111,6 +192,18 @@ workflows:
             material_decision_change: false
   - name: oaf-enterprise-architecture-review
     workflow: workflows/oaf-enterprise-architecture-review/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - architecture-review
+      optional:
+        - name: capability-map-review
+          on_missing: "Do not make capability-map quality claims."
+        - name: capability-gap-analysis
+          on_missing: "Keep capability-gap implications unresolved."
     description: >
       Run an evidence-gated OAF enterprise architecture review linking business outcomes, capabilities, operating model, architecture decisions and portfolio implications without inventing technology defects.
     metadata:
@@ -131,6 +224,44 @@ workflows:
               - architecture stop-condition enforcement
   - name: oaf-enterprise-change-review
     workflow: workflows/oaf-enterprise-change-review/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        []
+      optional:
+        - name: strategy-to-execution-diagnostic
+          on_missing: "Strategy/execution specialist unavailable; disclose reduced scope and do not simulate it."
+        - name: operating-model-review
+          on_missing: "Operating-model branch unavailable; narrow the review."
+        - name: global-local-model-review
+          on_missing: "Do not make global/local design claims."
+        - name: organizational-interface-review
+          on_missing: "Interface specialist unavailable; disclose the gap and do not simulate it."
+        - name: decision-rights-review
+          on_missing: "Decision-rights branch unavailable; narrow the review."
+        - name: decision-bottleneck-analysis
+          on_missing: "Do not make latency-cause claims."
+        - name: architecture-review
+          on_missing: "Architecture branch unavailable; keep architecture implications unresolved."
+        - name: capability-gap-analysis
+          on_missing: "Do not make capability-gap claims."
+        - name: portfolio-health-review
+          on_missing: "Portfolio-health branch unavailable; keep capacity/portfolio conclusions unresolved."
+        - name: portfolio-prioritization
+          on_missing: "Do not rank."
+        - name: evidence-loop-review
+          on_missing: "Evidence-loop branch unavailable."
+        - name: oaf-operating-model-redesign
+          on_missing: "Do not redesign the operating model."
+        - name: oaf-governance-redesign
+          on_missing: "Do not redesign governance."
+        - name: oaf-enterprise-architecture-review
+          on_missing: "Do not produce EA design."
+        - name: oaf-transformation-design
+          on_missing: "Do not produce transformation design."
     description: >
       Orchestrate the minimum evidence-backed OAF path across multiple domains, reusing specialist findings and producing only the bounded design and mobilisation supported by evidence.
     metadata:
@@ -152,6 +283,25 @@ workflows:
               - bounded 30-90 day mobilisation
   - name: commerce-product-deep-dive
     workflow: workflows/commerce-product-deep-dive/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - problem-demand-validation
+        - competition-landscape-review
+        - differentiation-review
+        - unit-economics-review
+        - supplier-viability-review
+        - acquisition-fit-review
+      optional:
+        - name: product-opportunity-discovery
+          on_missing: "If the input is only a category idea, stop and request discovery rather than inventing a product."
+        - name: market-transferability-review
+          on_missing: "Do not make cross-market transfer claims."
+        - name: commerce-regulatory-risk-review
+          on_missing: "If regulation could be material, stop at an unresolved regulatory gate."
     description: >
       Evaluate one e-commerce product opportunity end-to-end across problem demand, competition, differentiation, economics, sourcing, regulation and acquisition before deciding whether to test, research, defer or kill.
     metadata:
@@ -173,6 +323,34 @@ workflows:
               - cheapest-falsifying-experiment sequencing
   - name: commerce-opportunity-review
     workflow: workflows/commerce-opportunity-review/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        []
+      optional:
+        - name: product-opportunity-discovery
+          on_missing: "Discovery mode is unavailable; require a known product/opportunity."
+        - name: commerce-product-deep-dive
+          on_missing: "Known-product deep dive is unavailable; limit to specialist screening."
+        - name: market-transferability-review
+          on_missing: "Cross-market transfer remains unresolved."
+        - name: problem-demand-validation
+          on_missing: "Demand remains unresolved."
+        - name: competition-landscape-review
+          on_missing: "Competition/substitutes remain unresolved."
+        - name: differentiation-review
+          on_missing: "Differentiation remains unresolved."
+        - name: unit-economics-review
+          on_missing: "Economics remain unresolved; do not recommend paid testing or scale."
+        - name: supplier-viability-review
+          on_missing: "Supply viability remains unresolved."
+        - name: acquisition-fit-review
+          on_missing: "Acquisition fit remains unresolved."
+        - name: commerce-regulatory-risk-review
+          on_missing: "Regulatory risk remains unresolved; do not claim launch readiness."
     description: >
       Orchestrate the minimum evidence-backed path for discovering, screening and selecting e-commerce product opportunities without running the full commerce catalog by default.
     metadata:

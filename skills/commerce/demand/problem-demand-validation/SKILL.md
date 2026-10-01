@@ -4,7 +4,7 @@ description: >
   Validate whether a target customer problem is frequent, painful and purchase-relevant enough to justify product testing. Use before assuming category interest equals demand.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: low
   last_reviewed: 2026-09-30
@@ -16,6 +16,16 @@ metadata:
 
 ## Purpose
 Determine whether a real problem creates credible willingness to act and pay.
+
+
+## Preconditions
+Require a defined target customer/problem and target market or state them as unresolved. Do not use engagement metrics alone as proof of demand.
+
+## Inputs and evidence
+Prefer dated target-market purchase evidence, current workarounds, price anchors and costly commitments. Separate awareness, engagement, stated intent and actual purchase behavior.
+
+## Uncertainty and tool failure
+If current market evidence cannot be retrieved, state which demand claims remain unverified. Do not replace missing purchase evidence with search volume, reviews or social engagement.
 
 ## Procedure
 1. Define customer, job/problem and usage context.

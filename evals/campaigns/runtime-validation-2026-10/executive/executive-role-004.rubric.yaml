@@ -1,0 +1,14 @@
+{
+  "id": "executive-role-004",
+  "mode": "natural-routing",
+  "subject": "executive-role-evaluator",
+  "case": "lower-title-larger-mandate",
+  "should_trigger": true,
+  "assertions": {
+    "manual": [
+      "recognize executive substance beyond title",
+      "assess mandate and career value strongly"
+    ],
+    "manual_not": []
+  }
+}

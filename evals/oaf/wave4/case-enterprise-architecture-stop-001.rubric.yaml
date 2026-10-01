@@ -1,0 +1,27 @@
+schema_version: "1.0"
+id: "case-enterprise-architecture-stop-001"
+target: "oaf-enterprise-architecture-review"
+mode: explicit
+source_legacy: "evals/oaf/wave4/case-enterprise-architecture-stop-001.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## Expected behavior
+  
+  The workflow should stop before target-state design or retirement recommendations.
+  
+  It should:
+  - explain which evidence is missing;
+  - separate possible governance/decision-system issues from unknown technology-estate issues;
+  - define a minimum evidence pack and decision framing;
+  - not invent duplicate platforms, brittle integrations, technical debt or retirement candidates;
+  - not create a target-state diagram as if the evidence supported it.
+assertions:
+  manual:
+    - "explain which evidence is missing;"
+    - "separate possible governance/decision-system issues from unknown technology-estate issues;"
+    - "define a minimum evidence pack and decision framing;"
+    - "not invent duplicate platforms, brittle integrations, technical debt or retirement candidates;"
+    - "not create a target-state diagram as if the evidence supported it."

@@ -1,0 +1,13 @@
+id: oaf-decision-bottleneck-natural-pl
+mode: natural-routing
+language: pl
+expected_target: decision-bottleneck-analysis
+competing_intents:
+  - broad operating-model diagnosis
+  - generic decision-rights mapping
+assertions:
+  manual:
+    - select decision-path diagnosis for an already identified problematic decision class
+    - reconstruct waits, vetoes, evidence gaps and rework without broadening to the whole operating model
+  manual_not:
+    - lead with operating-model-review when the cross-unit structure is already scoped and the question is decision latency

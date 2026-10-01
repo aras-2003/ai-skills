@@ -1,5 +1,7 @@
 # Web / Design / Motion
 
+> **Status:** design/backlog documentation only. This domain currently contains no implemented `SKILL.md` files. The items below are proposed capability names, not current source or runtime availability.
+
 Skills for turning strategy and content into high-quality web concepts and implementations.
 
 | Skill | Purpose |

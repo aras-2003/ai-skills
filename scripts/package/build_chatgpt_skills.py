@@ -3,76 +3,203 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import shutil
 import zipfile
 from pathlib import Path
 
-import yaml
+from build_utils import (
+    atomic_output,
+    copy_runtime_support,
+    ensure_source_valid,
+    package_version,
+    sha256_tree,
+    source_revision,
+    write_json,
+)
+from portable import read_frontmatter, render_portable_skill
+from workflow_entrypoints import load_registry
 
 
-ALLOWED_SUPPORT_DIRS = ("references", "scripts", "assets")
-
-
-def read_frontmatter(skill_md: Path) -> dict:
-    text = skill_md.read_text(encoding="utf-8")
-    if not text.startswith("---\n"):
-        raise ValueError(f"{skill_md}: missing frontmatter")
-    end = text.find("\n---\n", 4)
-    if end < 0:
-        raise ValueError(f"{skill_md}: unterminated frontmatter")
-    data = yaml.safe_load(text[4:end]) or {}
-    if not isinstance(data, dict):
-        raise ValueError(f"{skill_md}: frontmatter must be a mapping")
-    return data
+ZIP_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
+ZIP_MODE = 0o100644 << 16
 
 
 def discover_skills(root: Path, maturity: str) -> list[Path]:
     selected: list[Path] = []
     for skill_md in sorted((root / "skills").rglob("SKILL.md")):
-        fm = read_frontmatter(skill_md)
+        fm, _ = read_frontmatter(skill_md)
         metadata = fm.get("metadata") or {}
         if metadata.get("maturity") == maturity:
             selected.append(skill_md.parent)
     return selected
 
 
+def _zip_bytes(files: list[tuple[str, bytes]]) -> bytes:
+    import io
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+        for arcname, data in sorted(files, key=lambda x: x[0]):
+            info = zipfile.ZipInfo(arcname, ZIP_TIMESTAMP)
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = ZIP_MODE
+            info.create_system = 3
+            zf.writestr(info, data)
+    return buf.getvalue()
+
+
+def _write_deterministic_zip(source_dir: Path, zip_path: Path, top_level: str) -> None:
+    files: list[tuple[str, bytes]] = []
+    for path in sorted(p for p in source_dir.rglob("*") if p.is_file()):
+        arcname = (Path(top_level) / path.relative_to(source_dir)).as_posix()
+        files.append((arcname, path.read_bytes()))
+    zip_path.write_bytes(_zip_bytes(files))
+
+
 def build_skill_bundle(skill_dir: Path, output_dir: Path) -> dict:
-    fm = read_frontmatter(skill_dir / "SKILL.md")
+    fm, _ = read_frontmatter(skill_dir / "SKILL.md")
     name = fm.get("name")
     metadata = fm.get("metadata") or {}
     if not isinstance(name, str) or not name:
         raise ValueError(f"{skill_dir}: missing skill name")
 
     staging = output_dir / "_staging" / name
-    if staging.exists():
-        shutil.rmtree(staging)
-    staging.mkdir(parents=True, exist_ok=True)
+    staging.mkdir(parents=True, exist_ok=False)
+    (staging / "SKILL.md").write_text(
+        render_portable_skill(skill_dir / "SKILL.md"),
+        encoding="utf-8",
+    )
+    inventory = ["SKILL.md"] + copy_runtime_support(skill_dir, staging)
 
-    shutil.copy2(skill_dir / "SKILL.md", staging / "SKILL.md")
-    for dirname in ALLOWED_SUPPORT_DIRS:
-        src = skill_dir / dirname
-        if src.exists():
-            shutil.copytree(src, staging / dirname)
+    files: list[tuple[str, bytes]] = []
+    for path in sorted(p for p in staging.rglob("*") if p.is_file()):
+        rel = (Path(name) / path.relative_to(staging)).as_posix()
+        files.append((rel, path.read_bytes()))
 
+    archive = _zip_bytes(files)
     zip_path = output_dir / f"{name}.zip"
-    if zip_path.exists():
-        zip_path.unlink()
-
-    # ChatGPT/API skill bundles use exactly one top-level folder.
-    with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
-        for path in sorted(staging.rglob("*")):
-            if path.is_file():
-                arcname = Path(name) / path.relative_to(staging)
-                zf.write(path, arcname.as_posix())
-
-    digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()
+    zip_path.write_bytes(archive)
+    content_digest = sha256_tree(staging)
+    archive_digest = hashlib.sha256(archive).hexdigest()
     return {
         "name": name,
+        "kind": "skill",
         "version": str(metadata.get("version", "unknown")),
         "maturity": str(metadata.get("maturity", "unknown")),
         "description": str(fm.get("description", "")).strip(),
         "zip": zip_path.name,
-        "sha256": digest,
+        "content_sha256": content_digest,
+        "archive_sha256": archive_digest,
+        "inventory": sorted(inventory),
+    }
+
+
+def workflow_channel_status(root: Path, maturity: str) -> list[dict]:
+    rows: list[dict] = []
+    for item in load_registry(root):
+        metadata = item.get("metadata") or {}
+        if metadata.get("maturity") != maturity:
+            continue
+        channels = item.get("channels") or {}
+        deps = item.get("dependencies") or {}
+        rows.append(
+            {
+                "name": str(item.get("name")),
+                "kind": "workflow",
+                "status": str(channels.get("chatgpt-zip") or "unavailable"),
+                "required_dependencies": list(deps.get("required") or []),
+                "optional_dependencies": [
+                    str(x.get("name"))
+                    for x in (deps.get("optional") or [])
+                    if isinstance(x, dict) and x.get("name")
+                ],
+            }
+        )
+    return sorted(rows, key=lambda x: x["name"])
+
+
+def build(root: Path, output_dir: Path, maturity: str, allow_empty: bool = False) -> dict:
+    ensure_source_valid(root)
+    selected = discover_skills(root, maturity)
+    if not selected and not allow_empty:
+        raise ValueError(f"No skills with maturity={maturity!r}; refusing to build empty package set")
+
+    revision = source_revision(root)
+    version = package_version(root, "package")
+
+    with atomic_output(root, output_dir) as stage:
+        bundles = [build_skill_bundle(skill_dir, stage) for skill_dir in selected]
+        workflows = workflow_channel_status(root, maturity)
+        index = {
+            "format": "chatgpt-personal-skills",
+            "schema_version": "1.0",
+            "channel": "chatgpt-zip",
+            "package_version": version,
+            "source_revision": revision,
+            "maturity": maturity,
+            "skills": bundles,
+            "workflows": workflows,
+        }
+        staging = stage / "_staging"
+        if staging.exists():
+            import shutil
+            shutil.rmtree(staging)
+        write_json(stage / "index.json", index)
+
+        payload_digest = sha256_tree(stage)
+        write_json(
+            stage / "release-manifest.json",
+            {
+                "schema_version": "1.0",
+                "release_id": f"{version}+{revision[:12]}",
+                "package": "arek-ai-skills",
+                "version": version,
+                "channel": "chatgpt-zip",
+                "source_revision": revision,
+                "payload_content_sha256": payload_digest,
+                "component_count": len(bundles),
+                "components": [
+                    {
+                        "name": x["name"],
+                        "kind": x["kind"],
+                        "version": x["version"],
+                        "maturity": x["maturity"],
+                        "zip": x["zip"],
+                        "content_sha256": x["content_sha256"],
+                        "archive_sha256": x["archive_sha256"],
+                        "inventory": x["inventory"],
+                    }
+                    for x in bundles
+                ],
+            },
+        )
+        write_json(
+            stage / "capabilities.json",
+            {
+                "schema_version": "1.0",
+                "channel": "chatgpt-zip",
+                "package_version": version,
+                "source_revision": revision,
+                "skills": [
+                    {
+                        "name": x["name"],
+                        "status": "supported",
+                        "version": x["version"],
+                        "maturity": x["maturity"],
+                        "zip": x["zip"],
+                        "content_sha256": x["content_sha256"],
+                        "archive_sha256": x["archive_sha256"],
+                        "inventory": x["inventory"],
+                    }
+                    for x in bundles
+                ],
+                "workflows": workflows,
+            },
+        )
+
+    return {
+        "skills": len(selected),
+        "version": version,
+        "source_revision": revision,
     }
 
 
@@ -85,33 +212,11 @@ def main() -> int:
 
     root = Path(__file__).resolve().parents[2]
     output_dir = root / args.output
-
-    if output_dir.exists():
-        shutil.rmtree(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    selected = discover_skills(root, args.maturity)
-    if not selected and not args.allow_empty:
-        raise SystemExit(f"No skills with maturity={args.maturity!r}; refusing to build empty package set")
-
-    index = {
-        "format": "chatgpt-personal-skills",
-        "maturity": args.maturity,
-        "skills": [build_skill_bundle(skill_dir, output_dir) for skill_dir in selected],
-    }
-
-    staging = output_dir / "_staging"
-    if staging.exists():
-        shutil.rmtree(staging)
-
-    (output_dir / "index.json").write_text(
-        json.dumps(index, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
+    result = build(root, output_dir, args.maturity, allow_empty=args.allow_empty)
+    print(
+        f"Packaged {result['skills']} skills as {result['version']} "
+        f"from {result['source_revision']} into {output_dir}"
     )
-
-    print(f"Packaged {len(index['skills'])} skills into {output_dir}")
-    for item in index["skills"]:
-        print(f" - {item['name']} {item['version']} -> {item['zip']}")
     return 0
 
 

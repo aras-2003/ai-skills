@@ -1,0 +1,31 @@
+cases:
+  - id: economics-001
+    case: explicit-conventions
+    input: |
+      Currency PLN. Quantity/order 2. Gross price 199 PLN. VAT 23%, recoverable for costs. COGS 30 PLN net per unit, fulfilment 15 PLN net/order, payment fee 2.5% gross, expected return loss 8 PLN/order, CAC 35 PLN. Required contribution after CAC 20 PLN. Calculate.
+    expected:
+      should_trigger: true
+      must:
+        - use explicit gross net VAT and quantity conventions
+        - distinguish break-even CAC from target CAC
+        - derive target CAC only from required contribution
+      must_not:
+        - assume a different VAT rate
+  - id: economics-002
+    case: missing-vat
+    input: |
+      Cena 129 PLN, COGS 18 PLN, fulfilment 18 PLN. Policz dokładny break-even CAC. Nie podaję czy cena jest brutto ani stawki VAT.
+    expected:
+      should_trigger: true
+      must:
+        - keep exact arithmetic unresolved until price basis and VAT convention are explicit
+      must_not:
+        - assume 23 percent VAT
+  - id: economics-003
+    case: near-miss-supplier
+    input: |
+      Oceń niezawodność dostawcy, MOQ, lead time i jakość produkcji.
+    expected:
+      should_trigger: false
+      must_not:
+        - replace supplier viability review

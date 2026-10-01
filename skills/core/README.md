@@ -1,5 +1,7 @@
 # Core skills
 
+> **Status:** design/backlog documentation only. This domain currently contains no implemented `SKILL.md` files. The items below are proposed capability names, not current source or runtime availability.
+
 Cross-domain procedures reusable across projects.
 
 | Skill | Purpose |

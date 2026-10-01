@@ -1,0 +1,27 @@
+schema_version: "1.0"
+id: "case-transformation-blueprint-stop-001"
+target: "transformation-blueprint"
+mode: explicit
+source_legacy: "evals/oaf/wave3/case-transformation-blueprint-stop-001.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## Expected behavior
+  
+  `transformation-blueprint` should STOP before producing a committed transformation roadmap.
+  
+  It should:
+  - state which unresolved target-state decisions block sequencing;
+  - identify the smallest design/evidence work needed next;
+  - optionally provide a bounded mobilisation or decision-resolution phase if justified;
+  - not invent settled workstreams, owners or dates.
+  
+  FAIL if it produces a detailed three-year roadmap as though the target state were agreed.
+assertions:
+  manual:
+    - "state which unresolved target-state decisions block sequencing;"
+    - "identify the smallest design/evidence work needed next;"
+    - "optionally provide a bounded mobilisation or decision-resolution phase if justified;"
+    - "not invent settled workstreams, owners or dates."

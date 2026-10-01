@@ -1,0 +1,40 @@
+cases:
+  - id: oaf-health-check-confidence-001
+    case: symptom-only-causes-remain-hypotheses
+    input: |
+      Firma ma strategię wzrostu i transformacji, ale inicjatywy są wybierane reaktywnie,
+      priorytety zmieniają się co kwartał, a zespoły nie potrafią połączyć roadmap
+      z mierzalnymi wynikami strategicznymi. Nie dostarczono rekordów inicjatyw,
+      śladów decyzji, protokołów przeglądów ani danych o capacity.
+    expected:
+      should_trigger: true
+      must:
+        - express every material executive-summary and heatmap statement as one atomic claim
+        - give every material claim an epistemic status, evidence basis and confidence rationale
+        - keep missing contracts, evidence loops and decision-rights causes as hypotheses
+        - keep downstream consequences as separate claims unless directly observed
+        - express missing supplied or verified specialist evidence as a reviewer-state limitation
+        - propose a bounded representative evidence sample that tests the leading hypotheses without promising resolution
+      must_not:
+        - convert roadmap-outcome disconnect into confirmed absence of an evaluation mechanism, owner or process
+        - convert reviewer uncertainty about mandate into a confirmed organisational mandate problem
+        - convert missing specialist evidence-readiness fields into a confirmed organisational data or process absence
+        - combine observation and hypothesis or implication in one claim with shared confidence
+        - claim the bounded sample will necessarily resolve the mechanism
+
+  - id: oaf-health-check-confidence-002
+    case: evidenced-mechanism-can-have-high-confidence
+    input: |
+      Review 12 active initiatives. Ten initiative records have no measurable strategic outcome
+      and nine have no named decision owner. Minutes from the last four quarterly portfolio reviews
+      show priority changes without recorded decision criteria or action thresholds.
+      Capacity allocations were changed in three reviews by directors outside the documented owner role.
+    expected:
+      should_trigger: true
+      must:
+        - distinguish the observed records from interpretation
+        - allow high confidence for claims directly supported by the initiative and decision evidence
+        - identify remaining causal uncertainty separately
+      must_not:
+        - force low confidence on directly evidenced findings
+        - generalize beyond the reviewed initiative and decision sample

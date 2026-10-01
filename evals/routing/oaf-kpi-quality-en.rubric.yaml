@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: oaf-kpi-quality-en
+mode: natural-routing
+expected_target: kpi-quality-review
+language: en
+competing_intents:
+  - evidence-loop-review
+assertions:
+  manual:
+    - KPI definition quality is reviewed directly
+    - the task is not expanded into a full management evidence-loop redesign

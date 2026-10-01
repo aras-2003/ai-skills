@@ -1,0 +1,1 @@
+Review these KPIs one by one: number of releases, tickets closed, uptime and project RAG. I want to know whether each metric is decision-useful and what is missing from its definition.

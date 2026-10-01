@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "evidence_scope": "current-version",
+  "case": {
+    "id": "fallback-strategy-production-001",
+    "target": "oaf-health-check",
+    "mode": "explicit",
+    "input_path": "evals/campaigns/runtime-validation-2026-10/fallback/fallback-strategy-production-001.input.md",
+    "input_sha256": "8cbafda4b6b69b97c2bdb8aa405624942810b332d5f76fc2420fe5c276ea2d0e",
+    "rubric_path": "evals/campaigns/runtime-validation-2026-10/fallback/fallback-strategy-production-001.rubric.yaml",
+    "rubric_sha256": "f147681eed7dab86b3949145890205af33a2b4f9abbb7b6c45adde8493e9146d"
+  },
+  "component": {
+    "name": "oaf-health-check",
+    "version": "1.0.0",
+    "content_sha256": "09cdc308cbbafabf8075b7d87c5ea7dc4be6bb4d4c8bc2664a04bdaf454407bf"
+  },
+  "source_revision": "ff012e494f5b2f71803f850d71d20f54a3315e2b",
+  "runtime_artifact": {
+    "channel": "production",
+    "package_name": "arek-ai-skills",
+    "package_version": "1.8.0",
+    "release_id": "1.8.0+ff012e494f5b",
+    "source_revision": "ff012e494f5b2f71803f850d71d20f54a3315e2b",
+    "payload_content_sha256": "0ce65516e149f5d66d77ca5ac968e932196a5e6435983ede1676b39b7b603387",
+    "component_content_sha256": "c52831b11c58f33a76f5a46a08464778dee397e44d2600b2d6eb4d6040236677"
+  },
+  "runtime": {
+    "provider": "openai",
+    "model_id": "gpt-5.6-luna",
+    "reasoning": "medium",
+    "catalog": [
+      "acquisition-fit-review",
+      "architecture-review",
+      "arek-skills-diagnostic",
+      "capability-gap-analysis",
+      "capability-map-review",
+      "commerce-opportunity-review",
+      "commerce-product-deep-dive",
+      "commerce-regulatory-risk-review",
+      "company-context-research",
+      "competition-landscape-review",
+      "decision-bottleneck-analysis",
+      "decision-rights-review",
+      "differentiation-review",
+      "evidence-loop-review",
+      "executive-role-evaluator",
+      "global-local-model-review",
+      "governance-design",
+      "market-transferability-review",
+      "oaf-enterprise-architecture-review",
+      "oaf-enterprise-change-review",
+      "oaf-governance-redesign",
+      "oaf-health-check",
+      "oaf-operating-model-redesign",
+      "oaf-transformation-design",
+      "operating-model-review",
+      "portfolio-health-review",
+      "portfolio-prioritization",
+      "problem-demand-validation",
+      "product-opportunity-discovery",
+      "skill-authoring",
+      "skill-specification",
+      "skill-validation",
+      "supplier-viability-review",
+      "transformation-blueprint",
+      "unit-economics-review"
+    ],
+    "tools": []
+  },
+  "execution": {
+    "assisted": false,
+    "prompt": "Firma ma strategię wzrostu i transformacji, ale inicjatywy są wybierane reaktywnie, priorytety zmieniają się co kwartał, a zespoły nie potrafią połączyć roadmap z mierzalnymi wynikami strategicznymi. Zrób przekrojową diagnozę problemu i wskaż najkrótszy sensowny następny krok. Korzystaj wyłącznie z capability faktycznie dostępnych w tej sesji.\n",
+    "actual_output_path": "evals/results/runtime-campaign/fallback-strategy-production-001/2026-10-01-luna/output.md",
+    "actual_output_sha256": "eb68c5de22c0cb916aec6a5ae4230bd22e5739db10c8cf5851c4ebff90a85327",
+    "tool_trace_path": "evals/results/runtime-campaign/fallback-strategy-production-001/2026-10-01-luna/trace.json",
+    "tool_trace_sha256": "6e2b3848c9eecdded2843b0da8106facdd71501ba002c469c33026efb2ffab9e",
+    "selection_findings": [],
+    "evidence_origin": "runtime"
+  },
+  "evaluation": {
+    "status": "FAIL",
+    "rubric_version": "1.0",
+    "reviewer": "codex-independent-evaluator",
+    "timestamp_utc": "2026-10-01T14:14:31.617056+00:00",
+    "note": "Availability/routing passed; uncertainty assertion failed: inferred root causes marked high certainty despite symptom-only input. Exact same-session smoke verified before execution. See evaluation.md."
+  }
+}

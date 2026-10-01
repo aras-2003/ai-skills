@@ -1,0 +1,48 @@
+{
+  "session_id": "01a0f7c9-ea2a-7573-8a2c-58310d2027fe",
+  "selected_capabilities": [
+    "oaf-health-check",
+    "portfolio-prioritization",
+    "evidence-loop-review",
+    "decision-rights-review"
+  ],
+  "tool_calls": [
+    {
+      "type": "custom_tool_call",
+      "id": "ctc_0b9d71a6ed5d9952016abe6a27111487d2ba45acbea93d9e56",
+      "status": "completed",
+      "call_id": "call_2xTxdTEoKQJDUELYTs05mb5a",
+      "name": "exec",
+      "input": "const r = await tools.exec_command({cmd:\"sed -n '1,260p' /Users/arkadiuszkamrowski/.codex/plugins/cache/arek-ai-skills-runtime-test/arek-ai-skills/1.8.0/skills/oaf-health-check/SKILL.md\",\"workdir\":\"/Users/arkadiuszkamrowski/Documents/Codex/2026-10-01/przed-wykonaniem-zadania-uzupe-nij-za\",\"yield_time_ms\":10000,\"max_output_tokens\":12000});\ntext(r.output);",
+      "internal_chat_message_metadata_passthrough": {
+        "turn_id": "01a0f7ce-8c71-77b3-8d6c-ad5fd1d6a878",
+        "create_time": 1790863905.318583
+      }
+    },
+    {
+      "type": "custom_tool_call",
+      "id": "ctc_0b9d71a6ed5d9952016abe6a2cb94087d2b2b2e120dbfc3df3",
+      "status": "completed",
+      "call_id": "call_JJhD8G34Acu22KY56eKpTErL",
+      "name": "exec",
+      "input": "const r = await tools.exec_command({cmd:\"sed -n '1,360p' /Users/arkadiuszkamrowski/.codex/plugins/cache/arek-ai-skills-runtime-test/arek-ai-skills/1.8.0/skills/oaf-health-check/references/WORKFLOW.md\",\"workdir\":\"/Users/arkadiuszkamrowski/Documents/Codex/2026-10-01/przed-wykonaniem-zadania-uzupe-nij-za\",\"yield_time_ms\":10000,\"max_output_tokens\":20000});\ntext(r.output);",
+      "internal_chat_message_metadata_passthrough": {
+        "turn_id": "01a0f7ce-8c71-77b3-8d6c-ad5fd1d6a878",
+        "create_time": 1790863914.482585
+      }
+    },
+    {
+      "type": "custom_tool_call",
+      "id": "ctc_0b9d71a6ed5d9952016abe6a33554887d29ab93595facbf101",
+      "status": "completed",
+      "call_id": "call_ROXViOeDGhELtEQanWvhPfA3",
+      "name": "exec",
+      "input": "const r = await tools.exec_command({cmd:\"for f in portfolio-prioritization evidence-loop-review decision-rights-review; do echo \\\"--- $f ---\\\"; sed -n '1,280p' \\\"/Users/arkadiuszkamrowski/.codex/plugins/cache/arek-ai-skills-runtime-test/arek-ai-skills/1.8.0/skills/$f/SKILL.md\\\"; done\",\"workdir\":\"/Users/arkadiuszkamrowski/Documents/Codex/2026-10-01/przed-wykonaniem-zadania-uzupe-nij-za\",\"yield_time_ms\":10000,\"max_output_tokens\":24000});\ntext(r.output);",
+      "internal_chat_message_metadata_passthrough": {
+        "turn_id": "01a0f7ce-8c71-77b3-8d6c-ad5fd1d6a878",
+        "create_time": 1790863919.734585
+      }
+    }
+  ],
+  "notes": "Actual installed production workflow and three available specialists read. Missing strategy-to-execution diagnostic not executed. Same-session exact smoke verified before business input."
+}

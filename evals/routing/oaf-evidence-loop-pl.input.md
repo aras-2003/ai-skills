@@ -1,0 +1,1 @@
+Mamy dziesiątki KPI i dashboardów, ale miesięczne przeglądy prawie nigdy nie zmieniają priorytetów, finansowania ani decyzji stop. Chcę zdiagnozować, dlaczego evidence nie prowadzi do działania.

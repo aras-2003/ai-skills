@@ -1,0 +1,2 @@
+Firma ma strategię wzrostu i transformacji, ale inicjatywy są wybierane reaktywnie, priorytety zmieniają się co kwartał, a zespoły nie potrafią połączyć roadmap z mierzalnymi wynikami strategicznymi. Zrób przekrojową diagnozę problemu i wskaż najkrótszy sensowny następny krok. Korzystaj wyłącznie z capability faktycznie dostępnych w tej sesji.
+

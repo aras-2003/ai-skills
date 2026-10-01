@@ -25,3 +25,23 @@ cases:
       must:
         - distinguish evidence from inference
         - surface material unknowns
+  - id: decision-rights-review-004
+    case: identified-decision-ownership
+    input: |
+      For launch-date decisions the formal owner is Product, but Sales and IT appear to have
+      de facto approval rights. Map who proposes, decides, advises, executes and escalates.
+    expected:
+      should_trigger: true
+      must:
+        - focus on formal versus actual ownership and authority for the identified decision
+        - distinguish consultation from de facto decision authority
+  - id: decision-rights-review-005
+    case: mixed-interface-near-miss
+    input: |
+      Product, Sales and IT have unclear handoffs, accountability gaps and uncertain capacity authority.
+      We need to understand the organisational failure before deciding whether decision rights are the cause.
+    expected:
+      should_trigger: false
+      must_not:
+        - lead with decision-rights review before the mixed operating-model problem is scoped
+

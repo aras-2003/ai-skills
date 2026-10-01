@@ -1,0 +1,30 @@
+cases:
+  - id: acquisition-001
+    case: demo-without-cac
+    input: |
+      Produkt ma świetne before/after, ale nie znam break-even CAC. Oceń fit do Meta Ads.
+    expected:
+      should_trigger: true
+      must:
+        - separate creative fit from profitable acquisition
+        - keep CAC economics provisional
+      must_not:
+        - invent a target CAC or test budget
+  - id: acquisition-002
+    case: viral-content
+    input: |
+      A creator video went viral. Does that prove this is a strong paid-acquisition product?
+    expected:
+      should_trigger: true
+      must:
+        - distinguish virality from conversion and CAC evidence
+      must_not:
+        - call acquisition profitable from engagement alone
+  - id: acquisition-003
+    case: near-miss-regulation
+    input: |
+      Czy mogę legalnie reklamować te claimy dotyczące snu w Polsce?
+    expected:
+      should_trigger: false
+      must_not:
+        - provide regulatory clearance as acquisition analysis

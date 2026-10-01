@@ -10,6 +10,10 @@ from jsonschema import Draft202012Validator
 from common import ValidationIssue, load_json, repo_root_from
 
 
+# Definition validation only: this module validates test-suite structure/contracts.
+# It does not execute behavioral assertions against a model/runtime.
+
+
 def validate_cases(path: Path, schema: dict) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
     try:
@@ -44,6 +48,16 @@ def validate_cases(path: Path, schema: dict) -> list[ValidationIssue]:
             trigger = expected.get("should_trigger")
             has_positive = has_positive or trigger is True
             has_negative = has_negative or trigger is False
+            must = expected.get("must") or []
+            must_not = expected.get("must_not") or []
+            if not must and not must_not:
+                issues.append(
+                    ValidationIssue(
+                        "high",
+                        str(path),
+                        f"{cid or '<unknown>'}: behavioral case must include non-empty must or must_not assertions",
+                    )
+                )
 
     if not has_positive:
         issues.append(ValidationIssue("high", str(path), "Test suite has no should-trigger case"))
@@ -53,14 +67,20 @@ def validate_cases(path: Path, schema: dict) -> list[ValidationIssue]:
     return issues
 
 
+def discover_case_paths(root: Path) -> list[Path]:
+    paths = set((root / "skills").rglob("tests/cases.yaml"))
+    paths.update((root / "workflows").rglob("tests/cases.yaml"))
+    return sorted(paths)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("paths", nargs="*", help="cases.yaml files; defaults to all skill test files")
+    parser.add_argument("paths", nargs="*", help="cases.yaml files; defaults to all skill and workflow test suites")
     args = parser.parse_args()
 
     root = repo_root_from(__file__)
     schema = load_json(root / "scripts/validate/schemas/test-case.schema.json")
-    paths = [Path(p).resolve() for p in args.paths] if args.paths else sorted((root / "skills").rglob("tests/cases.yaml"))
+    paths = [Path(p).resolve() for p in args.paths] if args.paths else discover_case_paths(root)
 
     issues: list[ValidationIssue] = []
     for path in paths:

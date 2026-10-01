@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: career-cv-gaps-en
+mode: natural-routing
+expected_target: cv-gap-analysis
+language: en
+competing_intents:
+  - cv-tailoring
+assertions:
+  manual:
+    - gap analysis is selected without rewriting the CV
+    - the 500-person requirement is not fabricated as candidate experience

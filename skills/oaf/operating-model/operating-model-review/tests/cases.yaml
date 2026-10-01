@@ -25,3 +25,25 @@ cases:
       must:
         - distinguish evidence from inference
         - surface material unknowns
+  - id: operating-model-review-004
+    case: mixed-interface-accountability-capacity
+    input: |
+      Product, Sales and IT have unclear handoffs, accountability falls between units,
+      and the nominal owner cannot reliably secure delivery capacity. We do not yet know
+      whether the root cause is structure, decision rights or queues. Diagnose what to check first.
+    expected:
+      should_trigger: true
+      must:
+        - lead with operating-model diagnosis before assuming a decision-specific failure
+        - examine interfaces, accountability and authority/resource alignment together
+        - preserve uncertainty about the specific mechanism
+  - id: operating-model-review-005
+    case: specific-decision-latency-near-miss
+    input: |
+      For pricing-exception decisions we already know the owner and units involved.
+      Trace why this decision class waits for days, where vetoes occur and what causes rework.
+    expected:
+      should_trigger: false
+      must_not:
+        - lead with a broad operating-model review when the problem is an identified decision bottleneck
+

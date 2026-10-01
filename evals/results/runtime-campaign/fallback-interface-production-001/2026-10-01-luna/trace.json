@@ -1,0 +1,21 @@
+{
+  "session_id": "01a0f7d2-b98b-7451-b7a7-3609f0406b81",
+  "selected_capabilities": [
+    "operating-model-review"
+  ],
+  "tool_calls": [
+    {
+      "type": "custom_tool_call",
+      "id": "ctc_0ff410bba27f0d11016abe6ca328a487d2b1f81fd780174bd3",
+      "status": "completed",
+      "call_id": "call_NsZxVnQlH5ZxTpoLsRdu0sIP",
+      "name": "exec",
+      "input": "const r = await tools.exec_command({cmd:\"sed -n '1,280p' /Users/arkadiuszkamrowski/.codex/plugins/cache/arek-ai-skills-runtime-test/arek-ai-skills/1.8.0/skills/operating-model-review/SKILL.md\",\"workdir\":\"/Users/arkadiuszkamrowski/Documents/Codex/2026-10-01/uzupe-nij-za-czony-smoke-production\",\"yield_time_ms\":10000,\"max_output_tokens\":30000}); text(r.output);",
+      "internal_chat_message_metadata_passthrough": {
+        "turn_id": "01a0f7d8-418f-7d60-87ef-fc8588006324",
+        "create_time": 1790864540.944218
+      }
+    }
+  ],
+  "notes": "Only operating-model-review instructions loaded; expected oaf-operating-model-redesign workflow not selected. Same session verified exact smoke before business input."
+}

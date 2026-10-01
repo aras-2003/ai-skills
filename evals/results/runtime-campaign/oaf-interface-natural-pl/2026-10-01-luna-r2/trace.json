@@ -1,0 +1,15 @@
+{
+  "selected_capabilities": [
+    "decision-bottleneck-analysis",
+    "decision-rights-review"
+  ],
+  "tool_calls": [
+    {
+      "name": "exec",
+      "input": "const r = await tools.exec_command({\n  cmd:\"sed -n '1,260p' /Users/arkadiuszkamrowski/.codex/plugins/cache/arek-ai-skills-runtime-r2/arek-ai-skills/1.8.0/skills/decision-bottleneck-analysis/SKILL.md && printf '\\\\n--- decision-rights-review ---\\\\n' && sed -n '1,300p' /Users/arkadiuszkamrowski/.codex/plugins/cache/arek-ai-skills-runtime-r2/arek-ai-skills/1.8.0/skills/decision-rights-review/SKILL.md\",\n  workdir:\"/Users/arkadiuszkamrowski/Documents/Codex/2026-10-01/wykonaj-wy-cznie-smoke-check-bie-3\",\n  yield_time_ms:10000,\n  max_output_tokens:30000\n}); text(r.output);\n",
+      "call_id": "call_gGA5IR1awHW4X91jaEe3HE7G"
+    }
+  ],
+  "conversation_id": "01a0f869-113c-72d2-b342-063362e20b9b",
+  "notes": "Actual session rollout; two decision specialists read from installed R2 paths. Expected operating-model-review was not selected. No case rubric or audit material provided to executor. Host confirms openai/gpt-5.6-luna/medium for business turn."
+}

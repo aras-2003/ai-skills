@@ -131,30 +131,48 @@ cases:
         - force irrelevant long-form sections
 
   - id: executive-role-012
-    case: hard-first-block-after-context-research
+    case: compact-default-after-context-research
     input: |
       Kelvion has global D&IT and Technology leadership. What does this mean for the local CTO role I am considering?
     expected:
       should_trigger: true
       must:
-        - start response with Decision
-        - place Confidence before any narrative
-        - include Role archetype before any narrative
-        - use insufficient evidence instead of omitting unsupported score fields
+        - make Decision explicit
+        - make Confidence explicit
+        - include Role archetype
+        - preserve UNKNOWN where evidence is missing
       must_not:
-        - place an introductory paragraph before Decision
-        - place a source discussion before Decision
-        - place a table before Decision
+        - invent Role Quality out of 100
+        - invent Candidate Fit out of 100
+        - add company facts unrelated to role implications
 
   - id: executive-role-013
-    case: hard-first-block-simple-role-question
+    case: compact-default-simple-role-question
     input: |
       CTO, 150-person company, reports to COO, no team initially, vendor-heavy IT. Is it worth continuing?
     expected:
       should_trigger: true
       must:
-        - start response with Decision
-        - include Confidence in the first block
-        - include Risk in the first block
+        - make Decision explicit
+        - include Confidence
+        - include Risk
+        - identify authority and team uncertainty
       must_not:
-        - answer with narrative before the decision header
+        - invent a numeric total
+        - force irrelevant long-form sections
+
+  - id: executive-role-014
+    case: user-requested-format-override
+    input: |
+      Oceń tę rolę, ale odpowiedz wyłącznie krótką tabelą: decyzja, confidence, mandat, ryzyko, największa niewiadoma.
+      CTO, raportuje do COO, brak zespołu na start, IT głównie u vendorów.
+    expected:
+      should_trigger: true
+      must:
+        - respect the requested table format
+        - preserve decision and confidence
+        - preserve material authority risk
+        - preserve the critical unknown
+      must_not:
+        - force the default prose layout
+        - invent a score out of 100

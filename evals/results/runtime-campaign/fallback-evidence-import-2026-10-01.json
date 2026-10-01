@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "import_note": "Run receipts are repository-normalized for validation: all status, case/component/source/runtime-artifact identity, catalog, output/trace digests, selection findings and evaluation fields are preserved. The very large runtime.tools arrays are omitted from the repository receipt copies; their original counts/digests and the byte-exact uploaded receipt/ZIP digests are recorded here. The uploaded ZIPs remain the canonical byte-level source for those arrays.",
+  "interface": {
+    "uploaded_name": "FALLBACK-INTERFACE-EVIDENCE-2026-10-01.zip",
+    "archive_size": 29958,
+    "archive_sha256": "d293a89906716ccf167efc59ba1f00bfa6076d234b88eb78899721a9df737a60",
+    "original_receipt_sha256": "a914fa819ae6aa379e000f4d9ba6e39509643ab23dccad7fb86fb0818e57cf83",
+    "original_runtime_tools_count": 702,
+    "original_runtime_tools_sha256": "05aed8238ed731f33e1790515db46e6bd6e485bd3c78cea2d10300713245994d",
+    "members": {
+      "trace": "79a801184e46c401f18b70e4a060fc492c78cb5def1e61aa02b2a8c0e06d0293",
+      "tool_outputs": "452f2b78faadeff82acdbe25982836a613eed07ebef6f2fd785b9404a7ee5e28",
+      "output": "901d68ee180ad8c137d445a4e91ae66222863e296405abec9cfba19f422ee181",
+      "host_provenance": "d35c2b1b4593fce63d24fcb769e7271e2fde54192aaecb79f7542e057790038c",
+      "actual_prompt": "3929ea24f32143808b6f53c14aa5ed8050a53a61dcdca9f341cc5aa1e264e13b",
+      "evaluation": "d90e999b0b52c98269c09a9fc8231c836b946d650e7d7565e7df0962eb65a9de",
+      "smoke": "d1304f1e5e5a74118d40796203e7675d93258af6952df1dde3981511b4ae1334",
+      "campaign_lock": "8bf5f9296dc6dece9b8a7bd9874735ce4c9ebb3d94b71afa4a9a277b35974958"
+    }
+  },
+  "strategy": {
+    "uploaded_name": "FALLBACK-STRATEGY-EVIDENCE-2026-10-01.zip",
+    "archive_size": 33615,
+    "archive_sha256": "b2e3df5be7334e6125e52c49cb607415e504bc982d22cfea31f952f3d919a326",
+    "original_receipt_sha256": "478091a079cf8551183124710c5b450697eec692f9b68c2dc52ce14ec1c80f7d",
+    "original_runtime_tools_count": 704,
+    "original_runtime_tools_sha256": "a8fbf9f5fc99aa4a7e510920aa952d4b993e4e699a68bcd3e54bd34188e7d2c6",
+    "members": {
+      "trace": "6e2b3848c9eecdded2843b0da8106facdd71501ba002c469c33026efb2ffab9e",
+      "tool_outputs": "2fbe360a397d6d193f1dcd6be4841f88d1c11b6a540ed05b6d43ea8c3eb7c035",
+      "output": "eb68c5de22c0cb916aec6a5ae4230bd22e5739db10c8cf5851c4ebff90a85327",
+      "actual_prompt": "163de20cb96205fdea7ede20ed06ace8bb616d6d164675d2a10006f2c134a642",
+      "evaluation": "85d09708c18da0663e6c8e2afbcf5d5ac96ecc0659a4010fd90a2f49ef036d80",
+      "smoke": "d04c146c5aeda0fc7f75576d234c664e948363809f9ab4ce3b4365b2d374a7e5",
+      "campaign_lock": "8bf5f9296dc6dece9b8a7bd9874735ce4c9ebb3d94b71afa4a9a277b35974958"
+    }
+  }
+}

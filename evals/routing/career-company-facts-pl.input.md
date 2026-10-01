@@ -1,0 +1,1 @@
+Sprawdź przychody, zatrudnienie, właściciela i ostatnie przejęcia Kelvion. Nie oceniaj żadnej roli zawodowej.

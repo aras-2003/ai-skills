@@ -1,0 +1,21 @@
+schema_version: "1.0"
+id: "case-004-boring-winner"
+target: "commerce-product-deep-dive"
+mode: explicit
+source_legacy: "evals/commerce/case-004-boring-winner.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## PASS
+  - "boring" is not treated as negative evidence;
+  - strong logistics/economics/demo fit are recognized;
+  - lack of validated CAC remains the main empirical unknown;
+  - if desk evidence is sufficient, workflow recommends a bounded test rather than endless research.
+assertions:
+  manual:
+    - "\"boring\" is not treated as negative evidence;"
+    - "strong logistics/economics/demo fit are recognized;"
+    - "lack of validated CAC remains the main empirical unknown;"
+    - "if desk evidence is sufficient, workflow recommends a bounded test rather than endless research."

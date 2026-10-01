@@ -1,0 +1,13 @@
+{
+  "id": "executive-role-008",
+  "mode": "natural-routing",
+  "subject": "executive-role-evaluator",
+  "case": "should-not-trigger-cv-tailoring",
+  "should_trigger": false,
+  "assertions": {
+    "manual": [],
+    "manual_not": [
+      "perform a full executive role evaluation"
+    ]
+  }
+}

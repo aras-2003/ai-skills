@@ -41,19 +41,36 @@ Do not use `governance-design` or `transformation-blueprint` until the relevant 
 
 ## Stage 4 — Cross-domain synthesis
 
-For each finding record:
-- evidence;
-- OAF domain;
-- structural cause;
-- consequence;
-- dependency on other findings;
-- uncertainty.
+### Normalize specialist findings to the evidence scope
 
-Look for reinforcing loops, for example:
-- unclear strategy -> overloaded portfolio;
-- unclear decision rights -> governance proliferation;
-- fragmented operating model -> duplicate technology/capabilities;
-- weak evidence loop -> repeated low-quality prioritisation.
+Before creating any organisational claim, translate each specialist finding into the scope actually supported by its evidence:
+
+- `not supplied / not verified / insufficient for this review` is a **review-state limitation**, not an organisational absence;
+- a specialist's minimum evidence list identifies what the review needs next; it is not evidence that the organisation lacks those fields, owners, mechanisms or records;
+- `organisation lacks X` requires evidence about the organisation showing that X is absent in the reviewed scope;
+- when organisational absence is plausible but not established, keep it as a hypothesis to test.
+
+Example: if `portfolio-prioritization` cannot rank because comparable outcome, owner, cost, capacity or dependency evidence was not supplied, the supported conclusion is: **this review cannot rank the initiatives from the available evidence**. It is not: **the portfolio has no comparable data**.
+
+Build a short claim ledger before writing prose. Every material statement must be one atomic claim with four fields:
+
+`claim | epistemic status | evidence | confidence rationale`
+
+Allowed epistemic status:
+- `observed` — direct paraphrase of the input or evidence actually collected;
+- `supported` — mechanism directly supported by reviewed evidence;
+- `hypothesis` — plausible mechanism not yet established;
+- `implication` — possible consequence not directly observed.
+
+Do not combine an observation with a hypothesis or implication in the same claim. Unknown reviewer knowledge is not evidence that the organisation lacks an owner, mandate, mechanism or process.
+
+A roadmap/outcome disconnect establishes only that disconnect. It does not by itself establish:
+- absence of a common evaluation mechanism;
+- missing ownership;
+- failed evidence-to-action process;
+- unclear organisational mandate.
+
+Cross-domain synthesis may connect claims, but the connection itself is a hypothesis unless directly evidenced.
 
 ## Stage 5 — Prioritise structural changes
 
@@ -62,6 +79,10 @@ Separate:
 2. foundational changes;
 3. local improvements;
 4. unresolved questions.
+
+When the input contains symptoms but not mechanism evidence, the next step is a bounded evidence sample that can discriminate between the leading hypotheses. Select a small representative set of recent initiatives, priority changes, decisions, reviews or interface events and inspect only the evidence needed to test the suspected mechanism.
+
+Do not require complete initiative cards, decision maps or action decisions for the whole portfolio before identifying the mechanism. A bounded sample is a test of hypotheses, not proof that the sample will be sufficient. State what the sample can discriminate, what result would support or weaken each hypothesis, and expand only if the evidence remains ambiguous.
 
 Avoid producing a long transformation backlog from weak evidence.
 
@@ -73,23 +94,50 @@ When diagnosis is sufficient:
 
 ## Output contract
 
+Keep the answer compact. Reuse the same epistemic structure in every section.
+
 ### Executive diagnosis
-3–5 sentences on what is structurally wrong and why it matters.
+
+Write 2–4 atomic claims. For each use:
+
+`[status | confidence] claim — evidence: <specific input/evidence>; confidence because: <why this evidence is sufficient/limited>`
+
+Do not write an unlabeled narrative summary that introduces new mechanisms.
 
 ### OAF heatmap
-| Domain | Status | Evidence confidence | Main issue | Consequence |
+
+| Domain | Claim | Epistemic status | Confidence | Evidence / confidence rationale |
 |---|---|---|---|---|
 
-Use only domains actually reviewed.
+Use one claim per row. If an observed symptom suggests a causal mechanism or consequence, put that mechanism/consequence in a separate row with its own status and confidence.
 
-### Cross-domain causes
-List the few structural causes connecting multiple symptoms.
+### Leading hypotheses
 
-### Critical unknowns
-Questions whose answers could materially change the diagnosis.
+List only hypotheses that materially change the next evidence step. For each state what evidence would strengthen or weaken it.
 
 ### Recommended next action
-Route to the next OAF skill/design step, or stop if evidence is insufficient.
+
+Define the smallest evidence sample that can test the leading hypotheses. State:
+- what will be sampled;
+- which hypotheses it can discriminate;
+- what evidence would support/weaken each;
+- that the sample may remain inconclusive and may need expansion.
+
+Do not claim that a bounded sample will resolve the mechanism before seeing its evidence.
+
+## Pre-finalization epistemic check
+
+Before returning the answer, inspect every material sentence and every heatmap cell:
+
+1. Can this claim be traced to a specific input statement or collected evidence? If yes, cite that basis and use `observed/supported`.
+2. If not, is it a mechanism? Use `hypothesis`.
+3. If not, is it a downstream effect? Use `implication`.
+4. Does one sentence contain more than one epistemic type? Split it.
+5. Does confidence apply to exactly one claim and have an evidence rationale? If not, rewrite it.
+6. Does any specialist evidence-readiness gap describe what was not supplied or verified? Keep it as a review-state limitation unless organisation-level evidence proves absence; otherwise express organisational absence only as a hypothesis.
+7. Does next action promise that a sample will decide the issue? Rewrite as a test that may remain inconclusive.
+
+If any material claim cannot pass this check, do not finalize it as fact.
 
 ## Stop conditions
 

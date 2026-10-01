@@ -1,0 +1,16 @@
+{
+  "id": "executive-role-010",
+  "mode": "natural-routing",
+  "subject": "executive-role-evaluator",
+  "case": "explicit-company-context-to-role-evaluation",
+  "should_trigger": true,
+  "assertions": {
+    "manual": [
+      "interpret company context only in relation to the role",
+      "make decision state explicit",
+      "make confidence explicit",
+      "identify reporting and decision-rights unknowns"
+    ],
+    "manual_not": []
+  }
+}

@@ -1,0 +1,15 @@
+id: oaf-interface-natural-pl
+mode: natural-routing
+language: pl
+expected_target: operating-model-review
+competing_intents:
+  - broad operating-model redesign
+  - specialist interface analysis
+assertions:
+  manual:
+    - select the narrower production operating-model diagnostic before broad redesign
+    - diagnose interfaces, accountability and authority/resource alignment without assuming a target model
+    - preserve uncertainty about root causes until representative interface evidence exists
+  manual_not:
+    - require oaf-operating-model-redesign for this symptom-only request
+    - claim organizational-interface-review ran when it is unavailable in production

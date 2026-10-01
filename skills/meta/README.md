@@ -1,5 +1,7 @@
 # Meta skills — creating and governing skills
 
+Status: **implemented source domain with mixed maturity**. Source presence does not imply production runtime availability; consult each `SKILL.md` frontmatter and the built channel manifest.
+
 These skills are used to design, write, test, validate and promote other skills.
 
 They are intentionally separated from domain skills because they govern the capability library itself.

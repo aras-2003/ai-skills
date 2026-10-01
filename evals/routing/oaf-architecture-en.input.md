@@ -1,0 +1,1 @@
+Leadership wants to consolidate several customer and data platforms globally, but we do not have comparable cost, usage, dependency or migration evidence. Review what architecture decision is actually supportable now.

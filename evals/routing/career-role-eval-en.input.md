@@ -1,0 +1,1 @@
+I am considering a technology leadership role reporting to the COO, with no team at the start and vendor-heavy IT. Assess whether the mandate is worth pursuing and what I need to validate.

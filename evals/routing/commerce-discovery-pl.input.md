@@ -1,0 +1,1 @@
+Mam kilka sygnałów produktowych: viralny suplement na sen, ciężki koc obciążeniowy, prostą szczotkę do szczelin i mały zestaw do czyszczenia butów. Chcę z tego wybrać kilka hipotez do dalszego badania w Polsce, jeszcze bez pełnego business case.

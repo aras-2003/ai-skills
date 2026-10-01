@@ -1,29 +1,59 @@
 # Workflows
 
-Workflows compose multiple skills into repeatable end-to-end processes.
+Workflows compose skills into repeatable end-to-end processes with entry criteria, dependency handling, gates, stop conditions and output contracts.
 
-Initial candidates:
+## Implemented workflow sources
 
-## Career Role Evaluation
-`job-validity-check -> role-fit-analysis -> career-trajectory-check -> company-context-research -> red-team-review -> decision-brief`
+Current `WORKFLOW.md` implementations:
+- `commerce-opportunity-review`
+- `commerce-product-deep-dive`
+- `oaf-health-check`
+- `oaf-operating-model-redesign`
+- `oaf-governance-redesign`
+- `oaf-enterprise-architecture-review`
+- `oaf-transformation-design`
+- `oaf-enterprise-change-review`
+- `oaf-strategy-execution-reset`
+- `skill-development`
 
-## Product Opportunity Validation
-`signal-scout -> problem-validation -> poland-demand-check -> competition-landscape -> why-would-they-buy -> supplier-feasibility -> unit-economics -> regulatory-screen -> investment-decision`
+Not every workflow is a production runtime entrypoint.
 
-## Executive Decision Review
-`research-brief -> evidence-validator -> strategy-challenge -> red-team-review -> executive-decision-brief`
+## Runtime workflow availability
 
-## Web Concept to Implementation
-`reference-analysis -> concept-to-metaphor -> motion-storyboard -> design-critique -> implementation-brief -> visual-regression-review -> quality-gate`
+`workflows/runtime-registry.yaml` is authoritative for plugin/Lab workflow entrypoints and dependency behavior.
 
-## Tender Go / No-Go
-`rfp-extraction -> eligibility-check -> requirement-classification -> capability-evidence-match -> evidence-gap -> delivery-risk-analysis -> commercial-risk-analysis -> go-no-go -> decision-brief`
+Current production-maturity runtime workflows include:
+- `commerce-opportunity-review`
+- `commerce-product-deep-dive`
+- `oaf-health-check`
+- `oaf-operating-model-redesign`
+- `oaf-governance-redesign`
+- `oaf-enterprise-architecture-review`
+- `oaf-transformation-design`
+- `oaf-enterprise-change-review`
+
+`oaf-strategy-execution-reset` is candidate maturity and belongs to controlled evaluation/Lab rather than the production plugin.
+
+`skill-development` is a repository engineering workflow and is not implied to be a user-facing runtime entrypoint unless explicitly registered.
+
+## Dependency behavior
+
+Required and optional dependencies are declared in the runtime registry. Missing optional specialists must be handled explicitly according to `on_missing`; workflows must not silently simulate an unavailable dependency.
+
+Examples:
+- `oaf-health-check` may narrow a branch when a specialist is unavailable;
+- `oaf-operating-model-redesign` must disclose a missing `organizational-interface-review` when interface analysis is material, keep interface-specific causes provisional and preserve a lower-disruption option;
+- design workflows stop before unsupported downstream design when required evidence/capability is absent.
+
+## Workflow design contract
 
 Workflows should define:
-- entry conditions
-- required inputs
-- skill sequence
-- stop/gate conditions
-- outputs
-- quality checks
-- escalation / human decision points
+- entry conditions;
+- required inputs;
+- dependency/skill sequence;
+- evidence gates and stop conditions;
+- outputs;
+- quality checks;
+- escalation/human decision points.
+
+Runtime availability must be read from the generated channel manifest, not inferred from this README or source presence alone.

@@ -1,0 +1,12 @@
+schema_version: "1.0"
+cases:
+  - id: oaf-interface-natural-pl
+    input: evals/routing/supplemental/oaf-interface-natural-pl.input.md
+    rubric: evals/routing/supplemental/oaf-interface-natural-pl.rubric.yaml
+  - id: oaf-decision-bottleneck-natural-pl
+    input: evals/routing/supplemental/oaf-decision-bottleneck-natural-pl.input.md
+    rubric: evals/routing/supplemental/oaf-decision-bottleneck-natural-pl.rubric.yaml
+  - id: oaf-decision-rights-natural-pl
+    input: evals/routing/supplemental/oaf-decision-rights-natural-pl.input.md
+    rubric: evals/routing/supplemental/oaf-decision-rights-natural-pl.rubric.yaml
+

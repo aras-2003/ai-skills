@@ -4,7 +4,7 @@ description: >
   Test whether an e-commerce offer has a credible reason to win versus cheap generics and established brands. Use when premium pricing, brand positioning or commodity risk matters.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: low
   last_reviewed: 2026-09-30
@@ -16,6 +16,16 @@ metadata:
 
 ## Purpose
 Determine why a customer should choose this offer rather than a cheaper or better-known alternative.
+
+
+## Preconditions
+Require a concrete offer or product hypothesis and at least one meaningful alternative. Do not assess differentiation from brand aesthetics alone.
+
+## Inputs and evidence
+Distinguish claimed advantage from demonstrated proof. Prefer sample comparisons, measurable outcome evidence, customer behavior and credible product evidence over branding language.
+
+## Uncertainty and tool failure
+If product performance cannot be inspected or tested, label functional differentiation unverified. Do not infer superiority from premium price, packaging or creator content.
 
 ## Procedure
 1. State the target customer and competing alternatives.

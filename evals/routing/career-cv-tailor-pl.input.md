@@ -1,0 +1,1 @@
+Dostosuj mój bazowy CV do tej roli Deputy CIO. Możesz zmienić kolejność i język, ale nie dodawaj doświadczeń, których nie ma w bazowym CV.

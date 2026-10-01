@@ -1,0 +1,1 @@
+Na styku produktu, sprzedaży i IT handoffy są niejasne, odpowiedzialność ginie między jednostkami, a decyzje często eskalują do dyrektorów. Chcę zrozumieć, gdzie leży problem organizacyjny i co najpierw sprawdzić, zanim zaczniemy przeprojektowywać cały model działania.

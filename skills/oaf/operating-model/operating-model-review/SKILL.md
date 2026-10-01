@@ -1,10 +1,10 @@
 ---
 name: operating-model-review
 description: >
-  Review an operating model for role clarity, global/local split, interfaces, autonomy, coordination and accountability. Use when organisational structure or collaboration inhibits strategy execution; do not reduce the review to an org chart.
+  Review an operating model for role clarity, interfaces, accountability, autonomy, coordination and authority/resource alignment. Use as the lead diagnosis when symptoms span cross-unit handoffs plus unclear accountability or capacity/funding authority and the failure has not yet been isolated to one decision class. Do not reduce the review to an org chart.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -22,7 +22,9 @@ metadata:
 # Operating Model Review
 
 ## Purpose
-Assess whether the organisation's division of responsibility and coordination model supports its strategic goals.
+Assess whether the organisation's division of responsibility, cross-unit interfaces and authority/resource model support its strategic goals.
+
+When a problem mixes handoffs, accountability and effective authority/capacity across units, lead with this skill to classify the operating-model failure before routing into a decision-specific specialist.
 
 ## Procedure
 1. Identify major value streams/functions/business units and their mandates.
@@ -40,6 +42,8 @@ Assess whether the organisation's division of responsibility and coordination mo
 - Centralise where scale, consistency, interoperability or risk materially matter.
 - Localise where context, speed and domain expertise create value.
 - Accountability must match authority and resources.
+- Mixed interface/accountability/capacity symptoms are an operating-model diagnosis until evidence isolates a specific decision-rights or decision-latency problem.
+- Once a specific material decision class is identified, route the relevant slice to `decision-rights-review` or `decision-bottleneck-analysis` rather than duplicating their detailed procedure.
 - Forums should not compensate for unclear ownership.
 - Centralisation versus autonomy is a trade-off to diagnose, not a default answer.
 

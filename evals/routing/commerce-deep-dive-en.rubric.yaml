@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: commerce-deep-dive-en
+mode: natural-routing
+expected_target: commerce-product-deep-dive
+language: en
+competing_intents:
+  - product-opportunity-discovery
+assertions:
+  manual:
+    - known-product deep dive is selected
+    - discovery is not used to replace the concrete decision

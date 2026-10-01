@@ -1,0 +1,11 @@
+schema_version: "1.0"
+id: oaf-portfolio-health-en
+mode: natural-routing
+expected_target: portfolio-health-review
+language: en
+competing_intents:
+  - portfolio-prioritization
+assertions:
+  manual:
+    - portfolio health is selected before prioritization
+    - incompatible evidence prevents false ranking precision

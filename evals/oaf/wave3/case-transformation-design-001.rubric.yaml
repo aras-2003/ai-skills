@@ -1,0 +1,49 @@
+schema_version: "1.0"
+id: "case-transformation-design-001"
+target: "oaf-transformation-design"
+mode: explicit
+source_legacy: "evals/oaf/wave3/case-transformation-design-001.md"
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  ## Test objective
+  
+  Evaluate whether `oaf-transformation-design`:
+  1. reuses diagnosis and target direction;
+  2. defines transformation boundary;
+  3. uses transformation-blueprint logic without overcommitting;
+  4. sequences foundations/pilots before scale;
+  5. identifies critical path and constrained data capacity;
+  6. defines continue/adjust/stop gates;
+  7. protects service continuity and temporary-state complexity;
+  8. limits detailed commitment to the 90-day mobilisation horizon.
+  
+  ## Expected behaviors
+  
+  PASS if:
+  - the plan is traceable from diagnosis to workstreams;
+  - 90-day actions are concrete;
+  - longer-horizon steps are conditional;
+  - the data-team bottleneck changes sequencing;
+  - pilot evidence can alter the plan;
+  - decommission/retirement is not scheduled before adoption and dependency evidence exist.
+  
+  FAIL if:
+  - it produces a fixed three-year roadmap;
+  - ignores operational transition risk;
+  - treats target-state selection as unfinished;
+  - assumes unlimited capacity.
+assertions:
+  manual:
+    - "the plan is traceable from diagnosis to workstreams;"
+    - "90-day actions are concrete;"
+    - "longer-horizon steps are conditional;"
+    - "the data-team bottleneck changes sequencing;"
+    - "pilot evidence can alter the plan;"
+    - "decommission/retirement is not scheduled before adoption and dependency evidence exist."
+    - "it produces a fixed three-year roadmap;"
+    - "ignores operational transition risk;"
+    - "treats target-state selection as unfinished;"
+    - "assumes unlimited capacity."

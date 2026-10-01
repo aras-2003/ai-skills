@@ -126,7 +126,11 @@ Promotion criteria:
 - output contract is clear;
 - no known high-severity failure mode remains;
 - at least one real workflow uses it;
-- owner and review date are defined.
+- owner and review date are defined;
+- runtime behavior claims are backed by an exact-version evidence receipt, not only a historical summary;
+- natural-routing evidence is separate from explicit-invocation behavior evidence.
+
+If runtime access is unavailable, record NOT_RUN/pending. Do not translate unavailable evidence into PASS.
 
 Production skills should be merged/promoted to the production branch only through review.
 
@@ -177,3 +181,5 @@ feature/<skill-or-process>
 ```
 
 Keep `production` intentionally smaller and more stable than `main`.
+
+Branch membership and component maturity are different: builders filter by metadata and channel contracts. Review current production evidence in `release/production-readiness.yaml`.

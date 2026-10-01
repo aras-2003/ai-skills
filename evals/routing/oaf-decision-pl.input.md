@@ -1,0 +1,1 @@
+W organizacji te same decyzje inwestycyjne krążą między kilkoma dyrektorami, są wielokrotnie eskalowane i nikt nie wie, kto ma ostateczne prawo decyzji. Chcę zrozumieć, gdzie jest problem, zanim zaprojektujemy governance.

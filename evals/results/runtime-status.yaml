@@ -1,0 +1,21 @@
+schema_version: "1.0"
+source_note: "Runtime/model execution was not available during AIS-20/AIS-05 repository remediation. Historical narrative summaries are not promoted to current receipts."
+cases:
+  - id: case-001-premium-vs-generic
+    status: NOT_RUN
+    required_next_test: "Unassisted explicit behavior run using only the packaged .input.md and recorded catalog."
+  - id: case-002-good-demand-bad-economics
+    status: NOT_RUN
+    required_next_test: "Unassisted explicit behavior run using only the packaged .input.md and recorded catalog."
+  - id: case-003-viral-regulated
+    status: NOT_RUN
+    required_next_test: "Unassisted explicit behavior run using only the packaged .input.md and recorded catalog."
+  - id: case-004-boring-winner
+    status: NOT_RUN
+    required_next_test: "Unassisted explicit behavior run using only the packaged .input.md and recorded catalog."
+  - id: case-005-false-us-pl-transfer
+    status: NOT_RUN
+    required_next_test: "Unassisted explicit behavior run using only the packaged .input.md and recorded catalog."
+  - id: case-006-product-discovery
+    status: NOT_RUN
+    required_next_test: "Unassisted explicit behavior run using only the packaged .input.md and recorded catalog."

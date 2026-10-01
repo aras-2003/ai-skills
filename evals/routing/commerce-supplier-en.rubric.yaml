@@ -1,0 +1,12 @@
+schema_version: "1.0"
+id: commerce-supplier-en
+mode: natural-routing
+expected_target: supplier-viability-review
+language: en
+competing_intents:
+  - unit economics
+  - differentiation
+assertions:
+  manual:
+    - supplier viability is selected
+    - quote scope and sample-vs-scale uncertainty are preserved
