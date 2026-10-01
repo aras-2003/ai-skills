@@ -91,34 +91,51 @@ def sha256_tree(path: Path) -> str:
     return h.hexdigest()
 
 
-def _resolved(path: Path) -> Path:
-    return path.resolve(strict=False)
+SAFE_ARTIFACT_ROOTS = ("plugins", "dist", ".tmp")
+
+
+def _absolute_without_resolve(path: Path) -> Path:
+    return Path(os.path.abspath(os.fspath(path)))
 
 
 def validate_output_path(root: Path, output: Path) -> Path:
-    root = _resolved(root)
-    output = _resolved(output)
-    forbidden = {
-        root,
-        _resolved(root / ".git"),
-        _resolved(root / "skills"),
-        _resolved(root / "workflows"),
-        _resolved(root / "scripts"),
-        Path(output.anchor),
-    }
-    if output in forbidden:
-        raise ValueError(f"unsafe output path: {output}")
-    try:
-        output.relative_to(root)
-    except ValueError as exc:
-        raise ValueError(f"output must stay inside repository: {output}") from exc
+    root_lexical = _absolute_without_resolve(root)
+    output_lexical = _absolute_without_resolve(output)
 
-    current = output
-    while current != root:
+    try:
+        relative = output_lexical.relative_to(root_lexical)
+    except ValueError as exc:
+        raise ValueError(f"output must stay inside repository: {output_lexical}") from exc
+
+    if not relative.parts:
+        raise ValueError(f"unsafe output path: {output_lexical}")
+
+    current = root_lexical
+    for part in relative.parts:
+        current = current / part
         if current.exists() and current.is_symlink():
             raise ValueError(f"output path traverses symlink: {current}")
-        current = current.parent
-    return output
+
+    root_resolved = root_lexical.resolve(strict=False)
+    output_resolved = output_lexical.resolve(strict=False)
+    try:
+        resolved_relative = output_resolved.relative_to(root_resolved)
+    except ValueError as exc:
+        raise ValueError(f"output escapes repository after resolution: {output_lexical}") from exc
+
+    if len(resolved_relative.parts) < 2 or resolved_relative.parts[0] not in SAFE_ARTIFACT_ROOTS:
+        allowed = ", ".join(f"{name}/<artifact>" for name in SAFE_ARTIFACT_ROOTS)
+        raise ValueError(f"unsafe output path: {output_lexical}; allowed roots: {allowed}")
+
+    git_dir = (root_resolved / ".git").resolve(strict=False)
+    try:
+        output_resolved.relative_to(git_dir)
+    except ValueError:
+        pass
+    else:
+        raise ValueError(f"unsafe output path inside .git: {output_lexical}")
+
+    return output_resolved
 
 
 @contextmanager
