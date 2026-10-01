@@ -588,23 +588,33 @@ def import_run(args) -> Path:
     return path
 
 
+def evidence_compatibility_profile(source_revision: str, root: Path = ROOT) -> str:
+    active_revision = str(config(root).get("behavior_source_revision") or "")
+    if source_revision == active_revision:
+        return "active-r2"
+    historical_campaign = HISTORICAL_RECEIPT_COMPATIBILITY.get(source_revision)
+    if historical_campaign:
+        historical_config = root / "evals" / "campaigns" / historical_campaign / "campaign.yaml"
+        if not historical_config.is_file():
+            raise ValueError(
+                f"historical compatibility campaign is missing: {historical_campaign}"
+            )
+        return "historical-r1"
+    raise ValueError(f"unsupported evidence source revision: {source_revision}")
+
+
 def validate_evidence() -> list[str]:
     root = ROOT / config()["evidence_root"]
     if not root.exists():
         return []
     errors = []
-    active_revision = str(config().get("behavior_source_revision") or "")
     for path in sorted(root.rglob("receipt.json")):
         data = json.loads(path.read_text(encoding="utf-8"))
         source_revision = str(data.get("source_revision") or "")
-        if source_revision == active_revision:
-            compatibility = "active-r2"
-        elif source_revision in HISTORICAL_RECEIPT_COMPATIBILITY:
-            compatibility = "historical-r1"
-        else:
-            errors.append(
-                f"{path.relative_to(ROOT)}: unsupported evidence source revision: {source_revision}"
-            )
+        try:
+            compatibility = evidence_compatibility_profile(source_revision, root=ROOT)
+        except ValueError as exc:
+            errors.append(f"{path.relative_to(ROOT)}: {exc}")
             continue
         for err in receipt.validate_receipt_data(
             data, root=ROOT, current_revision=source_revision
