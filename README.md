@@ -19,11 +19,12 @@ Rule: **LLM interprets; code calculates and validates.**
 - `skills/commerce/` — product discovery, demand, competition, economics, sourcing, acquisition and regulatory screening
 - `skills/oaf/` — Organisational Architecture Framework specialists
 - `skills/meta/` — skill engineering/control skills
+- `skills/investing/` — personal Investment OS: market attention, research, portfolio, sizing, monitoring and learning
 - `skills/core/`, `skills/ecommerce/`, `skills/learning/`, `skills/product-research/`, `skills/strategy-ea/`, `skills/tender/`, `skills/web-design/` — additional source domains at mixed maturity
 
 The source tree is not the runtime allow-list.
 
-Current implemented source skills: **39**. Only `career`, `commerce`, `meta` and `oaf` currently contain `SKILL.md` implementations. The other domain README files describe design/backlog intent unless stated otherwise.
+Current implemented source skills: **52**. Only `career`, `commerce`, `meta` and `oaf` currently contain `SKILL.md` implementations. The other domain README files describe design/backlog intent unless stated otherwise.
 
 ## Branches, maturity and installed capability
 
@@ -61,7 +62,7 @@ Details:
 
 A narrative historical PASS is not a current-version runtime receipt. When runtime evidence is unavailable, record `NOT_RUN`/pending rather than assuming success.
 
-Current runtime follow-up campaign on this branch: `runtime-validation-2026-10-r6`, behavior source `a924f3ba9fe964ff3aeaa2e5570b7a718d29d38c`, core count 38. Historical R1 and R2 runtime receipts remain bound to their original behavior sources and statuses. R3 is frozen historical evidence. R4 remains historical FAIL evidence for the strategy fallback. R5 remains historical FAIL evidence for the strategy fallback. The active R6 campaign has one targeted current-version PASS for the focused health-check strategy fallback. Remaining campaign cases are not implied PASS, and this does not establish full readiness.
+Current runtime follow-up campaign on this branch: `runtime-validation-2026-10-r7`, behavior source `008c9944cf3a8bc3e2d7231a4862aaf00e722889`, core count 38. Historical R1 and R2 runtime receipts remain bound to their original behavior sources and statuses. R3 is frozen historical evidence. R4 remains historical FAIL evidence for the strategy fallback. R5 remains historical FAIL evidence for the strategy fallback. R6 remains historical evidence. R7 is the consolidated personal-beta baseline after AIS hardening and Investing OS promotion. Investing runtime fixtures begin as NOT_RUN; green static/package gates permit personal use but do not imply runtime PASS.
 
 ## Quality and build
 
