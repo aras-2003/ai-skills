@@ -16,3 +16,4 @@ cases:
     input: "Map the datacenter power value chain."
     expected:
       should_trigger: false
+      must_not: ["bear", "base", "bull"]
