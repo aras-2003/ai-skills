@@ -116,6 +116,8 @@ def validate_record(
         return [f"{name}: invalid current_runtime_receipt"]
     if not rec.get("maturity_disposition"):
         errors.append(f"{name}: missing maturity_disposition")
+    if rec.get("known_high_severity_failure") is True:
+        errors.append(f"{name}: unresolved known high-severity failure blocks readiness disposition")
 
     if status == "verified":
         errors.extend(_validate_verified_receipt(root, name, version, rec))
@@ -136,9 +138,6 @@ def validate_record(
                 errors.append(f"{name}: exception_expires must not exceed review_by")
             if (expiry - today).days > MAX_EXCEPTION_DAYS:
                 errors.append(f"{name}: pending exception exceeds {MAX_EXCEPTION_DAYS}-day limit")
-        if rec.get("known_high_severity_failure") is True:
-            errors.append(f"{name}: pending exception forbidden for known high-severity failure")
-
     elif status == "not-required":
         if not rec.get("not_required_reason"):
             errors.append(f"{name}: not-required requires not_required_reason")
