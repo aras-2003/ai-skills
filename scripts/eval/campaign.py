@@ -31,7 +31,7 @@ def config():
 
 def behavior_changes(pinned: str, *, require_commit: bool = False) -> list[str]:
     exists = subprocess.run(
-        ["git", "cat-file", "-e", f"{pinned}^{commit}"],
+        ["git", "cat-file", "-e", pinned + "^{commit}"],
         cwd=ROOT, check=False, capture_output=True, text=True,
     )
     if exists.returncode:
