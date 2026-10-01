@@ -157,6 +157,19 @@ def build(root: Path, output_dir: Path, maturity: str, allow_empty: bool = False
                 "source_revision": revision,
                 "payload_content_sha256": payload_digest,
                 "component_count": len(bundles),
+                "components": [
+                    {
+                        "name": x["name"],
+                        "kind": x["kind"],
+                        "version": x["version"],
+                        "maturity": x["maturity"],
+                        "zip": x["zip"],
+                        "content_sha256": x["content_sha256"],
+                        "archive_sha256": x["archive_sha256"],
+                        "inventory": x["inventory"],
+                    }
+                    for x in bundles
+                ],
             },
         )
         write_json(
@@ -164,9 +177,19 @@ def build(root: Path, output_dir: Path, maturity: str, allow_empty: bool = False
             {
                 "schema_version": "1.0",
                 "channel": "chatgpt-zip",
+                "package_version": version,
                 "source_revision": revision,
                 "skills": [
-                    {"name": x["name"], "status": "supported", "version": x["version"]}
+                    {
+                        "name": x["name"],
+                        "status": "supported",
+                        "version": x["version"],
+                        "maturity": x["maturity"],
+                        "zip": x["zip"],
+                        "content_sha256": x["content_sha256"],
+                        "archive_sha256": x["archive_sha256"],
+                        "inventory": x["inventory"],
+                    }
                     for x in bundles
                 ],
                 "workflows": workflows,
