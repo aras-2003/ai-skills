@@ -101,16 +101,34 @@ def current_component_identity(root: Path, name: str) -> tuple[str, str]:
 
 def component_identity_at_revision(root: Path, name: str, revision: str) -> tuple[str, str]:
     try:
-        subprocess.run(
-            ["git", "cat-file", "-e", revision + "^{commit}"],
-            cwd=root,
-            check=True,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+        git_root = Path(
+            subprocess.check_output(
+                ["git", "rev-parse", "--show-toplevel"],
+                cwd=root,
+                text=True,
+                stderr=subprocess.DEVNULL,
+            ).strip()
         )
     except Exception:
-        current = current_component_identity(root, name)
-        return current
+        # A transported checkout may intentionally omit .git. In that case the
+        # current tree can still verify evidence whose source content is present.
+        return current_component_identity(root, name)
+
+    exists = subprocess.run(
+        ["git", "cat-file", "-e", revision + "^{commit}"],
+        cwd=git_root,
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    if exists.returncode:
+        try:
+            head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=git_root, text=True).strip()
+        except Exception:
+            head = ""
+        if revision == head:
+            return current_component_identity(root, name)
+        raise ValueError(f"source revision unavailable in checkout: {revision}")
 
     import tempfile
 
@@ -119,7 +137,7 @@ def component_identity_at_revision(root: Path, name: str, revision: str) -> tupl
         snapshot.mkdir()
         archive = subprocess.Popen(
             ["git", "archive", "--format=tar", revision, "skills", "workflows"],
-            cwd=root,
+            cwd=git_root,
             stdout=subprocess.PIPE,
         )
         extract = subprocess.run(
