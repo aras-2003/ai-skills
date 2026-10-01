@@ -1,10 +1,10 @@
 ---
 name: decision-rights-review
 description: >
-  Map and review critical organisational decision rights, including who proposes, decides, executes, advises and escalates. Use when decisions are slow, duplicated, political or unclear; do not use merely to create a generic RACI.
+  Map and review critical organisational decision rights, including who proposes, decides, executes, advises and escalates. Use when the primary question concerns ownership or authority for identified material decisions. Do not lead a mixed cross-unit handoff/accountability/capacity diagnosis before the decision problem is isolated, and do not use merely to create a generic RACI.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -22,7 +22,9 @@ metadata:
 # Decision Rights Review
 
 ## Purpose
-Clarify how important decisions actually move through the organisation.
+Clarify ownership and authority for identified important decisions and how those decisions actually move through the organisation.
+
+If the initial problem spans interfaces, accountability and resource/capacity authority across units without a defined decision set, first use the operating-model diagnostic and then apply this skill to the decision classes it exposes.
 
 ## Procedure
 1. Select the critical decision set relevant to the problem.
