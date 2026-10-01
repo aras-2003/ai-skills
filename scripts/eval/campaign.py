@@ -226,6 +226,7 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
         if unavailable in catalogs["production"]:
             raise ValueError(f"fallback campaign precondition changed: {unavailable} is now in production")
 
+    all_cases = {**load_campaign_cases(ROOT), **load_supplemental_cases(ROOT)}
     case_channels = {}
     for case in all_cases.values():
         target = case["target"]
