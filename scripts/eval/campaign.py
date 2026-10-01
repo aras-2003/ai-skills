@@ -135,13 +135,13 @@ def queue_text() -> str:
     return "\n".join(out)
 
 
-def prepare(out: Path) -> None:
+def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
     errors = validate_campaign()
     if errors:
         raise ValueError("; ".join(errors))
     cfg = config()
     pinned = cfg["behavior_source_revision"]
-    changed = behavior_changes(pinned, require_commit=True)
+    changed = behavior_changes(pinned, require_commit=require_pinned_commit)
     if changed:
         raise ValueError("behavior changed after pinned SHA: " + ", ".join(changed))
     production = out / "production-plugin"
