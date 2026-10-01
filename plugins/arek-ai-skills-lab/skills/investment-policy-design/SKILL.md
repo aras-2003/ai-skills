@@ -10,7 +10,7 @@ description: 'Design or revise a personal investment policy from the investor''s
 metadata:
   owner: arkadiusz-kamrowski
   version: 0.1.0
-  maturity: candidate
+  maturity: production
   risk: high
   last_reviewed: '2026-10-02'
 ---

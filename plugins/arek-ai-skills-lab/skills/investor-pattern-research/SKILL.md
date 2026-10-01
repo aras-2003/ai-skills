@@ -10,7 +10,7 @@ description: 'Research how credible investors or investment organizations make d
 metadata:
   owner: arkadiusz-kamrowski
   version: 0.1.0
-  maturity: candidate
+  maturity: production
   risk: medium
   last_reviewed: '2026-10-02'
 ---

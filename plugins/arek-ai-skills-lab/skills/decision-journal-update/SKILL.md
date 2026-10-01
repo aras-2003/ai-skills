@@ -9,7 +9,7 @@ description: 'Append a structured investment decision record capturing what was 
 metadata:
   owner: arkadiusz-kamrowski
   version: 0.1.0
-  maturity: candidate
+  maturity: production
   risk: medium
   last_reviewed: '2026-10-02'
 ---

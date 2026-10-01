@@ -9,7 +9,7 @@ description: 'Research an investment trend or market theme by mapping its econom
 metadata:
   owner: arkadiusz-kamrowski
   version: 0.1.0
-  maturity: candidate
+  maturity: production
   risk: medium
   last_reviewed: '2026-10-02'
 ---

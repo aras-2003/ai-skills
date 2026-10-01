@@ -10,7 +10,7 @@ description: 'Underwrite one equity or ETF as an investment by analyzing busines
 metadata:
   owner: arkadiusz-kamrowski
   version: 0.1.0
-  maturity: candidate
+  maturity: production
   risk: high
   last_reviewed: '2026-10-02'
 ---

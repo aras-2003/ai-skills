@@ -93,9 +93,9 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "557cb8f18a48898c46d453e329e608161f704d7c4d83d41148fdd5e7d4f012c4",
+      "content_sha256": "8e020a337e15ff06543603290a397f647a4a2923b7c8786360ab3b04036d72e2",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "decision-journal-update",
       "version": "0.1.0"
     },
@@ -149,65 +149,65 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "ee6e5678cd18272cafdc537b1a49b23a3f0df465d9be9734b98f9e01535eebc1",
+      "content_sha256": "795e1698a4871f7998d443685d74865b5093296698bf613ae087993349c6b5ac",
       "kind": "workflow",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "investment-attention-review",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "245c11e5b09b0f9c9040e151f25d8cbfb799f0a49e695545cc5dce614ebc437e",
+      "content_sha256": "2824e95e4c5d7e53c08ca93f73f4184f465fa41c97133f8b2b1a126d29d49223",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "investment-attention-triage",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "3bf9d459e7b9aa6623f6b3f56845cc7747538aa6579dfdc8f74fc1eb95b9a3fc",
+      "content_sha256": "95439c53a212c119446feb1daf02db72339778fefc152848a6f8547b794868a6",
       "kind": "workflow",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "investment-opportunity-hunter",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "b8c5da93d1b16ee8902c765c30b600b5de8edd9f942efb69633121d750fb4e87",
+      "content_sha256": "d01a535f6252217e32a8c96b101c94b794582cd7076712c5fca80520f87c5d28",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "investment-policy-design",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "2827e3481139cc36abcb3885d6ab2526377ad613021e62c78ed2a5c42757ed42",
+      "content_sha256": "7085911eb3e0e23278cda5fcedd0cc441650a8ab3f0020152fdebb9fd31e5ef6",
       "kind": "workflow",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "investment-portfolio-review",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "22a4a0fd8c974bbb1978f8146a630bd48b640865d903df5f71449945c656d4ed",
+      "content_sha256": "a57e9d0323c56d4a54427f236c3567e4ad60a03dad34f66e3e7e67ad4719d1b0",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "investment-record-store",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "e4224d9caee1e66827a3c705742b132df1d4a9dd4b2eaa749f5beb52777ed898",
+      "content_sha256": "7e7cef32b1c58c46313dcc7b39d96967f004e990eac7e823eecff83dc3bc305f",
       "kind": "workflow",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "investment-security-review",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "59c7b89b86009b32c82373ad88cdbb51b77d17a1d55fc62d24c6a3e1d8d7c83b",
+      "content_sha256": "491efec6d954f103ef72b06ab0fc7ea5d263c02156776113d777f0964a722d9c",
       "kind": "workflow",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "investment-theme-discovery",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "395318a8c3a0b8c89962250c5cec63d380fc78fff2dd1727263453958f99905e",
+      "content_sha256": "5ad20619130edc73e1911b05840634245f8a141035f085dd6242d5ed5d1fe3c2",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "investor-pattern-research",
       "version": "0.1.0"
     },
@@ -233,9 +233,9 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "04f61dfc46709164745f9ef5fd37c3f00d301f92d3d769c1d6ce2c842506259a",
+      "content_sha256": "a7a3ec957e5d914ab65e5416d34e267cdd3bd983b218e8a5e0cd7c38f8949409",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "market-opportunity-scan",
       "version": "0.1.0"
     },
@@ -324,16 +324,16 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "62a6fb64580e2ce445729679605060ea2968bbaf5381854f9cfb1164e11f8e2a",
+      "content_sha256": "c52e4fda7fd1dbc0466d1270aa90cbd6f10434f0de67cac33776731c77c69a1e",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "portfolio-state-review",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "b6d8ddd0c6749384e296f23712d6edbb9aa3dbe8ce01ba937576d2a3166334b3",
+      "content_sha256": "61c16902bd274c95952851c6693de8066cbadaba40f834e136a665f9f213e0e2",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "position-sizing-review",
       "version": "0.1.0"
     },
@@ -359,9 +359,9 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "e3bf8e063c8a4abe4b90a83d2c159f67e973e7a202a288d409d1f64d46865693",
+      "content_sha256": "288dbd8226bd2eb6af69d97f7a037d7bbb26fb782df95234fe90d2101a02fff1",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "security-underwriting",
       "version": "0.1.0"
     },
@@ -401,16 +401,16 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "f0c00338686ed50650ab55e2259e746db349ca2d3338b1a244a94d73181b118c",
+      "content_sha256": "4954a644bf8bb0cd9552ae3cc5185b47dd6ea6e2ca35a202f4fe5e6e240f8f88",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "thesis-challenge",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "c27ccfc4fc1c187f7a20316be7f9d00160ce249541f67459ece87b85be634f4e",
+      "content_sha256": "cd2291210fa53dc2584351642aa3a90f02c32087544f94c819dbfd8eb4d61781",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "thesis-monitor",
       "version": "0.1.0"
     },
@@ -422,9 +422,9 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "62bfbefa4d97b648ad202fbf73d428c44721c447900fbf8257f1e44284a3b102",
+      "content_sha256": "3be6829370b55466010650f92f27156c81ac338ff4ec9d467bfc72b3795bf9fa",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "trend-theme-research",
       "version": "0.1.0"
     },
@@ -436,17 +436,17 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "bbf04278c3e02200c77d249443d9c30eff2736e50dd51b4daa646841fa15d9bd",
+      "content_sha256": "eda16a1a1a88c492b54b1f2635c4fce232f281754c22b8fa655fc8f803fa5047",
       "kind": "skill",
-      "maturity": "candidate",
+      "maturity": "production",
       "name": "valuation-scenario-review",
       "version": "0.1.0"
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "a448811fe3b217f59ffe3f14f4bf13ac91eca088a1703bf906fdfe45e667d529",
-  "release_id": "0.3.0+d71634fa172e",
+  "payload_content_sha256": "013f0f850b883480ef8eb92869a956680e1b4bb57d30279d80c2ba25cfd40fcd",
+  "release_id": "0.3.0+008c9944cf3a",
   "schema_version": "1.0",
-  "source_revision": "d71634fa172ece8e8a49f898584e2981dfb14552",
+  "source_revision": "008c9944cf3a8bc3e2d7231a4862aaf00e722889",
   "version": "0.3.0"
 }

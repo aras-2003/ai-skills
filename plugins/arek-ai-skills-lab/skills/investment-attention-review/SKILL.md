@@ -6,7 +6,7 @@ description: Review new company, industry, market and portfolio information agai
 metadata:
   owner: arkadiusz-kamrowski
   version: 0.1.0
-  maturity: candidate
+  maturity: production
   risk: high
   last_reviewed: '2026-10-02'
 ---

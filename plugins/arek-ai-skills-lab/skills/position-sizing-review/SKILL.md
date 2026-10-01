@@ -10,7 +10,7 @@ description: 'Determine a decision-support position-size band from investment po
 metadata:
   owner: arkadiusz-kamrowski
   version: 0.1.0
-  maturity: candidate
+  maturity: production
   risk: high
   last_reviewed: '2026-10-02'
 ---

@@ -6,7 +6,7 @@ description: Scan the XTB-investable universe and tracked history for evidence-b
 metadata:
   owner: arkadiusz-kamrowski
   version: 0.1.0
-  maturity: candidate
+  maturity: production
   risk: high
   last_reviewed: '2026-10-02'
 ---

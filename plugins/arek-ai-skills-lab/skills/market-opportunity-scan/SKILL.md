@@ -9,7 +9,7 @@ description: 'Screen the XTB-investable equity and ETF universe for research can
 metadata:
   owner: arkadiusz-kamrowski
   version: 0.1.0
-  maturity: candidate
+  maturity: production
   risk: medium
   last_reviewed: '2026-10-02'
 ---

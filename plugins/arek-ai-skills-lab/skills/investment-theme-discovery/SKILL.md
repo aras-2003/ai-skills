@@ -6,7 +6,7 @@ description: Research structural or cyclical investment themes through value-cha
 metadata:
   owner: arkadiusz-kamrowski
   version: 0.1.0
-  maturity: candidate
+  maturity: production
   risk: medium
   last_reviewed: '2026-10-02'
 ---
