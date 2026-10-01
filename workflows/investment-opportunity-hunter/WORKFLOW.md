@@ -13,6 +13,7 @@ Find a small number of XTB-investable research candidates by combining market ch
 - investment-record-store
 
 ## Optional skills
+- investment-attention-triage
 - trend-theme-research
 - portfolio-state-review
 - security-underwriting
@@ -22,12 +23,13 @@ Find a small number of XTB-investable research candidates by combining market ch
 ## Sequence
 1. Read current policy, portfolio, watchlist, prior opportunities and signal history when available.
 2. Run market-opportunity-scan; prefer changed signals over static rankings.
-3. If a theme drives the setup, use trend-theme-research before attributing benefit to a company.
-4. Reduce to 3-10 research candidates.
-5. For the highest-value candidates only, run security-underwriting and valuation-scenario-review.
-6. Run thesis-challenge before promoting a candidate to a conviction queue.
-7. Persist Sources, Opportunities, Research_Log and Signals_History.
-8. Do not size or label BUY/SELL here; route portfolio action to investment-security-review or position-sizing-review.
+3. Use investment-attention-triage when a new event/signal must first be judged for materiality before spending deep-research effort.
+4. If a theme drives the setup, use trend-theme-research before attributing benefit to a company.
+5. Reduce to 3-10 research candidates.
+6. For the highest-materiality candidates only, run security-underwriting and valuation-scenario-review.
+7. Run thesis-challenge before promoting a candidate to a conviction queue.
+8. Persist Sources, Opportunities, Research_Log and Signals_History.
+9. Do not size or label BUY/SELL here; route portfolio action to investment-security-review or position-sizing-review.
 
 ## Evidence gates
 - current claims require as-of/source dates;
