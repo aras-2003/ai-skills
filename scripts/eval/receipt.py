@@ -2,16 +2,22 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
+import os
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
 
+import yaml
 from jsonschema import Draft202012Validator
 
 from common import load_registry, repo_root, sha256_file
 
 VALID_STATUSES = {"NOT_RUN", "REVIEW_REQUIRED", "PASS", "FAIL"}
+VALID_EVIDENCE_SCOPES = {"current-version", "historical"}
+RUNTIME_STATUSES = {"REVIEW_REQUIRED", "PASS", "FAIL"}
 
 
 def find_case(root: Path, case_id: str) -> tuple[str, dict[str, Any]]:
@@ -20,6 +26,109 @@ def find_case(root: Path, case_id: str) -> tuple[str, dict[str, Any]]:
             if case.get("id") == case_id:
                 return target, case
     raise KeyError(f"unknown case id: {case_id}")
+
+
+def _split_frontmatter(path: Path) -> dict[str, Any]:
+    text = path.read_text(encoding="utf-8")
+    if not text.startswith("---\n"):
+        raise ValueError(f"{path}: missing frontmatter")
+    end = text.find("\n---\n", 4)
+    if end < 0:
+        raise ValueError(f"{path}: unterminated frontmatter")
+    data = yaml.safe_load(text[4:end]) or {}
+    if not isinstance(data, dict):
+        raise ValueError(f"{path}: frontmatter must be a mapping")
+    return data
+
+
+def _source_tree_digest(path: Path) -> str:
+    h = hashlib.sha256()
+    files: list[Path] = []
+    for item in path.rglob("*"):
+        if not item.is_file():
+            continue
+        rel = item.relative_to(path)
+        if rel.parts and rel.parts[0] in {"tests", "evals", "__pycache__"}:
+            continue
+        if item.name.endswith((".pyc", ".pyo")):
+            continue
+        files.append(item)
+    for item in sorted(files):
+        rel = item.relative_to(path).as_posix().encode()
+        h.update(len(rel).to_bytes(4, "big"))
+        h.update(rel)
+        data = item.read_bytes()
+        h.update(len(data).to_bytes(8, "big"))
+        h.update(data)
+    return h.hexdigest()
+
+
+def current_component_identity(root: Path, name: str) -> tuple[str, str]:
+    for skill_md in sorted((root / "skills").rglob("SKILL.md")):
+        fm = _split_frontmatter(skill_md)
+        if fm.get("name") != name:
+            continue
+        metadata = fm.get("metadata") or {}
+        version = metadata.get("version")
+        if not isinstance(version, str) or not version:
+            raise ValueError(f"{skill_md}: missing component version")
+        return version, _source_tree_digest(skill_md.parent)
+
+    registry_path = root / "workflows" / "runtime-registry.yaml"
+    data = yaml.safe_load(registry_path.read_text(encoding="utf-8")) or {}
+    for item in data.get("workflows") or []:
+        if not isinstance(item, dict) or item.get("name") != name:
+            continue
+        metadata = item.get("metadata") or {}
+        version = metadata.get("version")
+        workflow_rel = item.get("workflow")
+        if not isinstance(version, str) or not version:
+            raise ValueError(f"{registry_path}: {name} missing version")
+        if not isinstance(workflow_rel, str) or not workflow_rel:
+            raise ValueError(f"{registry_path}: {name} missing workflow path")
+        workflow_path = root / workflow_rel
+        if not workflow_path.is_file():
+            raise ValueError(f"{registry_path}: {name} workflow path missing: {workflow_rel}")
+        h = hashlib.sha256()
+        h.update(_source_tree_digest(workflow_path.parent).encode())
+        h.update(json.dumps(item, sort_keys=True, default=str, ensure_ascii=False).encode("utf-8"))
+        return version, h.hexdigest()
+    raise KeyError(f"unknown component: {name}")
+
+
+def current_source_revision(root: Path) -> str:
+    override = os.environ.get("SOURCE_REVISION")
+    if override:
+        return override
+    try:
+        return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    except Exception:
+        return "unknown"
+
+
+def _validate_status_contract(data: dict[str, Any], errors: list[str]) -> None:
+    status = data.get("evaluation", {}).get("status")
+    runtime = data.get("runtime", {})
+    execution = data.get("execution", {})
+    component = data.get("component", {})
+    if status not in VALID_STATUSES:
+        errors.append(f"invalid status: {status}")
+        return
+
+    if status in RUNTIME_STATUSES:
+        required = {
+            "component.version": component.get("version"),
+            "component.content_sha256": component.get("content_sha256"),
+            "runtime.provider": runtime.get("provider"),
+            "runtime.model_id": runtime.get("model_id"),
+            "execution.actual_output_path": execution.get("actual_output_path"),
+            "execution.actual_output_sha256": execution.get("actual_output_sha256"),
+        }
+        missing = [name for name, value in required.items() if not value]
+        if missing:
+            errors.append(f"{status} requires runtime/component/output identity: {', '.join(missing)}")
+    if status == "PASS" and execution.get("assisted"):
+        errors.append("assisted run cannot be PASS")
 
 
 def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
@@ -31,9 +140,12 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
     status = args.status
     if status not in VALID_STATUSES:
         raise ValueError(f"invalid status: {status}")
-    if status in {"PASS", "FAIL", "REVIEW_REQUIRED"} and not args.output:
+    evidence_scope = getattr(args, "evidence_scope", "current-version")
+    if evidence_scope not in VALID_EVIDENCE_SCOPES:
+        raise ValueError(f"invalid evidence scope: {evidence_scope}")
+    if status in RUNTIME_STATUSES and not args.output:
         raise ValueError(f"{status} requires --output")
-    if status in {"PASS", "FAIL", "REVIEW_REQUIRED"}:
+    if status in RUNTIME_STATUSES:
         required_runtime = {
             "component_version": args.component_version,
             "component_digest": args.component_digest,
@@ -46,9 +158,25 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
     if status == "PASS" and args.assisted:
         raise ValueError("assisted runs cannot be recorded as PASS")
 
+    component_name = args.component or target
+    if evidence_scope == "current-version" and status in RUNTIME_STATUSES:
+        current_version, current_digest = current_component_identity(root, component_name)
+        if args.component_version != current_version:
+            raise ValueError(
+                f"current-version evidence component version mismatch: {args.component_version} != {current_version}"
+            )
+        if args.component_digest != current_digest:
+            raise ValueError("current-version evidence component content digest mismatch")
+        current_revision = current_source_revision(root)
+        if current_revision != "unknown" and args.source_revision != current_revision:
+            raise ValueError(
+                f"current-version evidence source revision mismatch: {args.source_revision} != {current_revision}"
+            )
+
     output_path = Path(args.output).resolve() if args.output else None
     record = {
         "schema_version": "1.0",
+        "evidence_scope": evidence_scope,
         "case": {
             "id": args.case_id,
             "target": target,
@@ -59,7 +187,7 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
             "rubric_sha256": sha256_file(rubric_path),
         },
         "component": {
-            "name": args.component or target,
+            "name": component_name,
             "version": args.component_version,
             "content_sha256": args.component_digest,
         },
@@ -86,32 +214,74 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
         },
     }
 
-    schema = json.loads((root / "scripts/eval/schemas/evidence-record.schema.json").read_text(encoding="utf-8"))
-    errors = sorted(Draft202012Validator(schema).iter_errors(record), key=lambda e: list(e.path))
+    errors = validate_receipt_data(record, root=root, current_revision=current_source_revision(root))
     if errors:
-        raise ValueError("; ".join(e.message for e in errors))
+        raise ValueError("; ".join(errors))
     return record
 
 
-def validate_receipt(path: Path) -> list[str]:
-    root = repo_root()
-    data = json.loads(path.read_text(encoding="utf-8"))
+def validate_receipt_data(
+    data: dict[str, Any],
+    *,
+    root: Path | None = None,
+    current_revision: str | None = None,
+) -> list[str]:
+    root = root or repo_root()
     schema = json.loads((root / "scripts/eval/schemas/evidence-record.schema.json").read_text(encoding="utf-8"))
     errors = [f"schema: {e.message}" for e in Draft202012Validator(schema).iter_errors(data)]
+    _validate_status_contract(data, errors)
+
     case = data.get("case", {})
     try:
-        _, current = find_case(root, case.get("id", ""))
+        target, current = find_case(root, case.get("id", ""))
     except KeyError as exc:
         return errors + [str(exc)]
     input_path = root / current["input"]
     rubric_path = root / current["rubric"]
+    if case.get("target") != target:
+        errors.append("stale evidence: case target mismatch")
+    if case.get("input_path") != current["input"]:
+        errors.append("stale evidence: input path mismatch")
+    if case.get("rubric_path") != current["rubric"]:
+        errors.append("stale evidence: rubric path mismatch")
     if case.get("input_sha256") != sha256_file(input_path):
         errors.append("stale evidence: input digest mismatch")
     if case.get("rubric_sha256") != sha256_file(rubric_path):
         errors.append("stale evidence: rubric digest mismatch")
-    if data.get("evaluation", {}).get("status") == "PASS" and data.get("execution", {}).get("assisted"):
-        errors.append("assisted run cannot be PASS")
+
+    status = data.get("evaluation", {}).get("status")
+    execution = data.get("execution", {})
+    if status in RUNTIME_STATUSES:
+        raw_output = execution.get("actual_output_path")
+        if raw_output:
+            output_path = Path(raw_output)
+            if not output_path.is_file():
+                errors.append("runtime evidence output is missing")
+            elif execution.get("actual_output_sha256") != sha256_file(output_path):
+                errors.append("runtime evidence output digest mismatch")
+
+    scope = data.get("evidence_scope")
+    if scope == "current-version" and status in RUNTIME_STATUSES:
+        component = data.get("component", {})
+        component_name = component.get("name") or ""
+        try:
+            version, digest = current_component_identity(root, component_name)
+        except (KeyError, ValueError) as exc:
+            errors.append(str(exc))
+        else:
+            if component.get("version") != version:
+                errors.append("stale evidence: component version mismatch")
+            if component.get("content_sha256") != digest:
+                errors.append("stale evidence: component content digest mismatch")
+        current_revision = current_revision if current_revision is not None else current_source_revision(root)
+        if current_revision != "unknown" and data.get("source_revision") != current_revision:
+            errors.append("stale evidence: source revision mismatch")
     return errors
+
+
+def validate_receipt(path: Path) -> list[str]:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return validate_receipt_data(data)
 
 
 def main() -> int:
@@ -121,6 +291,7 @@ def main() -> int:
     create = sub.add_parser("create")
     create.add_argument("--case-id", required=True)
     create.add_argument("--status", required=True, choices=sorted(VALID_STATUSES))
+    create.add_argument("--evidence-scope", choices=sorted(VALID_EVIDENCE_SCOPES), default="current-version")
     create.add_argument("--source-revision", required=True)
     create.add_argument("--component")
     create.add_argument("--component-version")
