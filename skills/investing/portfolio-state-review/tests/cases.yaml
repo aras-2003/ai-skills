@@ -16,3 +16,4 @@ cases:
     input: "Analyze ASML's competitive moat."
     expected:
       should_trigger: false
+      must_not: ["portfolio concentration", "snapshot"]
