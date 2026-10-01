@@ -8,6 +8,7 @@ import yaml
 
 REQUIRED_SKILLS = {
     "decision-journal-update",
+    "investment-attention-triage",
     "investment-policy-design",
     "investment-record-store",
     "investor-pattern-research",
@@ -22,6 +23,7 @@ REQUIRED_SKILLS = {
 }
 
 REQUIRED_WORKFLOWS = {
+    "investment-attention-review",
     "investment-opportunity-hunter",
     "investment-security-review",
     "investment-portfolio-review",
@@ -104,6 +106,11 @@ def main() -> int:
         if required not in sizing:
             problems.append(f"position-sizing-review missing guardrail: {required}")
 
+    attention = (skill_root / "investment-attention-triage" / "SKILL.md").read_text(encoding="utf-8")
+    for required in ("NOISE", "MONITOR", "REVIEW", "ESCALATE", "next research question"):
+        if required.lower() not in attention.lower():
+            problems.append(f"investment-attention-triage missing materiality/escalation guardrail: {required}")
+
     monitor = (skill_root / "thesis-monitor" / "SKILL.md").read_text(encoding="utf-8")
     for required in ("Append a monitoring record", "never rewrite", "kill criteria"):
         if required.lower() not in monitor.lower():
@@ -112,8 +119,8 @@ def main() -> int:
     eval_root = root / "evals" / "investing"
     input_files = sorted(eval_root.glob("*.input.md"))
     rubric_files = sorted(eval_root.glob("*.rubric.yaml"))
-    if len(input_files) < 5:
-        problems.append("expected at least five investing workflow input evals")
+    if len(input_files) < 6:
+        problems.append("expected at least six investing workflow input evals")
     if len(input_files) != len(rubric_files):
         problems.append("every investing input eval must have exactly one rubric")
 
