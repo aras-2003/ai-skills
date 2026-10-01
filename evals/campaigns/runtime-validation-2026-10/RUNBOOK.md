@@ -69,8 +69,18 @@ In the fresh session, capture the actual package/runtime state into a copy of \`
   "channel": "production",
   "package": {
     "name": "arek-ai-skills",
-    "version": "1.8.0"
+    "version": "1.8.0",
+    "release_id": "actually-observed-release-id",
+    "source_revision": "actually-observed-source-sha",
+    "payload_content_sha256": "actually-observed-payload-digest"
   },
+  "components": [
+    {
+      "name": "actually-observed-capability",
+      "version": "actually-observed-version",
+      "content_sha256": "actually-observed-component-digest"
+    }
+  ],
   "enabled_packages": ["arek-ai-skills"],
   "catalog": ["actual-capability-name", "..."],
   "runtime": {
@@ -82,7 +92,7 @@ In the fresh session, capture the actual package/runtime state into a copy of \`
 }
 ~~~
 
-The values must be observed from the runtime, not copied from this example.
+The values must be observed from the installed runtime artifact, not copied from this example or from `lock.json`. If the runtime cannot expose release ID, source revision, payload digest and component identities, exact-version smoke is **not confirmed** and the run must not be promoted to PASS evidence.
 
 Validate:
 
@@ -94,7 +104,8 @@ python scripts/eval/campaign.py verify-smoke \
 
 The smoke gate rejects:
 
-- wrong package name/version for the declared channel;
+- wrong or unobserved package name/version/release ID/source revision/payload digest for the declared channel;
+- missing or mismatched observed component versions/content digests;
 - the required package not enabled;
 - production and Lab simultaneously enabled;
 - duplicate capability names;
