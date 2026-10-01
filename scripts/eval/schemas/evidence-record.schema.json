@@ -130,6 +130,12 @@
           "items": {
             "type": "string"
           }
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": false
@@ -171,6 +177,13 @@
             "string",
             "null"
           ]
+        },
+        "tool_trace_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
         }
       },
       "additionalProperties": false
