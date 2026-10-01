@@ -75,7 +75,7 @@ class ReadinessPolicyTests(unittest.TestCase):
             )
         self.assertTrue(any("exception expired" in e for e in errors))
 
-    def test_pending_exception_cannot_cover_known_high_severity_failure(self) -> None:
+    def test_pending_cannot_cover_known_high_severity_failure(self) -> None:
         rec = self._pending()
         rec["known_high_severity_failure"] = True
         with tempfile.TemporaryDirectory() as td:
@@ -84,6 +84,46 @@ class ReadinessPolicyTests(unittest.TestCase):
                 review_by=self.review_by, today=self.today,
             )
         self.assertTrue(any("high-severity" in e for e in errors))
+
+    def test_verified_cannot_cover_known_high_severity_failure(self) -> None:
+        rec = {
+            "current_runtime_receipt": "verified",
+            "maturity_disposition": "verified-current-version",
+            "known_high_severity_failure": True,
+        }
+        with tempfile.TemporaryDirectory() as td:
+            errors = validate_readiness.validate_record(
+                Path(td), "demo", "1.0.0", rec,
+                review_by=self.review_by, today=self.today,
+            )
+        self.assertTrue(any("high-severity" in e for e in errors))
+
+    def test_not_required_cannot_cover_known_high_severity_failure(self) -> None:
+        rec = {
+            "current_runtime_receipt": "not-required",
+            "maturity_disposition": "not-required",
+            "not_required_reason": "Runtime behavior is not part of this component contract.",
+            "known_high_severity_failure": True,
+        }
+        with tempfile.TemporaryDirectory() as td:
+            errors = validate_readiness.validate_record(
+                Path(td), "demo", "1.0.0", rec,
+                review_by=self.review_by, today=self.today,
+            )
+        self.assertTrue(any("high-severity" in e for e in errors))
+
+    def test_justified_not_required_without_failure_is_allowed(self) -> None:
+        rec = {
+            "current_runtime_receipt": "not-required",
+            "maturity_disposition": "not-required",
+            "not_required_reason": "Runtime behavior is not part of this component contract.",
+        }
+        with tempfile.TemporaryDirectory() as td:
+            errors = validate_readiness.validate_record(
+                Path(td), "demo", "1.0.0", rec,
+                review_by=self.review_by, today=self.today,
+            )
+        self.assertEqual([], errors)
 
     def test_not_required_needs_justification(self) -> None:
         rec = {
