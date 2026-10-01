@@ -1,0 +1,5 @@
+schema_version: "1.0"
+cases:
+  - id: oaf-interface-natural-pl
+    input: evals/routing/supplemental/oaf-interface-natural-pl.input.md
+    rubric: evals/routing/supplemental/oaf-interface-natural-pl.rubric.yaml
