@@ -10,6 +10,12 @@ There is no single universal runtime registry. The active campaign composes Comm
 
 The Lab packager copies only executor inputs.
 
+## Test-suite validation vs execution
+
+`scripts/validate/validate_tests.py` statically validates the definitions under both `skills/**/tests/cases.yaml` and `workflows/**/tests/cases.yaml`: YAML, schema, IDs and required assertion fields.
+
+That validator does **not** execute the behavioral assertions against a model/runtime. In particular, the `oaf-health-check` confidence cases are planned behavioral regressions until an actual evaluator/runtime run executes them. A structurally valid case is not runtime PASS.
+
 ## Evidence receipts
 
 Use `receipt.py` to create or validate a record. `NOT_RUN` is a first-class status and is required when runtime/model access is unavailable. Historical narrative summaries are not receipts for a later component version.
