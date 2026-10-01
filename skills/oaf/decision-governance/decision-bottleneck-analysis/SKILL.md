@@ -1,10 +1,10 @@
 ---
 name: decision-bottleneck-analysis
 description: >
-  Diagnose why specific material decisions are slow, repeatedly escalated or duplicated by tracing decision steps, waits, vetoes, evidence gaps and authority boundaries. Use after identifying a problematic decision class.
+  Diagnose why a specific material decision class is slow, repeatedly escalated or duplicated by tracing decision steps, waits, vetoes, evidence gaps and authority boundaries. Use after the problematic decision class is identified; do not lead a mixed cross-unit handoff/accountability/capacity diagnosis whose failure type is still unknown.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.1.0"
   maturity: production
   risk: medium
   last_reviewed: 2026-09-30
@@ -22,7 +22,9 @@ metadata:
 # Decision Bottleneck Analysis
 
 ## Purpose
-Find the actual source of decision latency rather than assuming governance is too heavy.
+Find the actual source of latency for an identified decision class rather than assuming governance is too heavy.
+
+If the prompt primarily mixes cross-unit handoffs, unclear accountability and capacity/funding authority without naming a decision class, first use the operating-model diagnostic to classify the failure.
 
 ## Procedure
 1. Select a small set of recent material decisions.
