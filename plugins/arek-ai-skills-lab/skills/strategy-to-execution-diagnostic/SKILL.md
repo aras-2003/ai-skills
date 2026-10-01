@@ -1,15 +1,16 @@
 ---
 name: strategy-to-execution-diagnostic
-description: >
-  Diagnose whether strategic intent is translated into explicit priorities, accountable owners, funding, roadmaps and measurable outcomes. Use when strategy appears disconnected from execution; do not use for generic strategy creation.
+description: 'Diagnose whether strategic intent is translated into explicit priorities,
+  accountable owners, funding, roadmaps and measurable outcomes. Use when strategy
+  appears disconnected from execution; do not use for generic strategy creation.
+
+  '
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: 0.1.0
   maturity: candidate
   risk: medium
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: standard
+  last_reviewed: '2026-09-30'
 ---
 
 # Strategy to Execution Diagnostic

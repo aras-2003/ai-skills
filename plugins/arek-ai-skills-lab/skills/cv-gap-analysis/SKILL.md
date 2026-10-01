@@ -1,15 +1,17 @@
 ---
 name: cv-gap-analysis
-description: >
-  Compare an approved mastery CV with a target executive technology role to identify evidence-backed strengths, missing proof, weak alignment and narrative gaps before tailoring. Use after a role is worth pursuing and before rewriting the CV.
+description: 'Compare an approved mastery CV with a target executive technology role
+  to identify evidence-backed strengths, missing proof, weak alignment and narrative
+  gaps before tailoring. Use after a role is worth pursuing and before rewriting the
+  CV.
+
+  '
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: 0.1.0
   maturity: candidate
   risk: medium
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: standard
+  last_reviewed: '2026-09-30'
 ---
 
 # CV Gap Analysis

@@ -1,15 +1,16 @@
 ---
 name: job-validity-check
-description: >
-  Verify whether a known job opportunity is still active, current, unique and materially unchanged across employer, ATS and aggregator sources. Use before spending time on role evaluation, company research or CV tailoring.
+description: 'Verify whether a known job opportunity is still active, current, unique
+  and materially unchanged across employer, ATS and aggregator sources. Use before
+  spending time on role evaluation, company research or CV tailoring.
+
+  '
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: 0.1.0
   maturity: candidate
   risk: low
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: fast
+  last_reviewed: '2026-09-30'
 ---
 
 # Job Validity Check

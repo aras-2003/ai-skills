@@ -1,6 +1,6 @@
-# Runtime Eval Fixtures
+# Runtime Eval Inputs
 
-Canonical source files are copied from the repository for lab-only runtime testing.
+Only executor inputs are packaged here. Rubrics remain repository-side and must never be loaded into the executor context.
 
-- \`case-003-viral-regulated.md\` — source: \`evals/commerce/case-003-viral-regulated.md\`
-- \`case-005-false-us-pl-transfer.md\` — source: \`evals/commerce/case-005-false-us-pl-transfer.md\`
+- `case-003-viral-regulated.input.md` — case: `case-003-viral-regulated`, mode: `explicit`
+- `case-005-false-us-pl-transfer.input.md` — case: `case-005-false-us-pl-transfer`, mode: `explicit`

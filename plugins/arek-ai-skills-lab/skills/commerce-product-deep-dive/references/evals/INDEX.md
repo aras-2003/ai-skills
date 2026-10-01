@@ -1,7 +1,7 @@
-# Runtime Eval Fixtures
+# Runtime Eval Inputs
 
-Canonical source files are copied from the repository for lab-only runtime testing.
+Only executor inputs are packaged here. Rubrics remain repository-side and must never be loaded into the executor context.
 
-- \`case-001-premium-vs-generic.md\` — source: \`evals/commerce/case-001-premium-vs-generic.md\`
-- \`case-002-good-demand-bad-economics.md\` — source: \`evals/commerce/case-002-good-demand-bad-economics.md\`
-- \`case-004-boring-winner.md\` — source: \`evals/commerce/case-004-boring-winner.md\`
+- `case-001-premium-vs-generic.input.md` — case: `case-001-premium-vs-generic`, mode: `explicit`
+- `case-002-good-demand-bad-economics.input.md` — case: `case-002-good-demand-bad-economics`, mode: `explicit`
+- `case-004-boring-winner.input.md` — case: `case-004-boring-winner`, mode: `explicit`

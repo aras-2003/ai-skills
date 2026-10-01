@@ -1,0 +1,575 @@
+{
+  "capabilities": [
+    {
+      "content_sha256": "eb3198309204c03fb1b83a88b74b6825ec378f14e592c88b3763aa3c23a0446b",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "acquisition-fit-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "b1fbdec3e182a68ba57e5a1935471d2f2f4d60c651203bc0714a45a047e939ea",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "architecture-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "95aa51ce2bce46f1f77f46e0fdcda8dcabeb0d5c01c11e8397d9f0aa7a5d6cb2",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "arek-skills-diagnostic",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "ddbd475ae6bd5d5bf36b586bceece036c62dd149d172fc0527ff93d1f512a5ce",
+      "inventory": [
+        "SKILL.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-capability-gap-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "capability-gap-analysis",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "1a68858180586acc28f9eaee7272f2498bed80ccae1d9a8bf934fc05d5348305",
+      "inventory": [
+        "SKILL.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-capability-map-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "capability-map-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "1d6db2f1b93d7aa8ba0e825fa9306d2ee1cab5d7cb3abfafa463a4cb4d0eea82",
+      "inventory": [
+        "SKILL.md",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-003-viral-regulated.input.md",
+        "references/evals/case-005-false-us-pl-transfer.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "commerce-opportunity-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "b2adc534d77f6466d066541af797cec47d5c73ea4775695092885e52452e65a1",
+      "inventory": [
+        "SKILL.md",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-001-premium-vs-generic.input.md",
+        "references/evals/case-002-good-demand-bad-economics.input.md",
+        "references/evals/case-004-boring-winner.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "commerce-product-deep-dive",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "0c69695162cbe985b9e1016d1bfb98d8bfc361bddd100ca82ebe44e8978a49cf",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "commerce-regulatory-risk-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "cbf70542c37266ee3fc4611abc5b0411c18185bd70e0c5e39c477d73246832c5",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "company-context-research",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "71309075b6fbcea13e89c21102000a3c12a6678dab557f576702ac5962cf1061",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "competition-landscape-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "773cb2fc14f06c3675a9b98764a99d783d30e9629623d4a657b35b36caff08d5",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "cv-gap-analysis",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "a870563ff9e9b9c2e96f04c47274dc06a16a3a4a3a1a107cbbb9b7634a0ad663",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "cv-tailoring",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "ed3ff95180b8fea28385cbc3bfe2ac45cc708fc040f3c8f11bcb53de1fe8e333",
+      "inventory": [
+        "SKILL.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-decision-bottleneck-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-bottleneck-analysis",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "50d32d4b098b6c763bb4b0b87277b7e1bbcc42e31e27a71320176ebc941370ea",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-rights-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "e12bc733f74198498188b8694785ef5405f2c75af455429c72217705ce6fab09",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "differentiation-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "910a214fd2fc141c464d1364330c6a261e5e6f732f20685f11fb38013db44720",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "evidence-loop-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "39bf030256fda104a6ae58402c69dabb539884449f57b674b646ab16a1a3a255",
+      "inventory": [
+        "SKILL.md",
+        "references/candidate-profile-schema.yaml",
+        "references/evaluation-model.md",
+        "references/output-template.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "executive-role-evaluator",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "1716f0a773bc3d3d2f14f14547e523580f3fe89e73c0213e4f41c7e9c46cce2f",
+      "inventory": [
+        "SKILL.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-global-local-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "global-local-model-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "629e34b610964308faed7d31754c4f031a67a83f7da0753b8e6c8462aab34ede",
+      "inventory": [
+        "SKILL.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-governance-design-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "governance-design",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "240ef2c853467fb480dcf91ec2b543ec2f963011f801720ccb200527b7a9d452",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "interview-brief",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "2ec1fac2e645cd5be6bf0b4357f4d4f541507e8cca38167aedff5761c30396c0",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "job-discovery",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "731d6d99a47d7dbe3f7607246474fcfe1f79496227774a869cd4578b2d42eb8c",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "job-validity-check",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "c99bec110b7c8cb38e9249f44481339eed7c496bd7c393ee20d3156f02bd8844",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "kpi-quality-review",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "48ae1be4dd9fa9389592bc0973c0f669bf08eae39e70d6fd0d43322a73955ed6",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "market-transferability-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "6a74b4a843bd75f304ef913c1a28146be44625fe484e5279e0a069dc985a7201",
+      "inventory": [
+        "SKILL.md",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-enterprise-architecture-review-001.input.md",
+        "references/evals/case-enterprise-architecture-stop-001.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-enterprise-architecture-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "990f40c3d10d32d6efbb1d94f73d5d4fe3d67301754a6cfe59eab7ea9e8eff29",
+      "inventory": [
+        "SKILL.md",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-001-enterprise-change.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-enterprise-change-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "ad1e614f63d4fe73099e9c4bf6fc3bfa1fb59e8a20ab2659ed004c051a286f30",
+      "inventory": [
+        "SKILL.md",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-governance-redesign-001.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-governance-redesign",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "0d367cd7be5cc90d6d31ed48a32b1d5ebbe45da56ff93876188d202b80d1d652",
+      "inventory": [
+        "SKILL.md",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-001-enterprise-it.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-health-check",
+      "version": "1.5.0"
+    },
+    {
+      "content_sha256": "a6b8fff651c917ec58502c7a3fb8163c2e95c775eb77b93e75c02b103b94cd18",
+      "inventory": [
+        "SKILL.md",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-operating-model-redesign-001.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-operating-model-redesign",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "e7b2ef791fae7a1517faa9a02e6d66303a3aa370beb8a3b4c73c7980d6188f47",
+      "inventory": [
+        "SKILL.md",
+        "references/WORKFLOW.md"
+      ],
+      "kind": "workflow",
+      "maturity": "candidate",
+      "name": "oaf-strategy-execution-reset",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "53f22742cbd71a4da72d0b928e0b7909c743e9b58f1d55205c883414c4aa2747",
+      "inventory": [
+        "SKILL.md",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-transformation-design-001.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-transformation-design",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "1d1f420d0cf7b1d82e5621189969348308be1df81056541bbfd880e018c968df",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "operating-model-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "76be7cde026837b15627047031c6fe9106b61d4147d3e7c16fe5ca22d7dbc783",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "organizational-interface-review",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "9be0f25cc77fecfff3ee7edf53552bbfe39bda11bdd6c2a8eb7dbffbce41a556",
+      "inventory": [
+        "SKILL.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-portfolio-health-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-health-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "fd002e7569567af44b33ab46d3f4f76fc43686aa16192dfd28be86f35a44756d",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-prioritization",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "89d03b1046432063ddf6097bf0a514671cc459bd52f10346f8e4152c5e498e9d",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "problem-demand-validation",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "6fabed3c1aa8748f39e6f2ea7801c40586345153a36c55dd3eb7a0247beddcab",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "process-update",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "ab8e642b7754336a19f8084b0d7035596e1a4f6f104971fab3a47f11b1381267",
+      "inventory": [
+        "SKILL.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-006-product-discovery.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "product-opportunity-discovery",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "2f5600720fc03114ca8633a5c88cfce97f4b450643d19617eebc47f8d1f98312",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-authoring",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "a06f4d08c7ea13199dc9a50c88183f386da6212f47749234e8c5e99e899fad86",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-specification",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "3ce46c95fd4e477082b7547719fbf0787d9863cb5dcf7d687926748584e8538e",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-validation",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "a31d165dbf1eb4be461e1573796b45e64eedc52bbed84fd1d3eea593ea580bcb",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "strategy-to-execution-diagnostic",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "456400d84b0c64236a670a23d89c13971bcbe6927270a9b57326dcac50ac74f9",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "supplier-viability-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "af5526586c5afa74cce9b92a9ed0da36c4831971b4ed3e6658537653030f22ce",
+      "inventory": [
+        "SKILL.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-transformation-blueprint-001.input.md",
+        "references/evals/case-transformation-blueprint-stop-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "transformation-blueprint",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "84435a0238bd9090681a71daefca4d9131b13c1390ac6e136f8849848db26e39",
+      "inventory": [
+        "SKILL.md",
+        "references/input-contract.md",
+        "scripts/calculator.py"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "unit-economics-review",
+      "version": "1.1.0"
+    }
+  ],
+  "channel": "lab",
+  "runtime_fixture_targets": [
+    {
+      "status": "packaged",
+      "target": "capability-gap-analysis"
+    },
+    {
+      "status": "packaged",
+      "target": "capability-map-review"
+    },
+    {
+      "status": "packaged",
+      "target": "commerce-opportunity-review"
+    },
+    {
+      "status": "packaged",
+      "target": "commerce-product-deep-dive"
+    },
+    {
+      "status": "packaged",
+      "target": "decision-bottleneck-analysis"
+    },
+    {
+      "status": "packaged",
+      "target": "global-local-model-review"
+    },
+    {
+      "status": "packaged",
+      "target": "governance-design"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-enterprise-architecture-review"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-enterprise-change-review"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-governance-redesign"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-health-check"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-operating-model-redesign"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-transformation-design"
+    },
+    {
+      "status": "packaged",
+      "target": "portfolio-health-review"
+    },
+    {
+      "status": "packaged",
+      "target": "product-opportunity-discovery"
+    },
+    {
+      "status": "packaged",
+      "target": "transformation-blueprint"
+    }
+  ],
+  "schema_version": "1.0",
+  "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
+  "source_revision": "bf3bbadcd97a58c06a3cb1770cfdcd8b5efea95e"
+}

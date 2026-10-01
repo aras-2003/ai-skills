@@ -1,15 +1,17 @@
 ---
 name: cv-tailoring
-description: >
-  Tailor an approved mastery CV to one specific executive technology role while preserving factual accuracy, seniority and evidence. Use after cv-gap-analysis; do not invent experience, inflate scope or optimize for keywords at the expense of credibility.
+description: 'Tailor an approved mastery CV to one specific executive technology role
+  while preserving factual accuracy, seniority and evidence. Use after cv-gap-analysis;
+  do not invent experience, inflate scope or optimize for keywords at the expense
+  of credibility.
+
+  '
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: 0.1.0
   maturity: candidate
   risk: medium
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: standard
+  last_reviewed: '2026-09-30'
 ---
 
 # CV Tailoring

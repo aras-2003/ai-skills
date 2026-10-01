@@ -1,0 +1,85 @@
+---
+name: skill-specification
+description: 'Decide whether a repeatable task should become an Agent Skill and define
+  its behavioral contract before implementation. Use when proposing a new skill, splitting/merging
+  skills, or when an existing skill has unclear scope, trigger conditions, inputs,
+  outputs or boundaries.
+
+  '
+metadata:
+  owner: arkadiusz-kamrowski
+  version: 1.0.0
+  maturity: production
+  risk: low
+  last_reviewed: '2026-09-30'
+---
+
+# Skill Specification
+
+## Purpose
+
+Prevent premature skill creation and define a testable contract before instructions are written.
+
+## Procedure
+
+1. Define the recurring user goal in one sentence.
+2. Confirm recurrence: identify at least 2–3 realistic situations where the same method applies.
+3. Decide the correct abstraction:
+   - use a **project instruction** for project-specific context or policy;
+   - use a **script/tool** for deterministic calculation or transformation;
+   - use a **workflow** for orchestration across multiple independently useful stages;
+   - use a **skill** for one reusable reasoning/execution/control method.
+4. Define trigger conditions in user-goal language.
+5. Define near-miss and competing cases that must not trigger.
+6. Define required and optional inputs.
+7. Define preconditions.
+8. Define the output contract.
+9. Define stop, ask, decline and escalation conditions.
+10. Identify tool, connector, script, reference and runtime dependencies.
+11. Identify evidence/verification requirements.
+12. Assign risk: low / medium / high.
+13. Produce candidate test prompts before authoring.
+
+## Output contract
+
+Return:
+
+### Skill candidate
+- Proposed name
+- Domain
+- Class: reasoning / execution / control
+- Problem solved
+- Why a skill is the right abstraction
+
+### Trigger boundary
+- Should trigger when
+- Should not trigger when
+- Competing skills
+
+### Contract
+- Required inputs
+- Optional inputs
+- Preconditions
+- Procedure summary
+- Output
+- Stop/escalation rules
+- Evidence/tool requirements
+
+### Risks
+- Failure modes
+- Security/surprise concerns
+- Portability concerns
+
+### Candidate eval cases
+At least:
+- direct positive;
+- indirect positive;
+- realistic near-miss negative.
+
+## Quality checks
+
+- Do not create a skill merely because a prompt can be saved.
+- Do not embed user-specific or project-specific facts that belong in context.
+- Do not combine tasks with different triggers or success criteria.
+- Do not hide deterministic algorithms in natural-language instructions when code is more reliable.
+- Do not proceed if the output cannot be specified well enough to test.

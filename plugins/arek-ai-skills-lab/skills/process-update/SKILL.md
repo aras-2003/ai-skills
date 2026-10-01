@@ -1,15 +1,16 @@
 ---
 name: process-update
-description: >
-  Convert new recruitment-process information into a concise structured status update with current stage, evidence, next action, owner/date and changes to prior assumptions. Use after recruiter calls, interviews, emails or offer updates.
+description: 'Convert new recruitment-process information into a concise structured
+  status update with current stage, evidence, next action, owner/date and changes
+  to prior assumptions. Use after recruiter calls, interviews, emails or offer updates.
+
+  '
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: 0.1.0
   maturity: candidate
   risk: low
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: fast
+  last_reviewed: '2026-09-30'
 ---
 
 # Process Update

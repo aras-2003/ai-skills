@@ -1,6 +1,6 @@
-# Runtime Eval Fixtures
+# Runtime Eval Inputs
 
-Canonical source files are copied from the repository for lab-only runtime testing.
+Only executor inputs are packaged here. Rubrics remain repository-side and must never be loaded into the executor context.
 
-- \`case-enterprise-architecture-review-001.md\` — source: \`evals/oaf/wave4/case-enterprise-architecture-review-001.md\`
-- \`case-enterprise-architecture-stop-001.md\` — source: \`evals/oaf/wave4/case-enterprise-architecture-stop-001.md\`
+- `case-enterprise-architecture-review-001.input.md` — case: `case-enterprise-architecture-review-001`, mode: `explicit`
+- `case-enterprise-architecture-stop-001.input.md` — case: `case-enterprise-architecture-stop-001`, mode: `explicit`

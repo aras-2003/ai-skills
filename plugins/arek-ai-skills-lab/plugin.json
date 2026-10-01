@@ -1,13 +1,18 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "arek-ai-skills-lab",
-  "version": "0.2.1",
-  "description": "Candidate skills and workflow entrypoints for controlled behavioral testing.",
-  "skills": "./skills/",
   "author": {
     "name": "Arkadiusz Kamrowski"
   },
-  "repository": "https://github.com/aras-2003/ai-skills",
+  "description": "Isolated lab package with candidate targets plus their production dependencies for controlled behavioral testing.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Arek AI Skills Lab",
+        "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing. Do not enable it in the same session as the production plugin because duplicate capability names may compete.",
+        "shortDescription": "Candidate skills for runtime evaluation before production."
+      }
+    }
+  },
   "keywords": [
     "skills",
     "lab",
@@ -15,13 +20,8 @@
     "oaf",
     "career"
   ],
-  "extensions": {
-    "com.openai": {
-      "interface": {
-        "displayName": "Arek AI Skills Lab",
-        "shortDescription": "Candidate skills for runtime evaluation before production.",
-        "longDescription": "A non-production lab package built from candidate skills on main for controlled Work/Codex behavioral and workflow testing."
-      }
-    }
-  }
+  "name": "arek-ai-skills-lab",
+  "repository": "https://github.com/aras-2003/ai-skills",
+  "skills": "./skills/",
+  "version": "0.3.0"
 }

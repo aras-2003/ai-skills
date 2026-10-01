@@ -1,15 +1,16 @@
 ---
 name: kpi-quality-review
-description: >
-  Review whether a defined KPI set is decision-useful, interpretable and linked to outcomes, owners, thresholds and actions. Use after the relevant decisions/outcomes are known; do not generate a generic KPI catalogue.
+description: 'Review whether a defined KPI set is decision-useful, interpretable and
+  linked to outcomes, owners, thresholds and actions. Use after the relevant decisions/outcomes
+  are known; do not generate a generic KPI catalogue.
+
+  '
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: 0.1.0
   maturity: candidate
   risk: low
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: fast
+  last_reviewed: '2026-09-30'
 ---
 
 # KPI Quality Review

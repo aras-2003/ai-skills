@@ -1,5 +1,5 @@
-# Runtime Eval Fixtures
+# Runtime Eval Inputs
 
-Canonical source files are copied from the repository for lab-only runtime testing.
+Only executor inputs are packaged here. Rubrics remain repository-side and must never be loaded into the executor context.
 
-- \`case-001-enterprise-it.md\` — source: \`evals/oaf-health-check/case-001-enterprise-it.md\`
+- `case-001-enterprise-it.input.md` — case: `case-001-enterprise-it`, mode: `explicit`

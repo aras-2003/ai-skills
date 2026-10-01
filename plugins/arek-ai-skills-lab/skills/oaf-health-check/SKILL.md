@@ -7,19 +7,10 @@ description: Run the OAF Health Check workflow as a selective cross-domain organ
   specialist OAF skill.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 1.0.0
+  version: 1.5.0
   maturity: production
   risk: medium
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: standard
-    validated_models:
-      luna:
-        status: pass
-        validated_on: 2026-09-30
-        validated_use:
-        - cross-domain diagnosis
-        - workflow synthesis
+  last_reviewed: '2026-10-01'
 ---
 
 # Oaf Health Check Runtime Entrypoint
@@ -34,7 +25,8 @@ Expose a repository workflow to the skill runtime without duplicating its orches
 2. Follow it as the authoritative orchestration procedure.
 3. Route only to specialist skills that the workflow actually requires.
 4. Preserve workflow gates, stop conditions and evidence discipline.
-5. Do not replace the workflow with a generic best-practice answer.
+5. If an optional dependency is unavailable, apply the declared reduced-scope behavior below and explicitly disclose that the specialist did not run.
+6. Do not replace the workflow with a generic best-practice answer.
 
 ## Output contract
 
@@ -44,12 +36,14 @@ Use the output contract defined in `references/WORKFLOW.md`.
 
 - [ ] The workflow source was loaded.
 - [ ] Specialist skills were selected selectively.
+- [ ] Required dependencies were available.
+- [ ] Missing optional dependencies were disclosed and not simulated.
 - [ ] Workflow stage order and gates were preserved.
 - [ ] Evidence and uncertainty remain explicit.
 - [ ] No extra domain was added merely for completeness.
 
-## Lab runtime eval fixtures
+## Lab runtime eval inputs
 
-When the user explicitly asks to run one of the exact lab eval cases below, load the corresponding file from `references/evals/` before executing the skill. Do not substitute another case or reconstruct missing details from memory.
+When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
 
-- `references/evals/case-001-enterprise-it.md`
+- `references/evals/case-001-enterprise-it.input.md`

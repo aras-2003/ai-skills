@@ -1,5 +1,5 @@
-# Runtime Eval Fixtures
+# Runtime Eval Inputs
 
-Canonical source files are copied from the repository for lab-only runtime testing.
+Only executor inputs are packaged here. Rubrics remain repository-side and must never be loaded into the executor context.
 
-- \`case-operating-model-redesign-001.md\` — source: \`evals/oaf/wave2/case-operating-model-redesign-001.md\`
+- `case-operating-model-redesign-001.input.md` — case: `case-operating-model-redesign-001`, mode: `explicit`

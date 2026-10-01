@@ -1,15 +1,16 @@
 ---
 name: organizational-interface-review
-description: >
-  Review critical organisational interfaces where ownership, work, information, funding or decisions cross unit boundaries. Use when handoffs, dependencies or coordination create delay or accountability loss; do not redesign the whole operating model.
+description: 'Review critical organisational interfaces where ownership, work, information,
+  funding or decisions cross unit boundaries. Use when handoffs, dependencies or coordination
+  create delay or accountability loss; do not redesign the whole operating model.
+
+  '
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: 0.1.0
   maturity: candidate
   risk: medium
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: standard
+  last_reviewed: '2026-09-30'
 ---
 
 # Organizational Interface Review

@@ -1,6 +1,6 @@
 {
+  "description": "Isolated lab package with candidate targets plus their production dependencies for controlled behavioral testing.",
   "name": "arek-ai-skills-lab",
-  "version": "0.2.1",
-  "description": "Candidate skills and workflow entrypoints for controlled behavioral testing.",
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "version": "0.3.0"
 }

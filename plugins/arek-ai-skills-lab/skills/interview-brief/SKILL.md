@@ -1,15 +1,17 @@
 ---
 name: interview-brief
-description: >
-  Prepare a concise executive interview brief from an evaluated role, company context and candidate profile, including likely themes, evidence-backed talking points, risks and high-value questions. Use before recruiter, hiring-manager or executive interviews.
+description: 'Prepare a concise executive interview brief from an evaluated role,
+  company context and candidate profile, including likely themes, evidence-backed
+  talking points, risks and high-value questions. Use before recruiter, hiring-manager
+  or executive interviews.
+
+  '
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: 0.1.0
   maturity: candidate
   risk: medium
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: standard
+  last_reviewed: '2026-09-30'
 ---
 
 # Interview Brief

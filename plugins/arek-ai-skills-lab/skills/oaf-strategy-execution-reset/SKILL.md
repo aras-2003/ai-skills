@@ -7,9 +7,7 @@ metadata:
   version: 0.1.0
   maturity: candidate
   risk: medium
-  last_reviewed: 2026-09-30
-  execution:
-    default_model_class: standard
+  last_reviewed: '2026-09-30'
 ---
 
 # Oaf Strategy Execution Reset Runtime Entrypoint
@@ -24,7 +22,8 @@ Expose a repository workflow to the skill runtime without duplicating its orches
 2. Follow it as the authoritative orchestration procedure.
 3. Route only to specialist skills that the workflow actually requires.
 4. Preserve workflow gates, stop conditions and evidence discipline.
-5. Do not replace the workflow with a generic best-practice answer.
+5. If an optional dependency is unavailable, apply the declared reduced-scope behavior below and explicitly disclose that the specialist did not run.
+6. Do not replace the workflow with a generic best-practice answer.
 
 ## Output contract
 
@@ -34,6 +33,8 @@ Use the output contract defined in `references/WORKFLOW.md`.
 
 - [ ] The workflow source was loaded.
 - [ ] Specialist skills were selected selectively.
+- [ ] Required dependencies were available.
+- [ ] Missing optional dependencies were disclosed and not simulated.
 - [ ] Workflow stage order and gates were preserved.
 - [ ] Evidence and uncertainty remain explicit.
 - [ ] No extra domain was added merely for completeness.

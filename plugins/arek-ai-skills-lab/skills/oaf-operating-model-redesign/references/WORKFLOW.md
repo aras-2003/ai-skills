@@ -12,7 +12,7 @@ Require:
 Missing evidence may still permit framing options, but it may prevent selecting a final target model.
 
 ## Stages
-1. **Confirm or reuse diagnosis** — do not restart generic analysis if a sufficiently evidenced diagnosis already exists. Use `operating-model-review`; add `global-local-model-review` only when global/local tension is material; add `organizational-interface-review` where interface failures dominate.
+1. **Confirm or reuse diagnosis** — do not restart generic analysis if a sufficiently evidenced diagnosis already exists. Use `operating-model-review`; add `global-local-model-review` only when global/local tension is material; add `organizational-interface-review` where interface failures dominate. If interface failures dominate but `organizational-interface-review` is unavailable in the active runtime, explicitly disclose that limitation, do not simulate the missing specialist, keep interface-specific causes provisional, and preserve a lower-disruption option until representative interface evidence exists.
 2. **Resolve decision architecture** — use `decision-rights-review`; use `decision-bottleneck-analysis` where latency is a material symptom.
 3. **Define design principles** — state which outcomes require enterprise consistency and which require local autonomy. Place authority with accountability and resources.
 4. **Generate bounded options** — compare 2–3 genuinely different operating-model options, including a lower-disruption option where plausible. Do not optimize only for hierarchy.

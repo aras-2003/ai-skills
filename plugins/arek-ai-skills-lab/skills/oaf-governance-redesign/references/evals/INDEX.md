@@ -1,5 +1,5 @@
-# Runtime Eval Fixtures
+# Runtime Eval Inputs
 
-Canonical source files are copied from the repository for lab-only runtime testing.
+Only executor inputs are packaged here. Rubrics remain repository-side and must never be loaded into the executor context.
 
-- \`case-governance-redesign-001.md\` — source: \`evals/oaf/wave3/case-governance-redesign-001.md\`
+- `case-governance-redesign-001.input.md` — case: `case-governance-redesign-001`, mode: `explicit`
