@@ -38,7 +38,7 @@ def load_registry(root: Path | None = None) -> dict[str, list[dict[str, Any]]]:
     return targets
 
 
-ACTIVE_CAMPAIGN = "runtime-validation-2026-10-r2"
+ACTIVE_CAMPAIGN = "runtime-validation-2026-10-r3"
 
 
 def load_campaign_config(root: Path | None = None, campaign: str | None = None) -> dict[str, Any]:
