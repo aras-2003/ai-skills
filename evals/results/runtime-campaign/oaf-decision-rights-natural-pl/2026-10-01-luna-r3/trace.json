@@ -1,0 +1,14 @@
+{
+  "selected_capabilities": [
+    "decision-rights-review"
+  ],
+  "tool_calls": [
+    {
+      "name": "exec",
+      "input": "const r = await tools.exec_command({cmd:\"sed -n '1,260p' /Users/arkadiuszkamrowski/.codex/plugins/cache/arek-ai-skills-runtime-r3/arek-ai-skills/1.8.0/skills/decision-rights-review/SKILL.md\",\"workdir\":\"/Users/arkadiuszkamrowski/Documents/Codex/2026-10-01/wykonaj-wy-cznie-smoke-bie-cej-7\",\"yield_time_ms\":10000,\"max_output_tokens\":20000}); text(r.output);",
+      "call_id": "call_RFHoucfyFUpZdRqgyxpheMMC"
+    }
+  ],
+  "conversation_id": "01a0f90a-f275-75e2-ac4e-34f25f9517a9",
+  "notes": "Actual session rollout; decision-rights-review selected directly and read from installed R3 path; no broad operating-model diagnostic, coaching or rubric supplied. No case rubric or audit material provided to executor. Host confirms openai/gpt-5.6-luna/medium for business turn."
+}
