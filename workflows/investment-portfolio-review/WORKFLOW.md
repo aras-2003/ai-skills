@@ -9,6 +9,7 @@ Review the current XTB portfolio as a system, detect material drift or thesis de
 - investment-record-store
 
 ## Optional skills
+- investment-attention-triage
 - position-sizing-review
 - valuation-scenario-review
 - thesis-challenge
@@ -18,11 +19,12 @@ Review the current XTB portfolio as a system, detect material drift or thesis de
 1. Read Portfolio_Current, latest Portfolio_History snapshot, Investment_Policy and active Thesis_Register entries.
 2. Reconcile current state and create a history snapshot before updating current state.
 3. Identify concentration, overlap, cash, currency, cycle/theme and policy changes.
-4. For positions with material new evidence, run thesis-monitor.
-5. Revalue only positions where valuation drift can change the action.
-6. Use position-sizing-review when concentration, uncertainty or thesis state changes the policy band.
-7. Surface positions requiring action review; suppress ordinary news/noise.
-8. Persist new snapshot, signals, thesis-monitor records and any user-confirmed decisions.
+4. Triage new company/industry/market evidence with investment-attention-triage when materiality is not already clear.
+5. For positions with REVIEW/ESCALATE evidence, run thesis-monitor.
+6. Revalue only positions where valuation drift can change the action.
+7. Use position-sizing-review when concentration, uncertainty or thesis state changes the policy band.
+8. Surface positions requiring action review; suppress ordinary news/noise.
+9. Persist new snapshot, signals, thesis-monitor records and any user-confirmed decisions.
 
 ## Decision rules
 - position risk can deteriorate while company thesis remains intact;
