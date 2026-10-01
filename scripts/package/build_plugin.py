@@ -15,7 +15,7 @@ PLUGIN_VERSION = "1.7.1"
 def discover_skills(root: Path, maturity: str) -> list[Path]:
     skills = []
     for skill_md in sorted((root / "skills").rglob("SKILL.md")):
-        fm = read_frontmatter(skill_md)
+        fm, _ = read_frontmatter(skill_md)
         metadata = fm.get("metadata") or {}
         if metadata.get("maturity") == maturity:
             skills.append(skill_md.parent)
@@ -23,7 +23,8 @@ def discover_skills(root: Path, maturity: str) -> list[Path]:
 
 
 def copy_skill(src: Path, dst_root: Path) -> None:
-    name = read_frontmatter(src / "SKILL.md").get("name")
+    fm, _ = read_frontmatter(src / "SKILL.md")
+    name = fm.get("name")
     if not isinstance(name, str) or not name:
         raise ValueError(f"{src}: missing skill name")
     dst = dst_root / name
