@@ -182,6 +182,7 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
             "version": plugin.get("version"),
             "release_id": rel.get("release_id"),
             "source_revision": rel.get("source_revision"),
+            "payload_content_sha256": rel.get("payload_content_sha256"),
         }
         for item in by_name.values():
             components.append({
@@ -222,7 +223,14 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
         package_info = packages[channel]
         smoke = {
             "channel": channel,
-            "package": {"name": package_info["name"], "version": package_info["version"]},
+            "package": {
+                "name": package_info["name"],
+                "version": package_info["version"],
+                "release_id": None,
+                "source_revision": None,
+                "payload_content_sha256": None,
+            },
+            "components": [],
             "enabled_packages": [package_info["name"]],
             "catalog": [],
             "runtime": {
@@ -249,9 +257,17 @@ def verify_smoke(lock_path: Path, observed_path: Path) -> list[str]:
     runtime = obs.get("runtime") or {}
     enabled = list(obs.get("enabled_packages") or [])
     catalog = list(obs.get("catalog") or [])
+    observed_components = obs.get("components")
+    if not isinstance(observed_components, list):
+        observed_components = []
 
-    if pkg.get("name") != expected_package["name"] or pkg.get("version") != expected_package["version"]:
-        errors.append("installed package name/version does not match channel lock")
+    for field in ("name", "version", "release_id", "source_revision", "payload_content_sha256"):
+        value = pkg.get(field)
+        if not value:
+            errors.append(f"installed artifact identity is not observed: package.{field}")
+        elif value != expected_package.get(field):
+            errors.append(f"installed artifact identity mismatch: package.{field}")
+
     if expected_package["name"] not in enabled:
         errors.append(f"{channel} package is not enabled")
     if "arek-ai-skills" in enabled and "arek-ai-skills-lab" in enabled:
@@ -260,6 +276,26 @@ def verify_smoke(lock_path: Path, observed_path: Path) -> list[str]:
         errors.append("observed catalog contains duplicate capability names")
     if set(catalog) != set(lock.get("expected_catalogs", {}).get(channel, [])):
         errors.append(f"observed catalog differs from locked {channel} catalog")
+
+    expected_components = {
+        x["name"]: x for x in lock.get("components", []) if x.get("channel") == channel
+    }
+    observed_by_name = {
+        str(x.get("name")): x for x in observed_components
+        if isinstance(x, dict) and x.get("name")
+    }
+    if set(observed_by_name) != set(expected_components):
+        errors.append("observed component identity set differs from locked artifact")
+    else:
+        for name, expected in expected_components.items():
+            observed = observed_by_name[name]
+            for field in ("version", "content_sha256"):
+                value = observed.get(field)
+                if not value:
+                    errors.append(f"installed artifact identity is not observed: component {name}.{field}")
+                elif value != expected.get(field):
+                    errors.append(f"installed artifact identity mismatch: component {name}.{field}")
+
     for field in ("provider", "model_id", "reasoning"):
         if not runtime.get(field):
             errors.append(f"runtime metadata missing {field}")
@@ -300,12 +336,13 @@ def import_run(args) -> Path:
         raise ValueError(f"case {args.case_id} requires {required_channel} session")
     trace = json.loads(Path(args.trace).read_text(encoding="utf-8"))
     sel_errors = selection_errors(case, trace)
-    if sel_errors:
-        raise ValueError("; ".join(sel_errors))
+    if sel_errors and args.status == "PASS":
+        raise ValueError("PASS forbidden when runtime selection findings exist: " + "; ".join(sel_errors))
 
     component = {
         (x["channel"], x["name"]): x for x in lock["components"]
     }[(required_channel, case["target"])]
+    source_version, source_digest = receipt.current_component_identity(ROOT, case["target"])
     dest = ROOT / cfg["evidence_root"] / args.case_id / args.run_id
     dest.mkdir(parents=True, exist_ok=False)
     out_dest = dest / "output.md"
@@ -320,8 +357,8 @@ def import_run(args) -> Path:
         evidence_scope="current-version",
         source_revision=lock["behavior_source_revision"],
         component=case["target"],
-        component_version=component["version"],
-        component_digest=component["content_sha256"],
+        component_version=source_version,
+        component_digest=source_digest,
         provider=runtime["provider"],
         model_id=runtime["model_id"],
         reasoning=runtime["reasoning"],
@@ -332,6 +369,17 @@ def import_run(args) -> Path:
         tool_trace=str(trace_dest),
         reviewer=args.reviewer,
         assisted=args.assisted,
+        runtime_artifact={
+            "channel": required_channel,
+            "package_name": obs["package"]["name"],
+            "package_version": obs["package"]["version"],
+            "release_id": obs["package"]["release_id"],
+            "source_revision": obs["package"]["source_revision"],
+            "payload_content_sha256": obs["package"]["payload_content_sha256"],
+            "component_content_sha256": component["content_sha256"],
+        },
+        selection_findings=sel_errors,
+        evidence_origin="runtime",
         note=args.note,
     )
     old = os.environ.get("SOURCE_REVISION")
