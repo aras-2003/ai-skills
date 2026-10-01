@@ -39,3 +39,9 @@ Use the output contract defined in `references/WORKFLOW.md`.
 - [ ] Workflow stage order and gates were preserved.
 - [ ] Evidence and uncertainty remain explicit.
 - [ ] No extra domain was added merely for completeness.
+
+## Lab runtime eval inputs
+
+When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
+
+- `references/evals/case-001-opportunity-hunter.input.md`

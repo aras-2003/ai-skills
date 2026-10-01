@@ -233,10 +233,12 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "795e1698a4871f7998d443685d74865b5093296698bf613ae087993349c6b5ac",
+      "content_sha256": "bc3356d28b82a0bf47cb4c3f8b0de65475fdd0e953e837f790330de6ae591481",
       "inventory": [
         "SKILL.md",
-        "references/WORKFLOW.md"
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-006-attention-acn.input.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -254,10 +256,12 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "95439c53a212c119446feb1daf02db72339778fefc152848a6f8547b794868a6",
+      "content_sha256": "5b177a8fc4601df80e1bf996ed456f2d7ea0c1224a8f413eeab5747bfe98095e",
       "inventory": [
         "SKILL.md",
-        "references/WORKFLOW.md"
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-001-opportunity-hunter.input.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -265,9 +269,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "d01a535f6252217e32a8c96b101c94b794582cd7076712c5fca80520f87c5d28",
+      "content_sha256": "626874749d97b7b2d1fb50598f70387b0459c157694b909deee74369f689a0aa",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-005-policy-learning.input.md"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -275,10 +281,12 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "7085911eb3e0e23278cda5fcedd0cc441650a8ab3f0020152fdebb9fd31e5ef6",
+      "content_sha256": "cdf8aae5ffb8008b1f74ef5dd6aab98ef7b0c544af8a5b7dd7d4ff7d040ebc5f",
       "inventory": [
         "SKILL.md",
-        "references/WORKFLOW.md"
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-003-portfolio-review.input.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -297,10 +305,12 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "7e7cef32b1c58c46313dcc7b39d96967f004e990eac7e823eecff83dc3bc305f",
+      "content_sha256": "8ceab05a24998ca01588668247e844110c31ff535e0d8f546b0640b1b5e6ed75",
       "inventory": [
         "SKILL.md",
-        "references/WORKFLOW.md"
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-002-security-sizing.input.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -308,10 +318,12 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "491efec6d954f103ef72b06ab0fc7ea5d263c02156776113d777f0964a722d9c",
+      "content_sha256": "4ddf47070f8649eb6465632a80150cb0bad535cb8330738699acf50b31a67dde",
       "inventory": [
         "SKILL.md",
-        "references/WORKFLOW.md"
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-004-theme-discovery.input.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -720,6 +732,30 @@
     },
     {
       "status": "packaged",
+      "target": "investment-attention-review"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-opportunity-hunter"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-policy-design"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-portfolio-review"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-security-review"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-theme-discovery"
+    },
+    {
+      "status": "packaged",
       "target": "oaf-enterprise-architecture-review"
     },
     {
@@ -757,5 +793,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "387eb75740797aa30613d79bb2e027a0ba578632"
+  "source_revision": "fc41516b6370697d2ef5cee4665da9237ed04935"
 }
