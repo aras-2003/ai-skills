@@ -197,6 +197,10 @@ class RuntimeCampaignTests(unittest.TestCase):
                 moved,
                 ignore=shutil.ignore_patterns(".git", ".tmp", "__pycache__", "*.pyc"),
             )
+            source_evidence = ROOT / evidence_rel
+            moved_evidence = moved / evidence_rel
+            moved_evidence.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copytree(source_evidence, moved_evidence)
             moved_record_path = (
                 moved / evidence_rel / case_id / "offline-good" / "receipt.json"
             )
