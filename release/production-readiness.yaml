@@ -190,7 +190,7 @@ components:
     exception_expires: "2026-10-14"
   - name: decision-bottleneck-analysis
     kind: skill
-    version: "1.0.0"
+    version: "1.1.0"
     source: skills/oaf/decision-governance/decision-bottleneck-analysis/SKILL.md
     declared_maturity: production
     static_contract: present
@@ -202,7 +202,7 @@ components:
     exception_expires: "2026-10-14"
   - name: decision-rights-review
     kind: skill
-    version: "1.0.0"
+    version: "1.1.0"
     source: skills/oaf/decision-governance/decision-rights-review/SKILL.md
     declared_maturity: production
     static_contract: present
@@ -286,7 +286,7 @@ components:
     exception_expires: "2026-10-14"
   - name: operating-model-review
     kind: skill
-    version: "1.0.0"
+    version: "1.1.0"
     source: skills/oaf/operating-model/operating-model-review/SKILL.md
     declared_maturity: production
     static_contract: present
@@ -334,7 +334,7 @@ components:
     exception_expires: "2026-10-14"
   - name: oaf-health-check
     kind: workflow
-    version: "1.1.0"
+    version: "1.2.0"
     source: workflows/oaf-health-check/WORKFLOW.md
     declared_maturity: production
     static_contract: present
