@@ -16,13 +16,13 @@ PACKAGE_DIR = ROOT / "scripts" / "package"
 if str(PACKAGE_DIR) not in sys.path:
     sys.path.insert(0, str(PACKAGE_DIR))
 
-from common import load_campaign_cases
+from common import load_campaign_cases, load_supplemental_cases
 import receipt
 import validate_routing
 import build_plugin
 import artifact_validation
 
-CONFIG = ROOT / "evals/campaigns/runtime-validation-2026-10/campaign.yaml"
+CONFIG = ROOT / "evals/campaigns/runtime-validation-2026-10-r2/campaign.yaml"
 
 
 def config():
@@ -79,6 +79,22 @@ def validate_campaign() -> list[str]:
         if counts[suite] != count:
             errors.append(f"{suite}: expected {count}, got {counts[suite]}")
 
+    supplemental = load_supplemental_cases(ROOT)
+    if len(supplemental) != 1:
+        errors.append(f"supplemental routing: expected 1 case, got {len(supplemental)}")
+    for cid, case in supplemental.items():
+        ip = ROOT / str(case.get("input") or "")
+        rp = ROOT / str(case.get("rubric") or "")
+        if not ip.is_file() or not ip.name.endswith(".input.md"):
+            errors.append(f"{cid}: missing/invalid supplemental executor input")
+            continue
+        if not rp.is_file() or not rp.name.endswith(".rubric.yaml"):
+            errors.append(f"{cid}: missing/invalid supplemental evaluator rubric")
+            continue
+        leaked = validate_routing.leaked_capabilities(ip.read_text(encoding="utf-8"), known)
+        if leaked:
+            errors.append(f"{cid}: supplemental input leaks capability names: {', '.join(leaked)}")
+
     source = yaml.safe_load((ROOT / cfg["executive_source"]).read_text(encoding="utf-8")) or {}
     source_by_id = {str(x["id"]): x for x in source.get("cases", []) if isinstance(x, dict) and x.get("id")}
     for cid in cfg.get("executive_case_ids", []):
@@ -106,20 +122,23 @@ def validate_campaign() -> list[str]:
     return errors
 
 
-def ordered_cases():
+def ordered_cases(include_supplemental: bool = False):
     cfg = config()
     rank = {name: i for i, name in enumerate(cfg.get("execution_order", []))}
-    return sorted(load_campaign_cases(ROOT).values(), key=lambda x: (rank.get(x.get("suite"), 99), x["id"]))
+    cases = list(load_campaign_cases(ROOT).values())
+    if include_supplemental:
+        cases.extend(load_supplemental_cases(ROOT).values())
+    return sorted(cases, key=lambda x: (rank.get(x.get("suite"), 98 if x.get("suite") == "supplemental-routing" else 99), x["id"]))
 
 
-def queue_text() -> str:
+def queue_text(include_supplemental: bool = False) -> str:
     out = [
         "# Runtime validation queue",
         "",
         "Executor-only inputs. Never provide the referenced rubric to the executor session.",
         "",
     ]
-    for i, case in enumerate(ordered_cases(), 1):
+    for i, case in enumerate(ordered_cases(include_supplemental), 1):
         prompt = (ROOT / case["input"]).read_text(encoding="utf-8").rstrip()
         out += [
             f"## {i:02d}. {case['id']}",
@@ -199,7 +218,7 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
             raise ValueError(f"fallback campaign precondition changed: {unavailable} is now in production")
 
     case_channels = {}
-    for case in load_campaign_cases(ROOT).values():
+    for case in all_cases.values():
         target = case["target"]
         if target in catalogs["production"]:
             case_channels[case["id"]] = "production"
@@ -215,6 +234,8 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
         "packages": packages,
         "expected_catalogs": {name: sorted(items) for name, items in catalogs.items()},
         "case_channels": case_channels,
+        "core_case_count": len(load_campaign_cases(ROOT)),
+        "supplemental_case_ids": sorted(load_supplemental_cases(ROOT)),
         "components": components,
     }
     (out / "lock.json").write_text(json.dumps(lock, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -316,7 +337,7 @@ def selection_errors(case: dict, trace: dict) -> list[str]:
         if not should and present:
             return ["negative executive-role case selected executive-role-evaluator"]
         return []
-    if suite == "routing":
+    if suite in {"routing", "supplemental-routing"}:
         expected = rubric.get("expected_target")
         return [] if expected in selected else [f"expected routing target absent: {expected}"]
     return [] if case["target"] in selected else [f"invoked subject absent from trace: {case['target']}"]
@@ -324,7 +345,7 @@ def selection_errors(case: dict, trace: dict) -> list[str]:
 
 def import_run(args) -> Path:
     cfg = config()
-    cases = load_campaign_cases(ROOT)
+    cases = {**load_campaign_cases(ROOT), **load_supplemental_cases(ROOT)}
     case = cases[args.case_id]
     smoke_errors = verify_smoke(Path(args.lock), Path(args.smoke))
     if smoke_errors:
@@ -416,6 +437,7 @@ def main() -> int:
     s.add_parser("validate")
     q = s.add_parser("queue")
     q.add_argument("--output", type=Path)
+    q.add_argument("--include-supplemental", action="store_true")
     prep = s.add_parser("prepare")
     prep.add_argument("--output", type=Path, default=ROOT / ".tmp/runtime-campaign")
     smoke = s.add_parser("verify-smoke")
@@ -444,7 +466,7 @@ def main() -> int:
             print("Runtime campaign definition: OK (38 cases)")
         return 1 if errors else 0
     if args.cmd == "queue":
-        text = queue_text()
+        text = queue_text(args.include_supplemental)
         if args.output:
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(text, encoding="utf-8")
