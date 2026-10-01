@@ -115,6 +115,7 @@ def _validate_status_contract(data: dict[str, Any], errors: list[str]) -> None:
     runtime = data.get("runtime", {})
     execution = data.get("execution", {})
     component = data.get("component", {})
+    runtime_artifact = data.get("runtime_artifact") or {}
     if status not in VALID_STATUSES:
         errors.append(f"invalid status: {status}")
         return
@@ -128,6 +129,16 @@ def _validate_status_contract(data: dict[str, Any], errors: list[str]) -> None:
             "execution.actual_output_path": execution.get("actual_output_path"),
             "execution.actual_output_sha256": execution.get("actual_output_sha256"),
         }
+        if runtime_artifact:
+            required.update({
+                "runtime_artifact.channel": runtime_artifact.get("channel"),
+                "runtime_artifact.package_name": runtime_artifact.get("package_name"),
+                "runtime_artifact.package_version": runtime_artifact.get("package_version"),
+                "runtime_artifact.release_id": runtime_artifact.get("release_id"),
+                "runtime_artifact.source_revision": runtime_artifact.get("source_revision"),
+                "runtime_artifact.payload_content_sha256": runtime_artifact.get("payload_content_sha256"),
+                "runtime_artifact.component_content_sha256": runtime_artifact.get("component_content_sha256"),
+            })
         missing = [name for name, value in required.items() if not value]
         if missing:
             errors.append(f"{status} requires runtime/component/output identity: {', '.join(missing)}")
@@ -214,6 +225,7 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
             "content_sha256": args.component_digest,
         },
         "source_revision": args.source_revision,
+        "runtime_artifact": getattr(args, "runtime_artifact", None),
         "runtime": {
             "provider": args.provider,
             "model_id": args.model_id,
@@ -228,6 +240,8 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
             "actual_output_sha256": sha256_file(output_path) if output_path else None,
             "tool_trace_path": _stored_path(root, trace_path),
             "tool_trace_sha256": sha256_file(trace_path) if trace_path else None,
+            "selection_findings": list(getattr(args, "selection_findings", []) or []),
+            "evidence_origin": str(getattr(args, "evidence_origin", "runtime")),
         },
         "evaluation": {
             "status": status,
@@ -327,6 +341,7 @@ def main() -> int:
     create.add_argument("--component")
     create.add_argument("--component-version")
     create.add_argument("--component-digest")
+    create.add_argument("--runtime-artifact-json")
     create.add_argument("--provider")
     create.add_argument("--model-id")
     create.add_argument("--reasoning")
@@ -337,6 +352,8 @@ def main() -> int:
     create.add_argument("--tool-trace")
     create.add_argument("--reviewer")
     create.add_argument("--assisted", action="store_true")
+    create.add_argument("--selection-finding", action="append", default=[])
+    create.add_argument("--evidence-origin", choices=["runtime", "offline"], default="runtime")
     create.add_argument("--note")
     create.add_argument("--write", required=True)
 
@@ -345,6 +362,11 @@ def main() -> int:
 
     args = parser.parse_args()
     if args.cmd == "create":
+        args.runtime_artifact = (
+            json.loads(Path(args.runtime_artifact_json).read_text(encoding="utf-8"))
+            if args.runtime_artifact_json else None
+        )
+        args.selection_findings = args.selection_finding
         record = create_receipt(args)
         dest = Path(args.write)
         dest.parent.mkdir(parents=True, exist_ok=True)
