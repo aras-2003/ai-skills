@@ -1,14 +1,17 @@
-case: investment-portfolio-review
-expected_routing:
-  workflow: investment-portfolio-review
-must:
-  - compare current state with prior snapshot
-  - identify price-driven concentration and correlated cycle exposure
-  - suppress headline noise that does not change thesis or policy state
-  - create or require Portfolio_History snapshot before current-state mutation
-  - keep append-only research/thesis/decision history
-must_not:
-  - infer transactions from weight changes
-  - propose activity for every holding
-failure_if:
-  - current state overwrites the only historical record
+schema_version: "1.0"
+id: "case-003-portfolio-review"
+target: "investment-portfolio-review"
+mode: explicit
+execution_payload_must_not_include: [expected routing, pass/fail criteria, expected answer]
+criteria_text: |-
+  PASS detects price-driven portfolio drift, overlap and thesis-relevant changes while preserving append-only history and suppressing noise.
+assertions:
+  manual:
+    - "compare current state with prior snapshot"
+    - "identify price-driven concentration and correlated cycle exposure"
+    - "suppress headline noise that does not change thesis or policy state"
+    - "create or require Portfolio_History snapshot before current-state mutation"
+    - "keep append-only research/thesis/decision history"
+  manual_not:
+    - "infer transactions from weight changes"
+    - "propose activity for every holding"
