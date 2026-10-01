@@ -16,14 +16,34 @@ from build_utils import atomic_output, sha256_file, validate_output_path
 
 
 class BuildIntegrityTests(unittest.TestCase):
-    def test_source_root_is_rejected(self) -> None:
+    def test_source_root_and_nested_source_tree_are_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             root = Path(td).resolve()
-            (root / "skills").mkdir()
+            (root / "skills" / "career").mkdir(parents=True)
+            for unsafe in (root, root / "skills", root / "skills" / "career"):
+                with self.assertRaises(ValueError):
+                    validate_output_path(root, unsafe)
+
+    def test_only_artifact_roots_are_allowed(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td).resolve()
+            for rel in ("plugins/pkg", "dist/zips", ".tmp/lab"):
+                expected = (root / rel).resolve()
+                self.assertEqual(expected, validate_output_path(root, root / rel))
             with self.assertRaises(ValueError):
-                validate_output_path(root, root)
-            with self.assertRaises(ValueError):
-                validate_output_path(root, root / "skills")
+                validate_output_path(root, root / "docs" / "generated")
+
+    def test_symlink_is_rejected_before_resolution(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td).resolve()
+            source = root / "skills" / "career"
+            source.mkdir(parents=True)
+            plugins = root / "plugins"
+            plugins.mkdir()
+            link = plugins / "escape"
+            link.symlink_to(source, target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, "symlink"):
+                validate_output_path(root, link / "artifact")
 
     def test_output_outside_repo_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as td, tempfile.TemporaryDirectory() as outside:
