@@ -13,7 +13,7 @@ from typing import Any
 import yaml
 from jsonschema import Draft202012Validator
 
-from common import load_campaign_cases, load_registry, repo_root, sha256_file
+from common import find_campaign_case, load_registry, repo_root, sha256_file
 
 VALID_STATUSES = {"NOT_RUN", "REVIEW_REQUIRED", "PASS", "FAIL"}
 VALID_EVIDENCE_SCOPES = {"current-version", "historical"}
@@ -25,10 +25,9 @@ def find_case(root: Path, case_id: str) -> tuple[str, dict[str, Any]]:
         for case in cases:
             if case.get("id") == case_id:
                 return target, case
-    campaign = load_campaign_cases(root)
-    if case_id in campaign:
-        case = campaign[case_id]
-        return str(case["target"]), case
+    campaign_case = find_campaign_case(root, case_id)
+    if campaign_case is not None:
+        return str(campaign_case["target"]), campaign_case
     raise KeyError(f"unknown case id: {case_id}")
 
 
@@ -98,6 +97,44 @@ def current_component_identity(root: Path, name: str) -> tuple[str, str]:
         h.update(json.dumps(item, sort_keys=True, default=str, ensure_ascii=False).encode("utf-8"))
         return version, h.hexdigest()
     raise KeyError(f"unknown component: {name}")
+
+
+def component_identity_at_revision(root: Path, name: str, revision: str) -> tuple[str, str]:
+    try:
+        subprocess.run(
+            ["git", "cat-file", "-e", revision + "^{commit}"],
+            cwd=root,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except Exception:
+        current = current_component_identity(root, name)
+        return current
+
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as td:
+        snapshot = Path(td) / "snapshot"
+        snapshot.mkdir()
+        archive = subprocess.Popen(
+            ["git", "archive", "--format=tar", revision, "skills", "workflows"],
+            cwd=root,
+            stdout=subprocess.PIPE,
+        )
+        extract = subprocess.run(
+            ["tar", "-xf", "-", "-C", str(snapshot)],
+            stdin=archive.stdout,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=False,
+        )
+        if archive.stdout is not None:
+            archive.stdout.close()
+        rc = archive.wait()
+        if rc != 0 or extract.returncode != 0:
+            raise ValueError(f"cannot materialize source revision {revision}")
+        return current_component_identity(snapshot, name)
 
 
 def current_source_revision(root: Path) -> str:
@@ -309,8 +346,9 @@ def validate_receipt_data(
     if scope == "current-version" and status in RUNTIME_STATUSES:
         component = data.get("component", {})
         component_name = component.get("name") or ""
+        identity_revision = str(data.get("source_revision") or "")
         try:
-            version, digest = current_component_identity(root, component_name)
+            version, digest = component_identity_at_revision(root, component_name, identity_revision)
         except (KeyError, ValueError) as exc:
             errors.append(str(exc))
         else:
@@ -318,6 +356,10 @@ def validate_receipt_data(
                 errors.append("stale evidence: component version mismatch")
             if component.get("content_sha256") != digest:
                 errors.append("stale evidence: component content digest mismatch")
+        runtime_artifact = data.get("runtime_artifact") or {}
+        artifact_revision = runtime_artifact.get("source_revision")
+        if artifact_revision and artifact_revision != identity_revision:
+            errors.append("runtime artifact/source evidence revision mismatch")
         current_revision = current_revision if current_revision is not None else current_source_revision(root)
         if current_revision != "unknown" and data.get("source_revision") != current_revision:
             errors.append("stale evidence: source revision mismatch")
