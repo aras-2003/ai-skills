@@ -9,7 +9,7 @@ import yaml
 
 from build_utils import atomic_output, ensure_source_valid, package_version, sha256_tree, source_revision, write_json
 from build_plugin import copy_skill, discover_skills
-from workflow_entrypoints import add_workflow_entrypoints
+from workflow_entrypoints import add_workflow_entrypoints, load_registry
 
 
 PLUGIN_NAME = "arek-ai-skills-lab"
@@ -105,10 +105,10 @@ def main() -> int:
         skills_out = stage / "skills"
         skills_out.mkdir(parents=True)
 
-        capabilities = []
+        skill_capabilities: dict[str, dict] = {}
         for skill_dir in candidate_skills + production_skills:
             item = copy_skill(skill_dir, skills_out)
-            capabilities.append(item)
+            skill_capabilities[item["name"]] = item
 
         available_names = {p.name for p in skills_out.iterdir() if p.is_dir()}
         candidate_workflows = add_workflow_entrypoints(
@@ -119,16 +119,47 @@ def main() -> int:
             root, "production", skills_out, channel="lab", available_names=available_names
         )
         workflow_names = candidate_workflows + production_workflows
-        capabilities.extend(
-            {
-                "name": name,
-                "kind": "workflow",
-                "maturity": "candidate" if name in candidate_workflows else "production",
-                "content_sha256": sha256_tree(skills_out / name),
-            }
-            for name in workflow_names
-        )
+
         runtime_eval_fixtures = add_runtime_eval_fixtures(root, skills_out)
+
+        registry_by_name = {
+            str(item.get("name")): item
+            for item in load_registry(root)
+            if isinstance(item, dict) and item.get("name")
+        }
+        capabilities: list[dict] = []
+        for name, item in skill_capabilities.items():
+            final_dir = skills_out / name
+            final_inventory = sorted(
+                p.relative_to(final_dir).as_posix()
+                for p in final_dir.rglob("*")
+                if p.is_file()
+            )
+            refreshed = dict(item)
+            refreshed["inventory"] = final_inventory
+            refreshed["content_sha256"] = sha256_tree(final_dir)
+            capabilities.append(refreshed)
+
+        for name in workflow_names:
+            registry_item = registry_by_name.get(name)
+            if registry_item is None:
+                raise ValueError(f"workflow registry item missing after packaging: {name}")
+            metadata = registry_item.get("metadata") or {}
+            final_dir = skills_out / name
+            capabilities.append(
+                {
+                    "name": name,
+                    "kind": "workflow",
+                    "maturity": metadata.get("maturity"),
+                    "version": metadata.get("version"),
+                    "inventory": sorted(
+                        p.relative_to(final_dir).as_posix()
+                        for p in final_dir.rglob("*")
+                        if p.is_file()
+                    ),
+                    "content_sha256": sha256_tree(final_dir),
+                }
+            )
 
         version = package_version(root, "lab")
         manifest = {
