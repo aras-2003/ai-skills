@@ -16,3 +16,4 @@ cases:
     input: "I have never looked at this company. Build the first thesis."
     expected:
       should_trigger: false
+      must_not: ["prior thesis", "kill criteria"]
