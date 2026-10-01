@@ -36,3 +36,26 @@ Backlog:
 - keep actual owner/authority claims evidence-bound.
 
 These observations are not frozen-routing assertion failures and do not alter the R3 PASS statuses.
+
+## 2026-10-01 — R6 targeted PASS observations
+
+Evidence: `fallback-strategy-production-002` R6 PASS on `oaf-health-check 1.5.0`, behavior source `a924f3ba9fe964ff3aeaa2e5570b7a718d29d38c`.
+
+### Epistemic status taxonomy consistency
+
+The runtime output used a review-state limitation label even though the workflow's enumerated epistemic statuses are `observed`, `supported`, `hypothesis` and `implication`.
+
+Backlog:
+- decide whether reviewer-state limitation should become a first-class status or remain metadata/evidence rationale;
+- avoid a runtime behavior change solely to tidy taxonomy while the meaning remains explicit and correctly scoped.
+
+### Domain synthesis wording precision
+
+The executive synthesis used `supported / medium` wording across strategy execution and evidence-loop domains and referenced limited traceability. In context this was appropriately bounded by explicit causal uncertainty, but wording could more sharply distinguish the observed roadmap/outcome disconnect from broader organisational traceability.
+
+Backlog:
+- tighten domain-level synthesis wording when one observed symptom motivates review of multiple domains;
+- do not treat domain relevance as proof of a causal mechanism.
+
+These are nonblocking quality observations and do not change the frozen R6 PASS.
+
