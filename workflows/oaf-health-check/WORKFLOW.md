@@ -42,12 +42,20 @@ Do not use `governance-design` or `transformation-blueprint` until the relevant 
 ## Stage 4 — Cross-domain synthesis
 
 For each finding record:
-- evidence;
+- observed symptom or direct evidence;
 - OAF domain;
-- structural cause;
+- possible structural cause;
 - consequence;
 - dependency on other findings;
-- uncertainty.
+- claim-level confidence and the evidence that supports that confidence.
+
+Keep observation and causality separate:
+- symptoms stated in the input may be treated as observed for the purpose of the review;
+- a cause is not observed merely because it is a plausible explanation of those symptoms;
+- without relevant initiative records, decision traces, review-cycle evidence, interface traces or equivalent data, causal explanations remain hypotheses;
+- do not label an unverified causal hypothesis as a confirmed critical gap;
+- confidence belongs to a specific claim and its evidence, not to an entire domain or section;
+- high confidence is appropriate when the relevant mechanism is directly evidenced, not merely because the symptom is severe or common.
 
 Look for reinforcing loops, for example:
 - unclear strategy -> overloaded portfolio;
@@ -77,13 +85,13 @@ When diagnosis is sufficient:
 3–5 sentences on what is structurally wrong and why it matters.
 
 ### OAF heatmap
-| Domain | Status | Evidence confidence | Main issue | Consequence |
-|---|---|---|---|---|
+| Domain | Status | Finding type | Evidence confidence | Main issue | Consequence |
+|---|---|---|---|---|---|
 
-Use only domains actually reviewed.
+Use only domains actually reviewed. Use `observed` for supported findings and `hypothesis` for plausible causes that still need evidence. A hypothesis may be material, but must not be presented as a confirmed critical gap.
 
 ### Cross-domain causes
-List the few structural causes connecting multiple symptoms.
+List the few structural causes connecting multiple symptoms. Mark each as observed/supported or hypothesis and state what evidence would raise or lower confidence.
 
 ### Critical unknowns
 Questions whose answers could materially change the diagnosis.
