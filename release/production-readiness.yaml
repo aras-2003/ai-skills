@@ -334,7 +334,7 @@ components:
     exception_expires: "2026-10-14"
   - name: oaf-health-check
     kind: workflow
-    version: "1.3.0"
+    version: "1.4.0"
     source: workflows/oaf-health-check/WORKFLOW.md
     declared_maturity: production
     static_contract: present
