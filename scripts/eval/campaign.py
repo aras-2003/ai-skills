@@ -50,6 +50,8 @@ def behavior_changes(pinned: str, *, require_commit: bool = False) -> list[str]:
         parts = Path(path).parts
         if "tests" in parts or "evals" in parts:
             continue
+        if Path(path).name.lower().startswith("readme"):
+            continue
         changed.append(path)
     return changed
 
