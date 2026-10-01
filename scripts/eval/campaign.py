@@ -29,7 +29,15 @@ def config():
     return yaml.safe_load(CONFIG.read_text(encoding="utf-8")) or {}
 
 
-def behavior_changes(pinned: str) -> list[str]:
+def behavior_changes(pinned: str, *, require_commit: bool = False) -> list[str]:
+    exists = subprocess.run(
+        ["git", "cat-file", "-e", f"{pinned}^{commit}"],
+        cwd=ROOT, check=False, capture_output=True, text=True,
+    )
+    if exists.returncode:
+        if require_commit:
+            raise ValueError(f"pinned behavior commit is unavailable in this checkout: {pinned}")
+        return []
     out = subprocess.check_output(
         ["git", "diff", "--name-only", pinned, "HEAD", "--", "skills", "workflows", "release/package.yaml"],
         cwd=ROOT, text=True,
@@ -92,7 +100,7 @@ def validate_campaign() -> list[str]:
             errors.append(f"{cid}: must_not assertion drift")
 
     pinned = str(cfg.get("behavior_source_revision") or "")
-    changed = behavior_changes(pinned)
+    changed = behavior_changes(pinned, require_commit=False)
     if changed:
         errors.append("behavior changed after pinned SHA: " + ", ".join(changed))
     return errors
@@ -133,71 +141,100 @@ def prepare(out: Path) -> None:
         raise ValueError("; ".join(errors))
     cfg = config()
     pinned = cfg["behavior_source_revision"]
-    package = out / "production-plugin"
+    changed = behavior_changes(pinned, require_commit=True)
+    if changed:
+        raise ValueError("behavior changed after pinned SHA: " + ", ".join(changed))
+    production = out / "production-plugin"
+    lab = out / "lab-plugin"
     out.mkdir(parents=True, exist_ok=True)
 
     old = os.environ.get("SOURCE_REVISION")
     os.environ["SOURCE_REVISION"] = pinned
     try:
-        build_plugin.build(ROOT, package, "production")
+        build_plugin.build(ROOT, production, "production")
+        env = dict(os.environ)
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts/package/build_lab_plugin.py"), "--output", str(lab)],
+            cwd=ROOT, env=env, check=True,
+        )
     finally:
         if old is None:
             os.environ.pop("SOURCE_REVISION", None)
         else:
             os.environ["SOURCE_REVISION"] = old
 
-    artifact_errors = artifact_validation.validate_tree(package)
-    if artifact_errors:
-        raise ValueError("; ".join(artifact_errors))
+    for package_path, is_lab in ((production, False), (lab, True)):
+        artifact_errors = artifact_validation.validate_tree(package_path, allow_lab_evals=is_lab)
+        if artifact_errors:
+            raise ValueError("; ".join(artifact_errors))
 
-    caps = json.loads((package / "capabilities.json").read_text(encoding="utf-8"))
-    rel = json.loads((package / "release-manifest.json").read_text(encoding="utf-8"))
-    plugin = json.loads((package / "plugin.json").read_text(encoding="utf-8"))
-    by_name = {x["name"]: x for x in caps.get("capabilities", [])}
+    packages = {}
+    catalogs = {}
+    components = []
+    for channel, package_path in (("production", production), ("lab", lab)):
+        caps = json.loads((package_path / "capabilities.json").read_text(encoding="utf-8"))
+        rel = json.loads((package_path / "release-manifest.json").read_text(encoding="utf-8"))
+        plugin = json.loads((package_path / "plugin.json").read_text(encoding="utf-8"))
+        by_name = {x["name"]: x for x in caps.get("capabilities", [])}
+        catalogs[channel] = by_name
+        packages[channel] = {
+            "name": plugin.get("name"),
+            "version": plugin.get("version"),
+            "release_id": rel.get("release_id"),
+            "source_revision": rel.get("source_revision"),
+        }
+        for item in by_name.values():
+            components.append({
+                "channel": channel,
+                "name": item.get("name"),
+                "kind": item.get("kind"),
+                "version": item.get("version"),
+                "maturity": item.get("maturity"),
+                "content_sha256": item.get("content_sha256"),
+            })
+
     for unavailable in ("strategy-to-execution-diagnostic", "organizational-interface-review"):
-        if unavailable in by_name:
+        if unavailable in catalogs["production"]:
             raise ValueError(f"fallback campaign precondition changed: {unavailable} is now in production")
-    subjects = sorted({x["target"] for x in load_campaign_cases(ROOT).values()})
-    locked = []
-    for name in subjects:
-        item = by_name.get(name)
-        if item is None:
-            raise ValueError(f"campaign subject absent from production package: {name}")
-        locked.append({
-            "name": name,
-            "kind": item.get("kind"),
-            "version": item.get("version"),
-            "maturity": item.get("maturity"),
-            "content_sha256": item.get("content_sha256"),
-        })
+
+    case_channels = {}
+    for case in load_campaign_cases(ROOT).values():
+        target = case["target"]
+        if target in catalogs["production"]:
+            case_channels[case["id"]] = "production"
+        elif target in catalogs["lab"]:
+            case_channels[case["id"]] = "lab"
+        else:
+            raise ValueError(f"campaign subject absent from both package catalogs: {target}")
 
     lock = {
         "schema_version": "1.0",
         "campaign": cfg["campaign"],
         "behavior_source_revision": pinned,
-        "package": {
-            "name": plugin.get("name"),
-            "version": plugin.get("version"),
-            "release_id": rel.get("release_id"),
-            "source_revision": rel.get("source_revision"),
-        },
-        "expected_catalog": sorted(by_name),
-        "components": locked,
+        "packages": packages,
+        "expected_catalogs": {name: sorted(items) for name, items in catalogs.items()},
+        "case_channels": case_channels,
+        "components": components,
     }
     (out / "lock.json").write_text(json.dumps(lock, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     (out / "QUEUE.md").write_text(queue_text(), encoding="utf-8")
-    smoke = {
-        "package": {"name": lock["package"]["name"], "version": lock["package"]["version"]},
-        "enabled_packages": ["arek-ai-skills"],
-        "catalog": [],
-        "runtime": {
-            "provider": None,
-            "model_id": None,
-            "reasoning": None,
-            "available_tools": [],
-        },
-    }
-    (out / "smoke-template.json").write_text(json.dumps(smoke, indent=2) + "\n", encoding="utf-8")
+    for channel in ("production", "lab"):
+        package_info = packages[channel]
+        smoke = {
+            "channel": channel,
+            "package": {"name": package_info["name"], "version": package_info["version"]},
+            "enabled_packages": [package_info["name"]],
+            "catalog": [],
+            "runtime": {
+                "provider": None,
+                "model_id": None,
+                "reasoning": None,
+                "available_tools": [],
+            },
+        }
+        (out / f"smoke-{channel}-template.json").write_text(
+            json.dumps(smoke, indent=2) + "\n", encoding="utf-8"
+        )
 
 
 def verify_smoke(lock_path: Path, observed_path: Path) -> list[str]:
