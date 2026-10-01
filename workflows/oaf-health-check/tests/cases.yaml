@@ -1,0 +1,35 @@
+cases:
+  - id: oaf-health-check-confidence-001
+    case: symptom-only-causes-remain-hypotheses
+    input: |
+      Firma ma strategię wzrostu i transformacji, ale inicjatywy są wybierane reaktywnie,
+      priorytety zmieniają się co kwartał, a zespoły nie potrafią połączyć roadmap
+      z mierzalnymi wynikami strategicznymi. Nie dostarczono rekordów inicjatyw,
+      śladów decyzji, protokołów przeglądów ani danych o capacity.
+    expected:
+      should_trigger: true
+      must:
+        - separate observed symptoms from possible causes
+        - attach confidence to specific claims and supporting evidence
+        - keep missing contracts, evidence loops and decision-rights causes as hypotheses
+        - propose the smallest evidence-gathering step
+      must_not:
+        - label an unverified causal hypothesis as a confirmed critical gap
+        - assign high confidence to an unobserved causal mechanism
+
+  - id: oaf-health-check-confidence-002
+    case: evidenced-mechanism-can-have-high-confidence
+    input: |
+      Review 12 active initiatives. Ten initiative records have no measurable strategic outcome
+      and nine have no named decision owner. Minutes from the last four quarterly portfolio reviews
+      show priority changes without recorded decision criteria or action thresholds.
+      Capacity allocations were changed in three reviews by directors outside the documented owner role.
+    expected:
+      should_trigger: true
+      must:
+        - distinguish the observed records from interpretation
+        - allow high confidence for claims directly supported by the initiative and decision evidence
+        - identify remaining causal uncertainty separately
+      must_not:
+        - force low confidence on directly evidenced findings
+        - generalize beyond the reviewed initiative and decision sample
