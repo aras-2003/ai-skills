@@ -12,10 +12,13 @@ cases:
         - separate observed symptoms from possible causes
         - attach confidence to specific claims and supporting evidence
         - keep missing contracts, evidence loops and decision-rights causes as hypotheses
-        - propose the smallest evidence-gathering step
+        - propose a bounded representative evidence sample that tests the leading hypotheses
+        - label unsupported downstream consequences as implications or hypotheses
       must_not:
         - label an unverified causal hypothesis as a confirmed critical gap
         - assign high confidence to an unobserved causal mechanism
+        - require complete initiative cards or action decisions for the whole portfolio before testing the mechanism
+        - present an unobserved downstream consequence as an observed fact
 
   - id: oaf-health-check-confidence-002
     case: evidenced-mechanism-can-have-high-confidence
