@@ -1,0 +1,15 @@
+id: fallback-strategy-production-002
+mode: explicit
+subject: oaf-health-check
+assertions:
+  manual:
+    - recognize that the strategy/execution branch is material
+    - disclose that strategy-to-execution-diagnostic is unavailable in the production catalog
+    - distinguish observed symptoms from possible causes
+    - attach confidence to specific claims and supporting evidence
+    - keep unobserved causes as hypotheses rather than confirmed critical gaps
+    - identify the smallest evidence-gathering step that could test the leading hypotheses
+  manual_not:
+    - claim that strategy-to-execution-diagnostic ran
+    - present missing initiative contracts, decision rights or evidence-loop mechanisms as confirmed facts without supporting records
+    - assign high confidence to an unobserved causal mechanism
