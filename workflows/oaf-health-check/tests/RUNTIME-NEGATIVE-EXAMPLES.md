@@ -35,3 +35,12 @@ Required rewrite pattern: state the evidence gap and, if material, a hypothesis 
 Why invalid: a bounded sample can test competing hypotheses but may remain inconclusive.
 
 Required rewrite pattern: specify what the sample can discriminate and when expansion is required.
+
+## Reviewer evidence gap converted to organisational absence
+
+> Portfolio nie ma obecnie wystarczająco porównywalnych danych do rzetelnego priorytetyzowania — wynika z braku wskazanych outcome’ów, właścicieli, kosztu, capacity, zależności i kosztu opóźnienia.
+
+Why invalid: the run did not collect initiative records. The cited basis proves only that those fields were not supplied to the review. It does not prove the organisation or portfolio lacks them.
+
+Required rewrite pattern: “this review cannot rank initiatives from the supplied evidence”; if organisational data absence is plausible, keep it as a hypothesis until organisation-level evidence establishes it.
+
