@@ -9,21 +9,16 @@ cases:
     expected:
       should_trigger: true
       must:
-        - separate observed symptoms from possible causes
-        - attach confidence to specific claims and supporting evidence
+        - express every material executive-summary and heatmap statement as one atomic claim
+        - give every material claim an epistemic status, evidence basis and confidence rationale
         - keep missing contracts, evidence loops and decision-rights causes as hypotheses
-        - propose a bounded representative evidence sample that tests the leading hypotheses
-        - keep each observation or hypothesis as a separate atomic claim with its own confidence
-        - label unsupported downstream consequences as implications or hypotheses
-        - frame the bounded sample as a hypothesis test whose sufficiency remains conditional
+        - keep downstream consequences as separate claims unless directly observed
+        - propose a bounded representative evidence sample that tests the leading hypotheses without promising resolution
       must_not:
-        - label an unverified causal hypothesis as a confirmed critical gap
-        - assign high confidence to an unobserved causal mechanism
-        - require complete initiative cards or action decisions for the whole portfolio before testing the mechanism
-        - present an unobserved downstream consequence as an observed fact
-        - infer a missing owner or failed evidence-to-action loop solely from weak roadmap-to-outcome linkage
-        - combine observation and hypothesis in one claim with shared confidence
-        - claim the small sample will be sufficient to resolve the mechanism before seeing the evidence
+        - convert roadmap-outcome disconnect into confirmed absence of an evaluation mechanism, owner or process
+        - convert reviewer uncertainty about mandate into a confirmed organisational mandate problem
+        - combine observation and hypothesis or implication in one claim with shared confidence
+        - claim the bounded sample will necessarily resolve the mechanism
 
   - id: oaf-health-check-confidence-002
     case: evidenced-mechanism-can-have-high-confidence
