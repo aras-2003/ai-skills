@@ -13,10 +13,12 @@ cases:
         - give every material claim an epistemic status, evidence basis and confidence rationale
         - keep missing contracts, evidence loops and decision-rights causes as hypotheses
         - keep downstream consequences as separate claims unless directly observed
+        - express missing supplied or verified specialist evidence as a reviewer-state limitation
         - propose a bounded representative evidence sample that tests the leading hypotheses without promising resolution
       must_not:
         - convert roadmap-outcome disconnect into confirmed absence of an evaluation mechanism, owner or process
         - convert reviewer uncertainty about mandate into a confirmed organisational mandate problem
+        - convert missing specialist evidence-readiness fields into a confirmed organisational data or process absence
         - combine observation and hypothesis or implication in one claim with shared confidence
         - claim the bounded sample will necessarily resolve the mechanism
 
