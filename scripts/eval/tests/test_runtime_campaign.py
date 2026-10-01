@@ -38,7 +38,7 @@ class RuntimeCampaignTests(unittest.TestCase):
     def test_prepare_locks_package_catalog_components_and_fallback_absence(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out = Path(td) / "campaign"
-            campaign.prepare(out)
+            campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
             self.assertEqual("ff012e494f5b2f71803f850d71d20f54a3315e2b", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
