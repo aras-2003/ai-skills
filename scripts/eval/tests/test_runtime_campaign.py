@@ -131,6 +131,17 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual("1.1.0", current_version)
             self.assertNotEqual(digest, current_digest)
 
+
+    def test_historical_r1_receipts_use_explicit_compatibility_profile(self) -> None:
+        self.assertEqual(
+            "historical-r1",
+            campaign.evidence_compatibility_profile(
+                "ff012e494f5b2f71803f850d71d20f54a3315e2b"
+            ),
+        )
+        with self.assertRaisesRegex(ValueError, "unsupported evidence source revision"):
+            campaign.evidence_compatibility_profile("deadbeef")
+
     def test_smoke_rejects_simultaneous_production_and_lab(self) -> None:
         lock = {
             "packages": {
@@ -218,6 +229,8 @@ class RuntimeCampaignTests(unittest.TestCase):
             campaign.prepare(prepared, require_pinned_commit=False)
             lock_path = prepared / "lock.json"
             lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            validated_lock = campaign.validate_lock_file(lock_path)
+            self.assertEqual(lock["campaign_definition_sha256"], validated_lock["campaign_definition_sha256"])
 
             case_id = "case-001-premium-vs-generic"
             channel = lock["case_channels"][case_id]
@@ -286,6 +299,129 @@ class RuntimeCampaignTests(unittest.TestCase):
                 current_revision=moved_record["source_revision"],
             )
             self.assertEqual([], moved_errors)
+            moved_lock = moved / "lock.json"
+            shutil.copyfile(lock_path, moved_lock)
+            validated_moved_lock = campaign.validate_lock_file(moved_lock, root=moved)
+            self.assertEqual(lock["campaign"], validated_moved_lock["campaign"])
+
+    def test_import_rejects_stale_or_incomplete_lock_without_partial_evidence(self) -> None:
+        cfg = dict(campaign.config())
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            td_path = Path(td)
+            prepared = td_path / "prepared"
+            campaign.prepare(prepared, require_pinned_commit=False)
+            good_lock_path = prepared / "lock.json"
+            good_lock = json.loads(good_lock_path.read_text(encoding="utf-8"))
+
+            case_id = "fallback-strategy-production-002"
+            channel = good_lock["case_channels"][case_id]
+            observed = self._observed_smoke(good_lock, channel)
+            smoke_path = td_path / "smoke.json"
+            smoke_path.write_text(json.dumps(observed), encoding="utf-8")
+            output = td_path / "output.md"
+            trace = td_path / "trace.json"
+            output.write_text("Synthetic offline lock-validation output.\n", encoding="utf-8")
+            trace.write_text(
+                json.dumps({"selected_capabilities": ["oaf-health-check"], "tool_calls": []}),
+                encoding="utf-8",
+            )
+
+            evidence_rel = f".tmp/{td_path.name}/lock-negative-evidence"
+            patched_cfg = dict(cfg)
+            patched_cfg["evidence_root"] = evidence_rel
+
+            strategy_index = next(
+                i for i, item in enumerate(good_lock["case_definitions"])
+                if item["id"] == case_id
+            )
+
+            variants = {}
+
+            old_input = json.loads(json.dumps(good_lock))
+            old_input["case_definitions"][strategy_index]["input_sha256"] = "0" * 64
+            variants["old-input"] = old_input
+
+            changed_rubric = json.loads(json.dumps(good_lock))
+            changed_rubric["case_definitions"][strategy_index]["rubric_sha256"] = "1" * 64
+            variants["changed-rubric"] = changed_rubric
+
+            changed_campaign = json.loads(json.dumps(good_lock))
+            changed_campaign["campaign_definition_sha256"] = "2" * 64
+            variants["changed-campaign"] = changed_campaign
+
+            missing_fields = json.loads(json.dumps(good_lock))
+            missing_fields.pop("case_definitions")
+            variants["missing-fields"] = missing_fields
+
+            missing_case = json.loads(json.dumps(good_lock))
+            missing_case["case_definitions"] = [
+                item for item in missing_case["case_definitions"] if item["id"] != case_id
+            ]
+            variants["missing-case"] = missing_case
+
+            unknown_case = json.loads(json.dumps(good_lock))
+            unknown = json.loads(json.dumps(unknown_case["case_definitions"][0]))
+            unknown["id"] = "unknown-runtime-case"
+            unknown_case["case_definitions"].append(unknown)
+            variants["unknown-case"] = unknown_case
+
+            legacy_r2 = json.loads(json.dumps(good_lock))
+            legacy_r2["schema_version"] = "1.0"
+            legacy_r2.pop("campaign_definition_sha256")
+            legacy_r2.pop("case_definitions")
+            variants["legacy-r2-lock"] = legacy_r2
+
+            for name, payload in variants.items():
+                with self.subTest(name=name):
+                    lock_path = td_path / f"{name}.lock.json"
+                    lock_path.write_text(json.dumps(payload), encoding="utf-8")
+                    run_id = f"offline-{name}"
+                    dest = ROOT / evidence_rel / case_id / run_id
+                    args = self._import_args(
+                        case_id=case_id,
+                        run_id=run_id,
+                        lock=lock_path,
+                        smoke=smoke_path,
+                        output=output,
+                        trace=trace,
+                        status="REVIEW_REQUIRED",
+                    )
+                    with patch.object(campaign, "config", return_value=patched_cfg):
+                        with self.assertRaisesRegex(ValueError, "invalid campaign lock"):
+                            campaign.import_run(args)
+                    self.assertFalse(dest.exists(), f"partial evidence written for {name}")
+
+    def test_lock_rejects_unknown_active_import_case_before_writes(self) -> None:
+        cfg = dict(campaign.config())
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            td_path = Path(td)
+            prepared = td_path / "prepared"
+            campaign.prepare(prepared, require_pinned_commit=False)
+            lock_path = prepared / "lock.json"
+            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            observed = self._observed_smoke(lock, "production")
+            smoke_path = td_path / "smoke.json"
+            smoke_path.write_text(json.dumps(observed), encoding="utf-8")
+            output = td_path / "output.md"
+            trace = td_path / "trace.json"
+            output.write_text("offline\n", encoding="utf-8")
+            trace.write_text(json.dumps({"selected_capabilities": []}), encoding="utf-8")
+            evidence_rel = f".tmp/{td_path.name}/unknown-import-evidence"
+            patched_cfg = dict(cfg)
+            patched_cfg["evidence_root"] = evidence_rel
+            args = self._import_args(
+                case_id="unknown-active-case",
+                run_id="offline-unknown",
+                lock=lock_path,
+                smoke=smoke_path,
+                output=output,
+                trace=trace,
+                status="REVIEW_REQUIRED",
+            )
+            with patch.object(campaign, "config", return_value=patched_cfg):
+                with self.assertRaisesRegex(ValueError, "unknown active campaign case"):
+                    campaign.import_run(args)
+            self.assertFalse((ROOT / evidence_rel / "unknown-active-case").exists())
 
     def test_bad_routing_can_be_archived_as_fail_but_not_pass(self) -> None:
         cfg = dict(campaign.config())
