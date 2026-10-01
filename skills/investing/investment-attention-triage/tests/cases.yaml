@@ -17,3 +17,4 @@ cases:
     input: "I have never researched ServiceNow. Build a full investment thesis and valuation."
     expected:
       should_trigger: false
+      must_not: ["attention queue", "materiality triage"]
