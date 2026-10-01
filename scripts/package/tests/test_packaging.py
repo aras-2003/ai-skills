@@ -22,6 +22,7 @@ class PackagingTests(unittest.TestCase):
     def setUp(self) -> None:
         self.old_revision = os.environ.get("SOURCE_REVISION")
         os.environ["SOURCE_REVISION"] = "0123456789abcdef0123456789abcdef01234567"
+        (ROOT / ".tmp").mkdir(exist_ok=True)
 
     def tearDown(self) -> None:
         if self.old_revision is None:
@@ -62,7 +63,7 @@ class PackagingTests(unittest.TestCase):
             assert_source_revision("abc", "def")
 
     def test_prebuild_failure_preserves_previous_output(self) -> None:
-        with tempfile.TemporaryDirectory(dir=ROOT) as td:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out = Path(td) / "plugin"
             out.mkdir()
             sentinel = out / "sentinel.txt"
@@ -77,7 +78,7 @@ class PackagingTests(unittest.TestCase):
             self.assertEqual("keep", sentinel.read_text(encoding="utf-8"))
 
     def test_invalid_maturity_preserves_previous_plugin_output(self) -> None:
-        with tempfile.TemporaryDirectory(dir=ROOT) as td:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out = Path(td) / "plugin"
             out.mkdir()
             sentinel = out / "sentinel.txt"
@@ -87,7 +88,7 @@ class PackagingTests(unittest.TestCase):
             self.assertEqual("keep", sentinel.read_text(encoding="utf-8"))
 
     def test_invalid_maturity_preserves_previous_zip_output(self) -> None:
-        with tempfile.TemporaryDirectory(dir=ROOT) as td:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out = Path(td) / "zips"
             out.mkdir()
             sentinel = out / "sentinel.txt"
@@ -97,9 +98,13 @@ class PackagingTests(unittest.TestCase):
             self.assertEqual("keep", sentinel.read_text(encoding="utf-8"))
 
     def test_unsafe_output_paths_are_rejected(self) -> None:
-        for out in (ROOT, ROOT / ".git", ROOT / "skills", Path("/")):
-            with self.assertRaises(ValueError):
-                validate_output_path(ROOT, out)
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td).resolve()
+            (root / ".git").mkdir()
+            (root / "skills" / "career").mkdir(parents=True)
+            for out in (root, root / ".git", root / "skills", root / "skills" / "career", Path("/")):
+                with self.assertRaises(ValueError):
+                    validate_output_path(root, out)
 
     def test_deterministic_zip_bytes(self) -> None:
         a = build_chatgpt_skills._zip_bytes([
@@ -118,7 +123,7 @@ class PackagingTests(unittest.TestCase):
         self.assertNotEqual(a, changed)
 
     def test_plugin_runtime_allowlist_excludes_tests_and_eval_reports(self) -> None:
-        with tempfile.TemporaryDirectory(dir=ROOT) as td:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out = Path(td) / "plugin"
             build_plugin.build(ROOT, out, "production")
             paths = [p.relative_to(out).as_posix() for p in out.rglob("*") if p.is_file()]
@@ -129,7 +134,7 @@ class PackagingTests(unittest.TestCase):
             self.assertTrue((out / "release-manifest.json").is_file())
 
     def test_chatgpt_channel_manifest_declares_workflow_limitations(self) -> None:
-        with tempfile.TemporaryDirectory(dir=ROOT) as td:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out1 = Path(td) / "zip1"
             out2 = Path(td) / "zip2"
             build_chatgpt_skills.build(ROOT, out1, "production")
