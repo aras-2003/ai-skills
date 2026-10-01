@@ -73,6 +73,21 @@ class RuntimeCampaignTests(unittest.TestCase):
         self.assertEqual("oaf-health-check", historical_strategy[0])
         self.assertEqual("oaf-operating-model-redesign", historical_interface[0])
 
+    def test_historical_receipt_identity_uses_recorded_behavior_revision(self) -> None:
+        old_revision = "ff012e494f5b2f71803f850d71d20f54a3315e2b"
+        for case_id, component_name, expected_version in (
+            ("fallback-strategy-production-001", "oaf-health-check", "1.0.0"),
+            ("fallback-interface-production-001", "oaf-operating-model-redesign", "1.0.0"),
+        ):
+            target, case = receipt.find_case(ROOT, case_id)
+            self.assertEqual(component_name, target)
+            version, digest = receipt.component_identity_at_revision(ROOT, component_name, old_revision)
+            self.assertEqual(expected_version, version)
+            self.assertEqual(64, len(digest))
+            current_version, current_digest = receipt.current_component_identity(ROOT, component_name)
+            self.assertEqual("1.1.0", current_version)
+            self.assertNotEqual(digest, current_digest)
+
     def test_smoke_rejects_simultaneous_production_and_lab(self) -> None:
         lock = {
             "packages": {
