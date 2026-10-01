@@ -3,9 +3,12 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 import sys
 
 HERE = Path(__file__).resolve()
@@ -80,6 +83,197 @@ class RuntimeCampaignTests(unittest.TestCase):
             op.write_text(json.dumps(observed), encoding="utf-8")
             errors = campaign.verify_smoke(lp, op)
         self.assertTrue(any("simultaneously enabled" in e for e in errors))
+
+    def _observed_smoke(self, lock: dict, channel: str, *, origin: str = "offline") -> dict:
+        package = dict(lock["packages"][channel])
+        components = [
+            {
+                "name": item["name"],
+                "version": item["version"],
+                "content_sha256": item["content_sha256"],
+            }
+            for item in lock["components"]
+            if item["channel"] == channel
+        ]
+        return {
+            "evidence_origin": origin,
+            "channel": channel,
+            "package": package,
+            "components": components,
+            "enabled_packages": [package["name"]],
+            "catalog": list(lock["expected_catalogs"][channel]),
+            "runtime": {
+                "provider": "offline-synthetic-provider",
+                "model_id": "offline-synthetic-model",
+                "reasoning": "offline",
+                "available_tools": ["offline-fixture"],
+            },
+        }
+
+    def _import_args(
+        self,
+        *,
+        case_id: str,
+        run_id: str,
+        lock: Path,
+        smoke: Path,
+        output: Path,
+        trace: Path,
+        status: str,
+    ) -> SimpleNamespace:
+        return SimpleNamespace(
+            case_id=case_id,
+            run_id=run_id,
+            lock=str(lock),
+            smoke=str(smoke),
+            output=str(output),
+            trace=str(trace),
+            status=status,
+            reviewer="offline-unit-test",
+            assisted=False,
+            evidence_origin="offline",
+            note="synthetic offline campaign-path test; not runtime evidence",
+        )
+
+    def test_full_offline_path_prepare_smoke_import_validate_and_moved_checkout(self) -> None:
+        cfg = dict(campaign.config())
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            td_path = Path(td)
+            prepared = td_path / "prepared"
+            campaign.prepare(prepared, require_pinned_commit=False)
+            lock_path = prepared / "lock.json"
+            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+
+            case_id = "case-001-premium-vs-generic"
+            channel = lock["case_channels"][case_id]
+            observed = self._observed_smoke(lock, channel)
+            smoke_path = td_path / "smoke.json"
+            smoke_path.write_text(json.dumps(observed, indent=2) + "\n", encoding="utf-8")
+            self.assertEqual([], campaign.verify_smoke(lock_path, smoke_path))
+
+            output = td_path / "output.md"
+            trace = td_path / "trace.json"
+            output.write_text("Synthetic offline response for import-path validation.\n", encoding="utf-8")
+            trace.write_text(
+                json.dumps({
+                    "selected_capabilities": ["commerce-product-deep-dive"],
+                    "tool_calls": [],
+                    "notes": "offline synthetic trace",
+                }),
+                encoding="utf-8",
+            )
+
+            evidence_rel = f".tmp/{td_path.name}/evidence"
+            patched_cfg = dict(cfg)
+            patched_cfg["evidence_root"] = evidence_rel
+            args = self._import_args(
+                case_id=case_id,
+                run_id="offline-good",
+                lock=lock_path,
+                smoke=smoke_path,
+                output=output,
+                trace=trace,
+                status="REVIEW_REQUIRED",
+            )
+            with patch.object(campaign, "config", return_value=patched_cfg):
+                receipt_path = campaign.import_run(args)
+                self.assertEqual([], campaign.validate_evidence())
+
+            record = json.loads(receipt_path.read_text(encoding="utf-8"))
+            self.assertEqual("offline", record["execution"]["evidence_origin"])
+            self.assertEqual([], record["execution"]["selection_findings"])
+            self.assertEqual(
+                receipt.current_component_identity(ROOT, case_id if False else "commerce-product-deep-dive")[1],
+                record["component"]["content_sha256"],
+            )
+            self.assertNotEqual(
+                record["component"]["content_sha256"],
+                record["runtime_artifact"]["component_content_sha256"],
+            )
+
+            moved = td_path / "moved-checkout"
+            shutil.copytree(
+                ROOT,
+                moved,
+                ignore=shutil.ignore_patterns(".git", ".tmp", "__pycache__", "*.pyc"),
+            )
+            moved_record_path = (
+                moved / evidence_rel / case_id / "offline-good" / "receipt.json"
+            )
+            moved_record = json.loads(moved_record_path.read_text(encoding="utf-8"))
+            moved_errors = receipt.validate_receipt_data(
+                moved_record,
+                root=moved,
+                current_revision=moved_record["source_revision"],
+            )
+            self.assertEqual([], moved_errors)
+
+    def test_bad_routing_can_be_archived_as_fail_but_not_pass(self) -> None:
+        cfg = dict(campaign.config())
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            td_path = Path(td)
+            prepared = td_path / "prepared"
+            campaign.prepare(prepared, require_pinned_commit=False)
+            lock_path = prepared / "lock.json"
+            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            case_id = "career-role-eval-en"
+            channel = lock["case_channels"][case_id]
+            observed = self._observed_smoke(lock, channel)
+            smoke_path = td_path / "smoke.json"
+            smoke_path.write_text(json.dumps(observed), encoding="utf-8")
+            output = td_path / "output.md"
+            trace = td_path / "trace.json"
+            output.write_text("Synthetic wrong-route output.\n", encoding="utf-8")
+            trace.write_text(
+                json.dumps({"selected_capabilities": [], "tool_calls": []}),
+                encoding="utf-8",
+            )
+            evidence_rel = f".tmp/{td_path.name}/evidence-routing"
+            patched_cfg = dict(cfg)
+            patched_cfg["evidence_root"] = evidence_rel
+
+            fail_args = self._import_args(
+                case_id=case_id,
+                run_id="offline-routing-fail",
+                lock=lock_path,
+                smoke=smoke_path,
+                output=output,
+                trace=trace,
+                status="FAIL",
+            )
+            with patch.object(campaign, "config", return_value=patched_cfg):
+                receipt_path = campaign.import_run(fail_args)
+            data = json.loads(receipt_path.read_text(encoding="utf-8"))
+            self.assertEqual("FAIL", data["evaluation"]["status"])
+            self.assertTrue(data["execution"]["selection_findings"])
+            self.assertEqual("offline", data["execution"]["evidence_origin"])
+
+            pass_args = self._import_args(
+                case_id=case_id,
+                run_id="offline-routing-pass",
+                lock=lock_path,
+                smoke=smoke_path,
+                output=output,
+                trace=trace,
+                status="PASS",
+            )
+            with patch.object(campaign, "config", return_value=patched_cfg):
+                with self.assertRaisesRegex(ValueError, "PASS forbidden"):
+                    campaign.import_run(pass_args)
+
+    def test_smoke_rejects_old_release_with_same_name_version_and_catalog(self) -> None:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            prepared = Path(td) / "prepared"
+            campaign.prepare(prepared, require_pinned_commit=False)
+            lock_path = prepared / "lock.json"
+            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            observed = self._observed_smoke(lock, "production")
+            observed["package"]["release_id"] = "1.8.0+stale0000000"
+            observed_path = Path(td) / "stale-smoke.json"
+            observed_path.write_text(json.dumps(observed), encoding="utf-8")
+            errors = campaign.verify_smoke(lock_path, observed_path)
+        self.assertTrue(any("package.release_id" in e for e in errors), errors)
+
 
     def test_receipt_paths_are_portable_and_trace_is_hashed(self) -> None:
         cfg = campaign.config()
