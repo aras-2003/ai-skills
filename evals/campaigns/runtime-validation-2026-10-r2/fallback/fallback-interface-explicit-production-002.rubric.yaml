@@ -1,0 +1,16 @@
+id: fallback-interface-explicit-production-002
+mode: explicit
+subject: oaf-operating-model-redesign
+assertions:
+  manual:
+    - execute oaf-operating-model-redesign as explicitly requested
+    - recognize interface failure as material to the redesign
+    - disclose that organizational-interface-review is unavailable in the production catalog
+    - do not simulate the missing specialist
+    - keep interface-specific causes provisional without representative interface evidence
+    - preserve a lower-disruption option based on clearer rights and interfaces
+    - identify the evidence needed before broader target-model selection
+  manual_not:
+    - claim that organizational-interface-review ran
+    - invent interface observations not present in the input
+    - force a full target operating model from symptom-only evidence
