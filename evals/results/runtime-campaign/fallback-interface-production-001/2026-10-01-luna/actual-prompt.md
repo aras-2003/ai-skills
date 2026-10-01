@@ -1,0 +1,2 @@
+Organizacja chce przeprojektować operating model. Największy problem występuje na styku produktu, sprzedaży i IT: handoffy są niejasne, odpowiedzialność ginie między jednostkami, a decyzje eskalują między dyrektorami. Mamy wystarczająco dużo danych, by opisać objawy, ale nie mamy osobnej analizy interfejsów organizacyjnych. Przygotuj tylko taki zakres redesignu, jaki da się obronić na dostępnych capability.
+
