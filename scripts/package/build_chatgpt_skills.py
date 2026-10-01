@@ -16,7 +16,7 @@ ALLOWED_SUPPORT_DIRS = ("references", "scripts", "assets")
 def discover_skills(root: Path, maturity: str) -> list[Path]:
     selected: list[Path] = []
     for skill_md in sorted((root / "skills").rglob("SKILL.md")):
-        fm = read_frontmatter(skill_md)
+        fm, _ = read_frontmatter(skill_md)
         metadata = fm.get("metadata") or {}
         if metadata.get("maturity") == maturity:
             selected.append(skill_md.parent)
@@ -24,7 +24,7 @@ def discover_skills(root: Path, maturity: str) -> list[Path]:
 
 
 def build_skill_bundle(skill_dir: Path, output_dir: Path) -> dict:
-    fm = read_frontmatter(skill_dir / "SKILL.md")
+    fm, _ = read_frontmatter(skill_dir / "SKILL.md")
     name = fm.get("name")
     metadata = fm.get("metadata") or {}
     if not isinstance(name, str) or not name:
