@@ -138,6 +138,15 @@ def main() -> int:
             if name != "investment-theme-discovery" and "XTB" not in text:
                 problems.append(f"{name}: XTB v1 boundary missing")
 
+    governance_path = skill_root / "investment-record-store" / "references" / "canonical-schema-governance.md"
+    if not governance_path.exists():
+        problems.append("canonical schema governance contract missing")
+    else:
+        governance = governance_path.read_text(encoding="utf-8")
+        for required in ("public.system_config", "cross_schema_fallback", "deprecated/noncanonical", "Never infer cutover from which schema happens to contain rows"):
+            if required.lower() not in governance.lower():
+                problems.append(f"canonical schema governance missing rule/token: {required}")
+
     supabase_contract_path = skill_root / "investment-record-store" / "references" / "supabase-contract.md"
     if not supabase_contract_path.exists():
         problems.append("Supabase data contract missing")
