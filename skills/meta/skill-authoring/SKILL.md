@@ -39,9 +39,11 @@ Require an approved specification or reconstruct one with `skill-specification` 
 8. Keep SKILL.md concise enough to reason over reliably; move long domain material to references.
 9. Use scripts for deterministic/repetitive logic.
 10. Use assets for templates/resources used in outputs.
+   - For reusable charts, diagrams, dashboards or executive visuals, define a semantic payload first and let `visual-output-design` select the rendering tool.
 11. State tool order and missing-result handling explicitly when tools matter.
 12. Preserve user agency: explicit user instructions override generic skill defaults unless higher-priority rules prevent it.
 13. Follow the principle of least surprise: never hide destructive, external, privileged or security-sensitive behavior.
+14. When the output is multidimensional or structural, define visual affordances without coupling domain logic to one renderer; prefer the shared `visual-output-design` presentation layer over bespoke ASCII diagrams or decorative pseudo-charts.
 
 ## Required body sections
 
