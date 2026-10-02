@@ -46,7 +46,7 @@ Use for two-dimensional comparisons such as materiality x direction, overlap, ev
 
 ### Structural diagram
 Use for reporting lines, decision rights, dependencies, operating models, value chains or flows.
-Prefer Figma/FigJam when editability and layout quality matter.
+Prefer a chat-native diagram renderer when available. Use Figma/FigJam only when the user explicitly requests an editable Figma/FigJam artifact.
 
 ### Roadmap / timeline
 Use for sequencing, catalysts, risks or transformation.
@@ -77,6 +77,9 @@ Use a compact global source/limitations block at the end for shared sources.
 - avoid wide tables when a chart/card can communicate the same decision more clearly;
 - preserve a text fallback for essential conclusions.
 
-## Artifact rule
-If a separate HTML/Figma/deck file is produced, it is the integrated report itself, not an auxiliary visual copy of a full chat report.
-Chat should then give only a short executive summary plus the artifact reference, unless the user asks for both.
+## Delivery rule
+Default delivery is the report itself in the chat response, with visual components embedded in the relevant sections.
+
+A separate HTML/PDF/Figma/deck/file may be produced only when the user explicitly requests that artifact or format. If the preferred inline visual is unavailable, use the best chat-native fallback rather than silently creating a file.
+
+When an external artifact is explicitly requested, avoid duplicating the entire report in both chat and the artifact unless the user asks for both.
