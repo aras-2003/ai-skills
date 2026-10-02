@@ -51,3 +51,21 @@ cases:
       must:
         - preserve unknown relationships
         - avoid inventing hierarchy
+
+
+  - id: visual-output-capability-preflight
+    case: Required quantitative visual has no deterministic renderer
+    input: |
+      The report contains chartable portfolio allocation data, but this runtime exposes only image generation,
+      image viewing and Figma diagram/design capabilities.
+    expected:
+      should_trigger: true
+      must:
+        - run capability preflight
+        - classify the quantitative chart renderer as unavailable
+        - return BLOCKED_NO_RENDERER
+        - keep any table fallback explicitly diagnostic
+      must_not:
+        - use image generation for factual quantitative charting
+        - count Figma diagram/design as a native quantitative chart renderer
+        - report successful rendering

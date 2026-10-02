@@ -82,8 +82,25 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("visual-floor rule", composer)
         self.assertIn("Visual floor:", standard)
         self.assertIn("include at least one portfolio-composition/concentration visual", standard)
-        self.assertIn("required when renderable in chat", profiles)
-        self.assertIn("do not return text-only", renderer)
+        self.assertIn("required visual-floor slot", profiles)
+        self.assertIn("text-only is not a successful substitute", renderer)
+
+    def test_required_visuals_fail_closed_without_renderer(self) -> None:
+        composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
+        standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")
+        routing = (ROOT / "skills/meta/visual-output-design/references/tool-routing.md").read_text(encoding="utf-8")
+        renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
+        quality_cases = (ROOT / "skills/meta/report-composer/tests/quality-cases.yaml").read_text(encoding="utf-8")
+
+        for text in (composer, standard, routing, renderer, quality_cases):
+            self.assertIn("BLOCKED_NO_RENDERER", text)
+
+        self.assertIn("capability_preflight", composer)
+        self.assertIn("capability_preflight", renderer)
+        self.assertIn("qualifying deterministic data renderer", routing)
+        self.assertIn("image generation", routing)
+        self.assertIn("diagnostic fallback", standard)
+        self.assertIn("report PASS for a text-only fallback", quality_cases)
 
 
 if __name__ == "__main__":

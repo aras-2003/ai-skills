@@ -503,8 +503,14 @@ def verify_smoke(lock_path: Path, observed_path: Path) -> list[str]:
     for field in ("provider", "model_id", "reasoning"):
         if not runtime.get(field):
             errors.append(f"runtime metadata missing {field}")
-    if not isinstance(runtime.get("available_tools"), list):
+    available_tools = runtime.get("available_tools")
+    if not isinstance(available_tools, list):
         errors.append("runtime available_tools must be a list")
+    else:
+        rendered = [str(item) for item in available_tools]
+        for fragment in config().get("required_runtime_tool_fragments") or []:
+            if not any(str(fragment) in tool for tool in rendered):
+                errors.append(f"required runtime tool capability not observed: {fragment}")
     return errors
 
 

@@ -6,7 +6,7 @@ These are default structures, not rigid templates. Skip sections that add no dec
 Default to a concise executive report, not a portfolio dump.
 1. Executive summary — 3–5 decision-relevant points
 2. Portfolio risk
-   - **required when renderable in chat:** at least one composition/concentration visual
+   - **required visual-floor slot:** at least one composition/concentration visual; run capability preflight and return `BLOCKED_NO_RENDERER` if no qualifying chat-native renderer exists
    - prefer ranked horizontal bars for many positions;
    - a donut/pie is acceptable only for a small meaningful part-to-whole (for example top categories or top positions + Other), not for a crowded 14-slice portfolio;
    - overlap/look-through matrix only if supported and decision-relevant

@@ -32,9 +32,9 @@ For opportunity/security comparisons:
 - Put interpretation immediately after the visual.
 - Do not collect all charts into a separate dashboard or visual appendix by default.
 - Do not add a visual just to make a section look richer.
-- **Visual floor:** when a substantial decision report contains a clear quantitative composition, ranking, time-series, matrix or structural relationship and a suitable chat-native renderer is available, include at least one real visual. A report with material chartable data should not silently degrade to text-only output.
+- **Visual floor:** when a substantial decision report contains a clear quantitative composition, ranking, time-series, matrix or structural relationship, create at least one required visual slot and run renderer `capability_preflight`. If a qualifying chat-native renderer is available, render the visual. If none can be proven available, the report must surface `BLOCKED_NO_RENDERER`; it must not be accepted as a successful text-only report.
 - For portfolio reviews with 3+ meaningful positions/categories, include at least one portfolio-composition/concentration visual when renderable in chat.
-- If a native visual renderer is unavailable, use a compact table/matrix fallback and explicitly treat that as a renderer limitation rather than a design preference.
+- If a qualifying native visual renderer is unavailable, a compact table/matrix may be shown as a diagnostic fallback, but the required visual remains unsatisfied and the report status is `BLOCKED_NO_RENDERER`.
 
 ## 5. Visual quality
 Prefer:
@@ -57,7 +57,7 @@ Avoid:
 - repeated bar charts for every candidate;
 - a separate 3M/6M/12M bar chart per security when one cross-candidate or real time-series visual would communicate the decision better.
 
-If no suitable chat-native visual renderer is available, use a compact table/matrix rather than pretending a graphic was rendered.
+If no suitable chat-native visual renderer is available, use a compact table/matrix only as a diagnostic aid and keep the explicit `BLOCKED_NO_RENDERER` status rather than pretending a graphic was rendered or treating the report as PASS.
 
 ## 6. Price and market context
 - Canonical portfolio/research state remains canonical.
@@ -93,4 +93,4 @@ Do not end with a generic summary that repeats the opening.
 ## 10. Chat-native default
 - The substantive report belongs in chat by default.
 - External HTML/PDF/Figma/deck/file output requires explicit user request.
-- Missing visual capability must fall back inside chat, not into an unsolicited file.
+- Missing visual capability must remain inside chat as an explicit blocked state, not disappear behind a successful text-only fallback and not escape into an unsolicited file.
