@@ -50,8 +50,17 @@ Ticker | setup | fundamental change | valuation change | market/trend change | m
 Stop when 3-10 credible research candidates remain.
 Stop deeper work when the evidence gap is larger than the apparent opportunity.
 
-## Visual presentation
-When structured comparison data are available, call `visual-output-design` after analytical synthesis and before the final response.
-Prefer candidate comparison cards plus a normalized performance/time-series chart and, when useful, a valuation/growth or evidence matrix.
-Do not invent missing market data for the visual. Keep XTB status, as-of dates, evidence quality and canonical persistence receipts visible.
-For a dense multi-candidate review, prefer an interactive HTML cockpit if runtime artifact support exists; otherwise use the best native chart/table combination.
+## Integrated report presentation
+After analytical synthesis, call `report-composer` to produce one integrated opportunity report. Use `visual-output-design` only for the inline visual slots selected by the composer.
+
+Default profile:
+- market/portfolio context;
+- shortlist cards;
+- candidate-by-candidate sections;
+- local price/performance chart where useful and supported;
+- cross-candidate comparison;
+- research queue / next actions;
+- canonical receipts and limitations.
+
+For each candidate section, place any price/performance visual immediately after the setup/context it explains. When verified time-series data exist, support 3M / 6M / 12M switching. State normalization, FX/dividend treatment and as-of date.
+Do not return a full textual report plus a separate duplicate dashboard. If rich HTML is the best target, make that HTML the integrated report itself and keep chat to a short executive summary.
