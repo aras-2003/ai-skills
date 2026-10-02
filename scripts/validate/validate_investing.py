@@ -23,6 +23,7 @@ REQUIRED_SKILLS = {
 }
 
 REQUIRED_WORKFLOWS = {
+    "investment-os-review",
     "investment-attention-review",
     "investment-opportunity-hunter",
     "investment-security-review",
@@ -117,10 +118,25 @@ def main() -> int:
             problems.append(f"missing workflow: {name}")
             continue
         text = p.read_text(encoding="utf-8")
-        if "investment-record-store" not in text:
-            problems.append(f"{name}: durable storage dependency missing")
-        if name != "investment-theme-discovery" and "XTB" not in text:
-            problems.append(f"{name}: XTB v1 boundary missing")
+        if name == "investment-os-review":
+            for child in (
+                "investment-portfolio-review",
+                "investment-security-review",
+                "investment-opportunity-hunter",
+                "investment-theme-discovery",
+                "investment-attention-review",
+                "investment-policy-design",
+            ):
+                if child not in text:
+                    problems.append(f"{name}: missing child route {child}")
+            for required in ("default orchestration front door", "generic investment commentary", "Select the primary route"):
+                if required.lower() not in text.lower():
+                    problems.append(f"{name}: missing front-door guardrail: {required}")
+        else:
+            if "investment-record-store" not in text:
+                problems.append(f"{name}: durable storage dependency missing")
+            if name != "investment-theme-discovery" and "XTB" not in text:
+                problems.append(f"{name}: XTB v1 boundary missing")
 
     supabase_contract_path = skill_root / "investment-record-store" / "references" / "supabase-contract.md"
     if not supabase_contract_path.exists():
