@@ -10,9 +10,9 @@ workflows:
         []
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: strategy-to-execution-diagnostic
           on_missing: "Strategy/execution diagnosis is unavailable in production; disclose reduced scope and stop/narrow if that branch is material."
         - name: operating-model-review
@@ -63,9 +63,9 @@ workflows:
         - decision-rights-review
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: global-local-model-review
           on_missing: "Do not claim global/local redesign; limit the option set."
         - name: organizational-interface-review
@@ -114,9 +114,9 @@ workflows:
         - governance-design
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: decision-bottleneck-analysis
           on_missing: "Proceed only with rights evidence; disclose that latency tracing was not run."
     description: >
@@ -177,9 +177,9 @@ workflows:
         - transformation-blueprint
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
     description: >
       Run an evidence-gated OAF transformation design workflow from validated diagnosis and target direction into bounded workstreams, sequencing, mobilisation and adaptive stage gates.
     metadata:
@@ -216,9 +216,9 @@ workflows:
         - architecture-review
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: capability-map-review
           on_missing: "Do not make capability-map quality claims."
         - name: capability-gap-analysis
@@ -316,9 +316,9 @@ workflows:
         - acquisition-fit-review
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: product-opportunity-discovery
           on_missing: "If the input is only a category idea, stop and request discovery rather than inventing a product."
         - name: market-transferability-review
@@ -355,9 +355,9 @@ workflows:
         []
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: product-opportunity-discovery
           on_missing: "Discovery mode is unavailable; require a known product/opportunity."
         - name: commerce-product-deep-dive
@@ -410,9 +410,9 @@ workflows:
         - investment-record-store
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: thesis-monitor
           on_missing: "Do not claim thesis monitoring; keep the item at attention-triage level."
         - name: market-opportunity-scan
@@ -450,9 +450,9 @@ workflows:
         - investment-record-store
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: investment-attention-triage
           on_missing: "Use scanner materiality only; do not claim dedicated attention triage."
         - name: trend-theme-research
@@ -490,9 +490,9 @@ workflows:
         - investment-record-store
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: trend-theme-research
           on_missing: "Keep broader theme implications unresolved."
         - name: portfolio-state-review
@@ -525,9 +525,9 @@ workflows:
         - investment-record-store
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: investment-attention-triage
           on_missing: "Review only already-material evidence; do not claim broad attention triage."
         - name: position-sizing-review
@@ -562,9 +562,9 @@ workflows:
         - investment-record-store
       optional:
         - name: report-composer
-          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
+          on_missing: "If the report has no required visual-floor slot, return a concise integrated text/table report. If material chartable data require a visual, return BLOCKED_NO_RENDERER; never treat text/table fallback as PASS."
         - name: visual-output-design
-          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
+          on_missing: "If visual output is optional, keep the analysis with concise text/table fallback. If a required visual-floor slot exists, return BLOCKED_NO_RENDERER; do not simulate rendering or report PASS."
         - name: investor-pattern-research
           on_missing: "Do not add investor-archetype context."
         - name: security-underwriting
