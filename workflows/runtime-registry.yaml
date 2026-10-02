@@ -172,7 +172,6 @@ workflows:
       optional:
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
-        []
     description: >
       Run an evidence-gated OAF transformation design workflow from validated diagnosis and target direction into bounded workstreams, sequencing, mobilisation and adaptive stage gates.
     metadata:
