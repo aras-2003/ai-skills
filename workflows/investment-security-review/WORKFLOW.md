@@ -45,7 +45,19 @@ Business thesis | evidence-sanity status | verified/blocked metrics | valuation 
 Stop before sizing if policy/portfolio context is missing.
 Stop valuation and numeric sizing if critical evidence is unresolved.
 
-## Visual presentation
-When the result is decision-dense, call `visual-output-design`.
-Prefer KPI cards, a bear/base/bull valuation range, catalyst/risk timeline and a compact separation of business quality, current-price attractiveness and portfolio fit.
-Do not collapse these dimensions into one composite score. If evidence-sanity blocks valuation, the visual must show the blocked state instead of a fabricated range.
+## Integrated report presentation
+After analytical synthesis, call `report-composer`. Use `visual-output-design` to render only the local visual slots.
+
+Default profile:
+- investment view / thesis state;
+- business performance with KPI strip;
+- price context with an inline 3M / 6M / 12M chart when verified time-series data exist;
+- fundamental change;
+- valuation / priced-in expectations with scenario range when permitted;
+- catalysts and risks;
+- portfolio fit / sizing constraints;
+- decision state / next trigger;
+- evidence and canonical receipts.
+
+The price chart belongs inside the price-context section, not in a separate dashboard. If evidence-sanity blocks valuation, show the blocked state rather than a fabricated range.
+Do not collapse business quality, current-price attractiveness and portfolio fit into one score.
