@@ -37,6 +37,15 @@ Theme mechanism | changes since prior view | indicators | value chain | benefici
 ## Stop conditions
 Stop once a falsifiable theme map and bounded research queue exist.
 
-## Visual presentation
-When the theme spans multiple value-chain nodes or candidates, call `visual-output-design`.
-Prefer an editable value-chain/beneficiary map, leading-indicator panel and bounded candidate comparison. Use Figma/FigJam for structural maps when available; use charts only for actual quantitative series.
+## Integrated report presentation
+After synthesis, call `report-composer`.
+
+Default profile:
+- theme mechanism with inline value-chain/mechanism diagram;
+- leading indicators;
+- beneficiaries and losers;
+- candidate-security sections with local evidence/price context where useful;
+- invalidation;
+- research queue and receipts.
+
+Use `visual-output-design` to route structural maps to Figma/FigJam when editability matters and charts to quantitative series only. The diagram belongs inside the mechanism/value-chain section, not in a separate visual appendix by default.

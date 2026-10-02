@@ -54,6 +54,16 @@ Escalate to strong for enterprise-wide multi-year sequencing, major transition e
 Stop if the target direction is not sufficiently selected.
 Stop at mobilisation if evidence does not support a credible longer-term sequence.
 
-## Visual presentation
-Call `visual-output-design` when workstreams, dependencies and stage gates are defined.
-Prefer a roadmap/gantt with critical dependencies, decision gates and evidence checkpoints. Use Figma/FigJam for editable roadmap artifacts or a deck for executive communication; keep unresolved choices visibly unresolved.
+## Integrated report presentation
+After transformation synthesis, call `report-composer`.
+
+Default profile:
+- transformation boundary;
+- workstreams;
+- sequence with inline roadmap/gantt;
+- stage gates;
+- transition risks;
+- 30–90 day mobilisation;
+- unresolved choices.
+
+Use Figma/FigJam or a deck renderer through `visual-output-design` when editability or executive communication matters. Keep unresolved choices visibly unresolved.

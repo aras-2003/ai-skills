@@ -146,6 +146,16 @@ Stop when:
 - evidence is insufficient for cross-domain claims;
 - additional OAF domains would add breadth but not decision value.
 
-## Visual presentation
-When the diagnosis spans multiple domains, call `visual-output-design`.
-Prefer a domain heatmap plus a causal/dependency map that distinguishes evidence, inference and unknowns. Use a real diagram/Figma canvas for structural relationships; do not reduce the health check to decorative traffic lights.
+## Integrated report presentation
+After diagnosis, call `report-composer` for one executive diagnostic report.
+
+Default profile:
+- executive diagnosis;
+- domain findings;
+- evidence-based heatmap only where dimensions are genuinely comparable;
+- causal/dependency interpretation with inline map;
+- highest-leverage gaps;
+- next diagnostic/design gate;
+- evidence and unknowns.
+
+Use `visual-output-design` for local diagrams/heatmaps. Do not return a separate diagram pack that duplicates the diagnosis unless explicitly requested.

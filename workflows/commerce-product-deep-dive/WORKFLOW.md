@@ -60,6 +60,16 @@ Stop and KILL when a fatal economics, regulatory, logistics or differentiation c
 Stop research and move to testing when the major remaining uncertainty is empirical conversion/CAC rather than desk-research evidence.
 Before paid acquisition, run any cheaper pre-market experiment that can invalidate differentiation, landed-cost, logistics or compliance assumptions.
 
-## Visual presentation
-Call `visual-output-design` when the product review contains enough evidence to support it.
-Prefer a unit-economics bridge/waterfall, competitor positioning matrix, gate-status panel and smallest-next-test card. Do not turn qualitative uncertainty into fake numeric precision merely to fill a chart.
+## Integrated report presentation
+After gate synthesis, call `report-composer`.
+
+Default profile:
+- product thesis;
+- evidence map;
+- gate review with inline gate-status panel;
+- economics with bridge/waterfall when numeric evidence exists;
+- competition/differentiation matrix;
+- supply/regulation/acquisition;
+- decision and smallest next test.
+
+Use `visual-output-design` for local visuals only. Do not create fake numeric precision to make a chart complete and do not duplicate the full textual analysis in a parallel visual artifact.

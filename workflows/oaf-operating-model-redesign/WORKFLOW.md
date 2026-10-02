@@ -57,6 +57,16 @@ Escalate to strong for:
 Stop before design if evidence does not distinguish structural failure from poor execution of the current model.
 Stop before final target-model selection if the evidence cannot distinguish the leading options.
 
-## Visual presentation
-Call `visual-output-design` when a target model or option set is sufficiently evidenced.
-Prefer current-vs-target operating-model maps, decision/interface flows and an option comparison. Use editable Figma for org/operating-model layouts when available; do not infer reporting lines or authority that the diagnosis did not establish.
+## Integrated report presentation
+After the target direction is sufficiently evidenced, call `report-composer`.
+
+Default profile:
+- design objective;
+- current-state failure modes;
+- options and trade-offs;
+- target model with inline editable Figma operating-model map when useful;
+- decision rights/interfaces with local flow;
+- transition with roadmap;
+- unresolved decisions/evidence.
+
+The target-model diagram must appear where the target model is discussed. Do not infer reporting lines or authority that the diagnosis did not establish.

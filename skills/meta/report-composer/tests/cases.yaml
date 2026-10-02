@@ -1,0 +1,50 @@
+cases:
+  - id: integrated-investment-report
+    case: Security report with inline interactive chart
+    input: |
+      Prepare one coherent Micron investment review. Put the 3/6/12 month price chart inside the price-context section,
+      not in a separate dashboard.
+    expected:
+      should_trigger: true
+      must:
+        - one integrated report
+        - inline visual slot near price context
+        - provenance and as-of context
+        - text fallback if inline rendering is unavailable
+      must_not:
+        - duplicate full visual dashboard beside the text report
+
+  - id: integrated-oaf-report
+    case: Operating-model report with embedded editable diagram
+    input: |
+      Present the operating-model redesign as one executive report with the target model diagram embedded where the target
+      model is discussed.
+    expected:
+      should_trigger: true
+      must:
+        - report sections
+        - inline structural visual
+        - avoid inventing reporting lines
+
+  - id: integrated-html-report
+    case: Rich report is the single primary artifact
+    input: |
+      Build an interactive portfolio report with narrative, charts and opportunity sections in one HTML report.
+    expected:
+      should_trigger: true
+      must:
+        - one rich integrated report
+        - separate semantic payload from rendering
+        - progressive disclosure
+      must_not:
+        - full duplicate text report plus separate full dashboard
+
+  - id: simple-answer-no-report
+    case: Narrow concept question
+    input: |
+      What is free cash flow yield?
+    expected:
+      should_trigger: false
+      must_not:
+        - compose a multi-section report
+        - create visual slots

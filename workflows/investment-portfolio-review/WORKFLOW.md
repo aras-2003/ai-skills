@@ -42,7 +42,17 @@ Requires attention; no material change; portfolio-level observations; derived an
 ## Stop conditions
 Stop when every material alert is tied to evidence or policy.
 
-## Visual presentation
-When portfolio data are available, call `visual-output-design`.
-Prefer allocation/concentration bars, overlap/look-through matrix, drift/change view and a small attention queue. Use derived analytics for the payload but keep Supabase/canonical state and as-of context explicit.
-For recurring reviews, prefer an interactive HTML cockpit when supported; otherwise use native charts plus concise tables.
+## Integrated report presentation
+After analytical synthesis, call `report-composer` to produce one portfolio decision report. Use `visual-output-design` for inline components only.
+
+Default profile:
+- portfolio decision headline + KPI strip;
+- concentration/diversification with inline allocation/concentration charts;
+- overlap/look-through matrix when supported;
+- material drift/change since prior snapshot;
+- positions requiring attention;
+- opportunity implications;
+- decision queue / next actions;
+- canonical READ/WRITE receipts and limitations.
+
+Prefer an interactive rich report when multiple coordinated portfolio views materially help, but it must be the primary integrated report rather than a duplicate dashboard beside a full chat answer.
