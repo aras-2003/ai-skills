@@ -69,6 +69,8 @@ Stop analysis when a fatal gate fails.
 Stop research and test when the remaining uncertainty is conversion/CAC/offer response and cheaper pre-market blockers have already been cleared.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After opportunity synthesis, call `report-composer`.
 
 Default profile:

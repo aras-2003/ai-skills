@@ -55,7 +55,7 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "c1d03275718ada57638aff80bdc561a769c2cc64b70d390f9d309ac15f050c92",
+      "content_sha256": "eccc36b6d9c8adcb083ce73ab043c41282066a38c4c9667429b8299af5663e25",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -69,7 +69,7 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "83a0fff3bdc9d36208e8509f8d7dadee402e16cc227d25016b4ef69ac0939b4e",
+      "content_sha256": "4309a26a324bc668fc7edfaed7e24524b0ea1baab04eaed50b41867918ce47a8",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -233,7 +233,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "e3a8915df8882f7f8e00387453ed24a66ae617fc4ecac05c59effc199b34c7a7",
+      "content_sha256": "2dcb4139e24bff8c41d77b2725bc9df7842d252103ec9b1d0608391b9f25b89d",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -256,7 +256,7 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "a4f51eef8e1a9a2666508ce8d786064cfd5ede3b3b2d7cc689276d2ab1df69a9",
+      "content_sha256": "fff85d8a175e480c034a424b4830132c84dc15aa43325fd93d0977ad9207c118",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -281,7 +281,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "a959f05d560458db29299ad36977541700737328671bf51b479b94abe9fa2554",
+      "content_sha256": "56523a24c6fd9d2f7763d812152c4fee89d103b6dcb11712cf05e451f66e4b00",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -306,7 +306,7 @@
       "version": "0.3.0"
     },
     {
-      "content_sha256": "5640d61f8a5e7b57e476d1081bd20729ea3a5abc671b38d5bd872fd6de61de0f",
+      "content_sha256": "24f661cc8eec01bacf91e9f9271cc4502b1602cd46c93f98bff353c30d7345eb",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -319,7 +319,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "d1da02c18a42017374b53a3ad44d145771983a644061bc3defe5296632f2216b",
+      "content_sha256": "4498138a179bdcafb2037e8bb763338b41243b1ef8739be0e9e9ce609839e166",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -392,7 +392,7 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "77f2b895ae850b3279e9d1a4c84a02c938ef1b8cd03a33fe3620799229c55dc9",
+      "content_sha256": "e56780be664527df36a093c5ace7ecb041f0d4f9be76c510ce6f0c5fdac72e6e",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -419,7 +419,7 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "12547851591fc18bf95ba879af81f4d6b6798c129516e0b44afb50d79793f3ec",
+      "content_sha256": "3aa2bf3a2f170335f25b17fb0d24183b374a966800d9909cfefd191de34a62a3",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -432,7 +432,7 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "5a117e0c01da6c4d406aa220ac9bb12b1c62a5574030278b339f605eeb67803e",
+      "content_sha256": "86282e674892c7017ae531b06c4bf46fbbee975c2d272c47a411e165897cef50",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -445,7 +445,7 @@
       "version": "1.5.0"
     },
     {
-      "content_sha256": "87ebc4c0d4fd8a43f511a784f5442d89db2deabe81349ce669069241da97a8e9",
+      "content_sha256": "94482f4bbc2277794cba78896a6cabcd896a72143a63c3ee85e4294673970299",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -469,7 +469,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "36126e07bb30e77614253d72087ce27f49bfb53f6d559e13754ed6ef8db07d80",
+      "content_sha256": "cbe9bfb21597c767f61918bf7904908fae81780030ed64747a4b8b3fb99dc3e3",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -576,7 +576,7 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "e01eb132652ea280171acd479ab47ed0fd6035302c4b32afcad64efc604a1ec0",
+      "content_sha256": "547c9ae9273edebc989761680345489605e9a115ffd93264b7d765492a559a97",
       "inventory": [
         "SKILL.md",
         "references/composition-rules.md",
@@ -585,7 +585,7 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "report-composer",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "861592341f9daac0cdf8d9df183a5c9676f0fa26d110f6ce990bca2772de473a",
@@ -713,7 +713,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "535bb1e07bb972cdf51e75a334389b2a2af310f7e8dd3cf99eab9e89ccb0de3f",
+      "content_sha256": "86a0237b106ff8e3d974e15b113446dc5df9b9599850252acc3e53976fe5572c",
       "inventory": [
         "SKILL.md",
         "references/design-system.md",
@@ -722,7 +722,7 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "visual-output-design",
-      "version": "0.2.0"
+      "version": "0.3.0"
     }
   ],
   "channel": "lab",
@@ -818,5 +818,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "f1c2102001c41a7d15218cc6187aaf810388337a"
+  "source_revision": "22219cae549a0588e08a887675f8cfc3c6758745"
 }

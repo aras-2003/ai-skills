@@ -38,6 +38,8 @@ Theme mechanism | changes since prior view | indicators | value chain | benefici
 Stop once a falsifiable theme map and bounded research queue exist.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After synthesis, call `report-composer`.
 
 Default profile:

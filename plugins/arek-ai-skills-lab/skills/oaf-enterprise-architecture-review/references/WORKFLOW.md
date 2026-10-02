@@ -67,6 +67,8 @@ Stop before target-state design if current-state evidence cannot distinguish org
 Stop before recommending platform consolidation/retirement when duplication purpose, dependency and transition evidence are insufficient.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After architectural synthesis, call `report-composer`.
 
 Default profile:

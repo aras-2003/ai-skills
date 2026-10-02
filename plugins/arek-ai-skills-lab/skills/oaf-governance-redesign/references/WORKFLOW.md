@@ -55,6 +55,8 @@ Stop before design if the decision problem or owner is not sufficiently evidence
 Stop before enterprise rollout if the mechanism has not been tested or the trade-offs remain material and unresolved.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After governance synthesis, call `report-composer`.
 
 Default profile:

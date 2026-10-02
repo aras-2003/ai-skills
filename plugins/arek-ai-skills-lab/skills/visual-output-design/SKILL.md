@@ -9,7 +9,7 @@ description: 'Convert an already-supported analysis or workflow result into a pr
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.2.0
+  version: 0.3.0
   maturity: candidate
   risk: low
   last_reviewed: '2026-10-02'
@@ -41,7 +41,7 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
    - source/provenance references.
 4. Select the narrowest suitable renderer using `references/tool-routing.md`.
 5. Apply the design and integrity rules in `references/design-system.md`.
-6. Render the visual using a connected native/plugin tool when one is appropriate and available.
+6. Prefer a renderer that can appear directly inside the chat response. Use an external-artifact renderer (HTML file, Figma file, PDF, deck) only when the user explicitly requested that output form.
 7. Keep the visual synchronized with its surrounding report section: it must not imply a stronger conclusion than the written analysis.
 8. Provide a compact text fallback when the chosen renderer is unavailable.
 9. For interactive HTML, keep analysis data and presentation logic separated so the report can be regenerated from the same payload.
@@ -50,9 +50,10 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 - Prefer one strong visual over several decorative ones.
 - Use a chart for quantitative comparison, trend, composition or relationship.
 - Use a diagram for structure, flow, dependency, ownership or state.
-- Use interactive HTML for a component or linked multi-view section where filters, tabs, hover detail or multiple coordinated visuals add value.
-- Use Figma/FigJam for editable executive-grade diagrams, reusable visual systems or high-fidelity layouts.
-- Use Figma Slides/deck output for narrative presentation rather than analysis exploration.
+- Use chat-native interactive components/widgets when available for linked views, filters, horizon switches or hover detail.
+- Use interactive HTML only when the user explicitly requests HTML/a file or an external interactive artifact.
+- Use Figma/FigJam only when the user explicitly requests an editable design/diagram artifact or when the calling task explicitly requires Figma output.
+- Use Figma Slides/deck output only when the user explicitly requests a presentation/deck.
 - Use generated imagery only for illustrative assets, never to encode factual quantities or organizational truth.
 - Do not use ASCII art, pseudo-charts made from punctuation or decorative emoji when a real renderer is available.
 - Do not create a single composite score merely to simplify a visual when the underlying dimensions should remain separate.
@@ -82,9 +83,9 @@ Return or render:
 - Visual labels must preserve units, time period and denominator.
 
 ## Failure and uncertainty handling
-- If the preferred renderer is unavailable, choose the next suitable renderer; do not pretend a tool ran.
+- If the preferred chat-native renderer is unavailable, choose the next suitable chat-native renderer or a table/text fallback; do not escape to an external file unless explicitly requested.
 - If data are incomplete, show the gap or omit the visual element rather than fabricating it.
-- If a high-fidelity Figma/deck artifact would add little value, do not create one.
+- Do not create a Figma/HTML/PDF/deck artifact unless the user explicitly requested that artifact class.
 - If interactivity is unavailable, fall back to a static chart/table plus concise interpretation.
 
 ## Quality checks
@@ -95,6 +96,7 @@ Return or render:
 - [ ] Visual and prose imply the same conclusion.
 - [ ] The result is readable without relying on color alone.
 - [ ] The visual is not decorative clutter.
+- [ ] The renderer stays inside chat unless an external artifact was explicitly requested.
 - [ ] A text fallback exists when the renderer is non-portable.
 
 ## References

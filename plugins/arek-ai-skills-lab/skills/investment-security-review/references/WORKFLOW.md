@@ -46,6 +46,8 @@ Stop before sizing if policy/portfolio context is missing.
 Stop valuation and numeric sizing if critical evidence is unresolved.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After analytical synthesis, call `report-composer`. Use `visual-output-design` to render only the local visual slots.
 
 Default profile:

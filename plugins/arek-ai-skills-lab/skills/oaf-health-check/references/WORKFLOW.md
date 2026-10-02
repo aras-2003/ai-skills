@@ -147,6 +147,8 @@ Stop when:
 - additional OAF domains would add breadth but not decision value.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After diagnosis, call `report-composer` for one executive diagnostic report.
 
 Default profile:
