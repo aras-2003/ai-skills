@@ -23,17 +23,26 @@ class ChartRendererTests(unittest.TestCase):
         cls.renderer = load_renderer()
 
     def test_bar_chart_returns_png_image(self) -> None:
-        image = self.renderer.render_bar_chart(
+        result = self.renderer.render_bar_chart(
             labels=["ACN", "IUIT", "SMH"],
             values=[25.26, 22.16, 5.68],
             title="Portfolio concentration",
             unit="%",
         )
+        self.assertEqual(2, len(result))
+        receipt, image = result
+        self.assertIn("CHART_PAYLOAD_OK", receipt)
+        self.assertIn("mime=image/png", receipt)
+        self.assertIn("sha256=", receipt)
+        self.assertEqual(2, len(result))
+        receipt, image = result
+        self.assertIn("CHART_PAYLOAD_OK", receipt)
+        self.assertIn("mime=image/png", receipt)
         self.assertIsNotNone(image.data)
         self.assertTrue(image.data.startswith(b"\x89PNG\r\n\x1a\n"))
 
     def test_line_chart_returns_png_image(self) -> None:
-        image = self.renderer.render_line_chart(
+        result = self.renderer.render_line_chart(
             x_labels=["2026-01", "2026-02", "2026-03"],
             series_names=["Portfolio"],
             series_values=[[100.0, 103.5, 101.2]],
