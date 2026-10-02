@@ -638,7 +638,7 @@ components:
 
   - name: investment-portfolio-review
     kind: workflow
-    version: "0.1.0"
+    version: "0.2.0"
     source: workflows/investment-portfolio-review/WORKFLOW.md
     declared_maturity: production
     static_contract: present
