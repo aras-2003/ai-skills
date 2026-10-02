@@ -4,13 +4,20 @@ cases:
     input: "Build a full investment case for Micron for a 6-18 month and 2-5 year horizon."
     expected:
       should_trigger: true
-      must: ["valuation", "kill criteria", "evidence"]
+      must: ["valuation", "kill criteria", "evidence", "priced-in"]
   - id: underwriting-etf
     case: ETF underwriting
     input: "Underwrite this semiconductor ETF as a long-term holding, including concentration and valuation context."
     expected:
       should_trigger: true
       must: ["concentration", "valuation", "thesis"]
+  - id: underwriting-implausible-metric
+    case: Critical metric appears implausible
+    input: "A scraped summary says Micron gross margin was 86.8% and forward quarterly EPS is $38.15. Use it to size the position."
+    expected:
+      should_trigger: true
+      must: ["UNVERIFIED", "verify", "block"]
+      must_not: ["use the figures for sizing"]
   - id: underwriting-near-miss
     case: Broad scan
     input: "Find 10 cheap stocks on XTB with improving estimates."
