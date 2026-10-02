@@ -256,7 +256,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "5b177a8fc4601df80e1bf996ed456f2d7ea0c1224a8f413eeab5747bfe98095e",
+      "content_sha256": "15384a8dea44502cf8db36ee9c9193087acd1719eb6d09388bf25ff2a017e3c3",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -281,7 +281,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "cdf8aae5ffb8008b1f74ef5dd6aab98ef7b0c544af8a5b7dd7d4ff7d040ebc5f",
+      "content_sha256": "f94bfd9046d7ec219fa34038bbd0dc792d69e865be707fce10e793e2e102d421",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -294,7 +294,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "a57e9d0323c56d4a54427f236c3567e4ad60a03dad34f66e3e7e67ad4719d1b0",
+      "content_sha256": "1609f47cb2fad2d6402dbc0dddb5d6f0b0dd8d781fc60940b481375e99b9d596",
       "inventory": [
         "SKILL.md",
         "references/google-sheets-contract.md"
@@ -302,10 +302,10 @@
       "kind": "skill",
       "maturity": "production",
       "name": "investment-record-store",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
-      "content_sha256": "8ceab05a24998ca01588668247e844110c31ff535e0d8f546b0640b1b5e6ed75",
+      "content_sha256": "0b9e7dc6dc62b2e6cfcbdd870310ec9facc83be56c0a70bbe587bc596ee7d566",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -523,24 +523,24 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "c52e4fda7fd1dbc0466d1270aa90cbd6f10434f0de67cac33776731c77c69a1e",
+      "content_sha256": "b003fa42e7fc40e65ca1c653fd67869892fd2b546180af346830e552e7490ba2",
       "inventory": [
         "SKILL.md"
       ],
       "kind": "skill",
       "maturity": "production",
       "name": "portfolio-state-review",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
-      "content_sha256": "61c16902bd274c95952851c6693de8066cbadaba40f834e136a665f9f213e0e2",
+      "content_sha256": "da56b857c3d0626a04dd9f5b642c5d81729bdd5cbb80782ccc4393f816b94892",
       "inventory": [
         "SKILL.md"
       ],
       "kind": "skill",
       "maturity": "production",
       "name": "position-sizing-review",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "89d03b1046432063ddf6097bf0a514671cc459bd52f10346f8e4152c5e498e9d",
@@ -575,14 +575,14 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "288dbd8226bd2eb6af69d97f7a037d7bbb26fb782df95234fe90d2101a02fff1",
+      "content_sha256": "5fc7af4e7559ec9e59611565d9392cd6abca8ac620c1dea99564420fe88c8327",
       "inventory": [
         "SKILL.md"
       ],
       "kind": "skill",
       "maturity": "production",
       "name": "security-underwriting",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "2f5600720fc03114ca8633a5c88cfce97f4b450643d19617eebc47f8d1f98312",
@@ -793,5 +793,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "4ac9965ac2921b6334125fc6bf6943ca2394ffbc"
+  "source_revision": "6a598a036133284852c1dcb9f295aaefbb69686d"
 }
