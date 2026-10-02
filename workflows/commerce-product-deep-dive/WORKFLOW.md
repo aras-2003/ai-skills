@@ -61,6 +61,8 @@ Stop research and move to testing when the major remaining uncertainty is empiri
 Before paid acquisition, run any cheaper pre-market experiment that can invalidate differentiation, landed-cost, logistics or compliance assumptions.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After gate synthesis, call `report-composer`.
 
 Default profile:
