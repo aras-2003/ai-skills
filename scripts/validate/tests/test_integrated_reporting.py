@@ -61,6 +61,19 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("Never create HTML/PDF/Figma/deck/file output merely because", routing)
         self.assertIn("Default delivery is the report itself in the chat response", composition)
 
+    def test_quality_standard_is_intrinsic(self) -> None:
+        composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
+        standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")
+        renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
+        design = (ROOT / "skills/meta/visual-output-design/references/design-system.md").read_text(encoding="utf-8")
+        self.assertIn("report-quality-standard.md", composer)
+        self.assertIn("without requiring the user to spell out formatting", composer)
+        self.assertIn("Start with an executive summary of 3–5", standard)
+        self.assertIn("default to 2–3 detailed candidates", standard)
+        self.assertIn("Do not expose raw Mermaid code fences", renderer)
+        self.assertIn("Mermaid xychart", design)
+        self.assertIn("external market data", standard.lower())
+
 
 if __name__ == "__main__":
     unittest.main()
