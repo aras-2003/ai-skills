@@ -2,9 +2,9 @@
 
 ## Identity
 - campaign: `runtime-validation-2026-10-r15`
-- behavior source: `6c01785e00254221bd45353f4889127b9701a751`
-- production package source version: `arek-ai-skills 1.18.0`
-- Lab package source version: `arek-ai-skills-lab 0.12.0`
+- behavior source: `4da3c2d8995c1865f93d7e9e61be9d100247d347`
+- production package source version: `arek-ai-skills 1.19.0`
+- Lab package source version: `arek-ai-skills-lab 0.13.0`
 
 R1–R14 remain historical evidence.
 
@@ -21,9 +21,12 @@ The system should include at least one real chat-native visual when:
 2. The visual is embedded next to the portfolio-risk argument it supports.
 3. For many positions, prefer ranked horizontal bars; a donut/pie is acceptable only for a small meaningful part-to-whole such as top categories or top positions + Other.
 4. The report must not substitute ASCII bars or raw Mermaid code.
-5. Run `capability_preflight`. If no qualifying deterministic chat-native data renderer exists, the expected result is `BLOCKED_NO_RENDERER` and the runtime evaluation is **FAIL for R15 visual-floor compliance**. A compact table/matrix may be included only as diagnostic fallback; it does not turn the case into PASS.
-6. Do not generate HTML/PDF/Figma/deck/file output merely to satisfy the visual floor.
-7. Existing report-quality defaults from R14 remain intact.
+5. Run `capability_preflight`. If no qualifying deterministic chat-native data renderer exists, renderer execution is `BLOCKED_NO_RENDERER` and the runtime evaluation is FAIL.
+6. If the renderer returns a valid image/chart payload, record `PAYLOAD_RENDERED`. The model must record client display as `NOT_OBSERVABLE`; it must not claim `UI_CONFIRMED`, visible rendering, or visual-floor PASS.
+7. R15 visual-floor PASS requires external client-display evidence: screenshot, client telemetry, or explicit user confirmation tied to the run. Without that evidence, a valid payload remains `PENDING_CLIENT_VALIDATION`.
+8. A compact table/matrix may be included only as diagnostic fallback; it does not substitute for renderer execution.
+9. Do not generate HTML/PDF/Figma/deck/file output merely to satisfy the visual floor.
+10. Existing report-quality defaults from R14 remain intact.
 
 ## Runtime focus
 - portfolio review with short prompt: "Review my portfolio and opportunity queue."
@@ -31,4 +34,9 @@ The system should include at least one real chat-native visual when:
 - one OAF report with a chartable/structural relationship.
 
 ## Promotion rule
-Require green static/package/isolation gates plus runtime evidence that at least one chartable report produces a real inline visual without prompt-level formatting instructions. Any text-only fallback for a required chartable case is FAIL, including when the runtime lacks a renderer; absence of the renderer is a capability blocker to fix, not a behavioral PASS.
+Require green static/package/isolation gates plus:
+- a qualifying renderer observed in runtime;
+- a valid chart payload receipt;
+- external evidence that the client actually displayed the required visual.
+
+A payload without external display evidence is PENDING_CLIENT_VALIDATION, not PASS. Any text-only fallback for a required chartable case is FAIL. Model-authored claims such as "rendered above" or `UI_CONFIRMED` are not client evidence.

@@ -89,11 +89,11 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("6c01785e00254221bd45353f4889127b9701a751", lock["behavior_source_revision"])
+            self.assertEqual("4da3c2d8995c1865f93d7e9e61be9d100247d347", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
-            self.assertEqual("1.18.0", lock["packages"]["production"]["version"])
+            self.assertEqual("1.19.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
-            self.assertEqual("0.12.0", lock["packages"]["lab"]["version"])
+            self.assertEqual("0.13.0", lock["packages"]["lab"]["version"])
             self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
             self.assertNotIn("organizational-interface-review", lock["expected_catalogs"]["production"])
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
@@ -279,6 +279,45 @@ class RuntimeCampaignTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "unsupported evidence source revision"):
             campaign.evidence_compatibility_profile("deadbeef")
+
+    def test_visual_pass_requires_external_client_display_evidence(self) -> None:
+        cfg = dict(campaign.config())
+        case_id = "case-003-portfolio-review"
+        cfg["client_display_validation_case_ids"] = [case_id]
+        cfg["client_display_evidence_types"] = ["screenshot", "telemetry", "user_confirmation"]
+
+        with patch.object(campaign, "config", return_value=cfg):
+            missing = campaign.client_display_evidence_errors(case_id, {}, "PASS")
+            self.assertTrue(any("external client-display evidence" in item for item in missing))
+
+            pending = campaign.client_display_evidence_errors(
+                case_id,
+                {
+                    "client_display_evidence": {
+                        "status": "PENDING",
+                        "type": "screenshot",
+                        "reference": "shot-1",
+                    }
+                },
+                "PASS",
+            )
+            self.assertTrue(any("must be CONFIRMED" in item for item in pending))
+
+            valid = campaign.client_display_evidence_errors(
+                case_id,
+                {
+                    "client_display_evidence": {
+                        "status": "CONFIRMED",
+                        "type": "screenshot",
+                        "reference": "shot-1",
+                    }
+                },
+                "PASS",
+            )
+            self.assertEqual([], valid)
+
+            review = campaign.client_display_evidence_errors(case_id, {}, "REVIEW_REQUIRED")
+            self.assertEqual([], review)
 
     def test_smoke_rejects_simultaneous_production_and_lab(self) -> None:
         lock = {

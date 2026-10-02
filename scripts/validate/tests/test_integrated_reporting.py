@@ -81,7 +81,7 @@ class IntegratedReportingTests(unittest.TestCase):
         renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("visual-floor rule", composer)
         self.assertIn("Visual floor:", standard)
-        self.assertIn("include at least one portfolio-composition/concentration visual", standard)
+        self.assertIn("attempt at least one portfolio-composition/concentration visual", standard)
         self.assertIn("required visual-floor slot", profiles)
         self.assertIn("text-only is not a successful substitute", renderer)
 
@@ -100,25 +100,46 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("qualifying deterministic data renderer", routing)
         self.assertIn("image generation", routing)
         self.assertIn("diagnostic fallback", standard)
-        self.assertIn("report PASS for a text-only fallback", quality_cases)
+        self.assertIn("claim renderer success for a text-only fallback", quality_cases)
 
-    def test_render_success_requires_payload_and_ui_confirmation(self) -> None:
+    def test_render_and_client_states_are_separated(self) -> None:
         composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
         renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("PAYLOAD_RENDERED", composer)
-        self.assertIn("UI_CONFIRMED", composer)
-        self.assertIn("UI_RENDER_UNCONFIRMED", composer)
-        self.assertIn("successful renderer call is not enough for PASS", composer)
-        self.assertIn("PAYLOAD_RENDERED", renderer)
-        self.assertIn("UI_RENDER_UNCONFIRMED", renderer)
-        self.assertIn("Tool success alone is not called UI-rendered", renderer)
-        self.assertIn("PASS_WITH_LIMITATIONS", composer)
-        self.assertIn("`PASS` is permitted only when that slot reaches `UI_CONFIRMED`", composer)
-
+        contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
         quality_cases = (ROOT / "skills/meta/report-composer/tests/quality-cases.yaml").read_text(encoding="utf-8")
-        self.assertIn("quality-payload-without-ui-confirmation", quality_cases)
-        self.assertIn("report_status UI_RENDER_UNCONFIRMED", quality_cases)
-        self.assertIn("report PASS_WITH_LIMITATIONS", quality_cases)
+
+        self.assertIn("PAYLOAD_RENDERED", composer)
+        self.assertIn("NOT_OBSERVABLE", composer)
+        self.assertIn("analysis_state", composer)
+        self.assertIn("Do not emit `report_status: PASS`", composer)
+        self.assertIn("PAYLOAD_RENDERED", renderer)
+        self.assertIn("NOT_OBSERVABLE", renderer)
+        self.assertIn("Do not emit `UI_CONFIRMED`, `UI_RENDER_UNCONFIRMED`", renderer)
+        self.assertIn("PENDING_CLIENT_VALIDATION", contract)
+        self.assertIn("USER_PROVIDED", contract)
+        self.assertIn("causal attribution", contract.lower())
+        self.assertIn("quality-payload-client-not-observable", quality_cases)
+        self.assertIn("quality-user-provided-unreproducible-metric", quality_cases)
+
+    def test_portfolio_attribution_fails_closed_without_causal_evidence(self) -> None:
+        workflow = (ROOT / "workflows/investment-portfolio-review/WORKFLOW.md").read_text(encoding="utf-8")
+        state = (ROOT / "skills/investing/portfolio-state-review/SKILL.md").read_text(encoding="utf-8")
+        cases = (ROOT / "skills/investing/portfolio-state-review/tests/cases.yaml").read_text(encoding="utf-8")
+
+        self.assertIn("attribution `UNKNOWN`", workflow)
+        self.assertIn("absence of observed transactions is not evidence", workflow.lower())
+        self.assertIn('never infer "market-driven"', state)
+        self.assertIn("portfolio-attribution-insufficient", cases)
+
+    def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
+        contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
+        standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")
+
+        self.assertIn("DERIVED", contract)
+        self.assertIn("USER_PROVIDED", contract)
+        self.assertIn("reproduce", contract.lower())
+        self.assertIn("Contradiction check", contract)
+        self.assertIn("cannot be recomputed from visible inputs", standard)
 
 
 if __name__ == "__main__":

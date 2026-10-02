@@ -1,9 +1,9 @@
 schema_version: "1.0"
 campaign: runtime-validation-2026-10-r15
-behavior_source_revision: 6c01785e00254221bd45353f4889127b9701a751
+behavior_source_revision: 4da3c2d8995c1865f93d7e9e61be9d100247d347
 package:
   name: arek-ai-skills
-  version: "1.18.0"
+  version: "1.19.0"
   channel: plugin
 commerce_case_ids:
   - case-001-premium-vs-generic
@@ -76,6 +76,12 @@ execution_order:
   - executive-role
 required_runtime_tool_fragments:
   - render_bar_chart
+client_display_validation_case_ids:
+  - case-003-portfolio-review
+client_display_evidence_types:
+  - screenshot
+  - telemetry
+  - user_confirmation
 runtime_fields_required:
   - provider
   - model_id

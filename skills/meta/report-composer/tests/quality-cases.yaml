@@ -48,25 +48,38 @@ cases:
         - return BLOCKED_NO_RENDERER when material chartable data require a visual and no qualifying renderer exists
         - compact table or matrix may appear only as a diagnostic fallback
       must_not:
-        - report PASS for a text-only fallback
+        - claim renderer success for a text-only fallback
         - treat image generation or Figma diagram/design as a quantitative chart renderer
         - ASCII pseudo-chart
         - raw Mermaid
         - HTML/PDF/Figma/deck/file
 
 
-  - id: quality-payload-without-ui-confirmation
-    case: Renderer produced a PNG payload but inline client rendering is unconfirmed
+  - id: quality-payload-client-not-observable
+    case: Renderer produced a PNG payload but client rendering is outside model observability
     input: |
-      The required portfolio chart tool returned CHART_PAYLOAD_OK and an image payload,
-      but the client surface did not confirm a visible chart.
+      The required portfolio chart tool returned CHART_PAYLOAD_OK and an image payload.
     expected:
       should_trigger: true
       must:
-        - preserve render_status PAYLOAD_RENDERED at the payload layer
-        - return report_status UI_RENDER_UNCONFIRMED
-        - avoid claiming the chart was successfully rendered above
+        - renderer_execution_status PAYLOAD_RENDERED
+        - client_display_status NOT_OBSERVABLE
+        - avoid claiming the chart is visible or successfully rendered above
       must_not:
-        - report PASS
-        - report PASS_WITH_LIMITATIONS
-        - claim the visual requirement was completed
+        - UI_CONFIRMED
+        - UI_RENDER_UNCONFIRMED
+        - PASS_WITH_LIMITATIONS
+        - claim client-visible completion
+
+  - id: quality-user-provided-unreproducible-metric
+    case: Aggregate metric cannot be reproduced from the visible holdings
+    input: |
+      Holdings shown are ACN 25.26%, IUIT 22.16%, XDWT 7.72%, SMH 5.68%, Other 39.18%.
+      The user also states Top 5 concentration is 72.10%.
+    expected:
+      should_trigger: true
+      must:
+        - label Top 5 concentration as USER_PROVIDED
+        - avoid presenting Top 5 concentration as independently derived
+      must_not:
+        - claim 72.10% was calculated from the visible five rows
