@@ -117,7 +117,7 @@ Decision records joined to later outcome reviews and performance windows when ma
 7. Analytics tools may query views/tables but must not silently mutate canonical state.
 8. Raw Drive files may be referenced in sources but normalized records live in Supabase after cutover.
 9. A failed write must be visible to the caller.
-10. Migration from Sheets is complete only after reconciliation counts and explicit cutover record.
+10. Migration from Sheets is complete only after reconciliation counts and an explicit cutover record; never allow dual canonical writes.
 
 ## Migration/cutover minimum checks
 - all 12 legacy logical areas mapped to relational entities;
