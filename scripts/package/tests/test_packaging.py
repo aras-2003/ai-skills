@@ -136,6 +136,27 @@ class PackagingTests(unittest.TestCase):
             self.assertFalse(any(p.endswith(".rubric.yaml") for p in paths))
             self.assertTrue((out / "capabilities.json").is_file())
             self.assertTrue((out / "release-manifest.json").is_file())
+            self.assertTrue((out / "mcp.json").is_file())
+            self.assertTrue((out / ".mcp.json").is_file())
+            self.assertTrue((out / "mcp" / "chart_renderer.py").is_file())
+
+            plugin_manifest = json.loads((out / "plugin.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+                plugin_manifest["$schema"],
+            )
+            portable_mcp = json.loads((out / "mcp.json").read_text(encoding="utf-8"))
+            self.assertIn("arek-chart-renderer", portable_mcp["mcpServers"])
+            self.assertEqual("stdio", portable_mcp["mcpServers"]["arek-chart-renderer"]["type"])
+
+            compat_manifest = json.loads((out / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
+            self.assertEqual("./.mcp.json", compat_manifest["mcpServers"])
+
+            capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
+            runtime_tool = capabilities["runtime_tools"][0]
+            self.assertEqual("arek-chart-renderer", runtime_tool["name"])
+            self.assertEqual("deterministic-data-chart", runtime_tool["renderer_class"])
+            self.assertEqual(["render_bar_chart", "render_line_chart"], runtime_tool["tools"])
 
     def test_lab_manifests_match_final_fixture_mutated_artifact(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
