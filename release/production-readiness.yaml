@@ -599,13 +599,13 @@ components:
 
   - name: investment-os-review
     kind: workflow
-    version: "0.1.0"
+    version: "0.2.0"
     source: workflows/investment-os-review/WORKFLOW.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Front-door routing has static/package coverage; exact-version unassisted runtime routing evidence is pending."
+    evidence_gap: "MCP-backed front-door routing has static/package coverage; exact-version unassisted runtime routing evidence is pending."
     limitation: "Use as the natural Investment OS entry point; child workflow execution remains subject to each child's evidence and runtime contracts."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
