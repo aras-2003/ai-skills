@@ -72,12 +72,12 @@ def validate_campaign() -> list[str]:
     errors = []
     cfg = config()
     cases = load_campaign_cases(ROOT)
-    expected = {"commerce": 6, "routing": 16, "executive-role": 14, "production-fallback": 2}
+    expected = {"commerce": 6, "routing": 17, "executive-role": 14, "production-fallback": 2}
     counts = {k: 0 for k in expected}
     known = validate_routing.known_capability_names(ROOT)
 
-    if len(cases) != 38:
-        errors.append(f"expected 38 campaign cases, got {len(cases)}")
+    if len(cases) != 39:
+        errors.append(f"expected 39 campaign cases, got {len(cases)}")
 
     for cid, case in cases.items():
         suite = str(case.get("suite") or "")
