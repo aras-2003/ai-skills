@@ -38,14 +38,18 @@ cases:
         - price momentum treated as thesis validity
 
   - id: quality-no-renderer
-    case: Missing rich renderer stays readable in chat
+    case: Missing required renderer blocks visual-floor completion
     input: |
       Give me the portfolio review here in chat.
     expected:
       should_trigger: true
       must:
-        - compact table or matrix fallback when graphics cannot render
+        - run capability preflight against actual runtime tools
+        - return BLOCKED_NO_RENDERER when material chartable data require a visual and no qualifying renderer exists
+        - compact table or matrix may appear only as a diagnostic fallback
       must_not:
+        - report PASS for a text-only fallback
+        - treat image generation or Figma diagram/design as a quantitative chart renderer
         - ASCII pseudo-chart
         - raw Mermaid
         - HTML/PDF/Figma/deck/file
