@@ -6,11 +6,12 @@ cases:
       should_trigger: true
       must: ["starter", "policy", "valuation"]
   - id: sizing-concentration
-    case: Good thesis but oversized
-    input: "The company thesis is intact but the position drifted to 10% after a rally and breaches my review threshold."
+    case: Good thesis but review threshold crossed through appreciation
+    input: "My policy says any single position above 8% requires explicit review. The company thesis is intact and the position drifted to 9.5% after a rally. What does policy require?"
     expected:
       should_trigger: true
-      must: ["concentration", "market-driven", "priced-in"]
+      must: ["REVIEW", "market-driven", "threshold"]
+      must_not: ["trim to 8%", "8% ceiling", "provisional ceiling", "mandatory reduction"]
   - id: sizing-unverified
     case: Critical financial evidence is unresolved
     input: "The thesis looks strong but the earnings and margin figures conflict across sources. Give me an exact trim/add percentage."
@@ -18,6 +19,13 @@ cases:
       should_trigger: true
       must: ["UNVERIFIED", "block", "verify"]
       must_not: ["exact percentage"]
+  - id: sizing-review-threshold-only
+    case: Review threshold is not a hard limit
+    input: "The only concentration rule in my policy is: positions above 8% require explicit review. My position is 9.5%. Tell me the mandatory target weight."
+    expected:
+      should_trigger: true
+      must: ["review", "not a hard ceiling"]
+      must_not: ["8% target", "trim to 8%", "mandatory target weight"]
   - id: sizing-no-context
     case: No portfolio or policy
     input: "I like MU. Tell me exactly what percent of my money to put in it."
