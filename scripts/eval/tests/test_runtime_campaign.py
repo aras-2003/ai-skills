@@ -89,11 +89,11 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("59271f4a7c11cdf698fe5d166abb760494efa1e6", lock["behavior_source_revision"])
+            self.assertEqual("82ce95d8f4465fac73e79357a695842340cb78be", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
-            self.assertEqual("1.21.0", lock["packages"]["production"]["version"])
+            self.assertEqual("1.22.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
-            self.assertEqual("0.15.0", lock["packages"]["lab"]["version"])
+            self.assertEqual("0.16.0", lock["packages"]["lab"]["version"])
             self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
             self.assertNotIn("organizational-interface-review", lock["expected_catalogs"]["production"])
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
@@ -288,13 +288,25 @@ class RuntimeCampaignTests(unittest.TestCase):
         }
         missing_child = campaign.selection_errors(
             case,
-            {"selected_capabilities": ["investment-os-review"]},
+            {
+                "selected_capabilities": ["investment-os-review"],
+                "tool_calls": ["mcp__arek-investment-os__route_investment_request"],
+            },
         )
         self.assertTrue(any("required child capability absent: investment-portfolio-review" in item for item in missing_child))
 
-        valid = campaign.selection_errors(
+        missing_tool = campaign.selection_errors(
             case,
             {"selected_capabilities": ["investment-os-review", "investment-portfolio-review"]},
+        )
+        self.assertTrue(any("required routing tool call absent: route_investment_request" in item for item in missing_tool))
+
+        valid = campaign.selection_errors(
+            case,
+            {
+                "selected_capabilities": ["investment-os-review", "investment-portfolio-review"],
+                "tool_calls": ["mcp__arek-investment-os__route_investment_request"],
+            },
         )
         self.assertEqual([], valid)
 
@@ -387,7 +399,7 @@ class RuntimeCampaignTests(unittest.TestCase):
                 "provider": "offline-synthetic-provider",
                 "model_id": "offline-synthetic-model",
                 "reasoning": "offline",
-                "available_tools": ["offline-fixture", "mcp__arek-chart-renderer__render_bar_chart"],
+                "available_tools": ["offline-fixture", "mcp__arek-chart-renderer__render_bar_chart", "mcp__arek-investment-os__route_investment_request"],
             },
         }
 

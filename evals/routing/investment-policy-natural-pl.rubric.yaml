@@ -7,6 +7,8 @@ competing_intents:
   - investment-portfolio-review
 required_selected_capabilities:
   - investment-policy-design
+required_tool_fragments:
+  - route_investment_request
 assertions:
   manual:
     - the Investment OS front door is selected first

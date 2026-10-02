@@ -107,7 +107,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
             }
         }
         write_json(stage / "plugin.json", manifest)
-        runtime_tool = package_runtime_mcp(root, stage)
+        runtime_tools = package_runtime_mcp(root, stage)
         compat_dir = stage / ".codex-plugin"
         compat_dir.mkdir(parents=True)
         write_json(
@@ -128,7 +128,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                 "channel": "plugin",
                 "source_revision": revision,
                 "capabilities": sorted(capabilities, key=lambda x: x["name"]),
-                "runtime_tools": [runtime_tool],
+                "runtime_tools": runtime_tools,
             },
         )
         payload_digest = sha256_tree(stage)

@@ -139,6 +139,7 @@ class PackagingTests(unittest.TestCase):
             self.assertTrue((out / "mcp.json").is_file())
             self.assertTrue((out / ".mcp.json").is_file())
             self.assertTrue((out / "mcp" / "chart_renderer.py").is_file())
+            self.assertTrue((out / "mcp" / "investment_runtime.py").is_file())
 
             plugin_manifest = json.loads((out / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual(
@@ -147,16 +148,22 @@ class PackagingTests(unittest.TestCase):
             )
             portable_mcp = json.loads((out / "mcp.json").read_text(encoding="utf-8"))
             self.assertIn("arek-chart-renderer", portable_mcp["mcpServers"])
+            self.assertIn("arek-investment-os", portable_mcp["mcpServers"])
             self.assertEqual("stdio", portable_mcp["mcpServers"]["arek-chart-renderer"]["type"])
+            self.assertEqual("stdio", portable_mcp["mcpServers"]["arek-investment-os"]["type"])
 
             compat_manifest = json.loads((out / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual("./.mcp.json", compat_manifest["mcpServers"])
 
             capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
-            runtime_tool = capabilities["runtime_tools"][0]
-            self.assertEqual("arek-chart-renderer", runtime_tool["name"])
-            self.assertEqual("deterministic-data-chart", runtime_tool["renderer_class"])
-            self.assertEqual(["render_bar_chart", "render_line_chart"], runtime_tool["tools"])
+            runtime_tools = {item["name"]: item for item in capabilities["runtime_tools"]}
+            self.assertEqual({"arek-chart-renderer", "arek-investment-os"}, set(runtime_tools))
+            chart = runtime_tools["arek-chart-renderer"]
+            self.assertEqual("deterministic-data-chart", chart["runtime_class"])
+            self.assertEqual(["render_bar_chart", "render_line_chart"], chart["tools"])
+            investment = runtime_tools["arek-investment-os"]
+            self.assertEqual("investment-request-router", investment["runtime_class"])
+            self.assertEqual(["route_investment_request"], investment["tools"])
 
     def test_lab_manifests_match_final_fixture_mutated_artifact(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:

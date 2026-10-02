@@ -8,6 +8,8 @@ competing_intents:
   - investment-opportunity-hunter
 required_selected_capabilities:
   - investment-security-review
+required_tool_fragments:
+  - route_investment_request
 assertions:
   manual:
     - the Investment OS front door is selected first
