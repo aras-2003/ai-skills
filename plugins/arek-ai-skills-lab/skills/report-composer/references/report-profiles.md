@@ -6,7 +6,7 @@ These are default structures, not rigid templates. Skip sections that add no dec
 Default to a concise executive report, not a portfolio dump.
 1. Executive summary — 3–5 decision-relevant points
 2. Portfolio risk
-   - **required visual-floor slot:** at least one composition/concentration visual; run capability preflight and return `BLOCKED_NO_RENDERER` if no qualifying chat-native renderer exists
+   - **required visual-floor slot:** at least one composition/concentration visual; run capability preflight; use `BLOCKED_NO_RENDERER` if no qualifying renderer exists and `PAYLOAD_RENDERED` when a valid chart payload is produced; client display remains `NOT_OBSERVABLE` to the model
    - prefer ranked horizontal bars for many positions;
    - a donut/pie is acceptable only for a small meaningful part-to-whole (for example top categories or top positions + Other), not for a crowded 14-slice portfolio;
    - overlap/look-through matrix only if supported and decision-relevant
@@ -18,7 +18,12 @@ Default to a concise executive report, not a portfolio dump.
 5. Cross-candidate comparison
    - one compact matrix/visual
 6. Decision queue — 3–5 actions/gates
-7. Compact canonical receipt and material limitations
+7. Evidence/limitations
+   - distinguish CANONICAL / USER_PROVIDED / EXTERNAL_VERIFIED / DERIVED / UNKNOWN;
+   - label unreproducible supplied aggregates as USER_PROVIDED;
+   - do not attribute drift cause without sufficient history/transaction evidence;
+   - keep missing-record limitations compact
+8. Compact canonical receipt
 
 If canonical storage lacks current market price history needed for price context, external market-data tools may be used. Label that data external and noncanonical.
 

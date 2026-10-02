@@ -177,7 +177,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "56523a24c6fd9d2f7763d812152c4fee89d103b6dcb11712cf05e451f66e4b00",
+      "content_sha256": "c71f28b56876a7d706387eb2c3e39d6f1c6e204b377f2768291bfd87775d5494",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-portfolio-review",
@@ -324,11 +324,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "4ddaa27e68beab3df3f7f37d0fc01c7778e9dfed350974bee1637b10cb3deb25",
+      "content_sha256": "2359d6e376ade0fa3a1bf5c3d518a316e50554d541f11fb2491160d1ac891f8d",
       "kind": "skill",
       "maturity": "production",
       "name": "portfolio-state-review",
-      "version": "0.3.0"
+      "version": "0.4.0"
     },
     {
       "content_sha256": "936118960a56d276495f32289f6d6bdc0fd1f4b2e1b9ae63e74e07a538968ddf",
@@ -359,11 +359,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "b99bfc34d3a84ebc44f516a67e69e052135c378ac57f381143d45878ad278ef0",
+      "content_sha256": "66d733a406046f9c8b57b11e1e15d3d9e3237f97fe31bef5147728c2073aac98",
       "kind": "skill",
       "maturity": "candidate",
       "name": "report-composer",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "content_sha256": "861592341f9daac0cdf8d9df183a5c9676f0fa26d110f6ce990bca2772de473a",
@@ -450,17 +450,17 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "29835411c1120b79fa5c796a6e3d5164a37bb9100f78e38780fb14e8bdaff1e8",
+      "content_sha256": "71c6fba16061109f8061859844c4160ca49a6e4f92e5e7318634dc4d7121144b",
       "kind": "skill",
       "maturity": "candidate",
       "name": "visual-output-design",
-      "version": "0.5.0"
+      "version": "0.6.0"
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "836e03711f65590e912c2a6783c73877d3dd2a2b8bcadfb47aa8508d988ae97d",
-  "release_id": "0.12.0+6d1db45debcf",
+  "payload_content_sha256": "2848b161c4a8391e2da09bdb699dc44f44dd0703e9fcd399430ea43337a8bfb5",
+  "release_id": "0.13.0+8a5d47dbae43",
   "schema_version": "1.0",
-  "source_revision": "6d1db45debcf2df3557eb930a2e6a13397809b54",
-  "version": "0.12.0"
+  "source_revision": "8a5d47dbae43b2a0813dc71e1f45a9493650887d",
+  "version": "0.13.0"
 }

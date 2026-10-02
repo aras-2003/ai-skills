@@ -9,7 +9,7 @@ description: 'Compose one integrated decision report from an already-supported w
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.4.0
+  version: 0.5.0
   maturity: candidate
   risk: low
   last_reviewed: '2026-10-02'
@@ -29,40 +29,46 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
 
 ## Procedure
 1. Identify the audience, decision and minimum report depth.
-2. Apply `references/report-quality-standard.md` as the default quality baseline.
-3. Run `capability_preflight` before finalising any visual-floor requirement:
+2. Apply `references/report-quality-standard.md` and `references/report-state-and-evidence-contract.md` as mandatory contracts.
+3. Build the evidence ledger before presentation:
+   - classify each decision-relevant claim as CANONICAL / USER_PROVIDED / EXTERNAL_VERIFIED / DERIVED / UNKNOWN;
+   - require reproducible inputs for every DERIVED claim;
+   - run the causal-attribution gate before stating why something changed.
+4. Run `capability_preflight` before finalising any visual-floor requirement:
    - inspect the tools actually available in the current runtime;
-   - classify whether a **deterministic data renderer** exists for the required visual grammar;
+   - classify whether a deterministic data renderer exists for the required visual grammar;
    - do not count `image_gen`, image viewers, generic media generation, or Figma diagram/design tools as a quantitative chart renderer;
    - record one of: `AVAILABLE`, `UNAVAILABLE`, `UNKNOWN`.
-4. Select a report profile from `references/report-profiles.md` or derive a minimal equivalent.
-5. Build a semantic report model containing ordered sections:
+5. Select a report profile from `references/report-profiles.md` or derive a minimal equivalent.
+6. Build a semantic report model containing ordered sections:
    - section purpose;
    - narrative block;
    - evidence block;
    - decision/implication block;
    - optional inline visual slots;
    - section-level provenance and uncertainty.
-6. Decide visual placement by reading flow, not by asset type:
+7. Decide visual placement by reading flow, not by asset type:
    - put the visual immediately after the claim/context it helps explain;
    - put interpretation immediately after the visual;
    - avoid collecting unrelated visuals into a separate appendix/dashboard unless the user explicitly asks.
-7. For each visual slot, call `visual-output-design` with:
+8. For each visual slot, call `visual-output-design` with:
    - the local section question;
    - only the relevant supported data;
    - required renderer capabilities;
    - as-of context and provenance.
-8. Choose output target:
-   - **chat-native report** when all required visual-floor slots have a qualifying renderer and render successfully;
-   - **chat-blocked** when chartable material data require a visual but `capability_preflight` returns `UNAVAILABLE` or `UNKNOWN`, or when invocation fails;
-   - **external artifact** only when the user explicitly asks for HTML, PDF, Figma, a deck, a downloadable file, or another external output format.
-9. A blocked report may still include a compact table/matrix so the user can inspect the data, but that fallback is diagnostic only: it does **not** satisfy the required visual slot and must carry `BLOCKED_NO_RENDERER` (or `FAIL_RENDERER_INVOCATION` when a qualifying renderer was discovered but failed).
-10. Preserve progressive disclosure:
+9. Choose output target from actual renderer execution:
+   - **chat-native report** when required visual slots have a qualifying renderer and a valid payload was produced;
+   - **chat-blocked** when no qualifying renderer exists or invocation fails;
+   - **external artifact** only when the user explicitly asks for one.
+   Client-display success is never inferred by the model. A valid payload is `PAYLOAD_RENDERED`; client display remains `NOT_OBSERVABLE`.
+10. A blocked report may still include a compact table/matrix so the user can inspect the data, but that fallback is diagnostic only: it does **not** satisfy the required visual slot and must carry `BLOCKED_NO_RENDERER` (or `FAIL_RENDERER_INVOCATION` when a qualifying renderer was discovered but failed).
+11. Preserve progressive disclosure:
    - lead with the decision and minimum evidence;
    - keep detail near the section it supports;
    - move exhaustive evidence tables or appendices later.
-11. Keep receipts, source notes and material limitations in the same report, not in a disconnected parallel artifact.
-12. Never silently convert a required visual-floor slot into a successful text-only report. If the runtime cannot truly embed a qualifying visual inline in chat, surface the block explicitly. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
+12. Keep receipts, source notes and material limitations in the same report, not in a disconnected parallel artifact.
+13. Run the contradiction check from the state/evidence contract before final output.
+14. Never silently convert a required visual-floor slot into successful renderer execution. If no qualifying renderer exists or invocation fails, surface that execution state explicitly. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
 
 ## Inline visual slot contract
 Each slot must define:
@@ -77,7 +83,8 @@ Each slot must define:
 - **uncertainty**
 - **fallback**
 - **capability_status**: AVAILABLE / UNAVAILABLE / UNKNOWN
-- **render_status**: PAYLOAD_RENDERED / UI_CONFIRMED / BLOCKED_NO_RENDERER / FAIL_RENDERER_INVOCATION / UI_RENDER_UNCONFIRMED / NOT_REQUIRED
+- **renderer_execution_status**: NOT_REQUIRED / NOT_ATTEMPTED / BLOCKED_NO_RENDERER / PAYLOAD_RENDERED / FAIL_RENDERER_INVOCATION
+- **client_display_status**: NOT_OBSERVABLE
 
 ## Decision rules
 - The report is the product; visuals are evidence-bearing components inside it.
@@ -96,9 +103,8 @@ Each slot must define:
 Return one semantic report with:
 - **report_title**
 - **decision_headline**
+- **analysis_state**: COMPLETE / PARTIAL_EVIDENCE / BLOCKED_ANALYSIS
 - **target**: chat-native / chat-blocked / external-artifact-requested
-- **report_status**: PASS / BLOCKED_NO_RENDERER / FAIL_RENDERER_INVOCATION / UI_RENDER_UNCONFIRMED
-- The status enum is closed. Do not invent variants such as `PASS_WITH_LIMITATIONS`, `PARTIAL_PASS`, `PASS_WITH_WARNINGS`, or similar.
 - **sections[]**
   - heading
   - narrative
@@ -108,9 +114,15 @@ Return one semantic report with:
   - decision_or_next_step
   - provenance
   - uncertainty
+- **runtime_diagnostic** only when requested or useful:
+  - capability_status
+  - renderer_execution_status
+  - client_display_status: NOT_OBSERVABLE
 - **receipts**
 - **limitations**
 - **appendix** only when needed
+
+Do not emit `report_status: PASS` for ordinary report composition. Runtime visual PASS/FAIL belongs to an external evaluator with client evidence.
 
 ## Evidence requirements
 - Every factual visual slot inherits the evidence standard of the calling workflow.
@@ -119,10 +131,12 @@ Return one semantic report with:
 - Missing evidence stays visibly missing.
 
 ## Failure and uncertainty handling
-- If `visual-output-design` is unavailable and a visual-floor slot is required, mark the report `BLOCKED_NO_RENDERER`; compact tables/text may be included only as an explicit diagnostic fallback.
-- If inline embedding is not supported by the current chat runtime for a required visual slot, do not pretend the requirement was met. Mark `BLOCKED_NO_RENDERER`. Never generate an external file merely as a fallback.
-- If an interactive control lacks complete comparable data, omit the control or disable the unsupported horizon/state.
-- If a section has no useful visual, do not force one.
+- If a required visual has no qualifying renderer, use `BLOCKED_NO_RENDERER`.
+- If renderer invocation fails, use `FAIL_RENDERER_INVOCATION`.
+- If the renderer returns a valid payload, use `PAYLOAD_RENDERED`; do not infer whether the client displayed it.
+- If decision-critical evidence is missing but useful analysis remains possible, use `analysis_state: PARTIAL_EVIDENCE`.
+- If the core requested analysis cannot be supported, use `analysis_state: BLOCKED_ANALYSIS`.
+- Never generate an external file merely as a fallback.
 
 ## Quality checks
 - [ ] The output is one coherent report in chat by default, not text plus a duplicate dashboard or unsolicited file.
@@ -135,15 +149,16 @@ Return one semantic report with:
 - [ ] The report remains readable on narrow/mobile layouts.
 - [ ] Receipts and limitations remain visible.
 - [ ] `capability_preflight` was run for every required visual-floor slot.
-- [ ] Text/table fallback never converts `BLOCKED_NO_RENDERER` into PASS.
-- [ ] A successful renderer call is not enough for PASS: verify a valid chart image payload receipt.
-- [ ] For any required visual-floor slot, `PASS` is permitted only when that slot reaches `UI_CONFIRMED`.
-- [ ] `PAYLOAD_RENDERED` alone must produce `UI_RENDER_UNCONFIRMED`, never PASS.
-- [ ] Never say a chart was "successfully rendered above", "visible above", or equivalent unless the required slot is `UI_CONFIRMED`.
-- [ ] If the client surface shows a blank/broken placeholder or visible embedding cannot be confirmed, use `UI_RENDER_UNCONFIRMED` rather than claiming the chart was rendered in chat.
-- [ ] Reject non-contract status variants such as `PASS_WITH_LIMITATIONS`.
+- [ ] Text/table fallback never converts `BLOCKED_NO_RENDERER` into renderer success.
+- [ ] Renderer success is reported only as `PAYLOAD_RENDERED`; client display remains `NOT_OBSERVABLE`.
+- [ ] No `UI_CONFIRMED`, `UI_RENDER_UNCONFIRMED`, `PASS_WITH_LIMITATIONS` or invented status appears.
+- [ ] Every derived metric is reproducible from identified inputs.
+- [ ] User-provided but non-reproducible metrics remain labelled USER_PROVIDED.
+- [ ] Causal claims pass the causal-attribution gate.
+- [ ] Limitations do not contradict earlier claims.
 
 ## References
 - references/report-quality-standard.md
+- references/report-state-and-evidence-contract.md
 - references/report-profiles.md
 - references/composition-rules.md
