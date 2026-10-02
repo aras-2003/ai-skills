@@ -9,6 +9,8 @@ competing_intents:
   - investment-security-review
 required_selected_capabilities:
   - investment-portfolio-review
+required_tool_fragments:
+  - route_investment_request
 assertions:
   manual:
     - the Investment OS front door is selected and invokes the full portfolio-review child workflow rather than generic investment commentary
