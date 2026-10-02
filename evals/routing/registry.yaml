@@ -48,3 +48,7 @@ cases:
   - id: oaf-architecture-workflow-pl
     input: evals/routing/oaf-architecture-workflow-pl.input.md
     rubric: evals/routing/oaf-architecture-workflow-pl.rubric.yaml
+
+  - id: investment-portfolio-natural-en
+    input: evals/routing/investment-portfolio-natural-en.input.md
+    rubric: evals/routing/investment-portfolio-natural-en.rubric.yaml

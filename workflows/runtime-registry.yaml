@@ -539,11 +539,14 @@ workflows:
         - name: decision-journal-update
           on_missing: "Return decisions for manual persistence."
     description: >
-      Review the current portfolio against policy, prior snapshots and active theses, surfacing only material
-      concentration, thesis, valuation or policy changes while preserving append-only history.
+      Review a user's investment portfolio end to end. Use when the user asks to review "my portfolio" or "this portfolio",
+      asks what requires attention, or provides holdings/weights and wants concentration, diversification, ETF overlap,
+      portfolio risk, policy fit, drift or next decisions. Trigger even when the user does not name Investment OS,
+      XTB, canonical records or this workflow. Start from canonical portfolio state when available, reconcile user-supplied
+      holdings as evidence rather than replacing canonical state, then run the integrated report and required visual-floor path.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.1.0"
+      version: "0.2.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-02

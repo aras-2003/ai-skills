@@ -28,16 +28,16 @@ class RuntimeCampaignTests(unittest.TestCase):
 
     def test_campaign_resolves_exact_scope_and_isolation(self) -> None:
         self.assertEqual([], campaign.validate_campaign())
-        cases = load_campaign_cases(ROOT)
-        self.assertEqual(38, len(cases))
+        cases = load_campaign_cases(ROOT, campaign.config()["campaign"])
+        self.assertEqual(39, len(cases))
         counts = {}
         for case in cases.values():
             counts[case["suite"]] = counts.get(case["suite"], 0) + 1
         self.assertEqual(
-            {"commerce": 6, "routing": 16, "executive-role": 14, "production-fallback": 2},
+            {"commerce": 6, "routing": 17, "executive-role": 14, "production-fallback": 2},
             counts,
         )
-        supplemental = load_supplemental_cases(ROOT)
+        supplemental = load_supplemental_cases(ROOT, campaign.config()["campaign"])
         self.assertEqual(
             [
                 "oaf-decision-bottleneck-natural-pl",
@@ -89,11 +89,11 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("4da3c2d8995c1865f93d7e9e61be9d100247d347", lock["behavior_source_revision"])
+            self.assertEqual("c7d64fcf6a89430524a805251180a71aa7e2ab38", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
-            self.assertEqual("1.19.0", lock["packages"]["production"]["version"])
+            self.assertEqual("1.20.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
-            self.assertEqual("0.13.0", lock["packages"]["lab"]["version"])
+            self.assertEqual("0.14.0", lock["packages"]["lab"]["version"])
             self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
             self.assertNotIn("organizational-interface-review", lock["expected_catalogs"]["production"])
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
@@ -102,7 +102,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual("production", lock["case_channels"]["fallback-strategy-production-002"])
             self.assertEqual("production", lock["case_channels"]["fallback-interface-explicit-production-002"])
             self.assertEqual("production", lock["case_channels"]["oaf-interface-natural-pl"])
-            self.assertEqual(38, lock["core_case_count"])
+            self.assertEqual(39, lock["core_case_count"])
             self.assertEqual(
                 [
                     "oaf-decision-bottleneck-natural-pl",
@@ -113,7 +113,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             )
             self.assertEqual(64, len(lock["campaign_definition_sha256"]))
             definitions = {item["id"]: item for item in lock["case_definitions"]}
-            self.assertEqual(41, len(definitions))
+            self.assertEqual(42, len(definitions))
             components = {(item["channel"], item["name"]): item for item in lock["components"]}
             self.assertEqual("1.5.0", components[("production", "oaf-health-check")]["version"])
             self.assertEqual("1.1.0", components[("production", "operating-model-review")]["version"])
@@ -126,7 +126,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual(64, len(strategy["rubric_sha256"]))
 
     def test_revised_fallback_identities_do_not_rewrite_historical_001_cases(self) -> None:
-        active = load_campaign_cases(ROOT)
+        active = load_campaign_cases(ROOT, campaign.config()["campaign"])
         self.assertIn("fallback-strategy-production-002", active)
         self.assertIn("fallback-interface-explicit-production-002", active)
         self.assertNotIn("fallback-strategy-production-001", active)
@@ -669,7 +669,7 @@ class RuntimeCampaignTests(unittest.TestCase):
 
     def test_receipt_paths_are_portable_and_trace_is_hashed(self) -> None:
         cfg = campaign.config()
-        cases = load_campaign_cases(ROOT)
+        cases = load_campaign_cases(ROOT, campaign.config()["campaign"])
         case = cases["case-001-premium-vs-generic"]
         version, digest = receipt.current_component_identity(ROOT, case["target"])
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:

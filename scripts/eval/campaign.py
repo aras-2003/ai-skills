@@ -71,13 +71,13 @@ def explicit_fallback_input_errors(case: dict, input_text: str) -> list[str]:
 def validate_campaign() -> list[str]:
     errors = []
     cfg = config()
-    cases = load_campaign_cases(ROOT)
-    expected = {"commerce": 6, "routing": 16, "executive-role": 14, "production-fallback": 2}
+    cases = load_campaign_cases(ROOT, config()["campaign"])
+    expected = {"commerce": 6, "routing": 17, "executive-role": 14, "production-fallback": 2}
     counts = {k: 0 for k in expected}
     known = validate_routing.known_capability_names(ROOT)
 
-    if len(cases) != 38:
-        errors.append(f"expected 38 campaign cases, got {len(cases)}")
+    if len(cases) != 39:
+        errors.append(f"expected 39 campaign cases, got {len(cases)}")
 
     for cid, case in cases.items():
         suite = str(case.get("suite") or "")
@@ -105,7 +105,7 @@ def validate_campaign() -> list[str]:
         if counts[suite] != count:
             errors.append(f"{suite}: expected {count}, got {counts[suite]}")
 
-    supplemental = load_supplemental_cases(ROOT)
+    supplemental = load_supplemental_cases(ROOT, config()["campaign"])
     expected_supplemental = len(cfg.get("supplemental_routing_case_ids") or [])
     if len(supplemental) != expected_supplemental:
         errors.append(
@@ -154,9 +154,9 @@ def validate_campaign() -> list[str]:
 def ordered_cases(include_supplemental: bool = False):
     cfg = config()
     rank = {name: i for i, name in enumerate(cfg.get("execution_order", []))}
-    cases = list(load_campaign_cases(ROOT).values())
+    cases = list(load_campaign_cases(ROOT, config()["campaign"]).values())
     if include_supplemental:
-        cases.extend(load_supplemental_cases(ROOT).values())
+        cases.extend(load_supplemental_cases(ROOT, config()["campaign"]).values())
     return sorted(cases, key=lambda x: (rank.get(x.get("suite"), 98 if x.get("suite") == "supplemental-routing" else 99), x["id"]))
 
 
@@ -203,7 +203,7 @@ HISTORICAL_RECEIPT_COMPATIBILITY = {
 
 
 def current_case_definitions(root: Path = ROOT) -> list[dict]:
-    all_cases = {**load_campaign_cases(root), **load_supplemental_cases(root)}
+    all_cases = {**load_campaign_cases(root, config(root)["campaign"]), **load_supplemental_cases(root, config(root)["campaign"])}
     definitions = []
     for case in all_cases.values():
         input_path = root / case["input"]
@@ -395,7 +395,7 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
         if unavailable in catalogs["production"]:
             raise ValueError(f"fallback campaign precondition changed: {unavailable} is now in production")
 
-    all_cases = {**load_campaign_cases(ROOT), **load_supplemental_cases(ROOT)}
+    all_cases = {**load_campaign_cases(ROOT, config()["campaign"]), **load_supplemental_cases(ROOT, config()["campaign"])}
     case_channels = {}
     for case in all_cases.values():
         target = case["target"]
@@ -416,8 +416,8 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
         "packages": packages,
         "expected_catalogs": {name: sorted(items) for name, items in catalogs.items()},
         "case_channels": case_channels,
-        "core_case_count": len(load_campaign_cases(ROOT)),
-        "supplemental_case_ids": sorted(load_supplemental_cases(ROOT)),
+        "core_case_count": len(load_campaign_cases(ROOT, config()["campaign"])),
+        "supplemental_case_ids": sorted(load_supplemental_cases(ROOT, config()["campaign"])),
         "case_definitions": sorted(case_definitions, key=lambda x: x["id"]),
         "components": components,
     }
@@ -562,7 +562,7 @@ def selection_errors(case: dict, trace: dict) -> list[str]:
 def import_run(args) -> Path:
     cfg = config()
     lock = validate_lock_file(Path(args.lock), root=ROOT)
-    cases = {**load_campaign_cases(ROOT), **load_supplemental_cases(ROOT)}
+    cases = {**load_campaign_cases(ROOT, config()["campaign"]), **load_supplemental_cases(ROOT, config()["campaign"])}
     if args.case_id not in cases:
         raise ValueError(f"unknown active campaign case: {args.case_id}")
     case = cases[args.case_id]
