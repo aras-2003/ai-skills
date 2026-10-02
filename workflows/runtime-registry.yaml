@@ -398,6 +398,34 @@ workflows:
               - selective routing
               - staged evidence gating
               - broad mixed-signal discovery and shortlist reduction
+  - name: investment-os-review
+    workflow: workflows/investment-os-review/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - investment-portfolio-review
+        - investment-security-review
+        - investment-opportunity-hunter
+        - investment-theme-discovery
+        - investment-attention-review
+        - investment-policy-design
+      optional: []
+    description: >
+      Default Investment OS front door for natural investment requests. Use when the user asks in ordinary language
+      to review their portfolio or holdings, assess a stock/security, find investment opportunities, research themes,
+      evaluate whether new market/company information matters, or define portfolio policy/risk limits. Route first,
+      then invoke the matching specialist workflow; do not answer with generic investment commentary.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: production
+      risk: high
+      last_reviewed: 2026-10-03
+      execution:
+        default_model_class: standard
   - name: investment-attention-review
     workflow: workflows/investment-attention-review/WORKFLOW.md
     channels:
