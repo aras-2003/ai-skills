@@ -81,7 +81,7 @@ class IntegratedReportingTests(unittest.TestCase):
         renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("visual-floor rule", composer)
         self.assertIn("Visual floor:", standard)
-        self.assertIn("include at least one portfolio-composition/concentration visual", standard)
+        self.assertIn("attempt at least one portfolio-composition/concentration visual", standard)
         self.assertIn("required visual-floor slot", profiles)
         self.assertIn("text-only is not a successful substitute", renderer)
 
