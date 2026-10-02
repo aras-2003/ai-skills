@@ -76,6 +76,12 @@ execution_order:
   - executive-role
 required_runtime_tool_fragments:
   - render_bar_chart
+client_display_validation_case_ids:
+  - case-003-portfolio-review
+client_display_evidence_types:
+  - screenshot
+  - telemetry
+  - user_confirmation
 runtime_fields_required:
   - provider
   - model_id
