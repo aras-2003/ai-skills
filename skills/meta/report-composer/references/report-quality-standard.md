@@ -60,7 +60,7 @@ Avoid:
 - repeated bar charts for every candidate;
 - a separate 3M/6M/12M bar chart per security when one cross-candidate or real time-series visual would communicate the decision better.
 
-If no suitable chat-native visual renderer is available, use a compact table/matrix only as a diagnostic aid and keep the explicit `BLOCKED_NO_RENDERER` status rather than pretending a graphic was rendered or treating the report as PASS.
+If no suitable chat-native visual renderer is available, use a compact table/matrix only as a diagnostic aid and keep renderer execution at `BLOCKED_NO_RENDERER`; do not imply renderer success or client-visible completion.
 
 ## 6. Price and market context
 - Canonical portfolio/research state remains canonical.
