@@ -18,6 +18,11 @@ The following do **not** qualify as quantitative chart renderers:
 - Figma/FigJam diagram/design tools used as freeform drawing surfaces;
 - text, markdown tables or ASCII/punctuation pseudo-charts.
 
+Known bundled renderer:
+- MCP server: `arek-chart-renderer`;
+- qualifying quantitative tools: `render_bar_chart`, `render_line_chart`;
+- these tools qualify only when they are actually exposed by the current runtime tool list. Package declaration alone is not proof of availability.
+
 Preflight status:
 - `AVAILABLE`: a concrete qualifying renderer is present and invokable;
 - `UNAVAILABLE`: inspected runtime capabilities contain no qualifying renderer;
