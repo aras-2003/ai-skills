@@ -112,6 +112,13 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("PAYLOAD_RENDERED", renderer)
         self.assertIn("UI_RENDER_UNCONFIRMED", renderer)
         self.assertIn("Tool success alone is not called UI-rendered", renderer)
+        self.assertIn("PASS_WITH_LIMITATIONS", composer)
+        self.assertIn("`PASS` is permitted only when that slot reaches `UI_CONFIRMED`", composer)
+
+        quality_cases = (ROOT / "skills/meta/report-composer/tests/quality-cases.yaml").read_text(encoding="utf-8")
+        self.assertIn("quality-payload-without-ui-confirmation", quality_cases)
+        self.assertIn("report_status UI_RENDER_UNCONFIRMED", quality_cases)
+        self.assertIn("report PASS_WITH_LIMITATIONS", quality_cases)
 
 
 if __name__ == "__main__":

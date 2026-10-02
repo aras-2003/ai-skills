@@ -53,3 +53,20 @@ cases:
         - ASCII pseudo-chart
         - raw Mermaid
         - HTML/PDF/Figma/deck/file
+
+
+  - id: quality-payload-without-ui-confirmation
+    case: Renderer produced a PNG payload but inline client rendering is unconfirmed
+    input: |
+      The required portfolio chart tool returned CHART_PAYLOAD_OK and an image payload,
+      but the client surface did not confirm a visible chart.
+    expected:
+      should_trigger: true
+      must:
+        - preserve render_status PAYLOAD_RENDERED at the payload layer
+        - return report_status UI_RENDER_UNCONFIRMED
+        - avoid claiming the chart was successfully rendered above
+      must_not:
+        - report PASS
+        - report PASS_WITH_LIMITATIONS
+        - claim the visual requirement was completed

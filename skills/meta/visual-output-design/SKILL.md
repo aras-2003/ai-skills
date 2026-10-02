@@ -113,7 +113,10 @@ Return or render:
 - [ ] Required quantitative visuals passed `capability_preflight` against an actual deterministic renderer.
 - [ ] Media-generation or design tools were not misclassified as quantitative chart renderers.
 - [ ] `BLOCKED_NO_RENDERER` cannot be reported as successful rendering.
-- [ ] Tool success alone is not called UI-rendered. A valid image payload receipt proves `PAYLOAD_RENDERED`; visible client rendering is `UI_CONFIRMED`. If the client shows a broken/blank placeholder, report `UI_RENDER_UNCONFIRMED`, not PASS.
+- [ ] Tool success alone is not called UI-rendered. A valid image payload receipt proves `PAYLOAD_RENDERED`; visible client rendering is `UI_CONFIRMED`.
+- [ ] For a required visual slot, `PAYLOAD_RENDERED` without `UI_CONFIRMED` resolves to `UI_RENDER_UNCONFIRMED`.
+- [ ] Do not describe the visual as rendered/visible in the surrounding prose unless `UI_CONFIRMED`.
+- [ ] If the client shows a broken/blank placeholder, report `UI_RENDER_UNCONFIRMED`, not PASS.
 
 ## References
 - references/tool-routing.md
