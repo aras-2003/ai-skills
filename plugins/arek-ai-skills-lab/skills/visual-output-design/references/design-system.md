@@ -24,6 +24,12 @@
 - Avoid rainbow palettes for categorical data unless category identity genuinely requires it.
 - Use sufficient contrast in light and dark themes.
 
+## Report-level visual density
+- Use visuals selectively; do not turn every section into a chart.
+- For a normal executive decision report, 1–3 strong visuals are usually enough unless the task is explicitly analytical/visual.
+- A visual should replace repetitive prose, not duplicate it.
+- When only a few exact comparisons matter, a compact table/matrix can be more professional than a weak chart.
+
 ## Tables and cards
 Use cards for:
 - a few key metrics or states.
@@ -47,8 +53,8 @@ Do not turn every field into a card.
 
 ### Investing
 Preferred:
-- normalized price/performance line chart;
-- allocation/concentration bars;
+- normalized price/performance line chart from actual historical series when available;
+- horizontal allocation/concentration bars for ranked weights;
 - overlap/exposure matrix;
 - scenario valuation range;
 - catalyst/risk timeline;
@@ -58,6 +64,10 @@ Preferred:
 Avoid:
 - one composite stock score;
 - decorative gauges;
+- ASCII/punctuation pseudo-charts;
+- raw Mermaid code fences;
+- Mermaid xychart when a better native renderer exists;
+- separate 3M/6M/12M bar charts for every security when one real time-series or cross-candidate visual is clearer;
 - price charts without date/source context.
 
 ### OAF / organisational architecture
