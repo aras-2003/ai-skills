@@ -22,26 +22,35 @@ class ChartRendererTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.renderer = load_renderer()
 
+    def _assert_png_result(self, result) -> None:
+        self.assertEqual(2, len(result))
+        receipt, image = result
+        self.assertIn("CHART_PAYLOAD_OK", receipt)
+        self.assertIn("mime=image/png", receipt)
+        self.assertIn("bytes=", receipt)
+        self.assertIn("sha256=", receipt)
+        self.assertIn("canvas_px=", receipt)
+        self.assertIsNotNone(image.data)
+        self.assertTrue(image.data.startswith(b"\x89PNG\r\n\x1a\n"))
+
     def test_bar_chart_returns_png_image(self) -> None:
-        image = self.renderer.render_bar_chart(
+        result = self.renderer.render_bar_chart(
             labels=["ACN", "IUIT", "SMH"],
             values=[25.26, 22.16, 5.68],
             title="Portfolio concentration",
             unit="%",
         )
-        self.assertIsNotNone(image.data)
-        self.assertTrue(image.data.startswith(b"\x89PNG\r\n\x1a\n"))
+        self._assert_png_result(result)
 
     def test_line_chart_returns_png_image(self) -> None:
-        image = self.renderer.render_line_chart(
+        result = self.renderer.render_line_chart(
             x_labels=["2026-01", "2026-02", "2026-03"],
             series_names=["Portfolio"],
             series_values=[[100.0, 103.5, 101.2]],
             title="Portfolio performance",
             unit="index",
         )
-        self.assertIsNotNone(image.data)
-        self.assertTrue(image.data.startswith(b"\x89PNG\r\n\x1a\n"))
+        self._assert_png_result(result)
 
     def test_invalid_parallel_data_fails_closed(self) -> None:
         with self.assertRaises(Exception):
