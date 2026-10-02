@@ -1,6 +1,8 @@
 # Investment Attention Review Workflow
 
 ## Purpose
+For actionable security follow-up, v1 remains constrained to the XTB-investable universe; non-XTB existing holdings may still be monitored for thesis and portfolio implications.
+
 Answer: **what changed since the last review, what actually matters, and where is deeper research worth the time?** It is not a news digest.
 
 ## Required skills
