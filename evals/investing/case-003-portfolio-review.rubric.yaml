@@ -4,14 +4,18 @@ target: "investment-portfolio-review"
 mode: explicit
 execution_payload_must_not_include: [expected routing, pass/fail criteria, expected answer]
 criteria_text: |-
-  PASS detects price-driven portfolio drift, overlap and thesis-relevant changes while preserving append-only history and suppressing noise.
+  PASS attempts canonical current/history retrieval, detects price-driven portfolio drift and overlap when evidence exists, suppresses noise, and preserves append-only history with explicit persistence receipts.
 assertions:
   manual:
-    - "compare current state with prior snapshot"
-    - "identify price-driven concentration and correlated cycle exposure"
+    - "attempt canonical Portfolio_Current and prior Portfolio_History retrieval before comparison"
+    - "compare current state with prior snapshot when canonical history is available, otherwise explicitly state the comparison is blocked"
+    - "identify price-driven concentration and correlated cycle exposure when holdings data supports it"
     - "suppress headline noise that does not change thesis or policy state"
     - "create or require Portfolio_History snapshot before current-state mutation"
     - "keep append-only research/thesis/decision history"
+    - "emit explicit canonical READ and WRITE persistence receipts"
+    - "never use a local history file as a substitute for canonical Portfolio_History"
   manual_not:
     - "infer transactions from weight changes"
     - "propose activity for every holding"
+    - "claim historical state was preserved solely because a local file was written"
