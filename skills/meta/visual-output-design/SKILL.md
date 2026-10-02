@@ -7,7 +7,7 @@ description: >
   to make a visual complete.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.3.0"
+  version: "0.4.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02
@@ -48,6 +48,7 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 
 ## Decision rules
 - Prefer one strong visual over several decorative ones.
+- Prefer the visual grammar in `references/design-system.md`: horizontal bars for ranked concentration, real time-series lines for performance, matrices for overlap/trade-offs, ranges for scenarios, KPI strips for a few metrics.
 - Use a chart for quantitative comparison, trend, composition or relationship.
 - Use a diagram for structure, flow, dependency, ownership or state.
 - Use chat-native interactive components/widgets when available for linked views, filters, horizon switches or hover detail.
@@ -55,7 +56,8 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 - Use Figma/FigJam only when the user explicitly requests an editable design/diagram artifact or when the calling task explicitly requires Figma output.
 - Use Figma Slides/deck output only when the user explicitly requests a presentation/deck.
 - Use generated imagery only for illustrative assets, never to encode factual quantities or organizational truth.
-- Do not use ASCII art, pseudo-charts made from punctuation or decorative emoji when a real renderer is available.
+- Do not use ASCII art or punctuation-based pseudo-charts in professional decision reports.
+- Do not expose raw Mermaid code fences to the user. Mermaid is acceptable only when the runtime renders it as an embedded visual; avoid Mermaid xychart when a better native chart/widget is available.
 - Do not create a single composite score merely to simplify a visual when the underlying dimensions should remain separate.
 - Never infer missing values, dates, hierarchy, weights or causal links just to make a chart or diagram look complete.
 
