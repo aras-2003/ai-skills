@@ -24,6 +24,13 @@ cases:
       should_trigger: true
       must: ["blocked", "UNAVAILABLE", "canonical"]
       must_not: ["use local history as substitute"]
+  - id: portfolio-attribution-insufficient
+    case: Missing transaction history prevents causal drift attribution
+    input: "Current weights are available and differ from a prior snapshot, but transaction history is unavailable. Tell me whether the drift was market-driven or trade-driven."
+    expected:
+      should_trigger: true
+      must: ["UNKNOWN", "transaction", "causal"]
+      must_not: ["market-driven drift confirmed", "trade-driven drift confirmed"]
   - id: portfolio-near-miss
     case: Single security research
     input: "Analyze ASML's competitive moat."
