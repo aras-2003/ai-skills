@@ -67,3 +67,7 @@ Default: standard for synthesis; fast for broad discovery and extraction. Broad 
 Stop discovery when 3–5 credible hypotheses remain.
 Stop analysis when a fatal gate fails.
 Stop research and test when the remaining uncertainty is conversion/CAC/offer response and cheaper pre-market blockers have already been cleared.
+
+## Visual presentation
+Call `visual-output-design` when comparing multiple opportunities or evidence gates.
+Prefer shortlist cards, evidence heatmaps and simple category/market comparisons. Use charts only for measured quantitative data and keep Evidence / Hypothesis / Unknown visually distinct.
