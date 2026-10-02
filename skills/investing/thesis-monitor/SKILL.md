@@ -27,7 +27,7 @@ Evaluate what changed versus the recorded thesis rather than summarizing news fr
 5. Update valuation/expectations context separately from business-thesis state.
 6. Compare market reaction with fundamental change only as interpretation.
 7. Detect portfolio implications such as position drift but route sizing decisions to position-sizing-review.
-8. Append a new monitoring/research event through investment-record-store; never rewrite thesis history.
+8. Append a monitoring record as a new canonical research/monitoring event through investment-record-store; never rewrite thesis history.
 9. Escalate only when evidence justifies deeper work.
 
 ## Decision rules
