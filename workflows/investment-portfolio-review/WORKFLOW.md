@@ -34,7 +34,8 @@ When activated naturally, do not replace the workflow with a generic investment 
 5. Attribute change only when evidence supports causality:
    - current state alone cannot establish drift cause;
    - current + prior canonical snapshots establish change, but not necessarily whether it came from trades or market movement;
-   - classify trade-driven vs market-driven only when transaction history plus comparable state, or an explicit canonical attribution record, distinguishes the causes;
+   - classify trade-driven vs market-driven only when transaction evidence plus comparable prior/current state, or an explicit canonical attribution record, distinguishes the causes;
+   - an empty, incomplete or unavailable transaction table is not causal evidence and does not prove that no transaction occurred;
    - otherwise return attribution `UNKNOWN` and do not guess.
 6. Triage new company/industry/market evidence with investment-attention-triage.
 7. For REVIEW/ESCALATE positions, run thesis-monitor.
@@ -51,11 +52,13 @@ When activated naturally, do not replace the workflow with a generic investment 
 - policy breach triggers review, not automatic sale;
 - without prior canonical snapshot, do not claim a complete change comparison;
 - without sufficient transaction/history evidence, do not classify drift as trade-driven or market-driven;
-- absence of observed transactions is not evidence that no transaction occurred;
+- an empty, incomplete, unavailable or zero-row transaction result is not evidence that no transaction occurred;
 - user-provided aggregate metrics that cannot be recomputed from the visible holdings remain USER_PROVIDED, not DERIVED.
 
 ## Output contract
 Requires attention; no material change; portfolio-level observations; derived analytics/provenance; canonical READ/WRITE receipts.
+
+When change exists but causal evidence does not distinguish transactions from market movement, state that attribution is `UNKNOWN` because distinguishing evidence is insufficient. Do not explain UNKNOWN merely as "the transaction table is empty".
 
 ## Stop conditions
 Stop when every material alert is tied to evidence or policy.
