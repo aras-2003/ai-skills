@@ -65,3 +65,7 @@ Escalate to strong for novel target architecture, major platform/data boundary r
 ## Stop conditions
 Stop before target-state design if current-state evidence cannot distinguish organisational/investment issues from technology-estate issues.
 Stop before recommending platform consolidation/retirement when duplication purpose, dependency and transition evidence are insufficient.
+
+## Visual presentation
+Call `visual-output-design` for capability/architecture relationships, option comparisons and portfolio implications.
+Prefer capability heatmaps, architecture option views and dependency diagrams. Use Figma for editable one-page executive architecture views when useful; never invent application, interface or dependency detail to complete a diagram.

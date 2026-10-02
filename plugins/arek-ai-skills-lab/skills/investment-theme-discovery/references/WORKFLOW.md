@@ -36,3 +36,7 @@ Theme mechanism | changes since prior view | indicators | value chain | benefici
 
 ## Stop conditions
 Stop once a falsifiable theme map and bounded research queue exist.
+
+## Visual presentation
+When the theme spans multiple value-chain nodes or candidates, call `visual-output-design`.
+Prefer an editable value-chain/beneficiary map, leading-indicator panel and bounded candidate comparison. Use Figma/FigJam for structural maps when available; use charts only for actual quantitative series.

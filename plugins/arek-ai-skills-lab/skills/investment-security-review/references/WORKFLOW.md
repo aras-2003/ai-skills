@@ -44,3 +44,8 @@ Business thesis | evidence-sanity status | verified/blocked metrics | valuation 
 ## Stop conditions
 Stop before sizing if policy/portfolio context is missing.
 Stop valuation and numeric sizing if critical evidence is unresolved.
+
+## Visual presentation
+When the result is decision-dense, call `visual-output-design`.
+Prefer KPI cards, a bear/base/bull valuation range, catalyst/risk timeline and a compact separation of business quality, current-price attractiveness and portfolio fit.
+Do not collapse these dimensions into one composite score. If evidence-sanity blocks valuation, the visual must show the blocked state instead of a fabricated range.

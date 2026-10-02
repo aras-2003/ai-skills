@@ -49,3 +49,9 @@ Ticker | setup | fundamental change | valuation change | market/trend change | m
 ## Stop conditions
 Stop when 3-10 credible research candidates remain.
 Stop deeper work when the evidence gap is larger than the apparent opportunity.
+
+## Visual presentation
+When structured comparison data are available, call `visual-output-design` after analytical synthesis and before the final response.
+Prefer candidate comparison cards plus a normalized performance/time-series chart and, when useful, a valuation/growth or evidence matrix.
+Do not invent missing market data for the visual. Keep XTB status, as-of dates, evidence quality and canonical persistence receipts visible.
+For a dense multi-candidate review, prefer an interactive HTML cockpit if runtime artifact support exists; otherwise use the best native chart/table combination.

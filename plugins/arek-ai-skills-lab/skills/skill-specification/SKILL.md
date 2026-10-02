@@ -38,7 +38,8 @@ Prevent premature skill creation and define a testable contract before instructi
 10. Identify tool, connector, script, reference and runtime dependencies.
 11. Identify evidence/verification requirements.
 12. Assign risk: low / medium / high.
-13. Produce candidate test prompts before authoring.
+13. Decide whether the output benefits from a visual presentation layer (chart, diagram, interactive report, Figma/deck) and whether that should be optional or required.
+14. Produce candidate test prompts before authoring.
 
 ## Output contract
 
@@ -62,6 +63,7 @@ Return:
 - Preconditions
 - Procedure summary
 - Output
+- Visual affordances / preferred renderer class when useful
 - Stop/escalation rules
 - Evidence/tool requirements
 
