@@ -145,3 +145,7 @@ Stop when:
 - the decision problem is narrow enough for one specialist skill;
 - evidence is insufficient for cross-domain claims;
 - additional OAF domains would add breadth but not decision value.
+
+## Visual presentation
+When the diagnosis spans multiple domains, call `visual-output-design`.
+Prefer a domain heatmap plus a causal/dependency map that distinguishes evidence, inference and unknowns. Use a real diagram/Figma canvas for structural relationships; do not reduce the health check to decorative traffic lights.
