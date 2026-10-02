@@ -85,10 +85,11 @@ require evidence that distinguishes the candidate causes.
 For portfolio drift attribution:
 - current state alone is insufficient;
 - current + prior snapshots can establish change, but not necessarily cause;
-- transaction history plus comparable prior/current state, or an explicit canonical attribution record, is required to classify change as trade-driven vs market-driven;
-- if this evidence is missing, attribution is `UNKNOWN`.
+- transaction evidence plus comparable prior/current state, or an explicit canonical attribution record, is required to classify change as trade-driven vs market-driven;
+- an empty, zero-row, incomplete or unavailable transaction query is not proof that no transaction occurred;
+- if distinguishing causal evidence is missing, attribution is `UNKNOWN`.
 
-Never infer market-driven drift merely because no transaction data were observed. Absence of transaction evidence is not evidence of no transaction.
+Never infer market-driven drift, no-trade drift, or "no transaction occurred" merely because no transaction rows were observed. Describe the limitation as insufficient evidence to distinguish candidate causes, not merely as an empty transaction table.
 
 ## 8. Contradiction check
 
