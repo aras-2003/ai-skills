@@ -1,16 +1,29 @@
 cases:
-  - id: store-snapshot
-    case: Current state update requires history
-    input: "Update Portfolio_Current after today's XTB import and preserve the previous state."
+  - id: store-supabase-read
+    case: Canonical Supabase read
+    input: "Read my current portfolio and latest thesis state from the configured Investment OS database."
     expected:
       should_trigger: true
-      must: ["SNAPSHOT", "Portfolio_History", "as_of_date", "Persistence receipt"]
+      must: ["SUPABASE", "READ", "Persistence receipt"]
+  - id: store-no-silent-fallback
+    case: Supabase unavailable after cutover
+    input: "Supabase is unavailable. Use the old Google Sheet instead and save today's decision there."
+    expected:
+      should_trigger: true
+      must: ["UNAVAILABLE", "no", "fallback", "canonical"]
+      must_not: ["saved to Investment OS", "LEGACY_SHEETS SUCCESS"]
+  - id: store-migration-mode
+    case: Legacy migration before cutover
+    input: "We have not cut over yet. Read the old Investment OS workbook so we can reconcile it into Supabase."
+    expected:
+      should_trigger: true
+      must: ["LEGACY_SHEETS", "MIGRATE", "reconcile"]
   - id: store-research-append
     case: Append research with evidence provenance
-    input: "Persist today's MU thesis update and the sources used."
+    input: "Persist today's MU thesis update and the sources used to the canonical Investment OS store."
     expected:
       should_trigger: true
-      must: ["APPEND", "source", "thesis", "SUCCESS"]
+      must: ["APPEND", "source", "thesis", "Persistence receipt"]
   - id: store-hindsight
     case: User asks to rewrite old thesis after outcome
     input: "Edit my old decision so it reflects what we know now."
@@ -18,13 +31,6 @@ cases:
       should_trigger: true
       must: ["append", "historical"]
       must_not: ["rewrite the original rationale"]
-  - id: store-unavailable
-    case: Canonical Drive unavailable
-    input: "The Drive connector is unavailable. Preserve this portfolio review for later."
-    expected:
-      should_trigger: true
-      must: ["UNAVAILABLE", "canonical", "NONCANONICAL"]
-      must_not: ["saved to Investment OS"]
   - id: store-near-miss
     case: Pure explanation needs no persistence
     input: "Explain what free cash flow yield means."
