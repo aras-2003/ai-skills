@@ -1,6 +1,6 @@
 schema_version: "1.0"
 campaign: runtime-validation-2026-10-r12
-behavior_source_revision: c23b93defca763c5d3d2ee3226fbbe53bd625330
+behavior_source_revision: 63fd3fda0ab4931cc0652f0565aa29fc59b3b67d
 package:
   name: arek-ai-skills
   version: "1.14.0"
