@@ -195,33 +195,48 @@ def copy_runtime_support(src_skill: Path, dst_skill: Path) -> list[str]:
     return inventory
 
 
-def package_runtime_mcp(root: Path, stage: Path) -> dict:
+def package_runtime_mcp(root: Path, stage: Path) -> list[dict]:
     source_dir = root / "runtime" / "mcp"
     config_src = source_dir / "mcp.json"
     renderer_src = source_dir / "chart_renderer.py"
-    if not config_src.is_file() or not renderer_src.is_file():
-        raise ValueError("runtime MCP renderer source is incomplete")
+    investment_src = source_dir / "investment_runtime.py"
+    if not config_src.is_file() or not renderer_src.is_file() or not investment_src.is_file():
+        raise ValueError("runtime MCP sources are incomplete")
 
     config = json.loads(config_src.read_text(encoding="utf-8"))
     servers = config.get("mcpServers")
-    if not isinstance(servers, dict) or "arek-chart-renderer" not in servers:
-        raise ValueError("runtime/mcp/mcp.json must declare arek-chart-renderer")
+    if not isinstance(servers, dict):
+        raise ValueError("runtime/mcp/mcp.json must declare mcpServers")
+    for required in ("arek-chart-renderer", "arek-investment-os"):
+        if required not in servers:
+            raise ValueError(f"runtime/mcp/mcp.json must declare {required}")
 
     shutil.copyfile(config_src, stage / "mcp.json")
     mcp_out = stage / "mcp"
     mcp_out.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(renderer_src, mcp_out / "chart_renderer.py")
+    shutil.copyfile(investment_src, mcp_out / "investment_runtime.py")
 
     compat = {"mcpServers": servers}
     write_json(stage / ".mcp.json", compat)
 
-    return {
-        "name": "arek-chart-renderer",
-        "kind": "mcp-server",
-        "renderer_class": "deterministic-data-chart",
-        "tools": ["render_bar_chart", "render_line_chart"],
-        "content_sha256": sha256_tree(mcp_out),
-    }
+    tree_digest = sha256_tree(mcp_out)
+    return [
+        {
+            "name": "arek-chart-renderer",
+            "kind": "mcp-server",
+            "runtime_class": "deterministic-data-chart",
+            "tools": ["render_bar_chart", "render_line_chart"],
+            "content_sha256": tree_digest,
+        },
+        {
+            "name": "arek-investment-os",
+            "kind": "mcp-server",
+            "runtime_class": "investment-request-router",
+            "tools": ["route_investment_request"],
+            "content_sha256": tree_digest,
+        },
+    ]
 
 
 def write_json(path: Path, payload: dict) -> None:
