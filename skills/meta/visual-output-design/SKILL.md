@@ -30,8 +30,15 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 
 ## Procedure
 1. Identify the local decision/comprehension job supplied by the calling workflow or `report-composer`.
-2. Decide whether a visual materially improves the result. If not, keep the response concise and textual.
-3. Build a semantic visual model from the supported analysis only:
+2. Decide whether a visual materially improves the result and whether the caller marks it as required by the visual floor.
+3. Run `capability_preflight` against the tools actually available in the current runtime:
+   - match the required visual grammar to a concrete renderer capability;
+   - a quantitative chart renderer must deterministically encode supplied numeric series/categories;
+   - `image_gen`, image viewing, generic media generation and Figma diagram/design capabilities do not qualify as quantitative data-chart renderers;
+   - return `AVAILABLE`, `UNAVAILABLE`, or `UNKNOWN`.
+4. If the visual is optional and no qualifying renderer exists, use the truthful text/table fallback.
+5. If the visual is required and no qualifying renderer exists, return `BLOCKED_NO_RENDERER`; do not claim successful rendering and do not let a table/text fallback satisfy the slot.
+6. Build a semantic visual model from the supported analysis only:
    - headline/message;
    - entities/categories;
    - measures/units;
@@ -39,16 +46,16 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
    - time/as-of context;
    - uncertainty/status;
    - source/provenance references.
-4. Select the narrowest suitable renderer using `references/tool-routing.md`.
-5. Apply the design and integrity rules in `references/design-system.md`.
-6. Prefer a renderer that can appear directly inside the chat response. Use an external-artifact renderer (HTML file, Figma file, PDF, deck) only when the user explicitly requested that output form.
-7. Keep the visual synchronized with its surrounding report section: it must not imply a stronger conclusion than the written analysis.
-8. Provide a compact text fallback when the chosen renderer is unavailable.
-9. For interactive HTML, keep analysis data and presentation logic separated so the report can be regenerated from the same payload.
+7. Select the narrowest suitable renderer using `references/tool-routing.md`.
+8. Apply the design and integrity rules in `references/design-system.md`.
+9. Prefer a renderer that can appear directly inside the chat response. Use an external-artifact renderer (HTML file, Figma file, PDF, deck) only when the user explicitly requested that output form.
+10. Keep the visual synchronized with its surrounding report section: it must not imply a stronger conclusion than the written analysis.
+11. Provide a compact text/table fallback when useful, but label it diagnostic when a required renderer is unavailable; it does not change `BLOCKED_NO_RENDERER` to PASS.
+12. For interactive HTML, keep analysis data and presentation logic separated so the report can be regenerated from the same payload.
 
 ## Decision rules
 - Prefer one strong visual over several decorative ones.
-- When the calling report marks a visual slot as required by the visual-floor rule and supported data are present, render a real chat-native visual if a suitable renderer exists; do not return text-only merely because text is easier.
+- When the calling report marks a visual slot as required by the visual-floor rule and supported data are present, render a real chat-native visual if a suitable renderer exists. If none exists, return `BLOCKED_NO_RENDERER`; text-only is not a successful substitute.
 - Prefer the visual grammar in `references/design-system.md`: horizontal bars for ranked concentration, real time-series lines for performance, matrices for overlap/trade-offs, ranges for scenarios, KPI strips for a few metrics.
 - Use a chart for quantitative comparison, trend, composition or relationship.
 - Use a diagram for structure, flow, dependency, ownership or state.
@@ -77,7 +84,9 @@ Return or render:
 - **as_of**: date/time context when relevant;
 - **provenance**: sources or canonical data references;
 - **uncertainty**: what is estimated, missing or inferred;
-- **fallback**: concise textual equivalent when rendering is unavailable.
+- **fallback**: concise textual/table equivalent when rendering is unavailable.
+- **capability_status**: AVAILABLE / UNAVAILABLE / UNKNOWN.
+- **render_status**: RENDERED / BLOCKED_NO_RENDERER / FAIL_RENDERER_INVOCATION / NOT_REQUIRED.
 
 ## Evidence requirements
 - Every plotted factual value must come from user-provided data, canonical state, calculation or cited evidence.
@@ -86,7 +95,7 @@ Return or render:
 - Visual labels must preserve units, time period and denominator.
 
 ## Failure and uncertainty handling
-- If the preferred chat-native renderer is unavailable, choose the next suitable chat-native renderer or a table/text fallback; do not escape to an external file unless explicitly requested.
+- If the preferred chat-native renderer is unavailable, choose the next qualifying chat-native renderer. If a required visual has no qualifying renderer, return `BLOCKED_NO_RENDERER`; a table/text fallback may accompany the status but cannot satisfy the requirement.
 - If data are incomplete, show the gap or omit the visual element rather than fabricating it.
 - Do not create a Figma/HTML/PDF/deck artifact unless the user explicitly requested that artifact class.
 - If interactivity is unavailable, fall back to a static chart/table plus concise interpretation.
@@ -101,6 +110,9 @@ Return or render:
 - [ ] The visual is not decorative clutter.
 - [ ] The renderer stays inside chat unless an external artifact was explicitly requested.
 - [ ] A text fallback exists when the renderer is non-portable.
+- [ ] Required quantitative visuals passed `capability_preflight` against an actual deterministic renderer.
+- [ ] Media-generation or design tools were not misclassified as quantitative chart renderers.
+- [ ] `BLOCKED_NO_RENDERER` cannot be reported as successful rendering.
 
 ## References
 - references/tool-routing.md
