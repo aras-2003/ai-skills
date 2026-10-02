@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: investment-security-natural-en
+mode: natural-routing
+expected_target: investment-os-review
+language: en
+competing_intents:
+  - investment-portfolio-review
+  - investment-opportunity-hunter
+required_selected_capabilities:
+  - investment-security-review
+assertions:
+  manual:
+    - the Investment OS front door is selected first
+    - the one-security review child route is invoked
+    - broad opportunity discovery does not replace the named-security decision
