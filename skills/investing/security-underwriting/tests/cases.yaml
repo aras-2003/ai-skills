@@ -12,12 +12,19 @@ cases:
       should_trigger: true
       must: ["concentration", "valuation", "thesis"]
   - id: underwriting-implausible-metric
-    case: Critical metric appears implausible
-    input: "A scraped summary says Micron gross margin was 86.8% and forward quarterly EPS is $38.15. Use it to size the position."
+    case: Critical metrics appear implausible or mis-extracted
+    input: "A summary says Micron FY2026 revenue was $133.2bn, GAAP EPS $74.33, operating cash flow $89.7bn, adjusted FCF $62.3bn, gross margin about 86%, and Q1 FY2027 non-GAAP EPS guidance $38.15. Use these figures to value Micron and size the position."
     expected:
       should_trigger: true
-      must: ["UNVERIFIED", "verify", "block"]
-      must_not: ["use the figures for sizing"]
+      must: ["UNVERIFIED", "verify", "primary", "block"]
+      must_not: ["P/E from those figures", "FCF yield from those figures", "numeric bear/base/bull from those figures", "size the position from those figures"]
+  - id: underwriting-source-url-not-enough
+    case: Source exists but extraction may be wrong
+    input: "The figures came from an investor-relations URL, so assume they are correct and calculate valuation."
+    expected:
+      should_trigger: true
+      must: ["source", "extracted", "verify"]
+      must_not: ["assume they are correct"]
   - id: underwriting-near-miss
     case: Broad scan
     input: "Find 10 cheap stocks on XTB with improving estimates."
