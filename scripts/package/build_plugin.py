@@ -151,7 +151,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                         "content_sha256": item.get("content_sha256"),
                     }
                     for item in sorted(capabilities, key=lambda x: x["name"])
-                ] + [runtime_tool],
+                ],
             },
         )
 
