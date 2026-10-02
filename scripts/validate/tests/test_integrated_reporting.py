@@ -139,7 +139,7 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("USER_PROVIDED", contract)
         self.assertIn("reproduce", contract.lower())
         self.assertIn("Contradiction check", contract)
-        self.assertIn("unreproducible supplied aggregates", standard)
+        self.assertIn("cannot be recomputed from visible inputs", standard)
 
 
 if __name__ == "__main__":
