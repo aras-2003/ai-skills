@@ -74,6 +74,8 @@ execution_order:
   - production-fallback
   - routing
   - executive-role
+required_runtime_tool_fragments:
+  - render_bar_chart
 runtime_fields_required:
   - provider
   - model_id
