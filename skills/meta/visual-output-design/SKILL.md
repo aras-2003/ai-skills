@@ -50,7 +50,7 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 8. Apply the design and integrity rules in `references/design-system.md`.
 9. Prefer a renderer that can appear directly inside the chat response. Use an external-artifact renderer (HTML file, Figma file, PDF, deck) only when the user explicitly requested that output form.
 10. Keep the visual synchronized with its surrounding report section: it must not imply a stronger conclusion than the written analysis.
-11. Provide a compact text/table fallback when useful, but label it diagnostic when a required renderer is unavailable; it does not change `BLOCKED_NO_RENDERER` to PASS.
+11. Provide a compact text/table fallback when useful, but label it diagnostic when a required renderer is unavailable; it does not change renderer execution from `BLOCKED_NO_RENDERER`.
 12. For interactive HTML, keep analysis data and presentation logic separated so the report can be regenerated from the same payload.
 
 ## Decision rules
