@@ -182,7 +182,7 @@ def main() -> int:
             }
         }
         write_json(stage / "plugin.json", manifest)
-        runtime_tool = package_runtime_mcp(root, stage)
+        runtime_tools = package_runtime_mcp(root, stage)
         compat_dir = stage / ".codex-plugin"
         compat_dir.mkdir(parents=True)
         write_json(
@@ -219,7 +219,7 @@ def main() -> int:
                 "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
                 "capabilities": sorted(capabilities, key=lambda x: x["name"]),
                 "runtime_fixture_targets": fixture_status,
-                "runtime_tools": [runtime_tool],
+                "runtime_tools": runtime_tools,
             },
         )
         digest = sha256_tree(stage)
