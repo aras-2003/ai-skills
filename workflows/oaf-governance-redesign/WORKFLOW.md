@@ -54,6 +54,15 @@ Escalate to strong for enterprise-wide executive authority redesign, politically
 Stop before design if the decision problem or owner is not sufficiently evidenced.
 Stop before enterprise rollout if the mechanism has not been tested or the trade-offs remain material and unresolved.
 
-## Visual presentation
-Call `visual-output-design` when the redesigned decision path is stable enough to render.
-Prefer a decision-rights/governance flow showing proposal, decision, execution, evidence and escalation. Use FigJam/Figma diagram tooling for the flow; avoid committee-centric org charts unless forums are genuinely decision-critical.
+## Integrated report presentation
+After governance synthesis, call `report-composer`.
+
+Default profile:
+- governance problem;
+- material decisions/bottlenecks;
+- proposed decision path with inline governance/decision flow;
+- rights and minimum forums;
+- escalation/evidence loop;
+- pilot/transition.
+
+Use Figma/FigJam through `visual-output-design` for editable flows when helpful. Keep the diagram within the decision-path section rather than as a parallel artifact.
