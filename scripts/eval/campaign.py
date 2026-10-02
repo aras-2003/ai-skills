@@ -541,6 +541,35 @@ def client_display_evidence_errors(case_id: str, trace: dict, requested_status: 
     return []
 
 
+def trace_schema_errors(trace: dict) -> list[str]:
+    errors: list[str] = []
+    if not isinstance(trace, dict):
+        return ["runtime trace must be an object"]
+
+    selected = trace.get("selected_capabilities")
+    if not isinstance(selected, list):
+        errors.append("selected_capabilities must be a list")
+        selected = []
+    elif not all(isinstance(item, str) and item.strip() for item in selected):
+        errors.append("selected_capabilities must contain only non-empty capability names")
+
+    known = validate_routing.known_capability_names(ROOT)
+    unknown = sorted({
+        str(item) for item in selected
+        if isinstance(item, str) and item.strip() and item not in known
+    })
+    if unknown:
+        errors.append(
+            "selected_capabilities contains non-capability/tool names: " + ", ".join(unknown)
+        )
+
+    tool_calls = trace.get("tool_calls")
+    if not isinstance(tool_calls, list):
+        errors.append("tool_calls must be a list")
+
+    return errors
+
+
 def selection_errors(case: dict, trace: dict) -> list[str]:
     selected = list(trace.get("selected_capabilities") or [])
     rubric = yaml.safe_load((ROOT / case["rubric"]).read_text(encoding="utf-8")) or {}
@@ -590,9 +619,10 @@ def import_run(args) -> Path:
     if obs.get("channel") != required_channel:
         raise ValueError(f"case {args.case_id} requires {required_channel} session")
     trace = json.loads(Path(args.trace).read_text(encoding="utf-8"))
-    sel_errors = selection_errors(case, trace)
+    schema_errors = trace_schema_errors(trace)
+    sel_errors = schema_errors + selection_errors(case, trace)
     if sel_errors and args.status == "PASS":
-        raise ValueError("PASS forbidden when runtime selection findings exist: " + "; ".join(sel_errors))
+        raise ValueError("PASS forbidden when runtime trace/selection findings exist: " + "; ".join(sel_errors))
 
     display_errors = client_display_evidence_errors(args.case_id, trace, args.status)
     if display_errors:
