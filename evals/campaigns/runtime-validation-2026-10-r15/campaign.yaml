@@ -30,6 +30,7 @@ routing_case_ids:
   - oaf-evidence-loop-pl
   - commerce-deep-dive-en
   - oaf-architecture-workflow-pl
+  - investment-portfolio-natural-en
 executive_source: skills/career/executive-role-evaluator/tests/cases.yaml
 executive_case_dir: evals/campaigns/runtime-validation-2026-10/executive
 executive_case_ids:
