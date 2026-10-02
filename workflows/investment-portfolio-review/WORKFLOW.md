@@ -1,7 +1,16 @@
 # Investment Portfolio Review Workflow
 
 ## Purpose
-Review the current XTB portfolio as a system, detect material drift or thesis deterioration and surface only positions that require attention.
+Review the user's investment portfolio as a system, detect material concentration, diversification/overlap risk, drift or thesis deterioration, and surface only positions that require attention.
+
+## Natural activation
+Use this workflow for ordinary portfolio-review requests even when the user does not name the workflow, Investment OS, XTB, canonical storage or any specialist skill. Typical natural requests include:
+- "review my portfolio";
+- "review this portfolio";
+- "what requires attention in my portfolio?";
+- a list/table of holdings or weights followed by a request for risk, concentration, diversification or next decisions.
+
+When activated naturally, do not replace the workflow with a generic investment commentary answer. Run the canonical/evidence path first, then integrated reporting and the required visual-floor path.
 
 ## Required skills
 - portfolio-state-review
@@ -16,7 +25,9 @@ Review the current XTB portfolio as a system, detect material drift or thesis de
 - decision-journal-update
 
 ## Sequence
-1. Read canonical current_positions, latest portfolio snapshot, current policy and active thesis versions through investment-record-store. Emit canonical READ receipt.
+1. Attempt canonical reads first through investment-record-store: current_positions, latest portfolio snapshot, current policy, active thesis versions and relevant transaction history. Emit canonical READ receipt.
+   - If the user also supplied holdings/weights, preserve them as USER_PROVIDED evidence and reconcile them against canonical state when available.
+   - Do not skip canonical reads merely because the prompt already contains enough numbers for a generic analysis.
 2. If current state or prior snapshot is unavailable, state exactly which comparison is blocked. Do not substitute local/chat/analytics cache.
 3. Reconcile current state and preserve append-only snapshot history.
 4. Use Data/analytics tooling for concentration, ETF look-through, overlap, currency, theme/cycle and historical trend calculations when useful. Treat results as derived analytics.
@@ -52,7 +63,7 @@ Stop when every material alert is tied to evidence or policy.
 ## Integrated report presentation
 Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
 
-After analytical synthesis, call `report-composer` to produce one portfolio decision report. Use `visual-output-design` for inline components only.
+After analytical synthesis, call `report-composer` to produce one portfolio decision report. Use `visual-output-design` for inline components only. This step is mandatory for substantial portfolio reviews; do not stop after a prose-only analytical answer when the visual floor applies.
 
 Default profile:
 - portfolio decision headline + KPI strip;
