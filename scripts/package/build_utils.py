@@ -226,6 +226,7 @@ def package_runtime_mcp(root: Path, stage: Path) -> list[dict]:
             "name": "arek-chart-renderer",
             "kind": "mcp-server",
             "runtime_class": "deterministic-data-chart",
+            "renderer_class": "deterministic-data-chart",
             "tools": ["render_bar_chart", "render_line_chart"],
             "content_sha256": tree_digest,
         },
