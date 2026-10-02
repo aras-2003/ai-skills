@@ -281,7 +281,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "c71f28b56876a7d706387eb2c3e39d6f1c6e204b377f2768291bfd87775d5494",
+      "content_sha256": "067e3f4b973730a714845533750e19987f3b05fdcf6cc6e64137a508d281c44d",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -291,7 +291,7 @@
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-portfolio-review",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "d271a7da176283dc33ffcc89448670caf5791106c120fc565763a3324e7831a0",
@@ -832,5 +832,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "8a5d47dbae43b2a0813dc71e1f45a9493650887d"
+  "source_revision": "af250f7c4ca58ec6ec8d864364d43b58f3a7c264"
 }

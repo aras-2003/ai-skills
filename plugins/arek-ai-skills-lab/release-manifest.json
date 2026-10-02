@@ -177,11 +177,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "c71f28b56876a7d706387eb2c3e39d6f1c6e204b377f2768291bfd87775d5494",
+      "content_sha256": "067e3f4b973730a714845533750e19987f3b05fdcf6cc6e64137a508d281c44d",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-portfolio-review",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "d271a7da176283dc33ffcc89448670caf5791106c120fc565763a3324e7831a0",
@@ -458,9 +458,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "2848b161c4a8391e2da09bdb699dc44f44dd0703e9fcd399430ea43337a8bfb5",
-  "release_id": "0.13.0+8a5d47dbae43",
+  "payload_content_sha256": "f0f3fc7d41f319e03e5863dcaea5f249c323c202cf3935c42b7f50cca41ec5fc",
+  "release_id": "0.14.0+af250f7c4ca5",
   "schema_version": "1.0",
-  "source_revision": "8a5d47dbae43b2a0813dc71e1f45a9493650887d",
-  "version": "0.13.0"
+  "source_revision": "af250f7c4ca58ec6ec8d864364d43b58f3a7c264",
+  "version": "0.14.0"
 }
