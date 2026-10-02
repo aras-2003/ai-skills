@@ -118,6 +118,7 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("PENDING_CLIENT_VALIDATION", contract)
         self.assertIn("USER_PROVIDED", contract)
         self.assertIn("causal attribution", contract.lower())
+        self.assertIn("zero-row", contract.lower())
         self.assertIn("quality-payload-client-not-observable", quality_cases)
         self.assertIn("quality-user-provided-unreproducible-metric", quality_cases)
 
@@ -127,9 +128,11 @@ class IntegratedReportingTests(unittest.TestCase):
         cases = (ROOT / "skills/investing/portfolio-state-review/tests/cases.yaml").read_text(encoding="utf-8")
 
         self.assertIn("attribution `UNKNOWN`", workflow)
-        self.assertIn("absence of observed transactions is not evidence", workflow.lower())
+        self.assertIn("zero-row transaction result is not evidence", workflow.lower())
         self.assertIn('never infer "market-driven"', state)
+        self.assertIn("empty or zero-row canonical query result", state.lower())
         self.assertIn("portfolio-attribution-insufficient", cases)
+        self.assertIn("portfolio-attribution-empty-transactions", cases)
 
     def test_investment_front_door_routes_portfolio_to_full_orchestration(self) -> None:
         registry = yaml.safe_load((ROOT / "workflows/runtime-registry.yaml").read_text(encoding="utf-8"))
