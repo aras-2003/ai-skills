@@ -59,3 +59,7 @@ Default: standard. Validated on Luna for premium-vs-generic, failed-economics an
 Stop and KILL when a fatal economics, regulatory, logistics or differentiation constraint is evidenced and not plausibly fixable.
 Stop research and move to testing when the major remaining uncertainty is empirical conversion/CAC rather than desk-research evidence.
 Before paid acquisition, run any cheaper pre-market experiment that can invalidate differentiation, landed-cost, logistics or compliance assumptions.
+
+## Visual presentation
+Call `visual-output-design` when the product review contains enough evidence to support it.
+Prefer a unit-economics bridge/waterfall, competitor positioning matrix, gate-status panel and smallest-next-test card. Do not turn qualitative uncertainty into fake numeric precision merely to fill a chart.
