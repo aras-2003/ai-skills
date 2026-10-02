@@ -280,6 +280,24 @@ class RuntimeCampaignTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unsupported evidence source revision"):
             campaign.evidence_compatibility_profile("deadbeef")
 
+    def test_routing_requires_front_door_child_capability(self) -> None:
+        case = {
+            "id": "investment-portfolio-natural-en",
+            "suite": "routing",
+            "rubric": "evals/routing/investment-portfolio-natural-en.rubric.yaml",
+        }
+        missing_child = campaign.selection_errors(
+            case,
+            {"selected_capabilities": ["investment-os-review"]},
+        )
+        self.assertTrue(any("required child capability absent: investment-portfolio-review" in item for item in missing_child))
+
+        valid = campaign.selection_errors(
+            case,
+            {"selected_capabilities": ["investment-os-review", "investment-portfolio-review"]},
+        )
+        self.assertEqual([], valid)
+
     def test_visual_pass_requires_external_client_display_evidence(self) -> None:
         cfg = dict(campaign.config())
         case_id = "case-003-portfolio-review"
