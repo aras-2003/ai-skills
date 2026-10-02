@@ -67,7 +67,7 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
    - move exhaustive evidence tables or appendices later.
 12. Keep receipts, source notes and material limitations in the same report, not in a disconnected parallel artifact.
 13. Run the contradiction check from the state/evidence contract before final output.
-14. Never silently convert a required visual-floor slot into a successful text-only report. If the runtime cannot truly embed a qualifying visual inline in chat, surface the block explicitly. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
+14. Never silently convert a required visual-floor slot into successful renderer execution. If no qualifying renderer exists or invocation fails, surface that execution state explicitly. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
 
 ## Inline visual slot contract
 Each slot must define:
@@ -148,7 +148,7 @@ Do not emit `report_status: PASS` for ordinary report composition. Runtime visua
 - [ ] The report remains readable on narrow/mobile layouts.
 - [ ] Receipts and limitations remain visible.
 - [ ] `capability_preflight` was run for every required visual-floor slot.
-- [ ] Text/table fallback never converts `BLOCKED_NO_RENDERER` into PASS.
+- [ ] Text/table fallback never converts `BLOCKED_NO_RENDERER` into renderer success.
 - [ ] Renderer success is reported only as `PAYLOAD_RENDERED`; client display remains `NOT_OBSERVABLE`.
 - [ ] No `UI_CONFIRMED`, `UI_RENDER_UNCONFIRMED`, `PASS_WITH_LIMITATIONS` or invented status appears.
 - [ ] Every derived metric is reproducible from identified inputs.
