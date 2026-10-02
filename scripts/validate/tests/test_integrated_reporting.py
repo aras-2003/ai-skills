@@ -102,6 +102,17 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("diagnostic fallback", standard)
         self.assertIn("report PASS for a text-only fallback", quality_cases)
 
+    def test_render_success_requires_payload_and_ui_confirmation(self) -> None:
+        composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
+        renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("PAYLOAD_RENDERED", composer)
+        self.assertIn("UI_CONFIRMED", composer)
+        self.assertIn("UI_RENDER_UNCONFIRMED", composer)
+        self.assertIn("successful renderer call is not enough for PASS", composer)
+        self.assertIn("PAYLOAD_RENDERED", renderer)
+        self.assertIn("UI_RENDER_UNCONFIRMED", renderer)
+        self.assertIn("Tool success alone is not called UI-rendered", renderer)
+
 
 if __name__ == "__main__":
     unittest.main()
