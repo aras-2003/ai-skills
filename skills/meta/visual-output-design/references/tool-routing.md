@@ -2,6 +2,29 @@
 
 Choose the narrowest capable renderer. Tool availability varies by runtime; never claim a tool was used unless it actually ran.
 
+## Capability preflight contract
+
+Before satisfying a required visual slot, inspect the tools available in the current session and bind the slot to a concrete renderer capability.
+
+A **qualifying deterministic data renderer** must:
+- accept structured numeric/category/time-series data or an equivalent explicit chart specification;
+- deterministically encode those supplied values into a rendered chart/visual;
+- preserve labels, units and ordering without model-invented geometry;
+- be invokable in the current runtime and embeddable in the intended response surface.
+
+The following do **not** qualify as quantitative chart renderers:
+- image generation or generic media generation;
+- image viewing;
+- Figma/FigJam diagram/design tools used as freeform drawing surfaces;
+- text, markdown tables or ASCII/punctuation pseudo-charts.
+
+Preflight status:
+- `AVAILABLE`: a concrete qualifying renderer is present and invokable;
+- `UNAVAILABLE`: inspected runtime capabilities contain no qualifying renderer;
+- `UNKNOWN`: the runtime/tool contract is insufficient to prove a qualifying renderer exists.
+
+For a required visual-floor slot, `UNAVAILABLE` or `UNKNOWN` means `BLOCKED_NO_RENDERER`. A table/text fallback may still be shown for usability, but it does not satisfy the visual requirement.
+
 ## 1. Native chart renderer
 Use for:
 - bar/ranked comparisons;
@@ -82,10 +105,11 @@ Never use generated imagery to represent exact quantitative data, organizational
 or evidence-backed process state.
 
 ## Fallback order
-1. best native chat renderer/widget;
-2. another chat-native structured renderer;
-3. static markdown table + concise prose;
-4. external artifact renderer only when the user explicitly requested that artifact class.
+1. best qualifying native chat renderer/widget;
+2. another qualifying chat-native structured renderer;
+3. for **optional** visuals: static markdown table + concise prose;
+4. for **required visual-floor** slots with no qualifying renderer: `BLOCKED_NO_RENDERER` plus an optional diagnostic table/prose fallback;
+5. external artifact renderer only when the user explicitly requested that artifact class.
 
 Never create HTML/PDF/Figma/deck/file output merely because the preferred chat renderer is unavailable.
 
