@@ -89,7 +89,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("c6467ab8a7f2cf6435ce613792615cc5e93769ad", lock["behavior_source_revision"])
+            self.assertEqual("930ef8ce1406872e06e889cf5e3f12fa50926230", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
             self.assertEqual("1.17.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
@@ -330,7 +330,7 @@ class RuntimeCampaignTests(unittest.TestCase):
                 "provider": "offline-synthetic-provider",
                 "model_id": "offline-synthetic-model",
                 "reasoning": "offline",
-                "available_tools": ["offline-fixture"],
+                "available_tools": ["offline-fixture", "mcp__arek-chart-renderer__render_bar_chart"],
             },
         }
 
