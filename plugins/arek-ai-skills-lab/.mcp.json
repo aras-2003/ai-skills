@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "arek-chart-renderer": {
+      "args": [
+        "run",
+        "${PLUGIN_ROOT}/mcp/chart_renderer.py"
+      ],
+      "command": "uv",
+      "cwd": "${PLUGIN_ROOT}",
+      "type": "stdio"
+    }
+  }
+}

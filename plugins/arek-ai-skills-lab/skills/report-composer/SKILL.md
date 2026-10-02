@@ -30,33 +30,39 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
 ## Procedure
 1. Identify the audience, decision and minimum report depth.
 2. Apply `references/report-quality-standard.md` as the default quality baseline.
-3. Select a report profile from `references/report-profiles.md` or derive a minimal equivalent.
-4. Build a semantic report model containing ordered sections:
+3. Run `capability_preflight` before finalising any visual-floor requirement:
+   - inspect the tools actually available in the current runtime;
+   - classify whether a **deterministic data renderer** exists for the required visual grammar;
+   - do not count `image_gen`, image viewers, generic media generation, or Figma diagram/design tools as a quantitative chart renderer;
+   - record one of: `AVAILABLE`, `UNAVAILABLE`, `UNKNOWN`.
+4. Select a report profile from `references/report-profiles.md` or derive a minimal equivalent.
+5. Build a semantic report model containing ordered sections:
    - section purpose;
    - narrative block;
    - evidence block;
    - decision/implication block;
    - optional inline visual slots;
    - section-level provenance and uncertainty.
-5. Decide visual placement by reading flow, not by asset type:
+6. Decide visual placement by reading flow, not by asset type:
    - put the visual immediately after the claim/context it helps explain;
    - put interpretation immediately after the visual;
    - avoid collecting unrelated visuals into a separate appendix/dashboard unless the user explicitly asks.
-6. For each visual slot, call `visual-output-design` with:
+7. For each visual slot, call `visual-output-design` with:
    - the local section question;
    - only the relevant supported data;
    - required renderer capabilities;
    - as-of context and provenance.
-7. Choose output target:
-   - **chat-native report** by default;
-   - **chat-native fallback** (native widget/chart/table/structured prose) when the ideal embedded visual is unavailable;
+8. Choose output target:
+   - **chat-native report** when all required visual-floor slots have a qualifying renderer and render successfully;
+   - **chat-blocked** when chartable material data require a visual but `capability_preflight` returns `UNAVAILABLE` or `UNKNOWN`, or when invocation fails;
    - **external artifact** only when the user explicitly asks for HTML, PDF, Figma, a deck, a downloadable file, or another external output format.
-8. Preserve progressive disclosure:
+9. A blocked report may still include a compact table/matrix so the user can inspect the data, but that fallback is diagnostic only: it does **not** satisfy the required visual slot and must carry `BLOCKED_NO_RENDERER` (or `FAIL_RENDERER_INVOCATION` when a qualifying renderer was discovered but failed).
+10. Preserve progressive disclosure:
    - lead with the decision and minimum evidence;
    - keep detail near the section it supports;
    - move exhaustive evidence tables or appendices later.
-9. Keep receipts, source notes and material limitations in the same report, not in a disconnected parallel artifact.
-10. If the runtime cannot truly embed the ideal visual inline in chat, use the best truthful chat-native fallback. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
+11. Keep receipts, source notes and material limitations in the same report, not in a disconnected parallel artifact.
+12. Never silently convert a required visual-floor slot into a successful text-only report. If the runtime cannot truly embed a qualifying visual inline in chat, surface the block explicitly. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
 
 ## Inline visual slot contract
 Each slot must define:
@@ -70,12 +76,14 @@ Each slot must define:
 - **provenance**
 - **uncertainty**
 - **fallback**
+- **capability_status**: AVAILABLE / UNAVAILABLE / UNKNOWN
+- **render_status**: RENDERED / BLOCKED_NO_RENDERER / FAIL_RENDERER_INVOCATION / NOT_REQUIRED
 
 ## Decision rules
 - The report is the product; visuals are evidence-bearing components inside it.
 - Apply the default quality standard without requiring the user to spell out formatting, section limits, chart preferences or receipt compactness in the prompt.
 - Prefer concise executive hierarchy: 3–5 opening points, a small number of detailed entities, selective visuals and a 3–5 item decision queue unless the task genuinely requires more.
-- Apply the visual-floor rule from the quality standard: material chartable data should yield at least one real chat-native visual when the runtime supports one.
+- Apply the visual-floor rule from the quality standard: material chartable data create a required visual slot. If a qualifying renderer is absent, the report is blocked rather than silently accepted as text-only.
 - Do not make a dashboard merely because several metrics exist.
 - Do not repeat the same content in prose and a separate visual artifact unless repetition materially aids the decision.
 - Use interactive controls only when the alternative views answer a real decision question.
@@ -88,7 +96,8 @@ Each slot must define:
 Return one semantic report with:
 - **report_title**
 - **decision_headline**
-- **target**: chat-native / chat-fallback / external-artifact-requested
+- **target**: chat-native / chat-blocked / external-artifact-requested
+- **report_status**: PASS / BLOCKED_NO_RENDERER / FAIL_RENDERER_INVOCATION
 - **sections[]**
   - heading
   - narrative
@@ -109,8 +118,8 @@ Return one semantic report with:
 - Missing evidence stays visibly missing.
 
 ## Failure and uncertainty handling
-- If `visual-output-design` is unavailable, preserve the integrated section structure and use compact tables/text.
-- If inline embedding is not supported by the current chat runtime, do not pretend it is; use a chat-native chart/widget/table/text fallback. Never generate an external file merely as a fallback.
+- If `visual-output-design` is unavailable and a visual-floor slot is required, mark the report `BLOCKED_NO_RENDERER`; compact tables/text may be included only as an explicit diagnostic fallback.
+- If inline embedding is not supported by the current chat runtime for a required visual slot, do not pretend the requirement was met. Mark `BLOCKED_NO_RENDERER`. Never generate an external file merely as a fallback.
 - If an interactive control lacks complete comparable data, omit the control or disable the unsupported horizon/state.
 - If a section has no useful visual, do not force one.
 
@@ -124,6 +133,8 @@ Return one semantic report with:
 - [ ] No external artifact/file was created unless explicitly requested.
 - [ ] The report remains readable on narrow/mobile layouts.
 - [ ] Receipts and limitations remain visible.
+- [ ] `capability_preflight` was run for every required visual-floor slot.
+- [ ] Text/table fallback never converts `BLOCKED_NO_RENDERER` into PASS.
 
 ## References
 - references/report-quality-standard.md
