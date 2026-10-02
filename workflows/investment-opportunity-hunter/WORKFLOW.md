@@ -51,6 +51,8 @@ Stop when 3-10 credible research candidates remain.
 Stop deeper work when the evidence gap is larger than the apparent opportunity.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After analytical synthesis, call `report-composer` to produce one integrated opportunity report. Use `visual-output-design` only for the inline visual slots selected by the composer.
 
 Default profile:
@@ -63,4 +65,4 @@ Default profile:
 - canonical receipts and limitations.
 
 For each candidate section, place any price/performance visual immediately after the setup/context it explains. When verified time-series data exist, support 3M / 6M / 12M switching. State normalization, FX/dividend treatment and as-of date.
-Do not return a full textual report plus a separate duplicate dashboard. If rich HTML is the best target, make that HTML the integrated report itself and keep chat to a short executive summary.
+Do not return a full textual report plus a separate duplicate dashboard. Do not generate HTML/PDF/Figma/deck/file output unless the user explicitly requested it; if an ideal visual cannot be embedded, use the best chat-native chart/widget/table/text fallback.
