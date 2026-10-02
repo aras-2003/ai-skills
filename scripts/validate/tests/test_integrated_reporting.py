@@ -131,6 +131,31 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn('never infer "market-driven"', state)
         self.assertIn("portfolio-attribution-insufficient", cases)
 
+    def test_portfolio_natural_activation_requires_full_orchestration(self) -> None:
+        registry = yaml.safe_load((ROOT / "workflows/runtime-registry.yaml").read_text(encoding="utf-8"))
+        item = next(x for x in registry["workflows"] if x["name"] == "investment-portfolio-review")
+        workflow = (ROOT / "workflows/investment-portfolio-review/WORKFLOW.md").read_text(encoding="utf-8")
+        routing = (ROOT / "evals/routing/registry.yaml").read_text(encoding="utf-8")
+        rubric = (ROOT / "evals/routing/investment-portfolio-natural-en.rubric.yaml").read_text(encoding="utf-8")
+
+        description = item["description"].lower()
+        self.assertIn("review my portfolio", description)
+        self.assertIn("review this portfolio", description)
+        self.assertIn("trigger even when", description)
+        self.assertIn("canonical portfolio state", description)
+        self.assertIn("required visual-floor path", description)
+
+        self.assertIn("## Natural activation", workflow)
+        self.assertIn("do not replace the workflow with a generic investment commentary answer", workflow.lower())
+        self.assertIn("Do not skip canonical reads merely because", workflow)
+        self.assertIn("mandatory for substantial portfolio reviews", workflow)
+
+        self.assertIn("investment-portfolio-natural-en", routing)
+        self.assertIn("expected_target: investment-portfolio-review", rubric)
+        self.assertIn("canonical portfolio reads are attempted", rubric)
+        self.assertIn("required visual-floor path", rubric)
+        self.assertIn("does not stop after a prose-only concentration analysis", rubric)
+
     def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
         contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
         standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")
