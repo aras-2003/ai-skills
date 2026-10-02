@@ -111,7 +111,7 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("PAYLOAD_RENDERED", composer)
         self.assertIn("NOT_OBSERVABLE", composer)
         self.assertIn("analysis_state", composer)
-        self.assertNotIn("report_status: PASS", composer)
+        self.assertIn("Do not emit `report_status: PASS`", composer)
         self.assertIn("PAYLOAD_RENDERED", renderer)
         self.assertIn("NOT_OBSERVABLE", renderer)
         self.assertIn("Do not emit `UI_CONFIRMED`, `UI_RENDER_UNCONFIRMED`", renderer)
