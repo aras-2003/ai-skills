@@ -32,6 +32,9 @@ For opportunity/security comparisons:
 - Put interpretation immediately after the visual.
 - Do not collect all charts into a separate dashboard or visual appendix by default.
 - Do not add a visual just to make a section look richer.
+- **Visual floor:** when a substantial decision report contains a clear quantitative composition, ranking, time-series, matrix or structural relationship and a suitable chat-native renderer is available, include at least one real visual. A report with material chartable data should not silently degrade to text-only output.
+- For portfolio reviews with 3+ meaningful positions/categories, include at least one portfolio-composition/concentration visual when renderable in chat.
+- If a native visual renderer is unavailable, use a compact table/matrix fallback and explicitly treat that as a renderer limitation rather than a design preference.
 
 ## 5. Visual quality
 Prefer:
@@ -44,6 +47,7 @@ Prefer:
 - option matrices for trade-offs.
 
 Avoid:
+- text-only reporting when material chartable data and a suitable chat-native renderer are available;
 - ASCII bars;
 - punctuation-based pseudo-charts;
 - raw Mermaid code fences shown to the user;
