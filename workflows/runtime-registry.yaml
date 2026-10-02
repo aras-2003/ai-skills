@@ -461,7 +461,7 @@ workflows:
       Do not use as the default entry point for broad natural investment requests.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.1.0"
+      version: "0.2.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-02
@@ -500,7 +500,7 @@ workflows:
       for broad natural investment requests.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.1.0"
+      version: "0.2.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-02
@@ -537,7 +537,7 @@ workflows:
       natural investment requests.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.1.0"
+      version: "0.2.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-02
@@ -576,7 +576,7 @@ workflows:
       Do not use as the default natural Investment OS entry point; natural portfolio requests should enter through investment-os-review.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.2.0"
+      version: "0.3.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-02
@@ -610,7 +610,7 @@ workflows:
       for broad natural investment requests.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.1.0"
+      version: "0.2.0"
       maturity: production
       risk: medium
       last_reviewed: 2026-10-02
