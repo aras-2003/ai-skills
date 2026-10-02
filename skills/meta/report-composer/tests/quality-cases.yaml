@@ -12,11 +12,13 @@ cases:
         - canonical/derived/external data distinction where relevant
         - compact decision queue
         - compact canonical receipt
+        - at least one real chat-native visual when material chartable portfolio data are available
       must_not:
         - ASCII bars
         - raw Mermaid code
         - unsolicited external artifact
         - repeat the same data in prose table and chart
+        - text-only output when a suitable chat-native renderer is available
 
   - id: quality-security-review
     case: Security review uses evidence-bearing visuals selectively

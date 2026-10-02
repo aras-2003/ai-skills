@@ -74,6 +74,17 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("Mermaid xychart", design)
         self.assertIn("external market data", standard.lower())
 
+    def test_visual_floor_is_intrinsic(self) -> None:
+        composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
+        standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")
+        profiles = (ROOT / "skills/meta/report-composer/references/report-profiles.md").read_text(encoding="utf-8")
+        renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("visual-floor rule", composer)
+        self.assertIn("Visual floor:", standard)
+        self.assertIn("include at least one portfolio-composition/concentration visual", standard)
+        self.assertIn("required when renderable in chat", profiles)
+        self.assertIn("do not return text-only", renderer)
+
 
 if __name__ == "__main__":
     unittest.main()
