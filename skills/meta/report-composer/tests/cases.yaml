@@ -13,6 +13,7 @@ cases:
         - text fallback if inline rendering is unavailable
       must_not:
         - duplicate full visual dashboard beside the text report
+        - create HTML/PDF/Figma/deck/file unless explicitly requested
 
   - id: integrated-oaf-report
     case: Operating-model report with embedded editable diagram
@@ -26,18 +27,34 @@ cases:
         - inline structural visual
         - avoid inventing reporting lines
 
-  - id: integrated-html-report
-    case: Rich report is the single primary artifact
+  - id: explicit-html-report
+    case: External HTML report is allowed only when explicitly requested
     input: |
       Build an interactive portfolio report with narrative, charts and opportunity sections in one HTML report.
     expected:
       should_trigger: true
       must:
-        - one rich integrated report
+        - one explicitly requested rich integrated report
         - separate semantic payload from rendering
         - progressive disclosure
       must_not:
         - full duplicate text report plus separate full dashboard
+
+  - id: no-unsolicited-artifact
+    case: Chat-native report is default even when HTML could be richer
+    input: |
+      Review my portfolio and opportunity queue. Give me the report here in the chat, with visuals embedded in the relevant sections.
+    expected:
+      should_trigger: true
+      must:
+        - one integrated chat-native report
+        - embedded or chat-native visual fallbacks
+      must_not:
+        - create HTML file
+        - create PDF
+        - create Figma file
+        - create deck
+        - replace chat report with an external artifact
 
   - id: simple-answer-no-report
     case: Narrow concept question
