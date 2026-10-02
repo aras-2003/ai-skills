@@ -7,7 +7,7 @@ description: >
   to make a visual complete.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.4.0"
+  version: "0.5.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02
@@ -48,6 +48,7 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 
 ## Decision rules
 - Prefer one strong visual over several decorative ones.
+- When the calling report marks a visual slot as required by the visual-floor rule and supported data are present, render a real chat-native visual if a suitable renderer exists; do not return text-only merely because text is easier.
 - Prefer the visual grammar in `references/design-system.md`: horizontal bars for ranked concentration, real time-series lines for performance, matrices for overlap/trade-offs, ranges for scenarios, KPI strips for a few metrics.
 - Use a chart for quantitative comparison, trend, composition or relationship.
 - Use a diagram for structure, flow, dependency, ownership or state.
