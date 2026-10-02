@@ -49,7 +49,7 @@ class RuntimeCampaignTests(unittest.TestCase):
         self.assertEqual("operating-model-review", supplemental["oaf-interface-natural-pl"]["target"])
         self.assertEqual("decision-bottleneck-analysis", supplemental["oaf-decision-bottleneck-natural-pl"]["target"])
         self.assertEqual("decision-rights-review", supplemental["oaf-decision-rights-natural-pl"]["target"])
-        self.assertEqual(["fallback-strategy-production-002"], campaign.config().get("retest_focus_case_ids"))
+        self.assertEqual(["case-001-opportunity-hunter", "case-002-security-sizing", "case-003-portfolio-review"], campaign.config().get("retest_focus_case_ids"))
 
 
     def test_explicit_fallback_requires_target_name_in_executor_input(self) -> None:
@@ -86,11 +86,11 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("008c9944cf3a8bc3e2d7231a4862aaf00e722889", lock["behavior_source_revision"])
+            self.assertEqual("06251cc0b0976f6c6d8ac81581e4f0362b3d2fe3", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
-            self.assertEqual("1.9.0", lock["packages"]["production"]["version"])
+            self.assertEqual("1.10.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
-            self.assertEqual("0.3.0", lock["packages"]["lab"]["version"])
+            self.assertEqual("0.4.0", lock["packages"]["lab"]["version"])
             self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
             self.assertNotIn("organizational-interface-review", lock["expected_catalogs"]["production"])
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
@@ -224,6 +224,12 @@ class RuntimeCampaignTests(unittest.TestCase):
             "historical-r5",
             campaign.evidence_compatibility_profile(
                 "a5c4001d28f45d3fb799f07a2c880f406f58cc65"
+            ),
+        )
+        self.assertEqual(
+            "historical-r7",
+            campaign.evidence_compatibility_profile(
+                "008c9944cf3a8bc3e2d7231a4862aaf00e722889"
             ),
         )
         with self.assertRaisesRegex(ValueError, "unsupported evidence source revision"):
