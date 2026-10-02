@@ -72,12 +72,12 @@ def validate_campaign() -> list[str]:
     errors = []
     cfg = config()
     cases = load_campaign_cases(ROOT, config()["campaign"])
-    expected = {"commerce": 6, "routing": 17, "executive-role": 14, "production-fallback": 2}
+    expected = {"commerce": 6, "routing": 22, "executive-role": 14, "production-fallback": 2}
     counts = {k: 0 for k in expected}
     known = validate_routing.known_capability_names(ROOT)
 
-    if len(cases) != 39:
-        errors.append(f"expected 39 campaign cases, got {len(cases)}")
+    if len(cases) != 44:
+        errors.append(f"expected 44 campaign cases, got {len(cases)}")
 
     for cid, case in cases.items():
         suite = str(case.get("suite") or "")
@@ -554,8 +554,17 @@ def selection_errors(case: dict, trace: dict) -> list[str]:
             return ["negative executive-role case selected executive-role-evaluator"]
         return []
     if suite in {"routing", "supplemental-routing"}:
+        errors: list[str] = []
         expected = rubric.get("expected_target")
-        return [] if expected in selected else [f"expected routing target absent: {expected}"]
+        if expected not in selected:
+            errors.append(f"expected routing target absent: {expected}")
+        for required in rubric.get("required_selected_capabilities") or []:
+            if required not in selected:
+                errors.append(f"required child capability absent: {required}")
+        for forbidden in rubric.get("forbidden_selected_capabilities") or []:
+            if forbidden in selected:
+                errors.append(f"forbidden capability selected: {forbidden}")
+        return errors
     return [] if case["target"] in selected else [f"invoked subject absent from trace: {case['target']}"]
 
 

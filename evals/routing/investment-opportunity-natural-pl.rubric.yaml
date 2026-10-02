@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: investment-opportunity-natural-pl
+mode: natural-routing
+expected_target: investment-os-review
+language: pl
+competing_intents:
+  - investment-portfolio-review
+  - investment-security-review
+required_selected_capabilities:
+  - investment-opportunity-hunter
+assertions:
+  manual:
+    - the Investment OS front door is selected first
+    - opportunity discovery is selected because no known security is supplied
+    - portfolio review does not replace discovery

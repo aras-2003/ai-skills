@@ -131,27 +131,42 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn('never infer "market-driven"', state)
         self.assertIn("portfolio-attribution-insufficient", cases)
 
-    def test_portfolio_natural_activation_requires_full_orchestration(self) -> None:
+    def test_investment_front_door_routes_portfolio_to_full_orchestration(self) -> None:
         registry = yaml.safe_load((ROOT / "workflows/runtime-registry.yaml").read_text(encoding="utf-8"))
-        item = next(x for x in registry["workflows"] if x["name"] == "investment-portfolio-review")
-        workflow = (ROOT / "workflows/investment-portfolio-review/WORKFLOW.md").read_text(encoding="utf-8")
+        by_name = {item["name"]: item for item in registry["workflows"]}
+        router = by_name["investment-os-review"]
+        portfolio = by_name["investment-portfolio-review"]
+        router_workflow = (ROOT / "workflows/investment-os-review/WORKFLOW.md").read_text(encoding="utf-8")
+        portfolio_workflow = (ROOT / "workflows/investment-portfolio-review/WORKFLOW.md").read_text(encoding="utf-8")
         routing = (ROOT / "evals/routing/registry.yaml").read_text(encoding="utf-8")
         rubric = (ROOT / "evals/routing/investment-portfolio-natural-en.rubric.yaml").read_text(encoding="utf-8")
 
-        description = item["description"].lower()
-        self.assertIn('review "my portfolio"', description)
-        self.assertIn('"this portfolio"', description)
-        self.assertIn("trigger even when", description)
-        self.assertIn("canonical portfolio state", description)
-        self.assertIn("required visual-floor path", description)
+        router_description = router["description"].lower()
+        self.assertIn("default investment os front door", router_description)
+        self.assertIn("review their portfolio", router_description)
+        self.assertIn("route first", router_description)
+        self.assertIn("generic investment commentary", router_description)
 
-        self.assertIn("## Natural activation", workflow)
-        self.assertIn("do not replace the workflow with a generic investment commentary answer", workflow.lower())
-        self.assertIn("Do not skip canonical reads merely because", workflow)
-        self.assertIn("mandatory for substantial portfolio reviews", workflow)
+        self.assertIn("investment-portfolio-review", router["dependencies"]["required"])
+        self.assertIn("investment-security-review", router["dependencies"]["required"])
+        self.assertIn("investment-opportunity-hunter", router["dependencies"]["required"])
+        self.assertIn("investment-theme-discovery", router["dependencies"]["required"])
+        self.assertIn("investment-attention-review", router["dependencies"]["required"])
+        self.assertIn("investment-policy-design", router["dependencies"]["required"])
+
+        self.assertIn("## Routing matrix", router_workflow)
+        self.assertIn("MUST take this route", router_workflow)
+        self.assertIn("Do not duplicate the child workflow with a generic answer", router_workflow)
+
+        self.assertIn("child workflow for full portfolio review", portfolio["description"].lower())
+        self.assertIn("do not use as the default natural investment os entry point", portfolio["description"].lower())
+        self.assertIn("Do not skip canonical reads merely because", portfolio_workflow)
+        self.assertIn("mandatory for substantial portfolio reviews", portfolio_workflow)
 
         self.assertIn("investment-portfolio-natural-en", routing)
-        self.assertIn("expected_target: investment-portfolio-review", rubric)
+        self.assertIn("expected_target: investment-os-review", rubric)
+        self.assertIn("required_selected_capabilities:", rubric)
+        self.assertIn("investment-portfolio-review", rubric)
         self.assertIn("canonical portfolio reads are attempted", rubric)
         self.assertIn("required visual-floor path", rubric)
         self.assertIn("does not stop after a prose-only concentration analysis", rubric)

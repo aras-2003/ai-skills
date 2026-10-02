@@ -597,9 +597,22 @@ components:
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
 
-  - name: investment-attention-review
+  - name: investment-os-review
     kind: workflow
     version: "0.1.0"
+    source: workflows/investment-os-review/WORKFLOW.md
+    declared_maturity: production
+    static_contract: present
+    current_runtime_receipt: pending
+    maturity_disposition: retain-existing-pending-evidence-review
+    evidence_gap: "Front-door routing has static/package coverage; exact-version unassisted runtime routing evidence is pending."
+    limitation: "Use as the natural Investment OS entry point; child workflow execution remains subject to each child's evidence and runtime contracts."
+    exception_owner: arkadiusz-kamrowski
+    exception_expires: "2026-10-14"
+
+  - name: investment-attention-review
+    kind: workflow
+    version: "0.2.0"
     source: workflows/investment-attention-review/WORKFLOW.md
     declared_maturity: production
     static_contract: present
@@ -612,7 +625,7 @@ components:
 
   - name: investment-opportunity-hunter
     kind: workflow
-    version: "0.1.0"
+    version: "0.2.0"
     source: workflows/investment-opportunity-hunter/WORKFLOW.md
     declared_maturity: production
     static_contract: present
@@ -625,7 +638,7 @@ components:
 
   - name: investment-security-review
     kind: workflow
-    version: "0.1.0"
+    version: "0.2.0"
     source: workflows/investment-security-review/WORKFLOW.md
     declared_maturity: production
     static_contract: present
@@ -638,7 +651,7 @@ components:
 
   - name: investment-portfolio-review
     kind: workflow
-    version: "0.2.0"
+    version: "0.3.0"
     source: workflows/investment-portfolio-review/WORKFLOW.md
     declared_maturity: production
     static_contract: present
@@ -651,7 +664,7 @@ components:
 
   - name: investment-theme-discovery
     kind: workflow
-    version: "0.1.0"
+    version: "0.2.0"
     source: workflows/investment-theme-discovery/WORKFLOW.md
     declared_maturity: production
     static_contract: present

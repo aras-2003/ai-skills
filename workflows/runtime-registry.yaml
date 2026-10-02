@@ -398,6 +398,34 @@ workflows:
               - selective routing
               - staged evidence gating
               - broad mixed-signal discovery and shortlist reduction
+  - name: investment-os-review
+    workflow: workflows/investment-os-review/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - investment-portfolio-review
+        - investment-security-review
+        - investment-opportunity-hunter
+        - investment-theme-discovery
+        - investment-attention-review
+        - investment-policy-design
+      optional: []
+    description: >
+      Default Investment OS front door for natural investment requests. Use when the user asks in ordinary language
+      to review their portfolio or holdings, assess a stock/security, find investment opportunities, research themes,
+      evaluate whether new market/company information matters, or define portfolio policy/risk limits. Route first,
+      then invoke the matching specialist workflow; do not answer with generic investment commentary.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
+      maturity: production
+      risk: high
+      last_reviewed: 2026-10-03
+      execution:
+        default_model_class: standard
   - name: investment-attention-review
     workflow: workflows/investment-attention-review/WORKFLOW.md
     channels:
@@ -428,11 +456,12 @@ workflows:
         - name: portfolio-state-review
           on_missing: "Do not make portfolio-fit claims."
     description: >
-      Review new company, industry, market and portfolio information against prior theses and expectations,
-      suppress noise, classify materiality and surface only the few items worth deeper research now.
+      Child workflow for Investment OS attention triage. Use when selected by investment-os-review, explicitly requested,
+      or when the user clearly asks whether new company/industry/market information changes existing holdings or theses.
+      Do not use as the default entry point for broad natural investment requests.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.1.0"
+      version: "0.2.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-02
@@ -466,11 +495,12 @@ workflows:
         - name: thesis-challenge
           on_missing: "Do not promote to a conviction queue without falsification."
     description: >
-      Scan the XTB-investable universe and tracked history for evidence-backed research candidates using changed
-      fundamentals, valuation, expectations, trend and portfolio context without issuing automatic buy or sell instructions.
+      Child workflow for Investment OS opportunity discovery. Use when selected by investment-os-review, explicitly requested,
+      or when the user clearly asks to scan for new securities or research candidates. Do not use as the default entry point
+      for broad natural investment requests.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.1.0"
+      version: "0.2.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-02
@@ -502,11 +532,12 @@ workflows:
         - name: decision-journal-update
           on_missing: "Return the decision record for manual persistence."
     description: >
-      Review one investment security end-to-end across underwriting, valuation scenarios, thesis challenge,
-      portfolio fit, lifecycle sizing and durable decision records.
+      Child workflow for one-security review. Use when selected by investment-os-review, explicitly requested, or when
+      a single named security is already the clear decision object. Do not use as the default entry point for broad
+      natural investment requests.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.1.0"
+      version: "0.2.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-02
@@ -539,14 +570,13 @@ workflows:
         - name: decision-journal-update
           on_missing: "Return decisions for manual persistence."
     description: >
-      Review a user's investment portfolio end to end. Use when the user asks to review "my portfolio" or "this portfolio",
-      asks what requires attention, or provides holdings/weights and wants concentration, diversification, ETF overlap,
-      portfolio risk, policy fit, drift or next decisions. Trigger even when the user does not name Investment OS,
-      XTB, canonical records or this workflow. Start from canonical portfolio state when available, reconcile user-supplied
-      holdings as evidence rather than replacing canonical state, then run the integrated report and required visual-floor path.
+      Child workflow for full portfolio review. Use when selected by investment-os-review, explicitly requested, or when
+      another Investment OS workflow delegates a portfolio-level decision. It performs canonical reads, reconciliation,
+      concentration/diversification analysis, policy/thesis checks, integrated reporting and the visual-floor path.
+      Do not use as the default natural Investment OS entry point; natural portfolio requests should enter through investment-os-review.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.2.0"
+      version: "0.3.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-02
@@ -575,11 +605,12 @@ workflows:
         - name: thesis-challenge
           on_missing: "Keep theme candidates pre-conviction."
     description: >
-      Research structural or cyclical investment themes through value-chain economics, bottlenecks, indicators
-      and invalidation, then create an XTB-focused research queue without treating theme exposure as security attractiveness.
+      Child workflow for Investment OS theme research. Use when selected by investment-os-review, explicitly requested,
+      or when thematic/value-chain research is already the clear decision object. Do not use as the default entry point
+      for broad natural investment requests.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.1.0"
+      version: "0.2.0"
       maturity: production
       risk: medium
       last_reviewed: 2026-10-02

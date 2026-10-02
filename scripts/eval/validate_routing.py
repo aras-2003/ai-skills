@@ -79,6 +79,15 @@ def validate(root: Path) -> list[str]:
         competing = rubric.get("competing_intents")
         if not isinstance(competing, list) or not competing:
             errors.append(f"{cid}: competing_intents must be non-empty")
+        for field in ("required_selected_capabilities", "forbidden_selected_capabilities"):
+            values = rubric.get(field) or []
+            if not isinstance(values, list) or not all(isinstance(x, str) and x for x in values):
+                errors.append(f"{cid}: {field} must be a list of capability names")
+                continue
+            unknown = sorted(set(values) - known)
+            if unknown:
+                errors.append(f"{cid}: {field} contains unknown capabilities: {', '.join(unknown)}")
+
         assertions = (rubric.get("assertions") or {}).get("manual") or []
         if not assertions:
             errors.append(f"{cid}: manual assertions are required")
