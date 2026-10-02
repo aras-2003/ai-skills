@@ -436,7 +436,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -449,7 +449,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -462,7 +462,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -475,7 +475,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -488,7 +488,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -501,7 +501,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -514,7 +514,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -527,7 +527,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -540,7 +540,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -553,7 +553,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -566,7 +566,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -579,7 +579,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -592,7 +592,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -605,7 +605,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -618,7 +618,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -631,7 +631,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -644,7 +644,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
@@ -657,7 +657,7 @@ components:
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta promotion has static/package coverage but no exact-version unassisted runtime PASS yet."
+    evidence_gap: "Personal-beta static/package coverage exists; R8 exact-version unassisted runtime retest remains pending."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
