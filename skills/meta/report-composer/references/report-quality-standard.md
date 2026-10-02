@@ -32,9 +32,12 @@ For opportunity/security comparisons:
 - Put interpretation immediately after the visual.
 - Do not collect all charts into a separate dashboard or visual appendix by default.
 - Do not add a visual just to make a section look richer.
-- **Visual floor:** when a substantial decision report contains a clear quantitative composition, ranking, time-series, matrix or structural relationship, create at least one required visual slot and run renderer `capability_preflight`. If a qualifying chat-native renderer is available, render the visual. If none can be proven available, the report must surface `BLOCKED_NO_RENDERER`; it must not be accepted as a successful text-only report.
-- For portfolio reviews with 3+ meaningful positions/categories, include at least one portfolio-composition/concentration visual when renderable in chat.
-- If a qualifying native visual renderer is unavailable, a compact table/matrix may be shown as a diagnostic fallback, but the required visual remains unsatisfied and the report status is `BLOCKED_NO_RENDERER`.
+- **Visual floor:** when a substantial decision report contains a clear quantitative composition, ranking, time-series, matrix or structural relationship, create at least one required visual slot and run renderer `capability_preflight`.
+- If no qualifying renderer exists, renderer execution is `BLOCKED_NO_RENDERER`.
+- If invocation succeeds and a valid image/chart payload is returned, renderer execution is `PAYLOAD_RENDERED`.
+- Client display is not observable by the language model and must remain `NOT_OBSERVABLE`; never infer inline visibility from payload success.
+- For portfolio reviews with 3+ meaningful positions/categories, attempt at least one portfolio-composition/concentration visual when a qualifying renderer exists.
+- A compact table/matrix may accompany unavailable/failed rendering as a diagnostic fallback, but it does not change renderer execution state.
 
 ## 5. Visual quality
 Prefer:
@@ -94,3 +97,13 @@ Do not end with a generic summary that repeats the opening.
 - The substantive report belongs in chat by default.
 - External HTML/PDF/Figma/deck/file output requires explicit user request.
 - Missing visual capability must remain inside chat as an explicit blocked state, not disappear behind a successful text-only fallback and not escape into an unsolicited file.
+
+
+## Evidence discipline
+- Classify decision-relevant facts as CANONICAL, USER_PROVIDED, EXTERNAL_VERIFIED, DERIVED or UNKNOWN.
+- A DERIVED metric must be reproducible from identified inputs.
+- A user-provided aggregate that cannot be recomputed from visible inputs stays USER_PROVIDED.
+- Do not turn missing transaction history into evidence that no trade occurred.
+- Historical or causal attribution requires evidence that distinguishes competing causes.
+- Run a contradiction check before final output: no missing-history limitation may coexist with a confident historical attribution; no missing-policy limitation may coexist with a policy-breach claim.
+- Keep limitations compact: state each material evidence gap once unless it changes a separate decision.
