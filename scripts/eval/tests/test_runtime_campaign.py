@@ -89,7 +89,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("109eddf46e2cf1ea6e95f1790a4f2aaf087e2238", lock["behavior_source_revision"])
+            self.assertEqual("25aee0e93032b96cbc56b371563bd7264507cf66", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
             self.assertEqual("1.12.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
