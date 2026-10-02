@@ -1,0 +1,48 @@
+---
+name: oaf-enterprise-change-review
+description: Orchestrate the minimum evidence-backed OAF path across multiple domains,
+  reusing specialist findings and producing only the bounded design and mobilisation
+  supported by evidence.
+metadata:
+  owner: arkadiusz-kamrowski
+  version: 1.0.0
+  maturity: production
+  risk: medium
+  last_reviewed: '2026-09-30'
+---
+
+# Oaf Enterprise Change Review Runtime Entrypoint
+
+## Purpose
+
+Expose a repository workflow to the skill runtime without duplicating its orchestration logic.
+
+## Procedure
+
+1. Load `references/WORKFLOW.md`.
+2. Follow it as the authoritative orchestration procedure.
+3. Route only to specialist skills that the workflow actually requires.
+4. Preserve workflow gates, stop conditions and evidence discipline.
+5. If an optional dependency is unavailable, apply the declared reduced-scope behavior below and explicitly disclose that the specialist did not run.
+6. Do not replace the workflow with a generic best-practice answer.
+
+## Dependency availability
+
+The following optional branches are unavailable in this package. Do not simulate or claim execution of the missing specialist:
+
+- `strategy-to-execution-diagnostic`: Strategy/execution specialist unavailable; disclose reduced scope and do not simulate it.
+- `organizational-interface-review`: Interface specialist unavailable; disclose the gap and do not simulate it.
+
+## Output contract
+
+Use the output contract defined in `references/WORKFLOW.md`.
+
+## Quality checks
+
+- [ ] The workflow source was loaded.
+- [ ] Specialist skills were selected selectively.
+- [ ] Required dependencies were available.
+- [ ] Missing optional dependencies were disclosed and not simulated.
+- [ ] Workflow stage order and gates were preserved.
+- [ ] Evidence and uncertainty remain explicit.
+- [ ] No extra domain was added merely for completeness.

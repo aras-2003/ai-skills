@@ -1,0 +1,27 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Arkadiusz Kamrowski"
+  },
+  "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Arek AI Skills",
+        "longDescription": "A governed collection of production-ready reusable AI skills maintained in GitHub and packaged for ChatGPT/Codex.",
+        "shortDescription": "Validated reusable workflows from the ai-skills production catalog."
+      }
+    }
+  },
+  "keywords": [
+    "skills",
+    "productivity",
+    "career",
+    "strategy",
+    "research"
+  ],
+  "name": "arek-ai-skills",
+  "repository": "https://github.com/aras-2003/ai-skills",
+  "skills": "./skills/",
+  "version": "1.11.0"
+}

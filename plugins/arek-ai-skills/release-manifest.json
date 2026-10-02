@@ -1,0 +1,382 @@
+{
+  "channel": "plugin",
+  "components": [
+    {
+      "content_sha256": "eb3198309204c03fb1b83a88b74b6825ec378f14e592c88b3763aa3c23a0446b",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "acquisition-fit-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "b1fbdec3e182a68ba57e5a1935471d2f2f4d60c651203bc0714a45a047e939ea",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "architecture-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "95aa51ce2bce46f1f77f46e0fdcda8dcabeb0d5c01c11e8397d9f0aa7a5d6cb2",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "arek-skills-diagnostic",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "ebe469aa043720e0c50880e86afd3e67dcb92e2088e3218f1e50afcfeb6f1af7",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "capability-gap-analysis",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "a97e1f0def7e6530b61dfc061433b7152ca4c91250dde23b7d89f2c92e04fa76",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "capability-map-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "fb2d7e207fc5c1887b55ada678b120b830ab807845a1fc4a790465980ffc2a5f",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "commerce-opportunity-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "7a293cbd958c17f048ac4844d9aa71850bb37e76cde7c531eb4d4994579cbda4",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "commerce-product-deep-dive",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "0c69695162cbe985b9e1016d1bfb98d8bfc361bddd100ca82ebe44e8978a49cf",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "commerce-regulatory-risk-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "cbf70542c37266ee3fc4611abc5b0411c18185bd70e0c5e39c477d73246832c5",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "company-context-research",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "71309075b6fbcea13e89c21102000a3c12a6678dab557f576702ac5962cf1061",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "competition-landscape-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "ce3c3e0f4aaf0f5e43ae40362d15f76e7f01cff77752121cc54ad425a8cf56dc",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-bottleneck-analysis",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "8e020a337e15ff06543603290a397f647a4a2923b7c8786360ab3b04036d72e2",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-journal-update",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "50d32d4b098b6c763bb4b0b87277b7e1bbcc42e31e27a71320176ebc941370ea",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-rights-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "e12bc733f74198498188b8694785ef5405f2c75af455429c72217705ce6fab09",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "differentiation-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "910a214fd2fc141c464d1364330c6a261e5e6f732f20685f11fb38013db44720",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "evidence-loop-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "39bf030256fda104a6ae58402c69dabb539884449f57b674b646ab16a1a3a255",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "executive-role-evaluator",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "1d04dd73c4dccbde1b396dc5d6958e8c83d78cd5e294d9951748c86b36216f78",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "global-local-model-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "a0117fed48e46023f87362c3b5ad80c82c4d9d2549199614b1b19efcdf71960c",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "governance-design",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "795e1698a4871f7998d443685d74865b5093296698bf613ae087993349c6b5ac",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-attention-review",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "2824e95e4c5d7e53c08ca93f73f4184f465fa41c97133f8b2b1a126d29d49223",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investment-attention-triage",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "15493ea2beb1b4c82a9b678ce302faf36a6f302f330a09828b54877358f032b2",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-opportunity-hunter",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "d01a535f6252217e32a8c96b101c94b794582cd7076712c5fca80520f87c5d28",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investment-policy-design",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "a96f6c4469d25c26d879b95d07d7f69c8c45fa17e6c02212766f9ef11ab60215",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-portfolio-review",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "1609f47cb2fad2d6402dbc0dddb5d6f0b0dd8d781fc60940b481375e99b9d596",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investment-record-store",
+      "version": "0.2.0"
+    },
+    {
+      "content_sha256": "314f9e24393a749adae8d85f11fd5e9ddca49d28bed0902cbda9fd0c3bf82d05",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-security-review",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "491efec6d954f103ef72b06ab0fc7ea5d263c02156776113d777f0964a722d9c",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-theme-discovery",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "5ad20619130edc73e1911b05840634245f8a141035f085dd6242d5ed5d1fe3c2",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investor-pattern-research",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "a7a3ec957e5d914ab65e5416d34e267cdd3bd983b218e8a5e0cd7c38f8949409",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "market-opportunity-scan",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "48ae1be4dd9fa9389592bc0973c0f669bf08eae39e70d6fd0d43322a73955ed6",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "market-transferability-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "1b3f91c2c97f4edd49fc4f8e3b62883c76eae295410ca076224cf33a78b6625b",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-enterprise-architecture-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "73f832f55d7241db272e47a6e59de80d2122ab9c73718060c53f663127cc90cd",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-enterprise-change-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "f4fd44352b7490f32be2d87bab36ce507b4e86b496d6f2d8079995131d5abffc",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-governance-redesign",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "1ee50daf8f32718b99ccc48e04655e9bc4a64faf670e859c3cbf5fc7168f0bdd",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-health-check",
+      "version": "1.5.0"
+    },
+    {
+      "content_sha256": "cfa7606ec221e29e281402b7a39fb0503eb0fe8fd4bf39df184e44399cddc3f5",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-operating-model-redesign",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "28a27e87711de6a3ad2a22e5032a08f2d3c935e766733de99a81f20ab296348c",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-transformation-design",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "1d1f420d0cf7b1d82e5621189969348308be1df81056541bbfd880e018c968df",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "operating-model-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "fadc6306c811ae93d7a915b1a962b5cb80c9832519fff2d048c1c16d6fb7dbe3",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-health-review",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "fd002e7569567af44b33ab46d3f4f76fc43686aa16192dfd28be86f35a44756d",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-prioritization",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "b003fa42e7fc40e65ca1c653fd67869892fd2b546180af346830e552e7490ba2",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-state-review",
+      "version": "0.2.0"
+    },
+    {
+      "content_sha256": "936118960a56d276495f32289f6d6bdc0fd1f4b2e1b9ae63e74e07a538968ddf",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "position-sizing-review",
+      "version": "0.3.0"
+    },
+    {
+      "content_sha256": "89d03b1046432063ddf6097bf0a514671cc459bd52f10346f8e4152c5e498e9d",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "problem-demand-validation",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "5c9dda68e06b44f78c86f53fa81a038dda00ba77b5e650ea0aa66be9f0ccbf37",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "product-opportunity-discovery",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "0163a1e90fced9d6b2c654a6d1a47731d5c971351ff5b543afc95f2951095f4c",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "security-underwriting",
+      "version": "0.3.0"
+    },
+    {
+      "content_sha256": "2f5600720fc03114ca8633a5c88cfce97f4b450643d19617eebc47f8d1f98312",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-authoring",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "a06f4d08c7ea13199dc9a50c88183f386da6212f47749234e8c5e99e899fad86",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-specification",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "3ce46c95fd4e477082b7547719fbf0787d9863cb5dcf7d687926748584e8538e",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-validation",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "456400d84b0c64236a670a23d89c13971bcbe6927270a9b57326dcac50ac74f9",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "supplier-viability-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "4954a644bf8bb0cd9552ae3cc5185b47dd6ea6e2ca35a202f4fe5e6e240f8f88",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "thesis-challenge",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "cd2291210fa53dc2584351642aa3a90f02c32087544f94c819dbfd8eb4d61781",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "thesis-monitor",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "df3965795551b1a2586fec21703b1f1333752a735cd9ee2fc932070813724fff",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "transformation-blueprint",
+      "version": "1.0.0"
+    },
+    {
+      "content_sha256": "3be6829370b55466010650f92f27156c81ac338ff4ec9d467bfc72b3795bf9fa",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "trend-theme-research",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "84435a0238bd9090681a71daefca4d9131b13c1390ac6e136f8849848db26e39",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "unit-economics-review",
+      "version": "1.1.0"
+    },
+    {
+      "content_sha256": "eda16a1a1a88c492b54b1f2635c4fce232f281754c22b8fa655fc8f803fa5047",
+      "kind": "skill",
+      "maturity": "production",
+      "name": "valuation-scenario-review",
+      "version": "0.1.0"
+    }
+  ],
+  "package": "arek-ai-skills",
+  "payload_content_sha256": "b53bdd0b455346ba32d35c243d61380ea2f919e94d7908021b18a2d0d8100a48",
+  "release_id": "1.11.0+05ee51b6373a",
+  "schema_version": "1.0",
+  "source_revision": "05ee51b6373ae94b10b88c9cb20e0bdad8b4d201",
+  "version": "1.11.0"
+}
