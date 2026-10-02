@@ -546,7 +546,7 @@ workflows:
       holdings as evidence rather than replacing canonical state, then run the integrated report and required visual-floor path.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.1.0"
+      version: "0.2.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-02
