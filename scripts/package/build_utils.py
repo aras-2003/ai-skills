@@ -195,5 +195,34 @@ def copy_runtime_support(src_skill: Path, dst_skill: Path) -> list[str]:
     return inventory
 
 
+def package_runtime_mcp(root: Path, stage: Path) -> dict:
+    source_dir = root / "runtime" / "mcp"
+    config_src = source_dir / "mcp.json"
+    renderer_src = source_dir / "chart_renderer.py"
+    if not config_src.is_file() or not renderer_src.is_file():
+        raise ValueError("runtime MCP renderer source is incomplete")
+
+    config = json.loads(config_src.read_text(encoding="utf-8"))
+    servers = config.get("mcpServers")
+    if not isinstance(servers, dict) or "arek-chart-renderer" not in servers:
+        raise ValueError("runtime/mcp/mcp.json must declare arek-chart-renderer")
+
+    shutil.copyfile(config_src, stage / "mcp.json")
+    mcp_out = stage / "mcp"
+    mcp_out.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(renderer_src, mcp_out / "chart_renderer.py")
+
+    compat = {"mcpServers": servers}
+    write_json(stage / ".mcp.json", compat)
+
+    return {
+        "name": "arek-chart-renderer",
+        "kind": "mcp-server",
+        "renderer_class": "deterministic-data-chart",
+        "tools": ["render_bar_chart", "render_line_chart"],
+        "content_sha256": sha256_tree(mcp_out),
+    }
+
+
 def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
