@@ -1,11 +1,12 @@
 ---
 name: investment-attention-review
-description: Review new company, industry, market and portfolio information against
-  prior theses and expectations, suppress noise, classify materiality and surface
-  only the few items worth deeper research now.
+description: Child workflow for Investment OS attention triage. Use when selected
+  by investment-os-review, explicitly requested, or when the user clearly asks whether
+  new company/industry/market information changes existing holdings or theses. Do
+  not use as the default entry point for broad natural investment requests.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
+  version: 0.2.0
   maturity: production
   risk: high
   last_reviewed: '2026-10-02'

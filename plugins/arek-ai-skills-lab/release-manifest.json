@@ -149,11 +149,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "2dcb4139e24bff8c41d77b2725bc9df7842d252103ec9b1d0608391b9f25b89d",
+      "content_sha256": "e5d04a0c6fa7d7b366c0ccbaffa992d7ae4b9eed35a3303f83763d49fa88b3ab",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-attention-review",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "9d9f6f56b42a76574c92e9975c8160099caea959a70bf88d99a62b5e543148b1",
@@ -163,10 +163,17 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "fff85d8a175e480c034a424b4830132c84dc15aa43325fd93d0977ad9207c118",
+      "content_sha256": "31ac908e9f30adf22c07f034ab5a50dfe92a7275890b02ae82f835a1794cba71",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-opportunity-hunter",
+      "version": "0.2.0"
+    },
+    {
+      "content_sha256": "f38386afb18c60bd1eb83f1e007caea1eb6358d25e702332a3ee9fdc7463e9f3",
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-os-review",
       "version": "0.1.0"
     },
     {
@@ -177,11 +184,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "067e3f4b973730a714845533750e19987f3b05fdcf6cc6e64137a508d281c44d",
+      "content_sha256": "e92f983300062bbb9ed81bc82e55c5449f7522e0c746820fc446195d6c6a162b",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-portfolio-review",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "d271a7da176283dc33ffcc89448670caf5791106c120fc565763a3324e7831a0",
@@ -191,18 +198,18 @@
       "version": "0.3.0"
     },
     {
-      "content_sha256": "24f661cc8eec01bacf91e9f9271cc4502b1602cd46c93f98bff353c30d7345eb",
+      "content_sha256": "7557c2167b29a21eb53cba010ff8a305d90db78a9802974fe546c50c1dafecde",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-security-review",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
-      "content_sha256": "4498138a179bdcafb2037e8bb763338b41243b1ef8739be0e9e9ce609839e166",
+      "content_sha256": "be6a3c72f10795482a3c301b48116e576c10407b445f0a524773ceaf4e34277e",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-theme-discovery",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "5ad20619130edc73e1911b05840634245f8a141035f085dd6242d5ed5d1fe3c2",
@@ -458,9 +465,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "f0f3fc7d41f319e03e5863dcaea5f249c323c202cf3935c42b7f50cca41ec5fc",
-  "release_id": "0.14.0+af250f7c4ca5",
+  "payload_content_sha256": "a882ca47a060f00f67b9e514841294e0b9232d25d192ce95772b42cfde36581f",
+  "release_id": "0.15.0+b306857ccd07",
   "schema_version": "1.0",
-  "source_revision": "af250f7c4ca58ec6ec8d864364d43b58f3a7c264",
-  "version": "0.14.0"
+  "source_revision": "b306857ccd07eec499bbdfbdd16af18e1ad010a5",
+  "version": "0.15.0"
 }

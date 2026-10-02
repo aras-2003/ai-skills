@@ -1,11 +1,12 @@
 ---
 name: investment-opportunity-hunter
-description: Scan the XTB-investable universe and tracked history for evidence-backed
-  research candidates using changed fundamentals, valuation, expectations, trend and
-  portfolio context without issuing automatic buy or sell instructions.
+description: Child workflow for Investment OS opportunity discovery. Use when selected
+  by investment-os-review, explicitly requested, or when the user clearly asks to
+  scan for new securities or research candidates. Do not use as the default entry
+  point for broad natural investment requests.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
+  version: 0.2.0
   maturity: production
   risk: high
   last_reviewed: '2026-10-02'

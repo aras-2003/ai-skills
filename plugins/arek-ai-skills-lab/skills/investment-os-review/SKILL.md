@@ -1,20 +1,20 @@
 ---
-name: investment-portfolio-review
-description: Child workflow for full portfolio review. Use when selected by investment-os-review,
-  explicitly requested, or when another Investment OS workflow delegates a portfolio-level
-  decision. It performs canonical reads, reconciliation, concentration/diversification
-  analysis, policy/thesis checks, integrated reporting and the visual-floor path.
-  Do not use as the default natural Investment OS entry point; natural portfolio requests
-  should enter through investment-os-review.
+name: investment-os-review
+description: Default Investment OS front door for natural investment requests. Use
+  when the user asks in ordinary language to review their portfolio or holdings, assess
+  a stock/security, find investment opportunities, research themes, evaluate whether
+  new market/company information matters, or define portfolio policy/risk limits.
+  Route first, then invoke the matching specialist workflow; do not answer with generic
+  investment commentary.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.3.0
+  version: 0.1.0
   maturity: production
   risk: high
-  last_reviewed: '2026-10-02'
+  last_reviewed: '2026-10-03'
 ---
 
-# Investment Portfolio Review Runtime Entrypoint
+# Investment Os Review Runtime Entrypoint
 
 ## Purpose
 
@@ -42,9 +42,3 @@ Use the output contract defined in `references/WORKFLOW.md`.
 - [ ] Workflow stage order and gates were preserved.
 - [ ] Evidence and uncertainty remain explicit.
 - [ ] No extra domain was added merely for completeness.
-
-## Lab runtime eval inputs
-
-When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
-
-- `references/evals/case-003-portfolio-review.input.md`

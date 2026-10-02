@@ -1,11 +1,11 @@
 ---
 name: investment-security-review
-description: Review one investment security end-to-end across underwriting, valuation
-  scenarios, thesis challenge, portfolio fit, lifecycle sizing and durable decision
-  records.
+description: Child workflow for one-security review. Use when selected by investment-os-review,
+  explicitly requested, or when a single named security is already the clear decision
+  object. Do not use as the default entry point for broad natural investment requests.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
+  version: 0.2.0
   maturity: production
   risk: high
   last_reviewed: '2026-10-02'

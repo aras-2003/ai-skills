@@ -1,11 +1,12 @@
 ---
 name: investment-theme-discovery
-description: Research structural or cyclical investment themes through value-chain
-  economics, bottlenecks, indicators and invalidation, then create an XTB-focused
-  research queue without treating theme exposure as security attractiveness.
+description: Child workflow for Investment OS theme research. Use when selected by
+  investment-os-review, explicitly requested, or when thematic/value-chain research
+  is already the clear decision object. Do not use as the default entry point for
+  broad natural investment requests.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
+  version: 0.2.0
   maturity: production
   risk: medium
   last_reviewed: '2026-10-02'
