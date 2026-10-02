@@ -100,7 +100,7 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("qualifying deterministic data renderer", routing)
         self.assertIn("image generation", routing)
         self.assertIn("diagnostic fallback", standard)
-        self.assertIn("report PASS for a text-only fallback", quality_cases)
+        self.assertIn("claim renderer success for a text-only fallback", quality_cases)
 
     def test_render_and_client_states_are_separated(self) -> None:
         composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
