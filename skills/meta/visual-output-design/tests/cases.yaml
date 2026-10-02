@@ -69,3 +69,17 @@ cases:
         - use image generation for factual quantitative charting
         - count Figma diagram/design as a native quantitative chart renderer
         - report successful rendering
+
+
+  - id: visual-output-payload-without-ui
+    case: PNG payload exists but client rendering is unconfirmed
+    input: |
+      The renderer returned CHART_PAYLOAD_OK and a PNG ImageContent block, but the client did not confirm a visible chart.
+    expected:
+      should_trigger: true
+      must:
+        - classify payload generation as PAYLOAD_RENDERED
+        - classify final visual state as UI_RENDER_UNCONFIRMED
+      must_not:
+        - call the visual UI_CONFIRMED
+        - claim successful inline rendering
