@@ -9,7 +9,7 @@ description: 'Compose one integrated decision report from an already-supported w
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.3.0
+  version: 0.4.0
   maturity: candidate
   risk: low
   last_reviewed: '2026-10-02'
@@ -75,6 +75,7 @@ Each slot must define:
 - The report is the product; visuals are evidence-bearing components inside it.
 - Apply the default quality standard without requiring the user to spell out formatting, section limits, chart preferences or receipt compactness in the prompt.
 - Prefer concise executive hierarchy: 3–5 opening points, a small number of detailed entities, selective visuals and a 3–5 item decision queue unless the task genuinely requires more.
+- Apply the visual-floor rule from the quality standard: material chartable data should yield at least one real chat-native visual when the runtime supports one.
 - Do not make a dashboard merely because several metrics exist.
 - Do not repeat the same content in prose and a separate visual artifact unless repetition materially aids the decision.
 - Use interactive controls only when the alternative views answer a real decision question.
