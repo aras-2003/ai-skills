@@ -9,6 +9,8 @@ workflows:
       required:
         []
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: strategy-to-execution-diagnostic
@@ -60,6 +62,8 @@ workflows:
         - operating-model-review
         - decision-rights-review
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: global-local-model-review
@@ -109,6 +113,8 @@ workflows:
         - decision-rights-review
         - governance-design
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: decision-bottleneck-analysis
@@ -170,6 +176,8 @@ workflows:
       required:
         - transformation-blueprint
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
     description: >
@@ -207,6 +215,8 @@ workflows:
       required:
         - architecture-review
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: capability-map-review
@@ -305,6 +315,8 @@ workflows:
         - supplier-viability-review
         - acquisition-fit-review
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: product-opportunity-discovery
@@ -342,6 +354,8 @@ workflows:
       required:
         []
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: product-opportunity-discovery
@@ -395,6 +409,8 @@ workflows:
         - investment-attention-triage
         - investment-record-store
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: thesis-monitor
@@ -433,6 +449,8 @@ workflows:
         - market-opportunity-scan
         - investment-record-store
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: investment-attention-triage
@@ -471,6 +489,8 @@ workflows:
         - thesis-challenge
         - investment-record-store
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: trend-theme-research
@@ -504,6 +524,8 @@ workflows:
         - thesis-monitor
         - investment-record-store
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: investment-attention-triage
@@ -539,6 +561,8 @@ workflows:
         - market-opportunity-scan
         - investment-record-store
       optional:
+        - name: report-composer
+          on_missing: "Return one concise integrated text/table report; do not create a duplicate parallel dashboard or pretend inline visuals were rendered."
         - name: visual-output-design
           on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: investor-pattern-research
