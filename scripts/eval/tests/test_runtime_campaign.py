@@ -89,11 +89,11 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("63fd3fda0ab4931cc0652f0565aa29fc59b3b67d", lock["behavior_source_revision"])
+            self.assertEqual("32fd24fbf12d924949e1af40829481bd95d68ec4", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
-            self.assertEqual("1.14.0", lock["packages"]["production"]["version"])
+            self.assertEqual("1.15.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
-            self.assertEqual("0.8.0", lock["packages"]["lab"]["version"])
+            self.assertEqual("0.9.0", lock["packages"]["lab"]["version"])
             self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
             self.assertNotIn("organizational-interface-review", lock["expected_catalogs"]["production"])
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
@@ -257,6 +257,12 @@ class RuntimeCampaignTests(unittest.TestCase):
             "historical-r11",
             campaign.evidence_compatibility_profile(
                 "5a9968dc72fb21d2f36e4b9dbc76642cb11916a0"
+            ),
+        )
+        self.assertEqual(
+            "historical-r12",
+            campaign.evidence_compatibility_profile(
+                "63fd3fda0ab4931cc0652f0565aa29fc59b3b67d"
             ),
         )
         with self.assertRaisesRegex(ValueError, "unsupported evidence source revision"):

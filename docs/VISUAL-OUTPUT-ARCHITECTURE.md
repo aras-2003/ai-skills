@@ -11,7 +11,7 @@ This is the rendering layer beneath `report-composer`.
 3. Report composition: ordered sections and inline visual slots.
 4. Semantic visual payload for one local slot.
 5. Renderer selection.
-6. Rendered inline component or specialist artifact.
+6. Rendered inline chat component by default; specialist artifact only on explicit request.
 
 The rendered visual is derivative presentation, not a new system of record.
 
@@ -22,12 +22,12 @@ The rendered visual is derivative presentation, not a new system of record.
 Do not use `visual-output-design` to create a second full dashboard beside an already complete report unless explicitly requested.
 
 ## Renderer routing
-- Native charts: quantitative comparison, time series, composition and numeric relationships.
-- Figma/FigJam: editable structural diagrams, operating models, decision flows and one-page executive visuals.
-- Figma Slides: polished narrative presentation components/decks.
-- Interactive HTML/CSS: inline rich components or an integrated report target with tabs, scenarios, tooltips or coordinated views.
+- Native charts/widgets: first choice for quantitative comparison, time series, composition, numeric relationships and other visuals that can appear in the chat response.
+- Text/table/structured chat: default fallback when a richer embedded renderer is unavailable.
+- Figma/FigJam: only when the user explicitly requests an editable structural artifact or Figma output.
+- Figma Slides/deck: only when the user explicitly requests a presentation/deck.
+- Interactive HTML/CSS: only when the user explicitly requests HTML, a file or an external interactive report.
 - Generated imagery: illustration only, never factual charts or organizational truth.
-- Text/table: fallback when a richer renderer is unavailable or adds no value.
 
 ## Domain patterns
 Investment OS: normalized performance, allocation/concentration, overlap, valuation ranges, catalyst/risk timelines and opportunity cards.
@@ -44,4 +44,5 @@ Career: mandate/authority matrices, role comparisons, recruitment timelines and 
 - Canonical read/write receipts remain auditable text.
 - External visual artifacts are not canonical state.
 - Factual visuals retain source and as-of context.
-- If chat cannot truly embed a visual inline, the system must either use a concise fallback or make one rich integrated artifact the primary report.
+- If chat cannot truly embed a visual inline, the system must use the best chat-native fallback.
+- Do not create HTML/PDF/Figma/deck/file output as an automatic fallback; external artifacts require explicit user intent.

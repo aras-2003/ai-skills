@@ -19,7 +19,7 @@ Evidence / canonical state
    -> inline visual slots
 -> **Visual Output Design**
    -> renderer selection per slot
--> Chat-native report or one rich integrated artifact
+-> Chat-native report by default; external artifact only on explicit user request
 
 `report-composer` owns document structure and placement.
 `visual-output-design` owns visual encoding and rendering.
@@ -48,12 +48,12 @@ A section contains:
 Use when the runtime can render suitable charts/widgets inline.
 The narrative remains in chat and visuals appear next to the relevant sections.
 
-### Rich integrated report
-Use when HTML/React/Figma/deck is required for interactivity, high-fidelity layout or complex structural visuals.
-The rich artifact is the report itself. Avoid producing a second complete report in chat.
+### External artifact
+Use only when the user explicitly requests HTML, PDF, Figma, a deck, a downloadable file or another external format.
+The external artifact may then be the primary report for that request, but this is never the automatic fallback for missing chat-native rendering.
 
-### Text fallback
-Use when richer renderers are unavailable. Preserve section structure and decision logic.
+### Chat-native fallback
+Use native widgets/charts when available, otherwise tables or structured prose. Preserve section structure and decision logic inside the chat response.
 
 ## Interaction
 Interactive controls must answer a real decision question.
@@ -66,7 +66,7 @@ Examples:
 Do not add filters/tabs solely because HTML supports them.
 
 ## Cross-domain adoption
-Investment OS, OAF and Commerce workflows should call Report Composer after analytical synthesis.
+Investment OS, OAF and Commerce workflows should call Report Composer after analytical synthesis. Their default delivery target is the chat response.
 Visual Output Design remains a shared renderer utility.
 New skills/workflows should specify report/visual affordances during specification and authoring.
 
@@ -75,4 +75,5 @@ New skills/workflows should specify report/visual affordances during specificati
 - visuals inherit workflow evidence standards;
 - canonical receipts remain explicit;
 - unknown relationships remain unknown;
-- rich artifacts are derivative and noncanonical unless a separate storage contract says otherwise.
+- external artifacts are derivative and noncanonical unless a separate storage contract says otherwise;
+- absence of a preferred embedded renderer never authorizes unsolicited HTML/PDF/Figma/deck generation.

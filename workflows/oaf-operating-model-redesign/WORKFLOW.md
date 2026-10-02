@@ -58,6 +58,8 @@ Stop before design if evidence does not distinguish structural failure from poor
 Stop before final target-model selection if the evidence cannot distinguish the leading options.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After the target direction is sufficiently evidenced, call `report-composer`.
 
 Default profile:

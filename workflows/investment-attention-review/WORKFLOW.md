@@ -39,6 +39,8 @@ Worth attention now; monitor; no material change; provenance; canonical persiste
 Stop when every escalated item has one concrete decision-relevant research question.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After triage/synthesis, call `report-composer`.
 
 Default profile:

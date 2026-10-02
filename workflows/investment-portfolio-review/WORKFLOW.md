@@ -43,6 +43,8 @@ Requires attention; no material change; portfolio-level observations; derived an
 Stop when every material alert is tied to evidence or policy.
 
 ## Integrated report presentation
+Render the report directly in the chat response by default. External HTML/PDF/Figma/deck/file output is allowed only when the user explicitly requests that artifact or format.
+
 After analytical synthesis, call `report-composer` to produce one portfolio decision report. Use `visual-output-design` for inline components only.
 
 Default profile:
@@ -55,4 +57,4 @@ Default profile:
 - decision queue / next actions;
 - canonical READ/WRITE receipts and limitations.
 
-Prefer an interactive rich report when multiple coordinated portfolio views materially help, but it must be the primary integrated report rather than a duplicate dashboard beside a full chat answer.
+Prefer embedded chat-native interactive views when multiple coordinated portfolio views materially help. If unavailable, use chat-native charts/tables/structured prose; do not generate an external artifact unless explicitly requested.
