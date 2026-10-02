@@ -28,7 +28,7 @@ class RuntimeCampaignTests(unittest.TestCase):
 
     def test_campaign_resolves_exact_scope_and_isolation(self) -> None:
         self.assertEqual([], campaign.validate_campaign())
-        cases = load_campaign_cases(ROOT)
+        cases = load_campaign_cases(ROOT, campaign.config()["campaign"])
         self.assertEqual(39, len(cases))
         counts = {}
         for case in cases.values():
@@ -37,7 +37,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             {"commerce": 6, "routing": 17, "executive-role": 14, "production-fallback": 2},
             counts,
         )
-        supplemental = load_supplemental_cases(ROOT)
+        supplemental = load_supplemental_cases(ROOT, campaign.config()["campaign"])
         self.assertEqual(
             [
                 "oaf-decision-bottleneck-natural-pl",
@@ -113,7 +113,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             )
             self.assertEqual(64, len(lock["campaign_definition_sha256"]))
             definitions = {item["id"]: item for item in lock["case_definitions"]}
-            self.assertEqual(41, len(definitions))
+            self.assertEqual(42, len(definitions))
             components = {(item["channel"], item["name"]): item for item in lock["components"]}
             self.assertEqual("1.5.0", components[("production", "oaf-health-check")]["version"])
             self.assertEqual("1.1.0", components[("production", "operating-model-review")]["version"])
@@ -126,7 +126,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual(64, len(strategy["rubric_sha256"]))
 
     def test_revised_fallback_identities_do_not_rewrite_historical_001_cases(self) -> None:
-        active = load_campaign_cases(ROOT)
+        active = load_campaign_cases(ROOT, campaign.config()["campaign"])
         self.assertIn("fallback-strategy-production-002", active)
         self.assertIn("fallback-interface-explicit-production-002", active)
         self.assertNotIn("fallback-strategy-production-001", active)
@@ -669,7 +669,7 @@ class RuntimeCampaignTests(unittest.TestCase):
 
     def test_receipt_paths_are_portable_and_trace_is_hashed(self) -> None:
         cfg = campaign.config()
-        cases = load_campaign_cases(ROOT)
+        cases = load_campaign_cases(ROOT, campaign.config()["campaign"])
         case = cases["case-001-premium-vs-generic"]
         version, digest = receipt.current_component_identity(ROOT, case["target"])
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
