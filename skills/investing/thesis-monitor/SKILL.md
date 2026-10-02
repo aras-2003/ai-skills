@@ -2,11 +2,11 @@
 name: thesis-monitor
 description: >
   Monitor an existing investment thesis against new earnings, guidance, industry data, price/valuation changes and
-  predefined kill criteria. Use for ongoing holding reviews and event-driven updates. Do not restart full underwriting
-  unless the thesis materially changes or evidence becomes stale.
+  predefined kill criteria. Use canonical thesis history plus structured research/primary evidence; do not restart
+  full underwriting unless the thesis materially changes or evidence becomes stale.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: "0.2.0"
   maturity: production
   risk: high
   last_reviewed: 2026-10-02
@@ -20,29 +20,22 @@ metadata:
 Evaluate what changed versus the recorded thesis rather than summarizing news from scratch.
 
 ## Procedure
-1. Load the latest thesis register entry and prior monitoring state.
-2. Ingest new dated evidence relevant to assumptions, KPIs, catalysts and kill criteria.
+1. Load the latest canonical thesis version and prior monitoring state through investment-record-store.
+2. Gather new dated evidence using structured research tools for breadth and primary sources for material claim verification.
 3. Classify materiality separately from direction: NOISE / MONITOR / REVIEW / ESCALATE and STRENGTHENS / WEAKENS / MIXED / NEUTRAL.
-4. Map the change to the exact thesis assumption, KPI, catalyst, risk or kill criterion it affects.
+4. Map each material change to the exact thesis assumption, KPI, catalyst, risk or kill criterion.
 5. Update valuation/expectations context separately from business-thesis state.
-6. Compare market reaction with the fundamental change only as an interpretation; never use price reaction as proof.
+6. Compare market reaction with fundamental change only as interpretation.
 7. Detect portfolio implications such as position drift but route sizing decisions to position-sizing-review.
-8. Append a monitoring record; never rewrite the historical thesis as though it had always contained new information.
-9. Escalate to fresh underwriting, valuation or thesis challenge only when the change is material enough to justify deeper work.
+8. Append a new monitoring/research event through investment-record-store; never rewrite thesis history.
+9. Escalate only when evidence justifies deeper work.
 
 ## Decision rules
 - News importance is measured against thesis, not headline size.
+- Research-provider output does not replace canonical thesis history.
 - Price change alone does not prove thesis change.
-- Kill criteria override narrative attachment when actually met.
-- Historical thesis text is immutable; corrections are new records.
+- Kill criteria require evidence, not narrative discomfort.
+- Historical thesis versions remain immutable.
 
 ## Output contract
-As-of date; prior thesis state; new evidence; affected assumption/KPI; materiality; direction; valuation/expectations change; market-reaction context; thesis state; triggered kill criteria; exact next research question; next review trigger.
-
-## Quality checks
-- [ ] Comparison baseline is explicit.
-- [ ] New evidence is dated.
-- [ ] Historical records are preserved.
-- [ ] Noise is allowed to produce NO MATERIAL CHANGE.
-- [ ] Materiality and direction are separate.
-- [ ] Every escalation has an exact decision-relevant research question.
+What changed; materiality; direction; affected thesis element; valuation/expectations impact; market reaction context; next step; persistence receipt.
