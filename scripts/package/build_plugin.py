@@ -9,6 +9,7 @@ from build_utils import (
     copy_runtime_support,
     ensure_source_valid,
     package_version,
+    package_runtime_mcp,
     sha256_tree,
     source_revision,
     write_json,
@@ -106,6 +107,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
             }
         }
         write_json(stage / "plugin.json", manifest)
+        runtime_tool = package_runtime_mcp(root, stage)
         compat_dir = stage / ".codex-plugin"
         compat_dir.mkdir(parents=True)
         write_json(
@@ -115,6 +117,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                 "version": version,
                 "description": manifest["description"],
                 "skills": "./skills/",
+                "mcpServers": "./.mcp.json",
             },
         )
         revision = source_revision(root)
@@ -125,6 +128,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                 "channel": "plugin",
                 "source_revision": revision,
                 "capabilities": sorted(capabilities, key=lambda x: x["name"]),
+                "runtime_tools": [runtime_tool],
             },
         )
         payload_digest = sha256_tree(stage)
@@ -147,7 +151,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                         "content_sha256": item.get("content_sha256"),
                     }
                     for item in sorted(capabilities, key=lambda x: x["name"])
-                ],
+                ] + [runtime_tool],
             },
         )
 
