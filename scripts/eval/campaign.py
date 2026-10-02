@@ -514,6 +514,33 @@ def verify_smoke(lock_path: Path, observed_path: Path) -> list[str]:
     return errors
 
 
+def client_display_evidence_errors(case_id: str, trace: dict, requested_status: str) -> list[str]:
+    if requested_status != "PASS":
+        return []
+
+    cfg = config()
+    required_cases = {str(x) for x in (cfg.get("client_display_validation_case_ids") or [])}
+    if case_id not in required_cases:
+        return []
+
+    evidence = trace.get("client_display_evidence")
+    if not isinstance(evidence, dict):
+        return ["external client-display evidence is required for visual PASS"]
+
+    if str(evidence.get("status") or "").upper() != "CONFIRMED":
+        return ["client-display evidence status must be CONFIRMED"]
+
+    evidence_type = str(evidence.get("type") or "")
+    allowed = {str(x) for x in (cfg.get("client_display_evidence_types") or [])}
+    if evidence_type not in allowed:
+        return [f"unsupported client-display evidence type: {evidence_type or '<missing>'}"]
+
+    if not str(evidence.get("reference") or "").strip():
+        return ["client-display evidence requires a reference"]
+
+    return []
+
+
 def selection_errors(case: dict, trace: dict) -> list[str]:
     selected = list(trace.get("selected_capabilities") or [])
     rubric = yaml.safe_load((ROOT / case["rubric"]).read_text(encoding="utf-8")) or {}
@@ -552,6 +579,12 @@ def import_run(args) -> Path:
     sel_errors = selection_errors(case, trace)
     if sel_errors and args.status == "PASS":
         raise ValueError("PASS forbidden when runtime selection findings exist: " + "; ".join(sel_errors))
+
+    display_errors = client_display_evidence_errors(args.case_id, trace, args.status)
+    if display_errors:
+        raise ValueError(
+            "PASS forbidden without external client-display evidence: " + "; ".join(display_errors)
+        )
 
     component = {
         (x["channel"], x["name"]): x for x in lock["components"]
