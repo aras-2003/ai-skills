@@ -88,6 +88,10 @@ def validate(root: Path) -> list[str]:
             if unknown:
                 errors.append(f"{cid}: {field} contains unknown capabilities: {', '.join(unknown)}")
 
+        tool_fragments = rubric.get("required_tool_fragments") or []
+        if not isinstance(tool_fragments, list) or not all(isinstance(x, str) and x for x in tool_fragments):
+            errors.append(f"{cid}: required_tool_fragments must be a list of non-empty strings")
+
         assertions = (rubric.get("assertions") or {}).get("manual") or []
         if not assertions:
             errors.append(f"{cid}: manual assertions are required")
