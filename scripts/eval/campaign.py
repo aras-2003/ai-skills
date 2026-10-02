@@ -554,8 +554,17 @@ def selection_errors(case: dict, trace: dict) -> list[str]:
             return ["negative executive-role case selected executive-role-evaluator"]
         return []
     if suite in {"routing", "supplemental-routing"}:
+        errors: list[str] = []
         expected = rubric.get("expected_target")
-        return [] if expected in selected else [f"expected routing target absent: {expected}"]
+        if expected not in selected:
+            errors.append(f"expected routing target absent: {expected}")
+        for required in rubric.get("required_selected_capabilities") or []:
+            if required not in selected:
+                errors.append(f"required child capability absent: {required}")
+        for forbidden in rubric.get("forbidden_selected_capabilities") or []:
+            if forbidden in selected:
+                errors.append(f"forbidden capability selected: {forbidden}")
+        return errors
     return [] if case["target"] in selected else [f"invoked subject absent from trace: {case['target']}"]
 
 
