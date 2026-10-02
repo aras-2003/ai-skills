@@ -98,6 +98,7 @@ Return one semantic report with:
 - **decision_headline**
 - **target**: chat-native / chat-blocked / external-artifact-requested
 - **report_status**: PASS / BLOCKED_NO_RENDERER / FAIL_RENDERER_INVOCATION / UI_RENDER_UNCONFIRMED
+- The status enum is closed. Do not invent variants such as `PASS_WITH_LIMITATIONS`, `PARTIAL_PASS`, `PASS_WITH_WARNINGS`, or similar.
 - **sections[]**
   - heading
   - narrative
@@ -135,7 +136,12 @@ Return one semantic report with:
 - [ ] Receipts and limitations remain visible.
 - [ ] `capability_preflight` was run for every required visual-floor slot.
 - [ ] Text/table fallback never converts `BLOCKED_NO_RENDERER` into PASS.
-- [ ] A successful renderer call is not enough for PASS: verify a valid chart image payload receipt. If the client surface shows a blank/broken placeholder or visible embedding cannot be confirmed, use `UI_RENDER_UNCONFIRMED` rather than claiming the chart was rendered in chat.
+- [ ] A successful renderer call is not enough for PASS: verify a valid chart image payload receipt.
+- [ ] For any required visual-floor slot, `PASS` is permitted only when that slot reaches `UI_CONFIRMED`.
+- [ ] `PAYLOAD_RENDERED` alone must produce `UI_RENDER_UNCONFIRMED`, never PASS.
+- [ ] Never say a chart was "successfully rendered above", "visible above", or equivalent unless the required slot is `UI_CONFIRMED`.
+- [ ] If the client surface shows a blank/broken placeholder or visible embedding cannot be confirmed, use `UI_RENDER_UNCONFIRMED` rather than claiming the chart was rendered in chat.
+- [ ] Reject non-contract status variants such as `PASS_WITH_LIMITATIONS`.
 
 ## References
 - references/report-quality-standard.md

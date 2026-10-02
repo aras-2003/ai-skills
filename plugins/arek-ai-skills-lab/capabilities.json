@@ -576,7 +576,7 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "057f6dfd991038db485797dc2366c814869ebfbea6b9d5f19232993d9771c7c8",
+      "content_sha256": "b99bfc34d3a84ebc44f516a67e69e052135c378ac57f381143d45878ad278ef0",
       "inventory": [
         "SKILL.md",
         "references/composition-rules.md",
@@ -714,7 +714,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "5a53361fd343cabfd386210789c51855107cd7f028cb19cfff4dfe52731bddce",
+      "content_sha256": "29835411c1120b79fa5c796a6e3d5164a37bb9100f78e38780fb14e8bdaff1e8",
       "inventory": [
         "SKILL.md",
         "references/design-system.md",
@@ -831,5 +831,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "baece504e4412829304c5b2f9dcf57869e6c0eae"
+  "source_revision": "6d1db45debcf2df3557eb930a2e6a13397809b54"
 }
