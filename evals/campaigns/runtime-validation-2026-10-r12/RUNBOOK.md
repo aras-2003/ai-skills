@@ -2,7 +2,7 @@
 
 ## Identity
 - campaign: `runtime-validation-2026-10-r12`
-- behavior source: `c23b93defca763c5d3d2ee3226fbbe53bd625330`
+- behavior source: `63fd3fda0ab4931cc0652f0565aa29fc59b3b67d`
 - production package source version: `arek-ai-skills 1.14.0`
 - Lab package source version: `arek-ai-skills-lab 0.8.0`
 
