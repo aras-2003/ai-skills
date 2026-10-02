@@ -53,3 +53,7 @@ Escalate to strong for enterprise-wide executive authority redesign, politically
 ## Stop conditions
 Stop before design if the decision problem or owner is not sufficiently evidenced.
 Stop before enterprise rollout if the mechanism has not been tested or the trade-offs remain material and unresolved.
+
+## Visual presentation
+Call `visual-output-design` when the redesigned decision path is stable enough to render.
+Prefer a decision-rights/governance flow showing proposal, decision, execution, evidence and escalation. Use FigJam/Figma diagram tooling for the flow; avoid committee-centric org charts unless forums are genuinely decision-critical.

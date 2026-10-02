@@ -22,7 +22,7 @@ import validate_routing
 import build_plugin
 import artifact_validation
 
-CONFIG_REL = Path("evals/campaigns/runtime-validation-2026-10-r10/campaign.yaml")
+CONFIG_REL = Path("evals/campaigns/runtime-validation-2026-10-r11/campaign.yaml")
 CONFIG = ROOT / CONFIG_REL
 
 
@@ -194,6 +194,7 @@ HISTORICAL_RECEIPT_COMPATIBILITY = {
     "008c9944cf3a8bc3e2d7231a4862aaf00e722889": "runtime-validation-2026-10-r7",
     "6a598a036133284852c1dcb9f295aaefbb69686d": "runtime-validation-2026-10-r8",
     "e301e7af458a2fb2461c7576960ba8415bf3435f": "runtime-validation-2026-10-r9",
+    "0900bca7816341b1727285669fac88148ebc4174": "runtime-validation-2026-10-r10",
 }
 
 
@@ -626,7 +627,9 @@ def evidence_compatibility_profile(source_revision: str, root: Path = ROOT) -> s
             return "historical-r7"
         if historical_campaign == "runtime-validation-2026-10-r8":
             return "historical-r8"
-        return "historical-r9"
+        if historical_campaign == "runtime-validation-2026-10-r9":
+            return "historical-r9"
+        return "historical-r10"
     raise ValueError(f"unsupported evidence source revision: {source_revision}")
 
 

@@ -9,6 +9,8 @@ workflows:
       required:
         []
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: strategy-to-execution-diagnostic
           on_missing: "Strategy/execution diagnosis is unavailable in production; disclose reduced scope and stop/narrow if that branch is material."
         - name: operating-model-review
@@ -58,6 +60,8 @@ workflows:
         - operating-model-review
         - decision-rights-review
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: global-local-model-review
           on_missing: "Do not claim global/local redesign; limit the option set."
         - name: organizational-interface-review
@@ -105,6 +109,8 @@ workflows:
         - decision-rights-review
         - governance-design
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: decision-bottleneck-analysis
           on_missing: "Proceed only with rights evidence; disclose that latency tracing was not run."
     description: >
@@ -164,7 +170,8 @@ workflows:
       required:
         - transformation-blueprint
       optional:
-        []
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
     description: >
       Run an evidence-gated OAF transformation design workflow from validated diagnosis and target direction into bounded workstreams, sequencing, mobilisation and adaptive stage gates.
     metadata:
@@ -200,6 +207,8 @@ workflows:
       required:
         - architecture-review
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: capability-map-review
           on_missing: "Do not make capability-map quality claims."
         - name: capability-gap-analysis
@@ -296,6 +305,8 @@ workflows:
         - supplier-viability-review
         - acquisition-fit-review
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: product-opportunity-discovery
           on_missing: "If the input is only a category idea, stop and request discovery rather than inventing a product."
         - name: market-transferability-review
@@ -331,6 +342,8 @@ workflows:
       required:
         []
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: product-opportunity-discovery
           on_missing: "Discovery mode is unavailable; require a known product/opportunity."
         - name: commerce-product-deep-dive
@@ -382,6 +395,8 @@ workflows:
         - investment-attention-triage
         - investment-record-store
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: thesis-monitor
           on_missing: "Do not claim thesis monitoring; keep the item at attention-triage level."
         - name: market-opportunity-scan
@@ -418,6 +433,8 @@ workflows:
         - market-opportunity-scan
         - investment-record-store
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: investment-attention-triage
           on_missing: "Use scanner materiality only; do not claim dedicated attention triage."
         - name: trend-theme-research
@@ -454,6 +471,8 @@ workflows:
         - thesis-challenge
         - investment-record-store
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: trend-theme-research
           on_missing: "Keep broader theme implications unresolved."
         - name: portfolio-state-review
@@ -485,6 +504,8 @@ workflows:
         - thesis-monitor
         - investment-record-store
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: investment-attention-triage
           on_missing: "Review only already-material evidence; do not claim broad attention triage."
         - name: position-sizing-review
@@ -518,6 +539,8 @@ workflows:
         - market-opportunity-scan
         - investment-record-store
       optional:
+        - name: visual-output-design
+          on_missing: "Return the same decision-useful analysis with concise text/table fallback; do not simulate a visual tool or fabricate a rendered artifact."
         - name: investor-pattern-research
           on_missing: "Do not add investor-archetype context."
         - name: security-underwriting
