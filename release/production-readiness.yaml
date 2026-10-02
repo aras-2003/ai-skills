@@ -469,7 +469,7 @@ components:
 
   - name: investment-record-store
     kind: skill
-    version: "0.1.0"
+    version: "0.2.0"
     source: skills/investing/investment-record-store/SKILL.md
     declared_maturity: production
     static_contract: present
@@ -508,7 +508,7 @@ components:
 
   - name: portfolio-state-review
     kind: skill
-    version: "0.1.0"
+    version: "0.2.0"
     source: skills/investing/portfolio-state-review/SKILL.md
     declared_maturity: production
     static_contract: present
@@ -521,7 +521,7 @@ components:
 
   - name: position-sizing-review
     kind: skill
-    version: "0.1.0"
+    version: "0.2.0"
     source: skills/investing/position-sizing-review/SKILL.md
     declared_maturity: production
     static_contract: present
@@ -534,7 +534,7 @@ components:
 
   - name: security-underwriting
     kind: skill
-    version: "0.1.0"
+    version: "0.2.0"
     source: skills/investing/security-underwriting/SKILL.md
     declared_maturity: production
     static_contract: present
