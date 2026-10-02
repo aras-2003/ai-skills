@@ -8,6 +8,15 @@
       "command": "uv",
       "cwd": "${PLUGIN_ROOT}",
       "type": "stdio"
+    },
+    "arek-investment-os": {
+      "args": [
+        "run",
+        "${PLUGIN_ROOT}/mcp/investment_runtime.py"
+      ],
+      "command": "uv",
+      "cwd": "${PLUGIN_ROOT}",
+      "type": "stdio"
     }
   }
 }

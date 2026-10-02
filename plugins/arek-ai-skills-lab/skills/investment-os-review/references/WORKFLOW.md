@@ -18,6 +18,13 @@ Typical requests include:
 
 Do not require the user to know Investment OS terminology, canonical storage, specialist names or workflow names.
 
+## Runtime routing preflight
+When the MCP tool `route_investment_request` is available, call it with the user's full natural-language request before substantive investment analysis.
+
+Treat the returned `child_workflow` as the primary route when it is specific. If the tool returns `investment-os-review` / unknown, resolve the ambiguity with the routing matrix below rather than inventing a specialist result.
+
+The routing tool is a classifier only. It does not replace loading and executing the selected child workflow.
+
 ## Routing matrix
 Choose exactly one primary route unless the request genuinely contains two separate decisions.
 
@@ -46,22 +53,23 @@ Use `investment-attention-review` when the user brings new company/industry/mark
 Use `investment-policy-design` when the decision is about portfolio rules, risk limits, target bands, sizing constraints or investment governance rather than reviewing current holdings.
 
 ## Orchestration rules
-1. Select the primary route before doing substantive analysis.
-2. Invoke the selected child workflow/skill and follow its evidence/canonical rules.
-3. Do not duplicate the child workflow with a generic answer before or after invocation.
-4. If the portfolio route is selected:
+1. Run the runtime routing preflight when available; otherwise use the routing matrix.
+2. Select the primary route before doing substantive analysis.
+3. Invoke the selected child workflow/skill and follow its evidence/canonical rules.
+4. Do not duplicate the child workflow with a generic answer before or after invocation.
+5. If the portfolio route is selected:
    - canonical reads must be attempted by the child workflow;
    - user-supplied weights are evidence to reconcile, not a replacement for canonical state;
    - substantial chartable portfolio data must continue through integrated reporting and the visual-floor path.
-5. If the request is ambiguous between routes, prefer the route that directly matches the user's decision object:
+6. If the request is ambiguous between routes, prefer the route that directly matches the user's decision object:
    - portfolio > multiple holdings/weights;
    - security > one named security;
    - attention > new event/news against existing holdings/theses;
    - opportunity > discovery of new securities;
    - theme > thematic research;
    - policy > rules/limits.
-6. Do not fan out to every Investment OS workflow merely for completeness.
-7. Missing evidence narrows the child workflow result; it does not justify bypassing the child workflow.
+7. Do not fan out to every Investment OS workflow merely for completeness.
+8. Missing evidence narrows the child workflow result; it does not justify bypassing the child workflow.
 
 ## Output contract
 Return the selected child workflow's normal output. Do not add a separate router report.

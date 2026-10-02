@@ -4,11 +4,11 @@ description: Default Investment OS front door for natural investment requests. U
   when the user asks in ordinary language to review their portfolio or holdings, assess
   a stock/security, find investment opportunities, research themes, evaluate whether
   new market/company information matters, or define portfolio policy/risk limits.
-  Route first, then invoke the matching specialist workflow; do not answer with generic
-  investment commentary.
+  Route first, then invoke the matching specialist workflow; use the MCP routing preflight
+  when available and do not answer with generic investment commentary.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
+  version: 0.2.0
   maturity: production
   risk: high
   last_reviewed: '2026-10-03'

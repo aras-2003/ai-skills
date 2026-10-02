@@ -170,11 +170,11 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "f38386afb18c60bd1eb83f1e007caea1eb6358d25e702332a3ee9fdc7463e9f3",
+      "content_sha256": "d22a4bf336ab5d5d10bca8bc2ff281248c5efeebd9d61270bd2e2496a5c210fc",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-os-review",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "626874749d97b7b2d1fb50598f70387b0459c157694b909deee74369f689a0aa",
@@ -465,9 +465,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "a882ca47a060f00f67b9e514841294e0b9232d25d192ce95772b42cfde36581f",
-  "release_id": "0.15.0+b306857ccd07",
+  "payload_content_sha256": "1675920f172d45a786191c78acf2d6f28b55c8211b63af5db0c70d10d8a4400f",
+  "release_id": "0.16.0+140a160be438",
   "schema_version": "1.0",
-  "source_revision": "b306857ccd07eec499bbdfbdd16af18e1ad010a5",
-  "version": "0.15.0"
+  "source_revision": "140a160be4382762fe4ec6fb7c87532079835124",
+  "version": "0.16.0"
 }

@@ -269,7 +269,7 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "f38386afb18c60bd1eb83f1e007caea1eb6358d25e702332a3ee9fdc7463e9f3",
+      "content_sha256": "d22a4bf336ab5d5d10bca8bc2ff281248c5efeebd9d61270bd2e2496a5c210fc",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md"
@@ -277,7 +277,7 @@
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-os-review",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "626874749d97b7b2d1fb50598f70387b0459c157694b909deee74369f689a0aa",
@@ -831,17 +831,27 @@
   ],
   "runtime_tools": [
     {
-      "content_sha256": "5b7c6a7549900105d97a97caa965d0de4f86748daab9efa8d972a58206d8a752",
+      "content_sha256": "0d93f004269f8f99d61c698b96c033c70746c2e4c441b02741d33d1c26bbcbbb",
       "kind": "mcp-server",
       "name": "arek-chart-renderer",
       "renderer_class": "deterministic-data-chart",
+      "runtime_class": "deterministic-data-chart",
       "tools": [
         "render_bar_chart",
         "render_line_chart"
+      ]
+    },
+    {
+      "content_sha256": "0d93f004269f8f99d61c698b96c033c70746c2e4c441b02741d33d1c26bbcbbb",
+      "kind": "mcp-server",
+      "name": "arek-investment-os",
+      "runtime_class": "investment-request-router",
+      "tools": [
+        "route_investment_request"
       ]
     }
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "b306857ccd07eec499bbdfbdd16af18e1ad010a5"
+  "source_revision": "140a160be4382762fe4ec6fb7c87532079835124"
 }
