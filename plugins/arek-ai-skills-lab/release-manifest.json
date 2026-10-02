@@ -191,7 +191,7 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "0b9e7dc6dc62b2e6cfcbdd870310ec9facc83be56c0a70bbe587bc596ee7d566",
+      "content_sha256": "eed742b23c43c938664730354bbc0e564a308fe587d833664d41d2d84158d76e",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-security-review",
@@ -331,11 +331,11 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "da56b857c3d0626a04dd9f5b642c5d81729bdd5cbb80782ccc4393f816b94892",
+      "content_sha256": "936118960a56d276495f32289f6d6bdc0fd1f4b2e1b9ae63e74e07a538968ddf",
       "kind": "skill",
       "maturity": "production",
       "name": "position-sizing-review",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "89d03b1046432063ddf6097bf0a514671cc459bd52f10346f8e4152c5e498e9d",
@@ -359,11 +359,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "5fc7af4e7559ec9e59611565d9392cd6abca8ac620c1dea99564420fe88c8327",
+      "content_sha256": "0163a1e90fced9d6b2c654a6d1a47731d5c971351ff5b543afc95f2951095f4c",
       "kind": "skill",
       "maturity": "production",
       "name": "security-underwriting",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "2f5600720fc03114ca8633a5c88cfce97f4b450643d19617eebc47f8d1f98312",
@@ -444,9 +444,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "80f4c47dabac95cea91f1065aecad414391f0077699d1b80948e1ac62c924f50",
-  "release_id": "0.4.0+888165d15dfc",
+  "payload_content_sha256": "313d42ccf5031fbe73f095974aa8d3713ac3c5740745b390c7c31d2e50308d72",
+  "release_id": "0.5.0+e301e7af458a",
   "schema_version": "1.0",
-  "source_revision": "888165d15dfccfbbc059eed901484ea4e60eff66",
-  "version": "0.4.0"
+  "source_revision": "e301e7af458a2fb2461c7576960ba8415bf3435f",
+  "version": "0.5.0"
 }

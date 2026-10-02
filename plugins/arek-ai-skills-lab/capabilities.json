@@ -305,7 +305,7 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "0b9e7dc6dc62b2e6cfcbdd870310ec9facc83be56c0a70bbe587bc596ee7d566",
+      "content_sha256": "eed742b23c43c938664730354bbc0e564a308fe587d833664d41d2d84158d76e",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -533,14 +533,14 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "da56b857c3d0626a04dd9f5b642c5d81729bdd5cbb80782ccc4393f816b94892",
+      "content_sha256": "936118960a56d276495f32289f6d6bdc0fd1f4b2e1b9ae63e74e07a538968ddf",
       "inventory": [
         "SKILL.md"
       ],
       "kind": "skill",
       "maturity": "production",
       "name": "position-sizing-review",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "89d03b1046432063ddf6097bf0a514671cc459bd52f10346f8e4152c5e498e9d",
@@ -575,14 +575,14 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "5fc7af4e7559ec9e59611565d9392cd6abca8ac620c1dea99564420fe88c8327",
+      "content_sha256": "0163a1e90fced9d6b2c654a6d1a47731d5c971351ff5b543afc95f2951095f4c",
       "inventory": [
         "SKILL.md"
       ],
       "kind": "skill",
       "maturity": "production",
       "name": "security-underwriting",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "2f5600720fc03114ca8633a5c88cfce97f4b450643d19617eebc47f8d1f98312",
@@ -793,5 +793,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "888165d15dfccfbbc059eed901484ea4e60eff66"
+  "source_revision": "e301e7af458a2fb2461c7576960ba8415bf3435f"
 }
