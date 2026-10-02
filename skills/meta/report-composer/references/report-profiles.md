@@ -3,46 +3,55 @@
 These are default structures, not rigid templates. Skip sections that add no decision value.
 
 ## Investment — portfolio review
-1. Portfolio decision headline
-   - KPI strip
-2. Concentration and diversification
-   - allocation/concentration chart
-   - overlap/look-through matrix if supported
-3. Material change since prior state
-   - drift/change visual
-4. Positions requiring attention
-   - compact cards or materiality matrix
-5. Opportunity implications
-   - candidate cards/comparison only where relevant
-6. Decision queue / next actions
-7. Canonical receipts and limitations
+Default to a concise executive report, not a portfolio dump.
+1. Executive summary — 3–5 decision-relevant points
+2. Portfolio risk
+   - one ranked concentration/allocation visual
+   - overlap/look-through matrix only if supported and decision-relevant
+3. Positions requiring attention
+   - only material exceptions
+4. Opportunity implications
+   - 2–3 detailed candidates by default
+   - compress the remaining queue into watch/defer notes
+5. Cross-candidate comparison
+   - one compact matrix/visual
+6. Decision queue — 3–5 actions/gates
+7. Compact canonical receipt and material limitations
+
+If canonical storage lacks current market price history needed for price context, external market-data tools may be used. Label that data external and noncanonical.
 
 ## Investment — security review
 1. Investment view / thesis state
 2. Business performance
-   - KPI strip
+   - 3–4 key KPIs
 3. Market/price context
-   - interactive 3M / 6M / 12M chart when data support it
+   - prefer real historical time-series;
+   - support 3M / 6M / 12M switching when the renderer and verified data support it
 4. What changed fundamentally
 5. Valuation / priced-in expectations
-   - scenario range
+   - scenario range only when evidence gates permit
 6. Catalysts and risks
-   - timeline or matrix
+   - compact timeline or matrix
 7. Portfolio fit / sizing constraints
 8. Decision state / next trigger
-9. Evidence and receipts
+9. Compact evidence/receipt block
+
+Do not use price momentum as thesis validity. External market data may supplement canonical state but must be labeled external/noncanonical.
 
 ## Investment — opportunity hunter
-1. Market/portfolio context
-2. Shortlist
-   - candidate cards
-3. Candidate-by-candidate sections
-   - thesis summary
-   - local price/performance chart if useful
-   - key evidence/valuation gate
-4. Cross-candidate comparison
+1. Executive shortlist context
+2. Top 2–3 candidates in detail by default
+   - thesis/setup
+   - 3–4 key KPIs
+   - price/valuation context
+   - catalyst/risk
+   - decision implication / next gate
+3. One cross-candidate visual/matrix
+4. Remaining names compressed into watch/defer
 5. Research queue / next actions
-6. receipts / limitations
+6. Compact receipts / limitations
+
+Prefer one shared comparison/time-series visual over repetitive per-candidate charts when it communicates the decision better.
 
 ## Investment — attention review
 1. What requires attention now

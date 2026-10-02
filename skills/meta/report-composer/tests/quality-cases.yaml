@@ -1,0 +1,49 @@
+cases:
+  - id: quality-investment-portfolio
+    case: Professional portfolio report without prompt-level formatting instructions
+    input: |
+      Review my portfolio and opportunity queue.
+    expected:
+      should_trigger: true
+      must:
+        - executive summary with 3-5 decision-relevant points
+        - integrated chat-native report
+        - detailed treatment limited to a small number of top candidates
+        - canonical/derived/external data distinction where relevant
+        - compact decision queue
+        - compact canonical receipt
+      must_not:
+        - ASCII bars
+        - raw Mermaid code
+        - unsolicited external artifact
+        - repeat the same data in prose table and chart
+
+  - id: quality-security-review
+    case: Security review uses evidence-bearing visuals selectively
+    input: |
+      Review this security end to end and show me what matters for the decision.
+    expected:
+      should_trigger: true
+      must:
+        - thesis/setup
+        - small KPI set
+        - price or valuation context only when supported
+        - catalyst/risk
+        - decision implication
+      must_not:
+        - decorative dashboard
+        - composite stock score
+        - price momentum treated as thesis validity
+
+  - id: quality-no-renderer
+    case: Missing rich renderer stays readable in chat
+    input: |
+      Give me the portfolio review here in chat.
+    expected:
+      should_trigger: true
+      must:
+        - compact table or matrix fallback when graphics cannot render
+      must_not:
+        - ASCII pseudo-chart
+        - raw Mermaid
+        - HTML/PDF/Figma/deck/file

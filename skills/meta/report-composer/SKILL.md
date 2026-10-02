@@ -6,7 +6,7 @@ description: >
   interactive components or Figma outputs appear inside the relevant sections instead of as a separate parallel artifact.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.2.0"
+  version: "0.3.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02
@@ -28,33 +28,34 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
 
 ## Procedure
 1. Identify the audience, decision and minimum report depth.
-2. Select a report profile from `references/report-profiles.md` or derive a minimal equivalent.
-3. Build a semantic report model containing ordered sections:
+2. Apply `references/report-quality-standard.md` as the default quality baseline.
+3. Select a report profile from `references/report-profiles.md` or derive a minimal equivalent.
+4. Build a semantic report model containing ordered sections:
    - section purpose;
    - narrative block;
    - evidence block;
    - decision/implication block;
    - optional inline visual slots;
    - section-level provenance and uncertainty.
-4. Decide visual placement by reading flow, not by asset type:
+5. Decide visual placement by reading flow, not by asset type:
    - put the visual immediately after the claim/context it helps explain;
    - put interpretation immediately after the visual;
    - avoid collecting unrelated visuals into a separate appendix/dashboard unless the user explicitly asks.
-5. For each visual slot, call `visual-output-design` with:
+6. For each visual slot, call `visual-output-design` with:
    - the local section question;
    - only the relevant supported data;
    - required renderer capabilities;
    - as-of context and provenance.
-6. Choose output target:
+7. Choose output target:
    - **chat-native report** by default;
    - **chat-native fallback** (native widget/chart/table/structured prose) when the ideal embedded visual is unavailable;
    - **external artifact** only when the user explicitly asks for HTML, PDF, Figma, a deck, a downloadable file, or another external output format.
-7. Preserve progressive disclosure:
+8. Preserve progressive disclosure:
    - lead with the decision and minimum evidence;
    - keep detail near the section it supports;
    - move exhaustive evidence tables or appendices later.
-8. Keep receipts, source notes and material limitations in the same report, not in a disconnected parallel artifact.
-9. If the runtime cannot truly embed the ideal visual inline in chat, use the best truthful chat-native fallback. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
+9. Keep receipts, source notes and material limitations in the same report, not in a disconnected parallel artifact.
+10. If the runtime cannot truly embed the ideal visual inline in chat, use the best truthful chat-native fallback. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
 
 ## Inline visual slot contract
 Each slot must define:
@@ -71,6 +72,8 @@ Each slot must define:
 
 ## Decision rules
 - The report is the product; visuals are evidence-bearing components inside it.
+- Apply the default quality standard without requiring the user to spell out formatting, section limits, chart preferences or receipt compactness in the prompt.
+- Prefer concise executive hierarchy: 3–5 opening points, a small number of detailed entities, selective visuals and a 3–5 item decision queue unless the task genuinely requires more.
 - Do not make a dashboard merely because several metrics exist.
 - Do not repeat the same content in prose and a separate visual artifact unless repetition materially aids the decision.
 - Use interactive controls only when the alternative views answer a real decision question.
@@ -121,5 +124,6 @@ Return one semantic report with:
 - [ ] Receipts and limitations remain visible.
 
 ## References
+- references/report-quality-standard.md
 - references/report-profiles.md
 - references/composition-rules.md
