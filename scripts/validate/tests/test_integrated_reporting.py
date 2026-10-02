@@ -139,8 +139,8 @@ class IntegratedReportingTests(unittest.TestCase):
         rubric = (ROOT / "evals/routing/investment-portfolio-natural-en.rubric.yaml").read_text(encoding="utf-8")
 
         description = item["description"].lower()
-        self.assertIn("review my portfolio", description)
-        self.assertIn("review this portfolio", description)
+        self.assertIn('review "my portfolio"', description)
+        self.assertIn('"this portfolio"', description)
         self.assertIn("trigger even when", description)
         self.assertIn("canonical portfolio state", description)
         self.assertIn("required visual-floor path", description)
