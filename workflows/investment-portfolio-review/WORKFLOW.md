@@ -41,3 +41,8 @@ Requires attention; no material change; portfolio-level observations; derived an
 
 ## Stop conditions
 Stop when every material alert is tied to evidence or policy.
+
+## Visual presentation
+When portfolio data are available, call `visual-output-design`.
+Prefer allocation/concentration bars, overlap/look-through matrix, drift/change view and a small attention queue. Use derived analytics for the payload but keep Supabase/canonical state and as-of context explicit.
+For recurring reviews, prefer an interactive HTML cockpit when supported; otherwise use native charts plus concise tables.
