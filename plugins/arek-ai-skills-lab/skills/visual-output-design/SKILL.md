@@ -9,7 +9,7 @@ description: 'Convert an already-supported analysis or workflow result into a pr
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.1.0
+  version: 0.2.0
   maturity: candidate
   risk: low
   last_reviewed: '2026-10-02'
@@ -18,8 +18,10 @@ metadata:
 # Visual Output Design
 
 ## Purpose
-Add a professional presentation layer after the analytical work is complete. Preserve the source analysis, evidence,
-uncertainty and canonical data contracts while choosing the best visual medium available in the runtime.
+Render one evidence-backed visual component or visual system for an already-defined local information need.
+This skill is the renderer/router beneath `report-composer`; it does not own the structure of a full report.
+
+Preserve the source analysis, evidence, uncertainty and canonical data contracts while choosing the best visual medium available in the runtime.
 
 ## Preconditions
 - The underlying analysis/result already exists or can be produced by the calling workflow.
@@ -27,7 +29,7 @@ uncertainty and canonical data contracts while choosing the best visual medium a
 - Decision-relevant data must retain source/provenance and as-of context.
 
 ## Procedure
-1. Identify the decision or comprehension job of the output.
+1. Identify the local decision/comprehension job supplied by the calling workflow or `report-composer`.
 2. Decide whether a visual materially improves the result. If not, keep the response concise and textual.
 3. Build a semantic visual model from the supported analysis only:
    - headline/message;
@@ -40,7 +42,7 @@ uncertainty and canonical data contracts while choosing the best visual medium a
 4. Select the narrowest suitable renderer using `references/tool-routing.md`.
 5. Apply the design and integrity rules in `references/design-system.md`.
 6. Render the visual using a connected native/plugin tool when one is appropriate and available.
-7. Keep the visual and prose synchronized: the visual must not imply a stronger conclusion than the written analysis.
+7. Keep the visual synchronized with its surrounding report section: it must not imply a stronger conclusion than the written analysis.
 8. Provide a compact text fallback when the chosen renderer is unavailable.
 9. For interactive HTML, keep analysis data and presentation logic separated so the report can be regenerated from the same payload.
 
@@ -48,7 +50,7 @@ uncertainty and canonical data contracts while choosing the best visual medium a
 - Prefer one strong visual over several decorative ones.
 - Use a chart for quantitative comparison, trend, composition or relationship.
 - Use a diagram for structure, flow, dependency, ownership or state.
-- Use interactive HTML for linked multi-view analysis where filters, tabs, hover detail or multiple coordinated visuals add value.
+- Use interactive HTML for a component or linked multi-view section where filters, tabs, hover detail or multiple coordinated visuals add value.
 - Use Figma/FigJam for editable executive-grade diagrams, reusable visual systems or high-fidelity layouts.
 - Use Figma Slides/deck output for narrative presentation rather than analysis exploration.
 - Use generated imagery only for illustrative assets, never to encode factual quantities or organizational truth.
@@ -66,7 +68,7 @@ uncertainty and canonical data contracts while choosing the best visual medium a
 ## Output contract
 Return or render:
 - **message**: one decision-relevant headline;
-- **visual_type**: chart / diagram / interactive-report / figma-design / deck / none;
+- **visual_type**: chart / diagram / interactive-component / figma-design / deck / none;
 - **visual_payload**: structured data used by the renderer;
 - **as_of**: date/time context when relevant;
 - **provenance**: sources or canonical data references;

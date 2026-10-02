@@ -55,7 +55,7 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "3a93eabf5fd9885a036d2e0ece4eb0817f7a1487b9900fcd0ecd5aaaf073e915",
+      "content_sha256": "c1d03275718ada57638aff80bdc561a769c2cc64b70d390f9d309ac15f050c92",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -69,7 +69,7 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "7815f26cd33a842e1bafb91c01488a358f9b1a37840ba664a919db11da2ec1c4",
+      "content_sha256": "83a0fff3bdc9d36208e8509f8d7dadee402e16cc227d25016b4ef69ac0939b4e",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -233,7 +233,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "7e7cca75af9c14a995ad92ddea97df85375aaec165459fa790511391af90878c",
+      "content_sha256": "e3a8915df8882f7f8e00387453ed24a66ae617fc4ecac05c59effc199b34c7a7",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -256,7 +256,7 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "41079db9011117b6b669f78a5ce5275781800509a59e7d480cdebf31ef5f9571",
+      "content_sha256": "a4f51eef8e1a9a2666508ce8d786064cfd5ede3b3b2d7cc689276d2ab1df69a9",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -281,7 +281,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "1e0758cbea31ef028153db939b3723e766c35157040e6ae7dcc42b2d4523eb4e",
+      "content_sha256": "a959f05d560458db29299ad36977541700737328671bf51b479b94abe9fa2554",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -306,7 +306,7 @@
       "version": "0.3.0"
     },
     {
-      "content_sha256": "f6f2f67dd102c21f2435d549ce3e9b6a3f46929f1d13f18d1d4269c6d4659758",
+      "content_sha256": "5640d61f8a5e7b57e476d1081bd20729ea3a5abc671b38d5bd872fd6de61de0f",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -319,7 +319,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "d7bb7f93d2925bd54ef38c1119dd5f52b74a50a42ffe5294147614d6bc8de97d",
+      "content_sha256": "d1da02c18a42017374b53a3ad44d145771983a644061bc3defe5296632f2216b",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -392,7 +392,7 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "7e215621501a060eebd5aa00c98cdae4213ab079f79131fdfe2b134da3d8c949",
+      "content_sha256": "77f2b895ae850b3279e9d1a4c84a02c938ef1b8cd03a33fe3620799229c55dc9",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -419,7 +419,7 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "9291bbe0a7c307e635f8a61d93663ba65a87c39278c1476ff3a6268120aae2bc",
+      "content_sha256": "12547851591fc18bf95ba879af81f4d6b6798c129516e0b44afb50d79793f3ec",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -432,7 +432,7 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "12ff9b399a82d96979dcc10cf01fddbbb2e58aa0cc27a66ce2fd7febbb05d7f7",
+      "content_sha256": "5a117e0c01da6c4d406aa220ac9bb12b1c62a5574030278b339f605eeb67803e",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -445,7 +445,7 @@
       "version": "1.5.0"
     },
     {
-      "content_sha256": "2b70c6f5c85343366714c0ab093997b0655706010c78860aa5509078e24e5ec5",
+      "content_sha256": "87ebc4c0d4fd8a43f511a784f5442d89db2deabe81349ce669069241da97a8e9",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -469,7 +469,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "588c0b433f5ef8f48e72309fe8316498d56d05918b0d18389346d341d7724a47",
+      "content_sha256": "36126e07bb30e77614253d72087ce27f49bfb53f6d559e13754ed6ef8db07d80",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -576,6 +576,18 @@
       "version": "1.1.0"
     },
     {
+      "content_sha256": "e01eb132652ea280171acd479ab47ed0fd6035302c4b32afcad64efc604a1ec0",
+      "inventory": [
+        "SKILL.md",
+        "references/composition-rules.md",
+        "references/report-profiles.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "report-composer",
+      "version": "0.1.0"
+    },
+    {
       "content_sha256": "861592341f9daac0cdf8d9df183a5c9676f0fa26d110f6ce990bca2772de473a",
       "inventory": [
         "SKILL.md"
@@ -586,7 +598,7 @@
       "version": "0.4.0"
     },
     {
-      "content_sha256": "18589abda68ef9679794012c2fe489f4f7e17b338b2de3844709a705f9350e0a",
+      "content_sha256": "d2a13f68ad4fc8e24a525c6717288eed1bbc78768db4ed89601e33850377b01b",
       "inventory": [
         "SKILL.md"
       ],
@@ -596,7 +608,7 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "ed9a96cd25e5c286e15e347098ed0ea393086164979f1779d6c089f200aef74c",
+      "content_sha256": "66d58685b30ef73ac950be0b060595980ffb77292135c0dcc81e21ef27e83563",
       "inventory": [
         "SKILL.md"
       ],
@@ -701,7 +713,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "9d54bdcd7be41d69227f8d1bfed0f3bef76c744a4b82366f9ffe86b047ffc02c",
+      "content_sha256": "535bb1e07bb972cdf51e75a334389b2a2af310f7e8dd3cf99eab9e89ccb0de3f",
       "inventory": [
         "SKILL.md",
         "references/design-system.md",
@@ -710,7 +722,7 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "visual-output-design",
-      "version": "0.1.0"
+      "version": "0.2.0"
     }
   ],
   "channel": "lab",
@@ -806,5 +818,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "1e96694516950a4744f64fd23bbaa3587d097d94"
+  "source_revision": "63fd3fda0ab4931cc0652f0565aa29fc59b3b67d"
 }

@@ -68,6 +68,15 @@ Stop discovery when 3–5 credible hypotheses remain.
 Stop analysis when a fatal gate fails.
 Stop research and test when the remaining uncertainty is conversion/CAC/offer response and cheaper pre-market blockers have already been cleared.
 
-## Visual presentation
-Call `visual-output-design` when comparing multiple opportunities or evidence gates.
-Prefer shortlist cards, evidence heatmaps and simple category/market comparisons. Use charts only for measured quantitative data and keep Evidence / Hypothesis / Unknown visually distinct.
+## Integrated report presentation
+After opportunity synthesis, call `report-composer`.
+
+Default profile:
+- decision state;
+- shortlist cards;
+- evidence gates with inline heatmap;
+- candidate sections;
+- smallest next tests;
+- unresolved evidence.
+
+Use `visual-output-design` only for evidence-backed local components. Keep Evidence / Hypothesis / Unknown visually distinct and avoid a separate duplicate dashboard.

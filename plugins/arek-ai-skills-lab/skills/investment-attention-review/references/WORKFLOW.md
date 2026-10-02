@@ -38,6 +38,16 @@ Worth attention now; monitor; no material change; provenance; canonical persiste
 ## Stop conditions
 Stop when every escalated item has one concrete decision-relevant research question.
 
-## Visual presentation
-When more than a few material items exist, call `visual-output-design`.
-Prefer a materiality x direction view, compact alert cards and a timeline for event-driven changes. Keep noise suppression visible and do not use price reaction as a visual proxy for thesis validity.
+## Integrated report presentation
+After triage/synthesis, call `report-composer`.
+
+Default profile:
+- what requires attention now;
+- inline materiality x direction view when useful;
+- holding/theme sections with changed evidence;
+- event timeline for material changes when useful;
+- noise suppressed;
+- exact next research questions;
+- canonical receipts / limitations.
+
+Keep each visual adjacent to the evidence it summarizes. Do not use price reaction as a visual proxy for thesis validity.
