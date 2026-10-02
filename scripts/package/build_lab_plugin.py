@@ -242,7 +242,7 @@ def main() -> int:
                         "content_sha256": item.get("content_sha256"),
                     }
                     for item in sorted(capabilities, key=lambda x: x["name"])
-                ] + [runtime_tool],
+                ],
             },
         )
 
