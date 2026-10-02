@@ -359,7 +359,7 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "2aa5e87f1c89181d3eac002582869efcc3158caf8e2858f1eb8b7a7a993e2949",
+      "content_sha256": "057f6dfd991038db485797dc2366c814869ebfbea6b9d5f19232993d9771c7c8",
       "kind": "skill",
       "maturity": "candidate",
       "name": "report-composer",
@@ -450,7 +450,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "6fab70d10baddd80c90ee007cfec4ddd7579bb63a42b2385f33d9147f49623a5",
+      "content_sha256": "5a53361fd343cabfd386210789c51855107cd7f028cb19cfff4dfe52731bddce",
       "kind": "skill",
       "maturity": "candidate",
       "name": "visual-output-design",
@@ -458,9 +458,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "93cb191efb7af4d05efb203ebba2c9888e22625b8e9a09e4f152f92d24489181",
-  "release_id": "0.12.0+1bc336f2634e",
+  "payload_content_sha256": "855f83043a1e02b063cf3b805a23016bfd62ff465d18e89b3422d78cd271c8af",
+  "release_id": "0.12.0+baece504e441",
   "schema_version": "1.0",
-  "source_revision": "1bc336f2634ef5ac96fc72c0475552b044c47ff2",
+  "source_revision": "baece504e4412829304c5b2f9dcf57869e6c0eae",
   "version": "0.12.0"
 }

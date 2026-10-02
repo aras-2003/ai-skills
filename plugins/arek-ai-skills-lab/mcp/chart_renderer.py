@@ -8,6 +8,7 @@
 
 from __future__ import annotations
 
+from hashlib import sha256
 from io import BytesIO
 from typing import Sequence
 
@@ -36,11 +37,27 @@ def _validate_parallel(labels: Sequence[str], values: Sequence[float]) -> None:
         raise ToolError("maximum 80 data points per chart")
 
 
-def _png(fig) -> Image:
+def _png(fig) -> list[str | Image]:
     buffer = BytesIO()
-    fig.savefig(buffer, format="png", dpi=160, bbox_inches="tight")
+    fig.savefig(
+        buffer,
+        format="png",
+        dpi=160,
+        bbox_inches="tight",
+        facecolor="white",
+        edgecolor="white",
+    )
+    width_px, height_px = fig.canvas.get_width_height()
     plt.close(fig)
-    return Image(data=buffer.getvalue(), format="png")
+
+    payload = buffer.getvalue()
+    digest = sha256(payload).hexdigest()
+    receipt = (
+        "CHART_PAYLOAD_OK "
+        f"mime=image/png bytes={len(payload)} sha256={digest} "
+        f"canvas_px={width_px}x{height_px}"
+    )
+    return [receipt, Image(data=payload, format="png")]
 
 
 @mcp.tool()
@@ -50,7 +67,7 @@ def render_bar_chart(
     title: str = "",
     unit: str = "",
     horizontal: bool = True,
-) -> Image:
+) -> list[str | Image]:
     """Render a deterministic factual bar chart from explicit labels and numeric values."""
     _validate_parallel(labels, values)
 
@@ -88,7 +105,7 @@ def render_line_chart(
     series_values: list[list[float]],
     title: str = "",
     unit: str = "",
-) -> Image:
+) -> list[str | Image]:
     """Render a deterministic factual line chart from explicit x labels and one or more numeric series."""
     if not x_labels:
         raise ToolError("x_labels must be non-empty")

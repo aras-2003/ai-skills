@@ -86,7 +86,7 @@ Return or render:
 - **uncertainty**: what is estimated, missing or inferred;
 - **fallback**: concise textual/table equivalent when rendering is unavailable.
 - **capability_status**: AVAILABLE / UNAVAILABLE / UNKNOWN.
-- **render_status**: RENDERED / BLOCKED_NO_RENDERER / FAIL_RENDERER_INVOCATION / NOT_REQUIRED.
+- **render_status**: PAYLOAD_RENDERED / UI_CONFIRMED / BLOCKED_NO_RENDERER / FAIL_RENDERER_INVOCATION / UI_RENDER_UNCONFIRMED / NOT_REQUIRED.
 
 ## Evidence requirements
 - Every plotted factual value must come from user-provided data, canonical state, calculation or cited evidence.
@@ -113,6 +113,7 @@ Return or render:
 - [ ] Required quantitative visuals passed `capability_preflight` against an actual deterministic renderer.
 - [ ] Media-generation or design tools were not misclassified as quantitative chart renderers.
 - [ ] `BLOCKED_NO_RENDERER` cannot be reported as successful rendering.
+- [ ] Tool success alone is not called UI-rendered. A valid image payload receipt proves `PAYLOAD_RENDERED`; visible client rendering is `UI_CONFIRMED`. If the client shows a broken/blank placeholder, report `UI_RENDER_UNCONFIRMED`, not PASS.
 
 ## References
 - references/tool-routing.md
