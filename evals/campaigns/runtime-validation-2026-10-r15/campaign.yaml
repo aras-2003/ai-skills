@@ -31,6 +31,11 @@ routing_case_ids:
   - commerce-deep-dive-en
   - oaf-architecture-workflow-pl
   - investment-portfolio-natural-en
+  - investment-security-natural-en
+  - investment-opportunity-natural-pl
+  - investment-theme-natural-en
+  - investment-attention-natural-pl
+  - investment-policy-natural-pl
 executive_source: skills/career/executive-role-evaluator/tests/cases.yaml
 executive_case_dir: evals/campaigns/runtime-validation-2026-10/executive
 executive_case_ids:
