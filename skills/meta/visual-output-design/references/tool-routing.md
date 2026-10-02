@@ -19,7 +19,7 @@ Do not use for:
 - arbitrary diagrams.
 
 ## 2. Figma / FigJam diagram
-Use a connected Figma diagram capability for:
+Use only when the user explicitly requests an editable Figma/FigJam artifact, or the calling task explicitly requires Figma output. Use a connected Figma diagram capability for:
 - flowcharts;
 - decision trees;
 - state/sequence diagrams;
@@ -31,7 +31,7 @@ For org charts, operating-model maps, capability maps and other layouts that exc
 use an editable Figma design canvas rather than forcing the content into an unsupported Mermaid form.
 
 ## 3. Figma design
-Use when:
+Use only when the user explicitly requests an editable Figma artifact. Use when:
 - the output should be editable and executive-grade;
 - a reusable visual language/design system matters;
 - multiple panels, cards, grids, labels and annotations must be composed precisely;
@@ -40,7 +40,7 @@ Use when:
 Do not invoke it for a simple two-series chart that the native chart renderer can handle better.
 
 ## 4. Figma Slides / deck
-Use for:
+Use only when the user explicitly requests a deck/presentation. Use for:
 - board/executive presentations;
 - multi-slide narratives;
 - research readouts;
@@ -50,7 +50,7 @@ Use for:
 A deck is a communication artifact, not the canonical analytical record.
 
 ## 5. Interactive HTML/CSS report
-Use when the result benefits from:
+Use only when the user explicitly requests HTML, a downloadable file or an external interactive report. Use when the result benefits from:
 - tabs or scenario switching;
 - filters;
 - hover/tooltips;
@@ -82,9 +82,11 @@ Never use generated imagery to represent exact quantitative data, organizational
 or evidence-backed process state.
 
 ## Fallback order
-1. best native structured renderer;
-2. editable specialist tool (Figma/FigJam/deck);
-3. interactive HTML when artifact/runtime support exists;
-4. static markdown table + concise prose.
+1. best native chat renderer/widget;
+2. another chat-native structured renderer;
+3. static markdown table + concise prose;
+4. external artifact renderer only when the user explicitly requested that artifact class.
+
+Never create HTML/PDF/Figma/deck/file output merely because the preferred chat renderer is unavailable.
 
 Do not fall back to punctuation-based pseudo-diagrams when a structured fallback is possible.
