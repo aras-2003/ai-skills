@@ -174,6 +174,21 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("required visual-floor path", rubric)
         self.assertIn("does not stop after a prose-only concentration analysis", rubric)
 
+    def test_investment_record_store_has_single_schema_bootstrap(self) -> None:
+        skill = (ROOT / "skills/investing/investment-record-store/SKILL.md").read_text(encoding="utf-8")
+        governance = (ROOT / "skills/investing/investment-record-store/references/canonical-schema-governance.md").read_text(encoding="utf-8")
+        portfolio = (ROOT / "workflows/investment-portfolio-review/WORKFLOW.md").read_text(encoding="utf-8")
+        cases = (ROOT / "skills/investing/investment-record-store/tests/cases.yaml").read_text(encoding="utf-8")
+
+        self.assertIn("public.system_config", skill)
+        self.assertIn("never silently fall back", skill.lower())
+        self.assertIn("bootstrap authority", governance.lower())
+        self.assertIn("cross_schema_fallback", governance)
+        self.assertIn("Never infer cutover from which schema happens to contain rows", governance)
+        self.assertIn("schema named in the canonical READ receipt", portfolio)
+        self.assertIn("store-canonical-schema-bootstrap", cases)
+        self.assertIn("store-canonical-schema-empty-no-fallback", cases)
+
     def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
         contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
         standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")

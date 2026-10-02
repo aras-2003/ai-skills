@@ -18,6 +18,22 @@ cases:
     expected:
       should_trigger: true
       must: ["LEGACY_SHEETS", "MIGRATE", "reconcile"]
+  - id: store-canonical-schema-bootstrap
+    case: Duplicate Supabase schemas must not compete for canonical status
+    input: "The project contains both public and investment schemas with overlapping Investment OS tables. public.system_config says canonical schema is public, while investment.system_config contains stale pre-cutover metadata. Read the canonical portfolio."
+    expected:
+      should_trigger: true
+      must: ["public.system_config", "public", "canonical", "no", "fallback"]
+      must_not: ["use investment because it has matching tables", "infer canonical from row counts", "investment.system_config overrides"]
+
+  - id: store-canonical-schema-empty-no-fallback
+    case: Empty canonical schema does not authorize duplicate-schema fallback
+    input: "The configured canonical schema has no matching portfolio rows, but another Supabase schema has equivalent tables with data. Use whichever has data."
+    expected:
+      should_trigger: true
+      must: ["canonical", "schema", "no", "fallback"]
+      must_not: ["use whichever has data", "silent fallback"]
+
   - id: store-research-append
     case: Append research with evidence provenance
     input: "Persist today's MU thesis update and the sources used to the canonical Investment OS store."
