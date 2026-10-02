@@ -29,6 +29,8 @@ class IntegratedReportingTests(unittest.TestCase):
                 text = (ROOT / "workflows" / name / "WORKFLOW.md").read_text(encoding="utf-8")
                 self.assertIn("## Integrated report presentation", text)
                 self.assertIn("report-composer", text)
+                self.assertIn("directly in the chat response by default", text)
+                self.assertIn("only when the user explicitly requests", text)
                 self.assertNotIn("## Visual presentation", text)
 
     def test_runtime_registry_exposes_composer_before_renderer(self) -> None:
@@ -46,7 +48,18 @@ class IntegratedReportingTests(unittest.TestCase):
         renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("The report is the product", composer)
         self.assertIn("inline visual", composer.lower())
+        self.assertIn("in the chat response by default", composer)
+        self.assertIn("Do not create an HTML/PDF/Figma/deck/file unless the user explicitly requests", composer)
         self.assertIn("does not own the structure of a full report", renderer)
+        self.assertIn("external-artifact renderer", renderer)
+
+    def test_external_artifact_is_opt_in_not_fallback(self) -> None:
+        composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
+        routing = (ROOT / "skills/meta/visual-output-design/references/tool-routing.md").read_text(encoding="utf-8")
+        composition = (ROOT / "skills/meta/report-composer/references/composition-rules.md").read_text(encoding="utf-8")
+        self.assertIn("Never generate an external file merely as a fallback", composer)
+        self.assertIn("Never create HTML/PDF/Figma/deck/file output merely because", routing)
+        self.assertIn("Default delivery is the report itself in the chat response", composition)
 
 
 if __name__ == "__main__":
