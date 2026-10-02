@@ -9,6 +9,15 @@
         "${PLUGIN_ROOT}/mcp/chart_renderer.py"
       ],
       "cwd": "${PLUGIN_ROOT}"
+    },
+    "arek-investment-os": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "${PLUGIN_ROOT}/mcp/investment_runtime.py"
+      ],
+      "cwd": "${PLUGIN_ROOT}"
     }
   }
 }
