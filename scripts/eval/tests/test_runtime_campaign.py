@@ -29,12 +29,12 @@ class RuntimeCampaignTests(unittest.TestCase):
     def test_campaign_resolves_exact_scope_and_isolation(self) -> None:
         self.assertEqual([], campaign.validate_campaign())
         cases = load_campaign_cases(ROOT, campaign.config()["campaign"])
-        self.assertEqual(39, len(cases))
+        self.assertEqual(44, len(cases))
         counts = {}
         for case in cases.values():
             counts[case["suite"]] = counts.get(case["suite"], 0) + 1
         self.assertEqual(
-            {"commerce": 6, "routing": 17, "executive-role": 14, "production-fallback": 2},
+            {"commerce": 6, "routing": 22, "executive-role": 14, "production-fallback": 2},
             counts,
         )
         supplemental = load_supplemental_cases(ROOT, campaign.config()["campaign"])
@@ -89,11 +89,11 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("c7d64fcf6a89430524a805251180a71aa7e2ab38", lock["behavior_source_revision"])
+            self.assertEqual("59271f4a7c11cdf698fe5d166abb760494efa1e6", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
-            self.assertEqual("1.20.0", lock["packages"]["production"]["version"])
+            self.assertEqual("1.21.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
-            self.assertEqual("0.14.0", lock["packages"]["lab"]["version"])
+            self.assertEqual("0.15.0", lock["packages"]["lab"]["version"])
             self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
             self.assertNotIn("organizational-interface-review", lock["expected_catalogs"]["production"])
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
@@ -102,7 +102,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual("production", lock["case_channels"]["fallback-strategy-production-002"])
             self.assertEqual("production", lock["case_channels"]["fallback-interface-explicit-production-002"])
             self.assertEqual("production", lock["case_channels"]["oaf-interface-natural-pl"])
-            self.assertEqual(39, lock["core_case_count"])
+            self.assertEqual(44, lock["core_case_count"])
             self.assertEqual(
                 [
                     "oaf-decision-bottleneck-natural-pl",
@@ -113,7 +113,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             )
             self.assertEqual(64, len(lock["campaign_definition_sha256"]))
             definitions = {item["id"]: item for item in lock["case_definitions"]}
-            self.assertEqual(42, len(definitions))
+            self.assertEqual(47, len(definitions))
             components = {(item["channel"], item["name"]): item for item in lock["components"]}
             self.assertEqual("1.5.0", components[("production", "oaf-health-check")]["version"])
             self.assertEqual("1.1.0", components[("production", "operating-model-review")]["version"])
