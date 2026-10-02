@@ -1,0 +1,747 @@
+{
+  "channel": "chatgpt-zip",
+  "format": "chatgpt-personal-skills",
+  "maturity": "production",
+  "package_version": "1.9.0",
+  "schema_version": "1.0",
+  "skills": [
+    {
+      "archive_sha256": "e0202ea2499c786218764811f6d72422c9a4d7dd844b98668b2f6f1d4df2ebb2",
+      "content_sha256": "cbf70542c37266ee3fc4611abc5b0411c18185bd70e0c5e39c477d73246832c5",
+      "description": "Research factual company context relevant to executive technology opportunities, including scale, revenue, headcount, ownership, leadership, transactions, strategy and technology organization. Use when the user asks for company facts or organizational context. Do not evaluate role attractiveness, candidate fit, career value, mandate quality or recommended recruitment actions unless the user explicitly asks what the company context means for a specific role; in that case hand off to executive-role-evaluator.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "company-context-research",
+      "version": "1.0.0",
+      "zip": "company-context-research.zip"
+    },
+    {
+      "archive_sha256": "c0ebfc304eef6e0a0e725d8ee2bd97eba27bf67474029815e034f4e414c7d129",
+      "content_sha256": "39bf030256fda104a6ae58402c69dabb539884449f57b674b646ab16a1a3a255",
+      "description": "Evaluate senior and executive technology job opportunities based on real mandate, organizational scope, candidate fit, career value, risk and evidence quality. Use when assessing whether an executive technology role is worth pursuing, comparing opportunities, updating an assessment after recruiter/interview evidence, or identifying decision-critical unknowns. Do not use for company research alone, CV tailoring alone, interview preparation alone, generic job matching, or factual company research that does not explicitly ask for role implications.",
+      "inventory": [
+        "SKILL.md",
+        "references/candidate-profile-schema.yaml",
+        "references/evaluation-model.md",
+        "references/output-template.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "executive-role-evaluator",
+      "version": "1.1.0",
+      "zip": "executive-role-evaluator.zip"
+    },
+    {
+      "archive_sha256": "119f5edcd38b2eaa8b8783de481d057b80e8ae55807589edbcf03e03b167033a",
+      "content_sha256": "89d03b1046432063ddf6097bf0a514671cc459bd52f10346f8e4152c5e498e9d",
+      "description": "Validate whether a target customer problem is frequent, painful and purchase-relevant enough to justify product testing. Use before assuming category interest equals demand.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "problem-demand-validation",
+      "version": "1.1.0",
+      "zip": "problem-demand-validation.zip"
+    },
+    {
+      "archive_sha256": "aa5314ef0be0129ab8274fc649070adcaf6d73abd3a41047e9a1bfa3595674e3",
+      "content_sha256": "84435a0238bd9090681a71daefca4d9131b13c1390ac6e136f8849848db26e39",
+      "description": "Evaluate e-commerce unit economics including VAT, COGS, freight, fulfilment, fees, returns and CAC headroom. Use before recommending a product test or scale decision.",
+      "inventory": [
+        "SKILL.md",
+        "references/input-contract.md",
+        "scripts/calculator.py"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "unit-economics-review",
+      "version": "1.1.0",
+      "zip": "unit-economics-review.zip"
+    },
+    {
+      "archive_sha256": "3692056e784aa0ec7c917f09d5114418e125e9ee426619468b85b8439f6ba09e",
+      "content_sha256": "eb3198309204c03fb1b83a88b74b6825ec378f14e592c88b3763aa3c23a0446b",
+      "description": "Assess whether a product is suitable for paid social and other direct-response acquisition based on demo strength, hooks, creative depth and CAC headroom. Use when channel fit matters after the offer and economics are at least provisionally defined.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "acquisition-fit-review",
+      "version": "1.1.0",
+      "zip": "acquisition-fit-review.zip"
+    },
+    {
+      "archive_sha256": "01d20f58f1df0510fd3df71f390b0afe2c70069b37d8cedd9b736295c9cc2767",
+      "content_sha256": "71309075b6fbcea13e89c21102000a3c12a6678dab557f576702ac5962cf1061",
+      "description": "Review competition around an e-commerce opportunity across product, price, brand, distribution and acquisition. Use before calling a market empty or saturated.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "competition-landscape-review",
+      "version": "1.1.0",
+      "zip": "competition-landscape-review.zip"
+    },
+    {
+      "archive_sha256": "97fbfd3ab60fe7ca7c7ac03401c1ab136cd9518807d6a22bf7814dda64f04ee4",
+      "content_sha256": "456400d84b0c64236a670a23d89c13971bcbe6927270a9b57326dcac50ac74f9",
+      "description": "Assess whether sourcing, MOQ, lead time, quality, packaging and supplier concentration make a product viable to test and scale. Use when supplier or inventory risk can change the launch decision.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "supplier-viability-review",
+      "version": "1.1.0",
+      "zip": "supplier-viability-review.zip"
+    },
+    {
+      "archive_sha256": "7ddc11e1e58194fce246512bcba7be19a3dd9f4d8277a27151d4cffdd9f34b5a",
+      "content_sha256": "48ae1be4dd9fa9389592bc0973c0f669bf08eae39e70d6fd0d43322a73955ed6",
+      "description": "Review whether a product or business model proven in one market is plausibly transferable to another market, especially US-to-Poland, without assuming foreign traction will repeat locally. Use when the thesis depends materially on source-market success.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "market-transferability-review",
+      "version": "1.1.0",
+      "zip": "market-transferability-review.zip"
+    },
+    {
+      "archive_sha256": "faf2cdd762e5b8f133fa8d200229af0e22eab24c0d82dec1b4e0b3c6af53cec1",
+      "content_sha256": "5c9dda68e06b44f78c86f53fa81a038dda00ba77b5e650ea0aa66be9f0ccbf37",
+      "description": "Discover product opportunity hypotheses from customer problems, category signals and market gaps. Use for broad e-commerce idea generation before deep validation; do not use when a concrete product already needs an end-to-end business decision.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "product-opportunity-discovery",
+      "version": "1.1.0",
+      "zip": "product-opportunity-discovery.zip"
+    },
+    {
+      "archive_sha256": "9e6e79f0f7b1117a3eb66449effab2a1fda852e40a0d173b80827cbbc24c909e",
+      "content_sha256": "e12bc733f74198498188b8694785ef5405f2c75af455429c72217705ce6fab09",
+      "description": "Test whether an e-commerce offer has a credible reason to win versus cheap generics and established brands. Use when premium pricing, brand positioning or commodity risk matters.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "differentiation-review",
+      "version": "1.1.0",
+      "zip": "differentiation-review.zip"
+    },
+    {
+      "archive_sha256": "9f2e06751e8ec882ea03bbec702b28bc3db992522de54ad31a877d5ca040c571",
+      "content_sha256": "0c69695162cbe985b9e1016d1bfb98d8bfc361bddd100ca82ebe44e8978a49cf",
+      "description": "Triage regulatory, claims, safety and compliance risk for consumer e-commerce products. Use to decide whether complexity is proportionate before deeper legal review; do not use this skill as legal clearance.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "commerce-regulatory-risk-review",
+      "version": "1.1.0",
+      "zip": "commerce-regulatory-risk-review.zip"
+    },
+    {
+      "archive_sha256": "38d03dd64455999e72ce876ce4de977f7089e7cd51da98b1de3b8c4e8c38c2f6",
+      "content_sha256": "8e020a337e15ff06543603290a397f647a4a2923b7c8786360ab3b04036d72e2",
+      "description": "Append a structured investment decision record capturing what was known, decided and expected at the time, then later support ex-post review of thesis, timing and sizing quality. Use after meaningful buy/add/reduce/exit/watchlist decisions or when reviewing past decision quality. Do not rewrite old decisions using hindsight.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-journal-update",
+      "version": "0.1.0",
+      "zip": "decision-journal-update.zip"
+    },
+    {
+      "archive_sha256": "995ef3a32295846f7295e70e8fb8d96aa077178e76371fd5b866b6d13b84e40e",
+      "content_sha256": "2824e95e4c5d7e53c08ca93f73f4184f465fa41c97133f8b2b1a126d29d49223",
+      "description": "Triage new market, company, industry and portfolio information into a short attention queue based on materiality, thesis impact, valuation/expectations and decision relevance. Use when deciding what changed, what deserves deeper research now, and why. Do not use as a generic news summary or as a substitute for full underwriting.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investment-attention-triage",
+      "version": "0.1.0",
+      "zip": "investment-attention-triage.zip"
+    },
+    {
+      "archive_sha256": "6377417d51f8b4e63214dbb9ea9409efc28bdef6785ee595cace8499c1548843",
+      "content_sha256": "d01a535f6252217e32a8c96b101c94b794582cd7076712c5fca80520f87c5d28",
+      "description": "Design or revise a personal investment policy from the investor's goals, liquidity, risk capacity, horizon, account structure and demonstrated behavior. Use when defining portfolio buckets, risk budget, concentration limits, sizing rules, review cadence or decision principles. Do not use for evaluating one security or reacting to one market move.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investment-policy-design",
+      "version": "0.1.0",
+      "zip": "investment-policy-design.zip"
+    },
+    {
+      "archive_sha256": "aafb9524499d45e51f8993fd08653701cae6bc47b381d34f09ebe8e24b698730",
+      "content_sha256": "a57e9d0323c56d4a54427f236c3567e4ad60a03dad34f66e3e7e67ad4719d1b0",
+      "description": "Read and persist canonical Investment OS records in the user's Google Drive spreadsheet, including current portfolio, snapshots, transactions, research, signals, theses, decisions, policy, themes and sources. Use whenever an investing workflow needs durable state or history. Do not store personal portfolio values or secrets in the skill repository.",
+      "inventory": [
+        "SKILL.md",
+        "references/google-sheets-contract.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investment-record-store",
+      "version": "0.1.0",
+      "zip": "investment-record-store.zip"
+    },
+    {
+      "archive_sha256": "9d1c4ccff2e1c29dc510d1891f11b2f202463182b57b9f004145cde0d8256dea",
+      "content_sha256": "5ad20619130edc73e1911b05840634245f8a141035f085dd6242d5ed5d1fe3c2",
+      "description": "Research how credible investors or investment organizations make decisions and extract transferable principles, archetypes and failure conditions. Use when building investment policy or learning from investors such as Buffett, Marks, Druckenmiller, Smith, Lynch or comparable practitioners. Do not copy their current holdings as recommendations.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investor-pattern-research",
+      "version": "0.1.0",
+      "zip": "investor-pattern-research.zip"
+    },
+    {
+      "archive_sha256": "47783d96c68385ed72b04e3c9173c886d071854ea0cecb4d48833f5920c3d57c",
+      "content_sha256": "a7a3ec957e5d914ab65e5416d34e267cdd3bd983b218e8a5e0cd7c38f8949409",
+      "description": "Screen the XTB-investable equity and ETF universe for research candidates using changes in fundamentals, valuation, expectations, price behavior and portfolio relevance. Use for broad opportunity hunting or change detection. Do not use to issue buy/sell instructions or to replace security underwriting.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "market-opportunity-scan",
+      "version": "0.1.0",
+      "zip": "market-opportunity-scan.zip"
+    },
+    {
+      "archive_sha256": "759cd80fb6bb8745c91a357998a250070d3896be77b5e9f96c952bd231b9eec7",
+      "content_sha256": "c52e4fda7fd1dbc0466d1270aa90cbd6f10434f0de67cac33776731c77c69a1e",
+      "description": "Reconstruct and review the current investment portfolio plus historical snapshots, exposures and material changes. Use when assessing portfolio concentration, diversification, overlap, cash deployment capacity, risk changes or what changed since a prior snapshot. Do not use for deep underwriting of a single security.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-state-review",
+      "version": "0.1.0",
+      "zip": "portfolio-state-review.zip"
+    },
+    {
+      "archive_sha256": "a944b5361ca4ce18b5e72ffb9b6e2f029a7393bc9fcd053f5a0e24151f06f190",
+      "content_sha256": "61c16902bd274c95952851c6693de8066cbadaba40f834e136a665f9f213e0e2",
+      "description": "Determine a decision-support position-size band from investment policy, thesis strength, uncertainty, valuation, downside, volatility, correlation and current portfolio concentration. Use after underwriting and challenge when deciding starter, build, hold or reduction sizing. Do not use without portfolio context and policy constraints.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "position-sizing-review",
+      "version": "0.1.0",
+      "zip": "position-sizing-review.zip"
+    },
+    {
+      "archive_sha256": "50dd3078a089f807bae105447e2d5de18dff486472b4f254f5be059613161556",
+      "content_sha256": "288dbd8226bd2eb6af69d97f7a037d7bbb26fb782df95234fe90d2101a02fff1",
+      "description": "Underwrite one equity or ETF as an investment by analyzing business economics, financial quality, growth drivers, valuation context, catalysts, risks, variant perception and thesis invalidation. Use after a security enters the research queue or when the user asks for a full investment case. Do not use for broad market scanning.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "security-underwriting",
+      "version": "0.1.0",
+      "zip": "security-underwriting.zip"
+    },
+    {
+      "archive_sha256": "165cec576581f9997922e7f357ada4879f96300781b47e5e630ebcf0c781e630",
+      "content_sha256": "4954a644bf8bb0cd9552ae3cc5185b47dd6ea6e2ca35a202f4fe5e6e240f8f88",
+      "description": "Stress-test an existing investment thesis by seeking contradictory evidence, priced-in expectations, alternative explanations and failure modes. Use after an initial thesis exists or when confirmation bias is a material risk. Do not use to create the initial thesis from scratch.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "thesis-challenge",
+      "version": "0.1.0",
+      "zip": "thesis-challenge.zip"
+    },
+    {
+      "archive_sha256": "4e54796413fa9a07bc014b343ca5f263e25423b58876a54049d42a82fda00620",
+      "content_sha256": "cd2291210fa53dc2584351642aa3a90f02c32087544f94c819dbfd8eb4d61781",
+      "description": "Monitor an existing investment thesis against new earnings, guidance, industry data, price/valuation changes and predefined kill criteria. Use for ongoing holding reviews and event-driven updates. Do not restart full underwriting unless the thesis materially changes or evidence becomes stale.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "thesis-monitor",
+      "version": "0.1.0",
+      "zip": "thesis-monitor.zip"
+    },
+    {
+      "archive_sha256": "e0c10d18d275f3d0d2ec84fc2ba51d3743f80d1a7e2259b9ec6f2b801db2128d",
+      "content_sha256": "3be6829370b55466010650f92f27156c81ac338ff4ec9d467bfc72b3795bf9fa",
+      "description": "Research an investment trend or market theme by mapping its economic value chain, demand drivers, bottlenecks, second-order beneficiaries and failure modes. Use when exploring themes such as AI infrastructure, power, memory, automation or other structural/cyclical trends. Do not use for one-company underwriting alone.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "trend-theme-research",
+      "version": "0.1.0",
+      "zip": "trend-theme-research.zip"
+    },
+    {
+      "archive_sha256": "204a7cb16790a8cc268bfbd65a509d8c49f834bf7fdcecc38735bb2d9ef30fb6",
+      "content_sha256": "eda16a1a1a88c492b54b1f2635c4fce232f281754c22b8fa655fc8f803fa5047",
+      "description": "Build bear, base and bull valuation scenarios for one security using explicit operating assumptions, valuation methods and market-implied expectations. Use when valuation could change an investment decision or position size. Do not use as a standalone price-target generator.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "valuation-scenario-review",
+      "version": "0.1.0",
+      "zip": "valuation-scenario-review.zip"
+    },
+    {
+      "archive_sha256": "0edd839dc5f0f1bd3a50e2edc2badb2090f7c38aebbcbeff56dc292431585b1c",
+      "content_sha256": "95aa51ce2bce46f1f77f46e0fdcda8dcabeb0d5c01c11e8397d9f0aa7a5d6cb2",
+      "description": "Confirm that the Arek AI Skills plugin is exposing bundled skills to ChatGPT or Codex. Use when the user explicitly asks to test, verify, diagnose, or confirm whether Arek AI Skills is active.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "arek-skills-diagnostic",
+      "version": "1.0.0",
+      "zip": "arek-skills-diagnostic.zip"
+    },
+    {
+      "archive_sha256": "c9f7d0d51177e663e3d4426d60a9e6860d4d3f2952016b073e142aa665896ea1",
+      "content_sha256": "2f5600720fc03114ca8633a5c88cfce97f4b450643d19617eebc47f8d1f98312",
+      "description": "Create or refactor an Agent Skill package from an approved skill specification. Use when writing SKILL.md, splitting instructions into references/scripts/assets, improving progressive disclosure, or aligning a skill with repository and current Agent Skills authoring conventions.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-authoring",
+      "version": "1.0.0",
+      "zip": "skill-authoring.zip"
+    },
+    {
+      "archive_sha256": "17154051541c66972b662a172530b161d8084c77c9f1390813a615edad3fa477",
+      "content_sha256": "a06f4d08c7ea13199dc9a50c88183f386da6212f47749234e8c5e99e899fad86",
+      "description": "Decide whether a repeatable task should become an Agent Skill and define its behavioral contract before implementation. Use when proposing a new skill, splitting/merging skills, or when an existing skill has unclear scope, trigger conditions, inputs, outputs or boundaries.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-specification",
+      "version": "1.0.0",
+      "zip": "skill-specification.zip"
+    },
+    {
+      "archive_sha256": "18c78c47f8567c4f352cb8f6283c811f240e9a9949f6418151a2b222c2479fb9",
+      "content_sha256": "3ce46c95fd4e477082b7547719fbf0787d9863cb5dcf7d687926748584e8538e",
+      "description": "Validate an Agent Skill package for structural correctness, routing clarity, standards alignment, security, portability, duplication and maintainability. Use after authoring or modifying a skill and before behavioral evaluation or release.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-validation",
+      "version": "1.0.0",
+      "zip": "skill-validation.zip"
+    },
+    {
+      "archive_sha256": "0f9c780f841de365ad97ea1a0060453bc8d682ce2286a1c0bc5c1e120dd9e2f7",
+      "content_sha256": "ce3c3e0f4aaf0f5e43ae40362d15f76e7f01cff77752121cc54ad425a8cf56dc",
+      "description": "Diagnose why a specific material decision class is slow, repeatedly escalated or duplicated by tracing decision steps, waits, vetoes, evidence gaps and authority boundaries. Use after the problematic decision class is identified; do not lead a mixed cross-unit handoff/accountability/capacity diagnosis whose failure type is still unknown.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-bottleneck-analysis",
+      "version": "1.1.0",
+      "zip": "decision-bottleneck-analysis.zip"
+    },
+    {
+      "archive_sha256": "ac3d54d7b84656bb22b7f0a31d21082e3dcab22c82a1b71fa535b527d4d3d313",
+      "content_sha256": "50d32d4b098b6c763bb4b0b87277b7e1bbcc42e31e27a71320176ebc941370ea",
+      "description": "Map and review critical organisational decision rights, including who proposes, decides, executes, advises and escalates. Use when the primary question concerns ownership or authority for identified material decisions. Do not lead a mixed cross-unit handoff/accountability/capacity diagnosis before the decision problem is isolated, and do not use merely to create a generic RACI.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-rights-review",
+      "version": "1.1.0",
+      "zip": "decision-rights-review.zip"
+    },
+    {
+      "archive_sha256": "8f26f616e1549c6a813903c8dc59e5d1fa2acd2b0e59f1d09efb1caecf476d1d",
+      "content_sha256": "a0117fed48e46023f87362c3b5ad80c82c4d9d2549199614b1b19efcdf71960c",
+      "description": "Design the minimum governance mechanisms needed for a defined set of material decisions, including ownership, evidence, cadence and escalation. Use only after decision-rights or operating-model problems are sufficiently diagnosed; do not create committees as a default response.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "governance-design",
+      "version": "1.0.0",
+      "zip": "governance-design.zip"
+    },
+    {
+      "archive_sha256": "9df3e89b6bdf15269a180143139af49ef966ba2baf5888468bef73c447ff80fd",
+      "content_sha256": "b1fbdec3e182a68ba57e5a1935471d2f2f4d60c651203bc0714a45a047e939ea",
+      "description": "Review alignment across business direction, capabilities, organisational design, information and technology architecture. Use for enterprise or organisational architecture decisions; do not use as a low-level software design review.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "architecture-review",
+      "version": "1.0.0",
+      "zip": "architecture-review.zip"
+    },
+    {
+      "archive_sha256": "3b365bba987c87c1830831be9874c11a8bb93ce8063e1d2c4abb55408b310046",
+      "content_sha256": "ebe469aa043720e0c50880e86afd3e67dcb92e2088e3218f1e50afcfeb6f1af7",
+      "description": "Identify material gaps between required business capabilities and current organisational, process, information, technology, governance or capacity enablement. Use after strategic outcomes are sufficiently clear; do not translate every capability gap directly into a technology project.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "capability-gap-analysis",
+      "version": "1.0.0",
+      "zip": "capability-gap-analysis.zip"
+    },
+    {
+      "archive_sha256": "fa22d5e40c8b92c429ccf95848a4d2fd957af3c0fa6af551c9bd9ed1686bc4e8",
+      "content_sha256": "a97e1f0def7e6530b61dfc061433b7152ca4c91250dde23b7d89f2c92e04fa76",
+      "description": "Assess whether a business capability map is coherent and decision-useful, including level consistency, overlap, gaps, ownership and linkage to strategy, investments, applications, risks or performance. Use to improve a map for a defined decision; do not infer detailed processes or technology defects from capability names alone.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "capability-map-review",
+      "version": "1.0.0",
+      "zip": "capability-map-review.zip"
+    },
+    {
+      "archive_sha256": "27f442e291424da2381475f1af142630139d9c4a8c1a06b3422aaea9c088b01d",
+      "content_sha256": "910a214fd2fc141c464d1364330c6a261e5e6f732f20685f11fb38013db44720",
+      "description": "Review whether organisational KPIs, outcomes, reviews and feedback loops actually inform decisions and adaptation. Use when governance produces reporting but weak learning; do not use as a generic KPI-design task.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "evidence-loop-review",
+      "version": "1.0.0",
+      "zip": "evidence-loop-review.zip"
+    },
+    {
+      "archive_sha256": "57b831b54edbcb2172fbf031bbbb9bff4a4272cb44ab092ebfbab15af43d5321",
+      "content_sha256": "1d04dd73c4dccbde1b396dc5d6958e8c83d78cd5e294d9951748c86b36216f78",
+      "description": "Review how responsibilities, standards, capabilities and decisions are split between global/central and local units. Use when the organisation needs to balance scale and consistency against local context and speed; do not default to centralisation.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "global-local-model-review",
+      "version": "1.0.0",
+      "zip": "global-local-model-review.zip"
+    },
+    {
+      "archive_sha256": "af17cb57e69f8d29ab1d401aca325bb9f2b74368f4a9727883fd7223f4000ded",
+      "content_sha256": "1d1f420d0cf7b1d82e5621189969348308be1df81056541bbfd880e018c968df",
+      "description": "Review an operating model for role clarity, interfaces, accountability, autonomy, coordination and authority/resource alignment. Use as the lead diagnosis when symptoms span cross-unit handoffs plus unclear accountability or capacity/funding authority and the failure has not yet been isolated to one decision class. Do not reduce the review to an org chart.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "operating-model-review",
+      "version": "1.1.0",
+      "zip": "operating-model-review.zip"
+    },
+    {
+      "archive_sha256": "2cfaf2ca58f773929cfbd711e2ddd2317ad4063d52d5890fe4c5379409ef23ff",
+      "content_sha256": "fadc6306c811ae93d7a915b1a962b5cb80c9832519fff2d048c1c16d6fb7dbe3",
+      "description": "Review whether an initiative portfolio is coherent, affordable, capacity-feasible, dependency-aware and aligned to strategic outcomes. Use for portfolio health diagnosis; do not force ranking when comparable evidence is missing.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-health-review",
+      "version": "1.0.0",
+      "zip": "portfolio-health-review.zip"
+    },
+    {
+      "archive_sha256": "03c0c9c8afc1deb7dfc434b6cb5749346d996500fba51dcb4a6cc44d82b1a99b",
+      "content_sha256": "fd002e7569567af44b33ab46d3f4f76fc43686aa16192dfd28be86f35a44756d",
+      "description": "Structure transparent prioritisation of initiatives using agreed strategic, value, risk, capacity and dependency criteria. Use when a portfolio needs comparable decisions; use deterministic calculation for scoring where possible.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-prioritization",
+      "version": "1.0.0",
+      "zip": "portfolio-prioritization.zip"
+    },
+    {
+      "archive_sha256": "8bf8d6193cb9625c31ac612fc6b2d23ee31784f5ff1be8da710330f7306b9d87",
+      "content_sha256": "df3965795551b1a2586fec21703b1f1333752a735cd9ee2fc932070813724fff",
+      "description": "Convert an approved organisational diagnosis and target direction into a sequenced transformation blueprint with workstreams, dependencies, decision gates, capacity needs and evidence checkpoints. Use after diagnosis and target-state direction are sufficiently agreed; do not roadmap unresolved design choices as facts.",
+      "inventory": [
+        "SKILL.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "transformation-blueprint",
+      "version": "1.0.0",
+      "zip": "transformation-blueprint.zip"
+    }
+  ],
+  "source_revision": "56d1beec5e5829d6398c2555e729079a87389c64",
+  "workflows": [
+    {
+      "kind": "workflow",
+      "name": "commerce-opportunity-review",
+      "optional_dependencies": [
+        "product-opportunity-discovery",
+        "commerce-product-deep-dive",
+        "market-transferability-review",
+        "problem-demand-validation",
+        "competition-landscape-review",
+        "differentiation-review",
+        "unit-economics-review",
+        "supplier-viability-review",
+        "acquisition-fit-review",
+        "commerce-regulatory-risk-review"
+      ],
+      "required_dependencies": [],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "commerce-product-deep-dive",
+      "optional_dependencies": [
+        "product-opportunity-discovery",
+        "market-transferability-review",
+        "commerce-regulatory-risk-review"
+      ],
+      "required_dependencies": [
+        "problem-demand-validation",
+        "competition-landscape-review",
+        "differentiation-review",
+        "unit-economics-review",
+        "supplier-viability-review",
+        "acquisition-fit-review"
+      ],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "investment-attention-review",
+      "optional_dependencies": [
+        "thesis-monitor",
+        "market-opportunity-scan",
+        "trend-theme-research",
+        "security-underwriting",
+        "valuation-scenario-review",
+        "thesis-challenge",
+        "portfolio-state-review"
+      ],
+      "required_dependencies": [
+        "investment-attention-triage",
+        "investment-record-store"
+      ],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "investment-opportunity-hunter",
+      "optional_dependencies": [
+        "investment-attention-triage",
+        "trend-theme-research",
+        "portfolio-state-review",
+        "security-underwriting",
+        "valuation-scenario-review",
+        "thesis-challenge"
+      ],
+      "required_dependencies": [
+        "market-opportunity-scan",
+        "investment-record-store"
+      ],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "investment-portfolio-review",
+      "optional_dependencies": [
+        "investment-attention-triage",
+        "position-sizing-review",
+        "valuation-scenario-review",
+        "thesis-challenge",
+        "decision-journal-update"
+      ],
+      "required_dependencies": [
+        "portfolio-state-review",
+        "thesis-monitor",
+        "investment-record-store"
+      ],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "investment-security-review",
+      "optional_dependencies": [
+        "trend-theme-research",
+        "portfolio-state-review",
+        "position-sizing-review",
+        "decision-journal-update"
+      ],
+      "required_dependencies": [
+        "security-underwriting",
+        "valuation-scenario-review",
+        "thesis-challenge",
+        "investment-record-store"
+      ],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "investment-theme-discovery",
+      "optional_dependencies": [
+        "investor-pattern-research",
+        "security-underwriting",
+        "thesis-challenge"
+      ],
+      "required_dependencies": [
+        "trend-theme-research",
+        "market-opportunity-scan",
+        "investment-record-store"
+      ],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "oaf-enterprise-architecture-review",
+      "optional_dependencies": [
+        "capability-map-review",
+        "capability-gap-analysis"
+      ],
+      "required_dependencies": [
+        "architecture-review"
+      ],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "oaf-enterprise-change-review",
+      "optional_dependencies": [
+        "strategy-to-execution-diagnostic",
+        "operating-model-review",
+        "global-local-model-review",
+        "organizational-interface-review",
+        "decision-rights-review",
+        "decision-bottleneck-analysis",
+        "architecture-review",
+        "capability-gap-analysis",
+        "portfolio-health-review",
+        "portfolio-prioritization",
+        "evidence-loop-review",
+        "oaf-operating-model-redesign",
+        "oaf-governance-redesign",
+        "oaf-enterprise-architecture-review",
+        "oaf-transformation-design"
+      ],
+      "required_dependencies": [],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "oaf-governance-redesign",
+      "optional_dependencies": [
+        "decision-bottleneck-analysis"
+      ],
+      "required_dependencies": [
+        "decision-rights-review",
+        "governance-design"
+      ],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "oaf-health-check",
+      "optional_dependencies": [
+        "strategy-to-execution-diagnostic",
+        "operating-model-review",
+        "decision-rights-review",
+        "governance-design",
+        "architecture-review",
+        "capability-map-review",
+        "portfolio-prioritization",
+        "evidence-loop-review",
+        "transformation-blueprint"
+      ],
+      "required_dependencies": [],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "oaf-operating-model-redesign",
+      "optional_dependencies": [
+        "global-local-model-review",
+        "organizational-interface-review",
+        "decision-bottleneck-analysis",
+        "governance-design",
+        "transformation-blueprint"
+      ],
+      "required_dependencies": [
+        "operating-model-review",
+        "decision-rights-review"
+      ],
+      "status": "unavailable"
+    },
+    {
+      "kind": "workflow",
+      "name": "oaf-transformation-design",
+      "optional_dependencies": [],
+      "required_dependencies": [
+        "transformation-blueprint"
+      ],
+      "status": "unavailable"
+    }
+  ]
+}

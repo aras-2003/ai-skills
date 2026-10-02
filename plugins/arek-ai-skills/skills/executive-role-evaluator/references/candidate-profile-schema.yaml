@@ -1,0 +1,37 @@
+# Generic schema only.
+# Keep the actual candidate profile in private project/context, not in this public reusable skill repository.
+
+career_target:
+  target_roles: []
+  strategic_direction: []
+
+role_preferences:
+  mandate:
+    importance: ""
+  team_ownership:
+    importance: ""
+  technology_scope:
+    importance: ""
+  executive_sponsorship:
+    importance: ""
+  board_exposure:
+    importance: ""
+  organizational_scale:
+    importance: ""
+  transformation_scope:
+    importance: ""
+  international_scope:
+    importance: ""
+
+work_model:
+  preferred_location: ""
+  preferred_hybrid_days: ""
+  travel_tolerance: ""
+  sustained_weekend_work: ""
+
+career_risks: []
+
+hard_constraints: []
+strong_preferences: []
+development_objectives: []
+nice_to_have: []

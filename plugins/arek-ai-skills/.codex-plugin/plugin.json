@@ -1,0 +1,6 @@
+{
+  "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
+  "name": "arek-ai-skills",
+  "skills": "./skills/",
+  "version": "1.9.0"
+}
