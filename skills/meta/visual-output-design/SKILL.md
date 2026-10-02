@@ -7,7 +7,7 @@ description: >
   to make a visual complete.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.5.0"
+  version: "0.6.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02
@@ -21,7 +21,7 @@ metadata:
 Render one evidence-backed visual component or visual system for an already-defined local information need.
 This skill is the renderer/router beneath `report-composer`; it does not own the structure of a full report.
 
-Preserve the source analysis, evidence, uncertainty and canonical data contracts while choosing the best visual medium available in the runtime.
+Preserve the source analysis, evidence, uncertainty and canonical data contracts while choosing the best visual medium available in the runtime. Follow `../report-composer/references/report-state-and-evidence-contract.md` for renderer/client-state semantics.
 
 ## Preconditions
 - The underlying analysis/result already exists or can be produced by the calling workflow.
@@ -86,7 +86,8 @@ Return or render:
 - **uncertainty**: what is estimated, missing or inferred;
 - **fallback**: concise textual/table equivalent when rendering is unavailable.
 - **capability_status**: AVAILABLE / UNAVAILABLE / UNKNOWN.
-- **render_status**: PAYLOAD_RENDERED / UI_CONFIRMED / BLOCKED_NO_RENDERER / FAIL_RENDERER_INVOCATION / UI_RENDER_UNCONFIRMED / NOT_REQUIRED.
+- **renderer_execution_status**: NOT_REQUIRED / NOT_ATTEMPTED / BLOCKED_NO_RENDERER / PAYLOAD_RENDERED / FAIL_RENDERER_INVOCATION.
+- **client_display_status**: NOT_OBSERVABLE.
 
 ## Evidence requirements
 - Every plotted factual value must come from user-provided data, canonical state, calculation or cited evidence.
@@ -113,10 +114,10 @@ Return or render:
 - [ ] Required quantitative visuals passed `capability_preflight` against an actual deterministic renderer.
 - [ ] Media-generation or design tools were not misclassified as quantitative chart renderers.
 - [ ] `BLOCKED_NO_RENDERER` cannot be reported as successful rendering.
-- [ ] Tool success alone is not called UI-rendered. A valid image payload receipt proves `PAYLOAD_RENDERED`; visible client rendering is `UI_CONFIRMED`.
-- [ ] For a required visual slot, `PAYLOAD_RENDERED` without `UI_CONFIRMED` resolves to `UI_RENDER_UNCONFIRMED`.
-- [ ] Do not describe the visual as rendered/visible in the surrounding prose unless `UI_CONFIRMED`.
-- [ ] If the client shows a broken/blank placeholder, report `UI_RENDER_UNCONFIRMED`, not PASS.
+- [ ] Tool success with a valid image payload is `PAYLOAD_RENDERED`, not proof of client display.
+- [ ] Client display is always `NOT_OBSERVABLE` from the model unless explicit external evidence is supplied.
+- [ ] Do not emit `UI_CONFIRMED`, `UI_RENDER_UNCONFIRMED`, `VISIBLE` or `BROKEN` as model-owned facts.
+- [ ] Do not describe a visual as visible/rendered "above" merely because the tool returned an image payload.
 
 ## References
 - references/tool-routing.md
