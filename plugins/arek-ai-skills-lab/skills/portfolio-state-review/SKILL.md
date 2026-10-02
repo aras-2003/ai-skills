@@ -1,14 +1,15 @@
 ---
 name: portfolio-state-review
 description: 'Reconstruct and review the current investment portfolio plus historical
-  snapshots, exposures and material changes. Use when assessing portfolio concentration,
-  diversification, overlap, cash deployment capacity, risk changes or what changed
-  since a prior snapshot. Do not use for deep underwriting of a single security.
+  snapshots, exposures and material changes from canonical Investment OS data. Use
+  when assessing concentration, diversification, overlap, cash deployment, risk changes
+  or what changed since a prior snapshot. Prefer relational Supabase views and analytics
+  over spreadsheet logic.
 
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.2.0
+  version: 0.3.0
   maturity: production
   risk: high
   last_reviewed: '2026-10-02'
@@ -17,35 +18,32 @@ metadata:
 # Portfolio State Review
 
 ## Purpose
-Turn holdings and canonical history into a decision-useful portfolio state while preserving history.
+Turn canonical holdings/history into a decision-useful portfolio state while preserving auditability.
 
 ## Procedure
-1. Use investment-record-store to read canonical Portfolio_Current and the latest canonical Portfolio_History snapshot. Do not use local Codex files or chat summaries as substitutes.
-2. If the prior canonical snapshot is unavailable, state that the comparison cannot be completed and identify exactly which history is missing.
+1. Use investment-record-store to read canonical `current_positions`, latest portfolio snapshot, current policy and relevant exposure data.
+2. If the configured canonical backend or prior snapshot is unavailable, state exactly what comparison is blocked. Do not substitute chat/local files or analytics cache.
 3. Reconcile position, quantity, cost basis, market value, portfolio weight, account and currency.
-4. Calculate or infer only metrics supported by data; mark unavailable metrics UNKNOWN.
-5. Review single-name, sector/theme, geography, currency, factor/cyclicality and ETF/stock overlap where evidence supports it.
-6. Compare with the previous snapshot and identify material changes caused by trades versus price movement.
+4. Use Data/analytics tooling when useful for aggregation, look-through, concentration, overlap and historical trend analysis; treat all outputs as derived analytics.
+5. Review single-name, sector/theme, geography, currency, factor/cyclicality and ETF/stock overlap where supported.
+6. Compare with the previous canonical snapshot and identify material changes caused by trades versus price movement.
 7. Flag policy breaches or review thresholds; do not automatically translate a breach into a sell action.
-8. Append a new canonical snapshot rather than overwriting historical records.
-9. Return explicit read/write persistence receipts.
+8. Persist a new snapshot/event through investment-record-store; do not write directly from analytics tooling.
+9. Return explicit canonical read/write receipts.
 
 ## Decision rules
 - A good company can become a poor portfolio position through concentration.
 - Price appreciation that increases weight is a portfolio change even without a transaction.
-- Missing holdings or stale prices lower confidence.
-- Current state and historical snapshots are different records.
-- No prior canonical snapshot means no claim of "change since prior snapshot."
-- A local history.json file is NONCANONICAL and cannot satisfy history preservation.
+- Current views and historical snapshots are different records.
+- Missing prior canonical state means no claim of "change since prior snapshot."
+- Analytics calculations are reproducible derived state, not canonical truth by themselves.
 
 ## Output contract
-Return: as-of date; canonical-read status; reconciled portfolio summary; material exposures; changes since prior snapshot or explicit comparison block; policy exceptions; stale/missing data; positions requiring review; canonical persistence receipt.
+As-of date; canonical-read status; reconciled portfolio summary; material exposures; changes since prior snapshot or explicit comparison block; policy exceptions; stale/missing data; positions requiring review; analytics provenance; canonical persistence receipt.
 
 ## Quality checks
-- [ ] As-of date is explicit.
 - [ ] Canonical current state and prior snapshot were attempted.
-- [ ] Missing canonical history is surfaced, not replaced with local artifacts.
+- [ ] Derived analytics are labeled separately from canonical records.
 - [ ] Trade-driven and market-driven changes are separated.
 - [ ] Historical state is not overwritten.
-- [ ] Portfolio concern is not presented as company-thesis failure.
-- [ ] Persistence receipt states whether snapshot/history write actually succeeded.
+- [ ] Persistence writes route only through investment-record-store.

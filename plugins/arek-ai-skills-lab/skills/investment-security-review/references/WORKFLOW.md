@@ -16,44 +16,31 @@ Evaluate one XTB security from thesis creation through falsification, valuation,
 - decision-journal-update
 
 ## Sequence
-1. Use investment-record-store to read prior research, thesis history, current portfolio and policy if they exist; emit the canonical READ receipt.
-2. Underwrite the security with an explicit horizon; if both 6-18 month and 2-5 year cases matter, keep them separate.
-3. Run the hard underwriting evidence-sanity gate before valuation:
-   - verify critical metrics in primary-source context;
-   - check period, units, GAAP/non-GAAP, quarterly vs annual, per-share vs absolute values, arithmetic consistency and magnitude versus company/prior-period scale;
-   - if a critical figure is implausible, conflicting or extraction-uncertain, mark UNVERIFIED/CONFLICTED and attempt re-verification.
-4. If any decision-critical metric remains UNVERIFIED/CONFLICTED:
-   - classify the case VERIFY / RESEARCH;
-   - do not calculate P/E, FCF yield or numeric scenario valuation from those figures;
-   - do not run numeric position sizing;
-   - persist the evidence gap and next verification step if canonical write is available;
-   - return.
-5. Only after the evidence gate passes, build bear/base/bull valuation scenarios and what the current price implies.
-6. Explicitly state business-thesis strength separately from security attractiveness and priced-in expectations.
-7. Run thesis-challenge independently of the preferred case.
-8. Classify the research state: REJECT / WATCH / RESEARCHED / THESIS SURVIVES / THESIS WEAKENED / INVALIDATED.
-9. If portfolio action is being considered, parse policy semantics literally before sizing:
-   - a review threshold triggers review;
-   - it is not a hard cap or trim target unless the policy explicitly says so.
-10. Only when critical evidence is verified and policy semantics are clear, run portfolio-state-review and position-sizing-review.
-11. Persist Sources, Research_Log, Signals_History and a new Thesis_Register version through investment-record-store.
-12. If the user makes an actual lifecycle decision, append Decision_Journal via decision-journal-update.
-13. Emit canonical WRITE persistence receipt. A local file path is NONCANONICAL and cannot be presented as durable history.
+1. Read prior research, thesis history, current portfolio and policy through investment-record-store; emit canonical READ receipt.
+2. Use structured equity/ETF research plugins for context and consensus framing, then underwrite the security with an explicit horizon.
+3. Verify decision-critical metrics in primary-source context; use Firecrawl to retrieve/parse filings or IR pages when useful.
+4. Run the hard evidence-sanity gate: period, units, GAAP/non-GAAP, quarterly/annual, per-share/absolute, arithmetic and scale.
+5. If any critical metric remains UNVERIFIED/CONFLICTED, classify VERIFY/RESEARCH; block numeric valuation and sizing; persist the gap if possible and return.
+6. Only after the gate passes, build bear/base/bull valuation scenarios and current-price implications.
+7. Separate business-thesis strength, security attractiveness and priced-in expectations.
+8. Run thesis-challenge independently.
+9. Classify research state: REJECT / WATCH / RESEARCHED / THESIS SURVIVES / THESIS WEAKENED / INVALIDATED.
+10. If portfolio action is considered, parse policy semantics literally and run portfolio-state-review/position-sizing-review as needed.
+11. Persist sources, research events, signals and a new thesis version through investment-record-store.
+12. If the user makes a lifecycle decision, append it via decision-journal-update.
+13. Emit canonical WRITE receipt. Research plugins, Data analytics and local files never count as canonical persistence.
 
 ## Decision rules
-- company quality, security attractiveness and portfolio fit are three different questions;
-- a surviving thesis does not imply a full position;
-- a strong chart/earnings momentum signal does not override valuation or concentration;
-- source URL present != extracted figures verified;
-- do not average bear/base/bull into false precision;
-- no action state is acceptable when evidence does not justify change;
+- company quality, security attractiveness and portfolio fit are different questions;
+- structured research speeds discovery but does not replace primary verification;
+- extreme figures must be verified, not rejected by magnitude;
+- source URL present != extracted figure verified;
 - unverified critical metrics block valuation and numeric sizing;
 - review threshold != hard ceiling.
 
 ## Output contract
-Business thesis | evidence-sanity status | blocked/verified metrics | valuation scenarios if permitted | priced-in expectations | security attractiveness | strongest countercase | thesis state | policy-rule semantics | portfolio constraints | drift source | lifecycle/sizing state if permitted | exact evidence gaps | next trigger | canonical READ/WRITE persistence receipts.
+Business thesis | evidence-sanity status | verified/blocked metrics | valuation if permitted | priced-in expectations | security attractiveness | strongest countercase | thesis state | portfolio constraints | lifecycle/sizing state if permitted | exact evidence gaps | next trigger | canonical READ/WRITE receipts.
 
 ## Stop conditions
 Stop before sizing if policy/portfolio context is missing.
-Stop valuation and numeric sizing if decision-critical evidence is unverified/conflicted.
-Escalate to fresh research if evidence is stale or the business/cycle regime changed.
+Stop valuation and numeric sizing if critical evidence is unresolved.

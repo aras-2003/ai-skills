@@ -149,21 +149,21 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "bc3356d28b82a0bf47cb4c3f8b0de65475fdd0e953e837f790330de6ae591481",
+      "content_sha256": "ce4df7a0b1aefafdad17b574d5abf3e189646005f3fd0a321b938b94c2acfcf0",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-attention-review",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "2824e95e4c5d7e53c08ca93f73f4184f465fa41c97133f8b2b1a126d29d49223",
+      "content_sha256": "9d9f6f56b42a76574c92e9975c8160099caea959a70bf88d99a62b5e543148b1",
       "kind": "skill",
       "maturity": "production",
       "name": "investment-attention-triage",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
-      "content_sha256": "15384a8dea44502cf8db36ee9c9193087acd1719eb6d09388bf25ff2a017e3c3",
+      "content_sha256": "72e99ca730515e5a1aec27834bbb71f1ee8a9bc267917e9638f6827da268e515",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-opportunity-hunter",
@@ -177,28 +177,28 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "f94bfd9046d7ec219fa34038bbd0dc792d69e865be707fce10e793e2e102d421",
+      "content_sha256": "2af19bafd046db7daab632b39cb344455bc62dc5b02ada93a17a07d1b2510b9b",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-portfolio-review",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "1609f47cb2fad2d6402dbc0dddb5d6f0b0dd8d781fc60940b481375e99b9d596",
+      "content_sha256": "d271a7da176283dc33ffcc89448670caf5791106c120fc565763a3324e7831a0",
       "kind": "skill",
       "maturity": "production",
       "name": "investment-record-store",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
-      "content_sha256": "eed742b23c43c938664730354bbc0e564a308fe587d833664d41d2d84158d76e",
+      "content_sha256": "16ec0b789380db7b1a401cb500ea79fffd0d706313cf7e774cee184f6345c958",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-security-review",
       "version": "0.1.0"
     },
     {
-      "content_sha256": "4ddf47070f8649eb6465632a80150cb0bad535cb8330738699acf50b31a67dde",
+      "content_sha256": "aeddd3f6a3ecfa5181a244918914f561ff9aaa756d9a216c72b3de9d873e8eed",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-theme-discovery",
@@ -233,11 +233,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "a7a3ec957e5d914ab65e5416d34e267cdd3bd983b218e8a5e0cd7c38f8949409",
+      "content_sha256": "7d87d58cdd2496335d5d9c17e4ae236ad6d64e4475b2a45e40b0232fc7a47a2a",
       "kind": "skill",
       "maturity": "production",
       "name": "market-opportunity-scan",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "48ae1be4dd9fa9389592bc0973c0f669bf08eae39e70d6fd0d43322a73955ed6",
@@ -324,11 +324,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "b003fa42e7fc40e65ca1c653fd67869892fd2b546180af346830e552e7490ba2",
+      "content_sha256": "4ddaa27e68beab3df3f7f37d0fc01c7778e9dfed350974bee1637b10cb3deb25",
       "kind": "skill",
       "maturity": "production",
       "name": "portfolio-state-review",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "936118960a56d276495f32289f6d6bdc0fd1f4b2e1b9ae63e74e07a538968ddf",
@@ -359,11 +359,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "0163a1e90fced9d6b2c654a6d1a47731d5c971351ff5b543afc95f2951095f4c",
+      "content_sha256": "861592341f9daac0cdf8d9df183a5c9676f0fa26d110f6ce990bca2772de473a",
       "kind": "skill",
       "maturity": "production",
       "name": "security-underwriting",
-      "version": "0.3.0"
+      "version": "0.4.0"
     },
     {
       "content_sha256": "2f5600720fc03114ca8633a5c88cfce97f4b450643d19617eebc47f8d1f98312",
@@ -408,11 +408,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "cd2291210fa53dc2584351642aa3a90f02c32087544f94c819dbfd8eb4d61781",
+      "content_sha256": "f79da63e60ee0342355ec69bb85793b4fdcecbec27731da2f3b143606a1d5159",
       "kind": "skill",
       "maturity": "production",
       "name": "thesis-monitor",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "af5526586c5afa74cce9b92a9ed0da36c4831971b4ed3e6658537653030f22ce",
@@ -444,9 +444,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "ffbaf383afb826616643917eba6279687da5470bcbc0ecdc769a1e8ccf58edcd",
-  "release_id": "0.5.0+05ee51b6373a",
+  "payload_content_sha256": "aaf92a21837a237a36276486e8dbe9475eb1adafd0f513e5a82d498d314a707c",
+  "release_id": "0.6.0+0900bca78163",
   "schema_version": "1.0",
-  "source_revision": "05ee51b6373ae94b10b88c9cb20e0bdad8b4d201",
-  "version": "0.5.0"
+  "source_revision": "0900bca7816341b1727285669fac88148ebc4174",
+  "version": "0.6.0"
 }

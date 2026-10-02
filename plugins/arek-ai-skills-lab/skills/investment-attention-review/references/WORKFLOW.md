@@ -1,9 +1,9 @@
 # Investment Attention Review Workflow
 
 ## Purpose
-Answer one recurring question: **what changed since the last review, what actually matters, and where is deeper research worth the time?**
+For actionable security follow-up, v1 remains constrained to the XTB-investable universe; non-XTB existing holdings may still be monitored for thesis and portfolio implications.
 
-This is the default monitoring workflow for existing holdings, watchlist names and tracked themes. In v1, actionable security follow-up is constrained to the XTB-investable universe, while existing non-XTB holdings such as IKE/IKZE/employee-plan positions may still be monitored for thesis, valuation and portfolio implications. It is not a news digest.
+Answer: **what changed since the last review, what actually matters, and where is deeper research worth the time?** It is not a news digest.
 
 ## Required skills
 - investment-attention-triage
@@ -19,41 +19,21 @@ This is the default monitoring workflow for existing holdings, watchlist names a
 - portfolio-state-review
 
 ## Sequence
-1. Read Portfolio_Current, Watchlist, active Thesis_Register, Market_Themes and recent Signals_History.
-2. Gather only new dated company, industry, earnings/guidance, contract/order, estimate, regulatory and relevant market evidence since the last review.
-3. Run investment-attention-triage.
-4. Suppress ordinary news and return a short attention queue.
-5. For existing holdings:
-   - use thesis-monitor when a material event maps to an existing assumption or kill criterion;
-   - use valuation-scenario-review when price/expectations changed enough to alter attractiveness.
-6. For new candidates:
-   - use market-opportunity-scan when the signal suggests a broader opportunity;
-   - use security-underwriting only for REVIEW/ESCALATE items where deeper work is justified.
-7. Use thesis-challenge when positive evidence risks confirmation bias or the market may already price the thesis.
-8. Persist material signals, source links, attention state and any updated thesis version.
+1. Read canonical current portfolio, watchlist, active thesis versions, themes and recent signals.
+2. Use structured equity/ETF research plugins for breadth across tracked names.
+3. Gather only new dated company, industry, earnings/guidance, estimate, regulatory and relevant market evidence since the last review.
+4. Verify material claims in primary sources; use Firecrawl where useful.
+5. Run investment-attention-triage and suppress ordinary news.
+6. For holdings, use thesis-monitor when a material event maps to an assumption/kill criterion; use valuation-scenario-review when price/expectations changed enough.
+7. For new candidates, use market-opportunity-scan; underwrite only REVIEW/ESCALATE items.
+8. Use thesis-challenge when confirmation bias or priced-in risk is material.
+9. Persist material signals, evidence links, attention state and thesis updates through investment-record-store only.
 
 ## Materiality model
-Evaluate at least:
-- likely revenue/earnings/FCF significance;
-- evidence about demand, pricing, margins or competitive position;
-- strategic relevance;
-- change versus prior expectation;
-- valuation/expectations already embedded in price;
-- portfolio relevance, including concentration.
+Revenue/earnings/FCF significance; demand/pricing/margins/competitive evidence; strategic relevance; change versus prior expectation; priced-in expectations; portfolio concentration.
 
 ## Output contract
-### Worth attention now
-Instrument/theme | what changed | thesis impact | materiality | priced-in context | why look deeper | exact next question | next skill/workflow.
-
-### Monitor
-Potentially useful changes that do not yet justify deep research.
-
-### No material change
-Suppress detail unless requested.
-
-### Persistence receipt
-What was recorded and the effective as-of date.
+Worth attention now; monitor; no material change; provenance; canonical persistence receipt.
 
 ## Stop conditions
-Stop when every escalated item has a concrete decision-relevant research question.
-Do not expand into a full market report merely because more news exists.
+Stop when every escalated item has one concrete decision-relevant research question.
