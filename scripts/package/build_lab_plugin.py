@@ -7,7 +7,7 @@ from pathlib import Path
 
 import yaml
 
-from build_utils import atomic_output, ensure_source_valid, package_version, sha256_tree, source_revision, write_json
+from build_utils import atomic_output, ensure_source_valid, package_runtime_mcp, package_version, sha256_tree, source_revision, write_json
 from build_plugin import copy_skill, discover_skills
 from workflow_entrypoints import add_workflow_entrypoints, load_registry
 
@@ -182,6 +182,7 @@ def main() -> int:
             }
         }
         write_json(stage / "plugin.json", manifest)
+        runtime_tool = package_runtime_mcp(root, stage)
         compat_dir = stage / ".codex-plugin"
         compat_dir.mkdir(parents=True)
         write_json(
@@ -191,6 +192,7 @@ def main() -> int:
                 "version": version,
                 "description": manifest["description"],
                 "skills": "./skills/",
+                "mcpServers": "./.mcp.json",
             },
         )
         revision = source_revision(root)
@@ -217,6 +219,7 @@ def main() -> int:
                 "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
                 "capabilities": sorted(capabilities, key=lambda x: x["name"]),
                 "runtime_fixture_targets": fixture_status,
+                "runtime_tools": [runtime_tool],
             },
         )
         digest = sha256_tree(stage)
@@ -239,7 +242,7 @@ def main() -> int:
                         "content_sha256": item.get("content_sha256"),
                     }
                     for item in sorted(capabilities, key=lambda x: x["name"])
-                ],
+                ] + [runtime_tool],
             },
         )
 
