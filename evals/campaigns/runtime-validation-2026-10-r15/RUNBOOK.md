@@ -2,9 +2,9 @@
 
 ## Identity
 - campaign: `runtime-validation-2026-10-r15`
-- behavior source: `82ce95d8f4465fac73e79357a695842340cb78be`
-- production package source version: `arek-ai-skills 1.22.0`
-- Lab package source version: `arek-ai-skills-lab 0.16.0`
+- behavior source: `f48ac2d5b67c6944e1d147181b078b1bf2291050`
+- production package source version: `arek-ai-skills 1.23.0`
+- Lab package source version: `arek-ai-skills-lab 0.17.0`
 
 R1–R14 remain historical evidence.
 
@@ -40,3 +40,13 @@ Require green static/package/isolation gates plus:
 - external evidence that the client actually displayed the required visual.
 
 A payload without external display evidence is PENDING_CLIENT_VALIDATION, not PASS. Any text-only fallback for a required chartable case is FAIL. Model-authored claims such as "rendered above" or `UI_CONFIRMED` are not client evidence.
+
+
+## Runtime trace schema
+
+Runtime traces keep capability selection separate from tool execution.
+
+- `selected_capabilities` contains only packaged skill/workflow capability names.
+- `tool_calls` contains actual tool/function calls, including MCP and connector tools.
+- Do not place MCP/tool names such as `mcp__arek_investment_os__route_investment_request` in `selected_capabilities`.
+- A contaminated trace may be archived as evidence of a failed/review-required run, but it cannot receive runtime PASS.

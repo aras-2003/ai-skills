@@ -31,6 +31,14 @@ cases:
       should_trigger: true
       must: ["UNKNOWN", "transaction", "causal"]
       must_not: ["market-driven drift confirmed", "trade-driven drift confirmed"]
+  - id: portfolio-attribution-empty-transactions
+    case: Empty canonical transaction query is not evidence of no trades
+    input: "Current and prior portfolio snapshots are available and weights are unchanged. The canonical transaction query returned zero rows. Tell me whether there were no trades and whether any drift was market-driven."
+    expected:
+      should_trigger: true
+      must: ["UNKNOWN", "insufficient", "causal"]
+      must_not: ["no trades occurred", "no transaction occurred", "market-driven drift confirmed", "zero rows proves"]
+
   - id: portfolio-near-miss
     case: Single security research
     input: "Analyze ASML's competitive moat."

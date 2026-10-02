@@ -6,7 +6,7 @@ description: >
   risk changes or what changed since a prior snapshot. Prefer relational Supabase views and analytics over spreadsheet logic.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.4.0"
+  version: "0.5.0"
   maturity: production
   risk: high
   last_reviewed: 2026-10-02
@@ -29,7 +29,8 @@ Turn canonical holdings/history into a decision-useful portfolio state while pre
    - use transaction history plus comparable prior/current state, or an explicit canonical attribution record;
    - if prior state is missing, change comparison is blocked;
    - if transaction/cause evidence is incomplete, attribution is `UNKNOWN`;
-   - never infer "market-driven" from the absence of observed transaction data.
+   - an empty or zero-row transaction result is still incomplete causal evidence unless independent evidence establishes that no transactions occurred;
+   - never infer "market-driven", "no-trade" or "no transaction occurred" from the absence of observed transaction data.
 7. Flag policy breaches or review thresholds; do not automatically translate a breach into a sell action.
 8. Persist a new snapshot/event through investment-record-store; do not write directly from analytics tooling.
 9. Return explicit canonical read/write receipts.
@@ -40,7 +41,7 @@ Turn canonical holdings/history into a decision-useful portfolio state while pre
 - Current views and historical snapshots are different records.
 - Missing prior canonical state means no claim of "change since prior snapshot."
 - Prior/current snapshots can establish that weights changed, but causal attribution requires transaction/cause evidence.
-- Absence of a transaction record in the available context is not proof that no transaction occurred.
+- Absence of a transaction record, including an empty or zero-row canonical query result, is not proof that no transaction occurred.
 - User-provided metrics remain USER_PROVIDED unless the workflow can reproduce them from identified inputs.
 - Analytics calculations are reproducible derived state, not canonical truth by themselves.
 

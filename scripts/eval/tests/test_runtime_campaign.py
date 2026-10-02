@@ -89,11 +89,11 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("82ce95d8f4465fac73e79357a695842340cb78be", lock["behavior_source_revision"])
+            self.assertEqual("f48ac2d5b67c6944e1d147181b078b1bf2291050", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
-            self.assertEqual("1.22.0", lock["packages"]["production"]["version"])
+            self.assertEqual("1.23.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
-            self.assertEqual("0.16.0", lock["packages"]["lab"]["version"])
+            self.assertEqual("0.17.0", lock["packages"]["lab"]["version"])
             self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
             self.assertNotIn("organizational-interface-review", lock["expected_catalogs"]["production"])
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
@@ -279,6 +279,46 @@ class RuntimeCampaignTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "unsupported evidence source revision"):
             campaign.evidence_compatibility_profile("deadbeef")
+
+    def test_trace_schema_separates_capabilities_from_tools(self) -> None:
+        contaminated = campaign.trace_schema_errors(
+            {
+                "selected_capabilities": [
+                    "investment-os-review",
+                    "investment-portfolio-review",
+                    "mcp__arek_investment_os__route_investment_request",
+                ],
+                "tool_calls": ["mcp__arek_investment_os__route_investment_request"],
+            }
+        )
+        self.assertTrue(
+            any("selected_capabilities contains non-capability/tool names" in item for item in contaminated)
+        )
+
+        clean = campaign.trace_schema_errors(
+            {
+                "selected_capabilities": [
+                    "investment-os-review",
+                    "investment-portfolio-review",
+                    "investment-record-store",
+                    "portfolio-state-review",
+                    "thesis-monitor",
+                    "report-composer",
+                    "visual-output-design",
+                ],
+                "tool_calls": [
+                    "mcp__arek_investment_os__route_investment_request",
+                    "mcp__arek_chart_renderer__render_bar_chart",
+                ],
+            }
+        )
+        self.assertEqual([], clean)
+
+        self.assertTrue(
+            campaign.trace_schema_errors(
+                {"selected_capabilities": ["investment-os-review"]}
+            )
+        )
 
     def test_routing_requires_front_door_child_capability(self) -> None:
         case = {
