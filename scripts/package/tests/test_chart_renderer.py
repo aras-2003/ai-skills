@@ -49,8 +49,8 @@ class ChartRendererTests(unittest.TestCase):
             title="Portfolio performance",
             unit="index",
         )
-        self.assertIsNotNone(image.data)
-        self.assertTrue(image.data.startswith(b"\x89PNG\r\n\x1a\n"))
+        self.assertIsNotNone(result[1].data)
+        self.assertTrue(result[1].data.startswith(b"\x89PNG\r\n\x1a\n"))
 
     def test_invalid_parallel_data_fails_closed(self) -> None:
         with self.assertRaises(Exception):
