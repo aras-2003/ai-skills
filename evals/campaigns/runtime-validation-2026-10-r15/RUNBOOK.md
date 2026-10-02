@@ -21,7 +21,7 @@ The system should include at least one real chat-native visual when:
 2. The visual is embedded next to the portfolio-risk argument it supports.
 3. For many positions, prefer ranked horizontal bars; a donut/pie is acceptable only for a small meaningful part-to-whole such as top categories or top positions + Other.
 4. The report must not substitute ASCII bars or raw Mermaid code.
-5. If no suitable chat-native renderer exists, use a compact table/matrix fallback and make the renderer limitation explicit.
+5. Run `capability_preflight`. If no qualifying deterministic chat-native data renderer exists, the expected result is `BLOCKED_NO_RENDERER` and the runtime evaluation is **FAIL for R15 visual-floor compliance**. A compact table/matrix may be included only as diagnostic fallback; it does not turn the case into PASS.
 6. Do not generate HTML/PDF/Figma/deck/file output merely to satisfy the visual floor.
 7. Existing report-quality defaults from R14 remain intact.
 
@@ -31,4 +31,4 @@ The system should include at least one real chat-native visual when:
 - one OAF report with a chartable/structural relationship.
 
 ## Promotion rule
-Require green static/package/isolation gates plus runtime evidence that at least one chartable report produces a real inline visual without prompt-level formatting instructions.
+Require green static/package/isolation gates plus runtime evidence that at least one chartable report produces a real inline visual without prompt-level formatting instructions. Any text-only fallback for a required chartable case is FAIL, including when the runtime lacks a renderer; absence of the renderer is a capability blocker to fix, not a behavioral PASS.
