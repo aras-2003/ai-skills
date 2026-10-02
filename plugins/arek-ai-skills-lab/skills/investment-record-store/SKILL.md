@@ -9,7 +9,7 @@ description: 'Read and persist canonical Investment OS records in Supabase/Postg
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.3.0
+  version: 0.4.0
   maturity: production
   risk: high
   last_reviewed: '2026-10-02'
@@ -33,15 +33,21 @@ During migration, the legacy Investment OS Google Sheet may remain the active ca
 A local artifact may be created for convenience, but it must be labeled `NONCANONICAL`.
 
 ## Procedure
-1. Determine the configured canonical backend and emit it in the READ receipt.
+1. Resolve the canonical target through the bootstrap contract in `references/canonical-schema-governance.md` before any normalized read or write:
+   - read `public.system_config`;
+   - resolve `canonical_backend` and optional `canonical_schema_policy`;
+   - verify project ID and canonical schema;
+   - emit backend + project + schema + config source in the READ receipt.
 2. If Supabase is the configured canonical backend:
-   - identify the configured Investment OS project;
+   - use only the resolved canonical schema for normalized Investment OS records;
+   - never discover the canonical schema by scanning for whichever schema contains rows;
+   - never silently fall back to an equivalent table in another schema;
    - read only required tables/views;
    - use relational keys and stable record IDs;
    - treat append-only/event tables as immutable history;
    - derive current-state views from source records where practical.
 3. If migration has not cut over yet, legacy Sheets may be read/written only under explicit `legacy_sheets` mode.
-4. Never silently fall back from Supabase to Sheets. If the configured backend is unavailable, return `UNAVAILABLE` or `FAILED`.
+4. Never silently fall back from Supabase to Sheets or from one Supabase schema to another. If the configured backend/schema is unavailable, contradictory or empty for the requested record, return `UNAVAILABLE`, `FAILED` or an evidence limitation as appropriate; do not search a duplicate schema for substitute canonical data.
 5. Require `as_of_date` for state records and `source_date` plus source reference for externally derived facts.
 6. Persist transactions, research events, signals, thesis versions, decisions, outcomes and sources append-only.
 7. Preserve policy versions with effective dates.
@@ -55,7 +61,9 @@ A local artifact may be created for convenience, but it must be labeled `NONCANO
 - Current-state correction and historical rewrite are different operations.
 - Duplicate evidence should link to one source record.
 - Repository files contain schemas/instructions only, never live holdings or credentials.
-- No hidden fallback between canonical backends.
+- No hidden fallback between canonical backends or schemas.
+- The fixed bootstrap authority is `public.system_config`; a duplicate `system_config` in another schema cannot redefine the active canonical target.
+- Current deployment resolves to project `investment-os`, schema `public`; `investment` is deprecated/noncanonical until a future explicit cutover.
 
 ## Output contract
 For every read/write operation return a Persistence receipt with:
@@ -63,6 +71,7 @@ For every read/write operation return a Persistence receipt with:
 - operation: READ / APPEND / SNAPSHOT / UPDATE_CURRENT / POLICY_VERSION / MIGRATE
 - backend: SUPABASE / LEGACY_SHEETS
 - canonical_target: project + schema/table/view or workbook + tab/range
+- config_source: bootstrap schema/table/key used to resolve canonical target
 - as_of_or_effective_date
 - record_ids or rows affected when successful
 - source references / provenance when applicable
@@ -71,8 +80,9 @@ For every read/write operation return a Persistence receipt with:
 - fallback_artifact, if any, explicitly labeled NONCANONICAL
 
 ## Quality checks
-- [ ] Exactly one canonical backend is active.
-- [ ] No silent Supabase->Sheets fallback occurred.
+- [ ] Exactly one canonical backend and one canonical Supabase schema are active.
+- [ ] Canonical target was resolved from `public.system_config`, not inferred from row presence.
+- [ ] No silent Supabase->Sheets or cross-schema fallback occurred.
 - [ ] READ and WRITE outcomes are explicit.
 - [ ] Append-only history was not overwritten.
 - [ ] Source provenance is retained.
@@ -82,4 +92,5 @@ For every read/write operation return a Persistence receipt with:
 
 ## References
 - references/supabase-contract.md
+- references/canonical-schema-governance.md
 - references/google-sheets-contract.md

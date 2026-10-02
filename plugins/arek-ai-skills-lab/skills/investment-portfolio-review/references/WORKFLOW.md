@@ -26,6 +26,8 @@ When activated naturally, do not replace the workflow with a generic investment 
 
 ## Sequence
 1. Attempt canonical reads first through investment-record-store: current_positions, latest portfolio snapshot, current policy, active thesis versions and relevant transaction history. Emit canonical READ receipt.
+   - Resolve backend/project/schema from the record-store bootstrap contract first; do not choose a schema by scanning for populated duplicate tables.
+   - Treat the schema named in the canonical READ receipt as authoritative for the entire workflow run.
    - If the user also supplied holdings/weights, preserve them as USER_PROVIDED evidence and reconcile them against canonical state when available.
    - Do not skip canonical reads merely because the prompt already contains enough numbers for a generic analysis.
 2. If current state or prior snapshot is unavailable, state exactly which comparison is blocked. Do not substitute local/chat/analytics cache.
@@ -47,6 +49,8 @@ When activated naturally, do not replace the workflow with a generic investment 
 
 ## Decision rules
 - analytics layer reads/derives; it does not become the system of record;
+- canonical schema is resolved once through investment-record-store and must not change mid-run;
+- duplicate Supabase schemas are not fallback sources;
 - position risk can deteriorate while company thesis remains intact;
 - no-trade price drift is still portfolio drift;
 - policy breach triggers review, not automatic sale;

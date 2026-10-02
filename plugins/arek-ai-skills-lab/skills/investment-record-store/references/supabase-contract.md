@@ -3,6 +3,8 @@
 ## Role
 Supabase/Postgres is the target canonical relational datastore for normalized Investment OS state and history.
 
+The canonical Supabase schema is not discovered heuristically. Resolve it from the fixed bootstrap authority `public.system_config` according to `canonical-schema-governance.md`. The current deployment resolves to schema `public`; duplicate schemas are noncanonical unless an explicit future cutover changes the bootstrap record.
+
 Google Drive remains the raw-document store for broker exports, statements, PDFs and other source files.
 
 ## Core tables
@@ -118,6 +120,9 @@ Decision records joined to later outcome reviews and performance windows when ma
 8. Raw Drive files may be referenced in sources but normalized records live in Supabase after cutover.
 9. A failed write must be visible to the caller.
 10. Migration from Sheets is complete only after reconciliation counts and an explicit cutover record; never allow dual canonical writes.
+11. Never infer canonical schema from populated tables, row counts or duplicate table names.
+12. Never silently fall back between Supabase schemas; a noncanonical schema may be inspected only for migration/security diagnostics.
+13. Bootstrap metadata lives in `public.system_config`; conflicting metadata elsewhere is noncanonical and cannot override it.
 
 ## Migration/cutover minimum checks
 - all 12 legacy logical areas mapped to relational entities;
