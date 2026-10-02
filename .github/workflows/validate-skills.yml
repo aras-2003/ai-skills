@@ -33,16 +33,16 @@ jobs:
           python scripts/eval/validate_isolation.py
           python scripts/eval/campaign.py validate
           python -m unittest discover -s scripts/eval/tests -p 'test_*.py'
-          python scripts/eval/campaign.py prepare --output .tmp/runtime-campaign-r7
+          python scripts/eval/campaign.py prepare --output .tmp/runtime-campaign-r8
           python scripts/eval/campaign.py validate-evidence
       - name: Assemble executor-only runtime retest pack
         run: |
           mkdir -p .tmp/runtime-retest-pack/executor-inputs
-          cp -R .tmp/runtime-campaign-r7/production-plugin .tmp/runtime-retest-pack/production
-          cp -R .tmp/runtime-campaign-r7/lab-plugin .tmp/runtime-retest-pack/lab
-          cp .tmp/runtime-campaign-r7/lock.json .tmp/runtime-retest-pack/lock.json
-          cp .tmp/runtime-campaign-r7/smoke-production-template.json .tmp/runtime-retest-pack/smoke-production-template.json
-          cp .tmp/runtime-campaign-r7/smoke-lab-template.json .tmp/runtime-retest-pack/smoke-lab-template.json
+          cp -R .tmp/runtime-campaign-r8/production-plugin .tmp/runtime-retest-pack/production
+          cp -R .tmp/runtime-campaign-r8/lab-plugin .tmp/runtime-retest-pack/lab
+          cp .tmp/runtime-campaign-r8/lock.json .tmp/runtime-retest-pack/lock.json
+          cp .tmp/runtime-campaign-r8/smoke-production-template.json .tmp/runtime-retest-pack/smoke-production-template.json
+          cp .tmp/runtime-campaign-r8/smoke-lab-template.json .tmp/runtime-retest-pack/smoke-lab-template.json
           cp evals/campaigns/runtime-validation-2026-10-r2/fallback/fallback-strategy-production-002.input.md .tmp/runtime-retest-pack/executor-inputs/01-fallback-strategy-explicit.input.md
           if find .tmp/runtime-retest-pack -type f \( -name '*.rubric.yaml' -o -name '*.rubric.yml' \) | grep -q .; then
             echo "rubric leaked into executor pack"
@@ -51,7 +51,7 @@ jobs:
       - name: Upload executor-only runtime retest pack
         uses: actions/upload-artifact@v4
         with:
-          name: runtime-retest-pack-r7
+          name: runtime-retest-pack-r8
           path: .tmp/runtime-retest-pack
           if-no-files-found: error
           retention-days: 14

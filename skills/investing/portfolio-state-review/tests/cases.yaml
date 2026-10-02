@@ -4,13 +4,20 @@ cases:
     input: "Review my current XTB portfolio and tell me what changed since the last snapshot."
     expected:
       should_trigger: true
-      must: ["as-of date", "changes since prior snapshot", "concentration"]
+      must: ["as-of date", "canonical", "changes since prior snapshot"]
   - id: portfolio-market-drift
     case: Position grew without a trade
     input: "I did not buy more, but one holding is now 11% after a rally. Check portfolio risk."
     expected:
       should_trigger: true
       must: ["market-driven", "policy"]
+  - id: portfolio-missing-history
+    case: Prior canonical snapshot unavailable
+    input: "Review changes since last snapshot, but the canonical Portfolio_History tab cannot be read."
+    expected:
+      should_trigger: true
+      must: ["blocked", "UNAVAILABLE", "canonical"]
+      must_not: ["use local history as substitute"]
   - id: portfolio-near-miss
     case: Single security research
     input: "Analyze ASML's competitive moat."

@@ -4,15 +4,18 @@ target: "investment-security-review"
 mode: explicit
 execution_payload_must_not_include: [expected routing, pass/fail criteria, expected answer]
 criteria_text: |-
-  PASS separates company thesis, valuation and portfolio fit; challenges confirmation bias; respects concentration policy; and preserves decision history.
+  PASS separates company thesis, valuation and portfolio fit; validates critical evidence; challenges confirmation bias; respects concentration policy; and preserves decision history canonically.
 assertions:
   manual:
     - "separate company thesis, security valuation and portfolio fit"
     - "challenge the HBM thesis with a plausible countercase and priced-in expectations"
+    - "run a sanity/provenance check on decision-critical financial metrics and block sizing if critical figures remain implausible or unverified"
     - "treat 9.5 percent concentration as a sizing constraint despite intact thesis"
     - "distinguish market-driven position drift from a new trade"
     - "use policy review threshold rather than inventing a new limit"
-    - "preserve a new thesis/decision record instead of rewriting history"
+    - "emit explicit canonical persistence receipt and preserve a new thesis/decision record instead of rewriting history"
   manual_not:
     - "equate strong momentum with permission to add"
     - "recommend a larger position merely because thesis survives"
+    - "use an implausible or unverified critical metric as the basis for sizing"
+    - "present a local Codex file as canonical decision history"

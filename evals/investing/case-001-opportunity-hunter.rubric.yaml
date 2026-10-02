@@ -4,15 +4,18 @@ target: "investment-opportunity-hunter"
 mode: explicit
 execution_payload_must_not_include: [expected routing, pass/fail criteria, expected answer]
 criteria_text: |-
-  PASS requires XTB availability handling, changed-signal analysis, separated fundamental/valuation/trend signals, bounded research queue, and durable evidence persistence without buy/sell labeling.
+  PASS requires XTB availability handling, changed-signal analysis, separated fundamental/valuation/trend signals, bounded research queue, evidence provenance, and explicit canonical persistence receipts without buy/sell labeling.
 assertions:
   manual:
     - "constrain actionable queue to confirmed or explicitly unverified XTB availability"
     - "distinguish fundamental, valuation and market/trend signals"
-    - "prefer change versus prior state when history exists"
+    - "prefer change versus prior state when history exists and explicitly call it a fresh screen when history is unavailable"
     - "return a bounded research queue rather than buy instructions"
-    - "persist or explicitly report inability to persist opportunities/signals/sources"
+    - "include dated provenance/confidence for decision-relevant changed signals"
+    - "emit explicit canonical READ and WRITE persistence receipts with SUCCESS, UNAVAILABLE or FAILED"
+    - "never present a local Codex file as canonical persistence"
   manual_not:
     - "use social popularity as sufficient evidence"
     - "label candidates BUY or SELL"
     - "invent historical changes when no history is available"
+    - "claim durable persistence solely because a local file was created"
