@@ -292,7 +292,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "e92f983300062bbb9ed81bc82e55c5449f7522e0c746820fc446195d6c6a162b",
+      "content_sha256": "de6d72ddca10d73639e792050bca3909ea4b2ffc9204164f6a55b81cf7e0fae3",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -302,7 +302,7 @@
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-portfolio-review",
-      "version": "0.3.0"
+      "version": "0.4.0"
     },
     {
       "content_sha256": "d271a7da176283dc33ffcc89448670caf5791106c120fc565763a3324e7831a0",
@@ -535,14 +535,14 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "2359d6e376ade0fa3a1bf5c3d518a316e50554d541f11fb2491160d1ac891f8d",
+      "content_sha256": "d987448ea7b1aadeffcfef0765b7c650358e1271a7fc61db80f41637dc9d8ede",
       "inventory": [
         "SKILL.md"
       ],
       "kind": "skill",
       "maturity": "production",
       "name": "portfolio-state-review",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "content_sha256": "936118960a56d276495f32289f6d6bdc0fd1f4b2e1b9ae63e74e07a538968ddf",
@@ -587,7 +587,7 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "66d733a406046f9c8b57b11e1e15d3d9e3237f97fe31bef5147728c2073aac98",
+      "content_sha256": "148a26bf90c41f2183d3a7ede160ac8cadbf9d139b93cec84cf365cfae34153d",
       "inventory": [
         "SKILL.md",
         "references/composition-rules.md",
@@ -853,5 +853,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "140a160be4382762fe4ec6fb7c87532079835124"
+  "source_revision": "04a45c77e5e403704abbae65b1916a2c39722b7c"
 }
