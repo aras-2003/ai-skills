@@ -280,6 +280,46 @@ class RuntimeCampaignTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unsupported evidence source revision"):
             campaign.evidence_compatibility_profile("deadbeef")
 
+    def test_trace_schema_separates_capabilities_from_tools(self) -> None:
+        contaminated = campaign.trace_schema_errors(
+            {
+                "selected_capabilities": [
+                    "investment-os-review",
+                    "investment-portfolio-review",
+                    "mcp__arek_investment_os__route_investment_request",
+                ],
+                "tool_calls": ["mcp__arek_investment_os__route_investment_request"],
+            }
+        )
+        self.assertTrue(
+            any("selected_capabilities contains non-capability/tool names" in item for item in contaminated)
+        )
+
+        clean = campaign.trace_schema_errors(
+            {
+                "selected_capabilities": [
+                    "investment-os-review",
+                    "investment-portfolio-review",
+                    "investment-record-store",
+                    "portfolio-state-review",
+                    "thesis-monitor",
+                    "report-composer",
+                    "visual-output-design",
+                ],
+                "tool_calls": [
+                    "mcp__arek_investment_os__route_investment_request",
+                    "mcp__arek_chart_renderer__render_bar_chart",
+                ],
+            }
+        )
+        self.assertEqual([], clean)
+
+        self.assertTrue(
+            campaign.trace_schema_errors(
+                {"selected_capabilities": ["investment-os-review"]}
+            )
+        )
+
     def test_routing_requires_front_door_child_capability(self) -> None:
         case = {
             "id": "investment-portfolio-natural-en",
