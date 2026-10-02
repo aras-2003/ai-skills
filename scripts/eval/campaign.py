@@ -564,6 +564,11 @@ def selection_errors(case: dict, trace: dict) -> list[str]:
         for forbidden in rubric.get("forbidden_selected_capabilities") or []:
             if forbidden in selected:
                 errors.append(f"forbidden capability selected: {forbidden}")
+
+        tool_calls_text = json.dumps(trace.get("tool_calls") or [], ensure_ascii=False)
+        for fragment in rubric.get("required_tool_fragments") or []:
+            if str(fragment) not in tool_calls_text:
+                errors.append(f"required routing tool call absent: {fragment}")
         return errors
     return [] if case["target"] in selected else [f"invoked subject absent from trace: {case['target']}"]
 
