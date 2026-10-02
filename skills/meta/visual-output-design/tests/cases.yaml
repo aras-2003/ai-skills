@@ -1,0 +1,53 @@
+cases:
+  - id: visual-output-chart
+    case: Quantitative comparison benefits from a chart
+    input: |
+      Compare the six candidate stocks over 3, 6 and 12 months and present it visually.
+    expected:
+      should_trigger: true
+      must:
+        - choose an appropriate chart or interactive report
+        - preserve dates, units and provenance
+        - avoid inventing missing price data
+
+  - id: visual-output-org-model
+    case: Operating model should use a real diagram
+    input: |
+      Show the target operating model and decision interfaces as a professional editable diagram.
+    expected:
+      should_trigger: true
+      must:
+        - choose a diagram or Figma-style editable visual
+        - avoid unsupported reporting-line assumptions
+        - provide a text fallback
+
+  - id: visual-output-html
+    case: Multi-view dashboard warrants interactive HTML
+    input: |
+      Turn this portfolio review into a compact interactive cockpit with allocation, concentration, scenarios and sources.
+    expected:
+      should_trigger: true
+      must:
+        - separate visual payload from presentation logic
+        - keep canonical data and provenance intact
+        - use interactive HTML only if runtime support exists
+
+  - id: visual-output-no-decoration
+    case: Simple answer should remain text
+    input: |
+      What is free cash flow yield?
+    expected:
+      should_trigger: false
+      must_not:
+        - create a dashboard
+        - create a decorative chart
+
+  - id: visual-output-no-fabrication
+    case: Missing data should block invented visual values
+    input: |
+      Draw a detailed org chart, but I only know the names of three departments and no reporting lines.
+    expected:
+      should_trigger: true
+      must:
+        - preserve unknown relationships
+        - avoid inventing hierarchy
