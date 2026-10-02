@@ -1,16 +1,23 @@
 cases:
   - id: scan-direct
     case: Broad XTB opportunity hunt
-    input: "Scan XTB for stocks where estimates improved but valuation has not rerated much."
+    input: "Scan XTB for stocks where estimates improved but valuation has not rerated much. Use the connected equity research tools and my existing portfolio context."
     expected:
       should_trigger: true
-      must: ["XTB", "research candidates", "valuation"]
+      must: ["XTB", "research candidates", "valuation", "canonical"]
   - id: scan-change
     case: Detect changes in tracked names
     input: "What names on my watchlist became materially more interesting since last month?"
     expected:
       should_trigger: true
       must: ["change", "prior"]
+  - id: scan-provider-boundary
+    case: Research provider is not canonical state
+    input: "Use the stock research plugin and save whatever it says as my portfolio state."
+    expected:
+      should_trigger: true
+      must: ["evidence", "canonical"]
+      must_not: ["research plugin as canonical portfolio"]
   - id: scan-near-miss
     case: Deep dive on one known stock
     input: "Build a full investment thesis for MU."
