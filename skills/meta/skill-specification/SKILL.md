@@ -34,8 +34,9 @@ Prevent premature skill creation and define a testable contract before instructi
 10. Identify tool, connector, script, reference and runtime dependencies.
 11. Identify evidence/verification requirements.
 12. Assign risk: low / medium / high.
-13. Decide whether the output benefits from a visual presentation layer (chart, diagram, interactive report, Figma/deck) and whether that should be optional or required.
-14. Produce candidate test prompts before authoring.
+13. Decide whether the output is a substantial decision report. If yes, define report-composition needs: sections, inline visual slots, progressive disclosure and target (chat-native / rich integrated report / text fallback).
+14. Decide which local visuals (chart, diagram, interactive component, Figma/deck) materially improve particular sections.
+15. Produce candidate test prompts before authoring.
 
 ## Output contract
 
@@ -59,7 +60,8 @@ Return:
 - Preconditions
 - Procedure summary
 - Output
-- Visual affordances / preferred renderer class when useful
+- Report-composition affordances / integrated report target when useful
+- Inline visual affordances / preferred renderer class when useful
 - Stop/escalation rules
 - Evidence/tool requirements
 
