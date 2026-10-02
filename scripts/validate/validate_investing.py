@@ -30,7 +30,7 @@ REQUIRED_WORKFLOWS = {
     "investment-theme-discovery",
 }
 
-REQUIRED_TABS = {
+LEGACY_LOGICAL_AREAS = {
     "Portfolio_Current",
     "Transactions",
     "Portfolio_History",
@@ -43,6 +43,39 @@ REQUIRED_TABS = {
     "Investment_Policy",
     "Market_Themes",
     "Sources",
+}
+
+REQUIRED_RELATIONAL_ENTITIES = {
+    "accounts",
+    "instruments",
+    "transactions",
+    "portfolio_snapshots",
+    "position_snapshots",
+    "watchlist",
+    "opportunities",
+    "research_events",
+    "signals",
+    "theses",
+    "thesis_versions",
+    "decisions",
+    "decision_outcomes",
+    "investment_policies",
+    "investment_policy_versions",
+    "market_themes",
+    "market_theme_versions",
+    "sources",
+    "evidence_links",
+    "instrument_exposures",
+}
+
+REQUIRED_VIEWS = {
+    "current_positions",
+    "latest_portfolio_snapshot",
+    "current_theses",
+    "current_policy",
+    "current_watchlist",
+    "portfolio_exposures",
+    "decision_performance",
 }
 
 LEAKAGE_MARKERS = ("expected_routing:", "failure_if:", "should_trigger:", "\nmust:", "\nmust_not:")
@@ -89,17 +122,32 @@ def main() -> int:
         if name != "investment-theme-discovery" and "XTB" not in text:
             problems.append(f"{name}: XTB v1 boundary missing")
 
-    contract_path = skill_root / "investment-record-store" / "references" / "google-sheets-contract.md"
-    if not contract_path.exists():
-        problems.append("Google Sheets data contract missing")
+    supabase_contract_path = skill_root / "investment-record-store" / "references" / "supabase-contract.md"
+    if not supabase_contract_path.exists():
+        problems.append("Supabase data contract missing")
     else:
-        contract = contract_path.read_text(encoding="utf-8")
-        for tab in REQUIRED_TABS:
-            if f"### {tab}" not in contract:
-                problems.append(f"data contract missing tab: {tab}")
-        for required in ("append-only", "as_of_date", "source_date", "Personal data remains in Drive"):
-            if required not in contract:
-                problems.append(f"data contract missing integrity rule/token: {required}")
+        contract = supabase_contract_path.read_text(encoding="utf-8")
+        for entity in REQUIRED_RELATIONAL_ENTITIES:
+            if f"### {entity}" not in contract:
+                problems.append(f"Supabase contract missing entity: {entity}")
+        for view in REQUIRED_VIEWS:
+            if f"### {view}" not in contract:
+                problems.append(f"Supabase contract missing view: {view}")
+        for required in ("append-only", "as_of_date", "source_date", "Google Drive", "explicit cutover", "never allow dual canonical writes"):
+            if required.lower() not in contract.lower():
+                problems.append(f"Supabase contract missing integrity rule/token: {required}")
+
+    legacy_contract_path = skill_root / "investment-record-store" / "references" / "google-sheets-contract.md"
+    if not legacy_contract_path.exists():
+        problems.append("legacy Google Sheets migration contract missing")
+    else:
+        legacy = legacy_contract_path.read_text(encoding="utf-8")
+        for area in LEGACY_LOGICAL_AREAS:
+            if area not in legacy:
+                problems.append(f"legacy migration contract missing logical area: {area}")
+        for required in ("read-only", "migration", "no new canonical writes"):
+            if required.lower() not in legacy.lower():
+                problems.append(f"legacy migration contract missing rule/token: {required}")
 
     sizing = (skill_root / "position-sizing-review" / "SKILL.md").read_text(encoding="utf-8")
     for required in ("investment policy", "portfolio state", "Without policy or portfolio state"):
@@ -148,7 +196,7 @@ def main() -> int:
     print(
         "Investing architecture validation passed: "
         f"{len(REQUIRED_SKILLS)} skills, {len(REQUIRED_WORKFLOWS)} workflows, "
-        f"{len(input_files)} isolated workflow evals, {len(REQUIRED_TABS)} datastore tabs."
+        f"{len(input_files)} isolated workflow evals, {len(REQUIRED_RELATIONAL_ENTITIES)} relational entities."
     )
     return 0
 

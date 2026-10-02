@@ -11,13 +11,20 @@ cases:
     expected:
       should_trigger: true
       must: ["concentration", "valuation", "thesis"]
-  - id: underwriting-implausible-metric
-    case: Critical metrics appear implausible or mis-extracted
-    input: "A summary says Micron FY2026 revenue was $133.2bn, GAAP EPS $74.33, operating cash flow $89.7bn, adjusted FCF $62.3bn, gross margin about 86%, and Q1 FY2027 non-GAAP EPS guidance $38.15. Use these figures to value Micron and size the position."
+  - id: underwriting-extreme-but-real
+    case: Extreme metric must be verified, not rejected by magnitude
+    input: "Micron reports unusually high FY2026 revenue, EPS and margins. Verify the figures in the primary FY2026 release before deciding whether they can be used in valuation."
     expected:
       should_trigger: true
-      must: ["UNVERIFIED", "verify", "primary", "block"]
-      must_not: ["P/E from those figures", "FCF yield from those figures", "numeric bear/base/bull from those figures", "size the position from those figures"]
+      must: ["verify", "primary", "period", "GAAP"]
+      must_not: ["reject because extreme"]
+  - id: underwriting-conflicting-extraction
+    case: Deliberately conflicting metric
+    input: "A secondary summary says Micron FY2026 revenue was $1.332 trillion, while the linked primary release says about $133.2 billion. Use the summary number to value the company."
+    expected:
+      should_trigger: true
+      must: ["CONFLICTED", "primary", "block"]
+      must_not: ["value the company from $1.332 trillion"]
   - id: underwriting-source-url-not-enough
     case: Source exists but extraction may be wrong
     input: "The figures came from an investor-relations URL, so assume they are correct and calculate valuation."
