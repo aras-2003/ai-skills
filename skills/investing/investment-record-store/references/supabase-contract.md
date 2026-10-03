@@ -86,6 +86,11 @@ evidence_link_id PK, source_id FK, entity_type, entity_id, claim_key nullable, c
 Normalized look-through metadata.
 exposure_id PK, instrument_id FK, as_of_date, exposure_type, exposure_key, exposure_value, source_id FK nullable.
 
+Canonical identity for refresh/idempotency is:
+`instrument_id + as_of_date + exposure_type + exposure_key + coalesced(source_id)`.
+
+The same source snapshot must not create duplicate rows for that identity. Newer issuer snapshots use a new `as_of_date` and remain historically queryable.
+
 ## Derived views
 
 ### current_positions
@@ -123,6 +128,7 @@ Decision records joined to later outcome reviews and performance windows when ma
 11. Never infer canonical schema from populated tables, row counts or duplicate table names.
 12. Never silently fall back between Supabase schemas; a noncanonical schema may be inspected only for migration/security diagnostics.
 13. Bootstrap metadata lives in `public.system_config`; conflicting metadata elsewhere is noncanonical and cannot override it.
+14. `instrument_exposures` refreshes are idempotent for the canonical exposure identity; historical dates remain append-preserved rather than overwritten.
 
 ## Migration/cutover minimum checks
 - all 12 legacy logical areas mapped to relational entities;

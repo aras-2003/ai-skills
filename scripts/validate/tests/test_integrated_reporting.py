@@ -189,6 +189,16 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("store-canonical-schema-bootstrap", cases)
         self.assertIn("store-canonical-schema-empty-no-fallback", cases)
 
+    def test_investment_exposure_refresh_is_idempotent(self) -> None:
+        skill = (ROOT / "skills/investing/investment-record-store/SKILL.md").read_text(encoding="utf-8")
+        contract = (ROOT / "skills/investing/investment-record-store/references/supabase-contract.md").read_text(encoding="utf-8")
+        cases = (ROOT / "skills/investing/investment-record-store/tests/cases.yaml").read_text(encoding="utf-8")
+
+        self.assertIn("instrument_exposures", skill)
+        self.assertIn("idempotent", skill.lower())
+        self.assertIn("Canonical identity for refresh/idempotency", contract)
+        self.assertIn("store-exposure-idempotency", cases)
+
     def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
         contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
         standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")

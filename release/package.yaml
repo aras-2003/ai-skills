@@ -1,6 +1,6 @@
 package:
   name: arek-ai-skills
-  version: "1.24.0"
+  version: "1.25.0"
 lab:
   name: arek-ai-skills-lab
-  version: "0.18.0"
+  version: "0.19.0"
