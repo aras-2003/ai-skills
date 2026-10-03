@@ -184,11 +184,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "63b2e3988629dbc5d73f6fb1f8a78168eb4ad5d4720df2193b899e72802a9c5f",
+      "content_sha256": "4d149c381964e9d5f73547ec51d2f0b51ebca9caab64636b23f342e72db04843",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-portfolio-observation",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "content_sha256": "30bde3b26265e23ed1459f5ab3ba96ef4a97f4a8570dfe06c1cec18baf908561",
@@ -198,11 +198,11 @@
       "version": "0.5.0"
     },
     {
-      "content_sha256": "5e7c470a3aad7121792343748bc8b641013173bda657c24314103125f3ff17c4",
+      "content_sha256": "cbb5b77032d84ba65f384cd09bad387f5085ebe20617c40aac3118a28956c599",
       "kind": "skill",
       "maturity": "production",
       "name": "investment-record-store",
-      "version": "0.8.0"
+      "version": "0.9.0"
     },
     {
       "content_sha256": "7557c2167b29a21eb53cba010ff8a305d90db78a9802974fe546c50c1dafecde",
@@ -338,11 +338,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "83a917b8da4c2087af145724d68105fe849135de1f441f5e180714573b179bbf",
+      "content_sha256": "c5dfdf9e2a608e2745764c7d44d13a44a5383d8e230a939957baa2e5c73d4fe9",
       "kind": "skill",
       "maturity": "production",
       "name": "portfolio-state-review",
-      "version": "0.6.0"
+      "version": "0.7.0"
     },
     {
       "content_sha256": "936118960a56d276495f32289f6d6bdc0fd1f4b2e1b9ae63e74e07a538968ddf",
@@ -472,9 +472,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "8438808eb9357b078fed8da90de9e51c92826c96fee7405c37245d5eee6b8dfd",
-  "release_id": "0.22.0+3b9490e6a4d6",
+  "payload_content_sha256": "5487ba7784f12c2c98b44d6cc508278d9ab0e83583cffb6b3f430943539bac7a",
+  "release_id": "0.23.0+661281661829",
   "schema_version": "1.0",
-  "source_revision": "3b9490e6a4d620bba1dad25624c3ee195a387127",
-  "version": "0.22.0"
+  "source_revision": "6612816618291bf056cf1ab2be530e623d80fe96",
+  "version": "0.23.0"
 }

@@ -37,14 +37,18 @@ Do not require the user to ask for policy enforcement, rebalancing or a full por
 ## Sequence
 1. Resolve the canonical backend/project/schema through investment-record-store.
 2. Read:
+   - bootstrap config from `public.system_config` using the canonical record-store contract;
    - latest valid snapshot;
    - previous valid snapshot;
    - `portfolio_position_changes`;
    - current positions;
+   - `portfolio_exposure_source_coverage`;
    - current portfolio exposures;
    - recent material signals/research;
    - ACTIVE theses when present;
    - DRAFT thesis presence as metadata only.
+   If the bootstrap query is unavailable or fails, report bootstrap status as unavailable/failed. Do not say `public.system_config is empty` unless an explicit query to that table returned zero rows.
+   If later canonical reads from `public.*` succeed while bootstrap was reported empty, treat that as a contradiction, retry the exact bootstrap query once, and do not publish the empty-config claim unless the retry confirms it.
 3. Establish observed change first. Do not infer causes from weight/value deltas.
 4. For each position classify observation state:
    - `REQUIRES_ATTENTION`: material observed change, material new evidence, thesis issue, or a meaningful data-quality problem that could change a decision;
@@ -56,6 +60,11 @@ Do not require the user to ask for policy enforcement, rebalancing or a full por
    - otherwise use `UNKNOWN`;
    - never infer market-driven/no-trade/trade-driven from an empty transaction table.
 6. Review exposure drift only where look-through evidence exists.
+   - distinguish **source coverage** from **decomposition completeness**;
+   - source coverage = portfolio weight of instruments that have any source-backed exposure metadata;
+   - decomposition completeness = how fully those instruments are decomposed into constituents/sectors; do not infer this from row counts or weighted-exposure sums unless the source explicitly supports completeness;
+   - never sum heterogeneous `holding_weight` and `sector_weight` rows and call the result "look-through coverage";
+   - never call a partial top-holdings set a complete decomposition;
    - distinguish measured exposure from partial/minimum exposure;
    - do not turn incomplete look-through into a precise total.
 7. Use soft reference bands, if configured, only as attention signals. They are not policy breaches, target allocations or automatic rebalance instructions.
@@ -111,6 +120,7 @@ Compact summary; do not repeat every unchanged position unless explicitly reques
 
 ### Data gaps
 Only gaps that materially limit observation quality.
+When reporting look-through gaps, state source coverage separately from decomposition completeness.
 
 ### Receipts
 Canonical read/write status and relevant evidence limitations.
