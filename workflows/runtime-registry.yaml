@@ -416,7 +416,7 @@ workflows:
       optional: []
     description: >
       Default Investment OS front door for natural investment requests. Use when the user asks in ordinary language
-      to observe what changed in their portfolio, review portfolio risk/structure, assess a stock/security, find investment opportunities,
+      to observe what changed in their portfolio, review their portfolio risk/structure, assess a stock/security, find investment opportunities,
       research themes, evaluate whether new market/company information matters, or define portfolio policy/risk limits.
       Route first, then invoke the matching specialist workflow; use the MCP routing preflight when available and do not answer with generic investment commentary.
     metadata:
