@@ -660,7 +660,7 @@ components:
     evidence_gap: "New observation path has canonical-view/static coverage; exact-version unassisted runtime observation evidence is pending."
     limitation: "Use for observation/change monitoring; do not treat soft reference bands as target allocation or policy enforcement."
     exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-17"
+    exception_expires: "2026-10-14"
 
   - name: investment-portfolio-review
     kind: workflow
