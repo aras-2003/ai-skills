@@ -199,6 +199,19 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("Canonical identity for refresh/idempotency", contract)
         self.assertIn("store-exposure-idempotency", cases)
 
+    def test_thesis_lifecycle_separates_draft_and_active_state(self) -> None:
+        store = (ROOT / "skills/investing/investment-record-store/SKILL.md").read_text(encoding="utf-8")
+        contract = (ROOT / "skills/investing/investment-record-store/references/supabase-contract.md").read_text(encoding="utf-8")
+        monitor = (ROOT / "skills/investing/thesis-monitor/SKILL.md").read_text(encoding="utf-8")
+        cases = (ROOT / "skills/investing/thesis-monitor/tests/cases.yaml").read_text(encoding="utf-8")
+
+        self.assertIn("DRAFT", store)
+        self.assertIn("ACTIVE", store)
+        self.assertIn("RETIRED", store)
+        self.assertIn("draft_theses", contract)
+        self.assertIn("only when the latest version state is `ACTIVE`", contract)
+        self.assertIn("Do not use `draft_theses` as an active thesis", monitor)
+        self.assertIn("monitor-draft-only", cases)
     def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
         contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
         standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")
