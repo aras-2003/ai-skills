@@ -27,6 +27,7 @@ REQUIRED_WORKFLOWS = {
     "investment-attention-review",
     "investment-opportunity-hunter",
     "investment-security-review",
+    "investment-portfolio-observation",
     "investment-portfolio-review",
     "investment-theme-discovery",
 }
@@ -72,6 +73,8 @@ REQUIRED_RELATIONAL_ENTITIES = {
 REQUIRED_VIEWS = {
     "current_positions",
     "latest_portfolio_snapshot",
+    "latest_valid_snapshot_pair",
+    "portfolio_position_changes",
     "current_theses",
     "draft_theses",
     "current_policy",
@@ -121,6 +124,7 @@ def main() -> int:
         text = p.read_text(encoding="utf-8")
         if name == "investment-os-review":
             for child in (
+                "investment-portfolio-observation",
                 "investment-portfolio-review",
                 "investment-security-review",
                 "investment-opportunity-hunter",
@@ -136,7 +140,7 @@ def main() -> int:
         else:
             if "investment-record-store" not in text:
                 problems.append(f"{name}: durable storage dependency missing")
-            if name != "investment-theme-discovery" and "XTB" not in text:
+            if name not in {"investment-theme-discovery", "investment-portfolio-observation"} and "XTB" not in text:
                 problems.append(f"{name}: XTB v1 boundary missing")
 
     governance_path = skill_root / "investment-record-store" / "references" / "canonical-schema-governance.md"

@@ -9,7 +9,8 @@ This workflow does not replace the specialist workflows. It selects and invokes 
 Use this workflow when the user asks about their investments in ordinary language and does not explicitly name a narrower Investment OS workflow.
 
 Typical requests include:
-- "review my portfolio" / "review this portfolio" / "what requires attention?";
+- "review my portfolio" / "review this portfolio";
+- "what is happening with my portfolio?" / "what changed?" / "what should I watch?";
 - "review this stock/security";
 - "find opportunities" / "what should I research next?";
 - "what investment themes are worth researching?";
@@ -28,7 +29,17 @@ The routing tool is a classifier only. It does not replace loading and executing
 ## Routing matrix
 Choose exactly one primary route unless the request genuinely contains two separate decisions.
 
-### Portfolio route
+### Portfolio observation route
+Use `investment-portfolio-observation` when the user primarily wants:
+- what changed since the previous snapshot;
+- what is happening with current positions;
+- exposure drift;
+- what deserves attention or monitoring;
+- a compact observation update without target-allocation optimisation.
+
+Prefer observation when the decision object is "what changed / what should I watch" rather than "how should I restructure the portfolio".
+
+### Portfolio review route
 Use `investment-portfolio-review` when the request concerns:
 - multiple holdings or portfolio weights;
 - concentration, diversification, overlap, allocation or portfolio risk;
@@ -62,7 +73,8 @@ Use `investment-policy-design` when the decision is about portfolio rules, risk 
    - user-supplied weights are evidence to reconcile, not a replacement for canonical state;
    - substantial chartable portfolio data must continue through integrated reporting and the visual-floor path.
 6. If the request is ambiguous between routes, prefer the route that directly matches the user's decision object:
-   - portfolio > multiple holdings/weights;
+   - portfolio observation > change/drift/monitoring of existing holdings;
+   - portfolio review > multiple holdings/weights plus risk, concentration, structure or decisions;
    - security > one named security;
    - attention > new event/news against existing holdings/theses;
    - opportunity > discovery of new securities;

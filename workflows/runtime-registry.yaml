@@ -406,6 +406,7 @@ workflows:
       chatgpt-zip: unavailable
     dependencies:
       required:
+        - investment-portfolio-observation
         - investment-portfolio-review
         - investment-security-review
         - investment-opportunity-hunter
@@ -415,12 +416,44 @@ workflows:
       optional: []
     description: >
       Default Investment OS front door for natural investment requests. Use when the user asks in ordinary language
-      to review their portfolio or holdings, assess a stock/security, find investment opportunities, research themes,
-      evaluate whether new market/company information matters, or define portfolio policy/risk limits. Route first,
-      then invoke the matching specialist workflow; use the MCP routing preflight when available and do not answer with generic investment commentary.
+      to observe what changed in their portfolio, review their portfolio risk/structure, assess a stock/security, find investment opportunities,
+      research themes, evaluate whether new market/company information matters, or define portfolio policy/risk limits.
+      Route first, then invoke the matching specialist workflow; use the MCP routing preflight when available and do not answer with generic investment commentary.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.2.0"
+      version: "0.3.0"
+      maturity: production
+      risk: high
+      last_reviewed: 2026-10-03
+      execution:
+        default_model_class: standard
+
+  - name: investment-portfolio-observation
+    workflow: workflows/investment-portfolio-observation/WORKFLOW.md
+    channels:
+      plugin: supported
+      lab: supported
+      chatgpt-zip: unavailable
+    dependencies:
+      required:
+        - portfolio-state-review
+        - investment-record-store
+      optional:
+        - name: investment-attention-triage
+          on_missing: "Return observation state only; do not claim event/news materiality triage."
+        - name: thesis-monitor
+          on_missing: "Do not claim thesis-state monitoring; report whether ACTIVE/DRAFT thesis state exists and keep thesis impact unresolved."
+        - name: report-composer
+          on_missing: "Return a compact observation report directly in chat."
+        - name: visual-output-design
+          on_missing: "Visuals are optional for observation; keep the evidence-backed observation report."
+    description: >
+      Lightweight portfolio observation child workflow for natural requests asking what changed, what is happening with holdings,
+      exposure drift or what deserves attention now. It compares canonical state over time, separates observed change from causal
+      attribution, suppresses unchanged noise and does not optimise toward a fixed target allocation.
+    metadata:
+      owner: arkadiusz-kamrowski
+      version: "0.1.0"
       maturity: production
       risk: high
       last_reviewed: 2026-10-03

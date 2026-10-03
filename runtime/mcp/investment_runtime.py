@@ -22,8 +22,9 @@ policy/risk limits, or new information about an existing investment:
    user's full request.
 2. Follow the returned child_workflow and load/use the matching packaged workflow.
 3. Do not replace the selected workflow with generic investment commentary.
-4. For portfolio/holdings/weights requests, the selected child workflow must be
-   investment-portfolio-review.
+4. For portfolio requests:
+   - observation/change/monitoring intent -> investment-portfolio-observation;
+   - full risk/concentration/decision review -> investment-portfolio-review.
 5. This router does not make buy/sell decisions. It only chooses the Investment OS
    workflow that owns the request.
 
@@ -57,9 +58,10 @@ def _ticker_count(text: str) -> int:
 def route_investment_request(user_request: str) -> dict[str, str | bool]:
     """Call before substantive analysis for natural investment requests.
 
-    Routes portfolio/holdings, one-security review, new-opportunity discovery,
-    investment-theme research, new-information attention triage, or investment
-    policy/risk-limit design into the matching Investment OS child workflow.
+    Routes portfolio observation/change monitoring, full portfolio review,
+    one-security review, new-opportunity discovery, investment-theme research,
+    new-information attention triage, or investment policy/risk-limit design
+    into the matching Investment OS child workflow.
     It does not provide investment advice or replace the selected workflow.
     """
     raw = user_request.strip()
@@ -103,6 +105,16 @@ def route_investment_request(user_request: str) -> dict[str, str | bool]:
         "nowe spółki", "nowe spolki", "kandydatów do researchu",
         "kandydatow do researchu", "co warto zbadać", "co warto zbadac",
     )
+    observation = _contains(
+        text,
+        "what is happening with my portfolio", "what changed in my portfolio",
+        "what changed", "what should i watch", "monitor my holdings",
+        "monitor my portfolio", "portfolio drift", "observe my portfolio",
+        "co się dzieje z portfelem", "co sie dzieje z portfelem",
+        "co się zmieniło", "co sie zmienilo", "co mam obserwować",
+        "co mam obserwowac", "obserwuj moje pozycje", "obserwuj portfel",
+        "zmiany w portfelu", "monitoruj portfel",
+    )
     portfolio = _contains(
         text,
         "my portfolio", "this portfolio", "portfolio review", "review portfolio",
@@ -129,6 +141,12 @@ def route_investment_request(user_request: str) -> dict[str, str | bool]:
             "attention",
             "investment-attention-review",
             "request asks whether new information changes an existing investment thesis or deserves escalation",
+        )
+    elif observation:
+        route, child, reason = (
+            "portfolio_observation",
+            "investment-portfolio-observation",
+            "request asks to observe portfolio changes, drift or what deserves attention without requiring target-allocation optimisation",
         )
     elif portfolio:
         route, child, reason = (
