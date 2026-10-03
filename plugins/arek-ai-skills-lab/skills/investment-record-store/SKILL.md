@@ -9,7 +9,7 @@ description: 'Read and persist canonical Investment OS records in Supabase/Postg
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.6.0
+  version: 0.7.0
   maturity: production
   risk: high
   last_reviewed: '2026-10-02'
@@ -44,6 +44,10 @@ A local artifact may be created for convenience, but it must be labeled `NONCANO
    - never silently fall back to an equivalent table in another schema;
    - read only required tables/views;
    - use relational keys and stable record IDs;
+   - resolve instrument identity before creating a new instrument:
+     - non-null ISIN is globally unique and takes precedence when available;
+     - ticker alone is not a global unique key;
+     - a composite legacy reference containing multiple symbols (for example `SMH.L|IUIT.L`) is not one instrument and must never be inserted into `instruments`;
    - treat append-only/event tables as immutable history;
    - derive current-state views from source records where practical.
 3. If migration has not cut over yet, legacy Sheets may be read/written only under explicit `legacy_sheets` mode.
@@ -68,6 +72,7 @@ A local artifact may be created for convenience, but it must be labeled `NONCANO
 - Repository files contain schemas/instructions only, never live holdings or credentials.
 - No hidden fallback between canonical backends or schemas.
 - Exposure refreshes are idempotent: identical issuer evidence for the same instrument/date/type/key/source is one canonical exposure row.
+- Instrument master integrity: non-null ISIN must be unique; composite/multi-symbol legacy references are evidence or grouping metadata, not instrument identities.
 - Draft thesis content is never treated as active canonical thesis state; `current_theses` exposes only latest ACTIVE versions and `draft_theses` exposes latest DRAFT versions.
 - The fixed bootstrap authority is `public.system_config`; a duplicate `system_config` in another schema cannot redefine the active canonical target.
 - Current deployment resolves to project `investment-os`, schema `public`; `investment` is deprecated/noncanonical until a future explicit cutover.
@@ -95,6 +100,8 @@ For every read/write operation return a Persistence receipt with:
 - [ ] Source provenance is retained.
 - [ ] Analytics outputs are not presented as canonical records.
 - [ ] Instrument exposure refresh did not create duplicate identity rows.
+- [ ] Instrument identity was not created from a composite multi-symbol legacy reference.
+- [ ] Non-null ISIN identity is unique.
 - [ ] DRAFT thesis versions are excluded from active-thesis reads/monitoring.
 - [ ] No personal portfolio data or credentials are written to Git.
 - [ ] Persistence failure is surfaced explicitly.
