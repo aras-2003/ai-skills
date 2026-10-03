@@ -269,7 +269,7 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "d22a4bf336ab5d5d10bca8bc2ff281248c5efeebd9d61270bd2e2496a5c210fc",
+      "content_sha256": "364488d260b2197eeda6c46c1b3803352ced4f73f8c6f634e9c8583490345443",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md"
@@ -277,7 +277,7 @@
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-os-review",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "626874749d97b7b2d1fb50598f70387b0459c157694b909deee74369f689a0aa",
@@ -289,6 +289,17 @@
       "kind": "skill",
       "maturity": "production",
       "name": "investment-policy-design",
+      "version": "0.1.0"
+    },
+    {
+      "content_sha256": "63b2e3988629dbc5d73f6fb1f8a78168eb4ad5d4720df2193b899e72802a9c5f",
+      "inventory": [
+        "SKILL.md",
+        "references/WORKFLOW.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-portfolio-observation",
       "version": "0.1.0"
     },
     {
@@ -305,7 +316,7 @@
       "version": "0.5.0"
     },
     {
-      "content_sha256": "e4835b8e245a3287e12b78af4e717cd6a8b6a257ac2972a9866af5b81e0f2b9e",
+      "content_sha256": "5e7c470a3aad7121792343748bc8b641013173bda657c24314103125f3ff17c4",
       "inventory": [
         "SKILL.md",
         "references/canonical-schema-governance.md",
@@ -315,7 +326,7 @@
       "kind": "skill",
       "maturity": "production",
       "name": "investment-record-store",
-      "version": "0.7.0"
+      "version": "0.8.0"
     },
     {
       "content_sha256": "7557c2167b29a21eb53cba010ff8a305d90db78a9802974fe546c50c1dafecde",
@@ -536,14 +547,14 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "d987448ea7b1aadeffcfef0765b7c650358e1271a7fc61db80f41637dc9d8ede",
+      "content_sha256": "83a917b8da4c2087af145724d68105fe849135de1f441f5e180714573b179bbf",
       "inventory": [
         "SKILL.md"
       ],
       "kind": "skill",
       "maturity": "production",
       "name": "portfolio-state-review",
-      "version": "0.5.0"
+      "version": "0.6.0"
     },
     {
       "content_sha256": "936118960a56d276495f32289f6d6bdc0fd1f4b2e1b9ae63e74e07a538968ddf",
@@ -832,7 +843,7 @@
   ],
   "runtime_tools": [
     {
-      "content_sha256": "0d93f004269f8f99d61c698b96c033c70746c2e4c441b02741d33d1c26bbcbbb",
+      "content_sha256": "9ac97bd0dd40ce171ddb4d79d4b768e854b3c7fd329c245ef08cef9de6680706",
       "kind": "mcp-server",
       "name": "arek-chart-renderer",
       "renderer_class": "deterministic-data-chart",
@@ -843,7 +854,7 @@
       ]
     },
     {
-      "content_sha256": "0d93f004269f8f99d61c698b96c033c70746c2e4c441b02741d33d1c26bbcbbb",
+      "content_sha256": "9ac97bd0dd40ce171ddb4d79d4b768e854b3c7fd329c245ef08cef9de6680706",
       "kind": "mcp-server",
       "name": "arek-investment-os",
       "runtime_class": "investment-request-router",
@@ -854,5 +865,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "b20feaf8eb308d3e93d3b01296ed83898dafc58e"
+  "source_revision": "3b9490e6a4d620bba1dad25624c3ee195a387127"
 }

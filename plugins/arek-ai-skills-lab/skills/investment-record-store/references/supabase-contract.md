@@ -112,6 +112,14 @@ Latest valid position state per account/instrument from transactions and/or late
 ### latest_portfolio_snapshot
 Latest complete snapshot header and lines.
 
+### latest_valid_snapshot_pair
+Current and immediately previous valid portfolio snapshot IDs/as-of dates used for observation comparisons.
+
+### portfolio_position_changes
+Observation-only latest-valid versus previous-valid position comparison aggregated at instrument level.
+It may expose current/prior value, current/prior weight, deltas and an observed state such as NEW, EXITED, WEIGHT_UP, WEIGHT_DOWN or UNCHANGED.
+This view establishes observed change only. It must never be treated as causal evidence for market-driven, trade-driven or no-trade attribution.
+
 ### current_theses
 Latest thesis version per thesis/instrument only when the latest version state is `ACTIVE`. DRAFT and RETIRED latest versions are excluded.
 
@@ -147,6 +155,7 @@ Decision records joined to later outcome reviews and performance windows when ma
 14. `instrument_exposures` refreshes are idempotent for the canonical exposure identity; historical dates remain append-preserved rather than overwritten.
 15. Thesis lifecycle is state-aware: only latest ACTIVE versions appear in `current_theses`; DRAFT versions remain separately reviewable and RETIRED theses are not monitored as current.
 16. Instrument master identity is normalized: non-null ISIN values are unique, ticker alone is not assumed globally unique, and multi-symbol legacy refs never become single instrument identities.
+17. Portfolio observation views establish state/delta only. Causal attribution remains evidence-gated and cannot be inferred from snapshot deltas alone.
 
 ## Migration/cutover minimum checks
 - all 12 legacy logical areas mapped to relational entities;

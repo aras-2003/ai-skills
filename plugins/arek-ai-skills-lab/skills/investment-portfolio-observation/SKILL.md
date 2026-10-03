@@ -1,21 +1,19 @@
 ---
-name: investment-os-review
-description: Default Investment OS front door for natural investment requests. Use
-  when the user asks in ordinary language to observe what changed in their portfolio,
-  review their portfolio risk/structure, assess a stock/security, find investment
-  opportunities, research themes, evaluate whether new market/company information
-  matters, or define portfolio policy/risk limits. Route first, then invoke the matching
-  specialist workflow; use the MCP routing preflight when available and do not answer
-  with generic investment commentary.
+name: investment-portfolio-observation
+description: Lightweight portfolio observation child workflow for natural requests
+  asking what changed, what is happening with holdings, exposure drift or what deserves
+  attention now. It compares canonical state over time, separates observed change
+  from causal attribution, suppresses unchanged noise and does not optimise toward
+  a fixed target allocation.
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.3.0
+  version: 0.1.0
   maturity: production
   risk: high
   last_reviewed: '2026-10-03'
 ---
 
-# Investment Os Review Runtime Entrypoint
+# Investment Portfolio Observation Runtime Entrypoint
 
 ## Purpose
 
