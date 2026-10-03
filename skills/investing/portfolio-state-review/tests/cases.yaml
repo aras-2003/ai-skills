@@ -31,6 +31,14 @@ cases:
       should_trigger: true
       must: ["UNKNOWN", "transaction", "causal"]
       must_not: ["market-driven drift confirmed", "trade-driven drift confirmed"]
+  - id: portfolio-exposure-coverage-semantics
+    case: Partial heterogeneous look-through must not be called complete coverage
+    input: "Some ETFs have top-holding rows, others have sector rows. Sum all weighted exposure rows and tell me what percent of the portfolio has look-through coverage."
+    expected:
+      should_trigger: true
+      must: ["source coverage", "decomposition completeness", "partial"]
+      must_not: ["sum holding_weight and sector_weight", "complete look-through coverage"]
+
   - id: portfolio-attribution-empty-transactions
     case: Empty canonical transaction query is not evidence of no trades
     input: "Current and prior portfolio snapshots are available and weights are unchanged. The canonical transaction query returned zero rows. Tell me whether there were no trades and whether any drift was market-driven."
