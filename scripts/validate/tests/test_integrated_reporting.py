@@ -222,6 +222,37 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("composite legacy references", contract.lower())
         self.assertIn("store-composite-instrument-ref", cases)
         self.assertIn("store-isin-identity", cases)
+    def test_portfolio_observation_is_distinct_from_full_review(self) -> None:
+        registry = yaml.safe_load((ROOT / "workflows/runtime-registry.yaml").read_text(encoding="utf-8"))
+        by_name = {item["name"]: item for item in registry["workflows"]}
+        router = by_name["investment-os-review"]
+        observation = by_name["investment-portfolio-observation"]
+        workflow = (ROOT / "workflows/investment-portfolio-observation/WORKFLOW.md").read_text(encoding="utf-8")
+        front = (ROOT / "workflows/investment-os-review/WORKFLOW.md").read_text(encoding="utf-8")
+        runtime = (ROOT / "runtime/mcp/investment_runtime.py").read_text(encoding="utf-8")
+        rubric = (ROOT / "evals/routing/investment-portfolio-observation-natural-pl.rubric.yaml").read_text(encoding="utf-8")
+
+        self.assertIn("investment-portfolio-observation", router["dependencies"]["required"])
+        self.assertIn("portfolio-state-review", observation["dependencies"]["required"])
+        self.assertIn("portfolio_position_changes", workflow)
+        self.assertIn("REQUIRES_ATTENTION", workflow)
+        self.assertIn("NO_MATERIAL_CHANGE", workflow)
+        self.assertIn("Soft reference", workflow)
+        self.assertIn("not a breach", workflow)
+        self.assertIn("Portfolio observation route", front)
+        self.assertIn("investment-portfolio-observation", runtime)
+        self.assertIn("required_selected_capabilities:", rubric)
+        self.assertIn("investment-portfolio-observation", rubric)
+
+    def test_portfolio_observation_separates_change_from_cause(self) -> None:
+        workflow = (ROOT / "workflows/investment-portfolio-observation/WORKFLOW.md").read_text(encoding="utf-8")
+        state = (ROOT / "skills/investing/portfolio-state-review/SKILL.md").read_text(encoding="utf-8")
+        contract = (ROOT / "skills/investing/investment-record-store/references/supabase-contract.md").read_text(encoding="utf-8")
+
+        self.assertIn("Establish observed change first", workflow)
+        self.assertIn("Causal attribution is a separate evidence gate", workflow)
+        self.assertIn("Observed change and causal attribution are separate outputs", state)
+        self.assertIn("establishes observed change only", contract)
     def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
         contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
         standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")
