@@ -653,10 +653,10 @@ components:
     kind: workflow
     version: "0.1.0"
     source: workflows/investment-portfolio-observation/WORKFLOW.md
-    declared_maturity: candidate
+    declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: candidate-pending-runtime-evidence
+    maturity_disposition: retain-existing-pending-evidence-review
     evidence_gap: "New observation path has canonical-view/static coverage; exact-version unassisted runtime observation evidence is pending."
     limitation: "Use for observation/change monitoring; do not treat soft reference bands as target allocation or policy enforcement."
     exception_owner: arkadiusz-kamrowski
