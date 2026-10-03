@@ -238,7 +238,7 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("REQUIRES_ATTENTION", workflow)
         self.assertIn("NO_MATERIAL_CHANGE", workflow)
         self.assertIn("Soft reference", workflow)
-        self.assertIn("not a breach", workflow)
+        self.assertIn("not policy breaches", workflow)
         self.assertIn("Portfolio observation route", front)
         self.assertIn("investment-portfolio-observation", runtime)
         self.assertIn("required_selected_capabilities:", rubric)
