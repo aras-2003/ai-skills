@@ -6,7 +6,7 @@ description: >
   state or history. Google Drive is raw-document/legacy migration storage, not the canonical relational store after cutover.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.4.0"
+  version: "0.5.0"
   maturity: production
   risk: high
   last_reviewed: 2026-10-02
@@ -49,9 +49,10 @@ A local artifact may be created for convenience, but it must be labeled `NONCANO
 4. Never silently fall back from Supabase to Sheets or from one Supabase schema to another. If the configured backend/schema is unavailable, contradictory or empty for the requested record, return `UNAVAILABLE`, `FAILED` or an evidence limitation as appropriate; do not search a duplicate schema for substitute canonical data.
 5. Require `as_of_date` for state records and `source_date` plus source reference for externally derived facts.
 6. Persist transactions, research events, signals, thesis versions, decisions, outcomes and sources append-only.
-7. Preserve policy versions with effective dates.
-8. Prefer views for current positions/current thesis/current policy rather than duplicating mutable current-state tables when the relational model can derive them safely.
-9. After every write attempt, return an explicit WRITE receipt. Never claim saved/preserved if canonical persistence failed.
+7. For `instrument_exposures`, require idempotent identity by instrument + as_of_date + exposure_type + exposure_key + source. A refresh of the same issuer snapshot must not create duplicate exposure rows.
+8. Preserve policy versions with effective dates.
+9. Prefer views for current positions/current thesis/current policy rather than duplicating mutable current-state tables when the relational model can derive them safely.
+10. After every write attempt, return an explicit WRITE receipt. Never claim saved/preserved if canonical persistence failed.
 
 ## Decision rules
 - Supabase is a datastore, not an evidence source.
@@ -61,6 +62,7 @@ A local artifact may be created for convenience, but it must be labeled `NONCANO
 - Duplicate evidence should link to one source record.
 - Repository files contain schemas/instructions only, never live holdings or credentials.
 - No hidden fallback between canonical backends or schemas.
+- Exposure refreshes are idempotent: identical issuer evidence for the same instrument/date/type/key/source is one canonical exposure row.
 - The fixed bootstrap authority is `public.system_config`; a duplicate `system_config` in another schema cannot redefine the active canonical target.
 - Current deployment resolves to project `investment-os`, schema `public`; `investment` is deprecated/noncanonical until a future explicit cutover.
 
@@ -86,6 +88,7 @@ For every read/write operation return a Persistence receipt with:
 - [ ] Append-only history was not overwritten.
 - [ ] Source provenance is retained.
 - [ ] Analytics outputs are not presented as canonical records.
+- [ ] Instrument exposure refresh did not create duplicate identity rows.
 - [ ] No personal portfolio data or credentials are written to Git.
 - [ ] Persistence failure is surfaced explicitly.
 
