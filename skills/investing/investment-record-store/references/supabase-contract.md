@@ -50,6 +50,13 @@ thesis_id PK, instrument_id FK, horizon, created_at.
 Append-only/versioned.
 thesis_version_id PK, thesis_id FK, version, effective_date, thesis, assumptions jsonb, catalysts jsonb, risks jsonb, kill_criteria jsonb, state, supersedes FK nullable, created_at.
 
+Allowed lifecycle states:
+- `DRAFT`: working thesis candidate awaiting owner/review acceptance;
+- `ACTIVE`: approved/current thesis eligible for monitoring and downstream thesis-state claims;
+- `RETIRED`: no longer active.
+
+Lifecycle transitions are represented by appending a new version. Do not rewrite historical versions merely to change state.
+
 ### decisions
 Append-only.
 decision_id PK, decision_time, instrument_id FK, lifecycle_action, price_context, position_weight, horizon, thesis_version_id FK nullable, rationale, sizing_rationale, confidence, invalidation, created_at.
@@ -100,7 +107,10 @@ Latest valid position state per account/instrument from transactions and/or late
 Latest complete snapshot header and lines.
 
 ### current_theses
-Latest thesis version per thesis/instrument.
+Latest thesis version per thesis/instrument only when the latest version state is `ACTIVE`. DRAFT and RETIRED latest versions are excluded.
+
+### draft_theses
+Latest thesis version per thesis/instrument only when the latest version state is `DRAFT`. This view is for review/approval workflows and must not be used by thesis-monitor as the active investment thesis.
 
 ### current_policy
 Latest effective investment policy version.
@@ -129,6 +139,7 @@ Decision records joined to later outcome reviews and performance windows when ma
 12. Never silently fall back between Supabase schemas; a noncanonical schema may be inspected only for migration/security diagnostics.
 13. Bootstrap metadata lives in `public.system_config`; conflicting metadata elsewhere is noncanonical and cannot override it.
 14. `instrument_exposures` refreshes are idempotent for the canonical exposure identity; historical dates remain append-preserved rather than overwritten.
+15. Thesis lifecycle is state-aware: only latest ACTIVE versions appear in `current_theses`; DRAFT versions remain separately reviewable and RETIRED theses are not monitored as current.
 
 ## Migration/cutover minimum checks
 - all 12 legacy logical areas mapped to relational entities;
