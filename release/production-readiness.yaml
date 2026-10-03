@@ -469,7 +469,7 @@ components:
 
   - name: investment-record-store
     kind: skill
-    version: "0.6.0"
+    version: "0.7.0"
     source: skills/investing/investment-record-store/SKILL.md
     declared_maturity: production
     static_contract: present

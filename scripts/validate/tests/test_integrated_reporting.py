@@ -212,6 +212,16 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("only when the latest version state is `ACTIVE`", contract)
         self.assertIn("Do not use `draft_theses` as an active thesis", monitor)
         self.assertIn("monitor-draft-only", cases)
+    def test_instrument_identity_rejects_composite_legacy_refs(self) -> None:
+        store = (ROOT / "skills/investing/investment-record-store/SKILL.md").read_text(encoding="utf-8")
+        contract = (ROOT / "skills/investing/investment-record-store/references/supabase-contract.md").read_text(encoding="utf-8")
+        cases = (ROOT / "skills/investing/investment-record-store/tests/cases.yaml").read_text(encoding="utf-8")
+
+        self.assertIn("SMH.L|IUIT.L", store)
+        self.assertIn("non-null `isin` is globally unique", contract)
+        self.assertIn("composite legacy references", contract.lower())
+        self.assertIn("store-composite-instrument-ref", cases)
+        self.assertIn("store-isin-identity", cases)
     def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
         contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
         standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")

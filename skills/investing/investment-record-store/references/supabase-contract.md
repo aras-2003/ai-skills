@@ -15,6 +15,12 @@ account_id PK, provider, account_type, currency, tax_wrapper, active, metadata, 
 ### instruments
 instrument_id PK, ticker, isin, name, asset_type, exchange, currency, xtb_symbol, xtb_status, metadata, created_at, updated_at.
 
+Identity rules:
+- non-null `isin` is globally unique in the canonical instrument master;
+- ticker is a lookup attribute, not a global unique identifier;
+- exchange/share-class context may be required where no ISIN exists;
+- composite legacy references that encode more than one symbol (for example `SMH.L|IUIT.L`) must not be represented as a single instrument row; store them as migration/evidence/grouping metadata instead.
+
 ### transactions
 Append-only.
 transaction_id PK, account_id FK, instrument_id FK, trade_date, action, quantity, price, currency, fees, source_id FK, imported_at.
@@ -140,6 +146,7 @@ Decision records joined to later outcome reviews and performance windows when ma
 13. Bootstrap metadata lives in `public.system_config`; conflicting metadata elsewhere is noncanonical and cannot override it.
 14. `instrument_exposures` refreshes are idempotent for the canonical exposure identity; historical dates remain append-preserved rather than overwritten.
 15. Thesis lifecycle is state-aware: only latest ACTIVE versions appear in `current_theses`; DRAFT versions remain separately reviewable and RETIRED theses are not monitored as current.
+16. Instrument master identity is normalized: non-null ISIN values are unique, ticker alone is not assumed globally unique, and multi-symbol legacy refs never become single instrument identities.
 
 ## Migration/cutover minimum checks
 - all 12 legacy logical areas mapped to relational entities;

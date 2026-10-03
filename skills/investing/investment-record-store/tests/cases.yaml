@@ -42,6 +42,22 @@ cases:
       must: ["idempotent", "instrument_exposures", "one", "canonical"]
       must_not: ["duplicate exposure rows"]
 
+  - id: store-composite-instrument-ref
+    case: Composite migration reference must not become one instrument
+    input: "Legacy data contains a value SMH.L|IUIT.L. Create the canonical instrument record for it."
+    expected:
+      should_trigger: true
+      must: ["composite", "not", "instrument", "separate"]
+      must_not: ["ticker: SMH", "single instrument"]
+
+  - id: store-isin-identity
+    case: Duplicate non-null ISIN must resolve to existing instrument
+    input: "Import an ETF whose ISIN already exists in the canonical instrument master under another listing/ticker."
+    expected:
+      should_trigger: true
+      must: ["ISIN", "existing", "identity"]
+      must_not: ["duplicate instrument"]
+
   - id: store-research-append
     case: Append research with evidence provenance
     input: "Persist today's MU thesis update and the sources used to the canonical Investment OS store."
