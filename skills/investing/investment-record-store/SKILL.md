@@ -6,7 +6,7 @@ description: >
   state or history. Google Drive is raw-document/legacy migration storage, not the canonical relational store after cutover.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.8.0"
+  version: "0.9.0"
   maturity: production
   risk: high
   last_reviewed: 2026-10-02
@@ -37,6 +37,8 @@ A local artifact may be created for convenience, but it must be labeled `NONCANO
    - resolve `canonical_backend` and optional `canonical_schema_policy`;
    - verify project ID and canonical schema;
    - emit backend + project + schema + config source in the READ receipt.
+   - do not report the bootstrap table as empty unless an explicit query to `public.system_config` returned zero rows;
+   - if subsequent canonical `public.*` reads succeed after an "empty bootstrap" observation, treat that as contradictory evidence and retry the exact bootstrap read before finalizing the receipt.
 2. If Supabase is the configured canonical backend:
    - use only the resolved canonical schema for normalized Investment OS records;
    - never discover the canonical schema by scanning for whichever schema contains rows;
@@ -61,7 +63,8 @@ A local artifact may be created for convenience, but it must be labeled `NONCANO
 8. Preserve policy versions with effective dates.
 9. Prefer views for current positions/current thesis/current policy rather than duplicating mutable current-state tables when the relational model can derive them safely.
    - Use `latest_valid_snapshot_pair` and `portfolio_position_changes` for latest-vs-prior portfolio observation when available.
-   - Treat observation views as derived canonical-query surfaces for state/delta only, never as causal attribution evidence.
+   - Use `portfolio_exposure_source_coverage` to identify the share of current portfolio weight with any exposure metadata.
+   - Treat observation views as derived canonical-query surfaces for state/delta/coverage only, never as causal attribution evidence or proof of decomposition completeness.
 10. After every write attempt, return an explicit WRITE receipt. Never claim saved/preserved if canonical persistence failed.
 
 ## Decision rules

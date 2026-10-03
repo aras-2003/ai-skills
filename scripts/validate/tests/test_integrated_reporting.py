@@ -253,6 +253,26 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("Causal attribution is a separate evidence gate", workflow)
         self.assertIn("Observed change and causal attribution are separate outputs", state)
         self.assertIn("establishes observed change only", contract)
+    def test_portfolio_observation_coverage_and_bootstrap_are_truthful(self) -> None:
+        workflow = (ROOT / "workflows/investment-portfolio-observation/WORKFLOW.md").read_text(encoding="utf-8")
+        state = (ROOT / "skills/investing/portfolio-state-review/SKILL.md").read_text(encoding="utf-8")
+        store = (ROOT / "skills/investing/investment-record-store/SKILL.md").read_text(encoding="utf-8")
+        contract = (ROOT / "skills/investing/investment-record-store/references/supabase-contract.md").read_text(encoding="utf-8")
+        store_cases = (ROOT / "skills/investing/investment-record-store/tests/cases.yaml").read_text(encoding="utf-8")
+        portfolio_cases = (ROOT / "skills/investing/portfolio-state-review/tests/cases.yaml").read_text(encoding="utf-8")
+
+        self.assertIn("portfolio_exposure_source_coverage", workflow)
+        self.assertIn("source coverage", workflow.lower())
+        self.assertIn("decomposition completeness", workflow.lower())
+        self.assertIn("never sum heterogeneous", workflow.lower())
+        self.assertIn("portfolio_exposure_source_coverage", state)
+        self.assertIn("Source coverage and look-through decomposition completeness", state)
+        self.assertIn("do not report the bootstrap table as empty", store)
+        self.assertIn("contradictory evidence", store)
+        self.assertIn("portfolio_exposure_source_coverage", contract)
+        self.assertIn("store-bootstrap-empty-contradiction", store_cases)
+        self.assertIn("portfolio-exposure-coverage-semantics", portfolio_cases)
+
     def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
         contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
         standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")
