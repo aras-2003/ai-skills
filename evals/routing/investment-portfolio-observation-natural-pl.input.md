@@ -1,0 +1,1 @@
+Co się teraz dzieje z moim portfelem? Sprawdź, co zmieniło się od poprzedniego poprawnego snapshotu i powiedz mi tylko, co naprawdę warto obserwować. Nie chcę jeszcze ustalać docelowej struktury portfela ani robić rebalancingu.
