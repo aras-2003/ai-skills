@@ -11,6 +11,14 @@ cases:
     expected:
       should_trigger: true
       must: ["NO MATERIAL CHANGE"]
+  - id: monitor-draft-only
+    case: Draft thesis exists but has not been activated
+    input: "I have a DRAFT thesis for MU but no ACTIVE thesis. Monitor whether the thesis strengthened after earnings."
+    expected:
+      should_trigger: true
+      must: ["blocked", "DRAFT", "ACTIVE", "activation"]
+      must_not: ["STRENGTHENS", "WEAKENS", "thesis health"]
+
   - id: monitor-near-miss
     case: New unresearched company
     input: "I have never looked at this company. Build the first thesis."

@@ -6,7 +6,7 @@ description: >
   full underwriting unless the thesis materially changes or evidence becomes stale.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.2.0"
+  version: "0.3.0"
   maturity: production
   risk: high
   last_reviewed: 2026-10-02
@@ -20,7 +20,9 @@ metadata:
 Evaluate what changed versus the recorded thesis rather than summarizing news from scratch.
 
 ## Procedure
-1. Load the latest canonical thesis version and prior monitoring state through investment-record-store.
+1. Load the latest ACTIVE canonical thesis version from `current_theses` and prior monitoring state through investment-record-store.
+   - Do not use `draft_theses` as an active thesis.
+   - If only a DRAFT exists, return that monitoring is blocked pending thesis activation; do not infer thesis health.
 2. Gather new dated evidence using structured research tools for breadth and primary sources for material claim verification.
 3. Classify materiality separately from direction: NOISE / MONITOR / REVIEW / ESCALATE and STRENGTHENS / WEAKENS / MIXED / NEUTRAL.
 4. Map each material change to the exact thesis assumption, KPI, catalyst, risk or kill criterion.
@@ -33,6 +35,7 @@ Evaluate what changed versus the recorded thesis rather than summarizing news fr
 ## Decision rules
 - News importance is measured against thesis, not headline size.
 - Research-provider output does not replace canonical thesis history.
+- A DRAFT thesis is not an active monitoring baseline.
 - Price change alone does not prove thesis change.
 - Kill criteria require evidence, not narrative discomfort.
 - Historical thesis versions remain immutable.

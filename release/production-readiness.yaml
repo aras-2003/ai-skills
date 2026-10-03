@@ -469,7 +469,7 @@ components:
 
   - name: investment-record-store
     kind: skill
-    version: "0.5.0"
+    version: "0.6.0"
     source: skills/investing/investment-record-store/SKILL.md
     declared_maturity: production
     static_contract: present
@@ -560,7 +560,7 @@ components:
 
   - name: thesis-monitor
     kind: skill
-    version: "0.2.0"
+    version: "0.3.0"
     source: skills/investing/thesis-monitor/SKILL.md
     declared_maturity: production
     static_contract: present
