@@ -305,7 +305,7 @@
       "version": "0.5.0"
     },
     {
-      "content_sha256": "91e5735dad2f5491e50ba02a6c4b70bcf29aaa0e03dd1f2d1cb514ccc31ccb74",
+      "content_sha256": "a26d267d6b97f01161a5c24a3f648dadfe0db283f36191dbf23d8500c5dda391",
       "inventory": [
         "SKILL.md",
         "references/canonical-schema-governance.md",
@@ -315,7 +315,7 @@
       "kind": "skill",
       "maturity": "production",
       "name": "investment-record-store",
-      "version": "0.5.0"
+      "version": "0.6.0"
     },
     {
       "content_sha256": "7557c2167b29a21eb53cba010ff8a305d90db78a9802974fe546c50c1dafecde",
@@ -672,14 +672,14 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "f79da63e60ee0342355ec69bb85793b4fdcecbec27731da2f3b143606a1d5159",
+      "content_sha256": "9016a34311cc0f246894824d718fa0374ab43651297910d28c9c276ae54ceab1",
       "inventory": [
         "SKILL.md"
       ],
       "kind": "skill",
       "maturity": "production",
       "name": "thesis-monitor",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "af5526586c5afa74cce9b92a9ed0da36c4831971b4ed3e6658537653030f22ce",
@@ -854,5 +854,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "1f6b2e8166c94276a952576fcd9e25434bd17236"
+  "source_revision": "173bb42f2df2ce6d1d63eb7c0013bd14146525b5"
 }

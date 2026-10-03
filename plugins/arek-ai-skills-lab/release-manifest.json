@@ -191,11 +191,11 @@
       "version": "0.5.0"
     },
     {
-      "content_sha256": "91e5735dad2f5491e50ba02a6c4b70bcf29aaa0e03dd1f2d1cb514ccc31ccb74",
+      "content_sha256": "a26d267d6b97f01161a5c24a3f648dadfe0db283f36191dbf23d8500c5dda391",
       "kind": "skill",
       "maturity": "production",
       "name": "investment-record-store",
-      "version": "0.5.0"
+      "version": "0.6.0"
     },
     {
       "content_sha256": "7557c2167b29a21eb53cba010ff8a305d90db78a9802974fe546c50c1dafecde",
@@ -422,11 +422,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "f79da63e60ee0342355ec69bb85793b4fdcecbec27731da2f3b143606a1d5159",
+      "content_sha256": "9016a34311cc0f246894824d718fa0374ab43651297910d28c9c276ae54ceab1",
       "kind": "skill",
       "maturity": "production",
       "name": "thesis-monitor",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "af5526586c5afa74cce9b92a9ed0da36c4831971b4ed3e6658537653030f22ce",
@@ -465,9 +465,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "c1b094fbeb5b309917ff20a65649b03a84c65b392cb0596ceabffc2f4033a684",
-  "release_id": "0.19.0+1f6b2e8166c9",
+  "payload_content_sha256": "3e5ef563b415bedb4b1b7ca8f3e1520415aa68112c10fa9d43d6d88eb5319107",
+  "release_id": "0.20.0+173bb42f2df2",
   "schema_version": "1.0",
-  "source_revision": "1f6b2e8166c94276a952576fcd9e25434bd17236",
-  "version": "0.19.0"
+  "source_revision": "173bb42f2df2ce6d1d63eb7c0013bd14146525b5",
+  "version": "0.20.0"
 }
