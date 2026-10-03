@@ -6,7 +6,7 @@ description: >
   state or history. Google Drive is raw-document/legacy migration storage, not the canonical relational store after cutover.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.7.0"
+  version: "0.8.0"
   maturity: production
   risk: high
   last_reviewed: 2026-10-02
@@ -60,6 +60,8 @@ A local artifact may be created for convenience, but it must be labeled `NONCANO
 7. For `instrument_exposures`, require idempotent identity by instrument + as_of_date + exposure_type + exposure_key + source. A refresh of the same issuer snapshot must not create duplicate exposure rows.
 8. Preserve policy versions with effective dates.
 9. Prefer views for current positions/current thesis/current policy rather than duplicating mutable current-state tables when the relational model can derive them safely.
+   - Use `latest_valid_snapshot_pair` and `portfolio_position_changes` for latest-vs-prior portfolio observation when available.
+   - Treat observation views as derived canonical-query surfaces for state/delta only, never as causal attribution evidence.
 10. After every write attempt, return an explicit WRITE receipt. Never claim saved/preserved if canonical persistence failed.
 
 ## Decision rules
