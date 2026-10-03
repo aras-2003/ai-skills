@@ -34,6 +34,14 @@ cases:
       must: ["canonical", "schema", "no", "fallback"]
       must_not: ["use whichever has data", "silent fallback"]
 
+  - id: store-exposure-idempotency
+    case: Refreshing the same issuer look-through snapshot twice
+    input: "Import the same ETF constituent exposure snapshot twice with identical instrument, as-of date, exposure type, key and source."
+    expected:
+      should_trigger: true
+      must: ["idempotent", "instrument_exposures", "one", "canonical"]
+      must_not: ["duplicate exposure rows"]
+
   - id: store-research-append
     case: Append research with evidence provenance
     input: "Persist today's MU thesis update and the sources used to the canonical Investment OS store."
