@@ -6,7 +6,7 @@ description: >
   risk changes or what changed since a prior snapshot. Prefer relational Supabase views and analytics over spreadsheet logic.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.6.0"
+  version: "0.7.0"
   maturity: production
   risk: high
   last_reviewed: 2026-10-02
@@ -25,6 +25,10 @@ Turn canonical holdings/history into a decision-useful portfolio state while pre
 3. Reconcile position, quantity, cost basis, market value, portfolio weight, account and currency.
 4. Use Data/analytics tooling when useful for aggregation, look-through, concentration, overlap and historical trend analysis; treat all outputs as derived analytics.
 5. Review single-name, sector/theme, geography, currency, factor/cyclicality and ETF/stock overlap where supported.
+   - For coverage statements, prefer `portfolio_exposure_source_coverage`.
+   - "source coverage" means current portfolio weight attached to instruments with any exposure metadata.
+   - Do not infer decomposition completeness from source coverage, exposure row counts, or sums across heterogeneous exposure types.
+   - Never sum `holding_weight` and `sector_weight` weighted exposures into one coverage percentage.
 6. For observation requests, prefer the canonical `portfolio_position_changes` view for latest-valid versus previous-valid snapshot comparison. It establishes observed state only; it does not establish cause.
 7. Classify each observed position/exposure state when useful:
    - REQUIRES_ATTENTION;
@@ -55,6 +59,7 @@ Turn canonical holdings/history into a decision-useful portfolio state while pre
 - Observed change and causal attribution are separate outputs.
 - Soft reference bands are descriptive attention signals, not target allocations.
 - Observation should suppress unchanged/noise items rather than forcing action from a static portfolio structure.
+- Source coverage and look-through decomposition completeness are different measures and must not be conflated.
 
 ## Output contract
 As-of date; canonical-read status; reconciled portfolio summary; material exposures; observed changes since prior snapshot or explicit comparison block; causal attribution or UNKNOWN; observation state (REQUIRES_ATTENTION / MONITOR / NO_MATERIAL_CHANGE / DATA_GAP) where useful; explicit policy exceptions only when canonical policy supports them; stale/missing data; analytics provenance; canonical persistence receipt.
