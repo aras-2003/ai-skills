@@ -73,6 +73,7 @@ REQUIRED_VIEWS = {
     "current_positions",
     "latest_portfolio_snapshot",
     "current_theses",
+    "draft_theses",
     "current_policy",
     "current_watchlist",
     "portfolio_exposures",
@@ -158,7 +159,7 @@ def main() -> int:
         for view in REQUIRED_VIEWS:
             if f"### {view}" not in contract:
                 problems.append(f"Supabase contract missing view: {view}")
-        for required in ("append-only", "as_of_date", "source_date", "Google Drive", "explicit cutover", "never allow dual canonical writes", "canonical identity", "idempotent"):
+        for required in ("append-only", "as_of_date", "source_date", "Google Drive", "explicit cutover", "never allow dual canonical writes", "canonical identity", "idempotent", "DRAFT", "ACTIVE", "RETIRED"):
             if required.lower() not in contract.lower():
                 problems.append(f"Supabase contract missing integrity rule/token: {required}")
 
