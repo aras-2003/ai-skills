@@ -469,7 +469,7 @@ components:
 
   - name: investment-record-store
     kind: skill
-    version: "0.8.0"
+    version: "0.9.0"
     source: skills/investing/investment-record-store/SKILL.md
     declared_maturity: production
     static_contract: present
@@ -508,7 +508,7 @@ components:
 
   - name: portfolio-state-review
     kind: skill
-    version: "0.6.0"
+    version: "0.7.0"
     source: skills/investing/portfolio-state-review/SKILL.md
     declared_maturity: production
     static_contract: present
@@ -651,7 +651,7 @@ components:
 
   - name: investment-portfolio-observation
     kind: workflow
-    version: "0.1.0"
+    version: "0.2.0"
     source: workflows/investment-portfolio-observation/WORKFLOW.md
     declared_maturity: production
     static_contract: present
