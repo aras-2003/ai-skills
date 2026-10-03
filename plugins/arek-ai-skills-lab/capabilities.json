@@ -305,7 +305,7 @@
       "version": "0.5.0"
     },
     {
-      "content_sha256": "115ce2aff971fd25a18354d7b85ff5a92759e2e8f37683b3649ea6b56da28dd6",
+      "content_sha256": "91e5735dad2f5491e50ba02a6c4b70bcf29aaa0e03dd1f2d1cb514ccc31ccb74",
       "inventory": [
         "SKILL.md",
         "references/canonical-schema-governance.md",
@@ -315,7 +315,7 @@
       "kind": "skill",
       "maturity": "production",
       "name": "investment-record-store",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "content_sha256": "7557c2167b29a21eb53cba010ff8a305d90db78a9802974fe546c50c1dafecde",
@@ -854,5 +854,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "d4410231ae7a41856b307bdf4f30f326046c19fd"
+  "source_revision": "1f6b2e8166c94276a952576fcd9e25434bd17236"
 }

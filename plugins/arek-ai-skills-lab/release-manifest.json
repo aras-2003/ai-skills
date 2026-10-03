@@ -191,11 +191,11 @@
       "version": "0.5.0"
     },
     {
-      "content_sha256": "115ce2aff971fd25a18354d7b85ff5a92759e2e8f37683b3649ea6b56da28dd6",
+      "content_sha256": "91e5735dad2f5491e50ba02a6c4b70bcf29aaa0e03dd1f2d1cb514ccc31ccb74",
       "kind": "skill",
       "maturity": "production",
       "name": "investment-record-store",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "content_sha256": "7557c2167b29a21eb53cba010ff8a305d90db78a9802974fe546c50c1dafecde",
@@ -465,9 +465,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "e25f0795463823a06d87b9ea9aa96099ab39b796a59a66741e8b3dc5dbf8fbbe",
-  "release_id": "0.18.0+d4410231ae7a",
+  "payload_content_sha256": "c1b094fbeb5b309917ff20a65649b03a84c65b392cb0596ceabffc2f4033a684",
+  "release_id": "0.19.0+1f6b2e8166c9",
   "schema_version": "1.0",
-  "source_revision": "d4410231ae7a41856b307bdf4f30f326046c19fd",
-  "version": "0.18.0"
+  "source_revision": "1f6b2e8166c94276a952576fcd9e25434bd17236",
+  "version": "0.19.0"
 }
