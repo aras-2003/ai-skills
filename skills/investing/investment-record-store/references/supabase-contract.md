@@ -120,6 +120,16 @@ Observation-only latest-valid versus previous-valid position comparison aggregat
 It may expose current/prior value, current/prior weight, deltas and an observed state such as NEW, EXITED, WEIGHT_UP, WEIGHT_DOWN or UNCHANGED.
 This view establishes observed change only. It must never be treated as causal evidence for market-driven, trade-driven or no-trade attribution.
 
+### portfolio_exposure_source_coverage
+Current-position view indicating whether each portfolio position has any source-backed exposure metadata, together with latest exposure date, exposure types and row count.
+
+Semantics:
+- summing current portfolio weights where `has_exposure_metadata=true` yields **source coverage** only;
+- source coverage does not establish **decomposition completeness**;
+- exposure row counts do not establish completeness;
+- partial top-holdings data remain partial even when source-backed;
+- heterogeneous `holding_weight` and `sector_weight` rows must never be summed into one "coverage" percentage.
+
 ### current_theses
 Latest thesis version per thesis/instrument only when the latest version state is `ACTIVE`. DRAFT and RETIRED latest versions are excluded.
 
@@ -156,6 +166,7 @@ Decision records joined to later outcome reviews and performance windows when ma
 15. Thesis lifecycle is state-aware: only latest ACTIVE versions appear in `current_theses`; DRAFT versions remain separately reviewable and RETIRED theses are not monitored as current.
 16. Instrument master identity is normalized: non-null ISIN values are unique, ticker alone is not assumed globally unique, and multi-symbol legacy refs never become single instrument identities.
 17. Portfolio observation views establish state/delta only. Causal attribution remains evidence-gated and cannot be inferred from snapshot deltas alone.
+18. Exposure source coverage and decomposition completeness are distinct. Never derive completeness by summing heterogeneous exposure types or partial top-holdings rows.
 
 ## Migration/cutover minimum checks
 - all 12 legacy logical areas mapped to relational entities;
