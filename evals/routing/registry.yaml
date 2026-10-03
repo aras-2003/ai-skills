@@ -53,6 +53,10 @@ cases:
     input: evals/routing/investment-portfolio-natural-en.input.md
     rubric: evals/routing/investment-portfolio-natural-en.rubric.yaml
 
+  - id: investment-portfolio-observation-natural-pl
+    input: evals/routing/investment-portfolio-observation-natural-pl.input.md
+    rubric: evals/routing/investment-portfolio-observation-natural-pl.rubric.yaml
+
   - id: investment-security-natural-en
     input: evals/routing/investment-security-natural-en.input.md
     rubric: evals/routing/investment-security-natural-en.rubric.yaml
