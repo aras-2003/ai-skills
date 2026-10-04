@@ -168,7 +168,7 @@
       const q=pathState.query.trim().toLocaleLowerCase("pl");
       const result=pathState.processes.filter(p=>{
         if(pathState.domain!=="all"&&p.domain!==pathState.domain)return false;
-        const text=[p.title,p.summary,p.basis,p.runtime,p.domain,...p.lanes.flatMap(l=>[l.title,l.entry,...l.steps.flatMap(s=>[s.title,s.output,...(s.skills||[]),...(s.optionalSkills||[])])])].join(" ").toLocaleLowerCase("pl");
+        const text=[p.title,p.summary,p.basis,p.runtime,p.domain,...p.lanes.flatMap(l=>[l.title,l.entry,...l.steps.flatMap(s=>[s.title,s.output,...[...(s.skills||[]),...(s.optionalSkills||[])].flatMap(id=>[id,state.skills.find(skill=>skill.name===id)?.description||""])])])].join(" ").toLocaleLowerCase("pl");
         return !q||text.includes(q);
       });
       processList.setAttribute("aria-busy","false");
