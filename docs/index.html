@@ -157,7 +157,7 @@
       });
       processList.setAttribute("aria-busy","false");
       if(!result.length){processList.innerHTML='<div class="path-empty">Nie znaleziono pasującej ścieżki. Zmień hasło albo obszar.</div>';return}
-      const usage={};pathState.processes.forEach(p=>p.lanes.forEach(l=>l.steps.forEach(s=>[...(s.skills||[]),...(s.optionalSkills||[])].forEach(id=>usage[id]=(usage[id]||0)+1))));
+      const usage={};pathState.processes.forEach(p=>p.lanes.forEach(l=>l.steps.forEach(s=>[...(s.skills||[]),...(s.optionalSkills||[])].forEach(id=>{(usage[id]??=new Set()).add(l.id)}))));
       processList.innerHTML=result.map(p=>{
         const isCandidate=p.maturity==="candidate"||p.lanes.some(l=>l.maturity==="candidate");
         const type=p.basis.includes("Proponowana")?"proposed":isCandidate?"candidate":"production";
@@ -168,7 +168,7 @@
             const nodes=[...(step.skills||[]).map(id=>({id,optional:false})),...(step.optionalSkills||[]).map(id=>({id,optional:true}))].map(node=>{
               const skill=state.skills.find(s=>s.name===node.id);
               if(!skill)return '<span class="skill-node optional" title="Proces repozytoryjny: '+escapeHtml(node.id)+'">'+escapeHtml(skillTitle(node.id))+'<small>repo</small></span>';
-              return '<button class="skill-node'+(node.optional?" optional":"")+'" type="button" data-skill="'+escapeHtml(node.id)+'" title="'+(node.optional?"Skill opcjonalny":"Skill używany na tym etapie")+(usage[node.id]>1?"; używany w wielu ścieżkach":"")+'"><span class="domain-mark icon-'+escapeHtml(skill.domain)+'" aria-hidden="true"></span>'+escapeHtml(skillTitle(node.id))+(node.optional?'<small>opcjonalny</small>':"")+(usage[node.id]>1?'<small>↗'+usage[node.id]+'</small>':"")+'</button>';
+              return '<button class="skill-node'+(node.optional?" optional":"")+'" type="button" data-skill="'+escapeHtml(node.id)+'" title="'+(node.optional?"Skill opcjonalny":"Skill używany na tym etapie")+(usage[node.id]?.size>1?"; występuje w "+usage[node.id].size+" ścieżkach":"")+'"><span class="domain-mark icon-'+escapeHtml(skill.domain)+'" aria-hidden="true"></span>'+escapeHtml(skillTitle(node.id))+(node.optional?'<small>opcjonalny</small>':"")+(usage[node.id]?.size>1?'<small>↗ '+usage[node.id].size+'</small>':"")+'</button>';
             }).join("");
             return '<article class="flow-step"><h5>'+escapeHtml(step.title)+'</h5><div class="skill-nodes">'+(nodes||'<span class="lane-entry">Etap decyzyjny</span>')+'</div>'+(step.output?'<p class="step-output">'+escapeHtml(step.output)+'</p>':"")+'</article>';
           }).join("");
