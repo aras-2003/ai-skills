@@ -625,7 +625,7 @@ components:
 
   - name: investment-opportunity-hunter
     kind: workflow
-    version: "0.3.0"
+    version: "0.4.0"
     source: workflows/investment-opportunity-hunter/WORKFLOW.md
     declared_maturity: production
     static_contract: present
@@ -638,7 +638,7 @@ components:
 
   - name: investment-security-review
     kind: workflow
-    version: "0.3.0"
+    version: "0.4.0"
     source: workflows/investment-security-review/WORKFLOW.md
     declared_maturity: production
     static_contract: present
