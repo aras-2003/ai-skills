@@ -13,6 +13,10 @@ Reusable AI capability library for repeatable work across projects.
 
 Rule: **LLM interprets; code calculates and validates.**
 
+## Visual catalog
+
+Browse skills by domain and maturity in the [Arek AI Skills catalog](https://aras-2003.github.io/ai-skills/). The catalog is generated from the source metadata in `SKILL.md`.
+
 ## Current source domains
 
 - `skills/career/` — executive role/company/CV/interview workflows

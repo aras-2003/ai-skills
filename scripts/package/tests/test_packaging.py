@@ -178,6 +178,17 @@ class PackagingTests(unittest.TestCase):
             errors = artifact_validation.validate_tree(out, allow_lab_evals=True)
             self.assertEqual([], errors)
 
+            plugin_manifest = json.loads((out / "plugin.json").read_text(encoding="utf-8"))
+            interface = plugin_manifest["extensions"]["com.openai"]["interface"]
+            self.assertEqual("https://aras-2003.github.io/ai-skills/", interface["websiteURL"])
+            self.assertEqual("./assets/brand-mark.svg", interface["logo"])
+            self.assertEqual("./assets/brand-mark.svg", interface["composerIcon"])
+            self.assertEqual("#C6812C", interface["brandColor"])
+            self.assertEqual("#F0C982", interface["brandColorDark"])
+            self.assertTrue((out / "assets" / "brand-mark.svg").is_file())
+            compat_manifest = json.loads((out / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
+            self.assertEqual(interface, compat_manifest["interface"])
+
             import json
             capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
             workflows = [x for x in capabilities["capabilities"] if x.get("kind") == "workflow"]

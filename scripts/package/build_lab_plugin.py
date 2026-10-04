@@ -162,6 +162,16 @@ def main() -> int:
             )
 
         version = package_version(root, "lab")
+        interface = {
+            "displayName": "Arek AI Skills Lab",
+            "shortDescription": "Candidate skills for runtime evaluation and discovery.",
+            "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing. Do not enable it in the same session as the production plugin because duplicate capability names may compete.",
+            "websiteURL": "https://aras-2003.github.io/ai-skills/",
+            "brandColor": "#C6812C",
+            "brandColorDark": "#F0C982",
+            "logo": "./assets/brand-mark.svg",
+            "composerIcon": "./assets/brand-mark.svg",
+        }
         manifest = {
             "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
             "name": PLUGIN_NAME,
@@ -173,14 +183,16 @@ def main() -> int:
             "keywords": ["skills", "lab", "candidate", "oaf", "career"],
             "extensions": {
                 "com.openai": {
-                    "interface": {
-                        "displayName": "Arek AI Skills Lab",
-                        "shortDescription": "Candidate skills for runtime evaluation before production.",
-                        "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing. Do not enable it in the same session as the production plugin because duplicate capability names may compete."
-                    }
+                    "interface": interface
                 }
             }
         }
+        logo_source = root / "docs" / "assets" / "brand-mark.svg"
+        if not logo_source.is_file():
+            raise FileNotFoundError(f"Missing plugin brand asset: {logo_source}")
+        assets_out = stage / "assets"
+        assets_out.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(logo_source, assets_out / "brand-mark.svg")
         write_json(stage / "plugin.json", manifest)
         runtime_tools = package_runtime_mcp(root, stage)
         compat_dir = stage / ".codex-plugin"
@@ -193,6 +205,7 @@ def main() -> int:
                 "description": manifest["description"],
                 "skills": "./skills/",
                 "mcpServers": "./.mcp.json",
+                "interface": interface,
             },
         )
         revision = source_revision(root)
