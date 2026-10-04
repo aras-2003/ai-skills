@@ -73,10 +73,13 @@ Do not use price momentum as thesis validity. External market data may supplemen
    - observed moves vs likely causes + confidence;
    - catalyst/risk;
    - decision implication / next gate
-4. Required interactive historical visuals
-   - price history for each detailed candidate when verified time series exist;
-   - key KPI history where verified series exist;
-   - use one shared interactive comparison only when the same metric/horizon is genuinely comparable across names
+4. In-chat visual dashboard and historical visuals
+   - add a compact shortlist dashboard after the executive summary/radar: candidate, status, why-now signal, valuation/expectation risk, portfolio fit, and next gate;
+   - for each detailed candidate, include an inline price-history chart when verified series exist; use a shared chart only when the series are genuinely comparable;
+   - include inline history for the one or two KPIs that carry each candidate's thesis when reliable quarterly series exist; do not plot every available metric;
+   - prefer the host-native interactive chart when a documented, callable chart surface is available; otherwise embed the static renderer's returned image as an actual inline image and label it static;
+   - if neither renderer can produce an inline visual, mark the exact slot blocked/failed and show a compact diagnostic table; never imply completion from a tool attempt alone;
+   - do not put image data URIs, base64, chart JSON, or encoded payloads in the answer text.
 5. Cross-candidate comparison
 6. Remaining names compressed into watch/defer/reject
 7. Research queue / next actions
