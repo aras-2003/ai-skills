@@ -138,7 +138,7 @@
       state.skills=Array.isArray(data.skills)?data.skills:[];
       document.querySelector("#total-count").textContent=state.skills.length;
       document.querySelector("#domain-count").textContent=new Set(state.skills.map(s=>s.domain)).size;
-      renderFilters();renderCards();
+      renderFilters();renderCards();renderProcesses();
     }).catch(()=>{cards.setAttribute("aria-busy","false");cards.innerHTML='<div class="load-error"><strong>Katalog jest chwilowo niedostępny</strong>Odśwież stronę za chwilę.</div>'});
 
     const pathState={processes:[],domain:"all",query:""};
