@@ -79,6 +79,14 @@ cases:
       should_trigger: true
       must: ["append", "historical"]
       must_not: ["rewrite the original rationale"]
+  - id: store-research-report-opportunity-write
+    case: Discovery report can persist research-state opportunity
+    input: "Run an opportunity report. You found a new evidence-backed candidate that passed the research gate, but I did not make a BUY decision."
+    expected:
+      should_trigger: true
+      must: ["opportunities", "RESEARCH_CANDIDATE", "WRITE receipt"]
+      must_not: ["skip persistence because this is a report", "requires BUY decision"]
+
   - id: store-near-miss
     case: Pure explanation needs no persistence
     input: "Explain what free cash flow yield means."
