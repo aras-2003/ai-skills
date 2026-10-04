@@ -18,6 +18,7 @@ assertions:
     - "include a real inline visual for every required verified price/KPI-history slot, or explicitly mark the slot blocked/failed"
     - "embed returned static chart images as native images and label them static when no interactive renderer is available"
     - "never expose raw base64/data:image URIs or serialized chart payloads in user-facing text"
+    - "never claim a chart was rendered unless its native image/chart element is actually present in the user-facing response; otherwise mark the exact slot blocked or failed"
   manual_not:
     - "use social popularity as sufficient evidence"
     - "label candidates BUY or SELL"

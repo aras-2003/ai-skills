@@ -89,11 +89,11 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("ed7a139979c01cdbb5e3f6fe99f99fddebd6abdb", lock["behavior_source_revision"])
+            self.assertEqual("6b09f11d85cb183e68e36ac19ba2d7a3a9154a0b", lock["behavior_source_revision"])
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
-            self.assertEqual("1.34.0", lock["packages"]["production"]["version"])
+            self.assertEqual("1.35.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
-            self.assertEqual("0.28.0", lock["packages"]["lab"]["version"])
+            self.assertEqual("0.29.0", lock["packages"]["lab"]["version"])
             self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
             self.assertNotIn("organizational-interface-review", lock["expected_catalogs"]["production"])
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
@@ -439,7 +439,7 @@ class RuntimeCampaignTests(unittest.TestCase):
                 "provider": "offline-synthetic-provider",
                 "model_id": "offline-synthetic-model",
                 "reasoning": "offline",
-                "available_tools": ["offline-fixture", "mcp__arek-chart-renderer__render_bar_chart", "mcp__arek-investment-os__route_investment_request"],
+                "available_tools": ["offline-fixture", "mcp__arek-chart-renderer__render_bar_chart", "mcp__arek-chart-renderer__render_line_chart", "mcp__arek-investment-os__route_investment_request"],
             },
         }
 
