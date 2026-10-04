@@ -26,7 +26,7 @@ Known bundled static renderer:
 - a valid tool result proves renderer execution `PAYLOAD_RENDERED`; it does not prove client display. Client display is `NOT_OBSERVABLE` to the model.
 
 Interactive investment-history requirement:
-- when a workflow/profile marks a price/KPI history slot as interactive, preflight must locate a chat-native interactive quantitative chart/widget capability;
+- when a workflow/profile marks a price/KPI history slot as interactive, preflight should locate a chat-native interactive quantitative chart/widget capability when observable; if host-native capability visibility is incomplete, follow the attempt-first rule instead of blocking early;
 - **preferred ChatGPT capability: native `chart` widget** (JSON-backed interactive bar/line/pie/scatter chart) when exposed by the runtime;
 - for price/KPI history use `chart` with `chartType: "line"` and explicit time-series rows;
 - the native `chart` widget qualifies as interactive because the client renderer provides hover/tooltips and native chart interaction over deterministic supplied data;
@@ -34,14 +34,25 @@ Interactive investment-history requirement:
 - if `chart` is available, use it before `arek-chart-renderer`;
 - other interactive quantitative chart/widget capabilities may also qualify if they accept explicit numeric/time-series data and are chat-native;
 - static PNG/SVG/image payloads, markdown tables and generated images do not satisfy the interactive slot;
-- if no such capability exists, return `BLOCKED_NO_RENDERER` for that slot.
+- if a host-native attempt proves no such capability exists, return `BLOCKED_NO_RENDERER` for that slot.
 
 Preflight status:
 - `AVAILABLE`: a concrete qualifying renderer is present and invokable;
-- `UNAVAILABLE`: inspected runtime capabilities contain no qualifying renderer;
-- `UNKNOWN`: the runtime/tool contract is insufficient to prove a qualifying renderer exists.
+- `UNAVAILABLE`: the host/runtime explicitly proves that no qualifying renderer can be invoked;
+- `UNKNOWN`: tool enumeration is insufficient to determine whether a host-native renderer exists.
 
-For a required visual-floor slot, `UNAVAILABLE` or `UNKNOWN` means `BLOCKED_NO_RENDERER`. A table/text fallback may still be shown for usability, but it does not satisfy the visual requirement.
+### Attempt-first rule for required interactive investment charts
+For required price/KPI history slots, `UNKNOWN` is **not** a terminal blocked state.
+
+If the host surface may support a native chart component that is not exposed through MCP/tool enumeration:
+1. prepare the factual chart payload;
+2. attempt the host-native interactive chart using the host's response/widget contract;
+3. if the host accepts/renders the chart payload, record `AVAILABLE` + `PAYLOAD_RENDERED`;
+4. if the host explicitly rejects or lacks the capability, use `BLOCKED_NO_RENDERER` (or `FAIL_RENDERER_INVOCATION` when invocation was available but failed).
+
+Do not convert `UNKNOWN` directly into `BLOCKED_NO_RENDERER` without a host-native chart attempt for required investment-history visuals.
+
+A table/text fallback may accompany a blocked state for usability, but it does not satisfy the visual requirement.
 
 ## 1. Native interactive chart widget
 Preferred for investment price/KPI history when the host runtime exposes the native `chart` widget.
