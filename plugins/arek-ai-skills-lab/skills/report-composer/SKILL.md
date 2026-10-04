@@ -9,7 +9,7 @@ description: 'Compose one integrated decision report from an already-supported w
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.7.0
+  version: 0.8.0
   maturity: candidate
   risk: low
   last_reviewed: '2026-10-02'
@@ -39,7 +39,8 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
    - the native ChatGPT `chart` widget counts as an interactive deterministic data renderer when exposed;
    - classify whether a deterministic data renderer exists for the required visual grammar;
    - do not count `image_gen`, image viewers, generic media generation, or Figma diagram/design tools as a quantitative chart renderer;
-   - record one of: `AVAILABLE`, `UNAVAILABLE`, `UNKNOWN`.
+   - record one of: `AVAILABLE`, `UNAVAILABLE`, `UNKNOWN`;
+   - for required investment price/KPI charts, `UNKNOWN` means **attempt the host-native chart surface**, not block the report.
 5. Select a report profile from `references/report-profiles.md` or derive a minimal equivalent.
 6. Build a semantic report model containing ordered sections:
    - section purpose;
@@ -57,19 +58,20 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
    - only the relevant supported data;
    - required renderer capabilities;
    - as-of context and provenance.
-9. Choose output target from actual renderer execution:
+9. For required interactive investment price/KPI slots, do not finalize the report until a host-native chart attempt has been made when chartable verified data exist. A table is not an acceptable pre-attempt substitute.
+10. Choose output target from actual renderer execution:
    - **chat-native report** when required visual slots have a qualifying renderer and a valid payload was produced;
    - **chat-blocked** when no qualifying renderer exists or invocation fails;
    - **external artifact** only when the user explicitly asks for one.
    Client-display success is never inferred by the model. A valid payload is `PAYLOAD_RENDERED`; client display remains `NOT_OBSERVABLE`.
-10. A blocked report may still include a compact table/matrix so the user can inspect the data, but that fallback is diagnostic only: it does **not** satisfy the required visual slot and must carry `BLOCKED_NO_RENDERER` (or `FAIL_RENDERER_INVOCATION` when a qualifying renderer was discovered but failed).
-11. Preserve progressive disclosure:
+11. A blocked report may still include a compact table/matrix so the user can inspect the data, but that fallback is diagnostic only: it does **not** satisfy the required visual slot and must carry `BLOCKED_NO_RENDERER` (or `FAIL_RENDERER_INVOCATION` when a qualifying renderer was discovered but failed).
+12. Preserve progressive disclosure:
    - lead with the decision and minimum evidence;
    - keep detail near the section it supports;
    - move exhaustive evidence tables or appendices later.
-12. Keep receipts, source notes and material limitations in the same report, not in a disconnected parallel artifact.
-13. Run the contradiction check from the state/evidence contract before final output.
-14. Never silently convert a required visual-floor slot into successful renderer execution. If no qualifying renderer exists or invocation fails, surface that execution state explicitly. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
+13. Keep receipts, source notes and material limitations in the same report, not in a disconnected parallel artifact.
+14. Run the contradiction check from the state/evidence contract before final output.
+15. Never silently convert a required visual-floor slot into successful renderer execution. If no qualifying renderer exists or invocation fails, surface that execution state explicitly. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
 
 ## Inline visual slot contract
 Each slot must define:
@@ -132,7 +134,8 @@ Do not emit `report_status: PASS` for ordinary report composition. Runtime visua
 - Missing evidence stays visibly missing.
 
 ## Failure and uncertainty handling
-- If a required visual has no qualifying renderer, use `BLOCKED_NO_RENDERER`.
+- If a required investment price/KPI visual has `UNKNOWN` renderer visibility, attempt the host-native chart component before deciding it is blocked.
+- If a required visual is explicitly unavailable after the required attempt, use `BLOCKED_NO_RENDERER`.
 - If renderer invocation fails, use `FAIL_RENDERER_INVOCATION`.
 - If the renderer returns a valid payload, use `PAYLOAD_RENDERED`; do not infer whether the client displayed it.
 - If decision-critical evidence is missing but useful analysis remains possible, use `analysis_state: PARTIAL_EVIDENCE`.

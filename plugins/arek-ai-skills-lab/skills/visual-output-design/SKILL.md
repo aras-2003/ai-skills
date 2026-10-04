@@ -9,7 +9,7 @@ description: 'Convert an already-supported analysis or workflow result into a pr
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.8.0
+  version: 0.9.0
   maturity: candidate
   risk: low
   last_reviewed: '2026-10-02'
@@ -39,8 +39,13 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
    - `image_gen`, image viewing, generic media generation and Figma diagram/design capabilities do not qualify as quantitative data-chart renderers;
    - return `AVAILABLE`, `UNAVAILABLE`, or `UNKNOWN`.
 4. If the visual is optional and no qualifying renderer exists, use the truthful text/table fallback.
-5. If the visual is required and no qualifying renderer exists, return `BLOCKED_NO_RENDERER`; do not claim successful rendering and do not let a table/text fallback satisfy the slot.
-6. Build a semantic visual model from the supported analysis only:
+5. For a **required interactive investment price/KPI chart**:
+   - if preflight is `AVAILABLE`, render with the qualifying interactive chart capability;
+   - if preflight is `UNKNOWN` because host-native widgets are not visible through tool enumeration, build the factual payload and **attempt the host-native chart component before blocking**;
+   - only after an explicit unavailable/rejected host-native attempt may the slot become `BLOCKED_NO_RENDERER`;
+   - if an available renderer invocation fails, use `FAIL_RENDERER_INVOCATION`.
+6. For other required visuals with no qualifying renderer, return `BLOCKED_NO_RENDERER`; do not claim successful rendering and do not let a table/text fallback satisfy the slot.
+7. Build a semantic visual model from the supported analysis only:
    - headline/message;
    - entities/categories;
    - measures/units;
@@ -48,16 +53,17 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
    - time/as-of context;
    - uncertainty/status;
    - source/provenance references.
-7. Select the narrowest suitable renderer using `references/tool-routing.md`.
-8. Apply the design and integrity rules in `references/design-system.md`.
-9. Prefer a renderer that can appear directly inside the chat response. Use an external-artifact renderer (HTML file, Figma file, PDF, deck) only when the user explicitly requested that output form.
-10. Keep the visual synchronized with its surrounding report section: it must not imply a stronger conclusion than the written analysis.
-11. Provide a compact text/table fallback when useful, but label it diagnostic when a required renderer is unavailable; it does not change renderer execution from `BLOCKED_NO_RENDERER`.
-12. For interactive HTML, keep analysis data and presentation logic separated so the report can be regenerated from the same payload.
+8. Select the narrowest suitable renderer using `references/tool-routing.md`.
+9. Apply the design and integrity rules in `references/design-system.md`.
+10. Prefer a renderer that can appear directly inside the chat response. Use an external-artifact renderer (HTML file, Figma file, PDF, deck) only when the user explicitly requested that output form.
+11. Keep the visual synchronized with its surrounding report section: it must not imply a stronger conclusion than the written analysis.
+12. Provide a compact text/table fallback when useful, but label it diagnostic when a required renderer is unavailable; it does not change renderer execution from `BLOCKED_NO_RENDERER`.
+13. For interactive HTML, keep analysis data and presentation logic separated so the report can be regenerated from the same payload.
 
 ## Decision rules
 - Prefer one strong visual over several decorative ones.
-- When the calling report marks a visual slot as required by the visual-floor rule and supported data are present, render a real chat-native visual if a suitable renderer exists. If none exists, return `BLOCKED_NO_RENDERER`; text-only is not a successful substitute.
+- When a required investment-history slot has supported data, **attempt a host-native interactive chart before any text/table fallback**. Tool-list uncertainty alone is not evidence that the renderer is unavailable.
+- When another required visual has no suitable renderer, return `BLOCKED_NO_RENDERER`; text-only is not a successful substitute.
 - Prefer the visual grammar in `references/design-system.md`: horizontal bars for ranked concentration, real time-series lines for performance, matrices for overlap/trade-offs, ranges for scenarios, KPI strips for a few metrics.
 - Use a chart for quantitative comparison, trend, composition or relationship.
 - Use a diagram for structure, flow, dependency, ownership or state.
@@ -99,7 +105,9 @@ Return or render:
 - Visual labels must preserve units, time period and denominator.
 
 ## Failure and uncertainty handling
-- If the preferred chat-native renderer is unavailable, choose the next qualifying chat-native renderer. If a required visual has no qualifying renderer, return `BLOCKED_NO_RENDERER`; a table/text fallback may accompany the status but cannot satisfy the requirement.
+- If the preferred chat-native renderer is unavailable, choose the next qualifying chat-native renderer.
+- For required investment history, do not treat `UNKNOWN` capability discovery as unavailable: attempt the host-native chart surface first.
+- If the attempted host surface explicitly cannot render the required visual, return `BLOCKED_NO_RENDERER`; a table/text fallback may accompany the status but cannot satisfy the requirement.
 - If data are incomplete, show the gap or omit the visual element rather than fabricating it.
 - Do not create a Figma/HTML/PDF/deck artifact unless the user explicitly requested that artifact class.
 - If interactivity is unavailable, fall back to a static chart/table plus concise interpretation.

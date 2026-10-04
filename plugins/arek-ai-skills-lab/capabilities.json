@@ -256,7 +256,7 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "6d826d07693f3c8ab99271d4056e85a0a602dda2d78f0e51616e334b123910ea",
+      "content_sha256": "cba4d1ed67b4a4750e967f5c58fbcd156e1ce777c2bf3c14f4e1c9829f7b3cd6",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -266,7 +266,7 @@
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-opportunity-hunter",
-      "version": "0.3.0"
+      "version": "0.4.0"
     },
     {
       "content_sha256": "364488d260b2197eeda6c46c1b3803352ced4f73f8c6f634e9c8583490345443",
@@ -329,7 +329,7 @@
       "version": "0.9.0"
     },
     {
-      "content_sha256": "82fc5ab48bfa94d48e22416cfe5b703aa178f402314eba0f07eba5071a18182d",
+      "content_sha256": "d475f0e4b4bd352157be8205ab29d489a8820412a4a6cc0239365811a6694e2e",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -339,7 +339,7 @@
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-security-review",
-      "version": "0.3.0"
+      "version": "0.4.0"
     },
     {
       "content_sha256": "be6a3c72f10795482a3c301b48116e576c10407b445f0a524773ceaf4e34277e",
@@ -599,7 +599,7 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "f956b5ebcb6d7b1e865e66e55e9bd8a018970d782cddc6c57452062edc3d5d17",
+      "content_sha256": "df4bd03c83246dcb8f92a6f1e95aa23c9f55b1391b6cf1f64ffb4771b4497f28",
       "inventory": [
         "SKILL.md",
         "references/composition-rules.md",
@@ -610,7 +610,7 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "report-composer",
-      "version": "0.7.0"
+      "version": "0.8.0"
     },
     {
       "content_sha256": "39ebf3cf6aaa4b33540464ea0039d9f83802465caa9db6fa7280d5090370b6f5",
@@ -738,7 +738,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "cfa51609997afed68064b408c3dfb34fad250dbd08c6fbf44de2f6e36433adeb",
+      "content_sha256": "df0cf97d7947a2d3173d8890a4fa1ed77fde21096ad5ce6e33bb160ef1cec517",
       "inventory": [
         "SKILL.md",
         "references/design-system.md",
@@ -747,7 +747,7 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "visual-output-design",
-      "version": "0.8.0"
+      "version": "0.9.0"
     }
   ],
   "channel": "lab",
@@ -865,5 +865,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "0514d31e0f1553f69919c4493df4ba945a1c0a0e"
+  "source_revision": "ee06fd38bddd082b13b2b83af02d3d4ee8fcbc7e"
 }
