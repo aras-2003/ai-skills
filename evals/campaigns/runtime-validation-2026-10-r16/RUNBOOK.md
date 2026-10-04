@@ -2,9 +2,9 @@
 
 ## Identity
 - campaign: `runtime-validation-2026-10-r16`
-- behavior source: `ed7a139979c01cdbb5e3f6fe99f99fddebd6abdb`
-- production package source version: `arek-ai-skills 1.34.0`
-- Lab package source version: `arek-ai-skills-lab 0.28.0`
+- behavior source: `221819ee0ae8860a34bd74bdd89a5e97ace77678`
+- production package source version: `arek-ai-skills 1.35.0`
+- Lab package source version: `arek-ai-skills-lab 0.29.0`
 
 R1–R15 remain historical evidence. R16 is the first campaign pinned to the inline investment visual and bounded research-state persistence changes.
 
@@ -29,6 +29,10 @@ Validate that substantial reports deliver the requested visual elements inside c
 - Portfolio review with the short prompt: “Review my portfolio and opportunity queue.”
 - Opportunity discovery using `evals/investing/case-001-opportunity-hunter.input.md`; inspect dashboard completeness, per-candidate history, inline media integrity, and the canonical write receipt.
 - One OAF report with a chartable or structural relationship.
+
+## Observed regression and retest
+
+On 2026-10-05 the user confirmed that the opportunity report displayed no charts, although its prose claimed three static KPI charts. Score case-001's visual delivery as **FAIL (text-only)** for that run. The shortlist table is present but does not satisfy any chart slot. A later retest must show the actual inline chart images in the client; a chart caption or tool payload alone is insufficient. This user confirmation is evidence of missing display, not evidence that a renderer invocation succeeded.
 
 ## Promotion rule
 Require green static, package, and isolation gates plus a qualifying renderer observed in runtime and a valid payload receipt. For required visual PASS, also require external evidence that the client displayed the visual. A payload without display evidence remains PENDING_CLIENT_VALIDATION. Text-only output for a supported required visual is FAIL.
