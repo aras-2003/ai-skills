@@ -1,5 +1,15 @@
 {
   "description": "Isolated lab package with candidate targets plus their production dependencies for controlled behavioral testing.",
+  "interface": {
+    "brandColor": "#C6812C",
+    "brandColorDark": "#F0C982",
+    "composerIcon": "./assets/brand-mark.svg",
+    "displayName": "Arek AI Skills Lab",
+    "logo": "./assets/brand-mark.svg",
+    "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing. Do not enable it in the same session as the production plugin because duplicate capability names may compete.",
+    "shortDescription": "Candidate skills for runtime evaluation and discovery.",
+    "websiteURL": "https://aras-2003.github.io/ai-skills/"
+  },
   "mcpServers": "./.mcp.json",
   "name": "arek-ai-skills-lab",
   "skills": "./skills/",
