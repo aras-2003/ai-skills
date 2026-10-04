@@ -7,7 +7,7 @@ description: >
   to make a visual complete.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.9.0"
+  version: "0.10.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02
@@ -60,9 +60,19 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 12. Provide a compact text/table fallback when useful, but label it diagnostic when a required renderer is unavailable; it does not change renderer execution from `BLOCKED_NO_RENDERER`.
 13. For interactive HTML, keep analysis data and presentation logic separated so the report can be regenerated from the same payload.
 
+## Inline visual delivery integrity
+
+A visual slot is complete only when a valid chart, widget, or image is emitted as a native visual element in the chat response and placed beside the relevant analysis.
+
+- Never print, quote, or expose a data:image/...;base64,... payload in prose, a Markdown image URL, a code block, or a table. Do not stringify binary/image content.
+- When a renderer returns an image content block, preserve it as the renderer's native image output; add only a short caption, as-of date, and provenance in text.
+- Use a native interactive chart only through a real host-supported response mechanism. Do not invent a chart tool, widget call, or response syntax that the runtime does not expose.
+- A valid static image is a useful inline visual when interactivity is unavailable, but label it static; do not claim hover, filtering, or interaction.
+- If no actual inline visual can be emitted, mark the slot blocked/failed and show a concise diagnostic table. A URL, base64 string, or JSON payload printed as text is not a rendered visual.
+
 ## Decision rules
 - Prefer one strong visual over several decorative ones.
-- When a required investment-history slot has supported data, **attempt a host-native interactive chart before any text/table fallback**. Tool-list uncertainty alone is not evidence that the renderer is unavailable.
+- When a required investment-history slot has supported data, **attempt the host-native chart** only through a documented, callable host mechanism; prefer the interactive chart before any text/table fallback. Tool-list uncertainty alone is not evidence that the renderer is unavailable.
 - When another required visual has no suitable renderer, return `BLOCKED_NO_RENDERER`; text-only is not a successful substitute.
 - Prefer the visual grammar in `references/design-system.md`: horizontal bars for ranked concentration, real time-series lines for performance, matrices for overlap/trade-offs, ranges for scenarios, KPI strips for a few metrics.
 - Use a chart for quantitative comparison, trend, composition or relationship.
@@ -125,7 +135,9 @@ Return or render:
 - [ ] Required quantitative visuals passed `capability_preflight` against an actual deterministic renderer.
 - [ ] Media-generation or design tools were not misclassified as quantitative chart renderers.
 - [ ] `BLOCKED_NO_RENDERER` cannot be reported as successful rendering.
-- [ ] Tool success with a valid image payload is `PAYLOAD_RENDERED`, not proof of client display.
+- [ ] Tool success with a valid native image/chart payload is `PAYLOAD_RENDERED`, not proof of client display.
+- [ ] No base64 image data or serialized visual payload leaked into user-facing text.
+- [ ] Every required visual slot has an actual inline visual element, or an explicit blocked/failed state.
 - [ ] Client display is always `NOT_OBSERVABLE` from the model unless explicit external evidence is supplied.
 - [ ] Do not emit `UI_CONFIRMED`, `UI_RENDER_UNCONFIRMED`, `VISIBLE` or `BROKEN` as model-owned facts.
 - [ ] Do not describe a visual as visible/rendered "above" merely because the tool returned an image payload.

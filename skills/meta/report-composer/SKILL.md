@@ -6,7 +6,7 @@ description: >
   interactive components or Figma outputs appear inside the relevant sections instead of as a separate parallel artifact.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.8.0"
+  version: "0.9.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02
@@ -72,6 +72,15 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
 14. Run the contradiction check from the state/evidence contract before final output.
 15. Never silently convert a required visual-floor slot into successful renderer execution. If no qualifying renderer exists or invocation fails, surface that execution state explicitly. Do not silently move the report into an HTML/PDF/Figma/deck artifact. Create an external artifact only when the user explicitly requested one.
 
+## Visual coverage and dashboard contract
+
+- For each required slot, track slot_id, renderer class, execution state, whether a native visual element was included inline, and its adjacent provenance/caption.
+- In a detailed opportunity report, create a compact in-chat shortlist dashboard after the executive summary/radar. Show only decision-useful fields such as candidate, status, key change, valuation/expectation risk, portfolio fit, and next gate. Use a readable table or cards; do not call it interactive unless it is.
+- Place candidate-specific price/KPI visuals inside the corresponding candidate section. Share a chart only when the compared series use compatible definitions, units, and periods.
+- Before finalising, compare required slots with actual inline visual elements. A slot is not complete just because data were gathered, a tool was detected, a tool call was attempted, or a payload was mentioned in prose.
+- Never expose data:image/...;base64,..., raw base64, serialized image blocks, or chart JSON in user-facing text/Markdown. Preserve returned media as an actual inline image or native chart element. If the runtime cannot emit it, state the slot's blocked/failed status and retain a compact table fallback.
+- Prefer the best usable in-chat visual available. If only a static image renderer exists, embed the image as a native image element and label it static; do not imply interactivity.
+
 ## Inline visual slot contract
 Each slot must define:
 - **slot_id**
@@ -87,6 +96,7 @@ Each slot must define:
 - **capability_status**: AVAILABLE / UNAVAILABLE / UNKNOWN
 - **renderer_execution_status**: NOT_REQUIRED / NOT_ATTEMPTED / BLOCKED_NO_RENDERER / PAYLOAD_RENDERED / FAIL_RENDERER_INVOCATION
 - **client_display_status**: NOT_OBSERVABLE
+- **inline_visual_included**: YES / NO
 
 ## Decision rules
 - The report is the product; visuals are evidence-bearing components inside it.
@@ -144,6 +154,9 @@ Do not emit `report_status: PASS` for ordinary report composition. Runtime visua
 ## Quality checks
 - [ ] The output is one coherent report in chat by default, not text plus a duplicate dashboard or unsolicited file.
 - [ ] Visuals appear where the surrounding narrative needs them.
+- [ ] Every required slot is covered by an actual inline visual element or is explicitly blocked/failed.
+- [ ] A discovery report includes a compact in-chat shortlist dashboard when several candidates are compared.
+- [ ] No raw base64/data URI or serialized chart payload appears in user-facing text.
 - [ ] Every visual has local interpretation and provenance.
 - [ ] No visual exists only for decoration.
 - [ ] The same conclusion is preserved across text and visual rendering.
