@@ -72,7 +72,7 @@ A visual slot is complete only when a valid chart, widget, or image is emitted a
 
 ## Decision rules
 - Prefer one strong visual over several decorative ones.
-- When a required investment-history slot has supported data, **attempt a host-native interactive chart before any text/table fallback**. Tool-list uncertainty alone is not evidence that the renderer is unavailable.
+- When a required investment-history slot has supported data, **attempt the host-native chart** only through a documented, callable host mechanism; prefer the interactive chart before any text/table fallback. Tool-list uncertainty alone is not evidence that the renderer is unavailable.
 - When another required visual has no suitable renderer, return `BLOCKED_NO_RENDERER`; text-only is not a successful substitute.
 - Prefer the visual grammar in `references/design-system.md`: horizontal bars for ranked concentration, real time-series lines for performance, matrices for overlap/trade-offs, ranges for scenarios, KPI strips for a few metrics.
 - Use a chart for quantitative comparison, trend, composition or relationship.
