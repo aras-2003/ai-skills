@@ -312,6 +312,19 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("native ChatGPT `chart` widget", composer)
         self.assertIn("do not ignore it merely because it is not packaged as an MCP tool", renderer)
 
+    def test_required_investment_charts_are_attempt_first(self) -> None:
+        routing = (ROOT / "skills/meta/visual-output-design/references/tool-routing.md").read_text(encoding="utf-8")
+        renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
+        composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
+        hunter = (ROOT / "workflows/investment-opportunity-hunter/WORKFLOW.md").read_text(encoding="utf-8")
+        security = (ROOT / "workflows/investment-security-review/WORKFLOW.md").read_text(encoding="utf-8")
+
+        self.assertIn("Attempt-first rule", routing)
+        self.assertIn("attempt the host-native chart", routing.lower())
+        self.assertIn("attempt the host-native chart", renderer.lower())
+        self.assertIn("attempt the host-native chart", composer.lower())
+        self.assertIn("Attempt-first rendering rule", hunter)
+        self.assertIn("Attempt-first rendering rule", security)
     def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
         contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
         standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")
