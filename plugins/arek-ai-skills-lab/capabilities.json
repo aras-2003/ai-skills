@@ -705,7 +705,7 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "239af636cdf4523d2e1d3ea274722fff33a6064a9f3d8ed8ea4858d40bccdf60",
+      "content_sha256": "f2297edef640526cbe1e62c49d7db119fcff81d293d7dbf58f641340c7f7b4f9",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
@@ -718,7 +718,7 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "report-composer",
-      "version": "0.9.0"
+      "version": "0.10.0"
     },
     {
       "content_sha256": "f6bd0ac21549aae2034ca69bc8c8410e92c358081e5a1746e136834cc33610fb",
@@ -870,7 +870,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "c3498b87b2b9540ebf8bf7ef5e41f2baf5d24abc4afe521bb3b2d8edd9c54619",
+      "content_sha256": "c8e92cb1556f966fd42c6b52aaed8dcef99505c98f8175773c03adc76a5ec108",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
@@ -881,7 +881,7 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "visual-output-design",
-      "version": "0.10.0"
+      "version": "0.11.0"
     }
   ],
   "channel": "lab",
@@ -999,5 +999,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "61158aa0cf47f16525c34fca3d8f22b971ad62ad"
+  "source_revision": "8cf615235d04c13603ca7c79ab4c30ff356b200c"
 }
