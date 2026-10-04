@@ -16,7 +16,7 @@ Validate that substantial reports deliver the requested visual elements inside c
 2. A multi-candidate opportunity report includes a compact in-chat shortlist dashboard after its executive summary or radar.
 3. When at least two candidate price histories share a comparable window and adjustment basis, render one shared price chart indexed to 100 at the first common date; otherwise keep coverage separate and disclose the blocked/incomparable slots.
 4. Put one or two candidate-specific thesis KPI visuals inside each detailed candidate section. Preserve each KPI's own unit; use a time-series line for at least three dated observations and a two-period comparison for two points.
-5. A shared comparison chart is used only when series definitions, units, and periods are comparable.
+5. A static chart is complete only when its returned image is actually embedded inline and labeled static; do not imply interactivity.
 6. Interaction levels are distinct: STATIC image, HOVER tooltip, CONTROLLED selector/filter that changes the data view, or UNKNOWN. Never label a static or hover-only chart as controlled.
 7. If a user asks for controls the runtime does not expose, mark that feature BLOCKED_NO_RENDERER while still returning a useful static image when available.
 8. If a required visual cannot be emitted inline, identify that exact slot as blocked or failed and provide a compact diagnostic table. A tool attempt, URL, JSON payload, or encoded image is not a rendered visual.
