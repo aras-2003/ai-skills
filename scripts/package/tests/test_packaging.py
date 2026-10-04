@@ -189,7 +189,6 @@ class PackagingTests(unittest.TestCase):
             compat_manifest = json.loads((out / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual(interface, compat_manifest["interface"])
 
-            import json
             capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
             workflows = [x for x in capabilities["capabilities"] if x.get("kind") == "workflow"]
             self.assertTrue(workflows)
