@@ -6,7 +6,7 @@ description: >
   interactive components or Figma outputs appear inside the relevant sections instead of as a separate parallel artifact.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.9.0"
+  version: "0.10.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02
@@ -80,6 +80,18 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
 - Before finalising, compare required slots with actual inline visual elements. A slot is not complete just because data were gathered, a tool was detected, a tool call was attempted, or a payload was mentioned in prose.
 - Never expose data:image/...;base64,..., raw base64, serialized image blocks, or chart JSON in user-facing text/Markdown. Preserve returned media as an actual inline image or native chart element. If the runtime cannot emit it, state the slot's blocked/failed status and retain a compact table fallback.
 - Prefer the best usable in-chat visual available. If only a static image renderer exists, embed the image as a native image element and label it static; do not imply interactivity.
+
+## Hard stop: no phantom visuals
+
+A required visual is not complete because the report describes it, refers to “the chart”, names a chart type, or says an image is static. It is complete only when the current run has returned an actual chart/image payload and that payload is included as a native visual element in the response.
+
+Before drafting any caption or sentence that says what a chart “shows”:
+1. Call the concrete renderer for that slot with the verified values and source context.
+2. Confirm that the tool returned an image/chart payload, not only a URL, text, or JSON specification.
+3. Include the returned payload as an actual inline image/chart beside the relevant analysis.
+4. Confirm the final response contains the visual element itself. If you cannot include it, remove all wording that implies the visual exists and mark the slot `FAIL_RENDERER_INVOCATION` or `BLOCKED_NO_RENDERER`, with a compact diagnostic table.
+
+Do not claim “three charts”, “static charts”, or similar visual inventory unless each counted chart is actually included inline. A chart tool call with no returned image, and an image returned only as encoded text, both fail this gate. Keep payload data out of user-facing text.
 
 ## Inline visual slot contract
 Each slot must define:
