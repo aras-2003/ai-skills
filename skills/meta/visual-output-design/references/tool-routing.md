@@ -18,11 +18,18 @@ The following do **not** qualify as quantitative chart renderers:
 - Figma/FigJam diagram/design tools used as freeform drawing surfaces;
 - text, markdown tables or ASCII/punctuation pseudo-charts.
 
-Known bundled renderer:
+Known bundled static renderer:
 - MCP server: `arek-chart-renderer`;
-- qualifying quantitative tools: `render_bar_chart`, `render_line_chart`;
-- these tools qualify only when they are actually exposed by the current runtime tool list. Package declaration alone is not proof of availability.
+- tools: `render_bar_chart`, `render_line_chart`;
+- these tools qualify for ordinary static quantitative visual slots only when exposed by the current runtime.
+- they **do not qualify** for a slot that explicitly requires chat-native interactivity.
 - a valid tool result proves renderer execution `PAYLOAD_RENDERED`; it does not prove client display. Client display is `NOT_OBSERVABLE` to the model.
+
+Interactive investment-history requirement:
+- when a workflow/profile marks a price/KPI history slot as interactive, preflight must locate a chat-native interactive quantitative chart/widget capability;
+- it must support factual time-series values and interactive inspection such as hover, selectable series or horizon switching;
+- static PNG/SVG/image payloads, markdown tables and generated images do not satisfy the slot;
+- if no such capability exists, return `BLOCKED_NO_RENDERER` for that slot.
 
 Preflight status:
 - `AVAILABLE`: a concrete qualifying renderer is present and invokable;
