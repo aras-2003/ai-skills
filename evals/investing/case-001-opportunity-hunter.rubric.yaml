@@ -14,6 +14,10 @@ assertions:
     - "include dated provenance/confidence for decision-relevant changed signals"
     - "emit explicit canonical READ and WRITE persistence receipts with SUCCESS, UNAVAILABLE or FAILED"
     - "never present a local Codex file as canonical persistence"
+    - "show a compact in-chat shortlist dashboard for multiple promoted candidates"
+    - "include a real inline visual for every required verified price/KPI-history slot, or explicitly mark the slot blocked/failed"
+    - "embed returned static chart images as native images and label them static when no interactive renderer is available"
+    - "never expose raw base64/data:image URIs or serialized chart payloads in user-facing text"
   manual_not:
     - "use social popularity as sufficient evidence"
     - "label candidates BUY or SELL"
