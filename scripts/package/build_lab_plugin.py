@@ -167,8 +167,8 @@ def main() -> int:
             "shortDescription": "Candidate skills for runtime evaluation and discovery.",
             "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing. Do not enable it in the same session as the production plugin because duplicate capability names may compete.",
             "websiteURL": "https://aras-2003.github.io/ai-skills/",
-            "brandColor": "#6F5BEA",
-            "brandColorDark": "#C0B7FF",
+            "brandColor": "#C6812C",
+            "brandColorDark": "#F0C982",
             "logo": "./assets/brand-mark.svg",
             "composerIcon": "./assets/brand-mark.svg",
         }
