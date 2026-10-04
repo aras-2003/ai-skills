@@ -145,9 +145,10 @@ Return or render:
 - Visual labels must preserve units, time period and denominator.
 
 ## Failure and uncertainty handling
-- If the preferred chat-native renderer is unavailable, choose the next qualifying chat-native renderer.
-- For required investment history, do not treat `UNKNOWN` capability discovery as unavailable: attempt the host-native chart surface first.
-- If the attempted host surface explicitly cannot render the required visual, return `BLOCKED_NO_RENDERER`; a table/text fallback may accompany the status but cannot satisfy the requirement.
+- If the preferred interactive renderer is unavailable, use the next concrete renderer; a real static image remains a useful completed visual when it satisfies the request or fallback.
+- Do not make an undocumented host-widget attempt when interaction capability is `UNKNOWN`. Use an exposed deterministic static renderer and state that control behavior could not be verified.
+- If the user explicitly requires controls and the runtime exposes none, mark the control feature `BLOCKED_NO_RENDERER`; keep any successfully rendered static chart at `PAYLOAD_RENDERED`.
+- Return a visual slot as `BLOCKED_NO_RENDERER` only when no suitable renderer for the visual itself is available. A table/text fallback remains diagnostic.
 - If data are incomplete, show the gap or omit the visual element rather than fabricating it.
 - Do not create a Figma/HTML/PDF/deck artifact unless the user explicitly requested that artifact class.
 - If interactivity is unavailable, fall back to a static chart/table plus concise interpretation.
