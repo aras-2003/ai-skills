@@ -96,5 +96,9 @@ Default profile:
 - research queue / next actions;
 - canonical receipts and limitations.
 
-For each detailed candidate, the default price horizon is 5Y plus a 1Y current-setup view when data are available. KPI history defaults to 12-20 quarters. Use a chat-native interactive quantitative renderer/widget for these required historical visuals. A static PNG renderer does not satisfy the interactive visual slot; it may be used only as a diagnostic fallback with the interactive slot remaining blocked. State normalization, FX/dividend treatment, source and as-of date.
+For each detailed candidate, the default price horizon is 5Y plus a 1Y current-setup view when data are available. KPI history defaults to 12-20 quarters. Use a chat-native interactive quantitative renderer/widget for these required historical visuals.
+
+**Attempt-first rendering rule:** if chartable verified series exist, the workflow must attempt the host-native interactive chart surface before finalizing the report. An UNKNOWN tool/widget discovery state is not enough to skip the chart. Only an explicit failed/unavailable host-native attempt may result in BLOCKED_NO_RENDERER. A static PNG/table is diagnostic fallback only and does not satisfy the required interactive slot.
+
+State normalization, FX/dividend treatment, source and as-of date.
 Do not return a full textual report plus a separate duplicate dashboard. Do not generate HTML/PDF/Figma/deck/file output unless the user explicitly requested it; if an ideal visual cannot be embedded, use the best chat-native chart/widget/table/text fallback.
