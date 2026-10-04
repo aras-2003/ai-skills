@@ -6,7 +6,7 @@ description: >
   interactive components or Figma outputs appear inside the relevant sections instead of as a separate parallel artifact.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.5.0"
+  version: "0.6.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02

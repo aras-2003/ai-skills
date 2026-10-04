@@ -29,36 +29,60 @@ If canonical storage lacks current market price history needed for price context
 
 ## Investment — security review
 1. Investment view / thesis state
-2. Business performance
-   - 3–4 key KPIs
-3. Market/price context
+2. WHY THIS / WHY NOW
+   - explicit reason the security deserves attention now;
+   - 2–3 measurable supporting signals
+3. Historical business performance
+   - 3–4 key KPIs;
+   - default 12–20 quarters where available;
+   - **required interactive historical KPI visual slot** when verified series exist
+4. Market/price context
    - prefer real historical time-series;
-   - support 3M / 6M / 12M switching when the renderer and verified data support it
-4. What changed fundamentally
-5. Valuation / priced-in expectations
+   - default 5Y price history plus 1Y current setup when available;
+   - **required interactive historical price visual slot** when verified series exist
+5. Material-event timeline
+   - align dated earnings/guidance/capex/M&A/regulatory/product events to major price/KPI moves;
+   - separate OBSERVED / VERIFIED EVENT / INTERPRETATION / CONFIDENCE
+6. What changed fundamentally
+7. Valuation / priced-in expectations
+   - historical valuation context where reliable;
    - scenario range only when evidence gates permit
-6. Catalysts and risks
-   - compact timeline or matrix
-7. Portfolio fit / sizing constraints
-8. Decision state / next trigger
-9. Compact evidence/receipt block
+8. Catalysts and risks
+9. Portfolio fit / sizing constraints
+10. Decision state / next trigger
+11. Compact evidence/receipt block
 
 Do not use price momentum as thesis validity. External market data may supplement canonical state but must be labeled external/noncanonical.
 
 ## Investment — opportunity hunter
-1. Executive shortlist context
-2. Top 2–3 candidates in detail by default
-   - thesis/setup
-   - 3–4 key KPIs
-   - price/valuation context
-   - catalyst/risk
+1. Discovery logic
+   - universe scanned;
+   - why existing watchlist/opportunities did not dominate candidate generation
+2. Broad radar
+   - roughly 10–15 candidates by default;
+   - WHY THIS / WHY NOW;
+   - 2–3 measurable signals;
+   - failure case;
+   - PROMOTE / WATCH / DEFER / REJECT
+3. Top 2–3 candidates in detail by default
+   - exact reason each outranked alternatives;
+   - 3–4 key KPIs with 12–20 quarter history where available;
+   - 5Y price history + 1Y current setup;
+   - valuation history where reliable;
+   - dated material-event timeline;
+   - observed moves vs likely causes + confidence;
+   - catalyst/risk;
    - decision implication / next gate
-3. One cross-candidate visual/matrix
-4. Remaining names compressed into watch/defer
-5. Research queue / next actions
-6. Compact receipts / limitations
+4. Required interactive historical visuals
+   - price history for each detailed candidate when verified time series exist;
+   - key KPI history where verified series exist;
+   - use one shared interactive comparison only when the same metric/horizon is genuinely comparable across names
+5. Cross-candidate comparison
+6. Remaining names compressed into watch/defer/reject
+7. Research queue / next actions
+8. Compact receipts / limitations
 
-Prefer one shared comparison/time-series visual over repetitive per-candidate charts when it communicates the decision better.
+Prefer a shared interactive comparison when it answers the same decision question better than repeated candidate charts. Do not compress unlike KPIs or business models into one misleading chart.
 
 ## Investment — attention review
 1. What requires attention now

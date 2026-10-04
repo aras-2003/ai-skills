@@ -7,7 +7,7 @@ description: >
   to make a visual complete.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.6.0"
+  version: "0.7.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02

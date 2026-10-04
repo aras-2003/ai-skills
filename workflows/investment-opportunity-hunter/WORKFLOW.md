@@ -1,10 +1,10 @@
 # Investment Opportunity Hunter Workflow
 
 ## Purpose
-Find a small number of XTB-investable research candidates by combining market change detection, structured equity research, primary-source verification, theme context, portfolio context and evidence quality without turning discovery into automatic trading.
+Actively discover new investment opportunities globally, with XTB availability strongly preferred for actionable ideas, and reduce them to a small evidence-backed shortlist. Discovery must explain why each promoted name is interesting **now**, using measurable changes, historical context and primary evidence rather than cheapness or familiarity.
 
 ## Entry modes
-- broad scan: search the XTB-investable universe;
+- broad scan: scan globally, then verify XTB availability before calling an idea actionable;
 - watchlist change scan: detect names that became materially more or less interesting;
 - theme-led scan: start from a validated theme and find candidate beneficiaries.
 
@@ -23,20 +23,36 @@ Find a small number of XTB-investable research candidates by combining market ch
 ## Sequence
 1. Read current policy, portfolio, watchlist, prior opportunities and signal history through investment-record-store. Emit the canonical READ receipt.
 2. If canonical history is unavailable, continue only as a fresh screen and state that no prior-state comparison was possible.
-3. Use installed structured equity/ETF research plugins for breadth and candidate generation.
-4. Run market-opportunity-scan; prefer changed signals over static rankings.
-5. Verify decision-relevant claims with primary sources; use Firecrawl for live retrieval/parsing when useful.
-6. Keep fundamental, valuation and market/trend evidence in separate fields and attach dated provenance/confidence.
-7. Use investment-attention-triage when materiality is unclear.
-8. If a theme drives the setup, use trend-theme-research before attributing benefit to a company.
-9. Reduce to 3-10 research candidates.
-10. For highest-materiality candidates only, run security-underwriting and valuation-scenario-review.
-11. Run thesis-challenge before promoting a candidate to a conviction queue.
-12. Persist sources, opportunities, research events and signals through investment-record-store only.
-13. Emit canonical WRITE receipt. Data/analytics outputs and local files are NONCANONICAL.
-14. Do not size or label BUY/SELL here; route portfolio action to investment-security-review or position-sizing-review.
+3. Use installed structured equity/ETF research plugins and current external research for broad discovery. Do not seed the scan primarily from existing opportunities/watchlist.
+4. Run market-opportunity-scan and create a broad radar of roughly 10-15 names.
+5. Reject/defer candidates that lack:
+   - WHY THIS;
+   - WHY NOW;
+   - at least 2-3 measurable decision-relevant signals;
+   - a clear failure case.
+   Cheapness, a low multiple or a drawdown alone cannot pass this gate.
+6. Verify decision-relevant claims with primary sources; use Firecrawl for live retrieval/parsing when useful.
+7. Keep fundamental, valuation and market/trend evidence in separate fields and attach dated provenance/confidence.
+8. For promoted names, build historical evidence:
+   - 5Y price context when available;
+   - 1Y current setup;
+   - 12-20 quarter key KPI history;
+   - valuation history where reliable;
+   - dated events aligned to material price/KPI changes.
+9. Separate observed historical moves from likely causes. Causal interpretation must cite supporting events/data and carry HIGH/MEDIUM/LOW confidence or UNKNOWN.
+10. Use investment-attention-triage when materiality is unclear.
+11. If a theme drives the setup, use trend-theme-research before attributing benefit to a company.
+12. Rank the radar by evidence quality, asymmetry, material change and portfolio distinctiveness. Promote only the best 2-3 to detailed analysis by default, and say exactly why they outranked alternatives.
+13. For those 2-3, run security-underwriting and valuation-scenario-review.
+14. Run thesis-challenge before promoting a candidate to a conviction queue.
+15. Confirm XTB availability before calling an idea actionable.
+16. Persist sources, opportunities, research events and signals through investment-record-store only.
+17. Emit canonical WRITE receipt. Data/analytics outputs and local files are NONCANONICAL.
+18. Do not size or label BUY/SELL here; route portfolio action to investment-security-review or position-sizing-review.
 
 ## Evidence gates
+- no shortlist promotion without WHY THIS / WHY NOW and measurable evidence;
+- cheapness/drawdown alone fails the gate;
 - current claims require as-of/source dates;
 - structured research is discovery evidence, not canonical state;
 - critical figures require primary-source sanity checks;
@@ -44,10 +60,24 @@ Find a small number of XTB-investable research candidates by combining market ch
 - social/news attention alone cannot pass discovery.
 
 ## Output contract
-Ticker | setup | fundamental change | valuation change | market/trend change | materiality | evidence/provenance | portfolio relevance | XTB status | next step | canonical persistence receipts.
+### Broad radar
+10-15 names by default:
+Ticker | WHY THIS | WHY NOW | measurable evidence | valuation/expectations | failure case | portfolio distinctiveness | XTB status | disposition (PROMOTE/WATCH/DEFER/REJECT).
+
+### Detailed shortlist
+2-3 names by default:
+- explicit reason for selection over alternatives;
+- 5Y price history + 1Y current setup when available;
+- 12-20 quarter key KPI history;
+- valuation history where reliable;
+- material event timeline;
+- observed moves vs likely causes + confidence;
+- thesis/setup, catalyst, strongest countercase and next evidence gate;
+- canonical persistence receipts.
 
 ## Stop conditions
-Stop when 3-10 credible research candidates remain.
+Stop broad discovery when roughly 10-15 credible research candidates remain.
+Stop detailed work after the best 2-3 have passed the evidence gate unless the user asks for a wider deep dive.
 Stop deeper work when the evidence gap is larger than the apparent opportunity.
 
 ## Integrated report presentation
@@ -56,13 +86,15 @@ Render the report directly in the chat response by default. External HTML/PDF/Fi
 After analytical synthesis, call `report-composer` to produce one integrated opportunity report. Use `visual-output-design` only for the inline visual slots selected by the composer.
 
 Default profile:
-- market/portfolio context;
-- shortlist cards;
-- candidate-by-candidate sections;
-- local price/performance chart where useful and supported;
+- discovery context and search logic;
+- broad radar (10-15 candidates) with explicit promote/watch/defer/reject rationale;
+- top 2-3 candidate-by-candidate sections;
+- **required interactive price-history visual for each detailed candidate** when verified time-series data are available;
+- key KPI history visual(s) for each detailed candidate where material data exist;
+- dated material-event timeline and causal interpretation;
 - cross-candidate comparison;
 - research queue / next actions;
 - canonical receipts and limitations.
 
-For each candidate section, place any price/performance visual immediately after the setup/context it explains. When verified time-series data exist, support 3M / 6M / 12M switching. State normalization, FX/dividend treatment and as-of date.
+For each detailed candidate, the default price horizon is 5Y plus a 1Y current-setup view when data are available. KPI history defaults to 12-20 quarters. Use a chat-native interactive quantitative renderer/widget for these required historical visuals. A static PNG renderer does not satisfy the interactive visual slot; it may be used only as a diagnostic fallback with the interactive slot remaining blocked. State normalization, FX/dividend treatment, source and as-of date.
 Do not return a full textual report plus a separate duplicate dashboard. Do not generate HTML/PDF/Figma/deck/file output unless the user explicitly requested it; if an ideal visual cannot be embedded, use the best chat-native chart/widget/table/text fallback.
