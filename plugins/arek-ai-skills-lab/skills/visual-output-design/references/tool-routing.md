@@ -42,17 +42,21 @@ Preflight status:
 - `UNKNOWN`: tool enumeration is insufficient to determine whether a host-native renderer exists.
 
 ### Attempt-first rule for required interactive investment charts
-For required price/KPI history slots, `UNKNOWN` is **not** a terminal blocked state.
+For required price/KPI history slots, UNKNOWN is not a terminal blocked state, but an attempt is valid only when the current host exposes a documented, callable chart/widget mechanism.
 
-If the host surface may support a native chart component that is not exposed through MCP/tool enumeration:
-1. prepare the factual chart payload;
-2. attempt the host-native interactive chart using the host's response/widget contract;
-3. if the host accepts/renders the chart payload, record `AVAILABLE` + `PAYLOAD_RENDERED`;
-4. if the host explicitly rejects or lacks the capability, use `BLOCKED_NO_RENDERER` (or `FAIL_RENDERER_INVOCATION` when invocation was available but failed).
-
-Do not convert `UNKNOWN` directly into `BLOCKED_NO_RENDERER` without a host-native chart attempt for required investment-history visuals.
+1. Prepare the factual chart payload.
+2. Attempt the host-native interactive chart only through that real, documented mechanism; never simulate an unavailable widget call.
+3. If it accepts the payload, record AVAILABLE + PAYLOAD_RENDERED and preserve the chart as a native visual element in the chat response.
+4. If no callable/documented host mechanism exists, do not simulate a widget call or print chart JSON as if it rendered. Use an available static renderer, or mark the interactive slot BLOCKED_NO_RENDERER.
+5. If a real invocation fails, record FAIL_RENDERER_INVOCATION.
 
 A table/text fallback may accompany a blocked state for usability, but it does not satisfy the visual requirement.
+
+## Inline payload safety and display
+- Never place data:image/...;base64,... or raw base64 in user-facing Markdown/text. Do not encode or stringify image blocks returned by a renderer.
+- Preserve returned image content as an actual inline image block in the assistant response; put captions, source links, units, and as-of labels beside it.
+- A static chart image is not interactive. Record its renderer class accurately and never describe it as an interactive dashboard.
+- PAYLOAD_RENDERED means a native chart/image payload was produced and included in the response. It does not prove client display; keep client display NOT_OBSERVABLE.
 
 ## 1. Native interactive chart widget
 Preferred for investment price/KPI history when the host runtime exposes the native `chart` widget.

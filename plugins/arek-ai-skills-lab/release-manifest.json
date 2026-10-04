@@ -163,7 +163,7 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "3c665bccdd3086135afce8da87f9913ba9a3f99cc67d840d7ed284761198e0d7",
+      "content_sha256": "486e9d192f0ed2a0953f5d709d1c10e18b7c3e335ca7b8f93bce139f593df9d6",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-opportunity-hunter",
@@ -373,11 +373,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "df4bd03c83246dcb8f92a6f1e95aa23c9f55b1391b6cf1f64ffb4771b4497f28",
+      "content_sha256": "c97263b1e2e6999e9cc83ed43a220468765c790864c4c08c92c47344e6b1dc30",
       "kind": "skill",
       "maturity": "candidate",
       "name": "report-composer",
-      "version": "0.8.0"
+      "version": "0.9.0"
     },
     {
       "content_sha256": "39ebf3cf6aaa4b33540464ea0039d9f83802465caa9db6fa7280d5090370b6f5",
@@ -464,17 +464,17 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "df0cf97d7947a2d3173d8890a4fa1ed77fde21096ad5ce6e33bb160ef1cec517",
+      "content_sha256": "70af58c9d2be2905bb51fc62d1a3c99e650350fd6aea8a98b7e3c1c2992a0154",
       "kind": "skill",
       "maturity": "candidate",
       "name": "visual-output-design",
-      "version": "0.9.0"
+      "version": "0.10.0"
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "ffeed373e5b048710889c306a8efbef114c40f18b5eee29b9b195aad0033a4cf",
-  "release_id": "0.27.0+988ed60dcb2d",
+  "payload_content_sha256": "d62df69de9dbfe0947a7f5cc9b1ed9f8f9804c74d959c21b761daf4c47b232de",
+  "release_id": "0.28.0+ed7a139979c0",
   "schema_version": "1.0",
-  "source_revision": "988ed60dcb2d8a999dd83b814949ba691370571d",
-  "version": "0.27.0"
+  "source_revision": "ed7a139979c01cdbb5e3f6fe99f99fddebd6abdb",
+  "version": "0.28.0"
 }

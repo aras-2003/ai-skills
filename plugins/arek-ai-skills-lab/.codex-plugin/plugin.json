@@ -13,5 +13,5 @@
   "mcpServers": "./.mcp.json",
   "name": "arek-ai-skills-lab",
   "skills": "./skills/",
-  "version": "0.27.0"
+  "version": "0.28.0"
 }

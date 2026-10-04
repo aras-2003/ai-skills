@@ -46,13 +46,13 @@ Actively discover new investment opportunities globally, with XTB availability s
 13. For those 2-3, run security-underwriting and valuation-scenario-review.
 14. Run thesis-challenge before promoting a candidate to a conviction queue.
 15. Confirm XTB availability before calling an idea actionable.
-16. Persist new research state through investment-record-store only:
-   - sources and evidence links for material claims;
-   - research events/signals for verified new evidence;
-   - promoted candidates as canonical `opportunities` with research-state status such as `RESEARCH_CANDIDATE`, `WATCH`, `DEFER` or `REJECT`, when the candidate is new or materially changed.
-   A research report/discovery request is sufficient authority for these **research-state writes**. Do not reject them merely because the user did not make an owner portfolio decision.
-17. Before writing an opportunity, deduplicate against current/prior opportunities and stable instrument identity. Update disposition/history instead of creating a duplicate.
-18. Emit canonical WRITE receipt. Data/analytics outputs and local files are NONCANONICAL.
+16. Persist research state through investment-record-store only, within this allowlist:
+   - sources and evidence links that support material verified claims;
+   - research events/signals only for material new or changed evidence;
+   - promoted candidates as canonical opportunities with research status RESEARCH_CANDIDATE, WATCH, DEFER or REJECT.
+   A direct user request to run discovery, scan or produce the integrated opportunity report authorizes these bounded research-state writes by default. Do not write for a read-only, preview-only or explicitly no-save request. Do not persist the generated report itself as canonical state.
+17. Before writing, pass the evidence gates, deduplicate by stable instrument identity against current/prior opportunities, and write only new or materially changed research state. Update disposition/history instead of creating a duplicate. Do not write speculative candidates that remain in raw discovery.
+18. Emit a canonical WRITE receipt listing each entity class written, skipped or failed. Data/analytics outputs and local files are NONCANONICAL.
 19. Do not size or label BUY/SELL here; route portfolio action to investment-security-review or position-sizing-review.
 20. Owner-decision writes (BUY/SELL/REDUCE/EXIT, policy changes, thesis activation, transaction execution) remain separate and require the appropriate explicit authority.
 
@@ -106,7 +106,10 @@ Default profile:
 
 For each detailed candidate, the default price horizon is 5Y plus a 1Y current-setup view when data are available. KPI history defaults to 12-20 quarters. Use a chat-native interactive quantitative renderer/widget for these required historical visuals.
 
-**Attempt-first rendering rule:** if chartable verified series exist, the workflow must attempt the host-native interactive chart surface before finalizing the report. An UNKNOWN tool/widget discovery state is not enough to skip the chart. Only an explicit failed/unavailable host-native attempt may result in BLOCKED_NO_RENDERER. A static PNG/table is diagnostic fallback only and does not satisfy the required interactive slot.
+**Attempt-first rendering rule:** for each required chartable slot, attempt the host-native interactive chart only through a documented, callable host mechanism. If only a static chart renderer is available, embed its returned image as a native inline image and label it static; do not claim interactivity. If no renderer can emit an inline visual, mark that exact slot BLOCKED_NO_RENDERER or FAIL_RENDERER_INVOCATION and provide a diagnostic table fallback. A tool attempt, discovered capability, URL, chart JSON or base64 string does not count as an included visual.
+
+**Output audit:** before returning, reconcile every required slot for every detailed candidate against the actual inline visuals in the report. One successful chart does not cover another candidate's missing chart. Never expose data:image/...;base64,..., raw base64 or serialized media in user-facing text.
+
+Use a compact in-chat shortlist dashboard after the executive summary/radar to compare candidate, status, why-now evidence, valuation/expectation risk, portfolio fit and next gate. It is a readable table/card group inside the report, not a claim of an interactive dashboard and not a separate file. Keep historical charts adjacent to each candidate's analysis.
 
 State normalization, FX/dividend treatment, source and as-of date.
-Do not return a full textual report plus a separate duplicate dashboard. Do not generate HTML/PDF/Figma/deck/file output unless the user explicitly requested it; if an ideal visual cannot be embedded, use the best chat-native chart/widget/table/text fallback.
