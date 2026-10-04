@@ -10,7 +10,7 @@ metadata:
   version: "0.12.0"
   maturity: candidate
   risk: low
-  last_reviewed: 2026-10-02
+  last_reviewed: 2026-10-05
   execution:
     default_model_class: fast
 ---
