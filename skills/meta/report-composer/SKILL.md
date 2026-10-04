@@ -108,8 +108,9 @@ Each slot must define:
 - **slot_id**
 - **purpose**
 - **placement_after**
-- **renderer_class**: native-chart / native-widget / table / structured-chat / interactive-html / figma-diagram / figma-design / deck / none
+- **renderer_class**: native-chart / static-image / native-widget / table / structured-chat / interactive-html / figma-diagram / figma-design / deck / none
 - **payload**
+- **interaction_level**: STATIC / HOVER / CONTROLLED / UNKNOWN
 - **interaction**: e.g. none, 3m/6m/12m, scenario toggle, filter
 - **as_of**
 - **provenance**
@@ -182,6 +183,7 @@ Do not emit `report_status: PASS` for ordinary report composition. Runtime visua
 - [ ] Every visual has local interpretation and provenance.
 - [ ] No visual exists only for decoration.
 - [ ] The same conclusion is preserved across text and visual rendering.
+- [ ] Interaction level (STATIC / HOVER / CONTROLLED / UNKNOWN) matches the emitted component and observed/documented behavior.
 - [ ] Interaction controls correspond to real supported alternate views.
 - [ ] No external artifact/file was created unless explicitly requested.
 - [ ] The report remains readable on narrow/mobile layouts.
