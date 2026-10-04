@@ -28,5 +28,5 @@
   "name": "arek-ai-skills-lab",
   "repository": "https://github.com/aras-2003/ai-skills",
   "skills": "./skills/",
-  "version": "0.29.0"
+  "version": "0.30.0"
 }

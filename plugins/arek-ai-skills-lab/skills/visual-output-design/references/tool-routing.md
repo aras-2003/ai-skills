@@ -25,32 +25,31 @@ Known bundled static renderer:
 - they **do not qualify** for a slot that explicitly requires chat-native interactivity.
 - a valid tool result proves renderer execution `PAYLOAD_RENDERED`; it does not prove client display. Client display is `NOT_OBSERVABLE` to the model.
 
-Interactive investment-history requirement:
-- when a workflow/profile marks a price/KPI history slot as interactive, preflight should locate a chat-native interactive quantitative chart/widget capability when observable; if host-native capability visibility is incomplete, follow the attempt-first rule instead of blocking early;
-- **preferred ChatGPT capability: native `chart` widget** (JSON-backed interactive bar/line/pie/scatter chart) when exposed by the runtime;
-- for price/KPI history use `chart` with `chartType: "line"` and explicit time-series rows;
-- the native `chart` widget qualifies as interactive because the client renderer provides hover/tooltips and native chart interaction over deterministic supplied data;
-- do not require the skill package itself to own an MCP tool named `chart`; runtime-native widgets exposed by the host count during capability preflight;
-- if `chart` is available, use it before `arek-chart-renderer`;
-- other interactive quantitative chart/widget capabilities may also qualify if they accept explicit numeric/time-series data and are chat-native;
-- static PNG/SVG/image payloads, markdown tables and generated images do not satisfy the interactive slot;
-- if a host-native attempt proves no such capability exists, return `BLOCKED_NO_RENDERER` for that slot.
+Interaction classification is separate from renderer availability:
 
-Preflight status:
-- `AVAILABLE`: a concrete qualifying renderer is present and invokable;
-- `UNAVAILABLE`: the host/runtime explicitly proves that no qualifying renderer can be invoked;
-- `UNKNOWN`: tool enumeration is insufficient to determine whether a host-native renderer exists.
+- `STATIC`: a rendered image/chart with no user-operated interaction.
+- `HOVER`: documented native hover or tooltip behavior, with no data-view controls.
+- `CONTROLLED`: a documented, callable selector/filter/range control that changes the displayed data view.
+- `UNKNOWN`: the runtime or payload does not establish the interaction level.
 
-### Attempt-first rule for required interactive investment charts
-For required price/KPI history slots, UNKNOWN is not a terminal blocked state, but an attempt is valid only when the current host exposes a documented, callable chart/widget mechanism.
+A control-interactive chart is available only when the current runtime exposes a concrete, documented, callable component/API. Do not infer support from a product's general capabilities, mention of a `chart` widget, or JSON-shaped chart data. Tool enumeration alone may be supplemented by current official host documentation only if that documentation describes a callable mechanism for this session. Never invent response syntax or a mock control.
 
-1. Prepare the factual chart payload.
-2. Attempt the host-native interactive chart only through that real, documented mechanism; never simulate an unavailable widget call.
-3. If it accepts the payload, record AVAILABLE + PAYLOAD_RENDERED and preserve the chart as a native visual element in the chat response.
-4. If no callable/documented host mechanism exists, do not simulate a widget call or print chart JSON as if it rendered. Use an available static renderer, or mark the interactive slot BLOCKED_NO_RENDERER.
-5. If a real invocation fails, record FAIL_RENDERER_INVOCATION.
+If the user specifically asks for controls but the runtime exposes only a static renderer, mark the **control feature** `BLOCKED_NO_RENDERER`; separately render and label a static chart when useful. Do not mark the entire visual blocked if a real static visual was emitted. When a native chart's hover behavior is documented but no selectors are available, classify it `HOVER`, not `CONTROLLED`.
 
-A table/text fallback may accompany a blocked state for usability, but it does not satisfy the visual requirement.
+`AVAILABLE`, `UNAVAILABLE`, or `UNKNOWN` must be recorded for the requested capability level. For unknown interaction capability, use an available concrete static renderer for the visual while reporting that the interactive capability was not established. Do not make a speculative widget attempt.
+
+## Investment shortlist renderer choice
+
+1. Use a real callable interactive component only when its controls and output behavior are documented in the current runtime.
+2. Otherwise use the bundled static `arek-chart-renderer` when exposed. Its `render_line_chart` and `render_bar_chart` tools produce static visuals, not filters or selectors.
+3. If no deterministic chart renderer is callable, mark the visual slot `BLOCKED_NO_RENDERER` and give a compact table as diagnostic fallback only.
+
+For the static fallback:
+- when verified price series for at least two candidates overlap on comparable dates and use compatible adjustment definitions, plot each series indexed to 100 at the first common observation;
+- label the base date, period, currency, price-adjustment/dividend basis, as-of date, and source; describe the result as indexed share-price movement, not total return unless dividends are included;
+- keep KPI charts candidate-specific and units separate;
+- use a line for at least three dated observations; show two observations as a paired bar/dot comparison and call it a period comparison, not a trend;
+- do not smooth, interpolate, or silently omit missing periods. If common coverage is insufficient, use separate charts or state which exact slot is unavailable.
 
 ## Inline payload safety and display
 - Never place data:image/...;base64,... or raw base64 in user-facing Markdown/text. Do not encode or stringify image blocks returned by a renderer.

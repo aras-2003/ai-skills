@@ -9,10 +9,10 @@ description: 'Compose one integrated decision report from an already-supported w
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.10.0
+  version: 0.11.0
   maturity: candidate
   risk: low
-  last_reviewed: '2026-10-02'
+  last_reviewed: '2026-10-05'
 ---
 
 # Report Composer
@@ -34,13 +34,13 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
    - classify each decision-relevant claim as CANONICAL / USER_PROVIDED / EXTERNAL_VERIFIED / DERIVED / UNKNOWN;
    - require reproducible inputs for every DERIVED claim;
    - run the causal-attribution gate before stating why something changed.
-4. Run `capability_preflight` before finalising any visual-floor requirement:
-   - inspect both tools and host-native chat widgets/components exposed by the current runtime;
-   - the native ChatGPT `chart` widget counts as an interactive deterministic data renderer when exposed;
-   - classify whether a deterministic data renderer exists for the required visual grammar;
-   - do not count `image_gen`, image viewers, generic media generation, or Figma diagram/design tools as a quantitative chart renderer;
-   - record one of: `AVAILABLE`, `UNAVAILABLE`, `UNKNOWN`;
-   - for required investment price/KPI charts, `UNKNOWN` means **attempt the host-native chart surface**, not block the report.
+4. Run `capability_preflight` before finalising each visual-floor slot:
+   - inspect tools and host-native components actually documented and exposed by this runtime;
+   - bind the slot to a concrete, callable renderer; never infer a widget API from a product name or create response syntax that is not documented;
+   - distinguish deterministic static image/chart renderers from components with documented hover or user-operated controls;
+   - do not count `image_gen`, image viewers, generic media generation, or Figma diagram/design tools as quantitative chart renderers;
+   - record renderer availability as `AVAILABLE`, `UNAVAILABLE`, or `UNKNOWN`;
+   - when interactive capability is unknown or absent, use a real static renderer for the visual and explicitly state that interaction is unavailable; do not simulate an interactive-renderer attempt.
 5. Select a report profile from `references/report-profiles.md` or derive a minimal equivalent.
 6. Build a semantic report model containing ordered sections:
    - section purpose;
@@ -58,7 +58,7 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
    - only the relevant supported data;
    - required renderer capabilities;
    - as-of context and provenance.
-9. For required interactive investment price/KPI slots, do not finalize the report until a host-native chart attempt has been made when chartable verified data exist. A table is not an acceptable pre-attempt substitute.
+9. For required investment price/KPI visuals, invoke at least one concrete chart renderer when verified chartable data exist. Prefer a documented interactive component only when the runtime exposes a callable interface; otherwise render a static image. If the user explicitly requested interaction and none is available, mark the interaction feature blocked while still including any useful static visual.
 10. Choose output target from actual renderer execution:
    - **chat-native report** when required visual slots have a qualifying renderer and a valid payload was produced;
    - **chat-blocked** when no qualifying renderer exists or invocation fails;
@@ -80,7 +80,17 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
 - Place candidate-specific price/KPI visuals inside the corresponding candidate section. Share a chart only when the compared series use compatible definitions, units, and periods.
 - Before finalising, compare required slots with actual inline visual elements. A slot is not complete just because data were gathered, a tool was detected, a tool call was attempted, or a payload was mentioned in prose.
 - Never expose data:image/...;base64,..., raw base64, serialized image blocks, or chart JSON in user-facing text/Markdown. Preserve returned media as an actual inline image or native chart element. If the runtime cannot emit it, state the slot's blocked/failed status and retain a compact table fallback.
-- Prefer the best usable in-chat visual available. If only a static image renderer exists, embed the image as a native image element and label it static; do not imply interactivity.
+- Prefer the best usable in-chat visual available. State whether it is static, hover-interactive, or control-interactive only when that behavior is documented or observed; label static images as static.
+
+### Investment shortlist visual layout
+
+- Put the compact candidate dashboard near the top, then keep each KPI visual beside its candidate analysis.
+- When at least two candidates have verified price series with a common window and compatible adjustment definitions, create one shared price-comparison line chart indexed to 100 at the first common date. State the window, currency basis, price adjustment, dividend treatment and provenance. Treat it as a share-price comparison, not total return, unless dividends are included.
+- If price series do not share a comparable window or adjustment basis, do not combine them. Use separate small charts or a diagnostic table and identify the missing/unequal coverage.
+- Use candidate-specific KPI charts. Never plot different KPIs or units on a shared axis.
+- Use a line only for a genuine chronological sequence. With two observations, use a paired bar or dot comparison and call it a two-period comparison, not a trend. Do not interpolate missing quarters.
+- For static renderers, keep the chart visually clean: short title, period labels, units, readable scale and a brief interpretation. Prefer a shared indexed-price visual plus one compact KPI visual per detailed candidate over multiple repetitive chart variants.
+- Do not promise dynamic controls as the improvement path when the runtime exposes only static rendering. List unavailable selectors/filters plainly; never make a static image look like an interactive widget.
 
 ## Hard stop: no phantom visuals
 
@@ -99,8 +109,9 @@ Each slot must define:
 - **slot_id**
 - **purpose**
 - **placement_after**
-- **renderer_class**: native-chart / native-widget / table / structured-chat / interactive-html / figma-diagram / figma-design / deck / none
+- **renderer_class**: native-chart / static-image / native-widget / table / structured-chat / interactive-html / figma-diagram / figma-design / deck / none
 - **payload**
+- **interaction_level**: STATIC / HOVER / CONTROLLED / UNKNOWN
 - **interaction**: e.g. none, 3m/6m/12m, scenario toggle, filter
 - **as_of**
 - **provenance**
@@ -119,7 +130,7 @@ Each slot must define:
 - Do not make a dashboard merely because several metrics exist.
 - Do not repeat the same content in prose and a separate visual artifact unless repetition materially aids the decision.
 - Use interactive controls only when the alternative views answer a real decision question.
-- For company price/performance context, 3/6/12 month switching is useful when comparable, verified time-series data exist.
+- For company price/performance context, a shared indexed comparison is useful when comparable, verified time-series data exist; do not imply range switching unless real controls are available.
 - A visual may summarize but must not strengthen, rank or score beyond the underlying analysis.
 - Prefer native chat renderers for normal report delivery. Use Figma/HTML/PDF/deck renderers only when the user explicitly requests an editable or external artifact/file.
 - Canonical READ/WRITE receipts remain explicit and auditable.
@@ -156,8 +167,7 @@ Do not emit `report_status: PASS` for ordinary report composition. Runtime visua
 - Missing evidence stays visibly missing.
 
 ## Failure and uncertainty handling
-- If a required investment price/KPI visual has `UNKNOWN` renderer visibility, attempt the host-native chart component before deciding it is blocked.
-- If a required visual is explicitly unavailable after the required attempt, use `BLOCKED_NO_RENDERER`.
+- Track renderer availability separately from interaction level. If only interactive capability is unknown or unavailable, render a useful static visual when possible and mark the requested controls blocked/unknown; reserve `BLOCKED_NO_RENDERER` for the missing visual renderer itself.
 - If renderer invocation fails, use `FAIL_RENDERER_INVOCATION`.
 - If the renderer returns a valid payload, use `PAYLOAD_RENDERED`; do not infer whether the client displayed it.
 - If decision-critical evidence is missing but useful analysis remains possible, use `analysis_state: PARTIAL_EVIDENCE`.
@@ -173,6 +183,7 @@ Do not emit `report_status: PASS` for ordinary report composition. Runtime visua
 - [ ] Every visual has local interpretation and provenance.
 - [ ] No visual exists only for decoration.
 - [ ] The same conclusion is preserved across text and visual rendering.
+- [ ] Interaction level (STATIC / HOVER / CONTROLLED / UNKNOWN) matches the emitted component and observed/documented behavior.
 - [ ] Interaction controls correspond to real supported alternate views.
 - [ ] No external artifact/file was created unless explicitly requested.
 - [ ] The report remains readable on narrow/mobile layouts.
