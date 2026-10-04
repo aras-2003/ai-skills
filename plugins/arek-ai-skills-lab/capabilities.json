@@ -256,7 +256,7 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "31ac908e9f30adf22c07f034ab5a50dfe92a7275890b02ae82f835a1794cba71",
+      "content_sha256": "6d826d07693f3c8ab99271d4056e85a0a602dda2d78f0e51616e334b123910ea",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -266,7 +266,7 @@
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-opportunity-hunter",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "364488d260b2197eeda6c46c1b3803352ced4f73f8c6f634e9c8583490345443",
@@ -329,7 +329,7 @@
       "version": "0.9.0"
     },
     {
-      "content_sha256": "7557c2167b29a21eb53cba010ff8a305d90db78a9802974fe546c50c1dafecde",
+      "content_sha256": "82fc5ab48bfa94d48e22416cfe5b703aa178f402314eba0f07eba5071a18182d",
       "inventory": [
         "SKILL.md",
         "references/WORKFLOW.md",
@@ -339,7 +339,7 @@
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-security-review",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "be6a3c72f10795482a3c301b48116e576c10407b445f0a524773ceaf4e34277e",
@@ -395,14 +395,14 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "7d87d58cdd2496335d5d9c17e4ae236ad6d64e4475b2a45e40b0232fc7a47a2a",
+      "content_sha256": "109f5e15893d5adbcdb6953fdd3c28224af67a2bf96ef9de7544895250af518b",
       "inventory": [
         "SKILL.md"
       ],
       "kind": "skill",
       "maturity": "production",
       "name": "market-opportunity-scan",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "48ae1be4dd9fa9389592bc0973c0f669bf08eae39e70d6fd0d43322a73955ed6",
@@ -599,7 +599,7 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "148a26bf90c41f2183d3a7ede160ac8cadbf9d139b93cec84cf365cfae34153d",
+      "content_sha256": "8f74b3fd23f2357eacb30c1f2ca361de1e967949786219d8375df53546159515",
       "inventory": [
         "SKILL.md",
         "references/composition-rules.md",
@@ -610,17 +610,17 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "report-composer",
-      "version": "0.5.0"
+      "version": "0.6.0"
     },
     {
-      "content_sha256": "861592341f9daac0cdf8d9df183a5c9676f0fa26d110f6ce990bca2772de473a",
+      "content_sha256": "39ebf3cf6aaa4b33540464ea0039d9f83802465caa9db6fa7280d5090370b6f5",
       "inventory": [
         "SKILL.md"
       ],
       "kind": "skill",
       "maturity": "production",
       "name": "security-underwriting",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "content_sha256": "d2a13f68ad4fc8e24a525c6717288eed1bbc78768db4ed89601e33850377b01b",
@@ -738,7 +738,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "71c6fba16061109f8061859844c4160ca49a6e4f92e5e7318634dc4d7121144b",
+      "content_sha256": "cc0128b82c70effde17592bc305fddddf83f1b81011f645734e5346d7d9ebbf7",
       "inventory": [
         "SKILL.md",
         "references/design-system.md",
@@ -747,7 +747,7 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "visual-output-design",
-      "version": "0.6.0"
+      "version": "0.7.0"
     }
   ],
   "channel": "lab",
@@ -865,5 +865,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "6612816618291bf056cf1ab2be530e623d80fe96"
+  "source_revision": "b6417efdc277aa4cab1815d25e2575d0046f5094"
 }

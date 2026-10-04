@@ -40,6 +40,13 @@ For opportunity/security comparisons:
 - A compact table/matrix may accompany unavailable/failed rendering as a diagnostic fallback, but it does not change renderer execution state.
 
 ## 5. Visual quality
+For detailed investment/security reports with verified historical series:
+- price-history visuals are required;
+- key KPI-history visuals are required when those KPIs drive the thesis;
+- the required renderer class is **chat-native interactive quantitative time-series**;
+- a static PNG/image renderer does not satisfy these interactive investment-history slots;
+- if no qualifying interactive renderer/widget exists, keep the analytical work but mark the required slot `BLOCKED_NO_RENDERER`; a static chart/table may be diagnostic only.
+
 Prefer:
 - horizontal bars for ranked concentration/allocation;
 - normalized line charts for actual time-series / relative performance;
@@ -62,14 +69,19 @@ Avoid:
 
 If no suitable chat-native visual renderer is available, use a compact table/matrix only as a diagnostic aid and keep renderer execution at `BLOCKED_NO_RENDERER`; do not imply renderer success or client-visible completion.
 
-## 6. Price and market context
+## 6. Price, fundamentals and historical context
 - Canonical portfolio/research state remains canonical.
 - Market price history may come from current external market-data/research tools when canonical storage does not contain it.
 - Label such data as **external market data**, including as-of context/source.
 - Do not treat external price history as canonical state.
-- Prefer real historical series over three isolated trailing-return numbers when the series is available.
-- For security reports, 3M / 6M / 12M switching is useful only when the renderer and verified data support it.
+- For detailed investment/security analysis, default to 5Y price history plus a 1Y current-setup view when data are available.
+- For key business KPIs, default to 12–20 quarters where reliable history is available.
+- Include historical valuation context where it materially affects the thesis and reliable data exist.
+- Prefer real historical series over isolated trailing-return numbers.
+- Material historical moves should be paired with dated events when evidence supports interpretation.
+- Separate OBSERVED movement from VERIFIED EVENT and INTERPRETATION; attach confidence or use UNKNOWN.
 - Price momentum is context, not thesis validity.
+- Cheapness, a low multiple or a drawdown is not sufficient evidence for opportunity selection.
 
 ## 7. Canonical vs derived vs external
 Keep these visibly distinct:
