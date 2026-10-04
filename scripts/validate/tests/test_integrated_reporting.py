@@ -320,7 +320,7 @@ class IntegratedReportingTests(unittest.TestCase):
         security = (ROOT / "workflows/investment-security-review/WORKFLOW.md").read_text(encoding="utf-8")
 
         self.assertIn("Attempt-first rule", routing)
-        self.assertIn("attempt the host-native chart", routing.lower())
+        self.assertIn("attempt the host-native interactive chart", routing.lower())
         self.assertIn("attempt the host-native chart", renderer.lower())
         self.assertIn("attempt the host-native chart", composer.lower())
         self.assertIn("Attempt-first rendering rule", hunter)
