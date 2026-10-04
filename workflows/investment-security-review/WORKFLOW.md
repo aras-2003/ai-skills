@@ -60,8 +60,8 @@ Default profile:
 - investment view / thesis state;
 - WHY THIS / WHY NOW;
 - business performance with KPI strip;
-- **required interactive 5Y price-history chart plus 1Y current-setup view** when verified time-series data exist;
-- **required interactive KPI-history chart(s)** for the key decision-driving metrics when historical data exist;
+- a required inline 5Y price-history visual plus 1Y current-setup view when verified time-series data exist; use the best concrete renderer.
+- a required KPI-history visual for key decision-driving metrics when historical data exist;
 - dated material-event timeline tied to major price/KPI changes;
 - fundamental change;
 - valuation / priced-in expectations with scenario range when permitted;
@@ -70,9 +70,9 @@ Default profile:
 - decision state / next trigger;
 - evidence and canonical receipts.
 
-Historical charts belong inside the sections they explain, not in a separate dashboard. Default KPI history is 12-20 quarters. For required investment history visuals, prefer a chat-native interactive quantitative renderer/widget.
+Historical charts belong inside the sections they explain, not in a separate dashboard. Default KPI history is 12-20 quarters. Use a documented, callable interactive renderer only when this runtime exposes one; otherwise use the static chart renderer and label the returned image static.
 
-**Attempt-first rendering rule:** if verified chartable series exist, attempt the host-native interactive chart surface before finalizing the report. UNKNOWN capability discovery is not sufficient reason to omit the chart. Use BLOCKED_NO_RENDERER only after an explicit unavailable/rejected host-native attempt; static PNG/table remains diagnostic fallback only.
+**Renderer and interaction rule:** render each supported required price/KPI visual with an actual deterministic renderer. Use an interactive component only when the current runtime documents and exposes a callable interface. Otherwise embed the static renderer's returned image inline and label it static. If the user requested selectors or filters that are unavailable, mark the control feature BLOCKED_NO_RENDERER while retaining a successfully rendered static visual. If the visual itself cannot be rendered, mark that slot BLOCKED_NO_RENDERER or FAIL_RENDERER_INVOCATION; do not simulate a widget call.
 
 If evidence-sanity blocks valuation, show the blocked state rather than a fabricated range.
 Do not collapse business quality, current-price attractiveness and portfolio fit into one score.
