@@ -6,6 +6,8 @@ import shutil
 import tempfile
 import unittest
 import zipfile
+
+import yaml
 from pathlib import Path
 import sys
 
@@ -130,6 +132,15 @@ class PackagingTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
             out = Path(td) / "plugin"
             build_plugin.build(ROOT, out, "production")
+            skill_dirs = [p for p in (out / "skills").iterdir() if p.is_dir()]
+            for skill_dir in skill_dirs:
+                interface_path = skill_dir / "agents" / "openai.yaml"
+                self.assertTrue(interface_path.is_file(), skill_dir.name)
+                interface = yaml.safe_load(interface_path.read_text(encoding="utf-8"))
+                self.assertTrue(interface["interface"]["display_name"])
+                self.assertTrue(interface["interface"]["short_description"])
+                icon_path = skill_dir / interface["interface"]["icon_small"]
+                self.assertTrue(icon_path.is_file(), skill_dir.name)
             paths = [p.relative_to(out).as_posix() for p in out.rglob("*") if p.is_file()]
             self.assertFalse(any("/tests/" in f"/{p}/" for p in paths))
             self.assertFalse(any("/evals/" in f"/{p}/" for p in paths))
@@ -270,6 +281,14 @@ class PackagingTests(unittest.TestCase):
             self.assertTrue(data["workflows"])
             self.assertTrue(all(x["status"] == "unavailable" for x in data["workflows"]))
             zips1 = sorted(p for p in out1.glob("*.zip"))
+            self.assertTrue(zips1)
+            with zipfile.ZipFile(zips1[0]) as archive:
+                names = archive.namelist()
+                agent_path = next(p for p in names if p.endswith("/agents/openai.yaml"))
+                interface = yaml.safe_load(archive.read(agent_path).decode("utf-8"))
+                icon_path = (Path(agent_path).parent.parent / interface["interface"]["icon_small"]).as_posix()
+                self.assertIn(icon_path, names)
+                self.assertIn("display_name", interface["interface"])
             for p1 in zips1:
                 p2 = out2 / p1.name
                 self.assertEqual(p1.read_bytes(), p2.read_bytes())

@@ -7,6 +7,7 @@ from typing import Any
 import yaml
 
 from portable import portable_metadata
+from skill_interface import workflow_domain, write_skill_interface
 
 
 def load_registry(root: Path) -> list[dict]:
@@ -152,6 +153,10 @@ Use the output contract defined in `references/WORKFLOW.md`.
 - [ ] No extra domain was added merely for completeness.
 """
     (dst / "SKILL.md").write_text(skill_md, encoding="utf-8")
+    write_skill_interface(
+        root, dst, name=name, description=description,
+        domain=workflow_domain(str(name)),
+    )
     return name
 
 
