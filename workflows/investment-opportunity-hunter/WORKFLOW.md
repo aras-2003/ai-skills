@@ -97,19 +97,19 @@ Default profile:
 - discovery context and search logic;
 - broad radar (10-15 candidates) with explicit promote/watch/defer/reject rationale;
 - top 2-3 candidate-by-candidate sections;
-- **required interactive price-history visual for each detailed candidate** when verified time-series data are available;
+- a required inline price-history visual for each detailed candidate when verified time-series data are available; use the best concrete renderer in the current runtime.
 - key KPI history visual(s) for each detailed candidate where material data exist;
 - dated material-event timeline and causal interpretation;
 - cross-candidate comparison;
 - research queue / next actions;
 - canonical receipts and limitations.
 
-For each detailed candidate, the default price horizon is 5Y plus a 1Y current-setup view when data are available. KPI history defaults to 12-20 quarters. Use a chat-native interactive quantitative renderer/widget for these required historical visuals.
+For each detailed candidate, the default price horizon is 5Y plus a 1Y current-setup view when data are available. KPI history defaults to 12-20 quarters. Use a documented, callable interactive renderer only when the current runtime actually exposes one; otherwise use the static chart renderer and label the image static.
 
-**Attempt-first rendering rule:** for each required chartable slot, attempt the host-native interactive chart only through a documented, callable host mechanism. If only a static chart renderer is available, embed its returned image as a native inline image and label it static; do not claim interactivity. If no renderer can emit an inline visual, mark that exact slot BLOCKED_NO_RENDERER or FAIL_RENDERER_INVOCATION and provide a diagnostic table fallback. A tool attempt, discovered capability, URL, chart JSON or base64 string does not count as an included visual.
+**Renderer and interaction rule:** invoke an actual deterministic chart renderer for every supported chartable slot. Use a native interactive component only when this runtime documents and exposes a callable interface. Otherwise embed the static renderer's returned image inline and label it static. If the user requested selectors or filters that are unavailable, mark that control feature BLOCKED_NO_RENDERER while retaining any successfully rendered static chart. If the visual itself cannot be rendered, mark that exact slot BLOCKED_NO_RENDERER or FAIL_RENDERER_INVOCATION. A tool attempt, capability mention, URL, chart JSON or base64 string is not an included visual.
 
 **Output audit:** before returning, reconcile every required slot for every detailed candidate against the actual inline visuals in the report. One successful chart does not cover another candidate's missing chart. Never expose data:image/...;base64,..., raw base64 or serialized media in user-facing text.
 
 Use a compact in-chat shortlist dashboard after the executive summary/radar to compare candidate, status, why-now evidence, valuation/expectation risk, portfolio fit and next gate. It is a readable table/card group inside the report, not a claim of an interactive dashboard and not a separate file. Keep historical charts adjacent to each candidate's analysis.
 
-State normalization, FX/dividend treatment, source and as-of date.
+When at least two verified price series overlap on comparable dates and use compatible adjustment bases, prefer one shared price line indexed to 100 at the first common date. Keep candidate KPI visuals separate and retain original units. Use lines only for three or more dated observations; show two points as a period comparison, not a trend. State normalization, FX/dividend treatment, source and as-of date.
