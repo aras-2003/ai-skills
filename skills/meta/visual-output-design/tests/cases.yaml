@@ -84,3 +84,47 @@ cases:
         - UI_CONFIRMED
         - UI_RENDER_UNCONFIRMED
         - claim successful inline rendering
+
+  - id: visual-output-static-is-not-interactive
+    case: Static chart is rendered but no dynamic controls exist
+    input: |
+      The only callable chart renderer returns a PNG. Make a more dynamic comparison dashboard for three stocks.
+    expected:
+      should_trigger: true
+      must:
+        - classify the actual visual as STATIC
+        - render the PNG inline and label it static when data are supported
+        - state that selector/filter controls are unavailable
+      must_not:
+        - describe the PNG as interactive or controlled
+        - invent a chart-widget call or fake dropdown
+
+  - id: visual-output-controlled-needs-real-control
+    case: Distinguish a real selector from hover behavior
+    input: |
+      The runtime returns a native chart with hover tooltips but exposes no ticker or metric selector. The user asked to switch stocks.
+    expected:
+      should_trigger: true
+      must:
+        - classify interaction as HOVER, not CONTROLLED
+        - state that requested ticker switching is unavailable or blocked
+        - preserve a useful chart if supported
+      must_not:
+        - claim that hover verifies ticker selection
+        - describe the chart as a controlled dashboard
+
+  - id: visual-output-normalized-shortlist
+    case: Static comparison of comparable multi-candidate prices
+    input: |
+      Compare verified monthly prices for three candidates over the same dates and put their distinct thesis KPIs in the same dashboard.
+    expected:
+      should_trigger: true
+      must:
+        - index comparable price series to 100 at the common first date
+        - keep company-specific KPI units in separate charts
+        - label period, price basis, provenance and as-of date
+        - label static output when the renderer has no controls
+      must_not:
+        - imply price-only lines are total return
+        - plot unrelated KPIs on one shared axis
+        - interpolate missing observations

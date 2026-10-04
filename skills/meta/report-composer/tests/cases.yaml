@@ -65,3 +65,21 @@ cases:
       must_not:
         - compose a multi-section report
         - create visual slots
+
+  - id: integrated-investment-shortlist-static-fallback
+    case: Multi-candidate dashboard with static visual renderer only
+    input: |
+      Compare three research candidates. Use one shared normalized price chart if verified price histories overlap,
+      then place a thesis-driving KPI chart inside each candidate section. This runtime only returns static images.
+    expected:
+      should_trigger: true
+      must:
+        - compact shortlist dashboard near the opening
+        - normalize comparable shared prices to 100 at the first common date
+        - keep each company's KPI chart local to its section and preserve its units
+        - label actual images static and identify unavailable controls
+        - show exact blocked slots when data are not available
+      must_not:
+        - claim selector/filter interactions
+        - compare unrelated KPIs on a shared axis
+        - claim a chart exists when its image is not included

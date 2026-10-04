@@ -53,7 +53,10 @@ Do not turn every field into a card.
 
 ### Investing
 Preferred:
-- normalized price/performance line chart from actual historical series when available;
+- one shared price-comparison line indexed to 100 at the first common date when verified candidate series overlap and use comparable adjustment definitions;
+- candidate-specific KPI history charts placed beside the relevant thesis, with original units retained;
+- readable period labels, non-truncated scales, restrained annotations, and explicit source/as-of/price-basis context;
+- genuine controls only when the current runtime exposes them and they change the actual data view;
 - horizontal allocation/concentration bars for ranked weights;
 - overlap/exposure matrix;
 - scenario valuation range;

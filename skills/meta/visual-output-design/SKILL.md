@@ -7,10 +7,10 @@ description: >
   to make a visual complete.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.11.0"
+  version: "0.12.0"
   maturity: candidate
   risk: low
-  last_reviewed: 2026-10-02
+  last_reviewed: 2026-10-05
   execution:
     default_model_class: fast
 ---
@@ -32,19 +32,20 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 1. Identify the local decision/comprehension job supplied by the calling workflow or `report-composer`.
 2. Decide whether a visual materially improves the result and whether the caller marks it as required by the visual floor.
 3. Run `capability_preflight` against the capabilities actually exposed by the host runtime:
-   - inspect both callable tools and host-native chat widgets/components;
-   - the native ChatGPT `chart` widget, when exposed, is a qualifying interactive quantitative renderer for bar/line/pie/scatter charts;
-   - for investment price/KPI time series, prefer native `chart` line charts over static MCP/image renderers;
-   - a quantitative chart renderer must deterministically encode supplied numeric series/categories;
+   - inspect callable tools and host-native components actually documented and exposed in the current runtime;
+   - bind the slot to a concrete renderer and classify it as static, hover-interactive, or control-interactive only when those behaviors are documented or observed;
+   - do not invent a native `chart` call or response syntax because a platform is known to support charts elsewhere;
+   - a quantitative renderer must deterministically encode supplied numeric series/categories;
    - `image_gen`, image viewing, generic media generation and Figma diagram/design capabilities do not qualify as quantitative data-chart renderers;
-   - return `AVAILABLE`, `UNAVAILABLE`, or `UNKNOWN`.
-4. If the visual is optional and no qualifying renderer exists, use the truthful text/table fallback.
-5. For a **required interactive investment price/KPI chart**:
-   - if preflight is `AVAILABLE`, render with the qualifying interactive chart capability;
-   - if preflight is `UNKNOWN` because host-native widgets are not visible through tool enumeration, build the factual payload and **attempt the host-native chart component before blocking**;
-   - only after an explicit unavailable/rejected host-native attempt may the slot become `BLOCKED_NO_RENDERER`;
-   - if an available renderer invocation fails, use `FAIL_RENDERER_INVOCATION`.
-6. For other required visuals with no qualifying renderer, return `BLOCKED_NO_RENDERER`; do not claim successful rendering and do not let a table/text fallback satisfy the slot.
+   - return `AVAILABLE`, `UNAVAILABLE`, or `UNKNOWN` for each requested interaction level, separately from ordinary static-renderer availability.
+4. If the visual is optional and no deterministic renderer exists, use the truthful text/table fallback.
+5. For a **required investment price/KPI visual**:
+   - render verified data with the best concrete renderer available;
+   - when a documented interactive component is callable, prefer it for the interaction the user asked for;
+   - when only a static renderer is available, produce a static inline image and label it static;
+   - if the user specifically requires selectors/filters and none are supported, mark that interaction feature `BLOCKED_NO_RENDERER` while keeping any useful static chart separate;
+   - if a concrete renderer invocation fails, use `FAIL_RENDERER_INVOCATION`.
+6. For other required visuals with no qualifying renderer, return `BLOCKED_NO_RENDERER`; do not claim successful rendering and do not let a table/text fallback satisfy the visual slot.
 7. Build a semantic visual model from the supported analysis only:
    - headline/message;
    - entities/categories;
@@ -57,8 +58,27 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 9. Apply the design and integrity rules in `references/design-system.md`.
 10. Prefer a renderer that can appear directly inside the chat response. Use an external-artifact renderer (HTML file, Figma file, PDF, deck) only when the user explicitly requested that output form.
 11. Keep the visual synchronized with its surrounding report section: it must not imply a stronger conclusion than the written analysis.
-12. Provide a compact text/table fallback when useful, but label it diagnostic when a required renderer is unavailable; it does not change renderer execution from `BLOCKED_NO_RENDERER`.
+12. Provide a compact text/table fallback when useful. If the chart renderer itself is unavailable, label the visual slot diagnostic and keep it `BLOCKED_NO_RENDERER`. If only the requested interaction controls are unavailable, mark that feature separately and keep a successfully rendered static image at `PAYLOAD_RENDERED`.
 13. For interactive HTML, keep analysis data and presentation logic separated so the report can be regenerated from the same payload.
+
+## Interaction honesty and investment chart layout
+
+Classify the actual affordance, not the visual's appearance:
+- **STATIC**: an image or chart with no user-operated interaction.
+- **HOVER**: a documented native chart provides hover/tooltips, but the reader cannot change the series, metric or period.
+- **CONTROLLED**: a real selector/filter/range control changes the displayed data view.
+- **UNKNOWN**: the returned payload or runtime does not establish which interaction exists.
+
+A control-interactive dashboard requires evidence that the control is part of the actual emitted component. A static PNG with a dropdown drawn into it is still STATIC. Do not call hover-only behavior a selectable/filterable dashboard. If the user asks to test controls, state what control was operated and what view changed only when that action was observed; otherwise say interaction was not verified.
+
+For a multi-candidate investment report:
+- render one shared price chart indexed to 100 only when two or more verified price series overlap in dates and use compatible adjustment definitions;
+- label the base date, quote currency, price-adjustment/dividend basis, as-of date and sources; do not call price-only performance total return;
+- if series are not comparable, chart separately or explain the precise blocked slots;
+- use separate KPI charts for each company's thesis-driving metric and retain each unit;
+- show a chronological line for at least three real dated observations; show two points as a direct period comparison, not a trend;
+- do not fill missing periods, interpolate or collapse separate KPI dimensions into one score;
+- prefer one shared indexed-price chart plus candidate-specific KPI charts, placed beside the relevant candidate narrative.
 
 ## Inline visual delivery integrity
 
@@ -82,13 +102,13 @@ If the renderer returns no embeddable image/chart, or the response surface canno
 
 ## Decision rules
 - Prefer one strong visual over several decorative ones.
-- When a required investment-history slot has supported data, **attempt the host-native chart** only through a documented, callable host mechanism; prefer the interactive chart before any text/table fallback. Tool-list uncertainty alone is not evidence that the renderer is unavailable.
+- For required investment-history visuals, use the best concrete renderer available. Prefer a documented interactive component when it is callable; otherwise render and label a static image. Do not infer a chart API from tool-list uncertainty.
 - When another required visual has no suitable renderer, return `BLOCKED_NO_RENDERER`; text-only is not a successful substitute.
 - Prefer the visual grammar in `references/design-system.md`: horizontal bars for ranked concentration, real time-series lines for performance, matrices for overlap/trade-offs, ranges for scenarios, KPI strips for a few metrics.
 - Use a chart for quantitative comparison, trend, composition or relationship.
 - Use a diagram for structure, flow, dependency, ownership or state.
 - Use chat-native interactive components/widgets when available for linked views, filters, horizon switches or hover detail.
-- Treat host-native `chart` as the default interactive quantitative renderer when available; do not ignore it merely because it is not packaged as an MCP tool.
+- Treat a host-native chart as available only when the current runtime documents or exposes a concrete callable mechanism; do not assume a widget API by name.
 - Use interactive HTML only when the user explicitly requests HTML/a file or an external interactive artifact.
 - Use Figma/FigJam only when the user explicitly requests an editable design/diagram artifact or when the calling task explicitly requires Figma output.
 - Use Figma Slides/deck output only when the user explicitly requests a presentation/deck.
@@ -125,9 +145,10 @@ Return or render:
 - Visual labels must preserve units, time period and denominator.
 
 ## Failure and uncertainty handling
-- If the preferred chat-native renderer is unavailable, choose the next qualifying chat-native renderer.
-- For required investment history, do not treat `UNKNOWN` capability discovery as unavailable: attempt the host-native chart surface first.
-- If the attempted host surface explicitly cannot render the required visual, return `BLOCKED_NO_RENDERER`; a table/text fallback may accompany the status but cannot satisfy the requirement.
+- If the preferred interactive renderer is unavailable, use the next concrete renderer; a real static image remains a useful completed visual when it satisfies the request or fallback.
+- Do not make an undocumented host-widget attempt when interaction capability is `UNKNOWN`. Use an exposed deterministic static renderer and state that control behavior could not be verified.
+- If the user explicitly requires controls and the runtime exposes none, mark the control feature `BLOCKED_NO_RENDERER`; keep any successfully rendered static chart at `PAYLOAD_RENDERED`.
+- Return a visual slot as `BLOCKED_NO_RENDERER` only when no suitable renderer for the visual itself is available. A table/text fallback remains diagnostic.
 - If data are incomplete, show the gap or omit the visual element rather than fabricating it.
 - Do not create a Figma/HTML/PDF/deck artifact unless the user explicitly requested that artifact class.
 - If interactivity is unavailable, fall back to a static chart/table plus concise interpretation.

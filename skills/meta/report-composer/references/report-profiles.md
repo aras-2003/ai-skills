@@ -35,11 +35,11 @@ If canonical storage lacks current market price history needed for price context
 3. Historical business performance
    - 3–4 key KPIs;
    - default 12–20 quarters where available;
-   - **required interactive historical KPI visual slot** when verified series exist
+   - required historical KPI visual slot when verified series exist; use the best concrete renderer available and label static output accurately
 4. Market/price context
    - prefer real historical time-series;
    - default 5Y price history plus 1Y current setup when available;
-   - **required interactive historical price visual slot** when verified series exist
+   - required historical price visual slot when verified series exist; use the best concrete renderer available and label static output accurately
 5. Material-event timeline
    - align dated earnings/guidance/capex/M&A/regulatory/product events to major price/KPI moves;
    - separate OBSERVED / VERIFIED EVENT / INTERPRETATION / CONFIDENCE
@@ -75,9 +75,11 @@ Do not use price momentum as thesis validity. External market data may supplemen
    - decision implication / next gate
 4. In-chat visual dashboard and historical visuals
    - add a compact shortlist dashboard after the executive summary/radar: candidate, status, why-now signal, valuation/expectation risk, portfolio fit, and next gate;
-   - for each detailed candidate, include an inline price-history chart when verified series exist; use a shared chart only when the series are genuinely comparable;
-   - include inline history for the one or two KPIs that carry each candidate's thesis when reliable quarterly series exist; do not plot every available metric;
-   - prefer the host-native interactive chart when a documented, callable chart surface is available; otherwise embed the static renderer's returned image as an actual inline image and label it static;
+   - when at least two verified price histories overlap on comparable dates and adjustment bases, use one shared line chart indexed to 100 at the first common date; label price basis, currency, period and sources;
+   - otherwise keep price coverage separate and disclose incomparable or missing slots;
+   - include one or two inline visuals for the thesis-driving KPIs in each detailed candidate section; retain each metric's units and never combine unlike KPIs;
+   - use a chronological line for three or more observations; depict two observations as a period comparison, not a trend;
+   - prefer a real documented interactive component when callable; otherwise embed the static renderer's returned image and label it static;
    - if neither renderer can produce an inline visual, mark the exact slot blocked/failed and show a compact diagnostic table; never imply completion from a tool attempt alone;
    - do not put image data URIs, base64, chart JSON, or encoded payloads in the answer text.
 5. Cross-candidate comparison
@@ -85,7 +87,7 @@ Do not use price momentum as thesis validity. External market data may supplemen
 7. Research queue / next actions
 8. Compact receipts / limitations
 
-Prefer a shared interactive comparison when it answers the same decision question better than repeated candidate charts. Do not compress unlike KPIs or business models into one misleading chart.
+Prefer one shared indexed price comparison when it answers the same decision question better than repeated candidate price charts. Keep candidate KPI charts separate. Do not compress unlike KPIs or business models into one misleading chart.
 
 ## Investment — attention review
 1. What requires attention now

@@ -19,6 +19,10 @@ assertions:
     - "embed returned static chart images as native images and label them static when no interactive renderer is available"
     - "never expose raw base64/data:image URIs or serialized chart payloads in user-facing text"
     - "never claim a chart was rendered unless its native image/chart element is actually present in the user-facing response; otherwise mark the exact slot blocked or failed"
+    - "distinguish STATIC, HOVER, CONTROLLED and UNKNOWN interaction levels using actual renderer behavior"
+    - "if user-operated controls are unavailable, state that and use only the available static fallback"
+    - "normalize shared price series to 100 only when verified dates and adjustment bases are comparable"
+    - "keep thesis KPIs company-specific and do not imply a trend from two observations"
   manual_not:
     - "use social popularity as sufficient evidence"
     - "label candidates BUY or SELL"
