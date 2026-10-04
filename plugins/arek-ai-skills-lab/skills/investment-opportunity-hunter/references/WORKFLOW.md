@@ -46,9 +46,15 @@ Actively discover new investment opportunities globally, with XTB availability s
 13. For those 2-3, run security-underwriting and valuation-scenario-review.
 14. Run thesis-challenge before promoting a candidate to a conviction queue.
 15. Confirm XTB availability before calling an idea actionable.
-16. Persist sources, opportunities, research events and signals through investment-record-store only.
-17. Emit canonical WRITE receipt. Data/analytics outputs and local files are NONCANONICAL.
-18. Do not size or label BUY/SELL here; route portfolio action to investment-security-review or position-sizing-review.
+16. Persist new research state through investment-record-store only:
+   - sources and evidence links for material claims;
+   - research events/signals for verified new evidence;
+   - promoted candidates as canonical `opportunities` with research-state status such as `RESEARCH_CANDIDATE`, `WATCH`, `DEFER` or `REJECT`, when the candidate is new or materially changed.
+   A research report/discovery request is sufficient authority for these **research-state writes**. Do not reject them merely because the user did not make an owner portfolio decision.
+17. Before writing an opportunity, deduplicate against current/prior opportunities and stable instrument identity. Update disposition/history instead of creating a duplicate.
+18. Emit canonical WRITE receipt. Data/analytics outputs and local files are NONCANONICAL.
+19. Do not size or label BUY/SELL here; route portfolio action to investment-security-review or position-sizing-review.
+20. Owner-decision writes (BUY/SELL/REDUCE/EXIT, policy changes, thesis activation, transaction execution) remain separate and require the appropriate explicit authority.
 
 ## Evidence gates
 - no shortlist promotion without WHY THIS / WHY NOW and measurable evidence;
@@ -57,6 +63,8 @@ Actively discover new investment opportunities globally, with XTB availability s
 - structured research is discovery evidence, not canonical state;
 - critical figures require primary-source sanity checks;
 - XTB availability must be confirmed before a candidate is called actionable;
+- a promoted research candidate may still be persisted as `RESEARCH_CANDIDATE` while XTB status remains unverified;
+- a report/discovery request is not a reason to suppress canonical research-state persistence;
 - social/news attention alone cannot pass discovery.
 
 ## Output contract
@@ -73,7 +81,7 @@ Ticker | WHY THIS | WHY NOW | measurable evidence | valuation/expectations | fai
 - material event timeline;
 - observed moves vs likely causes + confidence;
 - thesis/setup, catalyst, strongest countercase and next evidence gate;
-- canonical persistence receipts.
+- canonical persistence receipts, including which promoted candidates were written/updated as research-state opportunities.
 
 ## Stop conditions
 Stop broad discovery when roughly 10-15 credible research candidates remain.

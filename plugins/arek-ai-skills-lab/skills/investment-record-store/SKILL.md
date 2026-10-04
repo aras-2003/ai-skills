@@ -9,7 +9,7 @@ description: 'Read and persist canonical Investment OS records in Supabase/Postg
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.9.0
+  version: 1.0.0
   maturity: production
   risk: high
   last_reviewed: '2026-10-02'
@@ -66,7 +66,12 @@ A local artifact may be created for convenience, but it must be labeled `NONCANO
    - Use `latest_valid_snapshot_pair` and `portfolio_position_changes` for latest-vs-prior portfolio observation when available.
    - Use `portfolio_exposure_source_coverage` to identify the share of current portfolio weight with any exposure metadata.
    - Treat observation views as derived canonical-query surfaces for state/delta/coverage only, never as causal attribution evidence or proof of decomposition completeness.
-10. After every write attempt, return an explicit WRITE receipt. Never claim saved/preserved if canonical persistence failed.
+10. Treat research-state persistence separately from owner-decision persistence:
+   - sources, evidence links, research events, signals, opportunity candidates/status updates and other factual research records may be written operationally when the calling workflow has verified new evidence;
+   - a research/report/discovery request is sufficient authority for those research-state writes;
+   - do not require an owner BUY/SELL decision before writing `opportunities`;
+   - owner decisions, policy changes, thesis activation and transaction execution follow their separate approval contracts.
+11. After every write attempt, return an explicit WRITE receipt. Never claim saved/preserved if canonical persistence failed.
 
 ## Decision rules
 - Supabase is a datastore, not an evidence source.
@@ -81,6 +86,7 @@ A local artifact may be created for convenience, but it must be labeled `NONCANO
 - Draft thesis content is never treated as active canonical thesis state; `current_theses` exposes only latest ACTIVE versions and `draft_theses` exposes latest DRAFT versions.
 - The fixed bootstrap authority is `public.system_config`; a duplicate `system_config` in another schema cannot redefine the active canonical target.
 - Current deployment resolves to project `investment-os`, schema `public`; `investment` is deprecated/noncanonical until a future explicit cutover.
+- Discovery/report mode does not suppress canonical research-state writes. A new evidence-backed opportunity can be recorded as `RESEARCH_CANDIDATE` or equivalent research disposition without creating an owner portfolio decision.
 
 ## Output contract
 For every read/write operation return a Persistence receipt with:
@@ -108,6 +114,7 @@ For every read/write operation return a Persistence receipt with:
 - [ ] Instrument identity was not created from a composite multi-symbol legacy reference.
 - [ ] Non-null ISIN identity is unique.
 - [ ] DRAFT thesis versions are excluded from active-thesis reads/monitoring.
+- [ ] Research-state opportunity writes were not incorrectly blocked merely because the request was a report/discovery task.
 - [ ] No personal portfolio data or credentials are written to Git.
 - [ ] Persistence failure is surfaced explicitly.
 

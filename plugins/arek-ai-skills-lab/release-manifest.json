@@ -163,11 +163,11 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "cba4d1ed67b4a4750e967f5c58fbcd156e1ce777c2bf3c14f4e1c9829f7b3cd6",
+      "content_sha256": "3c665bccdd3086135afce8da87f9913ba9a3f99cc67d840d7ed284761198e0d7",
       "kind": "workflow",
       "maturity": "production",
       "name": "investment-opportunity-hunter",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "content_sha256": "364488d260b2197eeda6c46c1b3803352ced4f73f8c6f634e9c8583490345443",
@@ -198,11 +198,11 @@
       "version": "0.5.0"
     },
     {
-      "content_sha256": "cbb5b77032d84ba65f384cd09bad387f5085ebe20617c40aac3118a28956c599",
+      "content_sha256": "09f0cf71df2c3b07396676ed26494ff1282a0c2a0a6898ff25c6394cc43ce784",
       "kind": "skill",
       "maturity": "production",
       "name": "investment-record-store",
-      "version": "0.9.0"
+      "version": "1.0.0"
     },
     {
       "content_sha256": "d475f0e4b4bd352157be8205ab29d489a8820412a4a6cc0239365811a6694e2e",
@@ -472,9 +472,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "ad24ec05e27d505ce73034749b6905f94f576bafeb995c534e83ce15d1368012",
-  "release_id": "0.26.0+ee06fd38bddd",
+  "payload_content_sha256": "ef80643c8bdc76675172de3274821d465750be190c2f8b12689758d8322c370c",
+  "release_id": "0.27.0+9301c83cb061",
   "schema_version": "1.0",
-  "source_revision": "ee06fd38bddd082b13b2b83af02d3d4ee8fcbc7e",
-  "version": "0.26.0"
+  "source_revision": "9301c83cb06109630c87457b02070298db70158a",
+  "version": "0.27.0"
 }
