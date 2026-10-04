@@ -129,7 +129,7 @@ Each slot must define:
 - Do not make a dashboard merely because several metrics exist.
 - Do not repeat the same content in prose and a separate visual artifact unless repetition materially aids the decision.
 - Use interactive controls only when the alternative views answer a real decision question.
-- For company price/performance context, 3/6/12 month switching is useful when comparable, verified time-series data exist.
+- For company price/performance context, a shared indexed comparison is useful when comparable, verified time-series data exist; do not imply range switching unless real controls are available.
 - A visual may summarize but must not strengthen, rank or score beyond the underlying analysis.
 - Prefer native chat renderers for normal report delivery. Use Figma/HTML/PDF/deck renderers only when the user explicitly requests an editable or external artifact/file.
 - Canonical READ/WRITE receipts remain explicit and auditable.
@@ -166,8 +166,7 @@ Do not emit `report_status: PASS` for ordinary report composition. Runtime visua
 - Missing evidence stays visibly missing.
 
 ## Failure and uncertainty handling
-- If a required investment price/KPI visual has `UNKNOWN` renderer visibility, attempt the host-native chart component before deciding it is blocked.
-- If a required visual is explicitly unavailable after the required attempt, use `BLOCKED_NO_RENDERER`.
+- Track renderer availability separately from interaction level. If only interactive capability is unknown or unavailable, render a useful static visual when possible and mark the requested controls blocked/unknown; reserve `BLOCKED_NO_RENDERER` for the missing visual renderer itself.
 - If renderer invocation fails, use `FAIL_RENDERER_INVOCATION`.
 - If the renderer returns a valid payload, use `PAYLOAD_RENDERED`; do not infer whether the client displayed it.
 - If decision-critical evidence is missing but useful analysis remains possible, use `analysis_state: PARTIAL_EVIDENCE`.
