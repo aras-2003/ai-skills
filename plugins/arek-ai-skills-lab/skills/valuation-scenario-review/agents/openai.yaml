@@ -1,0 +1,5 @@
+interface:
+  display_name: Valuation Scenario Review
+  short_description: Build bear, base and bull valuation scenarios for one…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#9588F7'

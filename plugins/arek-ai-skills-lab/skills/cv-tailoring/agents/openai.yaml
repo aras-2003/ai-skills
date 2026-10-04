@@ -1,0 +1,5 @@
+interface:
+  display_name: CV Tailoring
+  short_description: Tailor an approved mastery CV to one specific executive…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#FFD18A'

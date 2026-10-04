@@ -1,0 +1,5 @@
+interface:
+  display_name: OAF Governance Redesign
+  short_description: Run an OAF governance redesign workflow that starts from…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

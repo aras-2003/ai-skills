@@ -1,0 +1,5 @@
+interface:
+  display_name: Thesis Monitor
+  short_description: Monitor an existing investment thesis against new earnings…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#9588F7'

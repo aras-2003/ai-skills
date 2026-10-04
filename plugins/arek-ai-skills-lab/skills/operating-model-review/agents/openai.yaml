@@ -1,0 +1,5 @@
+interface:
+  display_name: Operating Model Review
+  short_description: Review an operating model for role clarity, interfaces…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

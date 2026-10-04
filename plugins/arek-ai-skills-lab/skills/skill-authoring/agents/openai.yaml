@@ -1,0 +1,5 @@
+interface:
+  display_name: Skill Authoring
+  short_description: Create or refactor an Agent Skill package from an approved…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#94D4B3'

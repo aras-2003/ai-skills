@@ -1,0 +1,5 @@
+interface:
+  display_name: OAF Health Check
+  short_description: Run the OAF Health Check workflow as a selective…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

@@ -1,0 +1,5 @@
+interface:
+  display_name: Strategy To Execution Diagnostic
+  short_description: Diagnose whether strategic intent is translated into…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

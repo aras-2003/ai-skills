@@ -1,0 +1,5 @@
+interface:
+  display_name: Job Validity Check
+  short_description: Verify whether a known job opportunity is still active…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#FFD18A'

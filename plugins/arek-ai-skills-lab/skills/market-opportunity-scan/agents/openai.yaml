@@ -1,0 +1,5 @@
+interface:
+  display_name: Market Opportunity Scan
+  short_description: Screen the XTB-investable equity and ETF universe for…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#9588F7'

@@ -1,0 +1,5 @@
+interface:
+  display_name: Portfolio Prioritization
+  short_description: Structure transparent prioritisation of initiatives using…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

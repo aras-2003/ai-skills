@@ -1,0 +1,5 @@
+interface:
+  display_name: CV Gap Analysis
+  short_description: Compare an approved mastery CV with a target executive…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#FFD18A'

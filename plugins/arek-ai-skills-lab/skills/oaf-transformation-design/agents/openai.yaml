@@ -1,0 +1,5 @@
+interface:
+  display_name: OAF Transformation Design
+  short_description: Run an evidence-gated OAF transformation design workflow…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

@@ -1,9 +1,11 @@
 {
   "capabilities": [
     {
-      "content_sha256": "eb3198309204c03fb1b83a88b74b6825ec378f14e592c88b3763aa3c23a0446b",
+      "content_sha256": "a2659281f7dd5a81cbc16be582eae8a473584cb63c2f265618132f58d0a4e88f",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -11,9 +13,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "b1fbdec3e182a68ba57e5a1935471d2f2f4d60c651203bc0714a45a047e939ea",
+      "content_sha256": "c5435f8003c07dd79f264c62fb7360c8117e8ea5b6e35f78cd204421e9d63471",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -21,9 +25,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "95aa51ce2bce46f1f77f46e0fdcda8dcabeb0d5c01c11e8397d9f0aa7a5d6cb2",
+      "content_sha256": "5e614a997a5d48de01874aaf2a88054b5d8a66df0f6e62b599fa7053fd834d09",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -31,9 +37,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "ddbd475ae6bd5d5bf36b586bceece036c62dd149d172fc0527ff93d1f512a5ce",
+      "content_sha256": "39cd9ad3486861808a691d86d5e92f3c64656389682ce3aa20a417dc110f5efa",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/evals/INDEX.md",
         "references/evals/case-capability-gap-001.input.md"
       ],
@@ -43,9 +51,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "1a68858180586acc28f9eaee7272f2498bed80ccae1d9a8bf934fc05d5348305",
+      "content_sha256": "2fa7dae1206ab2a92208a8461e4793c0b93ef4c22de5c38574451d41f52f009d",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/evals/INDEX.md",
         "references/evals/case-capability-map-001.input.md"
       ],
@@ -55,9 +65,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "eccc36b6d9c8adcb083ce73ab043c41282066a38c4c9667429b8299af5663e25",
+      "content_sha256": "6c91a1ae18d41a5111f638128a219e0bd1eb3ba717dfa323e204d90ed34111fc",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-003-viral-regulated.input.md",
@@ -69,9 +81,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "4309a26a324bc668fc7edfaed7e24524b0ea1baab04eaed50b41867918ce47a8",
+      "content_sha256": "932b06a856c5718e1603a9d285de59d7935d924f367432edd23a38ea5c6cb1d6",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-001-premium-vs-generic.input.md",
@@ -84,9 +98,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "0c69695162cbe985b9e1016d1bfb98d8bfc361bddd100ca82ebe44e8978a49cf",
+      "content_sha256": "363d511991389cf689bc89ad9d777a099335bf9b6a9cb4462fa2ebdfc2186a8f",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -94,9 +110,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "cbf70542c37266ee3fc4611abc5b0411c18185bd70e0c5e39c477d73246832c5",
+      "content_sha256": "9c1a8a863940ac8a8f3db7bd53b34334b8030e65d8a593b9b567f3f378c4560d",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -104,9 +122,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "71309075b6fbcea13e89c21102000a3c12a6678dab557f576702ac5962cf1061",
+      "content_sha256": "37106e0d10fbb8d0ac7088f798ef97b1098d7e3c2b7475ed930e03d2aefd1560",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -114,9 +134,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "773cb2fc14f06c3675a9b98764a99d783d30e9629623d4a657b35b36caff08d5",
+      "content_sha256": "44149f5cbd285030c0263282d44538629b98db3822e46ffca275be14a968416d",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "candidate",
@@ -124,9 +146,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "a870563ff9e9b9c2e96f04c47274dc06a16a3a4a3a1a107cbbb9b7634a0ad663",
+      "content_sha256": "fc9dc1732a9558f1b46bb6d7638175f843feecd8c1888f0bbfe13694df4fde80",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "candidate",
@@ -134,9 +158,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "ed3ff95180b8fea28385cbc3bfe2ac45cc708fc040f3c8f11bcb53de1fe8e333",
+      "content_sha256": "6faad312952347f4c40df640ea558d6ba2305723408fa77d62154065e564d01c",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/evals/INDEX.md",
         "references/evals/case-decision-bottleneck-001.input.md"
       ],
@@ -146,9 +172,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "8e020a337e15ff06543603290a397f647a4a2923b7c8786360ab3b04036d72e2",
+      "content_sha256": "199bd7ffdceb0d7d8fa47113c2347e599f150fcde27fe6d8d0059ca0962a6d29",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -156,9 +184,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "50d32d4b098b6c763bb4b0b87277b7e1bbcc42e31e27a71320176ebc941370ea",
+      "content_sha256": "b60e58b9efde3b82a179be5db1f244c0dd299fe70a1f7626b008f3c2898f588c",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -166,9 +196,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "e12bc733f74198498188b8694785ef5405f2c75af455429c72217705ce6fab09",
+      "content_sha256": "91845d55fbd3697f2ae8d52430977e68a1644f559d3f9bccb29935ce6f2d0aa2",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -176,9 +208,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "910a214fd2fc141c464d1364330c6a261e5e6f732f20685f11fb38013db44720",
+      "content_sha256": "2ed04cdd8c0235a5d48a33ea1107087ef4645821e3a95973cdf79d7662f321e6",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -186,9 +220,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "39bf030256fda104a6ae58402c69dabb539884449f57b674b646ab16a1a3a255",
+      "content_sha256": "de1943a3e7cc411ff24768b0478d73f7d19f1282489ebc26dde5a325268483a5",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/candidate-profile-schema.yaml",
         "references/evaluation-model.md",
         "references/output-template.md"
@@ -199,9 +235,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "1716f0a773bc3d3d2f14f14547e523580f3fe89e73c0213e4f41c7e9c46cce2f",
+      "content_sha256": "700d153f5352330f54bdfd638096e94da73bf3f9aef1f61fad5f5987ef5e99e5",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/evals/INDEX.md",
         "references/evals/case-global-local-001.input.md"
       ],
@@ -211,9 +249,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "629e34b610964308faed7d31754c4f031a67a83f7da0753b8e6c8462aab34ede",
+      "content_sha256": "dda0a48f0cb9573fbf767acadfe8179529051b7f27d56fcc24478cb569e61ec2",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/evals/INDEX.md",
         "references/evals/case-governance-design-001.input.md"
       ],
@@ -223,9 +263,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "240ef2c853467fb480dcf91ec2b543ec2f963011f801720ccb200527b7a9d452",
+      "content_sha256": "074dda92a7fdb159f18a3cfa54172b9877cf2c79ccf1d320e166d4598af531ff",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "candidate",
@@ -233,9 +275,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "e5d04a0c6fa7d7b366c0ccbaffa992d7ae4b9eed35a3303f83763d49fa88b3ab",
+      "content_sha256": "ee0d2f3b619e0ebf8437a98e1a81ff0782035ed63ce0addff29c64172bc64288",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-006-attention-acn.input.md"
@@ -246,9 +290,11 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "9d9f6f56b42a76574c92e9975c8160099caea959a70bf88d99a62b5e543148b1",
+      "content_sha256": "055bf3317637dba898a4865805dd92590de05680bc660f70a49a837dd3e327ed",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -256,9 +302,11 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "486e9d192f0ed2a0953f5d709d1c10e18b7c3e335ca7b8f93bce139f593df9d6",
+      "content_sha256": "0e362d56411d354b958e9d808f7a2fa3a9ee4acc0b86da05f258f544997edecb",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-001-opportunity-hunter.input.md"
@@ -269,9 +317,11 @@
       "version": "0.5.0"
     },
     {
-      "content_sha256": "364488d260b2197eeda6c46c1b3803352ced4f73f8c6f634e9c8583490345443",
+      "content_sha256": "d6cef4fe01bde0778a9d75184a14edcdc47b1e3afe6a766faa375d221f63fc25",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md"
       ],
       "kind": "workflow",
@@ -280,9 +330,11 @@
       "version": "0.3.0"
     },
     {
-      "content_sha256": "626874749d97b7b2d1fb50598f70387b0459c157694b909deee74369f689a0aa",
+      "content_sha256": "f96df1fc238f6b04cf54b2739642d2815d459b52b746d31643cbf8651af9c017",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/evals/INDEX.md",
         "references/evals/case-005-policy-learning.input.md"
       ],
@@ -292,9 +344,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "4d149c381964e9d5f73547ec51d2f0b51ebca9caab64636b23f342e72db04843",
+      "content_sha256": "7c731505eda325deb80b3492d8046f696d28194917c8d7d546e719a18cf9ec9e",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md"
       ],
       "kind": "workflow",
@@ -303,9 +357,11 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "30bde3b26265e23ed1459f5ab3ba96ef4a97f4a8570dfe06c1cec18baf908561",
+      "content_sha256": "57243a2d72ac47e2d6361806232e65232add10f5252d5b2320b3ba086e43dc4e",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-003-portfolio-review.input.md"
@@ -316,9 +372,11 @@
       "version": "0.5.0"
     },
     {
-      "content_sha256": "09f0cf71df2c3b07396676ed26494ff1282a0c2a0a6898ff25c6394cc43ce784",
+      "content_sha256": "12715263bbba5bbf3359a93052ca05793a17badddc0cfb5344da56dee7ab0fb1",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/canonical-schema-governance.md",
         "references/google-sheets-contract.md",
         "references/supabase-contract.md"
@@ -329,9 +387,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "d475f0e4b4bd352157be8205ab29d489a8820412a4a6cc0239365811a6694e2e",
+      "content_sha256": "6840c23a4a6151b563197b714f3c44bd0a1ad970a8bef12a000b871c8eae4a84",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-002-security-sizing.input.md"
@@ -342,9 +402,11 @@
       "version": "0.4.0"
     },
     {
-      "content_sha256": "be6a3c72f10795482a3c301b48116e576c10407b445f0a524773ceaf4e34277e",
+      "content_sha256": "2409597aae97a7ae12069144185625e1a9a0f313b3153948353d7cb3ca8b8ad1",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-004-theme-discovery.input.md"
@@ -355,9 +417,11 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "5ad20619130edc73e1911b05840634245f8a141035f085dd6242d5ed5d1fe3c2",
+      "content_sha256": "4716b010eb44c96c01cbc3702cc653806d178b0759a8913639b057b65b20958b",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -365,9 +429,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "2ec1fac2e645cd5be6bf0b4357f4d4f541507e8cca38167aedff5761c30396c0",
+      "content_sha256": "a5d3f72a7a64870e800728a76b5e023a0c01ea1cf74cdd2204b1d8d19c1e2b04",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "candidate",
@@ -375,9 +441,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "731d6d99a47d7dbe3f7607246474fcfe1f79496227774a869cd4578b2d42eb8c",
+      "content_sha256": "c35aaf8abab68685ae97f370d31f0f8681734898702c7f47d23da132fb37c932",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "candidate",
@@ -385,9 +453,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "c99bec110b7c8cb38e9249f44481339eed7c496bd7c393ee20d3156f02bd8844",
+      "content_sha256": "753840ce2bb6b1a8f531502086eab4461bd56b8f10e6a3804c981d09dcbbf0aa",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "candidate",
@@ -395,9 +465,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "109f5e15893d5adbcdb6953fdd3c28224af67a2bf96ef9de7544895250af518b",
+      "content_sha256": "0f7d0353039c7ad84fcff6a1da8483dd440ac4738dedfd5cb8d8debe3620255f",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -405,9 +477,11 @@
       "version": "0.3.0"
     },
     {
-      "content_sha256": "48ae1be4dd9fa9389592bc0973c0f669bf08eae39e70d6fd0d43322a73955ed6",
+      "content_sha256": "edf686807e83f8793016eb3084baad1a5581450149a6ea6b9917bc4495d6f278",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -415,9 +489,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "e56780be664527df36a093c5ace7ecb041f0d4f9be76c510ce6f0c5fdac72e6e",
+      "content_sha256": "e693613de18d7f8031d22b0adaa79736d1517bb267ace2e04a81fcacf911df76",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-enterprise-architecture-review-001.input.md",
@@ -429,9 +505,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "990f40c3d10d32d6efbb1d94f73d5d4fe3d67301754a6cfe59eab7ea9e8eff29",
+      "content_sha256": "7efe21975f217dd01833956835b9bf2d17bb21234b29a5ad51f39ba6c5522327",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-001-enterprise-change.input.md"
@@ -442,9 +520,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "3aa2bf3a2f170335f25b17fb0d24183b374a966800d9909cfefd191de34a62a3",
+      "content_sha256": "c1a7f00b3e993dda84f494bf6693b8dc35c4a7d4fd78a98ece328b679efbe8a7",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-governance-redesign-001.input.md"
@@ -455,9 +535,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "86282e674892c7017ae531b06c4bf46fbbee975c2d272c47a411e165897cef50",
+      "content_sha256": "3782f3582d0cf873860663dabee8e00aaf0ea1ad9bd48c9e144885b28b829738",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-001-enterprise-it.input.md"
@@ -468,9 +550,11 @@
       "version": "1.5.0"
     },
     {
-      "content_sha256": "94482f4bbc2277794cba78896a6cabcd896a72143a63c3ee85e4294673970299",
+      "content_sha256": "d95ca38a15971716de206e64b6611996afba49a68bd9e3438d020c39e981f154",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-operating-model-redesign-001.input.md"
@@ -481,9 +565,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "e7b2ef791fae7a1517faa9a02e6d66303a3aa370beb8a3b4c73c7980d6188f47",
+      "content_sha256": "03321c36d9452006b5e1b2ae7394196991dcf59fb9352d22fbb75398d5b06748",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md"
       ],
       "kind": "workflow",
@@ -492,9 +578,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "cbe9bfb21597c767f61918bf7904908fae81780030ed64747a4b8b3fb99dc3e3",
+      "content_sha256": "855e1371502acca2279e3f36f546eb15eaeed566b70f75c1d66272d72c70a16c",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/WORKFLOW.md",
         "references/evals/INDEX.md",
         "references/evals/case-transformation-design-001.input.md"
@@ -505,9 +593,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "1d1f420d0cf7b1d82e5621189969348308be1df81056541bbfd880e018c968df",
+      "content_sha256": "1b3190d4750c663dac27d9eb1133cc16cc0ad6bde520615051921313df66727f",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -515,9 +605,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "76be7cde026837b15627047031c6fe9106b61d4147d3e7c16fe5ca22d7dbc783",
+      "content_sha256": "dcfa9b4697978f412f085c9f9dcc29bad57520394868d94968b7fe84f82ed9b5",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "candidate",
@@ -525,9 +617,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "9be0f25cc77fecfff3ee7edf53552bbfe39bda11bdd6c2a8eb7dbffbce41a556",
+      "content_sha256": "8f6c8c001e7e5162b35c4beaf2b49612d636a524a73ef460585571d053fc8ea1",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/evals/INDEX.md",
         "references/evals/case-portfolio-health-001.input.md"
       ],
@@ -537,9 +631,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "fd002e7569567af44b33ab46d3f4f76fc43686aa16192dfd28be86f35a44756d",
+      "content_sha256": "434e4a621c3b8a4100d1f7245c6d3695625678d295f9a404c2d83090ea7443ad",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -547,9 +643,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "c5dfdf9e2a608e2745764c7d44d13a44a5383d8e230a939957baa2e5c73d4fe9",
+      "content_sha256": "40ff1467cbdd1acd94403e6b36fce50f78204a8bbcf2789915eef13df4a55a73",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -557,9 +655,11 @@
       "version": "0.7.0"
     },
     {
-      "content_sha256": "936118960a56d276495f32289f6d6bdc0fd1f4b2e1b9ae63e74e07a538968ddf",
+      "content_sha256": "640c8aed91d75ca5b0d201c15898e859a73c61cff9a1666b8f2495d5c9ebab8b",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -567,9 +667,11 @@
       "version": "0.3.0"
     },
     {
-      "content_sha256": "89d03b1046432063ddf6097bf0a514671cc459bd52f10346f8e4152c5e498e9d",
+      "content_sha256": "f3214e40f3fc46e16b151ae4840faf7d1548ca317983001f4c0a01ee87d3cd1d",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -577,9 +679,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "6fabed3c1aa8748f39e6f2ea7801c40586345153a36c55dd3eb7a0247beddcab",
+      "content_sha256": "8e619b1a1ae4184535f2f979d8247bf843be5a7282fc5daf4b0d584ff838cbd1",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "candidate",
@@ -587,9 +691,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "ab8e642b7754336a19f8084b0d7035596e1a4f6f104971fab3a47f11b1381267",
+      "content_sha256": "2a2babff3ab182939f5f9933b4493d216ceff1d85e3529303a3c76ce75bd5eeb",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/evals/INDEX.md",
         "references/evals/case-006-product-discovery.input.md"
       ],
@@ -599,9 +705,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "c97263b1e2e6999e9cc83ed43a220468765c790864c4c08c92c47344e6b1dc30",
+      "content_sha256": "239af636cdf4523d2e1d3ea274722fff33a6064a9f3d8ed8ea4858d40bccdf60",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/composition-rules.md",
         "references/report-profiles.md",
         "references/report-quality-standard.md",
@@ -613,9 +721,11 @@
       "version": "0.9.0"
     },
     {
-      "content_sha256": "39ebf3cf6aaa4b33540464ea0039d9f83802465caa9db6fa7280d5090370b6f5",
+      "content_sha256": "f6bd0ac21549aae2034ca69bc8c8410e92c358081e5a1746e136834cc33610fb",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -623,9 +733,11 @@
       "version": "0.5.0"
     },
     {
-      "content_sha256": "d2a13f68ad4fc8e24a525c6717288eed1bbc78768db4ed89601e33850377b01b",
+      "content_sha256": "8d4e68f1475757f4ba79254420066caac3420d743b9d4853a868182ac49d0222",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -633,9 +745,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "66d58685b30ef73ac950be0b060595980ffb77292135c0dcc81e21ef27e83563",
+      "content_sha256": "36ddcddc6441e34edabff727a8892bd2a3b34f24e2aea6bee76b89d76acb62e5",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -643,9 +757,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "3ce46c95fd4e477082b7547719fbf0787d9863cb5dcf7d687926748584e8538e",
+      "content_sha256": "18261b0facd272939aa449f1ceaa2fc659a763d5afbf2d1850693c071a1cf4fc",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -653,9 +769,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "a31d165dbf1eb4be461e1573796b45e64eedc52bbed84fd1d3eea593ea580bcb",
+      "content_sha256": "50cbfe9007be03408d653e8835ddf8e0cf4d036e93211f36651c1e1fbff5080f",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "candidate",
@@ -663,9 +781,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "456400d84b0c64236a670a23d89c13971bcbe6927270a9b57326dcac50ac74f9",
+      "content_sha256": "91d699ba7408d2bd35473b9c587331af0b19453fc3f2e11bbabf10c0b1aebd61",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -673,9 +793,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "4954a644bf8bb0cd9552ae3cc5185b47dd6ea6e2ca35a202f4fe5e6e240f8f88",
+      "content_sha256": "471404071b3f1d99368e8e0885dcf294e369824538d785443b32612f0de749e3",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -683,9 +805,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "9016a34311cc0f246894824d718fa0374ab43651297910d28c9c276ae54ceab1",
+      "content_sha256": "eb1acdd2fecee9f2567dda054ea50ad79bbcde824c6311bbe4d8678aa811a1c5",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -693,9 +817,11 @@
       "version": "0.3.0"
     },
     {
-      "content_sha256": "af5526586c5afa74cce9b92a9ed0da36c4831971b4ed3e6658537653030f22ce",
+      "content_sha256": "b59d7bfd8e243ca2fa27344890c422fcce0a6ae6268708b44574e5b4f5a69d28",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/evals/INDEX.md",
         "references/evals/case-transformation-blueprint-001.input.md",
         "references/evals/case-transformation-blueprint-stop-001.input.md"
@@ -706,9 +832,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "3be6829370b55466010650f92f27156c81ac338ff4ec9d467bfc72b3795bf9fa",
+      "content_sha256": "c26c7d3e3d5bb548ad35c1d2486b09990546fe078d2fab4b820f347266cfaecf",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -716,9 +844,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "84435a0238bd9090681a71daefca4d9131b13c1390ac6e136f8849848db26e39",
+      "content_sha256": "a01475a03e6c0bc945e9e062ecd35d607ef83480b693cfd16638bdde118e3f3f",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/input-contract.md",
         "scripts/calculator.py"
       ],
@@ -728,9 +858,11 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "eda16a1a1a88c492b54b1f2635c4fce232f281754c22b8fa655fc8f803fa5047",
+      "content_sha256": "725e06669755d5f3b8531ad3c0a3f937c5c9107e91f3e09c33e9569c621523c9",
       "inventory": [
-        "SKILL.md"
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -738,9 +870,11 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "70af58c9d2be2905bb51fc62d1a3c99e650350fd6aea8a98b7e3c1c2992a0154",
+      "content_sha256": "c3498b87b2b9540ebf8bf7ef5e41f2baf5d24abc4afe521bb3b2d8edd9c54619",
       "inventory": [
         "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg",
         "references/design-system.md",
         "references/tool-routing.md"
       ],
@@ -865,5 +999,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "29cbeb3b8041e86f43f495edd72ce9696cd7ebcd"
+  "source_revision": "61158aa0cf47f16525c34fca3d8f22b971ad62ad"
 }

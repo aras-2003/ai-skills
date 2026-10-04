@@ -1,0 +1,5 @@
+interface:
+  display_name: Skill Specification
+  short_description: Decide whether a repeatable task should become an Agent…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#94D4B3'

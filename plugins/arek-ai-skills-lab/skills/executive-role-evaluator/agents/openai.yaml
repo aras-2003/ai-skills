@@ -1,0 +1,5 @@
+interface:
+  display_name: Executive Role Evaluator
+  short_description: Evaluate senior and executive technology job opportunities…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#FFD18A'

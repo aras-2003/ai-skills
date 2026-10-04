@@ -1,0 +1,5 @@
+interface:
+  display_name: Thesis Challenge
+  short_description: Stress-test an existing investment thesis by seeking…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#9588F7'

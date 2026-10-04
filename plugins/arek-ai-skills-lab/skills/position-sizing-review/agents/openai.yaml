@@ -1,0 +1,5 @@
+interface:
+  display_name: Position Sizing Review
+  short_description: Determine a decision-support position-size band from…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#9588F7'

@@ -1,0 +1,5 @@
+interface:
+  display_name: Investment Record Store
+  short_description: Read and persist canonical Investment OS records in…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#9588F7'

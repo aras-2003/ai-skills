@@ -1,0 +1,5 @@
+interface:
+  display_name: Decision Bottleneck Analysis
+  short_description: Diagnose why a specific material decision class is slow…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

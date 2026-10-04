@@ -1,0 +1,5 @@
+interface:
+  display_name: OAF Enterprise Change Review
+  short_description: Orchestrate the minimum evidence-backed OAF path across…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

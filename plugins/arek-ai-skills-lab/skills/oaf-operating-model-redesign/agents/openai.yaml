@@ -1,0 +1,5 @@
+interface:
+  display_name: OAF Operating Model Redesign
+  short_description: Run an evidence-gated OAF operating-model redesign workflow…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

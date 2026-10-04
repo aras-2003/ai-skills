@@ -1,0 +1,5 @@
+interface:
+  display_name: Capability Map Review
+  short_description: Assess whether a business capability map is coherent and…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

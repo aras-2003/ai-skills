@@ -1,0 +1,5 @@
+interface:
+  display_name: Organizational Interface Review
+  short_description: Review critical organisational interfaces where ownership…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#83A9FF'

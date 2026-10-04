@@ -1,0 +1,5 @@
+interface:
+  display_name: Product Opportunity Discovery
+  short_description: Discover product opportunity hypotheses from customer…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#FF8B72'

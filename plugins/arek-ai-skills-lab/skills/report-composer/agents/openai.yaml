@@ -1,0 +1,5 @@
+interface:
+  display_name: Report Composer
+  short_description: Compose one integrated decision report from an…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#94D4B3'
