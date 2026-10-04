@@ -1,9 +1,9 @@
 schema_version: "1.0"
 campaign: runtime-validation-2026-10-r15
-behavior_source_revision: 443ae3e9534e82fdbecbf83c1e03491fd44fc818
+behavior_source_revision: 9c66f5987afbd5717047d0a5107383c0b75df73d
 package:
   name: arek-ai-skills
-  version: "1.32.0"
+  version: "1.33.0"
   channel: plugin
 commerce_case_ids:
   - case-001-premium-vs-generic
