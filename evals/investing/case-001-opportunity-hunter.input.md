@@ -2,4 +2,6 @@ I invest through XTB. Review a broad set of available equities and identify a sm
 
 I do not want a list of popular AI stocks. I want cases where something changed: estimates, margins, cash generation, cycle, valuation or market expectations. Use my existing watchlist/history if available. If broker availability is uncertain, say so.
 
+For the 2-3 strongest candidates, include a compact in-chat shortlist dashboard and render available historical price/KPI visuals inside the relevant candidate sections. If only static charts are supported, include them as inline images and label them static. Do not paste image data URIs, base64, or chart JSON into the answer.
+
 Do not tell me to buy anything yet. I want to know what deserves deeper research and why.
