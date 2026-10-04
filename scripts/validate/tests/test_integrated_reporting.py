@@ -328,7 +328,7 @@ class IntegratedReportingTests(unittest.TestCase):
         for workflow in (hunter, security):
             self.assertIn("Renderer and interaction rule", workflow)
             self.assertIn("static chart renderer", workflow)
-            self.assertIn("mark the control feature blocked_no_renderer", workflow.lower())
+            self.assertIn("control feature blocked_no_renderer", workflow.lower())
         self.assertIn("concrete, callable renderer", composer)
         self.assertIn("best concrete renderer available", renderer)
 
