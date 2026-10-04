@@ -6,7 +6,7 @@ description: >
   interactive components or Figma outputs appear inside the relevant sections instead of as a separate parallel artifact.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.6.0"
+  version: "0.7.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02
@@ -34,7 +34,8 @@ Do not create a second "visual report" beside the chat answer. Do not create an 
    - require reproducible inputs for every DERIVED claim;
    - run the causal-attribution gate before stating why something changed.
 4. Run `capability_preflight` before finalising any visual-floor requirement:
-   - inspect the tools actually available in the current runtime;
+   - inspect both tools and host-native chat widgets/components exposed by the current runtime;
+   - the native ChatGPT `chart` widget counts as an interactive deterministic data renderer when exposed;
    - classify whether a deterministic data renderer exists for the required visual grammar;
    - do not count `image_gen`, image viewers, generic media generation, or Figma diagram/design tools as a quantitative chart renderer;
    - record one of: `AVAILABLE`, `UNAVAILABLE`, `UNKNOWN`.
