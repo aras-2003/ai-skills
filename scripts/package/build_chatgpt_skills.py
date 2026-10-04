@@ -17,6 +17,7 @@ from build_utils import (
 )
 from portable import read_frontmatter, render_portable_skill
 from workflow_entrypoints import load_registry
+from skill_interface import repository_root, skill_domain, write_skill_interface
 
 
 ZIP_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
@@ -69,6 +70,13 @@ def build_skill_bundle(skill_dir: Path, output_dir: Path) -> dict:
         encoding="utf-8",
     )
     inventory = ["SKILL.md"] + copy_runtime_support(skill_dir, staging)
+    root = repository_root(skill_dir)
+    inventory.extend(
+        write_skill_interface(
+            root, staging, name=name, description=str(fm.get("description") or ""),
+            domain=skill_domain(root, skill_dir),
+        )
+    )
 
     files: list[tuple[str, bytes]] = []
     for path in sorted(p for p in staging.rglob("*") if p.is_file()):
