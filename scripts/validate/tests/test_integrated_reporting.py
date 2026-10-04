@@ -301,6 +301,17 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("scan-cheap-not-enough", scan_cases)
         self.assertIn("underwriting-causal-attribution", underwriting_cases)
 
+    def test_native_chart_widget_satisfies_interactive_investment_slots(self) -> None:
+        routing = (ROOT / "skills/meta/visual-output-design/references/tool-routing.md").read_text(encoding="utf-8")
+        renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
+        composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
+
+        self.assertIn("native `chart` widget", routing)
+        self.assertIn("default renderer for required interactive investment-history slots", routing)
+        self.assertIn("host-native chat widgets/components", renderer)
+        self.assertIn("native ChatGPT `chart` widget", composer)
+        self.assertIn("do not ignore it merely because it is not packaged as an MCP tool", renderer)
+
     def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
         contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")
         standard = (ROOT / "skills/meta/report-composer/references/report-quality-standard.md").read_text(encoding="utf-8")

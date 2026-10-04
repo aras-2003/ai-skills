@@ -27,8 +27,13 @@ Known bundled static renderer:
 
 Interactive investment-history requirement:
 - when a workflow/profile marks a price/KPI history slot as interactive, preflight must locate a chat-native interactive quantitative chart/widget capability;
-- it must support factual time-series values and interactive inspection such as hover, selectable series or horizon switching;
-- static PNG/SVG/image payloads, markdown tables and generated images do not satisfy the slot;
+- **preferred ChatGPT capability: native `chart` widget** (JSON-backed interactive bar/line/pie/scatter chart) when exposed by the runtime;
+- for price/KPI history use `chart` with `chartType: "line"` and explicit time-series rows;
+- the native `chart` widget qualifies as interactive because the client renderer provides hover/tooltips and native chart interaction over deterministic supplied data;
+- do not require the skill package itself to own an MCP tool named `chart`; runtime-native widgets exposed by the host count during capability preflight;
+- if `chart` is available, use it before `arek-chart-renderer`;
+- other interactive quantitative chart/widget capabilities may also qualify if they accept explicit numeric/time-series data and are chat-native;
+- static PNG/SVG/image payloads, markdown tables and generated images do not satisfy the interactive slot;
 - if no such capability exists, return `BLOCKED_NO_RENDERER` for that slot.
 
 Preflight status:
@@ -38,7 +43,20 @@ Preflight status:
 
 For a required visual-floor slot, `UNAVAILABLE` or `UNKNOWN` means `BLOCKED_NO_RENDERER`. A table/text fallback may still be shown for usability, but it does not satisfy the visual requirement.
 
-## 1. Native chart renderer
+## 1. Native interactive chart widget
+Preferred for investment price/KPI history when the host runtime exposes the native `chart` widget.
+
+Use:
+- `chartType: "line"` for price and KPI time series;
+- one chart per analytical question;
+- multiple series only when units and comparison are genuinely compatible;
+- inline data rows with source-backed values;
+- user-friendly time labels;
+- tooltips/hover supplied by the host renderer.
+
+This is the default renderer for required interactive investment-history slots.
+
+## 2. Static native/MCP chart renderer
 Use for:
 - bar/ranked comparisons;
 - line/time-series and normalized performance;
@@ -54,7 +72,7 @@ Do not use for:
 - multi-panel dashboards requiring filters;
 - arbitrary diagrams.
 
-## 2. Figma / FigJam diagram
+## 3. Figma / FigJam diagram
 Use only when the user explicitly requests an editable Figma/FigJam artifact, or the calling task explicitly requires Figma output. Use a connected Figma diagram capability for:
 - flowcharts;
 - decision trees;
@@ -66,7 +84,7 @@ Use only when the user explicitly requests an editable Figma/FigJam artifact, or
 For org charts, operating-model maps, capability maps and other layouts that exceed the supported diagram grammar,
 use an editable Figma design canvas rather than forcing the content into an unsupported Mermaid form.
 
-## 3. Figma design
+## 4. Figma design
 Use only when the user explicitly requests an editable Figma artifact. Use when:
 - the output should be editable and executive-grade;
 - a reusable visual language/design system matters;
@@ -75,7 +93,7 @@ Use only when the user explicitly requests an editable Figma artifact. Use when:
 
 Do not invoke it for a simple two-series chart that the native chart renderer can handle better.
 
-## 4. Figma Slides / deck
+## 5. Figma Slides / deck
 Use only when the user explicitly requests a deck/presentation. Use for:
 - board/executive presentations;
 - multi-slide narratives;
@@ -85,7 +103,7 @@ Use only when the user explicitly requests a deck/presentation. Use for:
 
 A deck is a communication artifact, not the canonical analytical record.
 
-## 5. Interactive HTML/CSS report
+## 6. Interactive HTML/CSS report
 Use only when the user explicitly requests HTML, a downloadable file or an external interactive report. Use when the result benefits from:
 - tabs or scenario switching;
 - filters;
@@ -97,7 +115,7 @@ Use only when the user explicitly requests HTML, a downloadable file or an exter
 
 Keep data in a separate structured payload from HTML/CSS/JS. Prefer simple, portable front-end code and avoid hidden calculations in the presentation layer.
 
-## 6. Data/analytics tools
+## 7. Data/analytics tools
 Use connected analytics tools for:
 - SQL/aggregation;
 - portfolio concentration;
@@ -107,7 +125,7 @@ Use connected analytics tools for:
 
 Analytics tools calculate the visual payload; they are not the presentation layer and do not become canonical state.
 
-## 7. Image generation / creative media
+## 8. Image generation / creative media
 Use only for:
 - illustrative concepts;
 - moodboards;
@@ -118,11 +136,12 @@ Never use generated imagery to represent exact quantitative data, organizational
 or evidence-backed process state.
 
 ## Fallback order
-1. best qualifying native chat renderer/widget;
-2. another qualifying chat-native structured renderer;
-3. for **optional** visuals: static markdown table + concise prose;
-4. for **required visual-floor** slots with no qualifying renderer: `BLOCKED_NO_RENDERER` plus an optional diagnostic table/prose fallback;
-5. external artifact renderer only when the user explicitly requested that artifact class.
+1. native host `chart` widget for quantitative interactive charts when available;
+2. another qualifying chat-native interactive structured renderer;
+3. static `arek-chart-renderer` only for non-interactive slots or as diagnostic fallback;
+4. for **optional** visuals: static markdown table + concise prose;
+5. for **required visual-floor** slots with no qualifying renderer: `BLOCKED_NO_RENDERER` plus an optional diagnostic table/prose fallback;
+6. external artifact renderer only when the user explicitly requested that artifact class.
 
 Never create HTML/PDF/Figma/deck/file output merely because the preferred chat renderer is unavailable.
 
