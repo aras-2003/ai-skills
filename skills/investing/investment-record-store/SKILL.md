@@ -6,7 +6,7 @@ description: >
   state or history. Google Drive is raw-document/legacy migration storage, not the canonical relational store after cutover.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.9.0"
+  version: "1.0.0"
   maturity: production
   risk: high
   last_reviewed: 2026-10-02
