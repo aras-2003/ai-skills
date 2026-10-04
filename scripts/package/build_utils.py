@@ -13,7 +13,7 @@ from typing import Iterator
 
 import yaml
 
-RUNTIME_DIRS = ("references", "scripts", "assets")
+RUNTIME_DIRS = ("references", "scripts", "assets", "agents")
 EXCLUDED_NAMES = {"__pycache__", ".DS_Store"}
 EXCLUDED_SUFFIXES = (".pyc", ".pyo", ".rubric.yaml")
 
