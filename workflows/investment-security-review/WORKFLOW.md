@@ -70,5 +70,9 @@ Default profile:
 - decision state / next trigger;
 - evidence and canonical receipts.
 
-Historical charts belong inside the sections they explain, not in a separate dashboard. Default KPI history is 12-20 quarters. For required investment history visuals, prefer a chat-native interactive quantitative renderer/widget. Static PNG does not satisfy the interactive requirement; if no qualifying interactive renderer exists, mark the slot BLOCKED_NO_RENDERER and optionally provide a static/table diagnostic fallback. If evidence-sanity blocks valuation, show the blocked state rather than a fabricated range.
+Historical charts belong inside the sections they explain, not in a separate dashboard. Default KPI history is 12-20 quarters. For required investment history visuals, prefer a chat-native interactive quantitative renderer/widget.
+
+**Attempt-first rendering rule:** if verified chartable series exist, attempt the host-native interactive chart surface before finalizing the report. UNKNOWN capability discovery is not sufficient reason to omit the chart. Use BLOCKED_NO_RENDERER only after an explicit unavailable/rejected host-native attempt; static PNG/table remains diagnostic fallback only.
+
+If evidence-sanity blocks valuation, show the blocked state rather than a fabricated range.
 Do not collapse business quality, current-price attractiveness and portfolio fit into one score.
