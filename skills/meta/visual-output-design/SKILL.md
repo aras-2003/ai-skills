@@ -102,13 +102,13 @@ If the renderer returns no embeddable image/chart, or the response surface canno
 
 ## Decision rules
 - Prefer one strong visual over several decorative ones.
-- When a required investment-history slot has supported data, **attempt the host-native chart** only through a documented, callable host mechanism; prefer the interactive chart before any text/table fallback. Tool-list uncertainty alone is not evidence that the renderer is unavailable.
+- For required investment-history visuals, use the best concrete renderer available. Prefer a documented interactive component when it is callable; otherwise render and label a static image. Do not infer a chart API from tool-list uncertainty.
 - When another required visual has no suitable renderer, return `BLOCKED_NO_RENDERER`; text-only is not a successful substitute.
 - Prefer the visual grammar in `references/design-system.md`: horizontal bars for ranked concentration, real time-series lines for performance, matrices for overlap/trade-offs, ranges for scenarios, KPI strips for a few metrics.
 - Use a chart for quantitative comparison, trend, composition or relationship.
 - Use a diagram for structure, flow, dependency, ownership or state.
 - Use chat-native interactive components/widgets when available for linked views, filters, horizon switches or hover detail.
-- Treat host-native `chart` as the default interactive quantitative renderer when available; do not ignore it merely because it is not packaged as an MCP tool.
+- Treat a host-native chart as available only when the current runtime documents or exposes a concrete callable mechanism; do not assume a widget API by name.
 - Use interactive HTML only when the user explicitly requests HTML/a file or an external interactive artifact.
 - Use Figma/FigJam only when the user explicitly requests an editable design/diagram artifact or when the calling task explicitly requires Figma output.
 - Use Figma Slides/deck output only when the user explicitly requests a presentation/deck.
