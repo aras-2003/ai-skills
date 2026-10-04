@@ -1,0 +1,802 @@
+{
+  "version": 1,
+  "description": "Functional pathways composed from repository workflow definitions. Suggested sequences are explicitly marked when the repository has no formal workflow.",
+  "processes": [
+    {
+      "id": "career-opportunity-to-interview",
+      "domain": "career",
+      "title": "Od znalezienia roli do rozmowy",
+      "basis": "Proponowana ścieżka z warunków użycia skills",
+      "runtime": "Nie ma formalnego workflow w repozytorium",
+      "summary": "Kolejne etapy dla executive job search. Weryfikacja oferty poprzedza kosztowną ocenę, dopasowanie CV i przygotowanie do rozmów.",
+      "sources": [
+        {
+          "label": "Katalog skills",
+          "path": "CATALOG.md"
+        }
+      ],
+      "lanes": [
+        {
+          "id": "career-main",
+          "title": "Ścieżka rekrutacyjna",
+          "entry": "Job search",
+          "summary": "Pomiń etapy, których nie wymaga konkretna rekrutacja.",
+          "steps": [
+            {
+              "title": "Odkryj role",
+              "skills": [
+                "job-discovery"
+              ],
+              "output": "Krótka lista dopasowanych ofert."
+            },
+            {
+              "title": "Sprawdź aktualność",
+              "skills": [
+                "job-validity-check"
+              ],
+              "output": "Aktywna i niezmieniona oferta."
+            },
+            {
+              "title": "Oceń rolę",
+              "skills": [
+                "executive-role-evaluator"
+              ],
+              "optionalSkills": [
+                "company-context-research"
+              ],
+              "output": "Decyzja, czy warto iść dalej."
+            },
+            {
+              "title": "Przygotuj aplikację",
+              "skills": [
+                "cv-gap-analysis",
+                "cv-tailoring"
+              ],
+              "output": "Najpierw luka dowodowa, potem dopasowanie CV."
+            },
+            {
+              "title": "Rozmowa i aktualizacja",
+              "skills": [
+                "interview-brief",
+                "process-update"
+              ],
+              "optionalSkills": [
+                "process-update"
+              ],
+              "output": "Brief przed rozmową; status po rozmowie lub nowej informacji."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "commerce-opportunity-to-test",
+      "domain": "commerce",
+      "title": "Od pomysłu do decyzji o teście",
+      "basis": "Zarejestrowane workflow",
+      "runtime": "Dostępne w pluginie",
+      "summary": "Dwie drogi wejścia, wspólne bramki dowodowe i decyzja: testować, zbadać jeden bloker, odłożyć albo odrzucić.",
+      "sources": [
+        {
+          "label": "Commerce Opportunity Review",
+          "path": "workflows/commerce-opportunity-review/WORKFLOW.md"
+        },
+        {
+          "label": "Commerce Product Deep Dive",
+          "path": "workflows/commerce-product-deep-dive/WORKFLOW.md"
+        }
+      ],
+      "lanes": [
+        {
+          "id": "commerce-discovery",
+          "title": "Mam problem lub kategorię",
+          "entry": "Tryb odkrywania",
+          "summary": "Dalszy etap zaczyna się dopiero, gdy poprzednia bramka daje podstawy.",
+          "steps": [
+            {
+              "title": "Znajdź hipotezy",
+              "skills": [
+                "product-opportunity-discovery"
+              ],
+              "output": "3–5 wiarygodnych szans do sprawdzenia."
+            },
+            {
+              "title": "Problem gate",
+              "skills": [
+                "problem-demand-validation"
+              ],
+              "output": "Czy problem jest częsty, bolesny i zakupowo istotny?"
+            },
+            {
+              "title": "Rynek i oferta",
+              "skills": [
+                "competition-landscape-review",
+                "differentiation-review"
+              ],
+              "optionalSkills": [
+                "market-transferability-review"
+              ],
+              "output": "Konkurencja, powód do wygrania i transferowalność — gdy ma znaczenie."
+            },
+            {
+              "title": "Ekonomia",
+              "skills": [
+                "unit-economics-review"
+              ],
+              "output": "Marża, koszty zmienne i przestrzeń na CAC."
+            },
+            {
+              "title": "Pozyskanie klienta",
+              "skills": [
+                "acquisition-fit-review"
+              ],
+              "output": "Czy kanał i kreacja mają wiarygodną drogę do klienta?"
+            },
+            {
+              "title": "Dostawca i ryzyko",
+              "skills": [
+                "supplier-viability-review",
+                "commerce-regulatory-risk-review"
+              ],
+              "output": "Wykonalność zaopatrzenia i bramki regulacyjne."
+            },
+            {
+              "title": "Decyzja",
+              "skills": [],
+              "output": "TEST / RESEARCH ONE BLOCKER / DEFER / KILL."
+            }
+          ]
+        },
+        {
+          "id": "commerce-known-product",
+          "title": "Mam konkretny produkt",
+          "entry": "Tryb znanego produktu",
+          "summary": "Pełny deep dive bez etapu szerokiego odkrywania.",
+          "steps": [
+            {
+              "title": "Problem gate",
+              "skills": [
+                "problem-demand-validation"
+              ]
+            },
+            {
+              "title": "Rynek i oferta",
+              "skills": [
+                "competition-landscape-review",
+                "differentiation-review"
+              ],
+              "optionalSkills": [
+                "market-transferability-review"
+              ]
+            },
+            {
+              "title": "Ekonomia",
+              "skills": [
+                "unit-economics-review"
+              ]
+            },
+            {
+              "title": "Pozyskanie klienta",
+              "skills": [
+                "acquisition-fit-review"
+              ]
+            },
+            {
+              "title": "Dostawca i ryzyko",
+              "skills": [
+                "supplier-viability-review",
+                "commerce-regulatory-risk-review"
+              ]
+            },
+            {
+              "title": "Decyzja",
+              "skills": [],
+              "output": "Test tylko po przejściu krytycznych bramek."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "investment-os",
+      "domain": "investing",
+      "title": "Investment OS — od intencji do właściwej analizy",
+      "basis": "Zarejestrowany router i workflow potomne",
+      "runtime": "Dostępne w pluginie",
+      "summary": "Jeden front door wybiera najmniejszą ścieżkę odpowiadającą pytaniu. Trasy są alternatywami, nie checklistą do uruchamiania wszystkich naraz.",
+      "sources": [
+        {
+          "label": "Investment OS Review",
+          "path": "workflows/investment-os-review/WORKFLOW.md"
+        }
+      ],
+      "lanes": [
+        {
+          "id": "invest-observe",
+          "title": "Co zmieniło się w portfelu?",
+          "entry": "investment-portfolio-observation",
+          "sourcePath": "workflows/investment-portfolio-observation/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Odczytaj stan",
+              "skills": [
+                "investment-record-store"
+              ]
+            },
+            {
+              "title": "Zrekonstruuj portfel",
+              "skills": [
+                "portfolio-state-review"
+              ]
+            },
+            {
+              "title": "Triage zmiany",
+              "skills": [],
+              "optionalSkills": [
+                "investment-attention-triage",
+                "thesis-monitor"
+              ],
+              "output": "Tylko gdy pojawił się materiał lub aktywna teza."
+            },
+            {
+              "title": "Zapisz obserwację",
+              "skills": [
+                "investment-record-store"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "invest-portfolio",
+          "title": "Przegląd portfela",
+          "entry": "investment-portfolio-review",
+          "sourcePath": "workflows/investment-portfolio-review/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Odczytaj dane kanoniczne",
+              "skills": [
+                "investment-record-store"
+              ]
+            },
+            {
+              "title": "Przejrzyj strukturę",
+              "skills": [
+                "portfolio-state-review"
+              ]
+            },
+            {
+              "title": "Sprawdź tezy i zmiany",
+              "skills": [],
+              "optionalSkills": [
+                "investment-attention-triage",
+                "thesis-monitor",
+                "valuation-scenario-review"
+              ]
+            },
+            {
+              "title": "Oceń rozmiar pozycji",
+              "skills": [],
+              "optionalSkills": [
+                "position-sizing-review"
+              ]
+            },
+            {
+              "title": "Utrwal wynik",
+              "skills": [
+                "investment-record-store"
+              ],
+              "optionalSkills": [
+                "report-composer",
+                "visual-output-design"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "invest-security",
+          "title": "Jedna spółka lub ETF",
+          "entry": "investment-security-review",
+          "sourcePath": "workflows/investment-security-review/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Kontekst kanoniczny",
+              "skills": [
+                "investment-record-store"
+              ]
+            },
+            {
+              "title": "Underwriting",
+              "skills": [
+                "security-underwriting"
+              ]
+            },
+            {
+              "title": "Wycena",
+              "skills": [
+                "valuation-scenario-review"
+              ]
+            },
+            {
+              "title": "Niezależne podważenie tezy",
+              "skills": [
+                "thesis-challenge"
+              ]
+            },
+            {
+              "title": "Dopasuj do portfela",
+              "skills": [],
+              "optionalSkills": [
+                "portfolio-state-review",
+                "position-sizing-review"
+              ]
+            },
+            {
+              "title": "Decyzja i zapis",
+              "skills": [
+                "investment-record-store"
+              ],
+              "optionalSkills": [
+                "decision-journal-update",
+                "report-composer",
+                "visual-output-design"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "invest-opportunity",
+          "title": "Szukaj nowych okazji",
+          "entry": "investment-opportunity-hunter",
+          "sourcePath": "workflows/investment-opportunity-hunter/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Historia i polityka",
+              "skills": [
+                "investment-record-store"
+              ]
+            },
+            {
+              "title": "Szeroki skan",
+              "skills": [
+                "market-opportunity-scan"
+              ]
+            },
+            {
+              "title": "Rozwiń wybrane sygnały",
+              "skills": [],
+              "optionalSkills": [
+                "trend-theme-research",
+                "investment-attention-triage"
+              ]
+            },
+            {
+              "title": "Shortlist 2–3 kandydatów",
+              "skills": [
+                "security-underwriting",
+                "valuation-scenario-review"
+              ]
+            },
+            {
+              "title": "Podważ i zapisz",
+              "skills": [
+                "thesis-challenge",
+                "investment-record-store"
+              ],
+              "optionalSkills": [
+                "report-composer",
+                "visual-output-design"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "invest-theme",
+          "title": "Zbadaj trend lub temat",
+          "entry": "investment-theme-discovery",
+          "sourcePath": "workflows/investment-theme-discovery/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Zdefiniuj mechanizm",
+              "skills": [
+                "trend-theme-research"
+              ]
+            },
+            {
+              "title": "Znajdź setupy",
+              "skills": [
+                "market-opportunity-scan"
+              ]
+            },
+            {
+              "title": "Zbadaj tylko najlepsze",
+              "skills": [],
+              "optionalSkills": [
+                "investor-pattern-research",
+                "security-underwriting",
+                "thesis-challenge"
+              ]
+            },
+            {
+              "title": "Zapisz wersję tezy",
+              "skills": [
+                "investment-record-store"
+              ],
+              "optionalSkills": [
+                "report-composer",
+                "visual-output-design"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "invest-attention",
+          "title": "Czy nowa informacja zmienia decyzję?",
+          "entry": "investment-attention-review",
+          "sourcePath": "workflows/investment-attention-review/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Odczytaj tezy i sygnały",
+              "skills": [
+                "investment-record-store"
+              ]
+            },
+            {
+              "title": "Oceń istotność",
+              "skills": [
+                "investment-attention-triage"
+              ]
+            },
+            {
+              "title": "Sprawdź aktywne tezy",
+              "skills": [],
+              "optionalSkills": [
+                "thesis-monitor",
+                "valuation-scenario-review",
+                "thesis-challenge"
+              ]
+            },
+            {
+              "title": "Zapisz istotne zmiany",
+              "skills": [
+                "investment-record-store"
+              ],
+              "optionalSkills": [
+                "report-composer",
+                "visual-output-design"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "invest-policy",
+          "title": "Ustal politykę inwestycyjną",
+          "entry": "investment-policy-design",
+          "steps": [
+            {
+              "title": "Poznaj wzorce",
+              "skills": [],
+              "optionalSkills": [
+                "investor-pattern-research"
+              ]
+            },
+            {
+              "title": "Zdefiniuj zasady",
+              "skills": [
+                "investment-policy-design"
+              ],
+              "output": "Cele, limity ryzyka, sizing, koncentracja i rytm przeglądu."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oaf-change-paths",
+      "domain": "oaf",
+      "title": "OAF — od diagnozy do zmiany",
+      "basis": "Zarejestrowane workflow OAF",
+      "runtime": "Dostępne w pluginie; strategy-execution reset jest kandydatem w Lab",
+      "summary": "Wybierz ścieżkę według rodzaju problemu. Diagnoza poprzedza projekt; szeroki workflow dobiera tylko potrzebne gałęzie.",
+      "sources": [
+        {
+          "label": "OAF Enterprise Change Review — orchestrator",
+          "path": "workflows/oaf-enterprise-change-review/WORKFLOW.md"
+        }
+      ],
+      "lanes": [
+        {
+          "id": "oaf-health",
+          "title": "Szeroka diagnoza organizacji",
+          "entry": "oaf-health-check",
+          "sourcePath": "workflows/oaf-health-check/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Wybierz domenę diagnozy",
+              "skills": [
+                "operating-model-review",
+                "decision-rights-review",
+                "architecture-review"
+              ],
+              "optionalSkills": [
+                "strategy-to-execution-diagnostic",
+                "decision-bottleneck-analysis",
+                "organizational-interface-review",
+                "global-local-model-review",
+                "capability-map-review",
+                "capability-gap-analysis",
+                "portfolio-health-review",
+                "evidence-loop-review",
+                "kpi-quality-review"
+              ],
+              "output": "Uruchamiaj tylko gałęzie istotne dla decyzji."
+            },
+            {
+              "title": "Zsyntetyzuj przyczyny",
+              "skills": [],
+              "output": "Oddziel obserwacje, hipotezy i konsekwencje."
+            },
+            {
+              "title": "Zaprojektuj to, co gotowe",
+              "skills": [],
+              "optionalSkills": [
+                "governance-design",
+                "portfolio-prioritization",
+                "transformation-blueprint"
+              ],
+              "output": "Projekt tylko po przejściu bramki dowodowej."
+            }
+          ]
+        },
+        {
+          "id": "oaf-operating-model",
+          "title": "Redesign operating model",
+          "entry": "oaf-operating-model-redesign",
+          "sourcePath": "workflows/oaf-operating-model-redesign/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Zdiagnozuj model i prawa decyzji",
+              "skills": [
+                "operating-model-review",
+                "decision-rights-review"
+              ]
+            },
+            {
+              "title": "Doprecyzuj źródło problemu",
+              "skills": [],
+              "optionalSkills": [
+                "organizational-interface-review",
+                "global-local-model-review",
+                "decision-bottleneck-analysis"
+              ]
+            },
+            {
+              "title": "Wybierz model i mechanizmy",
+              "skills": [],
+              "optionalSkills": [
+                "governance-design"
+              ],
+              "output": "Governance dopiero po wyborze opcji."
+            },
+            {
+              "title": "Zaplanowana zmiana",
+              "skills": [],
+              "optionalSkills": [
+                "transformation-blueprint"
+              ],
+              "output": "Blueprint dopiero po uzgodnieniu kierunku."
+            }
+          ]
+        },
+        {
+          "id": "oaf-governance",
+          "title": "Redesign governance",
+          "entry": "oaf-governance-redesign",
+          "sourcePath": "workflows/oaf-governance-redesign/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Ustal decyzje i właścicieli",
+              "skills": [
+                "decision-rights-review"
+              ],
+              "optionalSkills": [
+                "decision-bottleneck-analysis"
+              ]
+            },
+            {
+              "title": "Zaprojektuj minimum mechanizmów",
+              "skills": [
+                "governance-design"
+              ],
+              "output": "Właściciele, dowody, rytm, progi i eskalacje."
+            }
+          ]
+        },
+        {
+          "id": "oaf-architecture",
+          "title": "Enterprise architecture review",
+          "entry": "oaf-enterprise-architecture-review",
+          "sourcePath": "workflows/oaf-enterprise-architecture-review/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Połącz cele i architekturę",
+              "skills": [
+                "architecture-review"
+              ]
+            },
+            {
+              "title": "Sprawdź mapę i luki",
+              "skills": [],
+              "optionalSkills": [
+                "capability-map-review",
+                "capability-gap-analysis"
+              ]
+            },
+            {
+              "title": "Oceń implikacje portfelowe",
+              "skills": [],
+              "optionalSkills": [
+                "portfolio-health-review",
+                "portfolio-prioritization"
+              ]
+            },
+            {
+              "title": "Ustal następny gate",
+              "skills": [],
+              "optionalSkills": [
+                "transformation-blueprint"
+              ],
+              "output": "Nie zakładaj defektu technologicznego bez dowodów."
+            }
+          ]
+        },
+        {
+          "id": "oaf-transformation",
+          "title": "Projektowanie transformacji",
+          "entry": "oaf-transformation-design",
+          "sourcePath": "workflows/oaf-transformation-design/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Wejście: zatwierdzony kierunek",
+              "skills": [],
+              "output": "Diagnoza i wybór kierunku są warunkami wejścia."
+            },
+            {
+              "title": "Blueprint i sekwencja",
+              "skills": [
+                "transformation-blueprint"
+              ],
+              "output": "Strumienie prac, zależności, zdolność, pilotaże i bramki."
+            }
+          ]
+        },
+        {
+          "id": "oaf-strategy-reset",
+          "title": "Reset strategy-to-execution",
+          "entry": "oaf-strategy-execution-reset",
+          "sourcePath": "workflows/oaf-strategy-execution-reset/WORKFLOW.md",
+          "maturity": "candidate",
+          "steps": [
+            {
+              "title": "Strategia i luka zdolności",
+              "skills": [
+                "strategy-to-execution-diagnostic",
+                "capability-gap-analysis"
+              ]
+            },
+            {
+              "title": "Portfel, prawa i dowody",
+              "skills": [
+                "portfolio-health-review",
+                "decision-rights-review",
+                "evidence-loop-review"
+              ]
+            },
+            {
+              "title": "Priorytety i mobilizacja",
+              "skills": [],
+              "optionalSkills": [
+                "portfolio-prioritization",
+                "transformation-blueprint"
+              ],
+              "output": "Kandydat do kontrolowanej ewaluacji w Lab."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "skill-lifecycle",
+      "domain": "meta",
+      "title": "Cykl życia skill",
+      "basis": "Workflow inżynierski repozytorium",
+      "runtime": "Proces repozytoryjny, nie entrypoint użytkownika pluginu",
+      "summary": "Od specyfikacji do promocji. Brak przejścia przez bramkę zatrzymuje dalsze etapy.",
+      "sources": [
+        {
+          "label": "Skill Development Workflow",
+          "path": "workflows/skill-development/WORKFLOW.md"
+        }
+      ],
+      "lanes": [
+        {
+          "id": "skill-dev",
+          "title": "Zaprojektuj, sprawdź i wydaj skill",
+          "entry": "skill-development",
+          "sourcePath": "workflows/skill-development/WORKFLOW.md",
+          "steps": [
+            {
+              "title": "Specyfikacja",
+              "skills": [
+                "skill-specification"
+              ]
+            },
+            {
+              "title": "Autorstwo",
+              "skills": [
+                "skill-authoring"
+              ]
+            },
+            {
+              "title": "Walidacja",
+              "skills": [
+                "skill-validation"
+              ]
+            },
+            {
+              "title": "Testy zachowania",
+              "skills": [
+                "skill-test-design",
+                "skill-evaluation"
+              ]
+            },
+            {
+              "title": "Gotowość do wydania",
+              "skills": [
+                "skill-release-review"
+              ]
+            },
+            {
+              "title": "Promocja i utrzymanie",
+              "skills": [],
+              "optionalSkills": [
+                "arek-skills-diagnostic"
+              ],
+              "output": "Promocja po przejściu bramek; diagnostyka po wydaniu."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "plugin-diagnostics",
+      "domain": "meta",
+      "title": "Diagnostyka dostępności skills",
+      "basis": "Pojedynczy skill produkcyjny",
+      "runtime": "Dostępne w pluginie",
+      "summary": "Krótka ścieżka sprawdzenia, czy skills są widoczne w ChatGPT lub Codex.",
+      "sources": [
+        {
+          "label": "arek-skills-diagnostic",
+          "path": "skills/meta/arek-skills-diagnostic/SKILL.md"
+        }
+      ],
+      "lanes": [
+        {
+          "id": "diagnostic",
+          "title": "Sprawdzenie instalacji",
+          "entry": "arek-skills-diagnostic",
+          "sourcePath": "skills/meta/arek-skills-diagnostic/SKILL.md",
+          "steps": [
+            {
+              "title": "Sprawdź ekspozycję skills",
+              "skills": [
+                "arek-skills-diagnostic"
+              ],
+              "output": "Potwierdź dostępność w aktywnym runtime."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
