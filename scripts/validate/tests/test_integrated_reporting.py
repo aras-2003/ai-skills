@@ -294,7 +294,7 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("OBSERVED", underwriting)
         self.assertIn("VERIFIED EVENT", underwriting)
         self.assertIn("CONFIDENCE", underwriting)
-        self.assertIn("required historical price visual", security.lower())
+        self.assertIn("required inline 5y price-history visual", security.lower())
         self.assertIn("required historical price visual slot", profiles.lower())
         self.assertIn("A static inline image satisfies a visual slot", standard)
         self.assertIn("do not qualify", routing.lower())
@@ -328,7 +328,7 @@ class IntegratedReportingTests(unittest.TestCase):
         for workflow in (hunter, security):
             self.assertIn("Renderer and interaction rule", workflow)
             self.assertIn("static chart renderer", workflow)
-            self.assertIn("mark the control feature BLOCKED_NO_RENDERER", workflow)
+            self.assertIn("mark the control feature blocked_no_renderer", workflow.lower())
         self.assertIn("concrete, callable renderer", composer)
         self.assertIn("best concrete renderer available", renderer)
 
