@@ -7,7 +7,7 @@ description: >
   to make a visual complete.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.10.0"
+  version: "0.11.0"
   maturity: candidate
   risk: low
   last_reviewed: 2026-10-02
@@ -69,6 +69,16 @@ A visual slot is complete only when a valid chart, widget, or image is emitted a
 - Use a native interactive chart only through a real host-supported response mechanism. Do not invent a chart tool, widget call, or response syntax that the runtime does not expose.
 - A valid static image is a useful inline visual when interactivity is unavailable, but label it static; do not claim hover, filtering, or interaction.
 - If no actual inline visual can be emitted, mark the slot blocked/failed and show a concise diagnostic table. A URL, base64 string, or JSON payload printed as text is not a rendered visual.
+
+## Hard stop: renderer output must be present
+
+Do not report or caption a chart as completed based on a planned render, tool availability, numeric data, a tool-call attempt, or a chart specification. For every required slot:
+- invoke the documented renderer that is actually available in this runtime;
+- verify the result includes a native image/chart payload;
+- include that returned visual payload in the user-facing response next to its analysis;
+- only then describe the chart as present or state what it shows.
+
+If the renderer returns no embeddable image/chart, or the response surface cannot include it, the slot is blocked/failed. Say so plainly, provide a compact diagnostic table if useful, and remove language such as “the chart shows”, “the chart captures”, “inline chart”, or “static chart” unless the visual itself is present. Never substitute a Markdown link, placeholder, caption, JSON, or encoded image text for the returned visual.
 
 ## Decision rules
 - Prefer one strong visual over several decorative ones.
