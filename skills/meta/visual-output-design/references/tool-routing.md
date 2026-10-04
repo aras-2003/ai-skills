@@ -45,7 +45,7 @@ Preflight status:
 For required price/KPI history slots, UNKNOWN is not a terminal blocked state, but an attempt is valid only when the current host exposes a documented, callable chart/widget mechanism.
 
 1. Prepare the factual chart payload.
-2. Invoke a host-native interactive chart only through that real mechanism.
+2. Attempt the host-native interactive chart only through that real, documented mechanism; never simulate an unavailable widget call.
 3. If it accepts the payload, record AVAILABLE + PAYLOAD_RENDERED and preserve the chart as a native visual element in the chat response.
 4. If no callable/documented host mechanism exists, do not simulate a widget call or print chart JSON as if it rendered. Use an available static renderer, or mark the interactive slot BLOCKED_NO_RENDERER.
 5. If a real invocation fails, record FAIL_RENDERER_INVOCATION.
