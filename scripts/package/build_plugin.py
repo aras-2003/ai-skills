@@ -16,6 +16,7 @@ from build_utils import (
 )
 from portable import read_frontmatter, render_portable_skill
 from workflow_entrypoints import add_workflow_entrypoints, load_registry
+from skill_interface import repository_root, skill_domain, write_skill_interface
 
 PLUGIN_NAME = "arek-ai-skills"
 
@@ -42,6 +43,13 @@ def copy_skill(src: Path, dst_root: Path) -> dict:
     dst.mkdir(parents=True)
     (dst / "SKILL.md").write_text(render_portable_skill(src / "SKILL.md"), encoding="utf-8")
     inventory = ["SKILL.md"] + copy_runtime_support(src, dst)
+    root = repository_root(src)
+    inventory.extend(
+        write_skill_interface(
+            root, dst, name=name, description=str(fm.get("description") or ""),
+            domain=skill_domain(root, src),
+        )
+    )
     return {
         "name": name,
         "kind": "skill",
