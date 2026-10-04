@@ -41,13 +41,15 @@ For opportunity/security comparisons:
 
 ## 5. Visual quality
 For detailed investment/security reports with verified historical series:
-- price-history visuals are required;
+- price-history visuals are required when price history materially informs the analysis;
 - key KPI-history visuals are required when those KPIs drive the thesis;
-- the required renderer class is **chat-native interactive quantitative time-series**;
-- a static PNG/image renderer does not satisfy these interactive investment-history slots;
-- if no qualifying interactive renderer/widget exists, keep the analytical work but mark the required slot `BLOCKED_NO_RENDERER`; a static chart/table may be diagnostic only.
+- use the best renderer actually available: control-interactive, hover-interactive, or static. A static inline image satisfies a visual slot when it is the best supported chat renderer; it does not satisfy a separately requested control-interaction feature;
+- if the user explicitly requests selectors/filters and the runtime has no concrete callable control renderer, mark that interaction feature `BLOCKED_NO_RENDERER`, then include useful static chart images if available and label them static.
 
 Prefer:
+- for a multi-candidate queue, one shared price-history line indexed to 100 at the first common observation when at least two verified price series share a comparable date window and adjustment basis;
+- candidate-specific KPI visuals that keep each company's metric and units separate;
+- line charts for three or more dated observations; paired bars/dots for two observations without implying a trend;
 - horizontal bars for ranked concentration/allocation;
 - normalized line charts for actual time-series / relative performance;
 - overlap or exposure matrices for portfolio overlap;
