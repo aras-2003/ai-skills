@@ -57,7 +57,7 @@
         <div id="cards" class="grid" aria-live="polite" aria-busy="true"></div>
       </section>
     </main>
-    <footer class="footer"><span>Tytuły i opisy pochodzą z katalogu generowanego z plików SKILL.md.</span><a href="https://github.com/aras-2003/ai-skills/blob/main/CATALOG.md" target="_blank" rel="noopener noreferrer">Źródłowy katalog ↗</a></footer>
+    <footer class="footer"><span>Etykiety są po polsku, a opisy pozostają w języku źródłowym z plików SKILL.md.</span><a href="https://github.com/aras-2003/ai-skills/blob/main/CATALOG.md" target="_blank" rel="noopener noreferrer">Źródłowy katalog ↗</a></footer>
   </div>
   <dialog id="skill-dialog" aria-labelledby="dialog-title">
     <div class="dialog-inner">
@@ -73,10 +73,12 @@
     const domainShort={career:"CAR",commerce:"COM",investing:"INV",meta:"LAB",oaf:"OAF"};
     const domainColors={career:["#ffd18a","#ffd18a22"],commerce:["#ff9a84","#ff8b7222"],investing:["#a8a0ff","#9588f722"],meta:["#aee4c5","#94d4b322"],oaf:["#a9c8ff","#83a9ff22"]};
     const maturityNames={production:"Production",candidate:"Candidate",draft:"Draft"};
+    const acronyms=new Set(["ai","cac","cogs","cv","kpi","oaf","os","vat","xtb"]);
     const state={skills:[],domain:"all",maturity:"all",query:""};
     const cards=document.querySelector("#cards"),filters=document.querySelector("#filters"),dialog=document.querySelector("#skill-dialog");
     const escapeHtml=value=>String(value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
     const labelFor=domainNames;
+    const skillTitle=name=>name.split("-").map(part=>acronyms.has(part.toLowerCase())?part.toUpperCase():part.charAt(0).toUpperCase()+part.slice(1)).join(" ");
     function renderFilters(){
       const counts={all:state.skills.length};state.skills.forEach(s=>counts[s.domain]=(counts[s.domain]||0)+1);
       const domains=[...new Set(state.skills.map(s=>s.domain))].sort((a,b)=>(labelFor[a]||a).localeCompare(labelFor[b]||b,"pl"));
@@ -93,7 +95,7 @@
       });
     }
     function showDetails(skill){
-      document.querySelector("#dialog-title").textContent=skill.name.replaceAll("-"," ").replace(/\b\w/g,c=>c.toUpperCase());
+      document.querySelector("#dialog-title").textContent=skillTitle(skill.name);
       document.querySelector("#dialog-domain").textContent=labelFor[skill.domain]||skill.domain;
       document.querySelector("#dialog-description").textContent=skill.description;
       document.querySelector("#dialog-source").href=`https://github.com/aras-2003/ai-skills/blob/main/${skill.source}`;
@@ -106,7 +108,7 @@
       if(!result.length){cards.innerHTML='<div class="empty"><strong>Nie znaleziono wyników</strong>Spróbuj innego hasła albo zmień filtry.</div>';return}
       cards.innerHTML=result.map((s,index)=>{
         const [color,bg]=domainColors[s.domain]||["#c5baff","#c5baff22"];
-        const title=s.name.replaceAll("-"," ").replace(/\b\w/g,c=>c.toUpperCase());
+        const title=skillTitle(s.name);
         return `<article class="card" style="--domain-color:${color};--domain-bg:${bg}"><div class="card-top"><span class="domain"><span class="domain-mark" aria-hidden="true">${escapeHtml(domainShort[s.domain]||s.domain.slice(0,3).toUpperCase())}</span>${escapeHtml(labelFor[s.domain]||s.domain)}</span><span class="maturity ${escapeHtml(s.maturity)}">${escapeHtml(maturityNames[s.maturity]||s.maturity)}</span></div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(s.description)}</p><div class="card-bottom"><span>${escapeHtml(s.version?`Wersja ${s.version}`:"Workflow" )}</span><button class="open-card" type="button" data-index="${index}">Zobacz zakres&nbsp; ↗</button></div></article>`;
       }).join("");
       cards.querySelectorAll(".open-card").forEach(button=>button.addEventListener("click",()=>showDetails(result[Number(button.dataset.index)])));
