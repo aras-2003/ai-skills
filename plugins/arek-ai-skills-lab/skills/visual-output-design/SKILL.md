@@ -9,7 +9,7 @@ description: 'Convert an already-supported analysis or workflow result into a pr
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.7.0
+  version: 0.8.0
   maturity: candidate
   risk: low
   last_reviewed: '2026-10-02'
@@ -31,8 +31,10 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 ## Procedure
 1. Identify the local decision/comprehension job supplied by the calling workflow or `report-composer`.
 2. Decide whether a visual materially improves the result and whether the caller marks it as required by the visual floor.
-3. Run `capability_preflight` against the tools actually available in the current runtime:
-   - match the required visual grammar to a concrete renderer capability;
+3. Run `capability_preflight` against the capabilities actually exposed by the host runtime:
+   - inspect both callable tools and host-native chat widgets/components;
+   - the native ChatGPT `chart` widget, when exposed, is a qualifying interactive quantitative renderer for bar/line/pie/scatter charts;
+   - for investment price/KPI time series, prefer native `chart` line charts over static MCP/image renderers;
    - a quantitative chart renderer must deterministically encode supplied numeric series/categories;
    - `image_gen`, image viewing, generic media generation and Figma diagram/design capabilities do not qualify as quantitative data-chart renderers;
    - return `AVAILABLE`, `UNAVAILABLE`, or `UNKNOWN`.
@@ -60,6 +62,7 @@ Preserve the source analysis, evidence, uncertainty and canonical data contracts
 - Use a chart for quantitative comparison, trend, composition or relationship.
 - Use a diagram for structure, flow, dependency, ownership or state.
 - Use chat-native interactive components/widgets when available for linked views, filters, horizon switches or hover detail.
+- Treat host-native `chart` as the default interactive quantitative renderer when available; do not ignore it merely because it is not packaged as an MCP tool.
 - Use interactive HTML only when the user explicitly requests HTML/a file or an external interactive artifact.
 - Use Figma/FigJam only when the user explicitly requests an editable design/diagram artifact or when the calling task explicitly requires Figma output.
 - Use Figma Slides/deck output only when the user explicitly requests a presentation/deck.

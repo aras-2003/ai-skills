@@ -599,7 +599,7 @@
       "version": "1.1.0"
     },
     {
-      "content_sha256": "8f74b3fd23f2357eacb30c1f2ca361de1e967949786219d8375df53546159515",
+      "content_sha256": "f956b5ebcb6d7b1e865e66e55e9bd8a018970d782cddc6c57452062edc3d5d17",
       "inventory": [
         "SKILL.md",
         "references/composition-rules.md",
@@ -610,7 +610,7 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "report-composer",
-      "version": "0.6.0"
+      "version": "0.7.0"
     },
     {
       "content_sha256": "39ebf3cf6aaa4b33540464ea0039d9f83802465caa9db6fa7280d5090370b6f5",
@@ -738,7 +738,7 @@
       "version": "0.1.0"
     },
     {
-      "content_sha256": "cc0128b82c70effde17592bc305fddddf83f1b81011f645734e5346d7d9ebbf7",
+      "content_sha256": "cfa51609997afed68064b408c3dfb34fad250dbd08c6fbf44de2f6e36433adeb",
       "inventory": [
         "SKILL.md",
         "references/design-system.md",
@@ -747,7 +747,7 @@
       "kind": "skill",
       "maturity": "candidate",
       "name": "visual-output-design",
-      "version": "0.7.0"
+      "version": "0.8.0"
     }
   ],
   "channel": "lab",
@@ -865,5 +865,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "b6417efdc277aa4cab1815d25e2575d0046f5094"
+  "source_revision": "0514d31e0f1553f69919c4493df4ba945a1c0a0e"
 }
