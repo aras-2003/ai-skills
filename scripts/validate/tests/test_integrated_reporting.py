@@ -273,7 +273,7 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("store-bootstrap-empty-contradiction", store_cases)
         self.assertIn("portfolio-exposure-coverage-semantics", portfolio_cases)
 
-    def test_investment_discovery_requires_why_now_history_and_interactive_visuals(self) -> None:
+    def test_investment_discovery_requires_why_now_history_and_chart_visuals(self) -> None:
         scan = (ROOT / "skills/investing/market-opportunity-scan/SKILL.md").read_text(encoding="utf-8")
         hunter = (ROOT / "workflows/investment-opportunity-hunter/WORKFLOW.md").read_text(encoding="utf-8")
         underwriting = (ROOT / "skills/investing/security-underwriting/SKILL.md").read_text(encoding="utf-8")
@@ -294,37 +294,44 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("OBSERVED", underwriting)
         self.assertIn("VERIFIED EVENT", underwriting)
         self.assertIn("CONFIDENCE", underwriting)
-        self.assertIn("required interactive", security.lower())
-        self.assertIn("required interactive historical price visual slot", profiles.lower())
-        self.assertIn("chat-native interactive quantitative time-series", standard)
+        self.assertIn("required historical price visual", security.lower())
+        self.assertIn("required historical price visual slot", profiles.lower())
+        self.assertIn("A static inline image satisfies a visual slot", standard)
         self.assertIn("do not qualify", routing.lower())
         self.assertIn("scan-cheap-not-enough", scan_cases)
         self.assertIn("underwriting-causal-attribution", underwriting_cases)
 
-    def test_native_chart_widget_satisfies_interactive_investment_slots(self) -> None:
+    def test_interaction_levels_require_actual_runtime_capability(self) -> None:
         routing = (ROOT / "skills/meta/visual-output-design/references/tool-routing.md").read_text(encoding="utf-8")
         renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
         composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
 
-        self.assertIn("native `chart` widget", routing)
-        self.assertIn("default renderer for required interactive investment-history slots", routing)
-        self.assertIn("host-native chat widgets/components", renderer)
-        self.assertIn("native ChatGPT `chart` widget", composer)
-        self.assertIn("do not ignore it merely because it is not packaged as an MCP tool", renderer)
+        for level in ("STATIC", "HOVER", "CONTROLLED", "UNKNOWN"):
+            self.assertIn(level, routing)
+        self.assertIn("concrete, documented, callable component/API", routing)
+        self.assertIn("Do not infer support", routing)
+        self.assertIn("do not invent a native `chart` call", renderer)
+        self.assertIn("A control-interactive dashboard requires evidence", renderer)
+        self.assertIn("interaction_level", composer)
+        self.assertIn("CONTROLLED", composer)
 
-    def test_required_investment_charts_are_attempt_first(self) -> None:
+    def test_investment_charts_use_best_callable_renderer(self) -> None:
         routing = (ROOT / "skills/meta/visual-output-design/references/tool-routing.md").read_text(encoding="utf-8")
         renderer = (ROOT / "skills/meta/visual-output-design/SKILL.md").read_text(encoding="utf-8")
         composer = (ROOT / "skills/meta/report-composer/SKILL.md").read_text(encoding="utf-8")
         hunter = (ROOT / "workflows/investment-opportunity-hunter/WORKFLOW.md").read_text(encoding="utf-8")
         security = (ROOT / "workflows/investment-security-review/WORKFLOW.md").read_text(encoding="utf-8")
 
-        self.assertIn("Attempt-first rule", routing)
-        self.assertIn("attempt the host-native interactive chart", routing.lower())
-        self.assertIn("attempt the host-native chart", renderer.lower())
-        self.assertIn("attempt the host-native chart", composer.lower())
-        self.assertIn("Attempt-first rendering rule", hunter)
-        self.assertIn("Attempt-first rendering rule", security)
+        self.assertNotIn("Attempt-first rule", routing)
+        self.assertNotIn("Attempt-first rendering rule", hunter)
+        self.assertNotIn("Attempt-first rendering rule", security)
+        for workflow in (hunter, security):
+            self.assertIn("Renderer and interaction rule", workflow)
+            self.assertIn("static chart renderer", workflow)
+            self.assertIn("mark the control feature BLOCKED_NO_RENDERER", workflow)
+        self.assertIn("concrete, callable renderer", composer)
+        self.assertIn("best concrete renderer available", renderer)
+
     def test_discovery_report_persists_research_candidates_without_owner_decision(self) -> None:
         hunter = (ROOT / "workflows/investment-opportunity-hunter/WORKFLOW.md").read_text(encoding="utf-8")
         store = (ROOT / "skills/investing/investment-record-store/SKILL.md").read_text(encoding="utf-8")
