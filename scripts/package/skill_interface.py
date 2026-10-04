@@ -68,6 +68,10 @@ def write_skill_interface(
     if domain not in DOMAIN_COLORS:
         raise ValueError(f"{name}: no UI icon is configured for domain {domain!r}")
 
+    icon_source = root / "assets" / "skill-icons" / f"{domain}.svg"
+    if not icon_source.is_file():
+        return []
+
     config_path = skill_dir / "agents" / "openai.yaml"
     config_path.parent.mkdir(parents=True, exist_ok=True)
     if config_path.exists():
@@ -86,9 +90,6 @@ def write_skill_interface(
     interface["brand_color"] = DOMAIN_COLORS[domain]
     config["interface"] = interface
 
-    icon_source = root / "assets" / "skill-icons" / f"{domain}.svg"
-    if not icon_source.is_file():
-        raise FileNotFoundError(f"Missing domain icon: {icon_source}")
     icon_relative = "assets/arek-ai-domain-icon.svg"
     icon_target = skill_dir / icon_relative
     icon_target.parent.mkdir(parents=True, exist_ok=True)
