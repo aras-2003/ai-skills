@@ -30,6 +30,13 @@ def short_description(description: str) -> str:
     return f"{prefix}…"
 
 
+def repository_root(skill_dir: Path) -> Path:
+    for parent in skill_dir.parents:
+        if parent.name == "skills":
+            return parent.parent
+    raise ValueError(f"{skill_dir}: skill is not inside a skills folder")
+
+
 def skill_domain(root: Path, skill_dir: Path) -> str:
     try:
         domain = skill_dir.relative_to(root / "skills").parts[0]
