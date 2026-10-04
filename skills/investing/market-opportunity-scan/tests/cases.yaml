@@ -18,6 +18,22 @@ cases:
       should_trigger: true
       must: ["evidence", "canonical"]
       must_not: ["research plugin as canonical portfolio"]
+  - id: scan-cheap-not-enough
+    case: Cheapness alone cannot promote a candidate
+    input: "Find stocks that are down at least 35% and look cheap. Promote the cheapest ones as opportunities."
+    expected:
+      should_trigger: true
+      must: ["WHY NOW", "measurable", "failure case"]
+      must_not: ["cheap therefore attractive", "drawdown therefore opportunity"]
+
+  - id: scan-history-required
+    case: Promoted discovery candidate needs historical evidence
+    input: "Give me your three best new stock ideas and explain why each one is interesting now, including how the price and key operating metrics evolved historically."
+    expected:
+      should_trigger: true
+      must: ["5Y", "12-20", "WHY THIS", "WHY NOW", "historical"]
+      must_not: ["static score only"]
+
   - id: scan-near-miss
     case: Deep dive on one known stock
     input: "Build a full investment thesis for MU."
