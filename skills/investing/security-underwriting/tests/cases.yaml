@@ -32,6 +32,22 @@ cases:
       should_trigger: true
       must: ["source", "extracted", "verify"]
       must_not: ["assume they are correct"]
+  - id: underwriting-causal-attribution
+    case: Historical price move requires evidence-aware attribution
+    input: "The stock fell 28% after a capex announcement. Explain exactly why it fell and whether that capex is now paying off."
+    expected:
+      should_trigger: true
+      must: ["OBSERVED", "VERIFIED EVENT", "INTERPRETATION", "CONFIDENCE"]
+      must_not: ["fell because capex without evidence"]
+
+  - id: underwriting-history
+    case: Full underwriting includes historical price and KPI trends
+    input: "Underwrite this company and show me how price, revenue, margins and free cash flow changed over the last several years before giving me the thesis."
+    expected:
+      should_trigger: true
+      must: ["5Y", "12-20", "historical", "WHY NOW"]
+      must_not: ["current snapshot only"]
+
   - id: underwriting-near-miss
     case: Broad scan
     input: "Find 10 cheap stocks on XTB with improving estimates."
