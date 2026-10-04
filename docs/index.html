@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111119">
+  <meta name="description" content="Przejrzysty katalog Arek AI Skills Lab. Znajdź workflow według obszaru, celu i dojrzałości.">
+  <title>Arek AI Skills — katalog workflow</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/brand-mark.svg">
+  <style>
+    :root{color-scheme:dark;--bg:#111119;--panel:#191923;--panel-2:#20202c;--line:#30303c;--ink:#f4f1f8;--muted:#aaa6b6;--soft:#797586;--accent:#c5baff;--gold:#ffd18a;--coral:#ff8b72;--violet:#9588f7;--green:#94d4b3;--shadow:0 22px 64px #07070b70}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 12% -12%,#393044 0,transparent 30rem),radial-gradient(ellipse at 97% 4%,#25233b 0,transparent 26rem),var(--bg);color:var(--ink);font:15px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit}button,input{font:inherit}button{color:inherit}.skip{position:absolute;left:-999px;top:8px;background:white;color:#111;padding:10px;z-index:8}.skip:focus{left:12px}.shell{max-width:1240px;margin:auto;padding:28px 34px 52px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:27px;border-bottom:1px solid #ffffff18}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:650;letter-spacing:.01em}.brand img{width:38px;height:38px;border-radius:11px}.brand span{font-size:14px}.brand small{display:block;color:var(--muted);font-weight:450;font-size:11px;letter-spacing:.12em;text-transform:uppercase}.repo-link{display:inline-flex;align-items:center;gap:8px;color:#d5d0df;text-decoration:none;padding:9px 13px;border:1px solid #ffffff20;border-radius:999px;font-size:13px;transition:background .18s,border-color .18s}.repo-link:hover{background:#ffffff0c;border-color:#ffffff45}.repo-link svg{width:15px;height:15px}.hero{display:grid;grid-template-columns:minmax(0,1fr) 240px;align-items:end;gap:34px;padding:53px 0 32px}.eyebrow{display:flex;align-items:center;gap:9px;color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px #ffd18a99}.hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(40px,5.3vw,68px);line-height:.99;font-weight:500;letter-spacing:-.045em;max-width:760px;margin:17px 0 17px}.hero h1 em{color:var(--accent);font-weight:400}.hero p{max-width:680px;color:#c0bdc9;font-size:16px;line-height:1.65;margin:0}.summary{display:grid;grid-template-columns:1fr 1fr;gap:8px}.summary article{min-height:91px;padding:14px 15px;border:1px solid #ffffff18;border-radius:15px;background:#ffffff06}.summary strong{display:block;font:32px/1 Georgia,serif;color:var(--gold);letter-spacing:-.04em}.summary span{display:block;color:var(--muted);font-size:11px;line-height:1.35;margin-top:8px}.toolbar{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid #ffffff1c;border-radius:18px;background:#191923d9;box-shadow:var(--shadow);backdrop-filter:blur(16px)}.search{flex:1;position:relative;min-width:180px}.search svg{position:absolute;width:18px;height:18px;left:14px;top:50%;transform:translateY(-50%);color:#8d899a}.search input{width:100%;height:46px;padding:0 16px 0 43px;background:#111119;border:1px solid #ffffff14;border-radius:12px;color:var(--ink);outline:none}.search input::placeholder{color:#858192}.search input:focus{border-color:#aaa0ff;box-shadow:0 0 0 3px #9588f72b}.toolbar select{height:46px;min-width:158px;padding:0 34px 0 13px;border:1px solid #ffffff14;border-radius:12px;background:#111119;color:#e4e0eb;outline:none}.toolbar select:focus-visible,.chip:focus-visible,.clear:focus-visible,.open-card:focus-visible,.dialog-close:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.filters{display:flex;align-items:center;gap:8px;overflow:auto;padding:16px 1px 23px;scrollbar-width:thin}.chip{flex:none;border:1px solid #ffffff20;border-radius:999px;padding:8px 13px;background:transparent;color:#c1bdca;font-size:12px;cursor:pointer;transition:all .18s}.chip:hover{border-color:#ffffff50;color:white}.chip[aria-pressed="true"]{border-color:#c5baff77;background:#c5baff17;color:#e4deff}.chip .count{color:#8e899b;margin-left:5px;font-variant-numeric:tabular-nums}.section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:3px 0 15px}.section-head h2{margin:0;font:24px/1.2 Georgia,serif;font-weight:500;letter-spacing:-.025em}.section-head p{color:var(--muted);font-size:12px;margin:0}.clear{border:0;background:none;color:var(--accent);padding:6px 0;cursor:pointer;font-size:12px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{display:flex;flex-direction:column;min-height:222px;padding:18px 18px 15px;border:1px solid #ffffff17;border-radius:16px;background:linear-gradient(150deg,#1c1c27,#181820);transition:transform .18s,border-color .18s,background .18s}.card:hover{transform:translateY(-2px);border-color:#c5baff55;background:linear-gradient(150deg,#242331,#1a1a23)}.card-top{display:flex;align-items:center;justify-content:space-between;gap:9px}.domain{display:inline-flex;align-items:center;gap:7px;color:#d1ccd9;font-size:11px}.domain-mark{display:grid;place-items:center;width:27px;height:27px;border-radius:9px;background:var(--domain-bg);color:var(--domain-color);font-size:8px;font-weight:800;letter-spacing:.04em}.maturity{font-size:10px;letter-spacing:.03em;color:#c4c0cc;border:1px solid #ffffff19;border-radius:999px;padding:4px 8px;white-space:nowrap}.maturity.production{color:#aee4c5;border-color:#94d4b344;background:#94d4b30b}.maturity.candidate{color:#f1d19b;border-color:#ffd18a44;background:#ffd18a0b}.maturity.draft{color:#c5baff;border-color:#9588f744;background:#9588f70b}.card h3{font-size:17px;line-height:1.3;letter-spacing:-.02em;margin:17px 0 8px;font-weight:620}.card p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:#a9a6b4;font-size:12px;line-height:1.55;margin:0 0 16px}.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:10px;border-top:1px solid #ffffff10;color:#858192;font-size:10px}.open-card{border:0;background:none;color:#c5baff;cursor:pointer;padding:2px 0;font-size:11px}.open-card:hover{color:white}.empty,.load-error{grid-column:1/-1;padding:46px 20px;text-align:center;color:var(--muted);border:1px dashed #ffffff30;border-radius:16px}.empty strong,.load-error strong{display:block;color:var(--ink);font:20px Georgia,serif;margin-bottom:6px}.footer{display:flex;justify-content:space-between;gap:24px;margin-top:43px;padding-top:16px;border-top:1px solid #ffffff18;color:#848091;font-size:11px}.footer a{color:#b8b2c5;text-decoration:none}.footer a:hover{color:white}dialog{width:min(600px,calc(100% - 28px));max-height:86vh;padding:0;border:1px solid #ffffff28;border-radius:20px;background:#1b1b25;color:var(--ink);box-shadow:0 30px 100px #000b}dialog::backdrop{background:#09090ec9;backdrop-filter:blur(5px)}.dialog-inner{padding:26px}.dialog-head{display:flex;justify-content:space-between;align-items:start;gap:18px}.dialog-head h2{font:30px/1.15 Georgia,serif;font-weight:500;letter-spacing:-.03em;margin:8px 0 0}.dialog-close{width:34px;height:34px;border:1px solid #ffffff20;border-radius:50%;background:#ffffff08;cursor:pointer;font-size:18px;color:#ddd8e5}.dialog-meta{display:flex;gap:8px;align-items:center;margin-top:16px}.dialog-description{font-size:14px;line-height:1.75;color:#d0ccd8;margin:22px 0}.dialog-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8e899b}.dialog-source{display:inline-flex;align-items:center;gap:8px;color:#d1caff;text-decoration:none;border-top:1px solid #ffffff17;padding-top:15px;font-size:12px}.dialog-source:hover{color:white}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr 205px;gap:20px}.summary article{min-height:80px}}
+    @media(max-width:640px){.shell{padding:18px 17px 35px}.topbar{padding-bottom:17px}.brand img{width:34px;height:34px}.repo-link{font-size:0;width:38px;height:38px;justify-content:center;padding:0}.repo-link svg{width:17px;height:17px}.hero{grid-template-columns:1fr;padding:38px 0 24px;gap:23px}.hero h1{font-size:47px;max-width:480px}.hero p{font-size:14px}.summary{grid-template-columns:repeat(2,1fr);max-width:340px}.summary article{min-height:69px;padding:10px 12px}.summary strong{font-size:26px}.toolbar{flex-wrap:wrap;padding:10px}.search{flex-basis:100%}.toolbar select{flex:1;min-width:0}.filters{margin-right:-17px;padding-right:17px}.grid{grid-template-columns:1fr;gap:9px}.card{min-height:0;padding:16px}.card h3{margin-top:13px}.card p{-webkit-line-clamp:2}.footer{flex-direction:column;gap:7px}.dialog-inner{padding:21px}.dialog-head h2{font-size:26px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#catalog">Przejdź do katalogu</a>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Arek AI Skills — strona główna">
+        <img src="./assets/brand-mark.svg" alt="" width="38" height="38">
+        <span>AREK AI<small>Skills Lab</small></span>
+      </a>
+      <a class="repo-link" href="https://github.com/aras-2003/ai-skills" target="_blank" rel="noopener noreferrer" aria-label="Otwórz repozytorium GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.54v-2.1c-3.1.68-3.76-1.32-3.76-1.32-.5-1.29-1.23-1.63-1.23-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.71 2.63 1.21 3.27.92.1-.72.39-1.21.71-1.49-2.47-.28-5.07-1.24-5.07-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.15 3.05-1.15.61 1.53.23 2.67.11 2.95.72.78 1.15 1.78 1.15 3 0 4.29-2.6 5.23-5.08 5.51.4.35.76 1.02.76 2.06v3.1c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
+        <span>Repozytorium</span>
+      </a>
+    </header>
+    <main id="catalog">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <div class="eyebrow">Katalog możliwości</div>
+          <h1 id="page-title">Wybierz właściwy<br><em>sposób pracy.</em></h1>
+          <p>Przeglądaj workflow według obszaru i dojrzałości. Każdy skill ma jasno określony zakres, moment użycia i granice.</p>
+        </div>
+        <div class="summary" aria-label="Podsumowanie katalogu">
+          <article><strong id="total-count">—</strong><span>skills w katalogu</span></article>
+          <article><strong id="domain-count">—</strong><span>obszarów pracy</span></article>
+        </div>
+      </section>
+      <section aria-label="Wyszukaj i filtruj skills">
+        <div class="toolbar">
+          <label class="search">
+            <span class="sr-only">Szukaj po nazwie lub opisie</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
+            <input id="search" type="search" placeholder="Szukaj problemu, obszaru lub skill…" autocomplete="off">
+          </label>
+          <label class="sr-only" for="maturity">Filtruj według dojrzałości</label>
+          <select id="maturity"><option value="all">Każdy etap</option><option value="production">Production</option><option value="candidate">Candidate</option><option value="draft">Draft</option></select>
+        </div>
+        <nav id="filters" class="filters" aria-label="Filtruj według obszaru" aria-live="polite"></nav>
+      </section>
+      <section aria-labelledby="results-title">
+        <div class="section-head"><h2 id="results-title">Wszystkie skills</h2><p id="result-count" aria-live="polite"></p></div>
+        <div id="cards" class="grid" aria-live="polite" aria-busy="true"></div>
+      </section>
+    </main>
+    <footer class="footer"><span>Tytuły i opisy pochodzą z katalogu generowanego z plików SKILL.md.</span><a href="https://github.com/aras-2003/ai-skills/blob/main/CATALOG.md" target="_blank" rel="noopener noreferrer">Źródłowy katalog ↗</a></footer>
+  </div>
+  <dialog id="skill-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-inner">
+      <div class="dialog-head"><div><div id="dialog-domain" class="eyebrow"></div><h2 id="dialog-title"></h2></div><button class="dialog-close" type="button" aria-label="Zamknij szczegóły">×</button></div>
+      <div id="dialog-meta" class="dialog-meta"></div>
+      <div class="dialog-label">Zakres i moment użycia</div>
+      <p id="dialog-description" class="dialog-description"></p>
+      <a id="dialog-source" class="dialog-source" target="_blank" rel="noopener noreferrer">Otwórz SKILL.md ↗</a>
+    </div>
+  </dialog>
+  <script>
+    const domainNames={career:"Kariera i rekrutacja",commerce:"E-commerce",investing:"Inwestowanie",meta:"Projektowanie skills",oaf:"Architektura organizacyjna"};
+    const domainShort={career:"CAR",commerce:"COM",investing:"INV",meta:"LAB",oaf:"OAF"};
+    const domainColors={career:["#ffd18a","#ffd18a22"],commerce:["#ff9a84","#ff8b7222"],investing:["#a8a0ff","#9588f722"],meta:["#aee4c5","#94d4b322"],oaf:["#a9c8ff","#83a9ff22"]};
+    const maturityNames={production:"Production",candidate:"Candidate",draft:"Draft"};
+    const state={skills:[],domain:"all",maturity:"all",query:""};
+    const cards=document.querySelector("#cards"),filters=document.querySelector("#filters"),dialog=document.querySelector("#skill-dialog");
+    const escapeHtml=value=>String(value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+    const labelFor=domainNames;
+    function renderFilters(){
+      const counts={all:state.skills.length};state.skills.forEach(s=>counts[s.domain]=(counts[s.domain]||0)+1);
+      const domains=[...new Set(state.skills.map(s=>s.domain))].sort((a,b)=>(labelFor[a]||a).localeCompare(labelFor[b]||b,"pl"));
+      filters.innerHTML=[{key:"all",label:"Wszystkie"},...domains.map(key=>({key,label:labelFor[key]||key}))].map(item=>`<button class="chip" type="button" data-domain="${escapeHtml(item.key)}" aria-pressed="${state.domain===item.key}">${escapeHtml(item.label)}<span class="count">${counts[item.key]||0}</span></button>`).join("");
+      filters.querySelectorAll(".chip").forEach(button=>button.addEventListener("click",()=>{state.domain=button.dataset.domain;renderFilters();renderCards()}));
+    }
+    function filtered(){
+      const q=state.query.trim().toLocaleLowerCase("pl");
+      return state.skills.filter(s=>{
+        const matchesDomain=state.domain==="all"||s.domain===state.domain;
+        const matchesMaturity=state.maturity==="all"||s.maturity===state.maturity;
+        const haystack=`${s.name} ${s.domain} ${labelFor[s.domain]||""} ${s.description} ${s.maturity}`.toLocaleLowerCase("pl");
+        return matchesDomain&&matchesMaturity&&(!q||haystack.includes(q));
+      });
+    }
+    function showDetails(skill){
+      document.querySelector("#dialog-title").textContent=skill.name.replaceAll("-"," ").replace(/\b\w/g,c=>c.toUpperCase());
+      document.querySelector("#dialog-domain").textContent=labelFor[skill.domain]||skill.domain;
+      document.querySelector("#dialog-description").textContent=skill.description;
+      document.querySelector("#dialog-source").href=`https://github.com/aras-2003/ai-skills/blob/main/${skill.source}`;
+      document.querySelector("#dialog-meta").innerHTML=`<span class="maturity ${escapeHtml(skill.maturity)}">${escapeHtml(maturityNames[skill.maturity]||skill.maturity)}</span><span class="maturity">v${escapeHtml(skill.version||"—")}</span>`;
+      dialog.showModal();
+    }
+    function renderCards(){
+      const result=filtered();document.querySelector("#result-count").textContent=`${result.length} z ${state.skills.length} skills`;
+      cards.setAttribute("aria-busy","false");
+      if(!result.length){cards.innerHTML='<div class="empty"><strong>Nie znaleziono wyników</strong>Spróbuj innego hasła albo zmień filtry.</div>';return}
+      cards.innerHTML=result.map((s,index)=>{
+        const [color,bg]=domainColors[s.domain]||["#c5baff","#c5baff22"];
+        const title=s.name.replaceAll("-"," ").replace(/\b\w/g,c=>c.toUpperCase());
+        return `<article class="card" style="--domain-color:${color};--domain-bg:${bg}"><div class="card-top"><span class="domain"><span class="domain-mark" aria-hidden="true">${escapeHtml(domainShort[s.domain]||s.domain.slice(0,3).toUpperCase())}</span>${escapeHtml(labelFor[s.domain]||s.domain)}</span><span class="maturity ${escapeHtml(s.maturity)}">${escapeHtml(maturityNames[s.maturity]||s.maturity)}</span></div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(s.description)}</p><div class="card-bottom"><span>${escapeHtml(s.version?`Wersja ${s.version}`:"Workflow" )}</span><button class="open-card" type="button" data-index="${index}">Zobacz zakres&nbsp; ↗</button></div></article>`;
+      }).join("");
+      cards.querySelectorAll(".open-card").forEach(button=>button.addEventListener("click",()=>showDetails(result[Number(button.dataset.index)])));
+    }
+    document.querySelector("#search").addEventListener("input",event=>{state.query=event.target.value;renderCards()});
+    document.querySelector("#maturity").addEventListener("change",event=>{state.maturity=event.target.value;renderCards()});
+    document.querySelector(".dialog-close").addEventListener("click",()=>dialog.close());
+    dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close()});
+    fetch("./catalog.json").then(response=>{if(!response.ok)throw new Error("catalog unavailable");return response.json()}).then(data=>{
+      state.skills=Array.isArray(data.skills)?data.skills:[];
+      document.querySelector("#total-count").textContent=state.skills.length;
+      document.querySelector("#domain-count").textContent=new Set(state.skills.map(s=>s.domain)).size;
+      renderFilters();renderCards();
+    }).catch(()=>{cards.setAttribute("aria-busy","false");cards.innerHTML='<div class="load-error"><strong>Katalog jest chwilowo niedostępny</strong>Odśwież stronę za chwilę.</div>'});
+  </script>
+</body>
+</html>
