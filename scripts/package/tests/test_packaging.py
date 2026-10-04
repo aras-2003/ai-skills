@@ -286,7 +286,8 @@ class PackagingTests(unittest.TestCase):
                 names = archive.namelist()
                 agent_path = next(p for p in names if p.endswith("/agents/openai.yaml"))
                 interface = yaml.safe_load(archive.read(agent_path).decode("utf-8"))
-                self.assertIn(interface["interface"]["icon_small"], names[-1] if False else "\\n".join(names))
+                icon_path = (Path(agent_path).parent.parent / interface["interface"]["icon_small"]).as_posix()
+                self.assertIn(icon_path, names)
                 self.assertIn("display_name", interface["interface"])
             for p1 in zips1:
                 p2 = out2 / p1.name
