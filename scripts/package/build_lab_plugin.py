@@ -15,6 +15,22 @@ from workflow_entrypoints import add_workflow_entrypoints, load_registry
 PLUGIN_NAME = "arek-ai-skills-lab"
 PLUGIN_VERSION = "0.2.1"
 
+def discover_draft_test_skills(root: Path) -> list[Path]:
+    package = yaml.safe_load((root / "release" / "package.yaml").read_text(encoding="utf-8")) or {}
+    lab = package.get("lab") or {}
+    targets = lab.get("draft_test_targets") or []
+    if not isinstance(targets, list) or not targets or not all(isinstance(name, str) and name for name in targets):
+        raise ValueError("release/package.yaml: lab.draft_test_targets must be a non-empty list of names")
+    if len(targets) != len(set(targets)):
+        raise ValueError("release/package.yaml: lab.draft_test_targets must be unique")
+
+    drafts = {path.name: path for path in discover_skills(root, "draft")}
+    missing = sorted(set(targets) - drafts.keys())
+    if missing:
+        raise ValueError("Lab draft test targets are missing or not draft: " + ", ".join(missing))
+    return [drafts[name] for name in targets]
+
+
 def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
     registry = root / "evals" / "runtime-fixtures.yaml"
     if not registry.exists():
@@ -98,6 +114,7 @@ def main() -> int:
 
     candidate_skills = discover_skills(root, "candidate")
     production_skills = discover_skills(root, "production")
+    draft_test_skills = discover_draft_test_skills(root)
     if not candidate_skills:
         raise SystemExit("No candidate skills found; refusing to build empty lab plugin")
 
@@ -106,7 +123,7 @@ def main() -> int:
         skills_out.mkdir(parents=True)
 
         skill_capabilities: dict[str, dict] = {}
-        for skill_dir in candidate_skills + production_skills:
+        for skill_dir in candidate_skills + production_skills + draft_test_skills:
             item = copy_skill(skill_dir, skills_out)
             skill_capabilities[item["name"]] = item
 
@@ -165,7 +182,7 @@ def main() -> int:
         interface = {
             "displayName": "Arek AI Skills Lab",
             "shortDescription": "Candidate skills for runtime evaluation and discovery.",
-            "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing. Do not enable it in the same session as the production plugin because duplicate capability names may compete.",
+            "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing, including only explicitly selected draft test targets. Do not enable it in the same session as the production plugin because duplicate capability names may compete.",
             "websiteURL": "https://aras-2003.github.io/ai-skills/",
             "brandColor": "#C6812C",
             "brandColorDark": "#F0C982",
@@ -176,7 +193,7 @@ def main() -> int:
             "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
             "name": PLUGIN_NAME,
             "version": version,
-            "description": "Isolated lab package with candidate targets plus their production dependencies for controlled behavioral testing.",
+            "description": "Isolated lab package with candidate targets, explicitly selected draft test targets, and their production dependencies for controlled behavioral testing.",
             "skills": "./skills/",
             "author": {"name": "Arkadiusz Kamrowski"},
             "repository": "https://github.com/aras-2003/ai-skills",
