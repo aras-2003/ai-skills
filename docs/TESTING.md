@@ -38,7 +38,17 @@ Run previous failure cases after every material edit.
 ### Layer 5 — Workflow tests
 Check interactions between skills, gates and human approvals.
 
-## 3. Suggested test-case format
+## 3. Execution evidence states
+
+Record execution state per case, separately from the overall evaluation decision:
+
+- `NOT_RUN`: execution has not started; a queued workflow with no runner/steps is still NOT_RUN.
+- `BLOCKED` / `NOT TESTABLE`: a required runtime, tool, permission or fixture is unavailable.
+- `PASS` / `FAIL`: use only for assertions observed in an execution that actually ran.
+
+For live-browser/API requirements, a passing case needs the actual tool trace, source URL or resource, check time and observed status. A plan or narrative claim does not prove the check. Required NOT_RUN/BLOCKED evidence blocks an overall PASS.
+
+## 4. Suggested test-case format
 
 ```yaml
 id: career-role-fit-001
@@ -59,7 +69,7 @@ expected:
     format: structured-decision-note
 ```
 
-## 4. Evaluation dimensions
+## 5. Evaluation dimensions
 
 Score only for engineering/testing; do not expose numerical scores as a substitute for judgment in user-facing political contexts.
 
@@ -74,7 +84,7 @@ For ordinary skills, useful dimensions are:
 - robustness to missing data;
 - context/token efficiency.
 
-## 5. Golden cases
+## 6. Golden cases
 
 Maintain a small golden set of representative examples for each production skill.
 
@@ -86,7 +96,7 @@ A golden case contains:
 
 Do not require verbatim output matching for judgment-heavy tasks.
 
-## 6. Red-team cases
+## 7. Red-team cases
 
 High-value skills should include at least one red-team case:
 - misleading user premise;
@@ -95,7 +105,7 @@ High-value skills should include at least one red-team case:
 - request outside the skill boundary;
 - plausible but false data embedded in input.
 
-## 7. Quality gate before production
+## 8. Quality gate before production
 
 A skill cannot be production-ready if:
 - it cannot state when NOT to use it;
@@ -106,7 +116,7 @@ A skill cannot be production-ready if:
 - it requires excessive context for routine execution;
 - it contains deterministic logic that should live in code.
 
-## 8. Metrics to collect later
+## 9. Metrics to collect later
 
 Once the library is used regularly, measure:
 - trigger precision / false routing;

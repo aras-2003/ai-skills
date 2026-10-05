@@ -4,7 +4,7 @@ description: >
   Make an evidence-gated production-readiness decision for an Agent Skill after validation and evaluation are complete. Use before promotion or publication, including when reviewing a changed production skill.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.2.3"
+  version: "0.3.0"
   maturity: draft
   risk: medium
   last_reviewed: 2026-10-05
@@ -27,7 +27,7 @@ Require:
 
 The target channel is mandatory. If it is missing, the candidate identity is incomplete: decide `ITERATE`, name the missing channel, and withhold any readiness approval. Do not downgrade this gap to a limitation or follow-up.
 
-If other required evidence is missing, stale, belongs to another revision, or cannot be reproduced, record the gap and do not infer readiness. A local pass does not prove that the packaged artifact contains that revision.
+If other required evidence is missing, stale, belongs to another revision, or cannot be reproduced, record the gap and do not infer readiness. A local pass does not prove that the packaged artifact contains that revision. Preserve per-case states: queued/not-started is `NOT_RUN`; unavailable required runtime/tool is `BLOCKED` / `NOT TESTABLE`; only observed execution can be `PASS` or `FAIL`. For a new promotion, required NOT_RUN or BLOCKED evidence keeps the candidate at `ITERATE`. A separately documented personal-beta continuation for an already-declared production component may retain pending evidence only within the exact component/version, owner, limitation and expiry recorded in the readiness registry; it cannot authorize a new promotion, changed version, expanded scope or known high-severity failure. A model plan or claim is not a substitute for a tool trace when the criterion requires tool execution.
 
 ### Artifact identity hard stop
 

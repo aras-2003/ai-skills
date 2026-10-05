@@ -1,5 +1,23 @@
 schema_version: "2.0"
 targets:
+  skill-test-design:
+    - id: testdesign-description-only-routing
+      mode: explicit
+      input: evals/meta/skill-test-design/description-only-routing.input.md
+      rubric: evals/meta/skill-test-design/description-only-routing.rubric.yaml
+    - id: testdesign-live-source-evidence
+      mode: explicit
+      input: evals/meta/skill-test-design/live-source-evidence.input.md
+      rubric: evals/meta/skill-test-design/live-source-evidence.rubric.yaml
+  skill-evaluation:
+    - id: evaluation-queued-not-run
+      mode: explicit
+      input: evals/meta/skill-evaluation/queued-not-run.input.md
+      rubric: evals/meta/skill-evaluation/queued-not-run.rubric.yaml
+    - id: evaluation-live-browser-blocked
+      mode: explicit
+      input: evals/meta/skill-evaluation/live-browser-blocked.input.md
+      rubric: evals/meta/skill-evaluation/live-browser-blocked.rubric.yaml
   oaf-health-check:
     - id: case-001-enterprise-it
       mode: explicit

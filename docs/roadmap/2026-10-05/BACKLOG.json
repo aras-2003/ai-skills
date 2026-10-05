@@ -3,13 +3,20 @@
   "generated_at_local": "2026-10-05",
   "timezone": "Europe/Warsaw",
   "repository": "aras-2003/ai-skills",
-  "source_revision": "956885438f12968f958f9c733dc685e2d1b1ae18",
+  "source_revision": "eeae820badaa2c8f9c853a1801df8b08178a077a",
   "source_skill_count": 54,
   "source_workflow_count": 17,
   "installed_lab": {
-    "version": "0.29.0",
-    "source_revision": "8cf615235d04c13603ca7c79ab4c30ff356b200c",
-    "components": 67
+    "version": "0.32.0",
+    "source_revision": "8d200a3bd9ee675687de85f11ca7b4f6cbf8ba3f",
+    "components": 70,
+    "skills": 54,
+    "workflow_entrypoints": 16,
+    "maturity_counts": {
+      "production": 55,
+      "candidate": 12,
+      "draft": 3
+    }
   },
   "scope": "Proposed expansion and engineering roadmap; no implementation or runtime PASS claims",
   "items": [
@@ -20,10 +27,10 @@
       "type": "documentation/control",
       "title": "Uzgodnić stan źródła, runtime i dotychczasowych backlogów",
       "rationale": "Stare README i historyczne snapshoty zaniżają lub mylą zakres; można zlecić ponownie już wykonane prace.",
-      "scope": "Zestawić main, manifest Lab, katalog, AIS i RT; skorygować liczbę skills, opis Investing, R6/R7 i wersje. Wskazać rozbieżności, bez automatycznego zamykania historycznych ustaleń.",
+      "scope": "Zestawić bieżący main, manifest Lab, katalog, AIS i RT; odróżnić źródłowe skills/workflows od workflow entrypoints pakietowanych jako skills; wskazać wyjątki i rozbieżności z evidence, bez automatycznego zamykania historycznych ustaleń.",
       "acceptance_criteria": [
-        "54 źródłowe skills i 17 workflowów wynikają z przypiętego drzewa",
-        "Manifest Lab 0.29.0 jest osobnym stanem",
+        "54 źródłowe skills i 17 workflowów są przypisane do dokładnej rewizji main",
+        "Lab 0.32.0 identyfikuje źródło 8d200a3bd9ee675687de85f11ca7b4f6cbf8ba3f oraz 54 skills i 16 packaged workflow entrypoints",
         "Każde powiązanie AIS/RT ma evidence i status do potwierdzenia"
       ],
       "depends_on": [],

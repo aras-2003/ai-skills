@@ -14,7 +14,7 @@ Keep `main` current and useful for continuous development while `production` rem
 
 ## Personal-beta production rule
 
-This repository is primarily a personal system. A component may run in production before full runtime-evidence coverage when all of the following are true:
+This repository is primarily a personal system. A temporary personal-beta exception may continue use only for a component already declared production, at the exact recorded version, while runtime evidence is pending. It does not authorize a new production promotion, a changed component/version, expanded scope or a wider audience. A new promotion must pass its current mandatory release gates for the exact artifact and channel. No exception covers a known unresolved high-severity failure. For an existing-component continuation, all of the following are true:
 
 1. static contracts and repository validators pass;
 2. package builds and artifact validation pass;
@@ -44,7 +44,7 @@ Behavior-bearing paths currently include `skills/`, `workflows/`, and `release/p
 
 - Offline/static checks are never described as runtime PASS.
 - Historical PASS/FAIL remains bound to its original component version and source revision.
-- New or materially changed production components may begin with pending evidence under the personal-beta rule.
+- A pending-evidence exception is limited to an already-declared production component and exact version, and records the gap, limitation, owner and expiry. It never authorizes a new promotion or materially changed version.
 - Failures discovered in real use should become regression fixtures before the next meaningful release.
 
 ## Promotion cadence

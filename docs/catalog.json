@@ -281,7 +281,7 @@
       "name": "skill-evaluation",
       "domain": "meta",
       "maturity": "draft",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Evaluate an Agent Skill's routing and behavior using predeclared representative cases, a no-skill baseline or accepted prior version, and evidence-based regression analysis. Use after validation and test design, before production promotion, and after material behavior changes.",
       "source": "skills/meta/skill-evaluation/SKILL.md"
     },
@@ -289,7 +289,7 @@
       "name": "skill-release-review",
       "domain": "meta",
       "maturity": "draft",
-      "version": "0.2.3",
+      "version": "0.3.0",
       "description": "Make an evidence-gated production-readiness decision for an Agent Skill after validation and evaluation are complete. Use before promotion or publication, including when reviewing a changed production skill.",
       "source": "skills/meta/skill-release-review/SKILL.md"
     },
@@ -305,7 +305,7 @@
       "name": "skill-test-design",
       "domain": "meta",
       "maturity": "draft",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Design and maintain routing, behavioral, edge-case, adversarial, and regression tests for an Agent Skill. Use after a skill draft exists, when changing its trigger or procedure, or when converting a real failure into a permanent evaluation case.",
       "source": "skills/meta/skill-test-design/SKILL.md"
     },

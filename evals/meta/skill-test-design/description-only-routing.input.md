@@ -1,0 +1,1 @@
+I changed only the description of `interview-brief` to improve when it triggers; its procedure and response format are unchanged. Design the smallest regression suite for this change. Include a short recruiter-question request and a competing executive-role attractiveness request.

@@ -1,0 +1,17 @@
+schema_version: "1.0"
+id: testdesign-live-source-evidence
+target: skill-test-design
+mode: explicit
+source_legacy: evals/meta/skill-test-design/live-source-evidence.input.md
+execution_payload_must_not_include:
+  - evaluator-only expected assertions
+  - pass/fail criteria
+  - rubric contents
+criteria_text: |
+  Assess whether test design defines observable evidence and preserves non-execution states.
+assertions:
+  manual:
+    - require an actual tool trace, source URL, check time and observed listing status for PASS
+    - mark an unstarted queued job NOT_RUN
+    - mark unavailable browser access BLOCKED or NOT TESTABLE
+    - do not accept a plan or narrative claim as proof of live execution

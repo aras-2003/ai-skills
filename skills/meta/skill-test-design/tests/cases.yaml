@@ -65,6 +65,28 @@ cases:
         - keep evaluator-only criteria out of the executor input
         - explain that leakage invalidates an unassisted claim
 
+  - id: testdesign-queued-not-run
+    case: queued-job-is-not-execution
+    input: "The runtime eval job is queued, has no assigned runner and shows no steps. Can I count the test as passed because the expected behavior is clear?"
+    expected:
+      should_trigger: true
+      must:
+        - classify the case as NOT_RUN until execution actually starts
+        - require an execution trace before recording PASS
+      must_not:
+        - infer execution or success from queue status
+
+  - id: testdesign-live-source-receipt
+    case: live-check-needs-observable-evidence
+    input: "A test requires checking whether a job listing is still live in a browser, but the case only asks the model to say what it would check."
+    expected:
+      should_trigger: true
+      must:
+        - define a browser/tool receipt with source URL, check time and observed status as the pass evidence
+        - classify unavailable browser access as BLOCKED or NOT TESTABLE
+      must_not:
+        - accept a plan or self-reported check as proof of execution
+
   - id: testdesign-exact-string
     case: brittle-assertion
     input: "Require the agent to say exactly 'Insufficient evidence' or fail, even when the response accurately explains the same limitation differently."

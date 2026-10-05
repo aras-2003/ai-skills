@@ -1,0 +1,1 @@
+A required assertion is to verify that a listing remains open in a live browser. The browser is unavailable, and the model only explains how it would check. Classify this result and state what evidence would be needed for a pass.

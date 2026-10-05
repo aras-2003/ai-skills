@@ -34,7 +34,7 @@ Classify as:
 - **RESOURCE** — scripts/references/assets change;
 - **DOCS** — no behavioral effect.
 
-This determines test depth.
+This determines test depth. For a description-only `ROUTING` change, rerun positive, realistic near-miss and competing-skill routing cases; do not add output-format tests unless the contract also changed. `BEHAVIOR` changes require affected behavioral/regression cases. `RESOURCE` changes require direct resource/helper checks plus dependent flows. `DOCS` changes use static validation only unless implementation semantics changed.
 
 ## Stage 1 — specification
 
@@ -170,7 +170,9 @@ For material changes:
 Gate S6:
 - candidate improves or preserves intended behavior;
 - no severe routing regression;
-- no new high-severity failure mode.
+- no new high-severity failure mode;
+- every required case has an execution state: `NOT_RUN` for queued/not-started, `BLOCKED` / `NOT TESTABLE` for unavailable prerequisites, and `PASS` / `FAIL` only after observation;
+- a required unobserved case cannot be counted as a pass.
 
 ## Stage 7 — revision loop
 

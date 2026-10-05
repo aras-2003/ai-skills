@@ -4,7 +4,7 @@ description: >
   Evaluate an Agent Skill's routing and behavior using predeclared representative cases, a no-skill baseline or accepted prior version, and evidence-based regression analysis. Use after validation and test design, before production promotion, and after material behavior changes.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.2.0"
+  version: "0.3.0"
   maturity: draft
   risk: medium
   last_reviewed: 2026-10-05
@@ -33,6 +33,16 @@ Before running:
 - record material differences between compared variants.
 
 If any precondition is missing, return the exact gap and the smallest action needed to proceed. Do not present an informal spot check as a complete evaluation.
+
+## Case execution state and receipts
+
+Assign each case one evidence state independently of the overall disposition:
+- `NOT_RUN`: execution has not started; queued jobs without an assigned runner or steps remain NOT_RUN.
+- `BLOCKED` / `NOT TESTABLE`: a required runtime, tool, permission or fixture is unavailable before the criterion can be observed.
+- `PASS`: the case ran and its predeclared observable assertions are supported by evidence.
+- `FAIL`: the case ran and violated a material assertion, including claiming a live check or external action that the trace does not show.
+
+A textual description of intended tool use is not proof. When the criterion requires a live source check, retain the tool trace, URL/resource, check time and observed status. Do not count a required NOT_RUN or BLOCKED case as a conditional PASS; the overall disposition cannot be PASS while required evidence is unobserved.
 
 ## Choose the comparison
 
@@ -73,10 +83,10 @@ Do not score hidden chain-of-thought, exact phrasing, or stylistic preference as
 
 Return a compact report:
 - evaluation question, candidate/comparator and runtime;
-- plan and case matrix (case, expected route, observed route, scores, evidence, severity, delta);
+- plan and case matrix (case, expected route, observed route, evidence state, scores, evidence receipt, severity, delta);
 - aggregate result with denominator, repetitions and variation where applicable;
 - improvements and regressions, with root-cause hypotheses clearly labeled;
-- unsupported/unobserved criteria and material limitations;
+- unsupported/unobserved criteria and material limitations, with required NOT_RUN/BLOCKED cases kept separate from executed results;
 - disposition: PASS / ITERATE / REJECT;
 - smallest next changes and the exact cases to rerun.
 
