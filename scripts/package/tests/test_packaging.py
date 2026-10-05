@@ -205,6 +205,15 @@ class PackagingTests(unittest.TestCase):
             self.assertTrue(workflows)
             self.assertTrue(all(x.get("version") for x in workflows))
 
+            draft_targets = {"skill-test-design", "skill-evaluation", "skill-release-review"}
+            draft_components = {
+                x["name"]: x
+                for x in capabilities["capabilities"]
+                if x.get("kind") == "skill" and x.get("maturity") == "draft"
+            }
+            self.assertEqual(draft_targets, set(draft_components))
+            self.assertTrue(all((out / "skills" / name / "SKILL.md").is_file() for name in draft_targets))
+
             fixture_component = next(
                 x for x in capabilities["capabilities"]
                 if (out / "skills" / x["name"] / "references" / "evals").is_dir()
