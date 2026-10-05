@@ -19,7 +19,7 @@ Browse skills by domain and maturity in the [Arek AI Skills catalog](https://ara
 
 ## Expansion roadmap
 
-The [AI Skills expansion roadmap](docs/roadmap/2026-10-05/README.md) preserves the architecture analysis, proposed flows and 55-task development backlog. Start there before implementing expansion work; task state is maintained in its `BACKLOG.json`.
+The [AI Skills expansion roadmap](docs/roadmap/2026-10-05/README.md) preserves the architecture analysis, proposed flows and 72-task development backlog. Start there before implementing expansion work; task state is maintained in its `BACKLOG.json`.
 
 ## Current source domains
 

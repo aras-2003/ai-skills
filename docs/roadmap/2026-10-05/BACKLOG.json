@@ -1244,6 +1244,458 @@
       "status": "PROPOSED",
       "owner": "UNASSIGNED",
       "legacy_links": []
+    },
+    {
+      "id": "STR-01",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "domain/specification",
+      "title": "Zdefiniować osobną domenę Strategy i rozliczyć strategy-ea",
+      "rationale": "Wybór kierunku i sposobu konkurowania ma inny kontrakt niż OAF wykonania, Commerce i Investing.",
+      "scope": "Docelowe skills/strategy. Zakres: otoczenie, struktura branży, konkurencja, pozycja, wybory i design. Zmapować historyczny strategy-ea: reuse strategy-challenge; wskazać istniejące OAF i PRO bez migracji działających skills.",
+      "acceptance_criteria": [
+        "Jawne trigger/non-trigger PL/EN",
+        "Strategy nie jest obowiązkowym etapem każdej domeny",
+        "Historyczne nazwy nie prowadzą do duplikowania implemented OAF",
+        "Profil i bieżące dane organizacji pozostają w project context"
+      ],
+      "depends_on": [
+        "ENG-01",
+        "ENG-06"
+      ],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-02",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "new skill",
+      "title": "Zbudować strategic-environment-scan z PESTEL",
+      "rationale": "Potrzebna jest analiza materialnych zmian, a nie lista ogólnych trendów.",
+      "scope": "Zakres, geografia i horyzont; PESTEL tylko dla czynników zmieniających decyzję. Factor → evidence → mechanism → exposed entities → impact/horizon → implication. Aktualność i sprzeczności jawne.",
+      "acceptance_criteria": [
+        "Źródło/data przy decydujących claims",
+        "Rozróżnienie faktu, interpretacji, scenariusza i unknown",
+        "Brak wymuszonego wypełniania wszystkich sześciu kategorii",
+        "Stop gdy dalszy research nie zmienia opcji lub trzeba przetestować assumption"
+      ],
+      "depends_on": [
+        "STR-01"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-03",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "new skill",
+      "title": "Zbudować industry-structure-review z 5 siłami Portera",
+      "rationale": "Atrakcyjny popyt nie oznacza możliwości utrzymania marży lub przechwycenia wartości.",
+      "scope": "Najpierw granice branży, buyer, geografia i business model. Następnie rivalry, new entrants, substitutes, buyer/supplier power; causal economic mechanisms i role platforms/complements tam gdzie materialne. Porter nie zastępuje company-level competitive review.",
+      "acceptance_criteria": [
+        "Każda ocena force ma uzasadnienie i evidence",
+        "Potencjalni entrants i substitutes są odróżnieni",
+        "Market growth nie kompensuje strukturalnej presji na profitability",
+        "Nie tworzy pozornie precyzyjnego industry attractiveness score"
+      ],
+      "depends_on": [
+        "STR-01"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-04",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "new skill + reuse adapter",
+      "title": "Zbudować competitive-intelligence-review: pogłębiona analiza konkurencji",
+      "rationale": "Obecny competition-landscape-review obejmuje produkt/cenę/brand/distribution/acquisition; strategiczny deep dive wymaga więcej niż ponownego wykonania tej tabeli.",
+      "scope": "Granice rynku i strategic groups; direct/indirect/substitutes; segmenty, value proposition, model przychodów, zasoby/capabilities, distribution, moat/imitability, ruchy i możliwe reakcje. Reuse istniejącego Commerce evidence pack, jeśli aktualny i zakres zgodny; research wyłącznie gaps. Oddzielać observed move od hypothesis of intent.",
+      "acceptance_criteria": [
+        "Znany scope/geografia/as-of",
+        "Każdy profil ma observed facts, interpretations i unknowns",
+        "Ceny/oferty porównywane na zgodnych wariantach i okresach",
+        "Brak marketingowego claim o przewadze jako niezależnego dowodu",
+        "Hipoteza reakcji konkurenta nie jest potwierdzonym zamiarem",
+        "Lekki commerce landscape nie uruchamia automatycznie deep dive"
+      ],
+      "depends_on": [
+        "STR-01",
+        "ENG-10"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-05",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "new skill",
+      "title": "Zbudować strategic-position-review: zasoby, przewagi i ograniczenia",
+      "rationale": "Strategia potrzebuje odpowiedzi, czy dany podmiot ma zdolność wygrać, niezależnie od atrakcyjności branży.",
+      "scope": "Supplied current position/results/resources; VRIO i capability fit warunkowo. Odróżnić istniejące zdolności od aspiracji; koszt pozyskania braków, dependency, right-to-win i defensibility. Dla organizacji reuse OAF capability evidence bez ponownego projektowania organizacji.",
+      "acceptance_criteria": [
+        "Internal strengths/weaknesses mają evidence",
+        "Capability assertion nie powstaje z deklaracji marketingowej",
+        "VRIO nie gwarantuje sustainable advantage bez uzasadnienia",
+        "Bez danych wewnętrznych pozycja pozostaje provisional"
+      ],
+      "depends_on": [
+        "STR-01"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-06",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "workflow",
+      "title": "Zbudować strategic-analysis jako selektywny flow diagnostyczny",
+      "rationale": "Jeden entrypoint ma zapewnić analizę strategiczną bez obowiązkowego framework parade.",
+      "scope": "Question/scope → selected environment/industry/competition/position stages → synthesis → critical uncertainties → handoff. Entry: broad diagnostic, narrow framework/deep competition, supplied evidence. Wynik strategic evidence pack; opcje w analizie są hipotezami, nie zatwierdzoną strategią.",
+      "acceptance_criteria": [
+        "Dobiera tylko etapy zmieniające decyzję",
+        "Known competition request może trafić prosto do STR-04",
+        "Supplied aktualny pack pomija zrobiony research",
+        "Registry/channels i required/optional/on_missing jawne przy implementacji",
+        "Brak narzędzi/danych nie jest ukrywany",
+        "Output: ustalenia, mechanizmy, uncertainties, opcje do design/test i next gate"
+      ],
+      "depends_on": [
+        "STR-02",
+        "STR-03",
+        "STR-04",
+        "STR-05"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-07",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "new skill",
+      "title": "Zbudować strategic-options-design: pogłębiony projekt opcji",
+      "rationale": "Pogłębiony design wymaga realnych wyborów i konsekwencji; lista inicjatyw nie jest strategią.",
+      "scope": "Z celów i accepted/provisional evidence pack wypracować 2–4 odmiennych opcji: where-to-play/how-to-win, value proposition, advantage, required capabilities/resources, what-not-to-do i trade-offs. Include keep/defer/no-go gdy viable; wybór wymaga zasobów/ograniczeń lub oznaczonych scenariuszy.",
+      "acceptance_criteria": [
+        "Opcje nie są kosmetycznymi wariantami tej samej odpowiedzi",
+        "Każda ma causal rationale, sacrifices, feasibility i evidence links",
+        "Nie wymyśla budżetu/zdolności/mandatu",
+        "Wskazuje strongest viable alternative i co zmieni decyzję",
+        "Output odróżnia rekomendację, hypothesis i user-approved choice"
+      ],
+      "depends_on": [
+        "STR-05",
+        "STR-06"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-08",
+      "priority": "P2",
+      "epic": "Strategy",
+      "type": "new skill",
+      "title": "Zbudować strategic-scenario-review i signposts",
+      "rationale": "Deep strategy design powinien sprawdzać odporność opcji na niepewność, nie udawać jednej prognozy.",
+      "scope": "Najważniejsze niezależne uncertainties → kilka spójnych scenariuszy → option robustness → no-regret moves, contingent bets, reversible steps → measurable signposts. Nie wymuszać macierzy 2x2 i prawdopodobieństw.",
+      "acceptance_criteria": [
+        "Scenariusze odróżnione od prognoz/faktów",
+        "Assumptions i causal relationships widoczne",
+        "No arbitrary probability ani score",
+        "Każdy material signpost ma obserwowalny warunek i implication",
+        "Dla małej decyzji wystarcza compact sensitivity"
+      ],
+      "depends_on": [
+        "STR-07"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-09",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "reuse planned skill",
+      "title": "Zrealizować istniejący plan strategy-challenge",
+      "rationale": "Historyczny strategy-ea już planuje tę metodę; potrzebna jest niezależna kontrola logiki i alternatives.",
+      "scope": "Pre-mortem, weakest assumption, missing alternatives, competitor response, evidence contradiction, falsification; kontrola before design approval. Brak własnego pełnego research engine, brak generic critic do każdej odpowiedzi.",
+      "acceptance_criteria": [
+        "Challenge wskazuje najmniejszy test/poprawkę",
+        "Nie zamienia interpretacji w potwierdzone fakty",
+        "Nie odrzuca strategii dla stylistycznego upodobania",
+        "Znany severe feasibility/evidence problem widoczny, nie ukryty w average"
+      ],
+      "depends_on": [
+        "STR-01",
+        "ENG-03"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-10",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "workflow",
+      "title": "Zbudować strategy-design: od diagnozy do kompletnej strategii",
+      "rationale": "Osobny flow design ma inną odpowiedzialność i success criteria niż analiza.",
+      "scope": "Goals/constraints + evidence gate → strategic diagnosis → options → conditional scenarios/challenge → recommended choices → strategic objectives → capability/resource implications → staged validation, measures and review triggers. Entry: analyse-then-design lub supplied evidence. Missing decision-critical data stops final design, while supported sections remain reviewable. Business strategy i funkcjonalne strategie jako explicit modes.",
+      "acceptance_criteria": [
+        "Diagnoza nie udaje wyboru kierunku",
+        "Strategy obejmuje choices, differentiation, sacrifices i causal logic, nie tylko task list",
+        "Nie powtarza aktualnej analizy bez potrzeby",
+        "Synthesis oddziela proposed od approved",
+        "Nie projektuje governance/operating model ani inwestycyjnej alokacji",
+        "Warunki stop/handoff i framework selection jawne",
+        "Optional STR-08 ma explicit on_missing"
+      ],
+      "depends_on": [
+        "STR-06",
+        "STR-07",
+        "STR-09"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-11",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "new specialist + workflow branch",
+      "title": "Zbudować marketing-strategy-design jako specjalistę strategy-design",
+      "rationale": "Strategia marketingowa to decyzje o rynku, odbiorcy, pozycjonowaniu i wzroście; nie sam kalendarz contentu ani lista kanałów.",
+      "scope": "Business goals → demand/customer evidence → segmentation/targeting/positioning → value proposition/brand → acquisition/retention/channel roles → mix trade-offs → known budget/resources, constraints and measurement → staged experiments. Reuse Commerce demand/differentiation/acquisition/unit-economics gdzie fit, Writing/native tools do downstream execution. Szerszy zakres także dla services/B2B; nie zmuszać non-commerce do commerce calculator.",
+      "acceptance_criteria": [
+        "STP i kanały wynikają z dowodów, nie generycznych personas",
+        "Channel plan ma funkcję, rationale, assumptions i trade-offs",
+        "Budżet/CAC/ROI nie są wymyślane; arithmetic w kodzie i unknown jawne",
+        "Cele biznesowe odróżnione od vanity metrics",
+        "Brand, acquisition i retention nie mieszają poziomów strategii i taktyki",
+        "Obsługa B2B/services/eCommerce ma jawne assumptions",
+        "Brak automatycznego uruchomienia kampanii/content/publication"
+      ],
+      "depends_on": [
+        "STR-04",
+        "STR-07",
+        "STR-10"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-12",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "existing composer/renderer profiles",
+      "title": "Zaprojektować prezentację raportu PESTEL",
+      "rationale": "Raport ma pomagać odczytać materialność, horyzont, dowody i implikacje poszczególnych czynników.",
+      "scope": "Profile w report-composer + semantic payload. Executive implications → material factors by P/E/S/T/E/L → mechanism/impact/horizon/evidence/uncertainty → options/signposts. Matrix/cards/timeline tylko gdy odpowiadają na pytanie; severity/confidence separate, no fake numeric heatmap.",
+      "acceptance_criteria": [
+        "Każdy factor ma traceable source i adjacent implication",
+        "Brak nieuzasadnionego 0–5 score",
+        "Framework findings oddzielone od strategy choices",
+        "Inline presentation czytelna desktop/mobile i bez color-only meaning",
+        "Evidence-based visual z units/as-of; uczciwy documented renderer/fallback",
+        "Nie tworzy nowego strategic-report generator"
+      ],
+      "depends_on": [
+        "STR-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-13",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "existing composer/renderer profiles",
+      "title": "Zaprojektować prezentację 5 sił Portera",
+      "rationale": "Klasyczny schemat ma pokazać causal pressure na ekonomikę branży, a nie arbitralne liczby.",
+      "scope": "Boundary header → five-force overview → grounded pressure assessment → evidence/mechanism per force → combined implications for value capture and options. Diagram opcjonalny z adjacent evidence table; pressure ordinal tylko anchored rationale. Brak radar chart z invented scores.",
+      "acceptance_criteria": [
+        "Company competitive review nie miesza się z industry forces",
+        "Każda force ma evidence/mechanism i scope",
+        "Wizualny przegląd nie ukrywa niepewności",
+        "Combined conclusion nie jest średnią pięciu score",
+        "Brak renderer nie generuje phantom diagram"
+      ],
+      "depends_on": [
+        "STR-03"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-14",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "reference + composer profile",
+      "title": "Zaprojektować SWOT/TOWS jako syntezę i most do design",
+      "rationale": "SWOT bez dowodów jest listą opinii; TOWS powinno łączyć ustalenia z konkretnymi wyborami.",
+      "scope": "Internal S/W z STR-05, external O/T z environment/industry/competition, stable finding IDs. Compact SWOT → wybrane TOWS links → proposed options → criteria/test. Nie generować obowiązkowo każdej kombinacji SO/ST/WO/WT. Nie wydzielać SWOT w osobny skill bez recurring independent need.",
+      "acceptance_criteria": [
+        "S/W i O/T nie są zamienione",
+        "Każda pozycja dziedziczy evidence/uncertainty",
+        "TOWS option ma links do wspierających findings",
+        "Framework nie wzmacnia confidence względem source analysis",
+        "Aktualna synteza nie wymaga ponownego researchu"
+      ],
+      "depends_on": [
+        "STR-02",
+        "STR-03",
+        "STR-04",
+        "STR-05",
+        "STR-07"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-15",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "existing composer/renderer profiles",
+      "title": "Zaprojektować prezentację deep competition i strategy design",
+      "rationale": "Przegląd konkurentów oraz wybranej strategii wymaga czytelnej hierarchii, porównywalnych danych i traceability.",
+      "scope": "Deep competition: strategic groups, evidence-backed profile/matrix, differentiation/response, missing facts. Design: choices & trade-offs, option comparison, rationale, capabilities/resources, staged roadmap and measures. Marketing: STP/positioning, channel roles, budgets with known inputs and measurement. Section: finding → evidence → visual → implication → choice; findings link do chosen/rejected options.",
+      "acceptance_criteria": [
+        "Perceptual map tylko przy defensible axes/data; nie udaje customer research",
+        "Brak incomparable pricing/score",
+        "Map/diagram/rendering od istniejących tools, bez drugiego dashboarda",
+        "Wizualizacja nie dodaje niezweryfikowanych przewag ani causal claims",
+        "Reader widzi dlaczego opcja została wybrana i co odrzucono",
+        "Narrow task nie wymaga całego report profile",
+        "Chat default, external editable report/deck tylko na żądanie"
+      ],
+      "depends_on": [
+        "STR-04",
+        "STR-10",
+        "STR-11",
+        "STR-12",
+        "STR-13",
+        "STR-14"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-16",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "integration/contracts",
+      "title": "Zdefiniować handoff Strategy do Commerce/OAF/Investing/Career/Learning",
+      "rationale": "Wspólny wsad strategiczny nie może przejąć downstream decyzji ani zduplikować specialistów.",
+      "scope": "Strategic evidence pack: decision/scope/horizon, finding IDs, provenance/as-of, hypotheses, options, assumptions, unknowns, recommended gate, status. Domain adapters, no new global store. Commerce consumes opportunity thesis; OAF goals/capability implications; Investing sector mechanism/scenarios before existing theme/security/portfolio review; Career/Learning competence hypotheses after personal context.",
+      "acceptance_criteria": [
+        "Handoff nie przenosi nieudzielonych zgód",
+        "Strategy nie rekomenduje portfolio weights/security trade ani nie udaje underwriting",
+        "Nie duplikuje trend-theme-research",
+        "OAF design wymaga właściwych downstream evidence gates",
+        "Przekazanie tylko gdy użytkowy cel tego wymaga",
+        "Stary lub incompatible pack oznaczony, nie przyjęty silently"
+      ],
+      "depends_on": [
+        "STR-06",
+        "STR-10",
+        "CORE-04"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "STR-17",
+      "priority": "P1",
+      "epic": "Strategy",
+      "type": "evals/pilot/catalog",
+      "title": "Zweryfikować pełne Strategy flow i jakość prezentacji",
+      "rationale": "Framework completeness i atrakcyjny raport nie dowodzą trafnej analizy ani wykonalnego design.",
+      "scope": "Pilot: eCommerce category → marketing strategy, organisation/service business → strategy design → OAF handoff. Dodatkowo standalone deep competition, supplied evidence bypass, narrow PESTEL, existing-strategy execution failure, single-security research, stale/conflicting data, unavailable renderer. PL/EN natural routing, exact-version independent receipts, baseline quality/cost.",
+      "acceptance_criteria": [
+        "Real-use pilot i value vs baseline",
+        "Competitor facts nie mieszają się z intentions",
+        "Framework list nie zastępuje choices/feasibility",
+        "Każdy report section zachowuje evidence i supported visuals",
+        "Narrow prompt nie uruchamia pełnego pipeline",
+        "Marketing forecast nie daje invented ROI",
+        "Evals bez rubric leakage i brak runtime evidence pozostaje NOT_RUN",
+        "Catalog/registry/channels aktualizowane dopiero dla rzeczywistych implementations"
+      ],
+      "depends_on": [
+        "STR-06",
+        "STR-10",
+        "STR-11",
+        "STR-15",
+        "STR-16",
+        "ENG-04"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    }
+  ],
+  "change_log": [
+    {
+      "date_local": "2026-10-05",
+      "decision": "Add separate Strategy domain, deep competition, strategic-analysis and strategy-design with marketing specialist and framework presentation contracts",
+      "ids": [
+        "STR-01",
+        "STR-02",
+        "STR-03",
+        "STR-04",
+        "STR-05",
+        "STR-06",
+        "STR-07",
+        "STR-08",
+        "STR-09",
+        "STR-10",
+        "STR-11",
+        "STR-12",
+        "STR-13",
+        "STR-14",
+        "STR-15",
+        "STR-16",
+        "STR-17"
+      ],
+      "baseline_main": "f06f59b6de8ee4ff3a8f3fc3597d4c0dd59c8332"
     }
   ]
 }
