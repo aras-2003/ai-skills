@@ -1,7 +1,7 @@
 schema_version: "1.0"
 campaign: skill-release-review-2026-10
 target: skill-release-review
-candidate_version: "0.2.2"
+candidate_version: "0.2.3"
 out_of_scope_behavior_paths:
   - skills/meta/skill-release-review/SKILL.md
 cases:

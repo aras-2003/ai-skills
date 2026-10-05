@@ -4,7 +4,7 @@ description: >
   Make an evidence-gated production-readiness decision for an Agent Skill after validation and evaluation are complete. Use before promotion or publication, including when reviewing a changed production skill.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.2.2"
+  version: "0.2.3"
   maturity: draft
   risk: medium
   last_reviewed: 2026-10-05
@@ -37,7 +37,7 @@ For package releases, verify the complete identity chain:
 
 The manifest digest must identify the exact reviewed package, and the package must be demonstrably built from the reviewed source revision. Treat a missing required identity field as unverified, not as a match.
 
-Any mismatch or unverifiable required link is a blocker: decide `ITERATE` and withhold promotion. Passing tests, a prior `APPROVE` recommendation, or follow-up acceptance cannot override this gate. Require a rebuild from the reviewed source, a regenerated manifest, package-integrity verification and a fresh release review. If the artifact changes after authorization, obtain new authorization for that exact artifact. Never report a draft or recommendation as a completed publication.
+Any mismatch or unverifiable required link is a blocker: decide `ITERATE` and withhold promotion. Passing tests, a prior `APPROVE` recommendation, or follow-up acceptance cannot override this gate. Require a rebuild from the reviewed source, a regenerated manifest, package-integrity verification and a fresh release review. If the package digest changes after authorization, the prior authorization does not cover the replacement, including when described as a newer version, replacement build, or member of a version range. Obtain fresh authorization that explicitly names the exact replacement digest before publication. Never infer broader authorization from the old approval. Never report a draft or recommendation as a completed publication.
 
 ## Review procedure
 
