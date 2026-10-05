@@ -44,15 +44,37 @@ lab:
   version: "1.0.0"
 """, "abc")
 
+    def test_published_catalog_versions_match_package_source(self) -> None:
+        markdown = (ROOT / "CATALOG.md").read_text(encoding="utf-8")
+        package_manifest = (ROOT / "release/package.yaml").read_text(encoding="utf-8")
+        source_catalog = build_catalog(markdown, package_manifest, "revision")
+        published = json.loads((ROOT / "docs/catalog.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(source_catalog["metadata"]["packages"], published["metadata"]["packages"])
+        self.assertTrue(published["metadata"]["source_revision"])
+        by_name = {skill["name"]: skill for skill in published["skills"]}
+        for name in ("skill-evaluation", "skill-release-review", "skill-test-design"):
+            self.assertEqual("0.2.0", by_name[name]["version"])
+            self.assertEqual("draft", by_name[name]["maturity"])
+
     def test_default_page_is_area_first_and_discloses_versions(self) -> None:
         page = (ROOT / "docs/index.html").read_text(encoding="utf-8")
-        self.assertIn('data-view="areas" aria-pressed="true"', page)
-        self.assertIn('id="areas-view"', page)
-        self.assertIn('id="source-versions"', page)
-        self.assertIn('id="source-revision"', page)
-        self.assertIn('data-view="catalog"', page)
-        self.assertIn("./processes.json", page)
-        self.assertIn('id="area-cards"', page)
+        for marker in (
+            'data-view="areas" aria-pressed="true"',
+            'id="areas-view"',
+            'id="source-versions"',
+            'id="source-revision"',
+            'data-view="catalog"',
+            "./processes.json",
+            'id="area-cards"',
+            "area-status-bar",
+            "area-flows",
+            "Pokaż ścieżki",
+            "Production",
+            "Candidate",
+            "Draft",
+        ):
+            self.assertIn(marker, page)
 
     def test_process_data_has_domain_scoped_flows(self) -> None:
         catalog = json.loads((ROOT / "docs/catalog.json").read_text(encoding="utf-8"))
