@@ -24,13 +24,25 @@ class SiteCatalogContractTests(unittest.TestCase):
         self.assertTrue(catalog["skills"])
 
     def test_catalog_rejects_missing_package_or_revision_provenance(self) -> None:
-        markdown = "| Skill | Domain | Maturity | Version | Description | Source |\n|---|---|---|---|---|---|\n| sample | meta | draft | 0.1.0 | Example | skills/meta/sample/SKILL.md |\n"
-        valid_manifest = "package:\\n  name: arek-ai-skills\\n  version: \"1.0.0\"\\nlab:\\n  name: arek-ai-skills-lab\\n  version: \"0.1.0\"\\n"
+        markdown = """| Skill | Domain | Maturity | Version | Description | Source |
+|---|---|---|---|---|---|
+| sample | meta | draft | 0.1.0 | Example | skills/meta/sample/SKILL.md |
+"""
+        valid_manifest = """package:
+  name: arek-ai-skills
+  version: "1.0.0"
+lab:
+  name: arek-ai-skills-lab
+  version: "0.1.0"
+"""
 
         with self.assertRaisesRegex(ValueError, "Source revision"):
             build_catalog(markdown, valid_manifest, " ")
         with self.assertRaisesRegex(ValueError, "Missing lab"):
-            build_catalog(markdown, "package:\\n  name: arek-ai-skills\\n  version: \"1.0.0\"\\n", "abc")
+            build_catalog(markdown, """package:
+  name: arek-ai-skills
+  version: "1.0.0"
+""", "abc")
 
     def test_default_page_is_area_first_and_discloses_versions(self) -> None:
         page = (ROOT / "docs/index.html").read_text(encoding="utf-8")
