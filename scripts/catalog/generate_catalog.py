@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "validate"))
 from common import repo_root_from, split_frontmatter  # noqa: E402
+from generate_site_catalog import build_catalog, current_revision  # noqa: E402
 
 
 def main() -> int:
@@ -40,8 +42,29 @@ def main() -> int:
         safe = description.replace("|", "\\|")
         out.append(f"| {name} | {domain} | {maturity} | {version} | {safe} | {source} |")
 
-    (root / "CATALOG.md").write_text("\n".join(out) + "\n", encoding="utf-8")
-    print(f"Generated CATALOG.md with {len(rows)} skills")
+    markdown = "\n".join(out) + "\n"
+    catalog_path = root / "CATALOG.md"
+    catalog_path.write_text(markdown, encoding="utf-8")
+
+    # CATALOG.md and the website JSON are two published views of the same
+    # skills/package metadata. Refresh both here so version changes cannot
+    # leave the site data stale.
+    site_path = root / "docs" / "catalog.json"
+    previous_revision = ""
+    if site_path.is_file():
+        previous = json.loads(site_path.read_text(encoding="utf-8"))
+        previous_revision = str((previous.get("metadata") or {}).get("source_revision") or "")
+    package_manifest = (root / "release" / "package.yaml").read_text(encoding="utf-8")
+    site_catalog = build_catalog(
+        markdown,
+        package_manifest,
+        previous_revision or current_revision(),
+    )
+    site_path.write_text(
+        json.dumps(site_catalog, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print(f"Generated CATALOG.md and docs/catalog.json with {len(rows)} skills")
     return 0
 
 
