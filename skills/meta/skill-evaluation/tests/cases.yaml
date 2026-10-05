@@ -1,27 +1,80 @@
 cases:
-  - id: eval-001
+  - id: eval-routing-contract
+    case: separate-routing-from-behavior
+    input: "The skill description changed to trigger more often. The output examples all pass. Is that enough?"
+    expected:
+      should_trigger: true
+      must:
+        - require routing cases separate from behavior cases
+        - include realistic near-miss and competing-skill prompts
+        - not treat passing output examples as routing evidence
+
+  - id: eval-one-example
     case: new-skill-without-baseline
-    input: "The new skill gives a strong result on one example, so let's ship it."
+    input: "The new skill gave a strong result once, so let's ship it."
     expected:
       should_trigger: true
       must:
         - reject one-example evidence as insufficient
-        - recommend representative cases
-        - consider a no-skill baseline
+        - recommend representative cases and a fair comparator
+        - state that evaluation does not authorize release
 
-  - id: eval-002
+  - id: eval-paired-comparison
     case: existing-version-regression
-    input: "Version 0.2 improves formatting but misses a mandatory evidence check that 0.1 performed."
+    input: "Version 0.2 improves formatting but misses an evidence check that accepted version 0.1 performed."
     expected:
       should_trigger: true
       must:
-        - classify as behavioral regression
-        - prevent release until resolved
+        - compare equivalent inputs under equivalent conditions
+        - classify the evidence omission as a regression
+        - prevent a pass when a blocking correctness regression remains
 
-  - id: eval-003
+  - id: eval-subjective-blind-review
     case: subjective-output
-    input: "Two versions of a design critique skill both look plausible."
+    input: "Two versions of a strategy critique both look plausible and the reviewers know which is which."
     expected:
       should_trigger: true
       must:
-        - recommend blind comparison when feasible
+        - recommend blind comparison where practical
+        - use an anchored rubric rather than preference alone
+        - preserve limitations of reviewer agreement
+
+  - id: eval-stochastic-variance
+    case: repeated-run-variance
+    input: "A nondeterministic agent passes one run and fails two of three repetitions on a safety requirement."
+    expected:
+      should_trigger: true
+      must:
+        - report run count and observed variation
+        - treat the safety failure as material
+        - not average away a severe failure
+
+  - id: eval-missing-runtime-evidence
+    case: unavailable-tool
+    input: "The candidate needs a browser tool, but the evaluation runtime has no browser. Can I record the case as passed from its explanation?"
+    expected:
+      should_trigger: true
+      must:
+        - mark the behavior unobserved or blocked
+        - not equate explanation with successful tool execution
+        - state the smallest prerequisite to rerun
+
+  - id: eval-diagnostic-hypothesis
+    case: uncertain-root-cause
+    input: "A required output field is missing once, but the prompt and tool trace are incomplete."
+    expected:
+      should_trigger: true
+      must:
+        - distinguish confirmed failure from root-cause hypothesis
+        - preserve the incomplete trace as a limitation
+        - avoid attributing cause without evidence
+
+  - id: eval-no-trigger-near-miss
+    case: competing-capability
+    input: "A user asks only for a factual company profile, while the candidate evaluates whether a specific executive role is attractive."
+    expected:
+      should_trigger: false
+      must:
+        - route to factual company research or another appropriate capability
+      must_not:
+        - treat topical overlap as sufficient trigger evidence

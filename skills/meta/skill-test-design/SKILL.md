@@ -1,98 +1,79 @@
 ---
 name: skill-test-design
 description: >
-  Design routing, behavioral, edge-case and regression evals for an Agent Skill. Use after a skill draft exists, when changing its description/procedure, or when converting real failures into permanent regression tests.
+  Design and maintain routing, behavioral, edge-case, adversarial, and regression tests for an Agent Skill. Use after a skill draft exists, when changing its trigger or procedure, or when converting a real failure into a permanent evaluation case.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: "0.2.0"
   maturity: draft
   risk: low
-  last_reviewed: 2026-09-29
+  last_reviewed: 2026-10-05
 ---
 
 # Skill Test Design
 
 ## Purpose
 
-Create tests that reveal whether a skill routes and behaves correctly, rather than tests that merely confirm happy-path prose.
+Build a small, discriminating suite that tests the approved skill contract. Cases should reveal routing errors, missing behavior, unsafe actions and regressions; they should not merely echo instructions or reward one preferred wording.
 
-## Test dimensions
+## Inputs and scope
 
-Design two separate layers.
+Identify:
+- skill name/version and approved behavioral contract;
+- description and neighboring skills that may compete;
+- intended user, context, tools and action permissions;
+- known incidents, high-impact failure modes and the acceptance decision the tests support.
 
-### Routing tests
-Include:
-1. direct should-trigger;
-2. indirect should-trigger;
-3. near-miss should-not-trigger;
-4. competing-skill should-not-trigger;
-5. uncommon but valid phrasing.
+If the contract is not agreed, clarify or flag that gap before encoding assumptions into tests. Use skill-specification for unresolved capability/scope questions.
 
-Description changes require routing tests.
+## Design procedure
 
-### Behavioral tests
-Include as relevant:
-1. happy path;
-2. missing required input;
-3. ambiguity;
-4. unsupported fact/action;
-5. stale/conflicting evidence;
-6. tool failure/partial result;
-7. edge/adversarial input;
-8. previous real regression.
+1. **Map contract to observables.** Turn each important requirement, prohibited behavior, boundary and stop condition into an observable expectation. Keep implementation preference separate from outcome.
+2. **Separate test layers.**
+   - **Routing:** should-trigger and should-not-trigger cases, including direct, indirect, realistic near-miss and competing-skill prompts.
+   - **Behavior:** task quality and procedure under valid conditions.
+   - **Robustness:** incomplete/ambiguous input, conflicting or stale evidence, tool failure/partial results, edge cases and adversarial content as relevant.
+   - **Regression:** concrete previous failures, preserved as durable cases.
+3. **Cover the change.** Description-only changes require positive and negative routing regression. Procedure/output changes require behavior coverage. Changes to tools, permissions, claims or external actions require failure and boundary coverage. Do not add unrelated tests without a risk-based reason.
+4. **Choose cases for discrimination.** Use plausible prompts that separate the target skill from its closest alternatives. A negative should share enough domain vocabulary to be a real routing challenge. Avoid trivia and unrelated prompts.
+5. **Write stable assertions.** Prefer semantic must/must-not expectations, required evidence or fields, explicit route, and required stop/action boundaries. Avoid exact wording, hidden reasoning, cosmetic preferences and tests that a vaguely on-topic answer could pass.
+6. **Set severity and evidence.** Mark which cases are smoke, routing, behavioral, regression or high-risk in the case ID/name or suite documentation. Keep high-risk failures visible; do not hide them inside an average.
+7. **Validate the cases.** Ensure inputs are self-contained, expected outcomes are unambiguous, references/fixtures exist, case IDs are unique, and the schema is accepted by the repository validator.
+8. **Review for bias and leakage.** Do not disclose rubric-only facts to an unassisted executor when the evaluation claims to be unassisted. Avoid giving the model the answer in the prompt. Ensure negative cases do not test a different capability merely to make the target fail.
+9. **Keep suites maintainable.** Remove duplicates only when they test the same distinction. Retain a regression while the failure mode remains relevant; document any retired case and reason. Re-run impacted cases when skill behavior or evaluator rules change.
 
-## Assertion design
+## Minimum production-candidate coverage
 
-Prefer assertions such as:
-- must perform X;
-- must identify Y as unknown;
-- must not invoke Z;
-- must stop before external action;
-- output must contain required fields.
+For a new production candidate, include at least:
+- two positive routing cases with distinct realistic wording;
+- two realistic negative/competing-skill cases;
+- one incomplete-input or ambiguity case;
+- one relevant edge/adversarial case;
+- one tool/evidence failure case when the skill depends on tools or external facts;
+- regression cases for each known material incident.
 
-Avoid:
-- exact wording;
-- stylistic trivia;
-- assertions that encode one preferred chain of thought;
-- tests that are too easy to fail only if the model is completely off-topic.
+These are coverage floors, not a target case count. Use a smaller suite for a narrowly scoped change when it still covers every changed contract and risk; explain the rationale. Do not claim model behavior is proven by schema validation alone.
 
-## Near-miss rule
+## Case format
 
-Negative routing cases should share vocabulary/context with the skill but require a different capability.
-
-Good negative:
-- skill = `cv-tailoring`
-- prompt = "Compare these two job descriptions and tell me which has broader scope."
-
-Bad negative:
-- "Write a Fibonacci function."
-
-## Test output
-
-Create/update `tests/cases.yaml` with:
-- id;
-- case;
-- input;
+Create or update tests/cases.yaml using the repository schema:
+- unique id;
+- case identifying the tested distinction;
+- realistic input;
 - expected.should_trigger;
-- expected.must;
-- expected.must_not;
-- optional output properties;
-- optional fixtures/files.
+- semantic expected.must;
+- safety/routing expected.must_not where useful;
+- optional output properties or fixtures only when supported and needed.
 
-Also identify which cases are:
-- smoke;
-- routing;
-- behavioral;
-- regression;
-- high-risk.
+Each case should test one primary distinction. Keep criteria observable, concise and independently judgeable. Add suite-level documentation when tags, fixtures, thresholds or evaluation instructions need more detail; do not invent unsupported schema fields.
 
-## Minimum new-skill suite
+## Output
 
-A production candidate should have at least:
-- 2 positive routing cases;
-- 2 realistic negative/competing cases;
-- 1 incomplete-input case;
-- 1 edge/adversarial case;
-- evidence/tool failure case when relevant.
+Return:
+- the coverage map from contract/risk to case IDs;
+- missing coverage and any accepted gaps;
+- cases added/changed/retired with reasons;
+- validation command/result;
+- the smallest additional test needed, if a material gap remains.
 
-Do not optimize tests to the current implementation. Tests represent the intended contract.
+Tests represent the intended contract, not whichever current implementation is easiest to pass.
