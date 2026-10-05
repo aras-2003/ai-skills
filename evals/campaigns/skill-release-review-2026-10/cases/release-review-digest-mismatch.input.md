@@ -1,0 +1,1 @@
+Review this release candidate for the Lab channel. Tests pass on source revision abc123 and an earlier review recommended APPROVE, but the package manifest contains the digest of an older build. Decide whether this exact package is ready. Do not publish it.

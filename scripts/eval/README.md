@@ -8,6 +8,13 @@ The executor receives only files ending in `.input.md` plus the runtime catalog 
 
 There is no single universal runtime registry. The active campaign composes Commerce cases from `evals/runtime-fixtures.yaml`, natural-routing cases from `evals/routing/registry.yaml`, split executive-role cases, and campaign-specific fallback cases. The active definition is `evals/campaigns/runtime-validation-2026-10-r16/campaign.yaml`; the supplemental interface-routing regression is outside the core-38 count.
 
+`skill-release-review-2026-10` is an isolated meta-skill runtime campaign. It exercises five release-gate decisions against the candidate Lab package and records the exact source revision, Lab package identity, skill digest, executor-input hashes and evaluator-rubric hashes. The executor pack contains only prompts and the Lab artifact; rubrics remain in the repository. The R16 campaign definition and pin remain unchanged. Its behavior pin excludes only `skills/meta/skill-release-review/SKILL.md` when the dedicated campaign validates the matching candidate version.
+
+Validate and prepare it with:
+
+- `python scripts/eval/skill_release_campaign.py validate`
+- `python scripts/eval/skill_release_campaign.py prepare --lab .tmp/lab --output .tmp/runtime-campaign-skill-release-review`
+
 The Lab packager copies only executor inputs.
 
 ## Test-suite validation vs execution

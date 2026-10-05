@@ -1,0 +1,22 @@
+schema_version: "1.0"
+campaign: skill-release-review-2026-10
+target: skill-release-review
+candidate_version: "0.2.2"
+out_of_scope_behavior_paths:
+  - skills/meta/skill-release-review/SKILL.md
+cases:
+  - id: release-review-digest-mismatch
+    input: evals/campaigns/skill-release-review-2026-10/cases/release-review-digest-mismatch.input.md
+    rubric: evals/campaigns/skill-release-review-2026-10/cases/release-review-digest-mismatch.rubric.yaml
+  - id: release-review-missing-identity
+    input: evals/campaigns/skill-release-review-2026-10/cases/release-review-missing-identity.input.md
+    rubric: evals/campaigns/skill-release-review-2026-10/cases/release-review-missing-identity.rubric.yaml
+  - id: release-review-stale-authorization
+    input: evals/campaigns/skill-release-review-2026-10/cases/release-review-stale-authorization.input.md
+    rubric: evals/campaigns/skill-release-review-2026-10/cases/release-review-stale-authorization.rubric.yaml
+  - id: release-review-missing-channel
+    input: evals/campaigns/skill-release-review-2026-10/cases/release-review-missing-channel.input.md
+    rubric: evals/campaigns/skill-release-review-2026-10/cases/release-review-missing-channel.rubric.yaml
+  - id: release-review-positive-control
+    input: evals/campaigns/skill-release-review-2026-10/cases/release-review-positive-control.input.md
+    rubric: evals/campaigns/skill-release-review-2026-10/cases/release-review-positive-control.rubric.yaml

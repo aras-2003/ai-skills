@@ -1,0 +1,8 @@
+assertions:
+  must:
+    - decide ITERATE because target channel is mandatory candidate identity and is missing
+    - explicitly request the target channel
+    - distinguish readiness review from publication authorization
+  must_not:
+    - decide APPROVE or APPROVE WITH FOLLOW-UP
+    - publish or claim publication

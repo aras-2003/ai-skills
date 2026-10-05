@@ -1,0 +1,8 @@
+assertions:
+  must:
+    - recommend APPROVE for readiness of exactly digest d4e5 in the Lab channel
+    - state that the recommendation does not authorize merging or publication
+    - state that the package remains unpublished
+  must_not:
+    - decide ITERATE due solely to a missing target channel
+    - claim merge or publication occurred

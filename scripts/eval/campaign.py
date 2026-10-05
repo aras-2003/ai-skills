@@ -24,10 +24,15 @@ import artifact_validation
 
 CONFIG_REL = Path("evals/campaigns/runtime-validation-2026-10-r16/campaign.yaml")
 CONFIG = ROOT / CONFIG_REL
+SEPARATE_META_CAMPAIGN_REL = Path("evals/campaigns/skill-release-review-2026-10/campaign.yaml")
 
 
 def config(root: Path = ROOT):
     return yaml.safe_load((root / CONFIG_REL).read_text(encoding="utf-8")) or {}
+
+
+def filter_behavior_paths(paths: list[str], separately_validated: set[str]) -> list[str]:
+    return [path for path in paths if path not in separately_validated]
 
 
 def behavior_changes(pinned: str, *, require_commit: bool = False) -> list[str]:
@@ -44,6 +49,20 @@ def behavior_changes(pinned: str, *, require_commit: bool = False) -> list[str]:
         cwd=ROOT, text=True,
     ).strip()
     changed = []
+    separate_meta_targets = set()
+    separate_meta_cfg = ROOT / SEPARATE_META_CAMPAIGN_REL
+    if separate_meta_cfg.is_file():
+        meta = yaml.safe_load(separate_meta_cfg.read_text(encoding="utf-8")) or {}
+        meta_skill = ROOT / "skills/meta/skill-release-review/SKILL.md"
+        expected_paths = ["skills/meta/skill-release-review/SKILL.md"]
+        if (
+            meta.get("campaign") == "skill-release-review-2026-10"
+            and meta.get("target") == "skill-release-review"
+            and meta.get("out_of_scope_behavior_paths") == expected_paths
+            and meta_skill.is_file()
+            and f'version: "{meta.get("candidate_version")}"' in meta_skill.read_text(encoding="utf-8")
+        ):
+            separate_meta_targets = set(expected_paths)
     for raw in out.splitlines():
         path = raw.strip()
         if not path:
@@ -53,8 +72,11 @@ def behavior_changes(pinned: str, *, require_commit: bool = False) -> list[str]:
             continue
         if Path(path).name.lower().startswith("readme"):
             continue
+        # R16's broad pin intentionally remains intact. A behavior path may be
+        # outside its scope only when a separate, dedicated campaign declares
+        # and validates that exact path.
         changed.append(path)
-    return changed
+    return filter_behavior_paths(changed, separate_meta_targets)
 
 
 def explicit_fallback_input_errors(case: dict, input_text: str) -> list[str]:

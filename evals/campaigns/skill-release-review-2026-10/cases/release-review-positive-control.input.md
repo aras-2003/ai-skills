@@ -1,0 +1,1 @@
+Review brief-writer 0.2.1 for the Lab channel. The source revision, build, package digest d4e5 and manifest match; package integrity, validation, required tests and release criteria all pass; no blocker or unresolved regression remains. Recommend readiness only. Do not merge or publish.
