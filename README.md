@@ -17,6 +17,10 @@ Rule: **LLM interprets; code calculates and validates.**
 
 Browse skills by domain and maturity in the [Arek AI Skills catalog](https://aras-2003.github.io/ai-skills/). The catalog is generated from the source metadata in `SKILL.md`.
 
+## Expansion roadmap
+
+The [AI Skills expansion roadmap](docs/roadmap/2026-10-05/README.md) preserves the architecture analysis, proposed flows and 55-task development backlog. Start there before implementing expansion work; task state is maintained in its `BACKLOG.json`.
+
 ## Current source domains
 
 - `skills/career/` — executive role/company/CV/interview workflows
