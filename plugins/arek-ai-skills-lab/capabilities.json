@@ -757,7 +757,7 @@
       "version": "0.2.0"
     },
     {
-      "content_sha256": "b6a2937c07127dfcf9fe8c654e79a9c437448c9ef60edbde2339ac939d37697d",
+      "content_sha256": "395802873733b2b148d3ea2bceff8f2ac05d51005f347972c0c4d750b3e5057c",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
@@ -766,7 +766,7 @@
       "kind": "skill",
       "maturity": "draft",
       "name": "skill-release-review",
-      "version": "0.2.0"
+      "version": "0.2.2"
     },
     {
       "content_sha256": "36ddcddc6441e34edabff727a8892bd2a3b34f24e2aea6bee76b89d76acb62e5",
@@ -1035,5 +1035,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "0fc4e2e78eba0c99db02955bb86af84ab1e078fa"
+  "source_revision": "8d200a3bd9ee675687de85f11ca7b4f6cbf8ba3f"
 }
