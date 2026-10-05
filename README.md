@@ -52,7 +52,7 @@ Do not infer installed availability from branch membership alone.
 Production builders currently support:
 
 1. **Plugin channel** — production skills plus workflow entrypoints allowed by `workflows/runtime-registry.yaml`.
-2. **Lab channel** — isolated evaluation package containing candidate targets plus required production dependencies and executor-only eval inputs.
+2. **Lab channel** — isolated evaluation package containing candidate targets, required production dependencies, executor-only eval inputs, and explicitly allow-listed draft test targets.
 3. **ChatGPT ZIP channel** — individual production skill ZIPs. Workflow availability is declared explicitly in the channel manifest; unsupported workflows are not silently implied.
 
 Runtime packages use an allow-list: `SKILL.md`, required `references/`, `scripts/` and `assets/`. Test definitions, eval summaries and evaluator rubrics stay outside production runtime payloads.
@@ -70,7 +70,7 @@ Details:
 
 A narrative historical PASS is not a current-version runtime receipt. When runtime evidence is unavailable, record `NOT_RUN`/pending rather than assuming success.
 
-Current runtime follow-up campaign: `runtime-validation-2026-10-r7`, behavior source `008c9944cf3a8bc3e2d7231a4862aaf00e722889`, with 38 core regression cases. R1–R6 receipts remain historical and bound to their original source revisions. R7 is a time-bounded personal-beta continuation disposition for already-declared production components recorded in `release/production-readiness.yaml`; it is not a gate or authorization for new production promotions. Investing-specific runtime fixtures remain NOT_RUN where no exact-version receipt exists. Static/package checks do not imply runtime PASS.
+Current runtime validation campaign: `runtime-validation-2026-10-r16`, pinned to behavior source `89db15ef94cf38a35117ec02b8c60928ef72654d`, with 44 core cases plus 3 supplemental routing regressions. R1–R15 remain historical and bound to their original source revisions. R16 validates inline report visuals and bounded research-state persistence; it does not evaluate the three draft skill-lifecycle test targets included in Lab 0.32.0. Static/package checks do not imply runtime PASS.
 
 ## Quality and build
 
@@ -92,7 +92,7 @@ Generated artifacts are built atomically and include source provenance.
 - Lifecycle: `docs/LIFECYCLE.md`
 - Testing: `docs/TESTING.md`
 - Runtime evals: `docs/RUNTIME-EVALS.md`
-- Active R7 runbook: `evals/campaigns/runtime-validation-2026-10-r7/RUNBOOK.md`
+- Active R16 runbook: `evals/campaigns/runtime-validation-2026-10-r16/RUNBOOK.md`
 - Channel usage: `docs/GPT-USAGE.md`
 - Branch-rules proposal: `docs/GITHUB-BRANCH-RULES-PROPOSAL.md`
 - Distribution/license decision: `docs/DISTRIBUTION-LICENSE-DECISION.md`
