@@ -15,6 +15,16 @@
     "schema_version": {
       "const": "1.0"
     },
+    "outcome": {
+      "type": ["string", "null"],
+      "enum": ["passed", "failed", null]
+    },
+    "execution_state": {
+      "enum": ["executed", "blocked", "awaiting_runner", "no_steps", "not_executed"]
+    },
+    "execution_state_reason": {
+      "type": ["string", "null"]
+    },
     "evidence_scope": {
       "enum": [
         "current-version",
@@ -282,6 +292,56 @@
     }
   },
   "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evaluation": {
+            "properties": {"status": {"const": "PASS"}}
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "outcome": {"const": "passed"},
+          "execution_state": {"const": "executed"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evaluation": {
+            "properties": {"status": {"const": "FAIL"}}
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "outcome": {"const": "failed"},
+          "execution_state": {"const": "executed"}
+        }
+      }
+    },
+    {
+      "if": {
+        "required": ["outcome", "execution_state"],
+        "properties": {
+          "evaluation": {
+            "properties": {"status": {"const": "NOT_RUN"}}
+          }
+        }
+      },
+      "then": {
+        "required": ["outcome", "execution_state", "execution_state_reason"],
+        "properties": {
+          "outcome": {"const": null},
+          "execution_state": {
+            "enum": ["blocked", "awaiting_runner", "no_steps", "not_executed"]
+          },
+          "execution_state_reason": {"type": "string", "minLength": 1}
+        }
+      }
+    },
     {
       "if": {
         "properties": {

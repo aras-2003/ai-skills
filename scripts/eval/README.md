@@ -29,6 +29,10 @@ Use `receipt.py` to create or validate a record. `NOT_RUN` is a first-class stat
 
 A receipt binds evidence to input/rubric digests and a source revision. It also records runtime/model identity, reasoning setting, available catalog/tools, prompt, actual output and trace digests, reviewer, assisted/unassisted state, and separate source-component vs packaged runtime-artifact identity where available. Historical receipts can be validated against their recorded source revision.
 
+New receipts record `outcome` (`passed`, `failed`, or `null`) separately from `execution_state` (`executed`, `blocked`, `awaiting_runner`, `no_steps`, or `not_executed`). `evaluation.status` remains as a compatibility field for existing tooling. A `NOT_RUN` receipt must have a null outcome, a non-executed state, and a reason; `PASS`, `FAIL`, and `REVIEW_REQUIRED` require `execution_state=executed`. The fields are optional when validating historical 1.0 receipts, but when either new field is present both are required and checked against the compatibility status.
+
+For example, record infrastructure deferrals with `--status NOT_RUN --execution-state awaiting_runner --execution-state-reason "No runner assigned"`. Do not encode a status mismatch or an inability to reach a page as `CLOSED`: use `FAIL` only when the executed test's stated requirement failed, and use `NOT_RUN` with the appropriate execution state when no verdict can be reached.
+
 An assisted run cannot be recorded as PASS.
 
 ## Commands

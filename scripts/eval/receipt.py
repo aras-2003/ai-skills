@@ -18,6 +18,8 @@ from common import find_campaign_case, load_registry, repo_root, sha256_file
 VALID_STATUSES = {"NOT_RUN", "REVIEW_REQUIRED", "PASS", "FAIL"}
 VALID_EVIDENCE_SCOPES = {"current-version", "historical"}
 RUNTIME_STATUSES = {"REVIEW_REQUIRED", "PASS", "FAIL"}
+VALID_EXECUTION_STATES = {"executed", "blocked", "awaiting_runner", "no_steps", "not_executed"}
+STATUS_TO_OUTCOME = {"PASS": "passed", "FAIL": "failed"}
 
 
 def find_case(root: Path, case_id: str) -> tuple[str, dict[str, Any]]:
@@ -200,6 +202,26 @@ def _validate_status_contract(data: dict[str, Any], errors: list[str]) -> None:
     if status == "PASS" and execution.get("assisted"):
         errors.append("assisted run cannot be PASS")
 
+    # New receipts separate the test verdict from whether the test actually ran.
+    # Keep these fields optional when reading historical 1.0 receipts.
+    if "outcome" in data or "execution_state" in data:
+        if "outcome" not in data or "execution_state" not in data:
+            errors.append("outcome and execution_state must be recorded together")
+            return
+        outcome = data.get("outcome")
+        execution_state = data.get("execution_state")
+        if execution_state not in VALID_EXECUTION_STATES:
+            errors.append(f"invalid execution_state: {execution_state}")
+        expected_outcome = STATUS_TO_OUTCOME.get(status)
+        if outcome != expected_outcome:
+            errors.append(f"outcome {outcome!r} does not match evaluation.status {status!r}")
+        if status in {"PASS", "FAIL", "REVIEW_REQUIRED"} and execution_state != "executed":
+            errors.append(f"{status} requires execution_state=executed")
+        if status == "NOT_RUN" and execution_state == "executed":
+            errors.append("NOT_RUN cannot have execution_state=executed")
+        if status == "NOT_RUN" and not data.get("execution_state_reason"):
+            errors.append("NOT_RUN requires execution_state_reason")
+
 
 def _stored_path(root: Path, path: Path | None) -> str | None:
     if path is None:
@@ -244,6 +266,19 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
             raise ValueError(f"{status} requires runtime/component identity: {', '.join(missing)}")
     if status == "PASS" and args.assisted:
         raise ValueError("assisted runs cannot be recorded as PASS")
+    execution_state = getattr(args, "execution_state", None)
+    if execution_state is None:
+        execution_state = "executed" if status in RUNTIME_STATUSES else "not_executed"
+    if execution_state not in VALID_EXECUTION_STATES:
+        raise ValueError(f"invalid execution state: {execution_state}")
+    expected_outcome = STATUS_TO_OUTCOME.get(status)
+    if status in {"PASS", "FAIL", "REVIEW_REQUIRED"} and execution_state != "executed":
+        raise ValueError(f"{status} requires execution_state=executed")
+    if status == "NOT_RUN" and execution_state == "executed":
+        raise ValueError("NOT_RUN cannot have execution_state=executed")
+    execution_state_reason = getattr(args, "execution_state_reason", None) or args.note
+    if status == "NOT_RUN" and not execution_state_reason:
+        raise ValueError("NOT_RUN requires --execution-state-reason or --note")
 
     component_name = args.component or target
     if evidence_scope == "current-version" and status in RUNTIME_STATUSES:
@@ -264,6 +299,9 @@ def create_receipt(args: argparse.Namespace) -> dict[str, Any]:
     trace_path = Path(args.tool_trace).resolve() if args.tool_trace else None
     record = {
         "schema_version": "1.0",
+        "outcome": expected_outcome,
+        "execution_state": execution_state,
+        "execution_state_reason": execution_state_reason,
         "evidence_scope": evidence_scope,
         "case": {
             "id": args.case_id,
@@ -410,6 +448,8 @@ def main() -> int:
     create = sub.add_parser("create")
     create.add_argument("--case-id", required=True)
     create.add_argument("--status", required=True, choices=sorted(VALID_STATUSES))
+    create.add_argument("--execution-state", choices=sorted(VALID_EXECUTION_STATES))
+    create.add_argument("--execution-state-reason")
     create.add_argument("--evidence-scope", choices=sorted(VALID_EVIDENCE_SCOPES), default="current-version")
     create.add_argument("--source-revision", required=True)
     create.add_argument("--component")

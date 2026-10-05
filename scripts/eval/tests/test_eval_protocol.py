@@ -64,7 +64,97 @@ class EvalProtocolTests(unittest.TestCase):
         )
         record = receipt.create_receipt(args)
         self.assertEqual("NOT_RUN", record["evaluation"]["status"])
+        self.assertIsNone(record["outcome"])
+        self.assertEqual("not_executed", record["execution_state"])
         self.assertIsNone(record["execution"]["actual_output_path"])
+
+    def test_non_execution_states_have_no_test_outcome(self) -> None:
+        for state in ("blocked", "awaiting_runner", "no_steps", "not_executed"):
+            args = argparse.Namespace(
+                case_id="case-001-premium-vs-generic",
+                status="NOT_RUN",
+                execution_state=state,
+                execution_state_reason="controlled test condition",
+                source_revision="abcdef1234567",
+                component="commerce-product-deep-dive",
+                component_version=None,
+                component_digest=None,
+                provider=None,
+                model_id=None,
+                reasoning=None,
+                catalog=[],
+                prompt=None,
+                output=None,
+                tool_trace=None,
+                reviewer=None,
+                assisted=False,
+                note="runtime did not produce a test result",
+            )
+            record = receipt.create_receipt(args)
+            self.assertIsNone(record["outcome"])
+            self.assertEqual(state, record["execution_state"])
+            self.assertEqual([], receipt.validate_receipt_data(record, root=HERE.parents[3]))
+
+    def test_executed_verdict_maps_to_separate_outcome(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            output = Path(td) / "output.txt"
+            output.write_text("Decision: INVESTIGATE\n", encoding="utf-8")
+            for status, outcome in (("PASS", "passed"), ("FAIL", "failed"), ("REVIEW_REQUIRED", None)):
+                with self.subTest(status=status):
+                    args = self._runtime_args(output)
+                    args.status = status
+                    record = receipt.create_receipt(args)
+                    self.assertEqual(status, record["evaluation"]["status"])
+                    self.assertEqual(outcome, record["outcome"])
+                    self.assertEqual("executed", record["execution_state"])
+
+    def test_legacy_receipt_without_execution_state_remains_readable(self) -> None:
+        args = argparse.Namespace(
+            case_id="case-001-premium-vs-generic",
+            status="NOT_RUN",
+            source_revision="abcdef1234567",
+            component="commerce-product-deep-dive",
+            component_version=None,
+            component_digest=None,
+            provider=None,
+            model_id=None,
+            reasoning=None,
+            catalog=[],
+            prompt=None,
+            output=None,
+            tool_trace=None,
+            reviewer=None,
+            assisted=False,
+            note="runtime unavailable",
+        )
+        record = receipt.create_receipt(args)
+        record.pop("outcome")
+        record.pop("execution_state")
+        record.pop("execution_state_reason")
+        self.assertEqual([], receipt.validate_receipt_data(record, root=HERE.parents[3]))
+
+    def test_not_run_cannot_claim_execution_or_outcome(self) -> None:
+        args = argparse.Namespace(
+            case_id="case-001-premium-vs-generic",
+            status="NOT_RUN",
+            execution_state="executed",
+            source_revision="abcdef1234567",
+            component="commerce-product-deep-dive",
+            component_version=None,
+            component_digest=None,
+            provider=None,
+            model_id=None,
+            reasoning=None,
+            catalog=[],
+            prompt=None,
+            output=None,
+            tool_trace=None,
+            reviewer=None,
+            assisted=False,
+            note="invalid state",
+        )
+        with self.assertRaisesRegex(ValueError, "NOT_RUN cannot have execution_state=executed"):
+            receipt.create_receipt(args)
 
     def test_stale_input_digest_is_detected(self) -> None:
         args = argparse.Namespace(
@@ -83,7 +173,7 @@ class EvalProtocolTests(unittest.TestCase):
             tool_trace=None,
             reviewer=None,
             assisted=False,
-            note=None,
+            note="test record for stale input digest validation",
         )
         record = receipt.create_receipt(args)
         record["case"]["input_sha256"] = "0" * 64
