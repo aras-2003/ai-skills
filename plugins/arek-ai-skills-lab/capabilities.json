@@ -745,6 +745,30 @@
       "version": "1.0.0"
     },
     {
+      "content_sha256": "08d3c74d85dbe7f4bde30fa9817aedb810b765cd63a35b5ec7d3623692ad0793",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "draft",
+      "name": "skill-evaluation",
+      "version": "0.2.0"
+    },
+    {
+      "content_sha256": "b6a2937c07127dfcf9fe8c654e79a9c437448c9ef60edbde2339ac939d37697d",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "draft",
+      "name": "skill-release-review",
+      "version": "0.2.0"
+    },
+    {
       "content_sha256": "36ddcddc6441e34edabff727a8892bd2a3b34f24e2aea6bee76b89d76acb62e5",
       "inventory": [
         "SKILL.md",
@@ -755,6 +779,18 @@
       "maturity": "production",
       "name": "skill-specification",
       "version": "1.0.0"
+    },
+    {
+      "content_sha256": "2d59c9df810a19620f24aa0a1f7e4343a094bf3358a71ddd8db0b6dc247550d0",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/arek-ai-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "draft",
+      "name": "skill-test-design",
+      "version": "0.2.0"
     },
     {
       "content_sha256": "18261b0facd272939aa449f1ceaa2fc659a763d5afbf2d1850693c071a1cf4fc",
@@ -999,5 +1035,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "50bcec1e3eff9c1f6d24d7d7dfbce42792facc49"
+  "source_revision": "0fc4e2e78eba0c99db02955bb86af84ab1e078fa"
 }

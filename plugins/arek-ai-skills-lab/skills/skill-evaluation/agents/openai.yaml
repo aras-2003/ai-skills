@@ -1,0 +1,5 @@
+interface:
+  display_name: Skill Evaluation
+  short_description: Evaluate an Agent Skill's routing and behavior using…
+  icon_small: ./assets/arek-ai-domain-icon.svg
+  brand_color: '#94D4B3'

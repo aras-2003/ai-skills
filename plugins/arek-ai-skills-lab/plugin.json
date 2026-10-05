@@ -3,7 +3,7 @@
   "author": {
     "name": "Arkadiusz Kamrowski"
   },
-  "description": "Isolated lab package with candidate targets plus their production dependencies for controlled behavioral testing.",
+  "description": "Isolated lab package with candidate targets, explicitly selected draft test targets, and their production dependencies for controlled behavioral testing.",
   "extensions": {
     "com.openai": {
       "interface": {
@@ -12,7 +12,7 @@
         "composerIcon": "./assets/brand-mark.svg",
         "displayName": "Arek AI Skills Lab",
         "logo": "./assets/brand-mark.svg",
-        "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing. Do not enable it in the same session as the production plugin because duplicate capability names may compete.",
+        "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing, including only explicitly selected draft test targets. Do not enable it in the same session as the production plugin because duplicate capability names may compete.",
         "shortDescription": "Candidate skills for runtime evaluation and discovery.",
         "websiteURL": "https://aras-2003.github.io/ai-skills/"
       }
@@ -28,5 +28,5 @@
   "name": "arek-ai-skills-lab",
   "repository": "https://github.com/aras-2003/ai-skills",
   "skills": "./skills/",
-  "version": "0.31.0"
+  "version": "0.32.0"
 }
