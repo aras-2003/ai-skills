@@ -76,6 +76,7 @@ Current runtime validation campaign: `runtime-validation-2026-10-r16`, pinned to
 
 Required PR validation is defined in `.github/workflows/validate-skills.yml` and covers:
 - source/static contracts;
+- skill-source static security scan and scanner mutation tests;
 - validator mutation tests;
 - eval input/rubric isolation;
 - active runtime campaign definition, imported evidence validation and offline campaign regressions;
@@ -92,6 +93,7 @@ Generated artifacts are built atomically and include source provenance.
 - Lifecycle: `docs/LIFECYCLE.md`
 - Testing: `docs/TESTING.md`
 - Runtime evals: `docs/RUNTIME-EVALS.md`
+- Static skill security scan: `scripts/security/README.md`
 - Active R16 runbook: `evals/campaigns/runtime-validation-2026-10-r16/RUNBOOK.md`
 - Channel usage: `docs/GPT-USAGE.md`
 - Branch-rules proposal: `docs/GITHUB-BRANCH-RULES-PROPOSAL.md`

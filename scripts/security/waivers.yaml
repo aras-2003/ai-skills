@@ -1,0 +1,2 @@
+# Add only reviewed, fingerprint-specific exceptions with a reason and expiry.
+waivers: []
