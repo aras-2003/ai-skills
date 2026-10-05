@@ -1589,3 +1589,40 @@ Typ: evals/pilot/catalog. Status: PROPOSED. Wielkość: L. Zależności: STR-06,
 - Marketing forecast nie daje invented ROI
 - Evals bez rubric leakage i brak runtime evidence pozostaje NOT_RUN
 - Catalog/registry/channels aktualizowane dopiero dla rzeczywistych implementations
+
+
+---
+
+## Hardening addendum — skill-platform controls before broad expansion
+
+**Decision date:** 2026-10-05
+
+Benchmarking the current repository against external Agent Skills implementations identified a narrow set of engineering controls worth adopting without replacing the existing architecture. The current repository remains stronger in eval isolation, exact-version evidence, package provenance, lifecycle and release governance; the purpose of this addendum is to close security and scale-related gaps before the catalog grows substantially.
+
+### Sequencing decision
+
+Treat **ENG-15 → ENG-16**, strengthened **ENG-10**, and **ENG-17** as a near-term **P0 hardening tranche**. Broad net-new skill/domain expansion should not materially outrun these controls. Existing pilots, evidence gathering and already-committed work can continue where they help validate the controls.
+
+### ENG-15 · P0 · Agent Skill Security Scanner
+
+Add an offline/deterministic CI scanner for runtime skill contents. Cover remote fetch-and-execute, obfuscated execution, credential stores and environment access, network calls, credential+network exfiltration shapes, install-time execution lures and unpinned dependency installation. Findings must be machine-readable, tested and consumable by release review. Runtime fixtures and evaluator content must not be confused with shipped runtime content.
+
+### ENG-16 · P0 · Capability and side-effect contract
+
+Declare the capabilities a skill requires or may exercise: network, filesystem, shell/exec, credential classes, external actions/writes and required tools/connectors. Keep portable Agent Skills compatibility; repository-side/generated manifests may hold runtime-specific detail. Validate declared behavior against static observations and channel availability.
+
+### ENG-10 · P0 · Global routing collision gate
+
+Strengthen the existing routing-boundary work rather than create a duplicate task. Add positive/near-miss cases, catalog-wide expected-skill ranking and collision reporting. Lexical similarity is an early-warning sensor only; it never replaces semantic/natural-routing runtime evidence.
+
+### ENG-17 · P0 · Generated machine registry
+
+Generate a registry.json from canonical sources rather than maintaining a second manual catalog. Keep roles distinct: CATALOG.md for humans, registry.json for machines/discovery, capabilities.json for the actually installed runtime/channel state.
+
+### ENG-18 · P1 · Controlled skill improvement
+
+Explore automated improvement only after real failure evidence is sufficient. Do not copy a naive generate-tests → mutate → same-model-score loop. Keep development evals separate from held-out regression/holdout data; optimizer must not see evaluator-only rubrics or the entire holdout corpus. Output a candidate diff and evidence plan, then pass through existing validation, security, routing, runtime pilot and skill-release-review. Never auto-promote.
+
+### Explicit non-change
+
+Do not introduce a rule that every production skill must ship scripts/references/assets. The existing principle remains: add deterministic code, references and assets when the task requires them. A reusable reasoning procedure can still be a valid skill when prose is the correct implementation.
