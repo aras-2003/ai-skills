@@ -1,6 +1,6 @@
 # AI Skills expansion roadmap — 2026-10-05
 
-This directory preserves the expansion analysis and 72 proposed development tasks. It is a planning artifact, not a release or runtime-readiness declaration.
+This directory preserves the expansion analysis and 76 proposed development tasks. It is a planning artifact, not a release or runtime-readiness declaration.
 
 ## Start here
 
@@ -25,4 +25,20 @@ Saving and merging this roadmap does not authorize execution of all proposed tas
 
 ## Strategy addition — 2026-10-05
 
-The dated proposal now includes an additive Strategy decision and tasks STR-01 through STR-17: a separate domain, strategic-analysis, deep competitive intelligence, strategy-design, a marketing strategy specialist, PESTEL/Porter/SWOT-TOWS presentation profiles, domain handoffs and pilots. See the appended section in [the proposal](PROPOSAL-AND-BACKLOG.md). Original tasks remain unchanged; the current total is 72.
+The dated proposal now includes an additive Strategy decision and tasks STR-01 through STR-17: a separate domain, strategic-analysis, deep competitive intelligence, strategy-design, a marketing strategy specialist, PESTEL/Porter/SWOT-TOWS presentation profiles, domain handoffs and pilots. See the appended section in [the proposal](PROPOSAL-AND-BACKLOG.md). Original tasks remain unchanged; the current total is 76.
+
+
+## Near-term hardening gate — 2026-10-05
+
+Before materially accelerating net-new skill/domain development, prioritize the platform hardening tranche:
+
+1. **ENG-15 (P0)** — Agent Skill Security Scanner.
+2. **ENG-16 (P0)** — capability and side-effect contract.
+3. **ENG-10 (P0, strengthened)** — global routing collision gate across the full catalog.
+4. **ENG-17 (P0)** — generated machine-readable skill registry.
+
+These are sequencing controls, not claims that current skills are unsafe or routing is broken. Existing committed pilots and evidence work may continue where useful, but broad catalog expansion should not outrun these controls.
+
+**ENG-18 (P1)** captures a later controlled skill-improvement loop. Do not implement a self-modifying production path before sufficient real failure receipts exist, and do not let an optimizer see evaluator-only rubrics or the full held-out corpus.
+
+Architecture decision retained from the benchmark: do **not** require every production skill to contain scripts/references/assets merely to satisfy a quality gate. A reasoning procedure may be a valid skill when the reusable method itself creates value; add deterministic code or references only when the task requires them.

@@ -18,7 +18,7 @@
       "draft": 3
     }
   },
-  "scope": "Proposed expansion and engineering roadmap; no implementation or runtime PASS claims",
+  "scope": "Proposed expansion and engineering roadmap; near-term hardening gate ENG-10/ENG-15/ENG-16/ENG-17 should precede broad net-new skill expansion; no implementation or runtime PASS claims",
   "items": [
     {
       "id": "ENG-01",
@@ -229,17 +229,19 @@
     },
     {
       "id": "ENG-10",
-      "priority": "P1",
+      "priority": "P0",
       "epic": "Skill Engineering",
       "type": "catalog/evals",
-      "title": "Utrzymywać granice routingu i zestaw przypadków konkurujących",
-      "rationale": "Wzrost biblioteki szczególnie grozi kolizją consumer/commerce, research/article i OAF/software.",
-      "scope": "Dodać lekką macierz sąsiadów i routing cases; nie tworzyć centralnego mega-routera ani drugiego ręcznego katalogu procedur.",
+      "title": "Wzmocnić globalne granice routingu i dodać collision gate",
+      "rationale": "Przy rosnącym katalogu lokalne przypadki routingu nie wystarczą: descriptions mogą zacząć konkurować semantycznie i leksykalnie, a nowe skills mogą niejawnie przejmować istniejące intencje.",
+      "scope": "Rozszerzyć istniejące routing evals o globalny, deterministyczny early-warning gate: positive prompts, near-miss negatives, ranking expected skill względem całego katalogu i minimalny margin do najbliższego konkurenta. Utrzymać macierz routing neighbors oraz PL/EN i intencje pośrednie. Traktować lexical similarity jako sensor, nie jako dowód poprawnego routingu; semantyczne/runtime routing evals pozostają nadrzędne.",
       "acceptance_criteria": [
-        "Consumer purchase nie uruchamia Commerce",
-        "Tekst użytkownika do redakcji nie uruchamia pełnego research",
-        "Software ADR nie udaje OAF diagnozy",
-        "Przypadki obejmują PL/EN i pośrednią intencję"
+        "Dla każdego objętego przypadku expected skill jest #1 albo przypadek jest jawnie oznaczony jako wymagający modelowego/semantycznego routingu",
+        "Positive prompts wygrywają z near-miss negatives z udokumentowanym progiem/marginem",
+        "Raport CI pokazuje najwyższe kolizje description/trigger surface w całym katalogu",
+        "Consumer purchase nie uruchamia Commerce; tekst do redakcji nie uruchamia pełnego research; Software ADR nie udaje OAF diagnozy",
+        "Przypadki obejmują PL/EN, pośrednią intencję i nowe skills przed dopuszczeniem do szerszego rozwoju",
+        "Lexical gate nie zastępuje natural-routing runtime evidence ani nie generuje fałszywego PASS"
       ],
       "depends_on": [
         "ENG-03"
@@ -1677,6 +1679,111 @@
       "status": "PROPOSED",
       "owner": "UNASSIGNED",
       "legacy_links": []
+    },
+    {
+      "id": "ENG-15",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "security/control",
+      "title": "Dodać Agent Skill Security Scanner jako obowiązkowy gate",
+      "rationale": "Skill działa z uprawnieniami agenta i powinien być traktowany jak software, nie tylko prompt. Obecne walidacje jakości, pakietów i eval isolation nie tworzą osobnego gate'u dla typowych ryzyk supply-chain, exfiltration i remote execution.",
+      "scope": "Dodać repozytoryjny scanner uruchamiany w CI przed kosztownymi evalami. Wykrywać co najmniej: remote fetch-and-execute (curl/wget|shell, PowerShell equivalents), obfuscated execution/base64 payloads, podejrzany dostęp do credential stores i .env, masowe odczyty env, network calls, kombinację credential access + network jako exfiltration shape, niezadeklarowane install-time execution oraz unpinned dependency installation. Scanner nie wykonuje skanowanego kodu, ma machine-readable output, kontrolowane suppressions z uzasadnieniem i testy mutation/fixtures. Nie kopiować zewnętrznego scanner'a bez przeglądu; użyć go jako benchmarku i zachować własny policy contract.",
+      "acceptance_criteria": [
+        "Osobny CI gate uruchamia security scan dla runtime contents wszystkich skills przed build/release",
+        "CRITICAL dla remote execution, obfuscation i credential+network exfiltration blokuje candidate/release bez jawnej, uprawnionej decyzji ryzyka",
+        "Scanner rozróżnia runtime content od eval fixtures i nie obniża CRITICAL tylko dlatego, że wzorzec jest w fenced code",
+        "Brak network/credential deklaracji przy obserwowanym zachowaniu jest co najmniej blocking mismatch zgodnie z policy",
+        "Scanner jest deterministic/offline, nie wykonuje kodu i ma testy dla false positive, false negative oraz suppression abuse",
+        "Wynik jest dostępny maszynowo i może być użyty przez skill-release-review"
+      ],
+      "depends_on": [
+        "ENG-01"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-16",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "contract/runtime/security",
+      "title": "Wprowadzić jawny capability i side-effect contract dla skills",
+      "rationale": "Routing, packaging i release review powinny wiedzieć nie tylko co skill robi logicznie, ale również jakich uprawnień i efektów ubocznych wymaga. Bez tego runtime może uruchomić skill w niekompatybilnym środowisku albo security scan nie ma deklarowanego baseline.",
+      "scope": "Zaprojektować minimalny, przenośny kontrakt capabilities/side effects, najlepiej w metadata lub generowanym repository-side manifest: network (none/read/write), filesystem (none/read/write), shell/exec, credential classes, external actions/writes oraz wymagane connectors/tools. Nie przeciążać SKILL.md polami specyficznymi dla jednego runtime; portable frontmatter ma pozostać zgodny z Agent Skills. Walidować declared vs statically observed behavior i channel availability. Dla ryzykownych external writes zachować istniejące human approval boundaries.",
+      "acceptance_criteria": [
+        "Kontrakt rozróżnia co najmniej network, filesystem, shell/exec, credentials i external writes/actions",
+        "Portable SKILL.md nie jest łamany przez runtime-specific schema; rozszerzenia mogą być repository-side/generowane",
+        "CI wykrywa UNDECLARED lub EXCESSIVE capability względem implementacji i deklaracji",
+        "Builder/channel manifest potrafi oznaczyć capability jako supported, unavailable albo requiring approval zamiast symulować brakujące narzędzie",
+        "Routing/preconditions mogą zatrzymać skill przed wykonaniem, gdy wymagane capability jest niedostępne",
+        "Release review widzi capability delta jako część behavioral/security change"
+      ],
+      "depends_on": [
+        "ENG-15",
+        "ENG-06"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-17",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "catalog/runtime tooling",
+      "title": "Generować machine-readable registry skills z kanonicznych źródeł",
+      "rationale": "Przy wzroście katalogu potrzebny jest stabilny interfejs maszynowy dla discovery, instalatorów, routera i kanałów runtime. Ręcznie utrzymywany registry stworzyłby jednak drugie źródło prawdy obok SKILL.md, workflow registry, catalog i channel manifests.",
+      "scope": "Generować registry.json wyłącznie z kanonicznych źródeł: SKILL.md metadata/description, workflow registry oraz channel/build metadata. Registry ma zawierać minimum identity/path/description/version/maturity, domain/type, routing/eval pointers, wymagane capabilities/dependencies i wspierane kanały tam, gdzie dane istnieją. CATALOG.md pozostaje widokiem dla ludzi, registry.json dla maszyn, a capabilities.json opisuje faktycznie zainstalowany runtime. Dodać freshness/determinism test i zakaz ręcznej edycji generated registry.",
+      "acceptance_criteria": [
+        "registry.json jest w 100% generowany i reproducible dla tego samego source revision",
+        "Brak ręcznie duplikowanej definicji description, version, maturity lub dependencies",
+        "CI failuje, gdy registry jest stale względem źródeł",
+        "Registry rozróżnia source availability od installed runtime availability i nie sugeruje produkcji dla draft/candidate",
+        "Format wspiera przyszły router/installer bez parsowania CATALOG.md",
+        "README/docs wyjaśniają role CATALOG.md vs registry.json vs capabilities.json"
+      ],
+      "depends_on": [
+        "ENG-16",
+        "ENG-10",
+        "ENG-14"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-18",
+      "priority": "P1",
+      "epic": "Skill Engineering",
+      "type": "controlled improvement/evals",
+      "title": "Zaprojektować kontrolowaną pętlę skill improvement bez eval overfitting",
+      "rationale": "Automatyczne poprawianie skills może skrócić iteracje, ale prosty loop model-generates-tests → model-mutates → same-model-scores łatwo optymalizuje skill pod mały benchmark zamiast poprawiać realne zachowanie.",
+      "scope": "Zbudować najpierw proposal/experiment, nie auto-update production. Źródła sygnału: zanonimizowane real-use failures, development evals, regression corpus i version-bound receipts. Rozdzielić development evals od held-out regression/holdout; optimizer nie może widzieć pełnych evaluator rubrics ani całego holdout corpus. Pipeline: failure clustering → root-cause hypothesis → jedna/bounded mutation → static/security/routing gates → development evals → held-out regressions → runtime pilot → skill-release-review → osobna human authorization. Wynik ma być Improvement Proposal + candidate diff, nigdy samodzielna promocja.",
+      "acceptance_criteria": [
+        "Optimizer nie ma dostępu do pełnego held-out corpus ani evaluator-only rubrics",
+        "Każda mutacja jest powiązana z obserwowanym failure i hipotezą root cause",
+        "Poprawa development score bez utrzymania held-out/regression jakości nie jest akceptowana",
+        "Security, capability i routing gates uruchamiają się przed runtime pilotem",
+        "Production evidence jest zanonimizowane i nie przenosi danych prywatnych do publicznych fixtures",
+        "Narzędzie tworzy candidate diff i changelog; nie merge'uje, nie publikuje i nie zmienia maturity automatycznie",
+        "Implementacja rozpoczyna się dopiero po zebraniu wystarczającej liczby rzeczywistych failure receipts; do tego czasu status może pozostać DISCOVERY/PROPOSED"
+      ],
+      "depends_on": [
+        "ENG-04",
+        "ENG-08",
+        "ENG-10",
+        "ENG-12",
+        "ENG-15",
+        "ENG-16"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
     }
   ],
   "change_log": [
@@ -1703,6 +1810,21 @@
         "STR-17"
       ],
       "baseline_main": "f06f59b6de8ee4ff3a8f3fc3597d4c0dd59c8332"
+    },
+    {
+      "date_local": "2026-10-05",
+      "decision": "Prioritize skill-platform hardening before broad net-new skill expansion: security scan, capability/side-effect contract, global routing collision gate, generated machine registry; add controlled self-improvement only after sufficient real failure evidence",
+      "ids": [
+        "ENG-10",
+        "ENG-15",
+        "ENG-16",
+        "ENG-17",
+        "ENG-18"
+      ],
+      "benchmark_sources": [
+        "Shubhamsaboo/awesome-llm-apps agent_skills security/lint/routing/registry patterns",
+        "Current aras-2003/ai-skills lifecycle, eval isolation, provenance and release-review controls"
+      ]
     }
   ]
 }
