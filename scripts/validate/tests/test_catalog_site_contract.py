@@ -51,6 +51,7 @@ lab:
         published = json.loads((ROOT / "docs/catalog.json").read_text(encoding="utf-8"))
 
         self.assertEqual(source_catalog["metadata"]["packages"], published["metadata"]["packages"])
+        self.assertEqual(source_catalog["skills"], published["skills"])
         self.assertTrue(published["metadata"]["source_revision"])
         by_name = {skill["name"]: skill for skill in published["skills"]}
         for name in ("skill-evaluation", "skill-release-review", "skill-test-design"):
