@@ -196,8 +196,6 @@ Production promotion requires:
 - at least one real use case/workflow identified;
 - human approval for production promotion.
 
-The R7 personal-beta continuation is not a shortcut in this workflow: it is limited to already-declared production components bound to the exact component/version in its readiness record, with evidence gap, limitation, owner and expiry recorded in `release/production-readiness.yaml`. It cannot promote a new candidate or cover a known high-severity failure. Missing evidence remains `NOT_RUN`.
-
 ## Stage 9 — promotion
 
 Recommended Git flow:
