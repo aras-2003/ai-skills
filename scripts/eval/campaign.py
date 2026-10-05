@@ -46,17 +46,15 @@ def separately_validated_engineering_paths() -> set[str]:
     fixtures = yaml.safe_load((ROOT / "evals/runtime-fixtures.yaml").read_text(encoding="utf-8")) or {}
     targets = fixtures.get("targets") or {}
     declared_targets = cfg.get("runtime_targets") or {}
-    for target, version in (("skill-test-design", "0.3.0"), ("skill-evaluation", "0.3.0")):
+    for target in ("skill-test-design", "skill-evaluation"):
         skill = ROOT / f"skills/meta/{target}/SKILL.md"
-        if not skill.is_file() or f'version: "{version}"' not in skill.read_text(encoding="utf-8"):
+        declared = declared_targets.get(target) or {}
+        version = str(declared.get("version") or "")
+        if not version or not skill.is_file() or f'version: "{version}"' not in skill.read_text(encoding="utf-8"):
             return set()
         fixture_cases = targets.get(target) or []
-        declared = declared_targets.get(target) or {}
         fixture_ids = {str(case.get("id")) for case in fixture_cases}
-        if (
-            declared.get("version") != version
-            or set(declared.get("required_cases") or []) != fixture_ids
-        ):
+        if set(declared.get("required_cases") or []) != fixture_ids:
             return set()
         if len(fixture_cases) < 2:
             return set()

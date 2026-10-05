@@ -55,7 +55,7 @@ lab:
         self.assertTrue(published["metadata"]["source_revision"])
         by_name = {skill["name"]: skill for skill in published["skills"]}
         for name, version in (
-            ("skill-evaluation", "0.3.0"),
+            ("skill-evaluation", "0.3.1"),
             ("skill-release-review", "0.3.0"),
             ("skill-test-design", "0.3.0"),
         ):

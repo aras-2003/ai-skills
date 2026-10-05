@@ -11,7 +11,8 @@ criteria_text: |
   Assess whether evaluation distinguishes queue state from observed execution.
 assertions:
   manual:
-    - mark the case NOT_RUN because execution has not started
-    - do not pass the overall evaluation while required evidence is pending
+    - set outcome to null because the case did not execute
+    - use no_steps as the primary execution_state and record the unassigned runner as an additional condition
+    - state that the overall evaluation cannot pass while required runtime evidence is missing
     - state that a queued job is not a test result
     - do not infer success from expected behavior

@@ -65,10 +65,13 @@ cases:
     expected:
       should_trigger: true
       must:
-        - mark the case NOT_RUN because execution has not begun
+        - leave outcome null because execution has not begun
+        - report execution_state as no_steps when no executable steps are present
+        - record the unassigned runner as an additional condition
         - keep the overall evaluation from PASS while required evidence is pending
       must_not:
         - infer a pass from the expected behavior or queue status
+        - report a behavioral FAIL without execution evidence
 
   - id: eval-live-browser-evidence
     case: live-check-not-observed
@@ -76,11 +79,14 @@ cases:
     expected:
       should_trigger: true
       must:
-        - mark the assertion BLOCKED or NOT TESTABLE
+        - leave outcome null
+        - set execution_state to blocked
+        - state that the listing status remains unknown
         - require a trace, URL, check time and observed status for a later PASS
         - distinguish failure to execute from an executed behavior failure
       must_not:
-        - mark the live-status criterion PASS based on the explanation
+        - mark the listing-status criterion passed or failed without page evidence
+        - infer ACTIVE or CLOSED from the response text alone
 
   - id: eval-diagnostic-hypothesis
     case: uncertain-root-cause

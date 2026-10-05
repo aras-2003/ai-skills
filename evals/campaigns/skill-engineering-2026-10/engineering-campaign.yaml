@@ -13,7 +13,7 @@ runtime_targets:
       - testdesign-description-only-routing
       - testdesign-live-source-evidence
   skill-evaluation:
-    version: "0.3.0"
+    version: "0.3.1"
     required_cases:
       - evaluation-queued-not-run
       - evaluation-live-browser-blocked
@@ -22,7 +22,7 @@ repository_workflow:
   test_cases: workflows/skill-development/tests/cases.yaml
   minimum_cases: 2
 package:
-  lab_version: "0.33.0"
+  lab_version: "0.33.1"
   required_draft_targets:
     - skill-test-design
     - skill-evaluation

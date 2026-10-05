@@ -4,10 +4,10 @@ description: >
   Evaluate an Agent Skill's routing and behavior using predeclared representative cases, a no-skill baseline or accepted prior version, and evidence-based regression analysis. Use after validation and test design, before production promotion, and after material behavior changes.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.3.0"
+  version: "0.3.1"
   maturity: draft
   risk: medium
-  last_reviewed: 2026-10-05
+  last_reviewed: 2026-10-06
 ---
 
 # Skill Evaluation
@@ -36,11 +36,15 @@ If any precondition is missing, return the exact gap and the smallest action nee
 
 ## Case execution state and receipts
 
-Assign each case one evidence state independently of the overall disposition:
-- `NOT_RUN`: execution has not started; queued jobs without an assigned runner or steps remain NOT_RUN.
-- `BLOCKED` / `NOT TESTABLE`: a required runtime, tool, permission or fixture is unavailable before the criterion can be observed.
-- `PASS`: the case ran and its predeclared observable assertions are supported by evidence.
-- `FAIL`: the case ran and violated a material assertion, including claiming a live check or external action that the trace does not show.
+Record two independent fields for every case:
+- `outcome`: `passed`, `failed`, or `null` when execution did not produce enough evidence for a verdict;
+- `execution_state`: `executed`, `blocked`, `awaiting_runner`, `no_steps`, or `not_executed`.
+
+Use `outcome: passed` or `outcome: failed` only when `execution_state: executed`. For every non-executed state, leave `outcome` null and record the specific reason and evidence. A queued job with no runner is `awaiting_runner`; a job with no executable steps is `no_steps` and has invalid configuration. If both are true, use `no_steps` as the primary state and record the missing runner as an additional condition. An expected result or queued status is not execution evidence.
+
+When writing an evidence receipt, keep the compatibility field `evaluation.status` consistent: use `PASS` or `FAIL` only for an executed outcome; use `NOT_RUN` for non-execution states, with `outcome: null`, the corresponding `execution_state`, and a reason. Do not translate `NOT_RUN`, `BLOCKED`, `awaiting_runner`, or `no_steps` into a behavioral failure.
+
+For browser-based evidence checks, if the browser is unavailable, use `outcome: null` and `execution_state: blocked`; the listing status remains unknown. Do not report `ACTIVE` or `CLOSED` without page evidence. A status mismatch is a failed outcome only after the listing was successfully inspected and the observed status differs from the expected status. If reachability itself is an explicit assertion, an observed navigation failure may fail that assertion; otherwise it does not establish the listing's status.
 
 A textual description of intended tool use is not proof. When the criterion requires a live source check, retain the tool trace, URL/resource, check time and observed status. Do not count a required NOT_RUN or BLOCKED case as a conditional PASS; the overall disposition cannot be PASS while required evidence is unobserved.
 
@@ -79,11 +83,11 @@ Select only criteria relevant to the skill, but cover its contract:
 
 Do not score hidden chain-of-thought, exact phrasing, or stylistic preference as a proxy for task quality. Do not treat evaluator agreement, model confidence, or one attractive example as proof.
 
-## Result format
+## Output contract
 
 Return a compact report:
 - evaluation question, candidate/comparator and runtime;
-- plan and case matrix (case, expected route, observed route, evidence state, scores, evidence receipt, severity, delta);
+- plan and case matrix (case, expected route, observed route, `outcome`, `execution_state`, scores, evidence receipt, severity, delta);
 - aggregate result with denominator, repetitions and variation where applicable;
 - improvements and regressions, with root-cause hypotheses clearly labeled;
 - unsupported/unobserved criteria and material limitations, with required NOT_RUN/BLOCKED cases kept separate from executed results;
