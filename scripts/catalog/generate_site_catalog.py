@@ -12,27 +12,27 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def split_markdown_row(line: str) -> list[str]:
     """Split a pipe table row while keeping escaped pipes inside cells."""
-    cells = re.split(r"(?<!\\)\\|", line.strip())
+    cells = re.split(r"(?<!\\)\|", line.strip())
     if cells and not cells[0].strip():
         cells = cells[1:]
     if cells and not cells[-1].strip():
         cells = cells[:-1]
-    return [cell.replace(r"\\|", "|").strip() for cell in cells]
+    return [cell.replace(r"\|", "|").strip() for cell in cells]
 
 
 def parse_package_manifest(text: str) -> dict[str, dict[str, str]]:
-    """Read the two package identities without adding a YAML dependency."""
+    """Read package identities without adding a YAML dependency."""
     packages: dict[str, dict[str, str]] = {}
     for key, label in (("package", "production"), ("lab", "lab")):
         match = re.search(
-            rf"(?ms)^{re.escape(key)}:\\s*\\n(.*?)(?=^[^ \\t]|\\Z)",
+            rf"(?ms)^{re.escape(key)}:\s*\n(.*?)(?=^[^ \t]|\Z)",
             text,
         )
         if not match:
             raise ValueError(f"Missing {key} package metadata")
         section = match.group(1)
-        name = re.search(r"(?m)^  name:\\s*([^\\n#]+)", section)
-        version = re.search(r"(?m)^  version:\\s*['\"]?([^'\"\\s#]+)", section)
+        name = re.search(r"(?m)^  name:\s*([^\n#]+)", section)
+        version = re.search(r"(?m)^  version:\s*['\"]?([^'\"\s#]+)", section)
         if not name or not version:
             raise ValueError(f"Missing name or version for {key} package")
         packages[label] = {"name": name.group(1).strip(), "version": version.group(1).strip()}
@@ -72,7 +72,7 @@ def build_catalog(
     return {
         "metadata": {
             "packages": parse_package_manifest(package_manifest),
-            "source_revision": revision,
+            "source_revision": revision[:12],
         },
         "skills": skills,
     }
@@ -101,7 +101,7 @@ def main() -> int:
         package_source.read_text(encoding="utf-8"),
         current_revision(),
     )
-    output.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    output.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Generated site catalog with {len(catalog['skills'])} skills")
     return 0
 
