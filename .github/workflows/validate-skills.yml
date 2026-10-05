@@ -67,7 +67,7 @@ jobs:
       - name: Verify generated catalog is current
         run: |
           python scripts/catalog/generate_catalog.py
-          git diff --exit-code -- CATALOG.md
+          git diff --exit-code -- CATALOG.md docs/catalog.json
       - name: Build production plugin
         run: python scripts/package/build_plugin.py --maturity production --output .tmp/plugin
       - name: Validate production plugin

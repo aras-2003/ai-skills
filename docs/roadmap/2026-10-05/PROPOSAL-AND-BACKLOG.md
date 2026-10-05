@@ -2,7 +2,7 @@
 
 Data: 5 października 2026. Status: propozycja do wdrożenia, nie deklaracja gotowości ani wykonany release.
 
-> Zapis do repo: 5 października 2026. Analiza odnosi się do przypiętej wyżej wersji. Przy zapisie bazą main był `007f659995945084ce18e4ca62b38c92523e414a`; README ma już poprawne liczby 54 skills i 17 workflowów. Nie traktuj historycznych ustaleń jako automatycznie otwartych defektów. Przed realizacją sprawdź aktualne źródło, AIS/RT i evidence; statusy zadań utrzymuj w BACKLOG.json.
+> Aktualizacja bazowa: 5 października 2026. Weryfikacja z checkoutu: `origin/main` = `eeae820badaa2c8f9c853a1801df8b08178a077a`, z 54 źródłowymi skills i 17 workflowami. Zainstalowany Lab = 0.32.0, zbudowany ze źródła 8d200a3bd9ee675687de85f11ca7b4f6cbf8ba3f (przodek bieżącego main). Katalog zawiera 70 entrypointów skillowych: 54 skille oraz 16 workflowów udostępnionych przez adapters; metadane: 55 production, 12 candidate, 3 draft. Pełny source → build → pakiet nadal weryfikuje release gate, a zgodność liczby entrypointów sama jej nie dowodzi. Nie traktuj historycznych ustaleń jako automatycznie otwartych defektów. Statusy zadań pozostają w BACKLOG.json.
 
 ## Rekomendacja
 
@@ -12,14 +12,14 @@ Największa wartość dla Twojego stylu pracy: mniej czasu na definiowanie zadan
 
 ## Co jest potwierdzone, a co jest założeniem
 
-- Aktualne źródło GitHub: `aras-2003/ai-skills`, main przypięty do **956885438f12968f958f9c733dc685e2d1b1ae18**. Drzewo zawiera **54 źródłowe SKILL.md i 17 WORKFLOW.md**; source presence nie oznacza runtime availability.
-- Zainstalowany w tej sesji **Lab 0.29.0**, źródło **8cf615235d04c13603ca7c79ab4c30ff356b200c**: **67 komponentów**, w tym 51 skills i 16 workflowów. Maturity: 40 production skills + 11 candidate skills; 15 production workflows + 1 candidate workflow. To deklaracje manifestu, nie automatyczny dowód runtime PASS.
-- Meta: `skill-specification`, `skill-authoring`, `skill-validation` są już dostępne w Lab. `skill-test-design`, `skill-evaluation`, `skill-release-review` są w aktualnym main jako **draft 0.2.0** i nie ma ich w zainstalowanym manifestie. Nie proponuję pisania ich ponownie.
+- Źródło `aras-2003/ai-skills`: weryfikowany `main` = **eeae820badaa2c8f9c853a1801df8b08178a077a**; drzewo zawiera **54 źródłowe SKILL.md i 17 WORKFLOW.md**. Sama obecność źródła nie dowodzi dostępności w runtime.
+- Zainstalowany **Lab 0.32.0** został odświeżony ze źródła **8d200a3bd9ee675687de85f11ca7b4f6cbf8ba3f**, przodka bieżącego `main`. Zawiera 70 entrypointów skillowych: 54 skille oraz 16 workflowów wystawionych jako adapters; metadane to 55 production, 12 candidate i 3 draft. To osobny pakiet runtime, a jego readiness nadal wymaga pełnego manifestu/digestu i exact-version receipts.
+- Meta w `main`: `skill-test-design` 0.2.0 draft, `skill-evaluation` 0.2.0 draft i `skill-release-review` 0.2.2 draft. Wszystkie trzy są też obecne w Lab 0.32.0 w tych wersjach. To istniejące cele rozwoju, nie nowe skille.
 - Obecne domeny implementacji: Career, Commerce, OAF, Meta, Investing. Core, Learning, Tender i Web Design mają już plany w README. Historyczne Product Research/Ecommerce częściowo pokrywają obecne Commerce; nie są osobnym powodem do tworzenia tych samych metod.
 - Istnieją: szablon skilla i testów, registry workflowów, walidatory i mutation tests, builders dla kanałów, manifesty/provenance, repozytoryjny eval protocol, katalog i `docs/processes.json`.
 - Lokalny audit zawiera automatyczny controller/runner, kolejkę, izolację i osobny evaluator. Nie ustalono jeszcze, które elementy są już zintegrowane upstream; ENG-08 zaczyna od tej kontroli. Historyczny stan kolejki R6 nie jest bieżącym stanem całego pakietu.
-- README w snapshotcie analizy mówiło o 52 skills, a drzewo zawiera 54; opis domen implementacji pomija Investing mimo istniejących plików. Eval README w snapshotcie analizy odwoływało się do R6 przy R7 w głównym README. Dokumenty różnią się również zasadami strict release/personal-beta. To evidence na potrzebę harmonizacji, nie dowód awarii wykonania.
-- `report-composer` i `visual-output-design` już są candidates. Main ma odpowiednio 0.11.0 i 0.12.0; zainstalowany Lab 0.10.0 i 0.11.0. Propozycja używa istniejącego rozdziału kompozycja/rendering, bez drugiego report engine.
+- Lab udostępnia 16 z 17 workflowów jako skill entrypoints; brakujący workflow należy rozliczyć po registry i packaging rules. Różnica reprezentacji nie jest sama w sobie błędem provenance. Historyczne rozbieżności README i polityki release należy zamykać na podstawie aktualnych plików i evidence, nie samych snapshotów.
+- `report-composer` i `visual-output-design` są candidates: main i zainstalowany Lab mają odpowiednio 0.11.0 i 0.12.0. Propozycja używa istniejącego rozdziału kompozycja/rendering, bez drugiego report engine.
 - Masz skill artykułowy w aplikacji — informacja od Ciebie. Nazwa i kontrakt nie zostały potwierdzone w udostępnionym katalogu; WRI-01 jest zależnością, a nie sugestią wymiany tego skilla.
 - Projekty Amoura, Tender Pilot, Simple website, Houses, Malaga, Foodie Assistant, Meeting Summarizer, Career i Investing uzasadniają rozważenie tych flow. Same nazwy projektów nie dowodzą częstotliwości użycia ani ich obecnego etapu. Nie analizowano ich prywatnych plików.
 

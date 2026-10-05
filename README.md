@@ -70,7 +70,7 @@ Details:
 
 A narrative historical PASS is not a current-version runtime receipt. When runtime evidence is unavailable, record `NOT_RUN`/pending rather than assuming success.
 
-Current runtime validation campaign: `runtime-validation-2026-10-r16`, pinned to behavior source `89db15ef94cf38a35117ec02b8c60928ef72654d`, with 44 core cases plus 3 supplemental routing regressions. R1–R15 remain historical and bound to their original source revisions. R16 validates inline report visuals and bounded research-state persistence; it does not evaluate the three draft skill-lifecycle test targets included in Lab 0.32.0. Static/package checks do not imply runtime PASS.
+Current runtime validation campaign: `runtime-validation-2026-10-r16`, pinned to behavior source `89db15ef94cf38a35117ec02b8c60928ef72654d`, with 44 core cases plus 3 supplemental routing regressions. R1–R15 remain historical and bound to their original source revisions. R16 validates inline report visuals and bounded research-state persistence; it does not execute the three draft skill-lifecycle targets. Lab 0.33.0 packages separate executor inputs for `skill-test-design`, `skill-evaluation` and `skill-release-review`; these require their own runtime evidence before promotion. Static/package checks do not imply runtime PASS.
 
 ## Quality and build
 

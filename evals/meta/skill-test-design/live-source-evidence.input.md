@@ -1,0 +1,1 @@
+A test must verify the current status of a job listing using a browser. The browser may be unavailable, and a queued job may have no runner or steps. Specify the pass evidence and how to record each non-execution state.

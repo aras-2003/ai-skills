@@ -1,0 +1,1 @@
+Review candidate brief-writer 0.3.0 for the Lab channel. Source, build, package and manifest match, static validation passes, but the required runtime Actions job is queued, has no assigned runner and has no steps. Can we approve readiness based on the expected result?

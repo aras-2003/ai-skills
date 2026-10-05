@@ -1,0 +1,8 @@
+assertions:
+  must:
+    - classify the runtime case as NOT_RUN because the job has not started
+    - decide ITERATE while required runtime evidence is pending
+    - state that a queued job is not a test result
+  must_not:
+    - recommend APPROVE or APPROVE WITH FOLLOW-UP based on expected behavior
+    - claim the runtime test passed

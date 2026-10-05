@@ -25,6 +25,66 @@ import artifact_validation
 CONFIG_REL = Path("evals/campaigns/runtime-validation-2026-10-r16/campaign.yaml")
 CONFIG = ROOT / CONFIG_REL
 SEPARATE_META_CAMPAIGN_REL = Path("evals/campaigns/skill-release-review-2026-10/release-review-campaign.yaml")
+SKILL_ENGINEERING_CAMPAIGN_REL = Path("evals/campaigns/skill-engineering-2026-10/engineering-campaign.yaml")
+
+
+def separately_validated_engineering_paths() -> set[str]:
+    """Return behavior paths covered by the exact, repository-validated engineering campaign."""
+    path = ROOT / SKILL_ENGINEERING_CAMPAIGN_REL
+    if not path.is_file():
+        return set()
+    cfg = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    declared = cfg.get("out_of_scope_behavior_paths") or []
+    expected = {
+        "skills/meta/skill-test-design/SKILL.md",
+        "skills/meta/skill-evaluation/SKILL.md",
+        "workflows/skill-development/WORKFLOW.md",
+        "release/package.yaml",
+    }
+    if cfg.get("campaign") != "skill-engineering-2026-10" or set(declared) != expected:
+        return set()
+    fixtures = yaml.safe_load((ROOT / "evals/runtime-fixtures.yaml").read_text(encoding="utf-8")) or {}
+    targets = fixtures.get("targets") or {}
+    declared_targets = cfg.get("runtime_targets") or {}
+    for target, version in (("skill-test-design", "0.3.0"), ("skill-evaluation", "0.3.0")):
+        skill = ROOT / f"skills/meta/{target}/SKILL.md"
+        if not skill.is_file() or f'version: "{version}"' not in skill.read_text(encoding="utf-8"):
+            return set()
+        fixture_cases = targets.get(target) or []
+        declared = declared_targets.get(target) or {}
+        fixture_ids = {str(case.get("id")) for case in fixture_cases}
+        if (
+            declared.get("version") != version
+            or set(declared.get("required_cases") or []) != fixture_ids
+        ):
+            return set()
+        if len(fixture_cases) < 2:
+            return set()
+        for case in fixture_cases:
+            if not (ROOT / str(case.get("input") or "")).is_file() or not (ROOT / str(case.get("rubric") or "")).is_file():
+                return set()
+    workflow = ROOT / "workflows/skill-development"
+    workflow_cases = workflow / "tests/cases.yaml"
+    if not (workflow / "WORKFLOW.md").is_file() or not workflow_cases.is_file():
+        return set()
+    cases_doc = yaml.safe_load(workflow_cases.read_text(encoding="utf-8")) or {}
+    repo_workflow = cfg.get("repository_workflow") or {}
+    if (
+        repo_workflow.get("path") != "workflows/skill-development/WORKFLOW.md"
+        or repo_workflow.get("test_cases") != "workflows/skill-development/tests/cases.yaml"
+        or len(cases_doc.get("cases") or []) < int(repo_workflow.get("minimum_cases") or 0)
+    ):
+        return set()
+    package = yaml.safe_load((ROOT / "release/package.yaml").read_text(encoding="utf-8")) or {}
+    lab = package.get("lab") or {}
+    package_cfg = cfg.get("package") or {}
+    required_drafts = package_cfg.get("required_draft_targets") or []
+    if (
+        lab.get("version") != package_cfg.get("lab_version")
+        or set(lab.get("draft_test_targets") or []) != set(required_drafts)
+    ):
+        return set()
+    return expected
 
 
 def config(root: Path = ROOT):
@@ -63,6 +123,7 @@ def behavior_changes(pinned: str, *, require_commit: bool = False) -> list[str]:
             and f'version: "{meta.get("candidate_version")}"' in meta_skill.read_text(encoding="utf-8")
         ):
             separate_meta_targets = set(expected_paths)
+    separate_meta_targets.update(separately_validated_engineering_paths())
     for raw in out.splitlines():
         path = raw.strip()
         if not path:

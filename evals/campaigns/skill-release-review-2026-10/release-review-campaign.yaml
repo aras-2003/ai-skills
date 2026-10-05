@@ -1,7 +1,7 @@
 schema_version: "1.0"
 campaign: skill-release-review-2026-10
 target: skill-release-review
-candidate_version: "0.2.2"
+candidate_version: "0.3.0"
 out_of_scope_behavior_paths:
   - skills/meta/skill-release-review/SKILL.md
 cases:
@@ -20,3 +20,6 @@ cases:
   - id: release-review-positive-control
     input: evals/campaigns/skill-release-review-2026-10/cases/release-review-positive-control.input.md
     rubric: evals/campaigns/skill-release-review-2026-10/cases/release-review-positive-control.rubric.yaml
+  - id: release-review-queued-runtime
+    input: evals/campaigns/skill-release-review-2026-10/cases/release-review-queued-runtime.input.md
+    rubric: evals/campaigns/skill-release-review-2026-10/cases/release-review-queued-runtime.rubric.yaml

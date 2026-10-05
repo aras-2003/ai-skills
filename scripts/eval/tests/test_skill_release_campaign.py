@@ -18,7 +18,7 @@ class SkillReleaseCampaignTests(unittest.TestCase):
         self.assertEqual([], skill_release_campaign.validate(ROOT))
         cfg = skill_release_campaign.load_config(ROOT)
         self.assertEqual("skill-release-review", cfg["target"])
-        self.assertEqual(5, len(cfg["cases"]))
+        self.assertEqual(6, len(cfg["cases"]))
 
     def test_only_separately_campaigned_skill_behavior_is_excluded_from_r16_pin(self) -> None:
         allowed = {"skills/meta/skill-release-review/SKILL.md"}

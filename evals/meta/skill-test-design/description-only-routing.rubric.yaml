@@ -1,0 +1,17 @@
+schema_version: "1.0"
+id: testdesign-description-only-routing
+target: skill-test-design
+mode: explicit
+source_legacy: evals/meta/skill-test-design/description-only-routing.input.md
+execution_payload_must_not_include:
+  - evaluator-only expected assertions
+  - pass/fail criteria
+  - rubric contents
+criteria_text: |
+  Assess whether test design stays limited to the changed routing contract and includes a realistic competitor.
+assertions:
+  manual:
+    - include a positive interview-preparation routing case
+    - include a realistic negative or competing executive-role evaluation case
+    - do not add procedure or response-format tests because they did not change
+    - avoid a trivial unrelated negative prompt

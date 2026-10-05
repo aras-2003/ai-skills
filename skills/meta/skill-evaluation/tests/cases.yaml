@@ -59,6 +59,29 @@ cases:
         - not equate explanation with successful tool execution
         - state the smallest prerequisite to rerun
 
+  - id: eval-queued-not-run
+    case: queued-job-is-not-executed
+    input: "The required Actions job is still queued, has no runner and no steps. The candidate is expected to pass. What is the evaluation status?"
+    expected:
+      should_trigger: true
+      must:
+        - mark the case NOT_RUN because execution has not begun
+        - keep the overall evaluation from PASS while required evidence is pending
+      must_not:
+        - infer a pass from the expected behavior or queue status
+
+  - id: eval-live-browser-evidence
+    case: live-check-not-observed
+    input: "A required assertion says to verify a listing is live in a browser. The browser was unavailable, and the model only explained how it would check."
+    expected:
+      should_trigger: true
+      must:
+        - mark the assertion BLOCKED or NOT TESTABLE
+        - require a trace, URL, check time and observed status for a later PASS
+        - distinguish failure to execute from an executed behavior failure
+      must_not:
+        - mark the live-status criterion PASS based on the explanation
+
   - id: eval-diagnostic-hypothesis
     case: uncertain-root-cause
     input: "A required output field is missing once, but the prompt and tool trace are incomplete."

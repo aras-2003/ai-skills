@@ -1,0 +1,24 @@
+cases:
+  - id: routing-only-test-depth
+    case: description-only-routing-change
+    input: "A skill description changed; its procedure and output contract did not."
+    expected:
+      should_trigger: true
+      must:
+        - "Run positive, realistic near-miss, and competing-skill routing cases."
+        - "Do not add output-format tests unless the contract changed."
+  - id: queued-runtime-is-not-pass
+    case: queued-runtime-evidence
+    input: "A runtime job is queued and has no execution steps."
+    expected:
+      should_trigger: true
+      must:
+        - "Record NOT_RUN; do not count it as a passing test."
+        - "Keep candidate maturity below production until required runtime evidence exists."
+  - id: unrelated-document-edit
+    case: docs-only-edit
+    input: "Fix a typo in a skill's title without changing its meaning."
+    expected:
+      should_trigger: false
+      must_not:
+        - "Do not require the full skill-development workflow for a title typo."

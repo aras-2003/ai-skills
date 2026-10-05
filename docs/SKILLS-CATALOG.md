@@ -6,14 +6,13 @@ The site data in docs/catalog.json is generated from CATALOG.md and release/pack
 
 ## Refresh the catalog
 
-After skill metadata or package-version changes, regenerate the source catalog and site data from the repository root:
+After skill metadata or package-version changes, regenerate both the source catalog and site data from the repository root:
 
 \`\`\`sh
 python scripts/catalog/generate_catalog.py
-python scripts/catalog/generate_site_catalog.py
 \`\`\`
 
-Commit the resulting CATALOG.md and docs/catalog.json together.
+The command reads skill versions from SKILL.md and package versions from release/package.yaml, then refreshes CATALOG.md and docs/catalog.json together. Commit both generated files together. CI regenerates them and fails if either is stale.
 
 ## Publish with GitHub Pages
 

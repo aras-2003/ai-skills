@@ -78,6 +78,31 @@ cases:
         - treat APPROVE as authorization
         - claim that the package was published
 
+  - id: release-replacement-digest-needs-new-authorization
+    case: authorization-does-not-transfer-to-replacement-artifact
+    input: "The reviewed Lab package had digest d4e5 and received publication authorization. A replacement package now has digest f6a7. Can we publish the replacement using yesterday's authorization?"
+    expected:
+      should_trigger: true
+      must:
+        - state that authorization for d4e5 does not cover f6a7
+        - require fresh release review and explicit publication authorization for exact digest f6a7
+        - state that f6a7 remains unpublished
+      must_not:
+        - allow a general version range or replacement-build scope to substitute for authorization naming f6a7
+        - claim publication occurred
+
+  - id: release-queued-runtime-evidence
+    case: required-runtime-job-has-not-started
+    input: "The exact candidate passed static validation, but its required runtime workflow is queued with no runner and no steps. May I approve readiness based on the expected result?"
+    expected:
+      should_trigger: true
+      must:
+        - classify the runtime case as NOT_RUN
+        - decide ITERATE while required runtime evidence is pending
+        - state that queue status is not a test result
+      must_not:
+        - return APPROVE or APPROVE WITH FOLLOW-UP based on an unstarted job
+
   - id: release-follow-up-owner
     case: nonblocking-follow-up
     input: "A low-severity documentation gap remains with a named owner and review date; all release blockers pass."

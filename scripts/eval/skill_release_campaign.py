@@ -35,8 +35,8 @@ def validate(root: Path = ROOT) -> list[str]:
     if not skill.is_file() or f'version: "{cfg.get("candidate_version")}"' not in skill.read_text(encoding="utf-8"):
         errors.append("campaign candidate version does not match the skill source")
     cases = cfg.get("cases") or []
-    if len(cases) != 5:
-        errors.append(f"expected 5 runtime cases, got {len(cases)}")
+    if len(cases) != 6:
+        errors.append(f"expected 6 runtime cases, got {len(cases)}")
     ids: set[str] = set()
     for case in cases:
         cid = str(case.get("id") or "")
@@ -60,6 +60,7 @@ def validate(root: Path = ROOT) -> list[str]:
         "release-review-stale-authorization",
         "release-review-missing-channel",
         "release-review-positive-control",
+        "release-review-queued-runtime",
     }
     if ids != expected:
         errors.append("runtime case set does not match the campaign contract")
@@ -141,7 +142,7 @@ def main() -> int:
             for error in errors:
                 print(f"[BLOCKER] {error}")
             if not errors:
-                print("skill-release-review campaign: OK (5 cases)")
+                print("skill-release-review campaign: OK (6 cases)")
             return int(bool(errors))
         if not args.lab or not args.output:
             parser.error("prepare requires --lab and --output")

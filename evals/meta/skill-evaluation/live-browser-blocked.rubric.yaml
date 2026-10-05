@@ -1,0 +1,17 @@
+schema_version: "1.0"
+id: evaluation-live-browser-blocked
+target: skill-evaluation
+mode: explicit
+source_legacy: evals/meta/skill-evaluation/live-browser-blocked.input.md
+execution_payload_must_not_include:
+  - evaluator-only expected assertions
+  - pass/fail criteria
+  - rubric contents
+criteria_text: |
+  Assess whether evaluation separates missing browser capability from observed skill failure.
+assertions:
+  manual:
+    - mark the criterion BLOCKED or NOT TESTABLE
+    - require an observed browser/tool trace, URL, check time and status before PASS
+    - distinguish unavailable execution from an executed behavior failure
+    - do not mark live status PASS based only on model explanation
