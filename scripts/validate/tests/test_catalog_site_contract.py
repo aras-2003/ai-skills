@@ -81,6 +81,25 @@ lab:
         ):
             self.assertIn(marker, page)
 
+    def test_site_lab_receipt_matches_the_exact_packaged_lab_identity(self) -> None:
+        receipt = json.loads((ROOT / "docs/lab-release.json").read_text(encoding="utf-8"))
+        manifest = json.loads((ROOT / "plugins/arek-ai-skills-lab/release-manifest.json").read_text(encoding="utf-8"))
+        for field in ("channel", "version", "release_id", "source_revision", "payload_content_sha256"):
+            self.assertEqual(manifest[field], receipt[field], field)
+        self.assertEqual("lab", receipt["channel"])
+
+    def test_lab_packager_refreshes_the_public_release_receipt(self) -> None:
+        workflow = (ROOT / ".github/workflows/package-main-lab-plugin.yml").read_text(encoding="utf-8")
+        self.assertIn("cp plugins/arek-ai-skills-lab/release-manifest.json docs/lab-release.json", workflow)
+        self.assertIn("git add plugins/arek-ai-skills-lab docs/lab-release.json", workflow)
+
+    def test_page_distinguishes_catalog_revision_from_lab_build_revision(self) -> None:
+        page = (ROOT / "docs/index.html").read_text(encoding="utf-8")
+        self.assertIn('id="source-revision"', page)
+        self.assertIn('id="lab-source-revision"', page)
+        self.assertIn('id="lab-release-link"', page)
+        self.assertIn('fetch("./lab-release.json")', page)
+
     def test_process_data_has_domain_scoped_flows(self) -> None:
         catalog = json.loads((ROOT / "docs/catalog.json").read_text(encoding="utf-8"))
         processes = json.loads((ROOT / "docs/processes.json").read_text(encoding="utf-8"))

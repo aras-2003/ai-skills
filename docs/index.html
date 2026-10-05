@@ -51,7 +51,7 @@
         <img src="./assets/capability-map.svg" alt="Mapa kompetencji łącząca obszary strategii, inwestowania, e-commerce, organizacji i kariery wokół wspólnego punktu decyzyjnego." width="1440" height="960">
         <figcaption>Jeden katalog. Pięć obszarów pracy. Workflow dobrane do decyzji, którą chcesz podjąć.</figcaption>
       </figure>
-      <div class="source-version" aria-label="Wersje źródłowe katalogu"><span>Wersje z repozytorium</span><strong id="source-versions" aria-live="polite">Ładowanie…</strong><span>commit <a id="source-revision" target="_blank" rel="noopener noreferrer">—</a></span></div>
+      <div class="source-version" aria-label="Wersje kanałów i źródła"><span>Wersje kanałów</span><strong id="source-versions" aria-live="polite">Ładowanie…</strong><span>Katalog <a id="source-revision" target="_blank" rel="noopener noreferrer">—</a></span><span id="lab-provenance">Lab source <a id="lab-source-revision" target="_blank" rel="noopener noreferrer">ładowanie…</a> · <a id="lab-release-link" target="_blank" rel="noopener noreferrer">manifest</a></span></div>
       <nav class="view-switch" aria-label="Widok katalogu"><button type="button" data-view="areas" aria-pressed="true">Obszary pracy</button><button type="button" data-view="paths" aria-pressed="false">Ścieżki funkcjonalne</button><button type="button" data-view="catalog" aria-pressed="false">Wszystkie skills</button></nav>
       <section id="areas-view" aria-labelledby="areas-title">
         <div class="section-head"><div><h2 id="areas-title">Obszary pracy</h2><p>Najpierw wybierz domenę. Liczniki pokazują dojrzałość skills; flow prowadzą przez powiązane etapy.</p></div></div>
@@ -146,12 +146,18 @@
       state.metadata=data.metadata||{};
       const packages=state.metadata.packages||{};
       document.querySelector("#source-versions").textContent="Production "+(packages.production?.version||"—")+" · Lab "+(packages.lab?.version||"—");
-      const revision=(state.metadata.source_revision||"unknown").slice(0,12);
-      const revisionLink=document.querySelector("#source-revision");revisionLink.textContent=revision;revisionLink.href=revision==="unknown"?"https://github.com/aras-2003/ai-skills/commits/main":"https://github.com/aras-2003/ai-skills/commit/"+encodeURIComponent(revision);
+      const fullRevision=state.metadata.source_revision||"unknown";
+      const revisionLink=document.querySelector("#source-revision");revisionLink.textContent=fullRevision.slice(0,12);revisionLink.href=fullRevision==="unknown"?"https://github.com/aras-2003/ai-skills/commits/main":"https://github.com/aras-2003/ai-skills/commit/"+encodeURIComponent(fullRevision);
       document.querySelector("#total-count").textContent=state.skills.length;
       document.querySelector("#domain-count").textContent=new Set(state.skills.map(s=>s.domain)).size;
       renderFilters();renderCards();renderAreas();renderProcesses();
     }).catch(()=>{cards.setAttribute("aria-busy","false");document.querySelector("#area-cards").setAttribute("aria-busy","false");document.querySelector("#area-cards").innerHTML='<div class="load-error"><strong>Katalog jest chwilowo niedostępny</strong>Odśwież stronę za chwilę.</div>';cards.innerHTML='<div class="load-error"><strong>Katalog jest chwilowo niedostępny</strong>Odśwież stronę za chwilę.</div>'});
+
+    fetch("./lab-release.json").then(response=>{if(!response.ok)throw new Error("Lab release receipt unavailable");return response.json()}).then(release=>{
+      if(release.channel!=="lab"||!/^\d+\.\d+\.\d+$/.test(release.version||"")||!/^[0-9a-f]{40}$/i.test(release.source_revision||"")||!/^[0-9a-f]{64}$/i.test(release.payload_content_sha256||"")||typeof release.release_id!=="string")throw new Error("invalid Lab release receipt");
+      const link=document.querySelector("#lab-source-revision");link.textContent=release.source_revision.slice(0,12);link.href="https://github.com/aras-2003/ai-skills/commit/"+encodeURIComponent(release.source_revision);link.title="SHA-256: "+release.payload_content_sha256;
+      const manifest=document.querySelector("#lab-release-link");manifest.href="./lab-release.json";manifest.title="Release "+release.release_id+" · payload SHA-256: "+release.payload_content_sha256;
+    }).catch(()=>{document.querySelector("#lab-provenance").textContent="Lab source: manifest unavailable"});
 
     const pathState={processes:[],domain:"all",query:""};
     const pathwaysView=document.querySelector("#pathways-view"), processList=document.querySelector("#processes"),pathFilters=document.querySelector("#pathway-filters");
