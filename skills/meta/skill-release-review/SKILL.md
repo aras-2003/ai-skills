@@ -4,7 +4,7 @@ description: >
   Make an evidence-gated production-readiness decision for an Agent Skill after validation and evaluation are complete. Use before promotion or publication, including when reviewing a changed production skill.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.2.0"
+  version: "0.2.1"
   maturity: draft
   risk: medium
   last_reviewed: 2026-10-05
@@ -27,9 +27,19 @@ Require:
 
 If evidence is missing, stale, belongs to another revision, or cannot be reproduced, record the gap and do not infer readiness. A local pass does not prove that the packaged artifact contains that revision.
 
+### Artifact identity hard stop
+
+For package releases, verify the complete identity chain:
+
+`source revision -> build -> package -> manifest`
+
+The manifest digest must identify the exact reviewed package, and the package must be demonstrably built from the reviewed source revision. Treat a missing required identity field as unverified, not as a match.
+
+Any mismatch or unverifiable required link is a blocker: decide `ITERATE` and withhold promotion. Passing tests, a prior `APPROVE` recommendation, or follow-up acceptance cannot override this gate. Require a rebuild from the reviewed source, a regenerated manifest, package-integrity verification and a fresh release review. If the artifact changes after authorization, obtain new authorization for that exact artifact. Never report a draft or recommendation as a completed publication.
+
 ## Review procedure
 
-1. **Bind the candidate.** Record skill name, metadata version, source commit, package/channel, and the artifact or manifest digest when available. Check that all evidence targets this exact content.
+1. **Bind the candidate.** Record skill name, metadata version, source commit, package/channel, and the artifact or manifest digest when available. Check that all evidence targets this exact content. For package promotion, verify the full source → build → package → manifest chain before assessing any other release evidence.
 2. **Check scope and value.** Confirm a real use case, stable boundary, distinct role versus neighboring skills, and acceptable maintenance cost. Prefer a workflow, reference, project instruction or script when that better fits the need.
 3. **Review quality evidence.** Inspect validation, positive/negative routing, behavioral, edge/failure and regression cases. Verify that failures are resolved or explicitly dispositioned with an authorized owner; averages cannot erase a severe failure.
 4. **Review safety and operations.** Check claims/evidence rules, privacy and security, tool permissions, external actions and approval boundaries, failure/rollback path, dependencies, observability and support ownership as relevant.
@@ -40,9 +50,9 @@ If evidence is missing, stale, belongs to another revision, or cannot be reprodu
 
 ## Decision criteria
 
-- **APPROVE** — all mandatory evidence is current and bound to the candidate; no unresolved blocking/high issue; behavior adds value; packaging, channel and ownership are ready.
+- **APPROVE** — all mandatory evidence is current and bound to the candidate; the source → build → package → manifest chain matches the exact target artifact; no unresolved blocking/high issue; behavior adds value; packaging, channel and ownership are ready.
 - **APPROVE WITH FOLLOW-UP** — no blocker/high issue; only bounded low/medium follow-ups remain, each with owner, due/trigger and accepted risk.
-- **ITERATE** — fixable required evidence, validation, test, packaging or readiness gaps remain.
+- **ITERATE** — fixable required evidence, validation, test, packaging or readiness gaps remain. Stale evidence, a mismatch or an unverifiable required link in the artifact identity chain always blocks promotion.
 - **REJECT** — unsafe/surprising behavior, severe unresolved regression, no demonstrated value, unstable scope, or a better non-skill solution is established.
 
 A missing fact is a blocker only when it is required by the declared release policy; otherwise record it as a limitation. Never relabel missing evidence as a pass.
@@ -50,6 +60,8 @@ A missing fact is a blocker only when it is required by the declared release pol
 ## Promotion checklist
 
 - [ ] Candidate revision, skill version and destination channel match the reviewed artifacts
+- [ ] Source → build → package → manifest chain matches; manifest digest identifies the exact reviewed package
+- [ ] Final package integrity is verified after build
 - [ ] Scope, distinct value and owner are current
 - [ ] Validation and appropriate routing/behavior/regression evidence pass
 - [ ] No unresolved blocker/high issue; risk acceptance is explicit and authorized
