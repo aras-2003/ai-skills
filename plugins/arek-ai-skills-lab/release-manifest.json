@@ -472,9 +472,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "639f85c61f823eca88075750a10ab8ab3928b34df34cb97a093840e59ff313ac",
-  "release_id": "0.31.0+3c7cf199c9df",
+  "payload_content_sha256": "45c40470818f5c192f1d5d9f1d59b379ba4934c02794c7c6518a36a327655591",
+  "release_id": "0.31.0+27454ea97039",
   "schema_version": "1.0",
-  "source_revision": "3c7cf199c9df88c3ec0acd3cc1d954ae620cb39a",
+  "source_revision": "27454ea970396f5cc58329dc9e459d097e98373a",
   "version": "0.31.0"
 }
