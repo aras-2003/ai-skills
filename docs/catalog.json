@@ -7,10 +7,10 @@
       },
       "lab": {
         "name": "arek-ai-skills-lab",
-        "version": "0.31.0"
+        "version": "0.32.0"
       }
     },
-    "source_revision": "bfc6dedc0e55"
+    "source_revision": "89db15ef94cf"
   },
   "skills": [
     {
