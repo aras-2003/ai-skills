@@ -12,7 +12,7 @@ This review does **not** mass-promote or mass-downgrade components. It distingui
 
 After evaluator-rubric isolation changes, historical narrative PASS/PASS++ summaries are not treated as exact-version unassisted receipts. Where no matching receipt exists, `current_runtime_receipt: pending` is explicit.
 
-Existing production maturity may be retained temporarily for review rather than silently re-certified. Each pending record must identify the exact component/version, evidence gap, limitation, owner, explicit exception scope and expiry. This R7 personal-beta disposition applies only to components already declared production; it does not authorize a new promotion, changed version, expanded scope or wider audience. No exception can cover a known unresolved high-severity failure.
+Existing production maturity may be retained temporarily for review rather than silently re-certified. Each pending record must identify the exact component/version, evidence gap, limitation, owner and expiry. The component/version fields in that record define the exception's scope. This R7 personal-beta disposition applies only to components already declared production; it does not authorize a new promotion, changed version, expanded scope or wider audience. No exception can cover a known unresolved high-severity failure.
 
 ## Promotion/readiness rule
 
