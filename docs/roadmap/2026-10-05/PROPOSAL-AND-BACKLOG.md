@@ -1626,3 +1626,14 @@ Explore automated improvement only after real failure evidence is sufficient. Do
 ### Explicit non-change
 
 Do not introduce a rule that every production skill must ship scripts/references/assets. The existing principle remains: add deterministic code, references and assets when the task requires them. A reusable reasoning procedure can still be a valid skill when prose is the correct implementation.
+
+
+## Decyzja wykonawcza — przeglądy domen po zamknięciu jakości, 6 października 2026
+
+Przyjęta zasada: **nie degradujemy maturity**. Brak aktualnego runtime receipt pozostaje jawną luką dowodową, ale sam w sobie nie zmienia zadeklarowanego maturity istniejącego komponentu. Nie przedłużamy też hurtowo wyjątków ani nie deklarujemy PASS bez obserwacji.
+
+Najpierw zamykamy bieżące procesy/kampanie jakościowe z jawnie zapisanym wynikiem i dowodami. Dopiero potem uruchamiamy przegląd jednej domeny naraz (WIP 1). Pierwszy zakres obejmuje istniejące domeny Meta, Career, Commerce, Investing i OAF; kolejność wybieramy po zamknięciu jakości na podstawie rzeczywistego użycia, ryzyka i zależności. Puste/planned domain directories nie są audytowane jak gotowe produkty.
+
+Każdy domenowy review wiąże dokładne source/runtime versions; sprawdza odpowiedzialność i sąsiednie routingi, zależności, testy/evidence, security/capabilities, prywatność i nieufne wejścia oraz zgodność kanałów. Wynikiem dla każdego komponentu jest jedna z decyzji: retain, adopt, adapt, update, defer albo no-change, wraz z uzasadnieniem, minimalnym zakresem, testami, zależnościami i kryteriami akceptacji. Sam review nie wdraża zmian, nie zmienia maturity ani nie autoryzuje publikacji; każda aktualizacja przechodzi istniejący lifecycle.
+
+Backlog: `ENG-19` ustala gate/protokół, `DOM-01`–`DOM-05` prowadzą domeny, `ENG-20` utwardza supply chain/CI/publikację, a `ENG-21` porządkuje minimalne governance publicznego repo. `ENG-15` i `ENG-17` zmieniono tak, by rozbudowywały istniejący skaner i katalog, zamiast tworzyć duplikaty.
