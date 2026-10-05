@@ -1261,3 +1261,331 @@ Typ: integration/control. Status: PROPOSED. Wielkość: M. Zależności: ENG-09,
 
 
 Lokalnie odczytano także manifesty Lab 0.29.0 oraz audit/automation/README, runner state i backlogi AIS/RT z 30.09–02.10. Są historycznym materiałem porównawczym. Nie wykonano nowej kampanii runtime, nie potwierdzano aktualnych GitHub branch protections i nie zakładano, że istniejący artykułowy plugin został zweryfikowany. Backlog powstał przez analizę źródeł i dostępnego kontekstu, bez modyfikacji repozytorium, synced sources, skills ani instalacji.
+
+
+## Decyzja rozszerzająca — Strategy, 5 października 2026
+
+Po pierwotnej analizie przyjęto osobną domenę **Strategy**, pogłębioną analizę konkurencji i osobny workflow **strategy-design**, w tym strategię marketingową. Dodano **17 zadań STR-01…STR-17**; backlog ma teraz **72 zadania**. Pierwotne 55 wpisów i datowana analiza pozostają historycznym punktem wyjścia; statusy/owners/acceptance utrzymujemy w BACKLOG.json.
+
+### Zakres i granice domeny
+
+Strategy wybiera kierunek, where-to-play/how-to-win i sposób przechwycenia wartości. OAF projektuje organizację umożliwiającą wykonanie; Commerce waliduje konkretną opportunity; Investing wykonuje własne underwriting/valuation/portfolio gates; Career/Learning dopasowują wnioski do osobistego kontekstu. Strategy może działać samodzielnie i nie jest obowiązkowym etapem innych flow.
+
+Docelowe źródło: skills/strategy. Rozliczyć historyczny strategy-ea/README: reuse zaplanowanego strategy-challenge, link do wdrożonych OAF zamiast duplikatów. Nie przenosić działających skills dla samej kosmetyki katalogu.
+
+### Dwa odrębne workflow
+
+- **strategic-analysis:** question/scope → selektywne environment/industry/deep competition/position → evidence synthesis → uncertainties → strategic evidence pack i next gate. Narrow request kieruje do najwęższego specialista; current supplied pack pozwala pominąć research.
+- **strategy-design:** objectives/constraints + evidence gate → diagnosis → odmienne strategic options → conditional scenarios + challenge → choices/value proposition/advantage/sacrifices → capability/resource implications → measures, validation plan i review triggers. Nie kończy się na SWOT albo liście projektów. Materiał może być proposed/provisional; bez krytycznych danych nie deklarujemy ukończonej zatwierdzonej strategii.
+- **Marketing branch:** customer/demand evidence → segmentation/targeting/positioning → value proposition/brand → channel roles/acquisition/retention mix → known budget/resources → measures and staged experiments. To strategia funkcjonalna zgodna z business choices; content calendar, creative i campaign execution są downstream. Reuse Commerce specialists tylko dla zgodnego scope, także obsługa services/B2B bez wymuszania eCommerce economics.
+
+### Pogłębiona analiza konkurencji
+
+Proponowany **competitive-intelligence-review** obejmuje strategic groups, segmenty, business/revenue models, pozycjonowanie, capabilities/resources, distribution, defensibility, observed moves i hipotezy reakcji. Oddziela fakty od interpretacji intencji. Reuse aktualnego evidence pack z Commerce competition-landscape-review; nie wykonuje tego samego researchu drugi raz. Porter analizuje strukturę branży; deep competition analizuje konkretnych graczy i ich strategie — to różne zakresy.
+
+### Skills i kolejność przyrostów
+
+1. STR-01 boundaries; STR-02 environment, STR-03 industry, STR-04 deep competition, STR-05 position; STR-06 analysis oraz zaplanowany STR-09 challenge.
+2. STR-07 options i STR-10 design, STR-11 marketing specialist. STR-08 scenarios warunkowo według ryzyka/niepewności; optional dependency z explicit on_missing, nie ukryty obowiązkowy etap.
+3. STR-12…15 profiles, STR-16 handoffs i STR-17 pilots/evals. Profile projektować razem z kontraktami analitycznymi, a nie jako dekorację po ukończeniu tekstu.
+
+To plan staged implementation, nie zlecenie stworzenia wszystkich komponentów naraz. WIP istniejącej roadmap zachowany; wąskie cases nie uruchamiają pełnego pipeline.
+
+### Kontrakty prezentacji poszczególnych części
+
+| Część | Zalecana prezentacja | Integralność i interpretacja |
+|---|---|---|
+| PESTEL | Executive implications + material-factor matrix/cards; timeline gdy horyzont zmienia decyzję | Factor → source/date → mechanism → impact/horizon → uncertainty → implication; bez wymuszonego 0–5 score |
+| 5 sił Portera | Industry boundary + pięć grounded pressure assessments; optional force diagram i adjacent evidence | Force → economic mechanism → evidence → value-capture implication; bez średniej/radar chart z invented scores |
+| SWOT/TOWS | Compact SWOT + wybrane powiązania findings do strategic options | Internal S/W, external O/T; source finding IDs i inherited confidence; nie wszystkie combinations obowiązkowo |
+| Deep competition | Strategic-group overview + comparable evidence matrix + material competitor profiles | Perceptual map tylko przy defensible axes/data; brak fikcyjnych customer perceptions i zamiarów |
+| Strategy design | Decision headline → choices/option comparison → rationale/trade-offs → capability/resources → staged roadmap/measures | Traceability finding → proposed/rejected option → choice; nie myli task list ze strategią |
+| Marketing strategy | STP/value proposition → brand/channel roles → assumptions/budget/measurement → experiments | Budget/CAC/ROI wyłącznie known inputs lub labelled scenarios; vanity metrics oddzielone od outcomes |
+
+**Nie tworzymy drugiego report engine.** report-composer owns reading flow, profiles i provenance; visual-output-design owns semantic visual encoding i rzeczywisty renderer. Analiza jest upstream: renderer nie może dopisać facts, scores, weights ani causal relationships. Jedna coherent report response, evidence i interpretacja przy danej sekcji; chat default, external deck/PDF/editable file tylko na żądanie. Wąskie zadanie ma wąski profile; czytelność mobile, bez znaczeń opartych wyłącznie na kolorze. Actual renderer + truthful fallback, bez phantom visuals i bez deklaracji client-display PASS. Existing required visual-floor contracts zachowują uczciwy blocked status, gdy brak qualifying renderer.
+
+### Kryteria pilotów
+
+Dwa pionowe przypadki: eCommerce category → marketing strategy oraz organisation/service-business → strategy design → właściwy OAF handoff. Weryfikować niezależnie routing, factual evidence, feasibility/choices, framework selection i section-level presentation. Dodatkowe negatives: narrow PESTEL, known-product economics, execution of existing strategy, one-security research. Testować conflicting/stale data, supplied pack reuse, missing internal evidence i unavailable renderer. Nie utożsamiać atrakcyjnej macierzy z poprawnym wnioskiem; NOT_RUN pozostaje NOT_RUN.
+
+### Nowe zadania wykonawcze
+
+#### STR-01 · P1 · Zdefiniować osobną domenę Strategy i rozliczyć strategy-ea
+
+Typ: domain/specification. Status: PROPOSED. Wielkość: S. Zależności: ENG-01, ENG-06.
+
+**Dlaczego:** Wybór kierunku i sposobu konkurowania ma inny kontrakt niż OAF wykonania, Commerce i Investing.
+
+**Zakres:** Docelowe skills/strategy. Zakres: otoczenie, struktura branży, konkurencja, pozycja, wybory i design. Zmapować historyczny strategy-ea: reuse strategy-challenge; wskazać istniejące OAF i PRO bez migracji działających skills.
+
+**Ukończone, gdy:**
+
+- Jawne trigger/non-trigger PL/EN
+- Strategy nie jest obowiązkowym etapem każdej domeny
+- Historyczne nazwy nie prowadzą do duplikowania implemented OAF
+- Profil i bieżące dane organizacji pozostają w project context
+
+#### STR-02 · P1 · Zbudować strategic-environment-scan z PESTEL
+
+Typ: new skill. Status: PROPOSED. Wielkość: M. Zależności: STR-01.
+
+**Dlaczego:** Potrzebna jest analiza materialnych zmian, a nie lista ogólnych trendów.
+
+**Zakres:** Zakres, geografia i horyzont; PESTEL tylko dla czynników zmieniających decyzję. Factor → evidence → mechanism → exposed entities → impact/horizon → implication. Aktualność i sprzeczności jawne.
+
+**Ukończone, gdy:**
+
+- Źródło/data przy decydujących claims
+- Rozróżnienie faktu, interpretacji, scenariusza i unknown
+- Brak wymuszonego wypełniania wszystkich sześciu kategorii
+- Stop gdy dalszy research nie zmienia opcji lub trzeba przetestować assumption
+
+#### STR-03 · P1 · Zbudować industry-structure-review z 5 siłami Portera
+
+Typ: new skill. Status: PROPOSED. Wielkość: M. Zależności: STR-01.
+
+**Dlaczego:** Atrakcyjny popyt nie oznacza możliwości utrzymania marży lub przechwycenia wartości.
+
+**Zakres:** Najpierw granice branży, buyer, geografia i business model. Następnie rivalry, new entrants, substitutes, buyer/supplier power; causal economic mechanisms i role platforms/complements tam gdzie materialne. Porter nie zastępuje company-level competitive review.
+
+**Ukończone, gdy:**
+
+- Każda ocena force ma uzasadnienie i evidence
+- Potencjalni entrants i substitutes są odróżnieni
+- Market growth nie kompensuje strukturalnej presji na profitability
+- Nie tworzy pozornie precyzyjnego industry attractiveness score
+
+#### STR-04 · P1 · Zbudować competitive-intelligence-review: pogłębiona analiza konkurencji
+
+Typ: new skill + reuse adapter. Status: PROPOSED. Wielkość: L. Zależności: STR-01, ENG-10.
+
+**Dlaczego:** Obecny competition-landscape-review obejmuje produkt/cenę/brand/distribution/acquisition; strategiczny deep dive wymaga więcej niż ponownego wykonania tej tabeli.
+
+**Zakres:** Granice rynku i strategic groups; direct/indirect/substitutes; segmenty, value proposition, model przychodów, zasoby/capabilities, distribution, moat/imitability, ruchy i możliwe reakcje. Reuse istniejącego Commerce evidence pack, jeśli aktualny i zakres zgodny; research wyłącznie gaps. Oddzielać observed move od hypothesis of intent.
+
+**Ukończone, gdy:**
+
+- Znany scope/geografia/as-of
+- Każdy profil ma observed facts, interpretations i unknowns
+- Ceny/oferty porównywane na zgodnych wariantach i okresach
+- Brak marketingowego claim o przewadze jako niezależnego dowodu
+- Hipoteza reakcji konkurenta nie jest potwierdzonym zamiarem
+- Lekki commerce landscape nie uruchamia automatycznie deep dive
+
+#### STR-05 · P1 · Zbudować strategic-position-review: zasoby, przewagi i ograniczenia
+
+Typ: new skill. Status: PROPOSED. Wielkość: M. Zależności: STR-01.
+
+**Dlaczego:** Strategia potrzebuje odpowiedzi, czy dany podmiot ma zdolność wygrać, niezależnie od atrakcyjności branży.
+
+**Zakres:** Supplied current position/results/resources; VRIO i capability fit warunkowo. Odróżnić istniejące zdolności od aspiracji; koszt pozyskania braków, dependency, right-to-win i defensibility. Dla organizacji reuse OAF capability evidence bez ponownego projektowania organizacji.
+
+**Ukończone, gdy:**
+
+- Internal strengths/weaknesses mają evidence
+- Capability assertion nie powstaje z deklaracji marketingowej
+- VRIO nie gwarantuje sustainable advantage bez uzasadnienia
+- Bez danych wewnętrznych pozycja pozostaje provisional
+
+#### STR-06 · P1 · Zbudować strategic-analysis jako selektywny flow diagnostyczny
+
+Typ: workflow. Status: PROPOSED. Wielkość: L. Zależności: STR-02, STR-03, STR-04, STR-05.
+
+**Dlaczego:** Jeden entrypoint ma zapewnić analizę strategiczną bez obowiązkowego framework parade.
+
+**Zakres:** Question/scope → selected environment/industry/competition/position stages → synthesis → critical uncertainties → handoff. Entry: broad diagnostic, narrow framework/deep competition, supplied evidence. Wynik strategic evidence pack; opcje w analizie są hipotezami, nie zatwierdzoną strategią.
+
+**Ukończone, gdy:**
+
+- Dobiera tylko etapy zmieniające decyzję
+- Known competition request może trafić prosto do STR-04
+- Supplied aktualny pack pomija zrobiony research
+- Registry/channels i required/optional/on_missing jawne przy implementacji
+- Brak narzędzi/danych nie jest ukrywany
+- Output: ustalenia, mechanizmy, uncertainties, opcje do design/test i next gate
+
+#### STR-07 · P1 · Zbudować strategic-options-design: pogłębiony projekt opcji
+
+Typ: new skill. Status: PROPOSED. Wielkość: L. Zależności: STR-05, STR-06.
+
+**Dlaczego:** Pogłębiony design wymaga realnych wyborów i konsekwencji; lista inicjatyw nie jest strategią.
+
+**Zakres:** Z celów i accepted/provisional evidence pack wypracować 2–4 odmiennych opcji: where-to-play/how-to-win, value proposition, advantage, required capabilities/resources, what-not-to-do i trade-offs. Include keep/defer/no-go gdy viable; wybór wymaga zasobów/ograniczeń lub oznaczonych scenariuszy.
+
+**Ukończone, gdy:**
+
+- Opcje nie są kosmetycznymi wariantami tej samej odpowiedzi
+- Każda ma causal rationale, sacrifices, feasibility i evidence links
+- Nie wymyśla budżetu/zdolności/mandatu
+- Wskazuje strongest viable alternative i co zmieni decyzję
+- Output odróżnia rekomendację, hypothesis i user-approved choice
+
+#### STR-08 · P2 · Zbudować strategic-scenario-review i signposts
+
+Typ: new skill. Status: PROPOSED. Wielkość: M. Zależności: STR-07.
+
+**Dlaczego:** Deep strategy design powinien sprawdzać odporność opcji na niepewność, nie udawać jednej prognozy.
+
+**Zakres:** Najważniejsze niezależne uncertainties → kilka spójnych scenariuszy → option robustness → no-regret moves, contingent bets, reversible steps → measurable signposts. Nie wymuszać macierzy 2x2 i prawdopodobieństw.
+
+**Ukończone, gdy:**
+
+- Scenariusze odróżnione od prognoz/faktów
+- Assumptions i causal relationships widoczne
+- No arbitrary probability ani score
+- Każdy material signpost ma obserwowalny warunek i implication
+- Dla małej decyzji wystarcza compact sensitivity
+
+#### STR-09 · P1 · Zrealizować istniejący plan strategy-challenge
+
+Typ: reuse planned skill. Status: PROPOSED. Wielkość: M. Zależności: STR-01, ENG-03.
+
+**Dlaczego:** Historyczny strategy-ea już planuje tę metodę; potrzebna jest niezależna kontrola logiki i alternatives.
+
+**Zakres:** Pre-mortem, weakest assumption, missing alternatives, competitor response, evidence contradiction, falsification; kontrola before design approval. Brak własnego pełnego research engine, brak generic critic do każdej odpowiedzi.
+
+**Ukończone, gdy:**
+
+- Challenge wskazuje najmniejszy test/poprawkę
+- Nie zamienia interpretacji w potwierdzone fakty
+- Nie odrzuca strategii dla stylistycznego upodobania
+- Znany severe feasibility/evidence problem widoczny, nie ukryty w average
+
+#### STR-10 · P1 · Zbudować strategy-design: od diagnozy do kompletnej strategii
+
+Typ: workflow. Status: PROPOSED. Wielkość: L. Zależności: STR-06, STR-07, STR-09.
+
+**Dlaczego:** Osobny flow design ma inną odpowiedzialność i success criteria niż analiza.
+
+**Zakres:** Goals/constraints + evidence gate → strategic diagnosis → options → conditional scenarios/challenge → recommended choices → strategic objectives → capability/resource implications → staged validation, measures and review triggers. Entry: analyse-then-design lub supplied evidence. Missing decision-critical data stops final design, while supported sections remain reviewable. Business strategy i funkcjonalne strategie jako explicit modes.
+
+**Ukończone, gdy:**
+
+- Diagnoza nie udaje wyboru kierunku
+- Strategy obejmuje choices, differentiation, sacrifices i causal logic, nie tylko task list
+- Nie powtarza aktualnej analizy bez potrzeby
+- Synthesis oddziela proposed od approved
+- Nie projektuje governance/operating model ani inwestycyjnej alokacji
+- Warunki stop/handoff i framework selection jawne
+- Optional STR-08 ma explicit on_missing
+
+#### STR-11 · P1 · Zbudować marketing-strategy-design jako specjalistę strategy-design
+
+Typ: new specialist + workflow branch. Status: PROPOSED. Wielkość: L. Zależności: STR-04, STR-07, STR-10.
+
+**Dlaczego:** Strategia marketingowa to decyzje o rynku, odbiorcy, pozycjonowaniu i wzroście; nie sam kalendarz contentu ani lista kanałów.
+
+**Zakres:** Business goals → demand/customer evidence → segmentation/targeting/positioning → value proposition/brand → acquisition/retention/channel roles → mix trade-offs → known budget/resources, constraints and measurement → staged experiments. Reuse Commerce demand/differentiation/acquisition/unit-economics gdzie fit, Writing/native tools do downstream execution. Szerszy zakres także dla services/B2B; nie zmuszać non-commerce do commerce calculator.
+
+**Ukończone, gdy:**
+
+- STP i kanały wynikają z dowodów, nie generycznych personas
+- Channel plan ma funkcję, rationale, assumptions i trade-offs
+- Budżet/CAC/ROI nie są wymyślane; arithmetic w kodzie i unknown jawne
+- Cele biznesowe odróżnione od vanity metrics
+- Brand, acquisition i retention nie mieszają poziomów strategii i taktyki
+- Obsługa B2B/services/eCommerce ma jawne assumptions
+- Brak automatycznego uruchomienia kampanii/content/publication
+
+#### STR-12 · P1 · Zaprojektować prezentację raportu PESTEL
+
+Typ: existing composer/renderer profiles. Status: PROPOSED. Wielkość: M. Zależności: STR-02.
+
+**Dlaczego:** Raport ma pomagać odczytać materialność, horyzont, dowody i implikacje poszczególnych czynników.
+
+**Zakres:** Profile w report-composer + semantic payload. Executive implications → material factors by P/E/S/T/E/L → mechanism/impact/horizon/evidence/uncertainty → options/signposts. Matrix/cards/timeline tylko gdy odpowiadają na pytanie; severity/confidence separate, no fake numeric heatmap.
+
+**Ukończone, gdy:**
+
+- Każdy factor ma traceable source i adjacent implication
+- Brak nieuzasadnionego 0–5 score
+- Framework findings oddzielone od strategy choices
+- Inline presentation czytelna desktop/mobile i bez color-only meaning
+- Evidence-based visual z units/as-of; uczciwy documented renderer/fallback
+- Nie tworzy nowego strategic-report generator
+
+#### STR-13 · P1 · Zaprojektować prezentację 5 sił Portera
+
+Typ: existing composer/renderer profiles. Status: PROPOSED. Wielkość: M. Zależności: STR-03.
+
+**Dlaczego:** Klasyczny schemat ma pokazać causal pressure na ekonomikę branży, a nie arbitralne liczby.
+
+**Zakres:** Boundary header → five-force overview → grounded pressure assessment → evidence/mechanism per force → combined implications for value capture and options. Diagram opcjonalny z adjacent evidence table; pressure ordinal tylko anchored rationale. Brak radar chart z invented scores.
+
+**Ukończone, gdy:**
+
+- Company competitive review nie miesza się z industry forces
+- Każda force ma evidence/mechanism i scope
+- Wizualny przegląd nie ukrywa niepewności
+- Combined conclusion nie jest średnią pięciu score
+- Brak renderer nie generuje phantom diagram
+
+#### STR-14 · P1 · Zaprojektować SWOT/TOWS jako syntezę i most do design
+
+Typ: reference + composer profile. Status: PROPOSED. Wielkość: M. Zależności: STR-02, STR-03, STR-04, STR-05, STR-07.
+
+**Dlaczego:** SWOT bez dowodów jest listą opinii; TOWS powinno łączyć ustalenia z konkretnymi wyborami.
+
+**Zakres:** Internal S/W z STR-05, external O/T z environment/industry/competition, stable finding IDs. Compact SWOT → wybrane TOWS links → proposed options → criteria/test. Nie generować obowiązkowo każdej kombinacji SO/ST/WO/WT. Nie wydzielać SWOT w osobny skill bez recurring independent need.
+
+**Ukończone, gdy:**
+
+- S/W i O/T nie są zamienione
+- Każda pozycja dziedziczy evidence/uncertainty
+- TOWS option ma links do wspierających findings
+- Framework nie wzmacnia confidence względem source analysis
+- Aktualna synteza nie wymaga ponownego researchu
+
+#### STR-15 · P1 · Zaprojektować prezentację deep competition i strategy design
+
+Typ: existing composer/renderer profiles. Status: PROPOSED. Wielkość: L. Zależności: STR-04, STR-10, STR-11, STR-12, STR-13, STR-14.
+
+**Dlaczego:** Przegląd konkurentów oraz wybranej strategii wymaga czytelnej hierarchii, porównywalnych danych i traceability.
+
+**Zakres:** Deep competition: strategic groups, evidence-backed profile/matrix, differentiation/response, missing facts. Design: choices & trade-offs, option comparison, rationale, capabilities/resources, staged roadmap and measures. Marketing: STP/positioning, channel roles, budgets with known inputs and measurement. Section: finding → evidence → visual → implication → choice; findings link do chosen/rejected options.
+
+**Ukończone, gdy:**
+
+- Perceptual map tylko przy defensible axes/data; nie udaje customer research
+- Brak incomparable pricing/score
+- Map/diagram/rendering od istniejących tools, bez drugiego dashboarda
+- Wizualizacja nie dodaje niezweryfikowanych przewag ani causal claims
+- Reader widzi dlaczego opcja została wybrana i co odrzucono
+- Narrow task nie wymaga całego report profile
+- Chat default, external editable report/deck tylko na żądanie
+
+#### STR-16 · P1 · Zdefiniować handoff Strategy do Commerce/OAF/Investing/Career/Learning
+
+Typ: integration/contracts. Status: PROPOSED. Wielkość: M. Zależności: STR-06, STR-10, CORE-04.
+
+**Dlaczego:** Wspólny wsad strategiczny nie może przejąć downstream decyzji ani zduplikować specialistów.
+
+**Zakres:** Strategic evidence pack: decision/scope/horizon, finding IDs, provenance/as-of, hypotheses, options, assumptions, unknowns, recommended gate, status. Domain adapters, no new global store. Commerce consumes opportunity thesis; OAF goals/capability implications; Investing sector mechanism/scenarios before existing theme/security/portfolio review; Career/Learning competence hypotheses after personal context.
+
+**Ukończone, gdy:**
+
+- Handoff nie przenosi nieudzielonych zgód
+- Strategy nie rekomenduje portfolio weights/security trade ani nie udaje underwriting
+- Nie duplikuje trend-theme-research
+- OAF design wymaga właściwych downstream evidence gates
+- Przekazanie tylko gdy użytkowy cel tego wymaga
+- Stary lub incompatible pack oznaczony, nie przyjęty silently
+
+#### STR-17 · P1 · Zweryfikować pełne Strategy flow i jakość prezentacji
+
+Typ: evals/pilot/catalog. Status: PROPOSED. Wielkość: L. Zależności: STR-06, STR-10, STR-11, STR-15, STR-16, ENG-04.
+
+**Dlaczego:** Framework completeness i atrakcyjny raport nie dowodzą trafnej analizy ani wykonalnego design.
+
+**Zakres:** Pilot: eCommerce category → marketing strategy, organisation/service business → strategy design → OAF handoff. Dodatkowo standalone deep competition, supplied evidence bypass, narrow PESTEL, existing-strategy execution failure, single-security research, stale/conflicting data, unavailable renderer. PL/EN natural routing, exact-version independent receipts, baseline quality/cost.
+
+**Ukończone, gdy:**
+
+- Real-use pilot i value vs baseline
+- Competitor facts nie mieszają się z intentions
+- Framework list nie zastępuje choices/feasibility
+- Każdy report section zachowuje evidence i supported visuals
+- Narrow prompt nie uruchamia pełnego pipeline
+- Marketing forecast nie daje invented ROI
+- Evals bez rubric leakage i brak runtime evidence pozostaje NOT_RUN
+- Catalog/registry/channels aktualizowane dopiero dla rzeczywistych implementations

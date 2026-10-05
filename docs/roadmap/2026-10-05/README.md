@@ -1,6 +1,6 @@
 # AI Skills expansion roadmap — 2026-10-05
 
-This directory preserves the expansion analysis and 55 proposed development tasks. It is a planning artifact, not a release or runtime-readiness declaration.
+This directory preserves the expansion analysis and 72 proposed development tasks. It is a planning artifact, not a release or runtime-readiness declaration.
 
 ## Start here
 
@@ -22,3 +22,7 @@ The proposal is a dated analytical snapshot. Its source revision and installed r
 - Preserve the original analysis when decisions change; append a dated decision note or link an architecture decision rather than silently rewriting history.
 
 Saving and merging this roadmap does not authorize execution of all proposed tasks, production promotion, purchases, external messages or publication.
+
+## Strategy addition — 2026-10-05
+
+The dated proposal now includes an additive Strategy decision and tasks STR-01 through STR-17: a separate domain, strategic-analysis, deep competitive intelligence, strategy-design, a marketing strategy specialist, PESTEL/Porter/SWOT-TOWS presentation profiles, domain handoffs and pilots. See the appended section in [the proposal](PROPOSAL-AND-BACKLOG.md). Original tasks remain unchanged; the current total is 72.
