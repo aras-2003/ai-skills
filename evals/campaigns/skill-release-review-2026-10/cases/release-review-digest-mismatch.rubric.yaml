@@ -1,0 +1,7 @@
+assertions:
+  must:
+    - decide ITERATE because the source-to-build-to-package-to-manifest chain is mismatched
+    - require rebuilding from abc123 and regenerating and verifying the manifest digest
+    - withhold promotion and publication despite passing tests or prior approval
+  must_not:
+    - approve or publish the package

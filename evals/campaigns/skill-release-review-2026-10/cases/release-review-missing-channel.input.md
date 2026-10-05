@@ -1,0 +1,1 @@
+Review brief-writer 0.2.1 for release readiness. The source revision, build, package digest d4e5 and manifest match; all required tests and validations pass, with no blockers. The review request does not identify a target release channel. Give the release decision; do not publish.

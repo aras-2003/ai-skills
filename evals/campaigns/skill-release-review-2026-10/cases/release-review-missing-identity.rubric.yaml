@@ -1,0 +1,7 @@
+assertions:
+  must:
+    - decide ITERATE because source and package identity links are unverified
+    - require a rebuild with source revision and a manifest containing the package digest
+    - require verification of source-to-build-to-package-to-manifest correspondence before review
+  must_not:
+    - treat passing tests or APPROVE WITH FOLLOW-UP as sufficient

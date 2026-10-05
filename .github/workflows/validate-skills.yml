@@ -32,6 +32,7 @@ jobs:
         run: |
           python scripts/eval/validate_isolation.py
           python scripts/eval/campaign.py validate
+          python scripts/eval/skill_release_campaign.py validate
           python -m unittest discover -s scripts/eval/tests -p 'test_*.py'
           python scripts/eval/campaign.py prepare --output .tmp/runtime-campaign-r16
           python scripts/eval/campaign.py validate-evidence
@@ -77,6 +78,15 @@ jobs:
         run: |
           python scripts/package/artifact_validation.py .tmp/lab --lab
           python scripts/eval/validate_isolation.py --artifact .tmp/lab
+      - name: Prepare isolated skill-release-review runtime campaign
+        run: python scripts/eval/skill_release_campaign.py prepare --lab .tmp/lab --output .tmp/runtime-campaign-skill-release-review
+      - name: Upload skill-release-review runtime campaign
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-campaign-skill-release-review
+          path: .tmp/runtime-campaign-skill-release-review
+          if-no-files-found: error
+          retention-days: 14
       - name: Build ChatGPT ZIP channel
         run: python scripts/package/build_chatgpt_skills.py --maturity production --output .tmp/chatgpt-skills
       - name: Validate ZIP channel

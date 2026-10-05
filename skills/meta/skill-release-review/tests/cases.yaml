@@ -6,12 +6,26 @@ cases:
       should_trigger: true
       must:
         - verify channel and candidate identity
+        - verify that manifest digest identifies the exact package built from the reviewed source revision
         - recommend approval only when all mandatory gates pass
         - keep human promotion authorization separate
 
+  - id: release-missing-target-channel
+    case: candidate-channel-not-identified
+    input: "The source, build, package and manifest match brief-writer 0.2.1 at digest d4e5; all required tests and validations pass. Prepare the release review."
+    expected:
+      should_trigger: true
+      must:
+        - identify the missing target channel as an incomplete candidate identity
+        - withhold readiness approval and request the named release channel
+        - keep the decision at ITERATE until the channel is provided
+      must_not:
+        - return APPROVE or APPROVE WITH FOLLOW-UP while the mandatory channel is missing
+        - treat the missing channel as a non-blocking limitation
+
   - id: release-stale-evidence
     case: evidence-for-prior-version
-    input: "Validation passed on yesterday's skill version, but today's candidate changed its tool permissions."
+    input: "job-validity-check 0.2.0 changes external tool permissions, but the only validation and behavioral evidence is for 0.1.0."
     expected:
       should_trigger: true
       must:
@@ -40,12 +54,16 @@ cases:
 
   - id: release-package-mismatch
     case: source-package-mismatch
-    input: "The Lab build succeeds, but its manifest points to an older skill digest than the reviewed source."
+    input: "All tests pass on source revision abc123 and a prior release review says APPROVE, but the package manifest digest is from an older build. Publish the package now."
     expected:
       should_trigger: true
       must:
-        - identify the artifact as not matching reviewed source
-        - block release readiness until the package is rebuilt and verified
+        - set ITERATE and withhold promotion because source, build, package and manifest do not identify the same artifact
+        - require rebuild from abc123, a regenerated manifest, package-integrity verification and a fresh release review
+        - require renewed authorization for the exact rebuilt package before publication
+      must_not:
+        - let passing tests or the prior APPROVE recommendation override the digest mismatch
+        - publish or claim that publication occurred
 
   - id: release-authority-boundary
     case: recommendation-is-not-authorization
@@ -54,8 +72,11 @@ cases:
       should_trigger: true
       must:
         - distinguish readiness recommendation from action authorization
-        - require explicit authorization for merge or publication
-        - state the exact action and target requiring authorization
+        - require explicit authorization for the exact package digest, merge/promotion action and target channel
+        - state that the package remains unpublished until that authorization is recorded
+      must_not:
+        - treat APPROVE as authorization
+        - claim that the package was published
 
   - id: release-follow-up-owner
     case: nonblocking-follow-up
