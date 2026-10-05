@@ -289,7 +289,7 @@
       "name": "skill-release-review",
       "domain": "meta",
       "maturity": "draft",
-      "version": "0.2.0",
+      "version": "0.2.2",
       "description": "Make an evidence-gated production-readiness decision for an Agent Skill after validation and evaluation are complete. Use before promotion or publication, including when reviewing a changed production skill.",
       "source": "skills/meta/skill-release-review/SKILL.md"
     },

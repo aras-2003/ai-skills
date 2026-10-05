@@ -54,8 +54,12 @@ lab:
         self.assertEqual(source_catalog["skills"], published["skills"])
         self.assertTrue(published["metadata"]["source_revision"])
         by_name = {skill["name"]: skill for skill in published["skills"]}
-        for name in ("skill-evaluation", "skill-release-review", "skill-test-design"):
-            self.assertEqual("0.2.0", by_name[name]["version"])
+        for name, version in (
+            ("skill-evaluation", "0.2.0"),
+            ("skill-release-review", "0.2.2"),
+            ("skill-test-design", "0.2.0"),
+        ):
+            self.assertEqual(version, by_name[name]["version"])
             self.assertEqual("draft", by_name[name]["maturity"])
 
     def test_default_page_is_area_first_and_discloses_versions(self) -> None:
