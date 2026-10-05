@@ -1,0 +1,1263 @@
+# Rozbudowa Arek AI Skills — propozycja i backlog
+
+Data: 5 października 2026. Status: propozycja do wdrożenia, nie deklaracja gotowości ani wykonany release.
+
+> Zapis do repo: 5 października 2026. Analiza odnosi się do przypiętej wyżej wersji. Przy zapisie bazą main był `007f659995945084ce18e4ca62b38c92523e414a`; README ma już poprawne liczby 54 skills i 17 workflowów. Nie traktuj historycznych ustaleń jako automatycznie otwartych defektów. Przed realizacją sprawdź aktualne źródło, AIS/RT i evidence; statusy zadań utrzymuj w BACKLOG.json.
+
+## Rekomendacja
+
+Najpierw domknąć i usprawnić istniejący system Skill Engineering, następnie sprawdzić go na dwóch użytecznych pionowych flow: zakupach i artykułach. Dopiero ich realne użycie powinno uzasadnić wspólne abstrakcje i następne domeny. Nie budować najpierw rozbudowanego frameworka do produkowania skills.
+
+Największa wartość dla Twojego stylu pracy: mniej czasu na definiowanie zadania i ręczne porządkowanie wyników; mocniejsze decyzje oparte na dowodach; realistyczne trade-offs; gotowy materiał do działania; zachowanie kontroli nad publikacją i wydatkami. To lepsza miara sukcesu niż liczba komponentów.
+
+## Co jest potwierdzone, a co jest założeniem
+
+- Aktualne źródło GitHub: `aras-2003/ai-skills`, main przypięty do **956885438f12968f958f9c733dc685e2d1b1ae18**. Drzewo zawiera **54 źródłowe SKILL.md i 17 WORKFLOW.md**; source presence nie oznacza runtime availability.
+- Zainstalowany w tej sesji **Lab 0.29.0**, źródło **8cf615235d04c13603ca7c79ab4c30ff356b200c**: **67 komponentów**, w tym 51 skills i 16 workflowów. Maturity: 40 production skills + 11 candidate skills; 15 production workflows + 1 candidate workflow. To deklaracje manifestu, nie automatyczny dowód runtime PASS.
+- Meta: `skill-specification`, `skill-authoring`, `skill-validation` są już dostępne w Lab. `skill-test-design`, `skill-evaluation`, `skill-release-review` są w aktualnym main jako **draft 0.2.0** i nie ma ich w zainstalowanym manifestie. Nie proponuję pisania ich ponownie.
+- Obecne domeny implementacji: Career, Commerce, OAF, Meta, Investing. Core, Learning, Tender i Web Design mają już plany w README. Historyczne Product Research/Ecommerce częściowo pokrywają obecne Commerce; nie są osobnym powodem do tworzenia tych samych metod.
+- Istnieją: szablon skilla i testów, registry workflowów, walidatory i mutation tests, builders dla kanałów, manifesty/provenance, repozytoryjny eval protocol, katalog i `docs/processes.json`.
+- Lokalny audit zawiera automatyczny controller/runner, kolejkę, izolację i osobny evaluator. Nie ustalono jeszcze, które elementy są już zintegrowane upstream; ENG-08 zaczyna od tej kontroli. Historyczny stan kolejki R6 nie jest bieżącym stanem całego pakietu.
+- README w snapshotcie analizy mówiło o 52 skills, a drzewo zawiera 54; opis domen implementacji pomija Investing mimo istniejących plików. Eval README w snapshotcie analizy odwoływało się do R6 przy R7 w głównym README. Dokumenty różnią się również zasadami strict release/personal-beta. To evidence na potrzebę harmonizacji, nie dowód awarii wykonania.
+- `report-composer` i `visual-output-design` już są candidates. Main ma odpowiednio 0.11.0 i 0.12.0; zainstalowany Lab 0.10.0 i 0.11.0. Propozycja używa istniejącego rozdziału kompozycja/rendering, bez drugiego report engine.
+- Masz skill artykułowy w aplikacji — informacja od Ciebie. Nazwa i kontrakt nie zostały potwierdzone w udostępnionym katalogu; WRI-01 jest zależnością, a nie sugestią wymiany tego skilla.
+- Projekty Amoura, Tender Pilot, Simple website, Houses, Malaga, Foodie Assistant, Meeting Summarizer, Career i Investing uzasadniają rozważenie tych flow. Same nazwy projektów nie dowodzą częstotliwości użycia ani ich obecnego etapu. Nie analizowano ich prywatnych plików.
+
+## Architektura, którą zachowujemy
+
+`Project/context → intent/runtime → najmniejszy właściwy skill lub workflow → istniejące narzędzia → kontrola dowodów → wynik`
+
+| Warstwa | Co tutaj należy | Przykład rozszerzenia |
+|---|---|---|
+| Project/context | Profil, cele, prywatne dane, bieżący stan | Purchase preferences, voice samples, learning log |
+| Skill | Jedna powtarzalna metoda rozumowania/kontroli | Product evidence review, editorial argument review |
+| Workflow | Gałęzie, sekwencja, zależności, gates, stop | Purchase decision, article development |
+| Script | Obliczenia, parsowanie, agregacja, walidacja | TCO, scaffolder, dependency/test selection |
+| Connector/tool | Wyszukiwanie, dane, rzeczywiste działania | Existing search, browser, Drive, scheduler |
+| Report Composer | Struktura skończonego raportu | Profil porównania zakupowego lub technical memo |
+| Visual Output Design | Kodowanie i rendering sprawdzonych danych | Macierz lub wykres, tylko gdy pomaga |
+| Eval/release | Obserwowane zachowanie i tożsamość wersji | Independent receipts, candidate review |
+
+Zasady rozszerzeń:
+
+1. **Reuse przed build.** Native narzędzie rozwiązuje wykonanie, skill dodaje tylko metodę, której brakuje. Nowa nazwa nie jest dowodem nowej odpowiedzialności.
+2. **Wąskie granice.** Consumer kupuje do własnego użytku; Commerce ocenia biznes. Software decision dotyczy systemu; OAF architecture-review dotyczy organizacji. Article critique dotyczy argumentu; evidence review wiarygodności claims.
+3. **Bez globalnego Life OS i mega-routera.** Domena `consumer` ma konkretny decision object. Codzienne zastosowania zaczynają od flow i kontekstu, zamiast worka przypadkowych skills.
+4. **Core po udowodnionym re-use.** Plan Core już istnieje. Rozbudować początkowo trzy metody, dopiero po pilotach. Nie tworzyć naraz całego zestawu ośmiu ogólnych kontrolerów. `decision-brief` można realizować profilem composer, `quality-gate` w istniejących kontrolach, `red-team-review` jako reference zanim ma niezależny recurring use case.
+5. **Progressive disclosure.** Opis skilla routuje, body zawiera metodę, reference zawiera szczegóły kategorii. Nie ładować całej biblioteki ani pełnego profilu do każdego pytania.
+6. **Obliczenia i integralność w kodzie.** Nie przenosić deterministycznej arytmetyki do instrukcji modelu.
+7. **Zależności jawne.** Rejestrować kanały i required/optional dependencies; brak capability skutkuje zawężeniem albo zatrzymaniem właściwej gałęzi. Nie udawać wywołania brakującego writera/specjalisty.
+8. **Użyteczny fallback.** Dla nowych flow optional presentation nie blokuje analizy. Gdy istniejący kontrakt wymaga konkretnego renderera, brak renderera nadal ma uczciwy status blocked; zmiana tego kontraktu wymaga odrębnego review.
+9. **Stan domenowy ma właściciela.** Investment OS store pozostaje inwestycyjny. Zakupy/artykuły na początek korzystają z private context; nowy persistence dopiero przy realnej potrzebie historii i synchronizacji.
+10. **Zgody wynikają z bieżącego zlecenia.** Przygotowanie rekomendacji/tekstu nie wykonuje zakupu ani publikacji. Dawne zgody z konkretnego audytu nie są częścią portable skilla.
+
+## System tworzenia skills: docelowy flow
+
+`Powtarzalna potrzeba → reuse-or-build → skill-specification + wstępne eval cases → skill-authoring z istniejącego template → skill-validation → skill-test-design → isolated execution + independent skill-evaluation → poprawka najmniejszego komponentu → real-use pilot → skill-release-review → autoryzowana promocja → regresje i utrzymanie`
+
+Nie każdy etap musi być osobną sesją ani ręcznym przekazaniem. Jeden controller może przygotować artefakty i uruchomić dozwolone etapy; nadal nie może podać rubryk wykonawcy ani sam zadeklarować runtime PASS. Independent evaluator ma osobny kontekst, nie tylko etykietę roli w tej samej rozmowie.
+
+Przyspieszenie bierze się z: dobrego kontraktu od początku, testów przed obserwacją wyniku, małego scaffoldera, automatycznego zbierania dowodów, wyboru dotkniętych testów, krótkich PR i re-use. Nie z pomijania kontroli ani automatycznej promocji. Nie wymaga webowej platformy, custom DB ani nowego agent frameworka.
+
+Proponowana macierz zmian: DOCS → statyczna kontrola/freshness; ROUTING → negatives i routing neighbors; BEHAVIOR → zmieniony kontrakt + affected workflows; RESOURCE → direct helper tests + dependents; NEW → cały właściwy lifecycle. Builder/registry/shared-contract change wymaga szerszych kontroli integralności. Cosmetic edits nie potrzebują pełnego model eval.
+
+Gate kończący pierwszą falę: jedna reprezentatywna zmiana existing skill przechodzi proces bez ręcznego kopiowania wejść/wyników, z prawidłowym evidence receipt i minimalnym handoff. Nowe Consumer/Writing można specyfikować równolegle; dopiero ich promocja potrzebuje właściwych gates. Nie trzeba naprawić całej biblioteki przed pierwszym pilotem.
+
+## Proponowane flow i granice
+
+### 1. Zakup produktu — najwyższy priorytet użytkowy
+
+**Wejście:** „Potrzebuję monitora do pracy, laptop z USB-C, do 2500 zł” albo „Porównaj te trzy odkurzacze”. Potrzeba i budżet/constraints; brak krytycznej informacji to jedno ukierunkowane pytanie, bez formularza do prostego porównania.
+
+**Flow:** krótki brief → 3–5 modeli → odrzucenie niespełniających must-have → `product-evidence-review` → `product-fit-comparison` → `purchase-offer-review` → rekomendacja. Dla supplied shortlist pomijamy discovery. Dla znanego modelu i pytania „gdzie kupić?” wystarczy offer review.
+
+**Output:** najlepszy wybór i dlaczego, najmocniejsza alternatywa, macierz istotnych różnic, ograniczenia, konkretne oferty z datą, co zmieni rekomendację. Możliwe wyniki: kupić, zbadać jedną niewiadomą, poczekać, zachować obecny produkt. Search kończy się, gdy istnieje opcja spełniająca constraints, a dalsze informacje nie zmieniają decyzji; braku dowodu nie maskować.
+
+**Dlaczego warto:** regularny research oszczędzający czas i realne pieniądze. **Boundary:** brak biznesowego CAC, MOQ i go-to-market. **Ryzyka:** SKU/revision mismatch, affiliate bias, stare ceny, marketing zamiast testów, pozorna precyzja score. TCO ma jednostki, horyzont i known inputs; brak danych nie daje fałszywej dokładności.
+
+### 2. Artykuł — rozszerzenie istniejącego skilla
+
+**Wejście:** temat/teza, odbiorca, kanał; opcjonalnie własny draft i source pack. Voice samples jako private context.
+
+**Flow:** brief → teza i reader value → tylko potrzebny research → argument outline → istniejący writer → `editorial-argument-review` → article claim check → poprawa. Własny tekst do redakcji zaczyna od review, nie od nowego researchu.
+
+**Output:** jeden gotowy tekst, źródła do material claims, niewielka lista unresolved facts tylko gdy blokują. Adaptacje LinkedIn/newsletter/site są późniejszą gałęzią, nie obowiązkowym content bundle.
+
+**Dlaczego warto:** wzmacnia Twój analityczny, konkretny styl; nie wymienia sprawnego writera. **Ryzyka:** płynna pustka, unsupported causal claims, fikcyjne doświadczenia, zbyt ogólny tone, publikacja prywatnych case. Jeśli istniejący skill robi już argument/evidence review, nowe specialists nie powstają — integrujemy jego kontrakt.
+
+### 3. Decyzja technologiczna / vendor
+
+**Flow:** wymagania z repo/context → buy/build/defer → `technical-option-review` → trial/evidence → TCO/operational risk → krótki ADR/memo. `structured-comparison` po jego sprawdzeniu w drugim use case. Security/legal bez danych ma gaps, nie clearance.
+
+**Dlaczego warto:** pasuje do Staff Engineer/Solution Architect i AI-enabled products. **Boundary:** nie zastępuje OAF. **Output:** wybór, strongest alternative, coupling/data ownership, koszt operacji, exit/reversibility, warunek zmiany decyzji. Nie rekomendować vendor wyłącznie na feature table.
+
+### 4. Spotkanie → decyzje i działania
+
+**Flow:** transcript/notes → `meeting-decision-extraction` → decisions/actions/open questions → opcjonalny memo lub istniejący tracker. Najpierw oddzielać „proponujemy” od „postanawiamy”.
+
+**Dlaczego warto:** masz taki kontekst i zawodowo potrzebujesz wiarygodnych ustaleń. **Boundary:** nie zakłada dostępu do nagrania, nie przypisuje zgody, nie wysyła wiadomości. Owner/deadline bez evidence pozostają unknown.
+
+### 5. AI use case → mały pilot
+
+**Flow:** problem i baseline → `ai-use-case-review` → prostsza alternatywa → dane i failure cost → eval task → pilot boundaries → ewentualny automation brief.
+
+**Dlaczego warto:** wspiera Twoje prototypy i ogranicza agent-first overengineering. **Boundary:** workflow ocenia i projektuje, native tooling implementuje. Jeśli problem jest organizacyjny, kieruje do odpowiedniego existing OAF specialist.
+
+### 6. Tender — istniejący plan, mały wycinek
+
+**Flow:** RFP → `rfp-extraction` → `eligibility-check` → `capability-evidence-match` → `go-no-go`. Po przejściu kwalifikacji dopiero rozszerzenia delivery/commercial risk i traceability.
+
+**Dlaczego warto:** pasuje do Tender Pilot. **Boundary:** nie realizować od razu całych 11 zaplanowanych metod; deterministic parsing/calculation do kodu. Kwalifikacja bez dowodu nie staje się zgodnością.
+
+### 7. Learning Session — aktualny Learning OS
+
+**Flow:** cel → minimum theory → `practice-generator` → wykonanie użytkownika → `competence-check` → najmniejszy next step. Diagnose/explain początkowo w workflow. `retention-review` tylko przy potrzebie.
+
+**Dlaczego warto:** przenosi obecny sposób uczenia do powtarzalnego działania. **Boundary:** quick question nie uruchamia lekcji; exposure nie daje mastery. Zbyt wiele pedagogicznych kontrolerów zwiększy koszt bez capability gain.
+
+### 8. Web quality — review zamiast nowego buildera
+
+**Flow:** brief/approved design + rendered page → `design-critique` → `visual-regression-review` → judgment accessibility review → najmniejsze poprawki. Reuse Figma/Sites/browser/CI.
+
+**Dlaczego warto:** Twoje web properties wymagają jakości kompozycji i realnego renderu. **Boundary:** nie drugi website builder ani własny zestaw checkerów, które już wykonuje CI.
+
+### 9. Podróże / dom / usługi / jedzenie — kolejka discovery
+
+- **Trip decision:** shortlist → aktualne koszty → `itinerary-feasibility` → plan z buffers. Jedna powtarzalna metoda logistyczna, pozostałe etapy reużywają Consumer/Core.
+- **Property shortlist:** must-have → oferty → dojazdy i known costs → shortlist → pytania na viewing i due diligence. Brak legal/technical clearance; wartość high, ale wymaga więcej danych i kontroli.
+- **Local services:** porównywalny scope ofert → koszt/termin → evidence → wybór i pytania. Reviews nie są gwarancją jakości.
+- **Meal plan:** preferencje i pantry → realistyczne posiłki → deterministic shopping list. Bez Nutrition/Health OS.
+- **Subscriptions:** known payments/usage → value overlap → keep/downgrade/cancel candidates. Nie potrzebuje Investment store.
+- **Document to action:** supplied dokument → obowiązek/termin/source location → checklist/draft. Nie wysyła automatycznie.
+
+Te pomysły mają status DISCOVERY, bo kontekst projektów nie dowodzi nawyku. Zaczynać od jednego rzeczywistego zastosowania; jeśli metoda nie powtarza się, pozostawić jako project flow/template.
+
+## Kolejność realizacji i granice WIP
+
+| Fala | Co wykonujemy | Warunek zakończenia |
+|---|---|---|
+| 0 — reconcile | ENG-01/02, WRI-01, EXI-01 | Aktualny stan i polityka; znamy writera i bieżące high blockers |
+| 1 — minimum engineering | ENG-03/04/06/08; następnie ENG-05; mały ENG-07 | Jeden pełny proces z dowodami bez ręcznego kopiowania |
+| 2 — dwa pionowe pilots | CON-01…06 i WRI-02…05; maks. dwa flow naraz | Każdy daje wartość w realnych użyciach; negatives nie psują sąsiadów |
+| 3 — reuse i utrwalenie | CORE-01…03, ENG-09…12, EXI-04 | Wspólne metody mają dowód re-use, a affected tests obniżają koszt |
+| 4 — następna potrzeba | Jedno z Technical/Meeting/AI/Tender/Learning/Web/Career | Wybór na podstawie aktualnej pracy; nie cała fala jednocześnie |
+| 5 — daily life i maintenance | Jedno LIF flow + ENG-13/14 | Regularne użycie, brak zbędnego catalog growth |
+
+WIP: jeden engineering increment i najwyżej dwa domenowe pilots. Każdy zakończyć decyzją: utrwalić, poprawić, zostawić jako template, odrzucić. Priorytety są rekomendacją: P0 = warunki wiarygodnego i wydajnego rozwoju; P1 = pierwszy zlecony przyrost użytkowy; P2 = następne dopasowane użycie; P3 = po potwierdzeniu częstotliwości. P0 nie oznacza, że wszystkie prace blokują każdą specyfikację.
+
+Szacunki S/M/L oznaczają wielkość zadania względem innych, bez wiarygodnej obietnicy dni. Runtime pilots, brakujące narzędzia i dostęp do writera mogą zmienić nakład. Owner UNASSIGNED jest do przydzielenia przy realizacji. PROPOSED/DISCOVERY nie oznacza rozpoczętej implementacji. Nowe IDs nie zastępują AIS/RT; zadania historyczne należy rozliczyć na obecnym źródle.
+
+## Definition of Done dla nowego przyrostu
+
+- Potwierdzona powtarzalna potrzeba i reuse-or-build; właściwa warstwa architektury.
+- Testowalny scope, triggers/near-misses, inputs/outputs, dependencies, stop/failure handling.
+- Static/helper checks właściwe dla zmiany; routing i observed behavior nie są utożsamiane z parsingiem YAML.
+- Evals bez leakage, powiązane z konkretną wersją/model/runtime; baseline/previous version gdy sensowny; brak danych pozostaje NOT_RUN.
+- Real-use pilot zgodny z lifecycle i brak nierozliczonego high severity; mierzone poprawki/effort.
+- Output użyteczny i proporcjonalny; brak zbędnego researchu, formularzy, score i obowiązkowych wizualizacji.
+- Catalog/registry/channel manifests zgodne ze źródłem; new personal-beta ograniczony polityką, owner i expiry.
+- Krótka reviewable zmiana i autoryzacja do promotion/publication, gdy potrzebna; bez merge/deploy w ramach samego backlogu.
+
+## Co celowo odłożyć lub odrzucić
+
+- Nowa platforma „Skill Factory” z dashboardem, bazą, kolejkami i własnym frameworkiem agentów: na razie nadmierna infrastruktura względem istniejących scripts i controller.
+- Duplikat article-writer, generic researcher, generic report generator, website builder, stock screener: najpierw reuse capabilities już dostępnych.
+- Monolityczne Life OS, globalny record-store i uniwersalny router wszystkich projektów: rozszerzają coupling i privacy scope bez udowodnionej potrzeby.
+- Wszystkie pomysły z dawnych README jednocześnie: wiele jest rozpisaną intencją lub aliasem nowego Commerce.
+- Generic critic/red-team/quality-gate jako obowiązkowy etap każdej odpowiedzi: ryzyko procesowego narzutu; konkretna kontrola tylko gdy zmienia wynik.
+- Health/legal/tax OS: bez konkretnej potrzeby i odpowiedniego evidence/scope nie są dobrym pierwszym przyrostem.
+- Autonomiczne kupowanie, publikowanie, kontaktowanie sprzedawców lub wdrażanie zmian: odrębny action scope, nie domyślna konsekwencja research flow.
+
+## Backlog wykonawczy
+
+Każdy wpis ma uzasadnienie, zakres, kryteria ukończenia, dependencies, wielkość i status. CSV służy do importu; JSON zachowuje pełny kontrakt. Sekwencja zależności jest acykliczna; nie ma obowiązku realizacji wszystkich wpisów.
+
+
+### Skill Engineering
+
+
+#### ENG-01 · P0 · Uzgodnić stan źródła, runtime i dotychczasowych backlogów
+
+Typ: documentation/control. Status: PROPOSED. Wielkość: S. Zależności: brak.
+
+Powiązania historyczne do rozliczenia: AIS-16, AIS-21.
+
+**Dlaczego:** Stare README i historyczne snapshoty zaniżają lub mylą zakres; można zlecić ponownie już wykonane prace.
+
+**Zakres:** Zestawić main, manifest Lab, katalog, AIS i RT; skorygować liczbę skills, opis Investing, R6/R7 i wersje. Wskazać rozbieżności, bez automatycznego zamykania historycznych ustaleń.
+
+**Ukończone, gdy:**
+
+- 54 źródłowe skills i 17 workflowów wynikają z przypiętego drzewa
+
+- Manifest Lab 0.29.0 jest osobnym stanem
+
+- Każde powiązanie AIS/RT ma evidence i status do potwierdzenia
+
+
+#### ENG-02 · P0 · Ujednolicić pełne release gates i personal-beta
+
+Typ: policy/control. Status: PROPOSED. Wielkość: S. Zależności: ENG-01.
+
+Powiązania historyczne do rozliczenia: AIS-21.
+
+**Dlaczego:** Aktualne dokumenty opisują jednocześnie pełną walidację i czasowe wyjątki personal-beta.
+
+**Zakres:** Zaktualizować istniejące lifecycle, skill-development i release-review; jedna polityka dla strict release i ograniczonego personal-beta. Zachować bezwzględny zakaz wyjątku dla znanego high-severity failure.
+
+**Ukończone, gdy:**
+
+- Te same warunki w dokumentach i readiness
+
+- Wyjątek ma owner, zakres, expiry i widoczne NOT_RUN
+
+- Rekomendacja gotowości nie jest autoryzacją publikacji
+
+
+#### ENG-03 · P0 · Doprowadzić skill-test-design do candidate
+
+Typ: existing skill. Status: PROPOSED. Wielkość: M. Zależności: ENG-01.
+
+**Dlaczego:** Skill istnieje w main jako draft 0.2.0; nie wymaga tworzenia od nowa.
+
+**Zakres:** Pilot na meta, zakupach i artykułach; coverage map kontrakt → obserwowalne asercje; pozytywne i konkurujące intencje PL/EN.
+
+**Ukończone, gdy:**
+
+- Testy odróżniają dobry wynik od wiarygodnego błędu
+
+- Brak testowania ukrytego toku rozumowania
+
+- Runtime evidence dla dokładnej wersji; brak dowodu pozostaje NOT_RUN
+
+
+#### ENG-04 · P0 · Doprowadzić skill-evaluation do candidate
+
+Typ: existing skill. Status: PROPOSED. Wielkość: M. Zależności: ENG-03.
+
+Powiązania historyczne do rozliczenia: AIS-05, AIS-20.
+
+**Dlaczego:** Draft 0.2.0 ma już zamrożony plan, comparator i analizę wariancji.
+
+**Zakres:** Zweryfikować na baseline bez skill i poprzedniej wersji; zachować niezależność wykonawcy i evaluatora; podać wyniki per case i severity.
+
+**Ukończone, gdy:**
+
+- Wykonawca nie widzi rubryk
+
+- Runtime/model/input/tool budget są porównywalne
+
+- FAIL i brak evidence nie zamieniają się w PASS
+
+- Udokumentowana korzyść lub decyzja ITERATE/REJECT
+
+
+#### ENG-05 · P0 · Doprowadzić skill-release-review do candidate
+
+Typ: existing skill. Status: PROPOSED. Wielkość: M. Zależności: ENG-02, ENG-04.
+
+**Dlaczego:** Końcowy review już istnieje jako draft 0.2.0; trzeba powiązać go z realną polityką.
+
+**Zakres:** Pilot decyzji dla jednego zdrowego candidate, jednego brakującego dowodu i jednego high failure. Sprawdzić tożsamość źródła, paczki i kanału.
+
+**Ukończone, gdy:**
+
+- Wynik zgodny z ENG-02
+
+- Nieaktualny dowód nie potwierdza zmienionej wersji
+
+- APPROVE nie uruchamia merge/release
+
+- Znany high failure blokuje także personal-beta
+
+
+#### ENG-06 · P0 · Usprawnić istniejący skill-development
+
+Typ: workflow. Status: PROPOSED. Wielkość: M. Zależności: ENG-02, ENG-03.
+
+**Dlaczego:** Masz proces, lecz wiele ręcznych przejść i niejednolite dokumenty; nowy meta-workflow zdublowałby odpowiedzialność.
+
+**Zakres:** Dodać krótki intake, reuse-or-build, profil zmiany, kontrakt, testy i handoff. Rozpocząć projektowanie testów przy specyfikacji; sfinalizować po draft.
+
+**Ukończone, gdy:**
+
+- DOCS nie uruchamia pełnej kampanii
+
+- NEW/ROUTING/BEHAVIOR/RESOURCE mają jawną macierz kontroli
+
+- Output obejmuje implementację, evidence i najmniejszy następny krok
+
+
+#### ENG-07 · P1 · Dodać mały scaffolder oparty na istniejącym template
+
+Typ: script/template. Status: PROPOSED. Wielkość: S. Zależności: ENG-06.
+
+**Dlaczego:** Szablony SKILL.md i cases.yaml już są; ręczne kopiowanie zwiększa liczbę niespójności.
+
+**Zakres:** Skrypt tworzy pakiet z kontraktu, korzystając z templates/skill-template; nie generuje pustych katalogów i nie nadpisuje istniejącego skill.
+
+**Ukończone, gdy:**
+
+- Powtarzalny output
+
+- Brak overwrite i path traversal
+
+- Poprawne nazwy oraz walidacja
+
+- Referencje powstają tylko gdy potrzebne
+
+
+#### ENG-08 · P0 · Zintegrować lokalny runner z repozytoryjnym eval protocol
+
+Typ: runtime tooling. Status: PROPOSED. Wielkość: L. Zależności: ENG-01, ENG-04.
+
+Powiązania historyczne do rozliczenia: AIS-05, AIS-20.
+
+**Dlaczego:** Runner poza repo już obsługuje izolację, smoke, kolejkę i evidence; odbudowa od zera nie ma sensu.
+
+**Zakres:** Najpierw ustalić co jest już upstream. Przenieść potrzebne elementy controller-only do scripts/eval, zachowując receipt.py/campaign.py jako kontrakt. Bez danych prywatnych i historycznej autoryzacji do Drive.
+
+**Ukończone, gdy:**
+
+- Jedna komenda przygotowuje, wykonuje i archiwizuje przypadek
+
+- Wznowienie nie duplikuje run
+
+- Unassisted executor nie widzi rubric
+
+- CLI i Desktop mają oddzielne dowody
+
+- Dawne external-write authorization nie jest kopiowane do biblioteki
+
+
+#### ENG-09 · P1 · Dodać analizę wpływu zmiany i wybór testów
+
+Typ: script/control. Status: PROPOSED. Wielkość: M. Zależności: ENG-06, ENG-08.
+
+**Dlaczego:** Każde rozszerzenie nie powinno odpalać całej kosztownej kampanii, ale wspólne komponenty mają szeroki wpływ.
+
+**Zakres:** Rozszerzyć istniejące walidatory o affected skills/workflows z grafu dependencies i zasobów; pełny suite przy zmianach registry, buildera lub wspólnego kontraktu.
+
+**Ukończone, gdy:**
+
+- Zmiana specialist wybiera dependents i routing neighbors
+
+- Zmiana wspólnego pliku nie pomija dotkniętych flow
+
+- Dobór jest deterministyczny i ma uzasadnienie
+
+
+#### ENG-10 · P1 · Utrzymywać granice routingu i zestaw przypadków konkurujących
+
+Typ: catalog/evals. Status: PROPOSED. Wielkość: M. Zależności: ENG-03.
+
+Powiązania historyczne do rozliczenia: AIS-06.
+
+**Dlaczego:** Wzrost biblioteki szczególnie grozi kolizją consumer/commerce, research/article i OAF/software.
+
+**Zakres:** Dodać lekką macierz sąsiadów i routing cases; nie tworzyć centralnego mega-routera ani drugiego ręcznego katalogu procedur.
+
+**Ukończone, gdy:**
+
+- Consumer purchase nie uruchamia Commerce
+
+- Tekst użytkownika do redakcji nie uruchamia pełnego research
+
+- Software ADR nie udaje OAF diagnozy
+
+- Przypadki obejmują PL/EN i pośrednią intencję
+
+
+#### ENG-11 · P1 · Mierzyć użyteczność i koszt procesu
+
+Typ: metrics/control. Status: PROPOSED. Wielkość: S. Zależności: ENG-04, ENG-08.
+
+**Dlaczego:** Liczba skills i zielony YAML nie dowodzą oszczędności czasu ani jakości.
+
+**Zakres:** Dodać do istniejących receipts opcjonalne metryki czasu, dostępnych tokens/tool calls, kosztu jeśli faktycznie znany, interwencji i poprawek. Trzymać benchmark na tych samych wejściach.
+
+**Ukończone, gdy:**
+
+- Brak kosztu jest unknown
+
+- Wynik zawiera medianę/range i denominator
+
+- Odsetek ciężkich błędów nie ginie w średniej
+
+- Porównanie do pracy bez skill lub accepted version
+
+
+#### ENG-12 · P1 · Dodawać regresje z realnych poprawek użytkownika
+
+Typ: control/evals. Status: PROPOSED. Wielkość: S. Zależności: ENG-03, ENG-08.
+
+**Dlaczego:** Najbardziej wartościowe testy pochodzą z przypadków, gdzie realny wynik zawiódł.
+
+**Zakres:** Rozszerzyć istniejący revision/post-release loop; anonimizować wejście, zachować błąd i kontrakt, dodać regresję przed poprawką.
+
+**Ukończone, gdy:**
+
+- Pierwotny failure pozostaje w historii
+
+- Dane prywatne nie trafiają do publicznego fixture
+
+- Test nie jest osłabiony, by naprawa wyglądała dobrze
+
+
+#### ENG-13 · P2 · Wprowadzić przegląd użycia, scalanie i deprecację
+
+Typ: maintenance/control. Status: PROPOSED. Wielkość: S. Zależności: ENG-11.
+
+**Dlaczego:** Duży katalog zwiększa koszt kontekstu i utrzymania, także gdy poszczególne skills są dobre.
+
+**Zakres:** Okresowy review tylko na danych o użyciu/incydentach; wskazać komponenty nieużywane, pokrywające się i wyparte przez native tools.
+
+**Ukończone, gdy:**
+
+- Każde merge/deprecate ma dowód i migration path
+
+- Rzadko używany skill o dużej wartości nie jest automatycznie usuwany
+
+- Brak telemetry nie udaje braku użycia
+
+
+#### ENG-14 · P2 · Dodać do katalogu flow i jawny stan dostępności
+
+Typ: catalog/release. Status: PROPOSED. Wielkość: M. Zależności: ENG-01, ENG-10.
+
+**Dlaczego:** Katalog i docs/processes.json już istnieją; nowe flow powinny korzystać z tej samej prezentacji.
+
+**Zakres:** Rozszerzyć generator o nowe domains, flow, kanały i readiness; odróżnić suggested path od registered runtime workflow.
+
+**Ukończone, gdy:**
+
+- Brak ręcznie zdublowanych definicji
+
+- Candidate/draft nie wyglądają jak dostępna produkcja
+
+- Stan installed, main i evidence jest rozróżnialny
+
+
+### Shared methods
+
+
+#### CORE-01 · P1 · Zrealizować minimalny research-brief
+
+Typ: planned skill. Status: PROPOSED. Wielkość: M. Zależności: CON-02, WRI-02.
+
+**Dlaczego:** Jest zaplanowany w skills/core/README; zakupy, artykuły i vendor research mają podobny etap definiowania pytania.
+
+**Zakres:** Cel decyzji, odbiorca, must-have, ograniczenia, zakres źródeł i stop condition. Pilot z Consumer i Writing przed utrwaleniem abstrakcji.
+
+**Ukończone, gdy:**
+
+- 2–3 realne zastosowania pokazują tę samą metodę
+
+- Krótkie pytanie nie wymaga intake
+
+- Brak profilu użytkownika w skill
+
+- Kontrakt pasuje do obu flow
+
+
+#### CORE-02 · P1 · Zrealizować evidence-validator bez drugiej analizy domenowej
+
+Typ: planned skill/reference. Status: PROPOSED. Wielkość: M. Zależności: CON-03, WRI-02.
+
+**Dlaczego:** Już jest zaplanowany; istnieje też evidence contract w report-composer.
+
+**Zakres:** Reużyć definicje pochodzenia i niepewności. Kontrola źródeł, daty, sprzeczności i adekwatności wniosku; bez wybierania produktu lub pisania artykułu.
+
+**Ukończone, gdy:**
+
+- Nie kopiuje ledger z composer
+
+- Fakt, user claim, inference i unknown są rozróżnione
+
+- Testuje sprzeczne, stare i marketingowe dane
+
+- Nie analizuje ponownie domeny
+
+
+#### CORE-03 · P1 · Zrealizować structured-comparison
+
+Typ: planned skill. Status: PROPOSED. Wielkość: M. Zależności: CON-04, PRO-01.
+
+**Dlaczego:** Już jest zaplanowany; porównanie zakupów i rozwiązań technicznych ma wspólne kryteria i trade-offs.
+
+**Zakres:** Metoda porównania z hard constraints przed preferencjami; brak danych to unknown. Wagi tylko jawnie uzgodnione; obliczenia w skrypcie.
+
+**Ukończone, gdy:**
+
+- Niespełnienie must-have nie jest kompensowane ceną
+
+- Brak specyfikacji nie staje się niskim score
+
+- Zmiana priorytetu pokazuje warunek zmiany rekomendacji
+
+
+#### CORE-04 · P2 · Sprawdzić potrzebę handoff-generator
+
+Typ: planned skill/reference. Status: DISCOVERY. Wielkość: S. Zależności: ENG-06.
+
+**Dlaczego:** Zaplanowany core skill może pomóc w pracy między modelami, ale najpierw wystarczy template w workflow.
+
+**Zakres:** Minimalny handoff: cel, źródła, ustalenia, decyzje, unknowns, authority, next action. Skill dopiero gdy niezależny handoff powtarza się w kilku domenach.
+
+**Ukończone, gdy:**
+
+- Przeniesienie nie dopisuje zgód
+
+- Odbiorca dostaje potrzebny kontekst i nie dostaje rubryk
+
+- Da się wznowić zadanie bez odtwarzania całej rozmowy
+
+
+### Consumer decisions
+
+
+#### CON-01 · P1 · Zdefiniować granice Consumer i prywatny purchase profile
+
+Typ: specification/context. Status: PROPOSED. Wielkość: S. Zależności: ENG-01.
+
+**Dlaczego:** Zakup dla siebie to inny cel niż wejście na rynek e-commerce.
+
+**Zakres:** Nowa domena skills/consumer; kraj/rynek, waluta, budżet, zastosowanie i posiadany sprzęt w kontekście. Nazwy i boundaries przechodzą skill-specification.
+
+**Ukończone, gdy:**
+
+- Minimum 3 przykłady: sprzęt, dom/AGD, software subscription
+
+- Osobno must-have i nice-to-have
+
+- Kupno do użytku własnego nie uruchamia Commerce
+
+
+#### CON-02 · P1 · Zbudować purchase-decision jako pierwszy pionowy pilot
+
+Typ: workflow. Status: PROPOSED. Wielkość: L. Zależności: CON-01, ENG-06.
+
+**Dlaczego:** Realizuje dokładnie prośbę: mówię potrzebę, otrzymuję uporządkowany research i rekomendację.
+
+**Zakres:** Need → constraints → shortlist → hard-filter → evidence → comparison → offer check → recommendation. Zacząć od lekkich reference stages; specialists wyodrębniać gdy są niezależnie użyteczni.
+
+**Ukończone, gdy:**
+
+- 3–5 dopasowanych opcji jako default
+
+- Najlepszy wybór, alternatywa i warunek niewybierania
+
+- Odpowiedź rozróżnia model i ofertę
+
+- Brak zakupu/zamówienia
+
+- Ma stop condition i obsługę niedostępnego narzędzia
+
+
+#### CON-03 · P1 · Zbudować product-evidence-review
+
+Typ: new skill. Status: PROPOSED. Wielkość: M. Zależności: CON-01, ENG-03.
+
+**Dlaczego:** Karty marketingowe i rankingi afiliacyjne nie wystarczają do rekomendacji.
+
+**Zakres:** Ocena znanego modelu: exact SKU, region/revision, official specs/manual, niezależne pomiary, awarie/limitations; popularność nie jest dowodem jakości.
+
+**Ukończone, gdy:**
+
+- Źródło przy decydującej claim
+
+- Wariant modelu rozpoznany
+
+- Konflikt spec/test jest widoczny
+
+- Brak testu nie oznacza potwierdzonej jakości
+
+- Produkt niekompatybilny nie trafia do zwycięzców
+
+
+#### CON-04 · P1 · Zbudować product-fit-comparison
+
+Typ: new skill. Status: PROPOSED. Wielkość: M. Zależności: CON-03.
+
+**Dlaczego:** Najlepszy produkt dla Twojej sytuacji nie musi wygrać ogólnego rankingu.
+
+**Zakres:** Porównać model do scenariuszy użytkowania, hard constraints, jakości dowodów i trade-offs. Na start własny mały kontrakt; po pilocie wykorzystać CORE-03.
+
+**Ukończone, gdy:**
+
+- Jawne kryteria i dowody
+
+- Brak nieuzasadnionego aggregate score
+
+- Wskazany kompromis zwycięzcy i strongest alternative
+
+- Aktualny produkt/odroczenie może wygrać
+
+
+#### CON-05 · P1 · Zbudować purchase-offer-review i prosty kalkulator TCO
+
+Typ: new skill + script. Status: PROPOSED. Wielkość: M. Zależności: CON-01.
+
+**Dlaczego:** Wybór modelu i wybór konkretnej oferty mają inne dane i failure modes.
+
+**Zakres:** Dla known SKU sprawdzić sprzedawcę, cenę, dostępność, dostawę, gwarancję/zwroty i warunki. TCO na znanym okresie: zakup, eksploatacja, abonament, opłaty; nie estymować nieznanych kosztów bez etykiety.
+
+**Ukończone, gdy:**
+
+- Oferta ma exact SKU, walutę, rynek, URL i checked_at
+
+- Nieudokumentowane stock/seller quality są unknown
+
+- Arytmetyka ma testy i jednostki
+
+- Brak danych prawnych nie daje legal clearance
+
+
+#### CON-06 · P1 · Sprawdzić purchase-decision w realnych przypadkach
+
+Typ: evals/pilot. Status: PROPOSED. Wielkość: M. Zależności: CON-02, CON-03, CON-04, CON-05, ENG-04.
+
+**Dlaczego:** Flow musi oszczędzać pracę, a nie produkować długi research do każdego zakupu.
+
+**Zakres:** Pilot sprzętu, AGD/domu i subskrypcji oraz przypadki: brak must-have, podobne warianty, stare ceny, konflikt testów, zakup biznesowy, bardzo tania rzecz.
+
+**Ukończone, gdy:**
+
+- Około 3–5 realnych użyć zgodnie z lifecycle
+
+- Zestaw realistycznych negatives i failure cases
+
+- Wynik skraca czas i poprawki vs baseline
+
+- Brak nieautoryzowanej transakcji
+
+
+#### CON-07 · P2 · Dodać price/availability watch na wyraźne zlecenie
+
+Typ: context + automation. Status: PROPOSED. Wielkość: S. Zależności: CON-05, CON-06.
+
+**Dlaczego:** Monitoring ma sens po wyborze produktu i określeniu ceny docelowej.
+
+**Zakres:** Reużyć automation hosta; zachować exact SKU, warunek alertu, cadence, expiry i quiet-on-unchanged. Nie budować crawlera/daemonu.
+
+**Ukończone, gdy:**
+
+- Powiadomienie tylko o znaczącej zmianie
+
+- Dane odświeżone przed alertem
+
+- Wygaszenie/stop są jawne
+
+- Watch nie kupuje produktu
+
+
+#### CON-08 · P2 · Rozszerzyć decyzję o repair / keep / replace
+
+Typ: workflow branch. Status: PROPOSED. Wielkość: M. Zależności: CON-06.
+
+**Dlaczego:** Największa oszczędność może polegać na niewymienianiu sprawnej rzeczy.
+
+**Zakres:** Gałąź purchase-decision: obecny problem, naprawa/serwis, koszt wymiany, przewidywane ograniczenia i trade-off. Osobny skill tylko przy powtarzalnej analizie.
+
+**Ukończone, gdy:**
+
+- Odroczenie i naprawa są realnymi opcjami
+
+- Brak diagnozy technicznej jest unknown
+
+- Nie wydaje niebezpiecznych instrukcji naprawczych
+
+
+### Writing / publishing
+
+
+#### WRI-01 · P1 · Zidentyfikować istniejący skill artykułowy
+
+Typ: inventory/adapter. Status: DISCOVERY. Wielkość: S. Zależności: brak.
+
+**Dlaczego:** Użytkownik deklaruje skill w aplikacji, ale nie ma go w udostępnionym katalogu ani w drzewie ai-skills.
+
+**Zakres:** Odczytać name/version/contract/dependencies, rozróżnić zewnętrzny plugin i repo source; zachować portable boundary. Bez kopiowania cudzej implementacji.
+
+**Ukończone, gdy:**
+
+- Znana funkcja, wejście i wyjście
+
+- Legalny sposób użycia/adapter
+
+- Brak zależności oznacza unavailable, a nie udawane wywołanie
+
+
+#### WRI-02 · P1 · Zbudować article-development wokół obecnego writera
+
+Typ: workflow. Status: PROPOSED. Wielkość: L. Zależności: WRI-01, ENG-06.
+
+**Dlaczego:** Potrzebujesz opiniotwórczych i analitycznych tekstów; największa wartość jest w tezie i dowodach.
+
+**Zakres:** Brief → teza/odbiorca → potrzebny research → argument structure → existing writer → critique → evidence check → revision. Dla własnego draft pomijać wcześniejsze etapy.
+
+**Ukończone, gdy:**
+
+- Jeden spójny tekst gotowy do redakcji
+
+- Odrębny factual/research gate
+
+- Research kończy się gdy wspiera główne claims
+
+- Nie tworzy nowego article-writer
+
+- Znany kontrakt fallback przy braku adaptera
+
+
+#### WRI-03 · P1 · Zbudować editorial-argument-review
+
+Typ: new skill. Status: PROPOSED. Wielkość: M. Zależności: WRI-01.
+
+**Dlaczego:** Płynny język nie gwarantuje tezy, logiki ani wartości dla odbiorcy.
+
+**Zakres:** Kontrola centralnej tezy, wnioskowania, weakest premise, strongest counterargument, struktury, powtórzeń i konkretności. Nie researchuje i nie przepisywuje całości bez potrzeby.
+
+**Ukończone, gdy:**
+
+- Rozróżnia błąd logiczny i preferencję stylistyczną
+
+- Wskazuje minimalną poprawkę
+
+- Nie usuwa zastrzeżeń wzmacniających uczciwość
+
+- Nie narzuca generycznego AI tonu
+
+
+#### WRI-04 · P1 · Zdefiniować article-claim-check
+
+Typ: reference → conditional skill. Status: PROPOSED. Wielkość: M. Zależności: WRI-02.
+
+**Dlaczego:** Faktografia, cytowania i przypisy muszą zgadzać się z faktycznym źródłem.
+
+**Zakres:** Lista claims do kontroli: fakty/cytaty/liczby/causal claims; sprawdzić źródła i daty, oznaczyć opinion/inference. Najpierw reference w flow; po re-use delegować ogólną kontrolę do CORE-02.
+
+**Ukończone, gdy:**
+
+- Nieistniejący link/cytat jest blokowany
+
+- Cytowanie wspiera konkretną claim
+
+- Prywatny case nie trafia do publikacji bez świadomej decyzji
+
+- Własne doświadczenie nie jest dopisywane
+
+
+#### WRI-05 · P1 · Zbudować prywatny voice profile i sprawdzić flow
+
+Typ: project context + pilot. Status: PROPOSED. Wielkość: M. Zależności: WRI-02, WRI-03, WRI-04, ENG-04.
+
+**Dlaczego:** Twój styl powinien wynikać z autentycznych próbek, a nie z ogólnych przymiotników.
+
+**Zakres:** 3–5 tekstów/próbek, reguły struktury, słownictwo i antyprzykłady w kontekście projektu. Pilot: techniczny artykuł, executive opinion, poprawa własnego tekstu.
+
+**Ukończone, gdy:**
+
+- Profil nie jest zaszyty w publiczny skill
+
+- Tekst nie wymyśla doświadczeń
+
+- Blind A/B ogranicza wpływ atrakcyjnego formatowania
+
+- Mierzony zakres Twoich poprawek
+
+
+#### WRI-06 · P2 · Dodać adaptacje i publication handoff
+
+Typ: workflow branch / external tools. Status: PROPOSED. Wielkość: M. Zależności: WRI-05.
+
+**Dlaczego:** Jeden zatwierdzony tekst może zasilać LinkedIn, newsletter i stronę.
+
+**Zakres:** Adaptacja odbiorcy i formatu dopiero z ukończonego tekstu; SEO tylko dla właściwego kanału. Reużyć istniejące narzędzia strony/Docs; publikacja na wyraźne polecenie.
+
+**Ukończone, gdy:**
+
+- Brak nowych niezweryfikowanych tez
+
+- Wersje mają źródłowy tekst i approved state
+
+- Przygotowanie nie publikuje automatycznie
+
+- Nie generuje niepotrzebnych treści kanałowych
+
+
+### Professional work
+
+
+#### PRO-01 · P2 · Zbudować technical-option-review
+
+Typ: new skill. Status: PROPOSED. Wielkość: M. Zależności: ENG-10.
+
+**Dlaczego:** Twoja praca Staff/Solution Architect wymaga oceny decyzji o systemie; OAF jest oceną architektury organizacyjnej.
+
+**Zakres:** Alternatywy techniczne, constraints, integration/data ownership, operacje, koszt, lock-in i reversibility. Output: krótki ADR lub input do decyzji; repo/tool docs są source of truth.
+
+**Ukończone, gdy:**
+
+- Oddzielna granica od OAF architecture-review
+
+- Co najmniej strongest viable alternative
+
+- Nie wynajduje infrastruktury i API
+
+- Wskazuje co zmieniłoby decyzję
+
+
+#### PRO-02 · P2 · Zbudować technology-selection dla buy/build/vendor
+
+Typ: workflow. Status: PROPOSED. Wielkość: L. Zależności: PRO-01, CORE-03.
+
+**Dlaczego:** Możesz reużyć porównanie Consumer/Core, ale vendor decision wymaga innych kryteriów.
+
+**Zakres:** Requirements → buy/build/defer → shortlist → evidence → trial → TCO/risk → recommendation. Dodawać tylko security/data/SLA/exit criteria właściwe dla organizacji.
+
+**Ukończone, gdy:**
+
+- Nie myli produktu z enterprise offer
+
+- Vendor marketing nie jest dowodem SLA poza umową
+
+- Decyzja uwzględnia trial i exit cost
+
+- Brak automatycznego zakupu
+
+
+#### PRO-03 · P2 · Zbudować meeting-decision-extraction
+
+Typ: new skill. Status: PROPOSED. Wielkość: M. Zależności: brak.
+
+**Dlaczego:** Masz kontekst Meeting Summarizer; przydatny wynik to decyzje, zobowiązania i otwarte pytania.
+
+**Zakres:** Z supplied transcript/notes wydobyć decisions/actions z cytatem/time marker; właściciel i termin tylko gdy padły. Rozróżnić propozycję, zgodę i decyzję.
+
+**Ukończone, gdy:**
+
+- Brak wymyślonych właścicieli i dat
+
+- Brak przypisania decyzji z luźnej dyskusji
+
+- Sporne ustalenia są oznaczone
+
+- Nie nagrywa i nie wysyła wiadomości
+
+
+#### PRO-04 · P2 · Dodać executive-decision-memo jako profil
+
+Typ: workflow branch/template. Status: PROPOSED. Wielkość: S. Zależności: PRO-01.
+
+**Dlaczego:** Masz report-composer; osobny generic memo writer łatwo zdubluje kompozycję.
+
+**Zakres:** Profil: decision, evidence, options, risk, unknowns, owner/next action. Composer tylko jeśli dostępny; jasny lokalny text fallback dla nowego flow.
+
+**Ukończone, gdy:**
+
+- Nie analizuje ponownie tematu
+
+- Zwarta rekomendacja i trade-offs
+
+- Format nie wzmacnia pewności
+
+- Brak zależności composer nie blokuje opcjonalnej prezentacji
+
+
+#### PRO-05 · P2 · Zbudować ai-use-case-review
+
+Typ: new skill. Status: PROPOSED. Wielkość: M. Zależności: PRO-01.
+
+**Dlaczego:** AI-enabled products są w Twoim kontekście, ale nie każdy problem wymaga LLM/agenta.
+
+**Zakres:** Problem → deterministic/no-AI alternative → data readiness → eval task → failure cost → pilot boundary. OAF specialists tylko dla problemu organizacyjnego.
+
+**Ukończone, gdy:**
+
+- Porównanie do prostszej automatyzacji
+
+- Mierzalny pilot i quality/cost threshold
+
+- Explicit human/action authority
+
+- Brak AI ROI opartego na nieznanych liczbach
+
+
+#### PRO-06 · P2 · Zbudować automation-opportunity-review
+
+Typ: new skill + workflow. Status: PROPOSED. Wielkość: M. Zależności: PRO-05.
+
+**Dlaczego:** Zanim automatyzować, warto sprawdzić częstotliwość, wyjątki, dostęp i koszt błędu.
+
+**Zakres:** Intake procesu, źródła, deterministyczne kroki, judgement steps, właściciel, retry/idempotency, observability, stop. Output: mały automation brief; implementację wykonują właściwe narzędzia.
+
+**Ukończone, gdy:**
+
+- Rzeczywista powtarzalność
+
+- Prosty script/native automation oceniony przed agentem
+
+- Error/rollback path
+
+- Brak automatycznego provisioningu
+
+
+#### PRO-07 · P2 · Uruchomić tender-screening na istniejącym planie Tender
+
+Typ: reuse planned domain. Status: PROPOSED. Wielkość: L. Zależności: ENG-06.
+
+**Dlaczego:** Tender Pilot jest Twoim projektem; skills/tender zawiera już plan 11 metod.
+
+**Zakres:** Pierwszy wycinek: rfp-extraction → eligibility-check → capability-evidence-match → go-no-go. Parsery do kodu; requirements mają source location. Nie implementować od razu wszystkich 11 skills.
+
+**Ukończone, gdy:**
+
+- Mandatory fail zatrzymuje dalszy research
+
+- Każda claim ma evidence
+
+- Braki nie stają się deklarowaną zgodnością
+
+- Pilotaż na rzeczywistym lub anonimizowanym RFP
+
+
+#### PRO-08 · P2 · Uruchomić website-quality-review zamiast kolejnego buildera
+
+Typ: reuse planned domain + native tools. Status: PROPOSED. Wielkość: M. Zależności: ENG-06.
+
+**Dlaczego:** Masz projekty webowe i narzędzia Figma/Sites; domena web-design jest już rozpisana.
+
+**Zakres:** Najpierw design-critique i visual-regression-review; accessibility-gate dla judgement poza automatycznymi testami. Responsive, links i a11y scans w kodzie/CI.
+
+**Ukończone, gdy:**
+
+- Sprawdzony realny render desktop/mobile
+
+- Uwagi z lokalizacją i impact
+
+- Brak duplikacji native builder
+
+- Ruch i wygląd wspierają funkcję
+
+
+### Learning OS
+
+
+#### LEA-01 · P2 · Uruchomić learning-session zgodny z obecnym Learning OS
+
+Typ: workflow + project context. Status: PROPOSED. Wielkość: M. Zależności: brak.
+
+**Dlaczego:** Instrukcje projektu już określają router i learning loop; nie trzeba ich przepisywać w pięć obowiązkowych skills.
+
+**Zakres:** Quick question pozostaje quick; dla sesji: cel → minimum theory → practice → feedback → next. knowledge-diagnosis/concept-explainer początkowo jako gałęzie, nie automatyczny pipeline.
+
+**Ukończone, gdy:**
+
+- Brak przymusowego quizu do definicji
+
+- Po wystarczającym rozumieniu przejście do zastosowania
+
+- Profil i prywatny log w kontekście
+
+- Nie dopisuje osiągniętej kompetencji
+
+
+#### LEA-02 · P2 · Zrealizować practice-generator
+
+Typ: planned skill. Status: PROPOSED. Wielkość: M. Zależności: LEA-01.
+
+**Dlaczego:** Zaplanowany skill daje wysoką wartość przez realistyczne zadania zamiast dalszej teorii.
+
+**Zakres:** Scenariusze decyzji/design/diagnosis z progresywną trudnością i kryterium sukcesu. Dostosować do demonstrated level; nie zdradzać rozwiązania w zadaniu.
+
+**Ukończone, gdy:**
+
+- Ćwiczenie mierzy cel
+
+- Realne trade-offs i edge cases
+
+- Wskazówki oddzielone od zadania
+
+- Difficulty wynika z evidence
+
+
+#### LEA-03 · P2 · Zrealizować competence-check
+
+Typ: planned skill. Status: PROPOSED. Wielkość: M. Zależności: LEA-02.
+
+**Dlaczego:** Własne poczucie zrozumienia nie jest dowodem kompetencji.
+
+**Zakres:** Ocenić supplied performance: correctness, independence, transfer, trade-offs, error correction; feedback i najmniejszy następny krok. Bez obowiązkowej skali poza checkpoints.
+
+**Ukończone, gdy:**
+
+- Uzasadnienie oceny zachowuje evidence
+
+- Brak wykonania pozostaje nieocenione
+
+- Nie traktuje completion jako mastery
+
+- Nie zatrzymuje nauki dla nieistotnego perfekcjonizmu
+
+
+#### LEA-04 · P3 · Dodać retention-review i learning log dopiero gdy potrzebne
+
+Typ: planned skill + optional automation. Status: PROPOSED. Wielkość: S. Zależności: LEA-03.
+
+**Dlaczego:** Retencja i wielosesyjna ciągłość są już w instrukcjach; nie każdy temat wymaga śledzenia.
+
+**Zakres:** Review na demonstrated gaps; log na prośbę lub dla ciągłości. Automatyczne przypomnienia tylko zlecone przez użytkownika.
+
+**Ukończone, gdy:**
+
+- Recall/application zamiast streszczania
+
+- Log nie zawiera fikcyjnego postępu
+
+- Plan review ma stop/expiry
+
+- Brak niezamówionych powiadomień
+
+
+### Daily life
+
+
+#### LIF-01 · P2 · Zaprojektować trip-decision i itinerary-feasibility
+
+Typ: workflow + narrow skill. Status: DISCOVERY. Wielkość: M. Zależności: CON-06, CORE-03.
+
+**Dlaczego:** Projekt Malaga wskazuje kontekst podróży, ale nie dowodzi częstotliwości.
+
+**Zakres:** Wybór lokalizacji/noclegu/transportu reużywa Consumer/Core; osobna metoda sprawdza czasy, dystanse, godziny, buffer i feasibility. Preferencje w projekcie.
+
+**Ukończone, gdy:**
+
+- Koszty/datę/dostępność odświeżono
+
+- Plan uwzględnia buffers
+
+- Brak fikcyjnych reservations
+
+- Opcje odpadające na constraints nie są rekomendowane
+
+
+#### LIF-02 · P2 · Zaprojektować property-shortlist-review
+
+Typ: workflow. Status: DISCOVERY. Wielkość: L. Zależności: CORE-02, CORE-03.
+
+**Dlaczego:** Projekt Houses uzasadnia rozpoznanie potrzeby; zakup nieruchomości ma inną wagę niż AGD.
+
+**Zakres:** Oferty → hard constraints → dojazdy/okolica → koszty znane/scenariusze → shortlist → pytania na viewing. Dokładny adres, budżet i stan w private context.
+
+**Ukończone, gdy:**
+
+- Fakty z ofert odróżnione od zweryfikowanych
+
+- Nie wykonuje legal/technical clearance
+
+- Wskazuje dokumenty i due-diligence gaps
+
+- Brak automatycznego kontaktu z agentem
+
+
+#### LIF-03 · P3 · Zaprojektować meal-planning / pantry-to-list
+
+Typ: workflow + script. Status: DISCOVERY. Wielkość: M. Zależności: brak.
+
+**Dlaczego:** Projekty Foodie Assistant i Jedzenie wskazują użyteczny kontekst, lecz częstotliwość trzeba potwierdzić.
+
+**Zakres:** Budżet/czas/składniki → kilka posiłków → wspólna lista zakupów → batch prep. Agregacja jednostek i ilości w kodzie; preferencje/alergeny w kontekście.
+
+**Ukończone, gdy:**
+
+- Lista nie duplikuje składników
+
+- Uwzględnia supplied restrictions
+
+- Brak twierdzeń medycznych
+
+- Koszt i wartości odżywcze bez źródła są unknown
+
+
+#### LIF-04 · P3 · Zaprojektować local-service-selection
+
+Typ: workflow. Status: DISCOVERY. Wielkość: M. Zależności: CON-06, CORE-03.
+
+**Dlaczego:** Ten sam problem porównania występuje przy ekipie, serwisie i usługach; inne dowody niż dla produktu.
+
+**Zakres:** Brief → quotes → zakres włączeń/wyłączeń → dostępność → evidence/reviews → rekomendacja i pytania. Consumer profile nie zawiera prywatnego adresu w skill.
+
+**Ukończone, gdy:**
+
+- Oferty mają porównywalny scope
+
+- Opinie to weak evidence, nie gwarancja
+
+- Brak automatycznego wysłania request
+
+- Najtańsza oferta nie wygrywa mimo braków
+
+
+#### LIF-05 · P3 · Zaprojektować subscription-review
+
+Typ: workflow + context. Status: DISCOVERY. Wielkość: S. Zależności: CON-05.
+
+**Dlaczego:** Powtarzalne opłaty łączą zakupy i wybór narzędzi, ale nie potrzeba nowego finansowego OS.
+
+**Zakres:** User-provided list/usage → duplicate value → known annual cost → keep/downgrade/cancel candidates. Przepływ nie korzysta z inwestycyjnego record-store.
+
+**Ukończone, gdy:**
+
+- Koszt policzony ze znanych inputs
+
+- Brak dostępu do kont nie jest zastępowany domysłem
+
+- Nie anuluje bez zlecenia
+
+- Nie traktuje niskiego usage jako automatycznej decyzji
+
+
+#### LIF-06 · P3 · Zaprojektować document-to-action dla spraw domowych
+
+Typ: workflow/template. Status: DISCOVERY. Wielkość: M. Zależności: brak.
+
+**Dlaczego:** Terminy i obowiązki w dokumentach mogą dawać większą wartość niż kolejne streszczenie.
+
+**Zakres:** Z supplied dokumentu wydobyć termin, warunek, krok i source location; przygotować checklistę/draft odpowiedzi. Privacy i data minimization.
+
+**Ukończone, gdy:**
+
+- Nie wymyśla deadline
+
+- Interpretacja prawna odróżniona od tekstu dokumentu
+
+- Żadnego wysłania ani zapisania do zewnętrznego store bez odpowiedniego zlecenia
+
+
+### Existing portfolio
+
+
+#### EXI-01 · P1 · Rozliczyć bieżące AIS/RT i evidence gaps
+
+Typ: evals/readiness. Status: PROPOSED. Wielkość: M. Zależności: ENG-01, ENG-02.
+
+Powiązania historyczne do rozliczenia: AIS-05, AIS-21, AIS-22, RT-001.
+
+**Dlaczego:** Historyczne backlogi są cenne, ale stare FAIL/PASS są związane z poprzednią wersją.
+
+**Zakres:** Po ENG-01 potwierdzić aktualny stan i priorytet znanych failures; re-test tylko affected paths. Osobna kolejka maintenance, bez blokowania wszystkich nowych pomysłów.
+
+**Ukończone, gdy:**
+
+- Brak ponownego zlecania wykonanej poprawki
+
+- High unresolved regression blokuje affected release
+
+- Current receipt i pending mają jawny zakres
+
+
+#### EXI-02 · P2 · Domknąć dowody dla Career candidates
+
+Typ: evals/pilot. Status: PROPOSED. Wielkość: M. Zależności: ENG-04.
+
+**Dlaczego:** Job discovery, validity, CV i interview już istnieją jako candidates; budowanie zamienników traci wartość.
+
+**Zakres:** Priorytet według aktualnego recruitment use case; 3–5 real uses i routing/evidence cases. Mastery CV pozostaje approved private input.
+
+**Ukończone, gdy:**
+
+- Brak invented experience
+
+- Validity przed kosztownym tailoring
+
+- Dokładna wersja ma evidence
+
+- Nie promuje wszystkich tylko dla kompletności
+
+
+#### EXI-03 · P2 · Sformalizować career-opportunity-to-interview gdy pilot to uzasadni
+
+Typ: workflow. Status: PROPOSED. Wielkość: M. Zależności: EXI-02, ENG-10.
+
+**Dlaczego:** docs/processes.json już pokazuje suggested pathway, ale bez formalnego runtime workflow.
+
+**Zakres:** Reużyć istniejące skills; etapy optional/required zależnie od wejścia; register tylko kanały z dependencies. Z supplied interview pomija discovery.
+
+**Ukończone, gdy:**
+
+- Suggested vs registered jest jasne
+
+- Missing candidate nie jest symulowany
+
+- Flow nie wymusza całej ścieżki do wąskiej prośby
+
+
+#### EXI-04 · P1 · Sprawdzić przenośność report-composer i visual-output-design
+
+Typ: existing skills/contracts. Status: PROPOSED. Wielkość: M. Zależności: ENG-01, CON-06.
+
+**Dlaczego:** Main i installed Lab mają różne wersje; nowe domeny nie powinny dziedziczyć sztywnych wymagań Investing przypadkowo.
+
+**Zakres:** Ustalić profiles dla purchase/technical memo; composer owns structure, visual owns encoding. Optional presentation degraduje się uczciwie; obowiązkowy visual pozostaje blocked gdy runtime go nie obsługuje.
+
+**Ukończone, gdy:**
+
+- Nie zmienia domyślnie całej architektury raportów
+
+- Nie wymaga wykresu do krótkiego zakupu
+
+- Nie deklaruje render/client PASS
+
+- Jest test current version i kanału
+
+
+#### EXI-05 · P2 · Rozwijać OAF/Commerce/Investment OS na podstawie realnych gaps
+
+Typ: integration/control. Status: PROPOSED. Wielkość: M. Zależności: ENG-09, ENG-12.
+
+**Dlaczego:** Te domeny są już mocno rozbudowane; ekspansja powinna usuwać konkretne niedociągnięcia.
+
+**Zakres:** Re-test affected runtime fixtures, wersjonować kontrakt, zachować domenowe stores. Consumer nie reuse investment-record-store; red-team inwestycyjny nie staje się generic critic.
+
+**Ukończone, gdy:**
+
+- Nowy skill ma concrete recurring gap
+
+- Brak kopiowania starych product-research/ecommerce aliasów do nowych implementacji
+
+- Zmiana shared core nie powoduje niejawnej migracji istniejących flow
+
+
+## Źródła i ograniczenia przeglądu
+
+
+- [Architektura](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/docs/ARCHITECTURE.md) — przypięte do przejrzanego main.
+
+- [Model development/release](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/docs/DEVELOPMENT-RELEASE-MODEL.md) — przypięte do przejrzanego main.
+
+- [Lifecycle](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/docs/LIFECYCLE.md) — przypięte do przejrzanego main.
+
+- [Workflow tworzenia skills](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/workflows/skill-development/WORKFLOW.md) — przypięte do przejrzanego main.
+
+- [Meta chain](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/skills/meta/README.md) — przypięte do przejrzanego main.
+
+- [Aktualny katalog](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/CATALOG.md) — przypięte do przejrzanego main.
+
+- [Core — istniejący plan](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/skills/core/README.md) — przypięte do przejrzanego main.
+
+- [Learning — istniejący plan](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/skills/learning/README.md) — przypięte do przejrzanego main.
+
+- [Tender — istniejący plan](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/skills/tender/README.md) — przypięte do przejrzanego main.
+
+- [Web Design — istniejący plan](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/skills/web-design/README.md) — przypięte do przejrzanego main.
+
+- [Integrated report architecture](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/docs/INTEGRATED-REPORT-ARCHITECTURE.md) — przypięte do przejrzanego main.
+
+- [Runtime eval protocol](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/scripts/eval/README.md) — przypięte do przejrzanego main.
+
+- [Readiness](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/release/production-readiness.yaml) — przypięte do przejrzanego main.
+
+- [Flow catalog](https://github.com/aras-2003/ai-skills/blob/956885438f12968f958f9c733dc685e2d1b1ae18/docs/processes.json) — przypięte do przejrzanego main.
+
+
+Lokalnie odczytano także manifesty Lab 0.29.0 oraz audit/automation/README, runner state i backlogi AIS/RT z 30.09–02.10. Są historycznym materiałem porównawczym. Nie wykonano nowej kampanii runtime, nie potwierdzano aktualnych GitHub branch protections i nie zakładano, że istniejący artykułowy plugin został zweryfikowany. Backlog powstał przez analizę źródeł i dostępnego kontekstu, bez modyfikacji repozytorium, synced sources, skills ani instalacji.

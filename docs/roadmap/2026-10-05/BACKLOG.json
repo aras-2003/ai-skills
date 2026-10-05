@@ -1,0 +1,1249 @@
+{
+  "schema_version": "1.0",
+  "generated_at_local": "2026-10-05",
+  "timezone": "Europe/Warsaw",
+  "repository": "aras-2003/ai-skills",
+  "source_revision": "956885438f12968f958f9c733dc685e2d1b1ae18",
+  "source_skill_count": 54,
+  "source_workflow_count": 17,
+  "installed_lab": {
+    "version": "0.29.0",
+    "source_revision": "8cf615235d04c13603ca7c79ab4c30ff356b200c",
+    "components": 67
+  },
+  "scope": "Proposed expansion and engineering roadmap; no implementation or runtime PASS claims",
+  "items": [
+    {
+      "id": "ENG-01",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "documentation/control",
+      "title": "Uzgodnić stan źródła, runtime i dotychczasowych backlogów",
+      "rationale": "Stare README i historyczne snapshoty zaniżają lub mylą zakres; można zlecić ponownie już wykonane prace.",
+      "scope": "Zestawić main, manifest Lab, katalog, AIS i RT; skorygować liczbę skills, opis Investing, R6/R7 i wersje. Wskazać rozbieżności, bez automatycznego zamykania historycznych ustaleń.",
+      "acceptance_criteria": [
+        "54 źródłowe skills i 17 workflowów wynikają z przypiętego drzewa",
+        "Manifest Lab 0.29.0 jest osobnym stanem",
+        "Każde powiązanie AIS/RT ma evidence i status do potwierdzenia"
+      ],
+      "depends_on": [],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": [
+        "AIS-16",
+        "AIS-21"
+      ]
+    },
+    {
+      "id": "ENG-02",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "policy/control",
+      "title": "Ujednolicić pełne release gates i personal-beta",
+      "rationale": "Aktualne dokumenty opisują jednocześnie pełną walidację i czasowe wyjątki personal-beta.",
+      "scope": "Zaktualizować istniejące lifecycle, skill-development i release-review; jedna polityka dla strict release i ograniczonego personal-beta. Zachować bezwzględny zakaz wyjątku dla znanego high-severity failure.",
+      "acceptance_criteria": [
+        "Te same warunki w dokumentach i readiness",
+        "Wyjątek ma owner, zakres, expiry i widoczne NOT_RUN",
+        "Rekomendacja gotowości nie jest autoryzacją publikacji"
+      ],
+      "depends_on": [
+        "ENG-01"
+      ],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": [
+        "AIS-21"
+      ]
+    },
+    {
+      "id": "ENG-03",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "existing skill",
+      "title": "Doprowadzić skill-test-design do candidate",
+      "rationale": "Skill istnieje w main jako draft 0.2.0; nie wymaga tworzenia od nowa.",
+      "scope": "Pilot na meta, zakupach i artykułach; coverage map kontrakt → obserwowalne asercje; pozytywne i konkurujące intencje PL/EN.",
+      "acceptance_criteria": [
+        "Testy odróżniają dobry wynik od wiarygodnego błędu",
+        "Brak testowania ukrytego toku rozumowania",
+        "Runtime evidence dla dokładnej wersji; brak dowodu pozostaje NOT_RUN"
+      ],
+      "depends_on": [
+        "ENG-01"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-04",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "existing skill",
+      "title": "Doprowadzić skill-evaluation do candidate",
+      "rationale": "Draft 0.2.0 ma już zamrożony plan, comparator i analizę wariancji.",
+      "scope": "Zweryfikować na baseline bez skill i poprzedniej wersji; zachować niezależność wykonawcy i evaluatora; podać wyniki per case i severity.",
+      "acceptance_criteria": [
+        "Wykonawca nie widzi rubryk",
+        "Runtime/model/input/tool budget są porównywalne",
+        "FAIL i brak evidence nie zamieniają się w PASS",
+        "Udokumentowana korzyść lub decyzja ITERATE/REJECT"
+      ],
+      "depends_on": [
+        "ENG-03"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": [
+        "AIS-05",
+        "AIS-20"
+      ]
+    },
+    {
+      "id": "ENG-05",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "existing skill",
+      "title": "Doprowadzić skill-release-review do candidate",
+      "rationale": "Końcowy review już istnieje jako draft 0.2.0; trzeba powiązać go z realną polityką.",
+      "scope": "Pilot decyzji dla jednego zdrowego candidate, jednego brakującego dowodu i jednego high failure. Sprawdzić tożsamość źródła, paczki i kanału.",
+      "acceptance_criteria": [
+        "Wynik zgodny z ENG-02",
+        "Nieaktualny dowód nie potwierdza zmienionej wersji",
+        "APPROVE nie uruchamia merge/release",
+        "Znany high failure blokuje także personal-beta"
+      ],
+      "depends_on": [
+        "ENG-02",
+        "ENG-04"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-06",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "workflow",
+      "title": "Usprawnić istniejący skill-development",
+      "rationale": "Masz proces, lecz wiele ręcznych przejść i niejednolite dokumenty; nowy meta-workflow zdublowałby odpowiedzialność.",
+      "scope": "Dodać krótki intake, reuse-or-build, profil zmiany, kontrakt, testy i handoff. Rozpocząć projektowanie testów przy specyfikacji; sfinalizować po draft.",
+      "acceptance_criteria": [
+        "DOCS nie uruchamia pełnej kampanii",
+        "NEW/ROUTING/BEHAVIOR/RESOURCE mają jawną macierz kontroli",
+        "Output obejmuje implementację, evidence i najmniejszy następny krok"
+      ],
+      "depends_on": [
+        "ENG-02",
+        "ENG-03"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-07",
+      "priority": "P1",
+      "epic": "Skill Engineering",
+      "type": "script/template",
+      "title": "Dodać mały scaffolder oparty na istniejącym template",
+      "rationale": "Szablony SKILL.md i cases.yaml już są; ręczne kopiowanie zwiększa liczbę niespójności.",
+      "scope": "Skrypt tworzy pakiet z kontraktu, korzystając z templates/skill-template; nie generuje pustych katalogów i nie nadpisuje istniejącego skill.",
+      "acceptance_criteria": [
+        "Powtarzalny output",
+        "Brak overwrite i path traversal",
+        "Poprawne nazwy oraz walidacja",
+        "Referencje powstają tylko gdy potrzebne"
+      ],
+      "depends_on": [
+        "ENG-06"
+      ],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-08",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "runtime tooling",
+      "title": "Zintegrować lokalny runner z repozytoryjnym eval protocol",
+      "rationale": "Runner poza repo już obsługuje izolację, smoke, kolejkę i evidence; odbudowa od zera nie ma sensu.",
+      "scope": "Najpierw ustalić co jest już upstream. Przenieść potrzebne elementy controller-only do scripts/eval, zachowując receipt.py/campaign.py jako kontrakt. Bez danych prywatnych i historycznej autoryzacji do Drive.",
+      "acceptance_criteria": [
+        "Jedna komenda przygotowuje, wykonuje i archiwizuje przypadek",
+        "Wznowienie nie duplikuje run",
+        "Unassisted executor nie widzi rubric",
+        "CLI i Desktop mają oddzielne dowody",
+        "Dawne external-write authorization nie jest kopiowane do biblioteki"
+      ],
+      "depends_on": [
+        "ENG-01",
+        "ENG-04"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": [
+        "AIS-05",
+        "AIS-20"
+      ]
+    },
+    {
+      "id": "ENG-09",
+      "priority": "P1",
+      "epic": "Skill Engineering",
+      "type": "script/control",
+      "title": "Dodać analizę wpływu zmiany i wybór testów",
+      "rationale": "Każde rozszerzenie nie powinno odpalać całej kosztownej kampanii, ale wspólne komponenty mają szeroki wpływ.",
+      "scope": "Rozszerzyć istniejące walidatory o affected skills/workflows z grafu dependencies i zasobów; pełny suite przy zmianach registry, buildera lub wspólnego kontraktu.",
+      "acceptance_criteria": [
+        "Zmiana specialist wybiera dependents i routing neighbors",
+        "Zmiana wspólnego pliku nie pomija dotkniętych flow",
+        "Dobór jest deterministyczny i ma uzasadnienie"
+      ],
+      "depends_on": [
+        "ENG-06",
+        "ENG-08"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-10",
+      "priority": "P1",
+      "epic": "Skill Engineering",
+      "type": "catalog/evals",
+      "title": "Utrzymywać granice routingu i zestaw przypadków konkurujących",
+      "rationale": "Wzrost biblioteki szczególnie grozi kolizją consumer/commerce, research/article i OAF/software.",
+      "scope": "Dodać lekką macierz sąsiadów i routing cases; nie tworzyć centralnego mega-routera ani drugiego ręcznego katalogu procedur.",
+      "acceptance_criteria": [
+        "Consumer purchase nie uruchamia Commerce",
+        "Tekst użytkownika do redakcji nie uruchamia pełnego research",
+        "Software ADR nie udaje OAF diagnozy",
+        "Przypadki obejmują PL/EN i pośrednią intencję"
+      ],
+      "depends_on": [
+        "ENG-03"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": [
+        "AIS-06"
+      ]
+    },
+    {
+      "id": "ENG-11",
+      "priority": "P1",
+      "epic": "Skill Engineering",
+      "type": "metrics/control",
+      "title": "Mierzyć użyteczność i koszt procesu",
+      "rationale": "Liczba skills i zielony YAML nie dowodzą oszczędności czasu ani jakości.",
+      "scope": "Dodać do istniejących receipts opcjonalne metryki czasu, dostępnych tokens/tool calls, kosztu jeśli faktycznie znany, interwencji i poprawek. Trzymać benchmark na tych samych wejściach.",
+      "acceptance_criteria": [
+        "Brak kosztu jest unknown",
+        "Wynik zawiera medianę/range i denominator",
+        "Odsetek ciężkich błędów nie ginie w średniej",
+        "Porównanie do pracy bez skill lub accepted version"
+      ],
+      "depends_on": [
+        "ENG-04",
+        "ENG-08"
+      ],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-12",
+      "priority": "P1",
+      "epic": "Skill Engineering",
+      "type": "control/evals",
+      "title": "Dodawać regresje z realnych poprawek użytkownika",
+      "rationale": "Najbardziej wartościowe testy pochodzą z przypadków, gdzie realny wynik zawiódł.",
+      "scope": "Rozszerzyć istniejący revision/post-release loop; anonimizować wejście, zachować błąd i kontrakt, dodać regresję przed poprawką.",
+      "acceptance_criteria": [
+        "Pierwotny failure pozostaje w historii",
+        "Dane prywatne nie trafiają do publicznego fixture",
+        "Test nie jest osłabiony, by naprawa wyglądała dobrze"
+      ],
+      "depends_on": [
+        "ENG-03",
+        "ENG-08"
+      ],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-13",
+      "priority": "P2",
+      "epic": "Skill Engineering",
+      "type": "maintenance/control",
+      "title": "Wprowadzić przegląd użycia, scalanie i deprecację",
+      "rationale": "Duży katalog zwiększa koszt kontekstu i utrzymania, także gdy poszczególne skills są dobre.",
+      "scope": "Okresowy review tylko na danych o użyciu/incydentach; wskazać komponenty nieużywane, pokrywające się i wyparte przez native tools.",
+      "acceptance_criteria": [
+        "Każde merge/deprecate ma dowód i migration path",
+        "Rzadko używany skill o dużej wartości nie jest automatycznie usuwany",
+        "Brak telemetry nie udaje braku użycia"
+      ],
+      "depends_on": [
+        "ENG-11"
+      ],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-14",
+      "priority": "P2",
+      "epic": "Skill Engineering",
+      "type": "catalog/release",
+      "title": "Dodać do katalogu flow i jawny stan dostępności",
+      "rationale": "Katalog i docs/processes.json już istnieją; nowe flow powinny korzystać z tej samej prezentacji.",
+      "scope": "Rozszerzyć generator o nowe domains, flow, kanały i readiness; odróżnić suggested path od registered runtime workflow.",
+      "acceptance_criteria": [
+        "Brak ręcznie zdublowanych definicji",
+        "Candidate/draft nie wyglądają jak dostępna produkcja",
+        "Stan installed, main i evidence jest rozróżnialny"
+      ],
+      "depends_on": [
+        "ENG-01",
+        "ENG-10"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CORE-01",
+      "priority": "P1",
+      "epic": "Shared methods",
+      "type": "planned skill",
+      "title": "Zrealizować minimalny research-brief",
+      "rationale": "Jest zaplanowany w skills/core/README; zakupy, artykuły i vendor research mają podobny etap definiowania pytania.",
+      "scope": "Cel decyzji, odbiorca, must-have, ograniczenia, zakres źródeł i stop condition. Pilot z Consumer i Writing przed utrwaleniem abstrakcji.",
+      "acceptance_criteria": [
+        "2–3 realne zastosowania pokazują tę samą metodę",
+        "Krótkie pytanie nie wymaga intake",
+        "Brak profilu użytkownika w skill",
+        "Kontrakt pasuje do obu flow"
+      ],
+      "depends_on": [
+        "CON-02",
+        "WRI-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CORE-02",
+      "priority": "P1",
+      "epic": "Shared methods",
+      "type": "planned skill/reference",
+      "title": "Zrealizować evidence-validator bez drugiej analizy domenowej",
+      "rationale": "Już jest zaplanowany; istnieje też evidence contract w report-composer.",
+      "scope": "Reużyć definicje pochodzenia i niepewności. Kontrola źródeł, daty, sprzeczności i adekwatności wniosku; bez wybierania produktu lub pisania artykułu.",
+      "acceptance_criteria": [
+        "Nie kopiuje ledger z composer",
+        "Fakt, user claim, inference i unknown są rozróżnione",
+        "Testuje sprzeczne, stare i marketingowe dane",
+        "Nie analizuje ponownie domeny"
+      ],
+      "depends_on": [
+        "CON-03",
+        "WRI-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CORE-03",
+      "priority": "P1",
+      "epic": "Shared methods",
+      "type": "planned skill",
+      "title": "Zrealizować structured-comparison",
+      "rationale": "Już jest zaplanowany; porównanie zakupów i rozwiązań technicznych ma wspólne kryteria i trade-offs.",
+      "scope": "Metoda porównania z hard constraints przed preferencjami; brak danych to unknown. Wagi tylko jawnie uzgodnione; obliczenia w skrypcie.",
+      "acceptance_criteria": [
+        "Niespełnienie must-have nie jest kompensowane ceną",
+        "Brak specyfikacji nie staje się niskim score",
+        "Zmiana priorytetu pokazuje warunek zmiany rekomendacji"
+      ],
+      "depends_on": [
+        "CON-04",
+        "PRO-01"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CORE-04",
+      "priority": "P2",
+      "epic": "Shared methods",
+      "type": "planned skill/reference",
+      "title": "Sprawdzić potrzebę handoff-generator",
+      "rationale": "Zaplanowany core skill może pomóc w pracy między modelami, ale najpierw wystarczy template w workflow.",
+      "scope": "Minimalny handoff: cel, źródła, ustalenia, decyzje, unknowns, authority, next action. Skill dopiero gdy niezależny handoff powtarza się w kilku domenach.",
+      "acceptance_criteria": [
+        "Przeniesienie nie dopisuje zgód",
+        "Odbiorca dostaje potrzebny kontekst i nie dostaje rubryk",
+        "Da się wznowić zadanie bez odtwarzania całej rozmowy"
+      ],
+      "depends_on": [
+        "ENG-06"
+      ],
+      "effort": "S",
+      "status": "DISCOVERY",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CON-01",
+      "priority": "P1",
+      "epic": "Consumer decisions",
+      "type": "specification/context",
+      "title": "Zdefiniować granice Consumer i prywatny purchase profile",
+      "rationale": "Zakup dla siebie to inny cel niż wejście na rynek e-commerce.",
+      "scope": "Nowa domena skills/consumer; kraj/rynek, waluta, budżet, zastosowanie i posiadany sprzęt w kontekście. Nazwy i boundaries przechodzą skill-specification.",
+      "acceptance_criteria": [
+        "Minimum 3 przykłady: sprzęt, dom/AGD, software subscription",
+        "Osobno must-have i nice-to-have",
+        "Kupno do użytku własnego nie uruchamia Commerce"
+      ],
+      "depends_on": [
+        "ENG-01"
+      ],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CON-02",
+      "priority": "P1",
+      "epic": "Consumer decisions",
+      "type": "workflow",
+      "title": "Zbudować purchase-decision jako pierwszy pionowy pilot",
+      "rationale": "Realizuje dokładnie prośbę: mówię potrzebę, otrzymuję uporządkowany research i rekomendację.",
+      "scope": "Need → constraints → shortlist → hard-filter → evidence → comparison → offer check → recommendation. Zacząć od lekkich reference stages; specialists wyodrębniać gdy są niezależnie użyteczni.",
+      "acceptance_criteria": [
+        "3–5 dopasowanych opcji jako default",
+        "Najlepszy wybór, alternatywa i warunek niewybierania",
+        "Odpowiedź rozróżnia model i ofertę",
+        "Brak zakupu/zamówienia",
+        "Ma stop condition i obsługę niedostępnego narzędzia"
+      ],
+      "depends_on": [
+        "CON-01",
+        "ENG-06"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CON-03",
+      "priority": "P1",
+      "epic": "Consumer decisions",
+      "type": "new skill",
+      "title": "Zbudować product-evidence-review",
+      "rationale": "Karty marketingowe i rankingi afiliacyjne nie wystarczają do rekomendacji.",
+      "scope": "Ocena znanego modelu: exact SKU, region/revision, official specs/manual, niezależne pomiary, awarie/limitations; popularność nie jest dowodem jakości.",
+      "acceptance_criteria": [
+        "Źródło przy decydującej claim",
+        "Wariant modelu rozpoznany",
+        "Konflikt spec/test jest widoczny",
+        "Brak testu nie oznacza potwierdzonej jakości",
+        "Produkt niekompatybilny nie trafia do zwycięzców"
+      ],
+      "depends_on": [
+        "CON-01",
+        "ENG-03"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CON-04",
+      "priority": "P1",
+      "epic": "Consumer decisions",
+      "type": "new skill",
+      "title": "Zbudować product-fit-comparison",
+      "rationale": "Najlepszy produkt dla Twojej sytuacji nie musi wygrać ogólnego rankingu.",
+      "scope": "Porównać model do scenariuszy użytkowania, hard constraints, jakości dowodów i trade-offs. Na start własny mały kontrakt; po pilocie wykorzystać CORE-03.",
+      "acceptance_criteria": [
+        "Jawne kryteria i dowody",
+        "Brak nieuzasadnionego aggregate score",
+        "Wskazany kompromis zwycięzcy i strongest alternative",
+        "Aktualny produkt/odroczenie może wygrać"
+      ],
+      "depends_on": [
+        "CON-03"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CON-05",
+      "priority": "P1",
+      "epic": "Consumer decisions",
+      "type": "new skill + script",
+      "title": "Zbudować purchase-offer-review i prosty kalkulator TCO",
+      "rationale": "Wybór modelu i wybór konkretnej oferty mają inne dane i failure modes.",
+      "scope": "Dla known SKU sprawdzić sprzedawcę, cenę, dostępność, dostawę, gwarancję/zwroty i warunki. TCO na znanym okresie: zakup, eksploatacja, abonament, opłaty; nie estymować nieznanych kosztów bez etykiety.",
+      "acceptance_criteria": [
+        "Oferta ma exact SKU, walutę, rynek, URL i checked_at",
+        "Nieudokumentowane stock/seller quality są unknown",
+        "Arytmetyka ma testy i jednostki",
+        "Brak danych prawnych nie daje legal clearance"
+      ],
+      "depends_on": [
+        "CON-01"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CON-06",
+      "priority": "P1",
+      "epic": "Consumer decisions",
+      "type": "evals/pilot",
+      "title": "Sprawdzić purchase-decision w realnych przypadkach",
+      "rationale": "Flow musi oszczędzać pracę, a nie produkować długi research do każdego zakupu.",
+      "scope": "Pilot sprzętu, AGD/domu i subskrypcji oraz przypadki: brak must-have, podobne warianty, stare ceny, konflikt testów, zakup biznesowy, bardzo tania rzecz.",
+      "acceptance_criteria": [
+        "Około 3–5 realnych użyć zgodnie z lifecycle",
+        "Zestaw realistycznych negatives i failure cases",
+        "Wynik skraca czas i poprawki vs baseline",
+        "Brak nieautoryzowanej transakcji"
+      ],
+      "depends_on": [
+        "CON-02",
+        "CON-03",
+        "CON-04",
+        "CON-05",
+        "ENG-04"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CON-07",
+      "priority": "P2",
+      "epic": "Consumer decisions",
+      "type": "context + automation",
+      "title": "Dodać price/availability watch na wyraźne zlecenie",
+      "rationale": "Monitoring ma sens po wyborze produktu i określeniu ceny docelowej.",
+      "scope": "Reużyć automation hosta; zachować exact SKU, warunek alertu, cadence, expiry i quiet-on-unchanged. Nie budować crawlera/daemonu.",
+      "acceptance_criteria": [
+        "Powiadomienie tylko o znaczącej zmianie",
+        "Dane odświeżone przed alertem",
+        "Wygaszenie/stop są jawne",
+        "Watch nie kupuje produktu"
+      ],
+      "depends_on": [
+        "CON-05",
+        "CON-06"
+      ],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "CON-08",
+      "priority": "P2",
+      "epic": "Consumer decisions",
+      "type": "workflow branch",
+      "title": "Rozszerzyć decyzję o repair / keep / replace",
+      "rationale": "Największa oszczędność może polegać na niewymienianiu sprawnej rzeczy.",
+      "scope": "Gałąź purchase-decision: obecny problem, naprawa/serwis, koszt wymiany, przewidywane ograniczenia i trade-off. Osobny skill tylko przy powtarzalnej analizie.",
+      "acceptance_criteria": [
+        "Odroczenie i naprawa są realnymi opcjami",
+        "Brak diagnozy technicznej jest unknown",
+        "Nie wydaje niebezpiecznych instrukcji naprawczych"
+      ],
+      "depends_on": [
+        "CON-06"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "WRI-01",
+      "priority": "P1",
+      "epic": "Writing / publishing",
+      "type": "inventory/adapter",
+      "title": "Zidentyfikować istniejący skill artykułowy",
+      "rationale": "Użytkownik deklaruje skill w aplikacji, ale nie ma go w udostępnionym katalogu ani w drzewie ai-skills.",
+      "scope": "Odczytać name/version/contract/dependencies, rozróżnić zewnętrzny plugin i repo source; zachować portable boundary. Bez kopiowania cudzej implementacji.",
+      "acceptance_criteria": [
+        "Znana funkcja, wejście i wyjście",
+        "Legalny sposób użycia/adapter",
+        "Brak zależności oznacza unavailable, a nie udawane wywołanie"
+      ],
+      "depends_on": [],
+      "effort": "S",
+      "status": "DISCOVERY",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "WRI-02",
+      "priority": "P1",
+      "epic": "Writing / publishing",
+      "type": "workflow",
+      "title": "Zbudować article-development wokół obecnego writera",
+      "rationale": "Potrzebujesz opiniotwórczych i analitycznych tekstów; największa wartość jest w tezie i dowodach.",
+      "scope": "Brief → teza/odbiorca → potrzebny research → argument structure → existing writer → critique → evidence check → revision. Dla własnego draft pomijać wcześniejsze etapy.",
+      "acceptance_criteria": [
+        "Jeden spójny tekst gotowy do redakcji",
+        "Odrębny factual/research gate",
+        "Research kończy się gdy wspiera główne claims",
+        "Nie tworzy nowego article-writer",
+        "Znany kontrakt fallback przy braku adaptera"
+      ],
+      "depends_on": [
+        "WRI-01",
+        "ENG-06"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "WRI-03",
+      "priority": "P1",
+      "epic": "Writing / publishing",
+      "type": "new skill",
+      "title": "Zbudować editorial-argument-review",
+      "rationale": "Płynny język nie gwarantuje tezy, logiki ani wartości dla odbiorcy.",
+      "scope": "Kontrola centralnej tezy, wnioskowania, weakest premise, strongest counterargument, struktury, powtórzeń i konkretności. Nie researchuje i nie przepisywuje całości bez potrzeby.",
+      "acceptance_criteria": [
+        "Rozróżnia błąd logiczny i preferencję stylistyczną",
+        "Wskazuje minimalną poprawkę",
+        "Nie usuwa zastrzeżeń wzmacniających uczciwość",
+        "Nie narzuca generycznego AI tonu"
+      ],
+      "depends_on": [
+        "WRI-01"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "WRI-04",
+      "priority": "P1",
+      "epic": "Writing / publishing",
+      "type": "reference → conditional skill",
+      "title": "Zdefiniować article-claim-check",
+      "rationale": "Faktografia, cytowania i przypisy muszą zgadzać się z faktycznym źródłem.",
+      "scope": "Lista claims do kontroli: fakty/cytaty/liczby/causal claims; sprawdzić źródła i daty, oznaczyć opinion/inference. Najpierw reference w flow; po re-use delegować ogólną kontrolę do CORE-02.",
+      "acceptance_criteria": [
+        "Nieistniejący link/cytat jest blokowany",
+        "Cytowanie wspiera konkretną claim",
+        "Prywatny case nie trafia do publikacji bez świadomej decyzji",
+        "Własne doświadczenie nie jest dopisywane"
+      ],
+      "depends_on": [
+        "WRI-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "WRI-05",
+      "priority": "P1",
+      "epic": "Writing / publishing",
+      "type": "project context + pilot",
+      "title": "Zbudować prywatny voice profile i sprawdzić flow",
+      "rationale": "Twój styl powinien wynikać z autentycznych próbek, a nie z ogólnych przymiotników.",
+      "scope": "3–5 tekstów/próbek, reguły struktury, słownictwo i antyprzykłady w kontekście projektu. Pilot: techniczny artykuł, executive opinion, poprawa własnego tekstu.",
+      "acceptance_criteria": [
+        "Profil nie jest zaszyty w publiczny skill",
+        "Tekst nie wymyśla doświadczeń",
+        "Blind A/B ogranicza wpływ atrakcyjnego formatowania",
+        "Mierzony zakres Twoich poprawek"
+      ],
+      "depends_on": [
+        "WRI-02",
+        "WRI-03",
+        "WRI-04",
+        "ENG-04"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "WRI-06",
+      "priority": "P2",
+      "epic": "Writing / publishing",
+      "type": "workflow branch / external tools",
+      "title": "Dodać adaptacje i publication handoff",
+      "rationale": "Jeden zatwierdzony tekst może zasilać LinkedIn, newsletter i stronę.",
+      "scope": "Adaptacja odbiorcy i formatu dopiero z ukończonego tekstu; SEO tylko dla właściwego kanału. Reużyć istniejące narzędzia strony/Docs; publikacja na wyraźne polecenie.",
+      "acceptance_criteria": [
+        "Brak nowych niezweryfikowanych tez",
+        "Wersje mają źródłowy tekst i approved state",
+        "Przygotowanie nie publikuje automatycznie",
+        "Nie generuje niepotrzebnych treści kanałowych"
+      ],
+      "depends_on": [
+        "WRI-05"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "PRO-01",
+      "priority": "P2",
+      "epic": "Professional work",
+      "type": "new skill",
+      "title": "Zbudować technical-option-review",
+      "rationale": "Twoja praca Staff/Solution Architect wymaga oceny decyzji o systemie; OAF jest oceną architektury organizacyjnej.",
+      "scope": "Alternatywy techniczne, constraints, integration/data ownership, operacje, koszt, lock-in i reversibility. Output: krótki ADR lub input do decyzji; repo/tool docs są source of truth.",
+      "acceptance_criteria": [
+        "Oddzielna granica od OAF architecture-review",
+        "Co najmniej strongest viable alternative",
+        "Nie wynajduje infrastruktury i API",
+        "Wskazuje co zmieniłoby decyzję"
+      ],
+      "depends_on": [
+        "ENG-10"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "PRO-02",
+      "priority": "P2",
+      "epic": "Professional work",
+      "type": "workflow",
+      "title": "Zbudować technology-selection dla buy/build/vendor",
+      "rationale": "Możesz reużyć porównanie Consumer/Core, ale vendor decision wymaga innych kryteriów.",
+      "scope": "Requirements → buy/build/defer → shortlist → evidence → trial → TCO/risk → recommendation. Dodawać tylko security/data/SLA/exit criteria właściwe dla organizacji.",
+      "acceptance_criteria": [
+        "Nie myli produktu z enterprise offer",
+        "Vendor marketing nie jest dowodem SLA poza umową",
+        "Decyzja uwzględnia trial i exit cost",
+        "Brak automatycznego zakupu"
+      ],
+      "depends_on": [
+        "PRO-01",
+        "CORE-03"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "PRO-03",
+      "priority": "P2",
+      "epic": "Professional work",
+      "type": "new skill",
+      "title": "Zbudować meeting-decision-extraction",
+      "rationale": "Masz kontekst Meeting Summarizer; przydatny wynik to decyzje, zobowiązania i otwarte pytania.",
+      "scope": "Z supplied transcript/notes wydobyć decisions/actions z cytatem/time marker; właściciel i termin tylko gdy padły. Rozróżnić propozycję, zgodę i decyzję.",
+      "acceptance_criteria": [
+        "Brak wymyślonych właścicieli i dat",
+        "Brak przypisania decyzji z luźnej dyskusji",
+        "Sporne ustalenia są oznaczone",
+        "Nie nagrywa i nie wysyła wiadomości"
+      ],
+      "depends_on": [],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "PRO-04",
+      "priority": "P2",
+      "epic": "Professional work",
+      "type": "workflow branch/template",
+      "title": "Dodać executive-decision-memo jako profil",
+      "rationale": "Masz report-composer; osobny generic memo writer łatwo zdubluje kompozycję.",
+      "scope": "Profil: decision, evidence, options, risk, unknowns, owner/next action. Composer tylko jeśli dostępny; jasny lokalny text fallback dla nowego flow.",
+      "acceptance_criteria": [
+        "Nie analizuje ponownie tematu",
+        "Zwarta rekomendacja i trade-offs",
+        "Format nie wzmacnia pewności",
+        "Brak zależności composer nie blokuje opcjonalnej prezentacji"
+      ],
+      "depends_on": [
+        "PRO-01"
+      ],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "PRO-05",
+      "priority": "P2",
+      "epic": "Professional work",
+      "type": "new skill",
+      "title": "Zbudować ai-use-case-review",
+      "rationale": "AI-enabled products są w Twoim kontekście, ale nie każdy problem wymaga LLM/agenta.",
+      "scope": "Problem → deterministic/no-AI alternative → data readiness → eval task → failure cost → pilot boundary. OAF specialists tylko dla problemu organizacyjnego.",
+      "acceptance_criteria": [
+        "Porównanie do prostszej automatyzacji",
+        "Mierzalny pilot i quality/cost threshold",
+        "Explicit human/action authority",
+        "Brak AI ROI opartego na nieznanych liczbach"
+      ],
+      "depends_on": [
+        "PRO-01"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "PRO-06",
+      "priority": "P2",
+      "epic": "Professional work",
+      "type": "new skill + workflow",
+      "title": "Zbudować automation-opportunity-review",
+      "rationale": "Zanim automatyzować, warto sprawdzić częstotliwość, wyjątki, dostęp i koszt błędu.",
+      "scope": "Intake procesu, źródła, deterministyczne kroki, judgement steps, właściciel, retry/idempotency, observability, stop. Output: mały automation brief; implementację wykonują właściwe narzędzia.",
+      "acceptance_criteria": [
+        "Rzeczywista powtarzalność",
+        "Prosty script/native automation oceniony przed agentem",
+        "Error/rollback path",
+        "Brak automatycznego provisioningu"
+      ],
+      "depends_on": [
+        "PRO-05"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "PRO-07",
+      "priority": "P2",
+      "epic": "Professional work",
+      "type": "reuse planned domain",
+      "title": "Uruchomić tender-screening na istniejącym planie Tender",
+      "rationale": "Tender Pilot jest Twoim projektem; skills/tender zawiera już plan 11 metod.",
+      "scope": "Pierwszy wycinek: rfp-extraction → eligibility-check → capability-evidence-match → go-no-go. Parsery do kodu; requirements mają source location. Nie implementować od razu wszystkich 11 skills.",
+      "acceptance_criteria": [
+        "Mandatory fail zatrzymuje dalszy research",
+        "Każda claim ma evidence",
+        "Braki nie stają się deklarowaną zgodnością",
+        "Pilotaż na rzeczywistym lub anonimizowanym RFP"
+      ],
+      "depends_on": [
+        "ENG-06"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "PRO-08",
+      "priority": "P2",
+      "epic": "Professional work",
+      "type": "reuse planned domain + native tools",
+      "title": "Uruchomić website-quality-review zamiast kolejnego buildera",
+      "rationale": "Masz projekty webowe i narzędzia Figma/Sites; domena web-design jest już rozpisana.",
+      "scope": "Najpierw design-critique i visual-regression-review; accessibility-gate dla judgement poza automatycznymi testami. Responsive, links i a11y scans w kodzie/CI.",
+      "acceptance_criteria": [
+        "Sprawdzony realny render desktop/mobile",
+        "Uwagi z lokalizacją i impact",
+        "Brak duplikacji native builder",
+        "Ruch i wygląd wspierają funkcję"
+      ],
+      "depends_on": [
+        "ENG-06"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "LEA-01",
+      "priority": "P2",
+      "epic": "Learning OS",
+      "type": "workflow + project context",
+      "title": "Uruchomić learning-session zgodny z obecnym Learning OS",
+      "rationale": "Instrukcje projektu już określają router i learning loop; nie trzeba ich przepisywać w pięć obowiązkowych skills.",
+      "scope": "Quick question pozostaje quick; dla sesji: cel → minimum theory → practice → feedback → next. knowledge-diagnosis/concept-explainer początkowo jako gałęzie, nie automatyczny pipeline.",
+      "acceptance_criteria": [
+        "Brak przymusowego quizu do definicji",
+        "Po wystarczającym rozumieniu przejście do zastosowania",
+        "Profil i prywatny log w kontekście",
+        "Nie dopisuje osiągniętej kompetencji"
+      ],
+      "depends_on": [],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "LEA-02",
+      "priority": "P2",
+      "epic": "Learning OS",
+      "type": "planned skill",
+      "title": "Zrealizować practice-generator",
+      "rationale": "Zaplanowany skill daje wysoką wartość przez realistyczne zadania zamiast dalszej teorii.",
+      "scope": "Scenariusze decyzji/design/diagnosis z progresywną trudnością i kryterium sukcesu. Dostosować do demonstrated level; nie zdradzać rozwiązania w zadaniu.",
+      "acceptance_criteria": [
+        "Ćwiczenie mierzy cel",
+        "Realne trade-offs i edge cases",
+        "Wskazówki oddzielone od zadania",
+        "Difficulty wynika z evidence"
+      ],
+      "depends_on": [
+        "LEA-01"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "LEA-03",
+      "priority": "P2",
+      "epic": "Learning OS",
+      "type": "planned skill",
+      "title": "Zrealizować competence-check",
+      "rationale": "Własne poczucie zrozumienia nie jest dowodem kompetencji.",
+      "scope": "Ocenić supplied performance: correctness, independence, transfer, trade-offs, error correction; feedback i najmniejszy następny krok. Bez obowiązkowej skali poza checkpoints.",
+      "acceptance_criteria": [
+        "Uzasadnienie oceny zachowuje evidence",
+        "Brak wykonania pozostaje nieocenione",
+        "Nie traktuje completion jako mastery",
+        "Nie zatrzymuje nauki dla nieistotnego perfekcjonizmu"
+      ],
+      "depends_on": [
+        "LEA-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "LEA-04",
+      "priority": "P3",
+      "epic": "Learning OS",
+      "type": "planned skill + optional automation",
+      "title": "Dodać retention-review i learning log dopiero gdy potrzebne",
+      "rationale": "Retencja i wielosesyjna ciągłość są już w instrukcjach; nie każdy temat wymaga śledzenia.",
+      "scope": "Review na demonstrated gaps; log na prośbę lub dla ciągłości. Automatyczne przypomnienia tylko zlecone przez użytkownika.",
+      "acceptance_criteria": [
+        "Recall/application zamiast streszczania",
+        "Log nie zawiera fikcyjnego postępu",
+        "Plan review ma stop/expiry",
+        "Brak niezamówionych powiadomień"
+      ],
+      "depends_on": [
+        "LEA-03"
+      ],
+      "effort": "S",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "LIF-01",
+      "priority": "P2",
+      "epic": "Daily life",
+      "type": "workflow + narrow skill",
+      "title": "Zaprojektować trip-decision i itinerary-feasibility",
+      "rationale": "Projekt Malaga wskazuje kontekst podróży, ale nie dowodzi częstotliwości.",
+      "scope": "Wybór lokalizacji/noclegu/transportu reużywa Consumer/Core; osobna metoda sprawdza czasy, dystanse, godziny, buffer i feasibility. Preferencje w projekcie.",
+      "acceptance_criteria": [
+        "Koszty/datę/dostępność odświeżono",
+        "Plan uwzględnia buffers",
+        "Brak fikcyjnych reservations",
+        "Opcje odpadające na constraints nie są rekomendowane"
+      ],
+      "depends_on": [
+        "CON-06",
+        "CORE-03"
+      ],
+      "effort": "M",
+      "status": "DISCOVERY",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "LIF-02",
+      "priority": "P2",
+      "epic": "Daily life",
+      "type": "workflow",
+      "title": "Zaprojektować property-shortlist-review",
+      "rationale": "Projekt Houses uzasadnia rozpoznanie potrzeby; zakup nieruchomości ma inną wagę niż AGD.",
+      "scope": "Oferty → hard constraints → dojazdy/okolica → koszty znane/scenariusze → shortlist → pytania na viewing. Dokładny adres, budżet i stan w private context.",
+      "acceptance_criteria": [
+        "Fakty z ofert odróżnione od zweryfikowanych",
+        "Nie wykonuje legal/technical clearance",
+        "Wskazuje dokumenty i due-diligence gaps",
+        "Brak automatycznego kontaktu z agentem"
+      ],
+      "depends_on": [
+        "CORE-02",
+        "CORE-03"
+      ],
+      "effort": "L",
+      "status": "DISCOVERY",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "LIF-03",
+      "priority": "P3",
+      "epic": "Daily life",
+      "type": "workflow + script",
+      "title": "Zaprojektować meal-planning / pantry-to-list",
+      "rationale": "Projekty Foodie Assistant i Jedzenie wskazują użyteczny kontekst, lecz częstotliwość trzeba potwierdzić.",
+      "scope": "Budżet/czas/składniki → kilka posiłków → wspólna lista zakupów → batch prep. Agregacja jednostek i ilości w kodzie; preferencje/alergeny w kontekście.",
+      "acceptance_criteria": [
+        "Lista nie duplikuje składników",
+        "Uwzględnia supplied restrictions",
+        "Brak twierdzeń medycznych",
+        "Koszt i wartości odżywcze bez źródła są unknown"
+      ],
+      "depends_on": [],
+      "effort": "M",
+      "status": "DISCOVERY",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "LIF-04",
+      "priority": "P3",
+      "epic": "Daily life",
+      "type": "workflow",
+      "title": "Zaprojektować local-service-selection",
+      "rationale": "Ten sam problem porównania występuje przy ekipie, serwisie i usługach; inne dowody niż dla produktu.",
+      "scope": "Brief → quotes → zakres włączeń/wyłączeń → dostępność → evidence/reviews → rekomendacja i pytania. Consumer profile nie zawiera prywatnego adresu w skill.",
+      "acceptance_criteria": [
+        "Oferty mają porównywalny scope",
+        "Opinie to weak evidence, nie gwarancja",
+        "Brak automatycznego wysłania request",
+        "Najtańsza oferta nie wygrywa mimo braków"
+      ],
+      "depends_on": [
+        "CON-06",
+        "CORE-03"
+      ],
+      "effort": "M",
+      "status": "DISCOVERY",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "LIF-05",
+      "priority": "P3",
+      "epic": "Daily life",
+      "type": "workflow + context",
+      "title": "Zaprojektować subscription-review",
+      "rationale": "Powtarzalne opłaty łączą zakupy i wybór narzędzi, ale nie potrzeba nowego finansowego OS.",
+      "scope": "User-provided list/usage → duplicate value → known annual cost → keep/downgrade/cancel candidates. Przepływ nie korzysta z inwestycyjnego record-store.",
+      "acceptance_criteria": [
+        "Koszt policzony ze znanych inputs",
+        "Brak dostępu do kont nie jest zastępowany domysłem",
+        "Nie anuluje bez zlecenia",
+        "Nie traktuje niskiego usage jako automatycznej decyzji"
+      ],
+      "depends_on": [
+        "CON-05"
+      ],
+      "effort": "S",
+      "status": "DISCOVERY",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "LIF-06",
+      "priority": "P3",
+      "epic": "Daily life",
+      "type": "workflow/template",
+      "title": "Zaprojektować document-to-action dla spraw domowych",
+      "rationale": "Terminy i obowiązki w dokumentach mogą dawać większą wartość niż kolejne streszczenie.",
+      "scope": "Z supplied dokumentu wydobyć termin, warunek, krok i source location; przygotować checklistę/draft odpowiedzi. Privacy i data minimization.",
+      "acceptance_criteria": [
+        "Nie wymyśla deadline",
+        "Interpretacja prawna odróżniona od tekstu dokumentu",
+        "Żadnego wysłania ani zapisania do zewnętrznego store bez odpowiedniego zlecenia"
+      ],
+      "depends_on": [],
+      "effort": "M",
+      "status": "DISCOVERY",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "EXI-01",
+      "priority": "P1",
+      "epic": "Existing portfolio",
+      "type": "evals/readiness",
+      "title": "Rozliczyć bieżące AIS/RT i evidence gaps",
+      "rationale": "Historyczne backlogi są cenne, ale stare FAIL/PASS są związane z poprzednią wersją.",
+      "scope": "Po ENG-01 potwierdzić aktualny stan i priorytet znanych failures; re-test tylko affected paths. Osobna kolejka maintenance, bez blokowania wszystkich nowych pomysłów.",
+      "acceptance_criteria": [
+        "Brak ponownego zlecania wykonanej poprawki",
+        "High unresolved regression blokuje affected release",
+        "Current receipt i pending mają jawny zakres"
+      ],
+      "depends_on": [
+        "ENG-01",
+        "ENG-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": [
+        "AIS-05",
+        "AIS-21",
+        "AIS-22",
+        "RT-001"
+      ]
+    },
+    {
+      "id": "EXI-02",
+      "priority": "P2",
+      "epic": "Existing portfolio",
+      "type": "evals/pilot",
+      "title": "Domknąć dowody dla Career candidates",
+      "rationale": "Job discovery, validity, CV i interview już istnieją jako candidates; budowanie zamienników traci wartość.",
+      "scope": "Priorytet według aktualnego recruitment use case; 3–5 real uses i routing/evidence cases. Mastery CV pozostaje approved private input.",
+      "acceptance_criteria": [
+        "Brak invented experience",
+        "Validity przed kosztownym tailoring",
+        "Dokładna wersja ma evidence",
+        "Nie promuje wszystkich tylko dla kompletności"
+      ],
+      "depends_on": [
+        "ENG-04"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "EXI-03",
+      "priority": "P2",
+      "epic": "Existing portfolio",
+      "type": "workflow",
+      "title": "Sformalizować career-opportunity-to-interview gdy pilot to uzasadni",
+      "rationale": "docs/processes.json już pokazuje suggested pathway, ale bez formalnego runtime workflow.",
+      "scope": "Reużyć istniejące skills; etapy optional/required zależnie od wejścia; register tylko kanały z dependencies. Z supplied interview pomija discovery.",
+      "acceptance_criteria": [
+        "Suggested vs registered jest jasne",
+        "Missing candidate nie jest symulowany",
+        "Flow nie wymusza całej ścieżki do wąskiej prośby"
+      ],
+      "depends_on": [
+        "EXI-02",
+        "ENG-10"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "EXI-04",
+      "priority": "P1",
+      "epic": "Existing portfolio",
+      "type": "existing skills/contracts",
+      "title": "Sprawdzić przenośność report-composer i visual-output-design",
+      "rationale": "Main i installed Lab mają różne wersje; nowe domeny nie powinny dziedziczyć sztywnych wymagań Investing przypadkowo.",
+      "scope": "Ustalić profiles dla purchase/technical memo; composer owns structure, visual owns encoding. Optional presentation degraduje się uczciwie; obowiązkowy visual pozostaje blocked gdy runtime go nie obsługuje.",
+      "acceptance_criteria": [
+        "Nie zmienia domyślnie całej architektury raportów",
+        "Nie wymaga wykresu do krótkiego zakupu",
+        "Nie deklaruje render/client PASS",
+        "Jest test current version i kanału"
+      ],
+      "depends_on": [
+        "ENG-01",
+        "CON-06"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "EXI-05",
+      "priority": "P2",
+      "epic": "Existing portfolio",
+      "type": "integration/control",
+      "title": "Rozwijać OAF/Commerce/Investment OS na podstawie realnych gaps",
+      "rationale": "Te domeny są już mocno rozbudowane; ekspansja powinna usuwać konkretne niedociągnięcia.",
+      "scope": "Re-test affected runtime fixtures, wersjonować kontrakt, zachować domenowe stores. Consumer nie reuse investment-record-store; red-team inwestycyjny nie staje się generic critic.",
+      "acceptance_criteria": [
+        "Nowy skill ma concrete recurring gap",
+        "Brak kopiowania starych product-research/ecommerce aliasów do nowych implementacji",
+        "Zmiana shared core nie powoduje niejawnej migracji istniejących flow"
+      ],
+      "depends_on": [
+        "ENG-09",
+        "ENG-12"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    }
+  ]
+}
