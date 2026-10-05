@@ -7,7 +7,7 @@ description: 'Make an evidence-gated production-readiness decision for an Agent 
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.2.2
+  version: 0.3.0
   maturity: draft
   risk: medium
   last_reviewed: '2026-10-05'
@@ -30,7 +30,7 @@ Require:
 
 The target channel is mandatory. If it is missing, the candidate identity is incomplete: decide `ITERATE`, name the missing channel, and withhold any readiness approval. Do not downgrade this gap to a limitation or follow-up.
 
-If other required evidence is missing, stale, belongs to another revision, or cannot be reproduced, record the gap and do not infer readiness. A local pass does not prove that the packaged artifact contains that revision.
+If other required evidence is missing, stale, belongs to another revision, or cannot be reproduced, record the gap and do not infer readiness. A local pass does not prove that the packaged artifact contains that revision. Preserve per-case states: queued/not-started is `NOT_RUN`; unavailable required runtime/tool is `BLOCKED` / `NOT TESTABLE`; only observed execution can be `PASS` or `FAIL`. For a new promotion, required NOT_RUN or BLOCKED evidence keeps the candidate at `ITERATE`. A separately documented personal-beta continuation for an already-declared production component may retain pending evidence only within the exact component/version, owner, limitation and expiry recorded in the readiness registry; it cannot authorize a new promotion, changed version, expanded scope or known high-severity failure. A model plan or claim is not a substitute for a tool trace when the criterion requires tool execution.
 
 ### Artifact identity hard stop
 
@@ -40,7 +40,7 @@ For package releases, verify the complete identity chain:
 
 The manifest digest must identify the exact reviewed package, and the package must be demonstrably built from the reviewed source revision. Treat a missing required identity field as unverified, not as a match.
 
-Any mismatch or unverifiable required link is a blocker: decide `ITERATE` and withhold promotion. Passing tests, a prior `APPROVE` recommendation, or follow-up acceptance cannot override this gate. Require a rebuild from the reviewed source, a regenerated manifest, package-integrity verification and a fresh release review. If the artifact changes after authorization, obtain new authorization for that exact artifact. Never report a draft or recommendation as a completed publication.
+Any mismatch or unverifiable required link is a blocker: decide `ITERATE` and withhold promotion. Passing tests, a prior `APPROVE` recommendation, or follow-up acceptance cannot override this gate. Require a rebuild from the reviewed source, a regenerated manifest, package-integrity verification and a fresh release review. If the package digest changes after authorization, the prior authorization does not cover the replacement, including when described as a newer version, replacement build, or member of a version range. Obtain fresh authorization that explicitly names the exact replacement digest before publication. Never infer broader authorization from the old approval. Never report a draft or recommendation as a completed publication.
 
 ## Review procedure
 

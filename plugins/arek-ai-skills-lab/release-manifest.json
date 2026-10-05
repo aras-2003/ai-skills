@@ -394,18 +394,18 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "08d3c74d85dbe7f4bde30fa9817aedb810b765cd63a35b5ec7d3623692ad0793",
+      "content_sha256": "cb9e21613c05013edf1dd39b7d1c210c1f9187191f435fcb69a016a07187d4c5",
       "kind": "skill",
       "maturity": "draft",
       "name": "skill-evaluation",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
-      "content_sha256": "395802873733b2b148d3ea2bceff8f2ac05d51005f347972c0c4d750b3e5057c",
+      "content_sha256": "8c0b39691d5ffb9d1b1a3e2075d65e086d6363dddf33477f4aa50c943b115060",
       "kind": "skill",
       "maturity": "draft",
       "name": "skill-release-review",
-      "version": "0.2.2"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "36ddcddc6441e34edabff727a8892bd2a3b34f24e2aea6bee76b89d76acb62e5",
@@ -415,11 +415,11 @@
       "version": "1.0.0"
     },
     {
-      "content_sha256": "2d59c9df810a19620f24aa0a1f7e4343a094bf3358a71ddd8db0b6dc247550d0",
+      "content_sha256": "1badb0dea6755894a0504074087645c773450e0456a9541616d9365c2aa693e5",
       "kind": "skill",
       "maturity": "draft",
       "name": "skill-test-design",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "content_sha256": "18261b0facd272939aa449f1ceaa2fc659a763d5afbf2d1850693c071a1cf4fc",
@@ -493,9 +493,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "433c1e16c71dd428d5a0109558196256ef6a8f3af244a797f6d1fa8b16ac165d",
-  "release_id": "0.32.0+8d200a3bd9ee",
+  "payload_content_sha256": "ad56bfcf3eed37d667bf2f8da8b0bb2f17333e8c235c2d8453c38dd0d9e06e5c",
+  "release_id": "0.33.0+1731c308e8f2",
   "schema_version": "1.0",
-  "source_revision": "8d200a3bd9ee675687de85f11ca7b4f6cbf8ba3f",
-  "version": "0.32.0"
+  "source_revision": "1731c308e8f281de60181acd057ead359d052372",
+  "version": "0.33.0"
 }

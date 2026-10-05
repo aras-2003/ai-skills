@@ -8,7 +8,7 @@ description: 'Design and maintain routing, behavioral, edge-case, adversarial, a
   '
 metadata:
   owner: arkadiusz-kamrowski
-  version: 0.2.0
+  version: 0.3.0
   maturity: draft
   risk: low
   last_reviewed: '2026-10-05'
@@ -43,8 +43,17 @@ If the contract is not agreed, clarify or flag that gap before encoding assumpti
 5. **Write stable assertions.** Prefer semantic must/must-not expectations, required evidence or fields, explicit route, and required stop/action boundaries. Avoid exact wording, hidden reasoning, cosmetic preferences and tests that a vaguely on-topic answer could pass.
 6. **Set severity and evidence.** Mark which cases are smoke, routing, behavioral, regression or high-risk in the case ID/name or suite documentation. Keep high-risk failures visible; do not hide them inside an average.
 7. **Validate the cases.** Ensure inputs are self-contained, expected outcomes are unambiguous, references/fixtures exist, case IDs are unique, and the schema is accepted by the repository validator.
-8. **Review for bias and leakage.** Do not disclose rubric-only facts to an unassisted executor when the evaluation claims to be unassisted. Avoid giving the model the answer in the prompt. Ensure negative cases do not test a different capability merely to make the target fail.
-9. **Keep suites maintainable.** Remove duplicates only when they test the same distinction. Retain a regression while the failure mode remains relevant; document any retired case and reason. Re-run impacted cases when skill behavior or evaluator rules change.
+8. **Define execution evidence.** For every criterion that requires an actual browser, API, runtime or external action trace, specify the observable receipt needed (tool trace, URL or resource, check time, and observed result as relevant). A plan or narrative claim is not execution evidence.
+9. **Review for bias and leakage.** Do not disclose rubric-only facts to an unassisted executor when the evaluation claims to be unassisted. Avoid giving the model the answer in the prompt. Ensure negative cases do not test a different capability merely to make the target fail.
+10. **Keep suites maintainable.** Remove duplicates only when they test the same distinction. Retain a regression while the failure mode remains relevant; document any retired case and reason. Re-run impacted cases when skill behavior or evaluator rules change.
+
+## Execution evidence states
+
+Design assertions so execution state cannot be mistaken for outcome:
+- `NOT_RUN`: execution has not started, including a queued job with no runner/steps.
+- `BLOCKED` / `NOT TESTABLE`: execution cannot test the criterion because a required runtime, tool or fixture is unavailable.
+- `PASS` / `FAIL`: use only after observing the criterion in an execution that actually ran.
+- If a criterion explicitly requires checking a live source, a model explanation or stated plan cannot satisfy it. Define the trace, source/URL, check time and observed value needed to pass.
 
 ## Minimum production-candidate coverage
 
@@ -75,9 +84,17 @@ Each case should test one primary distinction. Keep criteria observable, concise
 
 Return:
 - the coverage map from contract/risk to case IDs;
+- the required execution receipt and state for every runtime-dependent assertion;
 - missing coverage and any accepted gaps;
 - cases added/changed/retired with reasons;
 - validation command/result;
 - the smallest additional test needed, if a material gap remains.
 
 Tests represent the intended contract, not whichever current implementation is easiest to pass.
+
+## Lab runtime eval inputs
+
+When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
+
+- `references/evals/description-only-routing.input.md`
+- `references/evals/live-source-evidence.input.md`
