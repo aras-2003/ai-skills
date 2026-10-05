@@ -4,7 +4,7 @@ description: >
   Make an evidence-gated production-readiness decision for an Agent Skill after validation and evaluation are complete. Use before promotion or publication, including when reviewing a changed production skill.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.2.1"
+  version: "0.2.2"
   maturity: draft
   risk: medium
   last_reviewed: 2026-10-05
@@ -25,7 +25,9 @@ Require:
 - routing, behavioral and regression evaluation evidence appropriate to the change;
 - release criteria and known risk acceptances.
 
-If evidence is missing, stale, belongs to another revision, or cannot be reproduced, record the gap and do not infer readiness. A local pass does not prove that the packaged artifact contains that revision.
+The target channel is mandatory. If it is missing, the candidate identity is incomplete: decide `ITERATE`, name the missing channel, and withhold any readiness approval. Do not downgrade this gap to a limitation or follow-up.
+
+If other required evidence is missing, stale, belongs to another revision, or cannot be reproduced, record the gap and do not infer readiness. A local pass does not prove that the packaged artifact contains that revision.
 
 ### Artifact identity hard stop
 
@@ -53,6 +55,7 @@ Any mismatch or unverifiable required link is a blocker: decide `ITERATE` and wi
 - **APPROVE** — all mandatory evidence is current and bound to the candidate; the source → build → package → manifest chain matches the exact target artifact; no unresolved blocking/high issue; behavior adds value; packaging, channel and ownership are ready.
 - **APPROVE WITH FOLLOW-UP** — no blocker/high issue; only bounded low/medium follow-ups remain, each with owner, due/trigger and accepted risk.
 - **ITERATE** — fixable required evidence, validation, test, packaging or readiness gaps remain. Stale evidence, a mismatch or an unverifiable required link in the artifact identity chain always blocks promotion.
+- **ITERATE** — the candidate's target release channel is not identified; channel is part of the required candidate identity.
 - **REJECT** — unsafe/surprising behavior, severe unresolved regression, no demonstrated value, unstable scope, or a better non-skill solution is established.
 
 A missing fact is a blocker only when it is required by the declared release policy; otherwise record it as a limitation. Never relabel missing evidence as a pass.

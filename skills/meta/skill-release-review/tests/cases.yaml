@@ -10,6 +10,19 @@ cases:
         - recommend approval only when all mandatory gates pass
         - keep human promotion authorization separate
 
+  - id: release-missing-target-channel
+    case: candidate-channel-not-identified
+    input: "The source, build, package and manifest match brief-writer 0.2.1 at digest d4e5; all required tests and validations pass. Prepare the release review."
+    expected:
+      should_trigger: true
+      must:
+        - identify the missing target channel as an incomplete candidate identity
+        - withhold readiness approval and request the named release channel
+        - keep the decision at ITERATE until the channel is provided
+      must_not:
+        - return APPROVE or APPROVE WITH FOLLOW-UP while the mandatory channel is missing
+        - treat the missing channel as a non-blocking limitation
+
   - id: release-stale-evidence
     case: evidence-for-prior-version
     input: "job-validity-check 0.2.0 changes external tool permissions, but the only validation and behavioral evidence is for 0.1.0."
