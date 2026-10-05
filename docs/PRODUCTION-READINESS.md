@@ -12,7 +12,7 @@ This review does **not** mass-promote or mass-downgrade components. It distingui
 
 After evaluator-rubric isolation changes, historical narrative PASS/PASS++ summaries are not treated as exact-version unassisted receipts. Where no matching receipt exists, `current_runtime_receipt: pending` is explicit.
 
-Existing production maturity is retained temporarily for review rather than silently re-certified. Each pending record has an owner and review date. No such record is an exception from a known unresolved high-severity failure.
+Existing production maturity may be retained temporarily for review rather than silently re-certified. Each pending record must identify the exact component/version, evidence gap, limitation, owner and expiry. The component/version fields in that record define the exception's scope. This R7 personal-beta disposition applies only to components already declared production; it does not authorize a new promotion, changed version, expanded scope or wider audience. No exception can cover a known unresolved high-severity failure.
 
 ## Promotion/readiness rule
 
@@ -21,7 +21,7 @@ A future new promotion or re-certification should require:
 2. representative behavior tests;
 3. natural-routing evidence when automatic selection matters;
 4. an exact runtime/model receipt where runtime behavior is claimed;
-5. real-use/pilot evidence required by the lifecycle policy, or an explicit reviewed exception whose scope and expiry are documented;
+5. real-use/pilot evidence required by the lifecycle policy for new promotions; the temporary R7 continuation exception is limited to existing declared production components and does not waive new-promotion gates;
 6. no unresolved high-severity failure.
 
 `NOT_RUN`/pending is a valid evidence state. It must never be translated to PASS.

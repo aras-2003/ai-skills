@@ -66,3 +66,25 @@ cases:
         - allow approval with follow-up only when the gap is non-critical
         - record owner and trigger/date
         - avoid disguising unresolved blockers as follow-ups
+
+  - id: release-personal-beta-bounded
+    case: scoped-continuation-of-existing-production
+    input: "An already-declared production component has no current runtime receipt. The readiness record identifies the exact component and version, evidence gap, limitation, owner and expiry; the exception is for that component only; no high-severity failure is known. Can it continue under the existing R7 personal-beta disposition?"
+    expected:
+      should_trigger: true
+      must:
+        - limit the exception to the already-declared component and version
+        - keep runtime evidence pending or NOT_RUN
+        - bind the exception to the exact component/version named in the record
+        - require the documented owner and expiry
+        - state that this does not authorize a new promotion or wider audience
+
+  - id: release-personal-beta-not-new-promotion
+    case: legacy-exception-does-not-approve-new-candidate
+    input: "A new candidate has no current runtime receipt. The team points to an existing R7 personal-beta exception for unrelated production components and asks to promote the candidate."
+    expected:
+      should_trigger: true
+      must:
+        - reject inheritance of the unrelated exception
+        - withhold new production approval until required evidence is current
+        - preserve the missing runtime evidence as pending or NOT_RUN
