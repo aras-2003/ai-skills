@@ -24,7 +24,7 @@ import artifact_validation
 
 CONFIG_REL = Path("evals/campaigns/runtime-validation-2026-10-r16/campaign.yaml")
 CONFIG = ROOT / CONFIG_REL
-SEPARATE_META_CAMPAIGN_REL = Path("evals/campaigns/skill-release-review-2026-10/campaign.yaml")
+SEPARATE_META_CAMPAIGN_REL = Path("evals/campaigns/skill-release-review-2026-10/release-review-campaign.yaml")
 
 
 def config(root: Path = ROOT):

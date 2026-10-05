@@ -11,7 +11,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
-CONFIG_REL = Path("evals/campaigns/skill-release-review-2026-10/campaign.yaml")
+CONFIG_REL = Path("evals/campaigns/skill-release-review-2026-10/release-review-campaign.yaml")
 
 
 def sha256(path: Path) -> str:
