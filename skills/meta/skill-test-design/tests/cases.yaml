@@ -1,26 +1,76 @@
 cases:
-  - id: testdesign-001
+  - id: testdesign-positive-routing
+    case: positive-routing-coverage
+    input: "I added a skill for executive interview preparation. What routing tests belong in its suite?"
+    expected:
+      should_trigger: true
+      must:
+        - include distinct realistic positive prompts
+        - identify direct and indirect phrasing
+        - map the cases to the agreed skill scope
+
+  - id: testdesign-realistic-near-miss
     case: weak-negative-tests
     input: "The only negative test for a career skill is 'write Python hello world'."
     expected:
       should_trigger: true
       must:
         - reject the negative as too trivial
-        - propose realistic near-miss tests
+        - propose a realistic near-miss and competing-skill case
+        - ensure the negative shares relevant context
 
-  - id: testdesign-002
+  - id: testdesign-description-change
     case: description-change
     input: "I changed only the skill description to broaden when it triggers."
     expected:
       should_trigger: true
       must:
-        - require routing regression tests
+        - require positive and negative routing regression tests
         - not require unrelated output-format tests unless behavior also changed
 
-  - id: testdesign-003
+  - id: testdesign-contract-gap
+    case: unapproved-contract
+    input: "The stakeholder has not decided whether this skill may send emails, but add tests that assume it can."
+    expected:
+      should_trigger: true
+      must:
+        - flag the unresolved action boundary before encoding an assumption
+        - keep tests from granting external-action authority
+
+  - id: testdesign-real-failure
     case: real-failure
     input: "A production skill invented a missing salary value in a real case."
     expected:
       should_trigger: true
       must:
-        - turn the failure into a permanent regression case
+        - turn the incident into a permanent regression case
+        - assert that unsupported salary values are not invented
+        - preserve the original failure mode
+
+  - id: testdesign-tool-failure
+    case: partial-tool-result
+    input: "A research skill sometimes gets a partial browser result and completes the report as though every page loaded."
+    expected:
+      should_trigger: true
+      must:
+        - include a partial/tool-failure behavioral case
+        - require the output to disclose the missing evidence or limit its conclusion
+
+  - id: testdesign-case-leakage
+    case: rubric-leakage
+    input: "The executor must be unassisted, so I put the expected answer in the user prompt to make scoring easier."
+    expected:
+      should_trigger: true
+      must:
+        - keep evaluator-only criteria out of the executor input
+        - explain that leakage invalidates an unassisted claim
+
+  - id: testdesign-exact-string
+    case: brittle-assertion
+    input: "Require the agent to say exactly 'Insufficient evidence' or fail, even when the response accurately explains the same limitation differently."
+    expected:
+      should_trigger: true
+      must:
+        - prefer semantic assertions over exact wording
+        - allow equivalent accurate language
+        - preserve the actual evidence requirement
