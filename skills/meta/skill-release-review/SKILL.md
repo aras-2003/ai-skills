@@ -40,6 +40,9 @@ If evidence is missing, stale, belongs to another revision, or cannot be reprodu
 
 ## Decision criteria
 
+The R7 personal-beta continuation exception applies only to already-declared production components. It requires an exact component/version, explicit scope, evidence gap, limitation, named owner and expiry in the readiness record; missing runtime evidence remains pending/`NOT_RUN`. It cannot approve a new production promotion, changed version or expanded audience, and cannot cover a known high-severity failure. Do not inherit that exception when reviewing a new candidate.
+
+
 - **APPROVE** — all mandatory evidence is current and bound to the candidate; no unresolved blocking/high issue; behavior adds value; packaging, channel and ownership are ready.
 - **APPROVE WITH FOLLOW-UP** — no blocker/high issue; only bounded low/medium follow-ups remain, each with owner, due/trigger and accepted risk.
 - **ITERATE** — fixable required evidence, validation, test, packaging or readiness gaps remain.
