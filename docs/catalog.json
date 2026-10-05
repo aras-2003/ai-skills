@@ -268,16 +268,16 @@
       "name": "skill-evaluation",
       "domain": "meta",
       "maturity": "draft",
-      "version": "0.1.0",
-      "description": "Evaluate a candidate Agent Skill against representative eval cases, a no-skill baseline or previous version, and diagnose routing or behavioral regressions. Use after validation and test design, before production promotion, and after material behavior changes.",
+      "version": "0.2.0",
+      "description": "Evaluate an Agent Skill's routing and behavior using predeclared representative cases, a no-skill baseline or accepted prior version, and evidence-based regression analysis. Use after validation and test design, before production promotion, and after material behavior changes.",
       "source": "skills/meta/skill-evaluation/SKILL.md"
     },
     {
       "name": "skill-release-review",
       "domain": "meta",
       "maturity": "draft",
-      "version": "0.1.0",
-      "description": "Perform the final production-readiness review for an Agent Skill. Use after validation and evals are complete, before promoting a candidate from development/main to the production skill catalog.",
+      "version": "0.2.0",
+      "description": "Make an evidence-gated production-readiness decision for an Agent Skill after validation and evaluation are complete. Use before promotion or publication, including when reviewing a changed production skill.",
       "source": "skills/meta/skill-release-review/SKILL.md"
     },
     {
@@ -292,8 +292,8 @@
       "name": "skill-test-design",
       "domain": "meta",
       "maturity": "draft",
-      "version": "0.1.0",
-      "description": "Design routing, behavioral, edge-case and regression evals for an Agent Skill. Use after a skill draft exists, when changing its description/procedure, or when converting real failures into permanent regression tests.",
+      "version": "0.2.0",
+      "description": "Design and maintain routing, behavioral, edge-case, adversarial, and regression tests for an Agent Skill. Use after a skill draft exists, when changing its trigger or procedure, or when converting a real failure into a permanent evaluation case.",
       "source": "skills/meta/skill-test-design/SKILL.md"
     },
     {
@@ -432,5 +432,18 @@
       "description": "Convert an approved organisational diagnosis and target direction into a sequenced transformation blueprint with workstreams, dependencies, decision gates, capacity needs and evidence checkpoints. Use after diagnosis and target-state direction are sufficiently agreed; do not roadmap unresolved design choices as facts.",
       "source": "skills/oaf/portfolio-execution/transformation-blueprint/SKILL.md"
     }
-  ]
+  ],
+  "metadata": {
+    "packages": {
+      "production": {
+        "name": "arek-ai-skills",
+        "version": "1.36.0"
+      },
+      "lab": {
+        "name": "arek-ai-skills-lab",
+        "version": "0.31.0"
+      }
+    },
+    "source_revision": "cc005717674c"
+  }
 }
