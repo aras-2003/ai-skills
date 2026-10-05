@@ -2,11 +2,11 @@
 
 ## Identity
 - campaign: `runtime-validation-2026-10-r16`
-- behavior source: `bfc6dedc0e554442577191867739f3d935250d93`
+- behavior source: `89db15ef94cf38a35117ec02b8c60928ef72654d`
 - production package source version: `arek-ai-skills 1.36.0`
-- Lab package source version: `arek-ai-skills-lab 0.31.0`
+- Lab package source version: `arek-ai-skills-lab 0.32.0`
 
-R1–R15 remain historical evidence. R16 is pinned to the inline investment visual and bounded research-state persistence changes. Its scope does not evaluate the three draft skill-lifecycle skills included in Lab 0.31.0.
+R1–R15 remain historical evidence. R16 is pinned to the inline investment visual and bounded research-state persistence changes. Its scope does not evaluate the three explicitly allow-listed draft skill-lifecycle test targets included in Lab 0.32.0.
 
 ## Purpose
 Validate that substantial reports deliver the requested visual elements inside chat and that persistence stays within the approved research-state boundary.
