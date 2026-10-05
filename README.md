@@ -28,7 +28,7 @@ Browse skills by domain and maturity in the [Arek AI Skills catalog](https://ara
 
 The source tree is not the runtime allow-list.
 
-Current implemented source skills: **52**. Only `career`, `commerce`, `meta` and `oaf` currently contain `SKILL.md` implementations. The other domain README files describe design/backlog intent unless stated otherwise.
+Current implemented source skills: **54**, across five implemented domains: `career`, `commerce`, `investing`, `meta` and `oaf`. The source tree contains 17 workflow definitions. Other domain README files describe design/backlog intent unless stated otherwise.
 
 ## Branches, maturity and installed capability
 
@@ -66,7 +66,7 @@ Details:
 
 A narrative historical PASS is not a current-version runtime receipt. When runtime evidence is unavailable, record `NOT_RUN`/pending rather than assuming success.
 
-Current runtime follow-up campaign on this branch: `runtime-validation-2026-10-r7`, behavior source `008c9944cf3a8bc3e2d7231a4862aaf00e722889`, core count 38. Historical R1 and R2 runtime receipts remain bound to their original behavior sources and statuses. R3 is frozen historical evidence. R4 remains historical FAIL evidence for the strategy fallback. R5 remains historical FAIL evidence for the strategy fallback. R6 remains historical evidence. R7 is the consolidated personal-beta baseline after AIS hardening and Investing OS promotion. Investing runtime fixtures begin as NOT_RUN; green static/package gates permit personal use but do not imply runtime PASS.
+Current runtime follow-up campaign: `runtime-validation-2026-10-r7`, behavior source `008c9944cf3a8bc3e2d7231a4862aaf00e722889`, with 38 core regression cases. R1–R6 receipts remain historical and bound to their original source revisions. R7 is a time-bounded personal-beta continuation disposition for already-declared production components recorded in `release/production-readiness.yaml`; it is not a gate or authorization for new production promotions. Investing-specific runtime fixtures remain NOT_RUN where no exact-version receipt exists. Static/package checks do not imply runtime PASS.
 
 ## Quality and build
 
@@ -88,7 +88,7 @@ Generated artifacts are built atomically and include source provenance.
 - Lifecycle: `docs/LIFECYCLE.md`
 - Testing: `docs/TESTING.md`
 - Runtime evals: `docs/RUNTIME-EVALS.md`
-- Active R6 runbook: `evals/campaigns/runtime-validation-2026-10-r6/RUNBOOK.md`
+- Active R7 runbook: `evals/campaigns/runtime-validation-2026-10-r7/RUNBOOK.md`
 - Channel usage: `docs/GPT-USAGE.md`
 - Branch-rules proposal: `docs/GITHUB-BRANCH-RULES-PROPOSAL.md`
 - Distribution/license decision: `docs/DISTRIBUTION-LICENSE-DECISION.md`
