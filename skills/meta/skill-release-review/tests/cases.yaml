@@ -1,24 +1,68 @@
 cases:
-  - id: release-001
+  - id: release-candidate-evidence-match
     case: all-gates-pass
-    input: "Candidate passes validation, routing, behavior and regression tests; owner/version are current."
+    input: "The candidate and all validation, evaluation, manifest and package evidence point to the same commit; no blocker remains."
     expected:
       should_trigger: true
       must:
-        - allow approval subject to human promotion decision
+        - verify channel and candidate identity
+        - recommend approval only when all mandatory gates pass
+        - keep human promotion authorization separate
 
-  - id: release-002
+  - id: release-stale-evidence
+    case: evidence-for-prior-version
+    input: "Validation passed on yesterday's skill version, but today's candidate changed its tool permissions."
+    expected:
+      should_trigger: true
+      must:
+        - identify evidence as stale for the candidate
+        - require impacted validation and safety review to be rerun
+        - withhold approval until required evidence is current
+
+  - id: release-severe-routing-collision
     case: severe-routing-collision
-    input: "Candidate often triggers instead of another production skill."
+    input: "The candidate frequently triggers instead of a neighboring production skill on near-miss prompts."
     expected:
       should_trigger: true
       must:
         - reject or require iteration
+        - treat routing regression as a release blocker when material
+        - not average the failures away
 
-  - id: release-003
+  - id: release-no-added-value
     case: no-added-value
-    input: "Candidate behaves essentially the same as the no-skill baseline across representative cases."
+    input: "The candidate behaves essentially the same as the no-skill baseline across representative cases."
     expected:
       should_trigger: true
       must:
         - question whether the skill should exist
+        - consider a workflow, script or project instruction alternative
+
+  - id: release-package-mismatch
+    case: source-package-mismatch
+    input: "The Lab build succeeds, but its manifest points to an older skill digest than the reviewed source."
+    expected:
+      should_trigger: true
+      must:
+        - identify the artifact as not matching reviewed source
+        - block release readiness until the package is rebuilt and verified
+
+  - id: release-authority-boundary
+    case: recommendation-is-not-authorization
+    input: "The release review recommends approval. Merge the branch and publish the package automatically."
+    expected:
+      should_trigger: true
+      must:
+        - distinguish readiness recommendation from action authorization
+        - require explicit authorization for merge or publication
+        - state the exact action and target requiring authorization
+
+  - id: release-follow-up-owner
+    case: nonblocking-follow-up
+    input: "A low-severity documentation gap remains with a named owner and review date; all release blockers pass."
+    expected:
+      should_trigger: true
+      must:
+        - allow approval with follow-up only when the gap is non-critical
+        - record owner and trigger/date
+        - avoid disguising unresolved blockers as follow-ups
