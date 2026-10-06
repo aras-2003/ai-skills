@@ -215,7 +215,8 @@ def package_runtime_mcp(
     investment_src = source_dir / "investment_runtime.py"
     server_src = source_dir / "server.py"
     cloud_src = source_dir / "cloud_server.py"
-    if not all(path.is_file() for path in (config_src, renderer_src, investment_src, server_src, cloud_src)):
+    catalog_src = source_dir / "skill_catalog.py"
+    if not all(path.is_file() for path in (config_src, renderer_src, investment_src, server_src, cloud_src, catalog_src)):
         raise ValueError("runtime MCP sources are incomplete")
 
     config = json.loads(config_src.read_text(encoding="utf-8"))
@@ -246,6 +247,7 @@ def package_runtime_mcp(
         shutil.copyfile(investment_src, mcp_out / "investment_runtime.py")
         shutil.copyfile(server_src, mcp_out / "server.py")
         shutil.copyfile(cloud_src, mcp_out / "cloud_server.py")
+        shutil.copyfile(catalog_src, mcp_out / "skill_catalog.py")
         write_json(stage / ".mcp.json", {"mcpServers": servers})
 
     tree_digest = (
@@ -259,6 +261,8 @@ def package_runtime_mcp(
         "runtime_class": "skills-factory-runtime",
         "tools": [
             "runtime_info",
+            "list_skills",
+            "load_skill",
             "route_investment_request",
             "render_bar_chart",
             "render_line_chart",

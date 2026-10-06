@@ -180,6 +180,8 @@ class PackagingTests(unittest.TestCase):
             self.assertEqual(
                 [
                     "runtime_info",
+                    "list_skills",
+                    "load_skill",
                     "route_investment_request",
                     "render_bar_chart",
                     "render_line_chart",
