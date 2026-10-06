@@ -9,7 +9,7 @@ RUNTIME = ROOT / "runtime" / "mcp" / "investment_runtime.py"
 
 
 def load_runtime():
-    spec = importlib.util.spec_from_file_location("arek_investment_runtime", RUNTIME)
+    spec = importlib.util.spec_from_file_location("skills_factory_investment_runtime", RUNTIME)
     if spec is None or spec.loader is None:
         raise RuntimeError("cannot load investment runtime")
     module = importlib.util.module_from_spec(spec)

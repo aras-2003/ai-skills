@@ -3,8 +3,8 @@
 ## Identity
 - campaign: `runtime-validation-2026-10-r15`
 - behavior source: `9c66f5987afbd5717047d0a5107383c0b75df73d`
-- production package source version: `arek-ai-skills 1.33.0`
-- Lab package source version: `arek-ai-skills-lab 0.27.0`
+- production package source version: `skills-factory 1.33.0`
+- Lab package source version: `skills-factory-lab 0.27.0`
 
 R1–R14 remain historical evidence.
 
@@ -48,5 +48,5 @@ Runtime traces keep capability selection separate from tool execution.
 
 - `selected_capabilities` contains only packaged skill/workflow capability names.
 - `tool_calls` contains actual tool/function calls, including MCP and connector tools.
-- Do not place MCP/tool names such as `mcp__arek_investment_os__route_investment_request` in `selected_capabilities`.
+- Do not place MCP/tool names such as `mcp__skills-factory-runtime__route_investment_request` in `selected_capabilities`.
 - A contaminated trace may be archived as evidence of a failed/review-required run, but it cannot receive runtime PASS.
