@@ -1,15 +1,15 @@
 {
-  "name": "arek-ai-skills",
+  "name": "skills-factory",
   "interface": {
-    "displayName": "Arek AI Skills"
+    "displayName": "Skills Factory"
   },
   "plugins": [
     {
-      "name": "arek-ai-skills",
+      "name": "skills-factory",
       "source": {
         "source": "git-subdir",
-        "url": "https://github.com/aras-2003/ai-skills.git",
-        "path": "./plugins/arek-ai-skills",
+        "url": "https://github.com/aras-2003/skills-factory.git",
+        "path": "./plugins/skills-factory",
         "ref": "production"
       },
       "policy": {
@@ -19,11 +19,11 @@
       "category": "Productivity"
     },
     {
-      "name": "arek-ai-skills-lab",
+      "name": "skills-factory-lab",
       "source": {
         "source": "git-subdir",
-        "url": "https://github.com/aras-2003/ai-skills.git",
-        "path": "./plugins/arek-ai-skills-lab",
+        "url": "https://github.com/aras-2003/skills-factory.git",
+        "path": "./plugins/skills-factory-lab",
         "ref": "main"
       },
       "policy": {
