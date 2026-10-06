@@ -1,6 +1,6 @@
 # AI Skills expansion roadmap — 2026-10-05
 
-This directory preserves the expansion analysis and 76 proposed development tasks. It is a planning artifact, not a release or runtime-readiness declaration.
+This directory preserves the expansion analysis and 84 proposed development tasks. It is a planning artifact, not a release or runtime-readiness declaration.
 
 ## Start here
 
@@ -25,7 +25,7 @@ Saving and merging this roadmap does not authorize execution of all proposed tas
 
 ## Strategy addition — 2026-10-05
 
-The dated proposal now includes an additive Strategy decision and tasks STR-01 through STR-17: a separate domain, strategic-analysis, deep competitive intelligence, strategy-design, a marketing strategy specialist, PESTEL/Porter/SWOT-TOWS presentation profiles, domain handoffs and pilots. See the appended section in [the proposal](PROPOSAL-AND-BACKLOG.md). Original tasks remain unchanged; the current total is 76.
+The dated proposal now includes an additive Strategy decision and tasks STR-01 through STR-17: a separate domain, strategic-analysis, deep competitive intelligence, strategy-design, a marketing strategy specialist, PESTEL/Porter/SWOT-TOWS presentation profiles, domain handoffs and pilots. See the appended section in [the proposal](PROPOSAL-AND-BACKLOG.md). Original tasks remain unchanged; the total was 76 after the 2026-10-05 hardening addendum and is now 84 after the 2026-10-06 governance/domain-review decision.
 
 
 ## Near-term hardening gate — 2026-10-05
@@ -42,3 +42,12 @@ These are sequencing controls, not claims that current skills are unsafe or rout
 **ENG-18 (P1)** captures a later controlled skill-improvement loop. Do not implement a self-modifying production path before sufficient real failure receipts exist, and do not let an optimizer see evaluator-only rubrics or the full held-out corpus.
 
 Architecture decision retained from the benchmark: do **not** require every production skill to contain scripts/references/assets merely to satisfy a quality gate. A reasoning procedure may be a valid skill when the reusable method itself creates value; add deterministic code or references only when the task requires them.
+
+
+## Controlled domain reviews — 2026-10-06
+
+Do not downgrade any current maturity as a result of the Claude review or the new domain-review backlog. Close the currently open quality processes/campaigns with explicit statuses and evidence first. Then review one implemented domain at a time, with WIP limited to one. Each review produces a conformity record and a scoped adopt/adapt/update/defer/no-change plan; it does not itself change code, maturity or publication state.
+
+The first queue covers the five implemented source domains: Meta, Career, Commerce, Investing and OAF (`DOM-01`–`DOM-05`). Select the starting domain only after quality closure, based on actual use, risk and dependencies. Planned/placeholder domains enter this queue only after they have real implementations.
+
+Supporting hardening work is tracked separately: `ENG-20` covers branch, CI and publication supply-chain controls; `ENG-21` records minimum public-repository governance, including an explicit licensing decision without assigning a license by default.

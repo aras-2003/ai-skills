@@ -1685,16 +1685,15 @@
       "priority": "P0",
       "epic": "Skill Engineering",
       "type": "security/control",
-      "title": "Dodać Agent Skill Security Scanner jako obowiązkowy gate",
-      "rationale": "Skill działa z uprawnieniami agenta i powinien być traktowany jak software, nie tylko prompt. Obecne walidacje jakości, pakietów i eval isolation nie tworzą osobnego gate'u dla typowych ryzyk supply-chain, exfiltration i remote execution.",
-      "scope": "Dodać repozytoryjny scanner uruchamiany w CI przed kosztownymi evalami. Wykrywać co najmniej: remote fetch-and-execute (curl/wget|shell, PowerShell equivalents), obfuscated execution/base64 payloads, podejrzany dostęp do credential stores i .env, masowe odczyty env, network calls, kombinację credential access + network jako exfiltration shape, niezadeklarowane install-time execution oraz unpinned dependency installation. Scanner nie wykonuje skanowanego kodu, ma machine-readable output, kontrolowane suppressions z uzasadnieniem i testy mutation/fixtures. Nie kopiować zewnętrznego scanner'a bez przeglądu; użyć go jako benchmarku i zachować własny policy contract.",
+      "title": "Rozszerzyć istniejący Agent Skill Security Scanner do pełnego zakresu runtime",
+      "rationale": "Repo ma już deterministyczny skaner dla skills/ i obowiązkowy gate CI. Przegląd wskazuje luki w zakresach runtime, scripts, workflows i templates oraz w obsłudze nieufnych treści; należy rozszerzyć istniejący kontrakt zamiast budować drugi skaner.",
+      "scope": "Rozszerzyć scripts/security/scan_skills.py i jego kontrakt o wykonywalne lub instruktażowe treści z runtime/, scripts/, workflows/ i templates/. Zachować offline/determinism, maszynowy receipt, allow-listę runtime vs fixtures i kontrolowane suppressions. Dla prompt injection i ukrytego Unicode użyć przeglądanych reguł hygiene oraz testów zachowania na treściach nieufnych; samo wyszukiwanie fraz nie jest dowodem bezpieczeństwa. Nie wykonywać skanowanego kodu.",
       "acceptance_criteria": [
-        "Osobny CI gate uruchamia security scan dla runtime contents wszystkich skills przed build/release",
-        "CRITICAL dla remote execution, obfuscation i credential+network exfiltration blokuje candidate/release bez jawnej, uprawnionej decyzji ryzyka",
-        "Scanner rozróżnia runtime content od eval fixtures i nie obniża CRITICAL tylko dlatego, że wzorzec jest w fenced code",
-        "Brak network/credential deklaracji przy obserwowanym zachowaniu jest co najmniej blocking mismatch zgodnie z policy",
-        "Scanner jest deterministic/offline, nie wykonuje kodu i ma testy dla false positive, false negative oraz suppression abuse",
-        "Wynik jest dostępny maszynowo i może być użyty przez skill-release-review"
+        "CI skanuje wskazane powierzchnie wykonywalne i instruktażowe przed build/release, bez mylenia runtime payloadu z eval fixtures",
+        "Istniejący gate i machine-readable receipt zostają rozszerzone bez tworzenia drugiej, konkurencyjnej implementacji",
+        "Mutation fixtures pokrywają false positive, false negative, obfuskację, nieufny tekst, ukryty Unicode i nadużycie suppression",
+        "Skan jest deterministyczny/offline i nigdy nie wykonuje badanej zawartości",
+        "Raport wskazuje regułę, ścieżkę, severity i fingerprint; high severity blokuje zgodnie z aktualną polityką"
       ],
       "depends_on": [
         "ENG-01"
@@ -1734,16 +1733,15 @@
       "priority": "P0",
       "epic": "Skill Engineering",
       "type": "catalog/runtime tooling",
-      "title": "Generować machine-readable registry skills z kanonicznych źródeł",
-      "rationale": "Przy wzroście katalogu potrzebny jest stabilny interfejs maszynowy dla discovery, instalatorów, routera i kanałów runtime. Ręcznie utrzymywany registry stworzyłby jednak drugie źródło prawdy obok SKILL.md, workflow registry, catalog i channel manifests.",
-      "scope": "Generować registry.json wyłącznie z kanonicznych źródeł: SKILL.md metadata/description, workflow registry oraz channel/build metadata. Registry ma zawierać minimum identity/path/description/version/maturity, domain/type, routing/eval pointers, wymagane capabilities/dependencies i wspierane kanały tam, gdzie dane istnieją. CATALOG.md pozostaje widokiem dla ludzi, registry.json dla maszyn, a capabilities.json opisuje faktycznie zainstalowany runtime. Dodać freshness/determinism test i zakaz ręcznej edycji generated registry.",
+      "title": "Uzupełnić generowany registry bez dublowania istniejącego katalogu i manifestów",
+      "rationale": "Repo już generuje CATALOG.md i docs/catalog.json z kanonicznych metadanych, a kanały zawierają własne capabilities/manifests. Nowy registry nie może tworzyć drugiego źródła prawdy ani kopiować stanu faktycznej instalacji.",
+      "scope": "Najpierw zinwentaryzować docs/catalog.json, CATALOG.md, workflow registry oraz manifesty kanałów i wskazać brakujące pola/odbiorców. Rozszerzyć istniejący generator albo utworzyć osobny registry.json wyłącznie, jeśli istniejące formaty nie spełniają udokumentowanego kontraktu. Każde pole musi wskazywać kanoniczne źródło. Rozróżniać deklarowaną dostępność source, zawartość zbudowanego pakietu i faktyczną dostępność capability w runtime.",
       "acceptance_criteria": [
-        "registry.json jest w 100% generowany i reproducible dla tego samego source revision",
-        "Brak ręcznie duplikowanej definicji description, version, maturity lub dependencies",
-        "CI failuje, gdy registry jest stale względem źródeł",
-        "Registry rozróżnia source availability od installed runtime availability i nie sugeruje produkcji dla draft/candidate",
-        "Format wspiera przyszły router/installer bez parsowania CATALOG.md",
-        "README/docs wyjaśniają role CATALOG.md vs registry.json vs capabilities.json"
+        "Udokumentowano odbiorcę i brakującą potrzebę, zanim dodano nowy plik registry",
+        "Description, version, maturity, dependencies i routing nie są utrzymywane ręcznie w więcej niż jednym źródle",
+        "Generator daje deterministyczny wynik dla tej samej rewizji, a CI wykrywa nieaktualny output",
+        "Registry rozróżnia source, packaged channel i faktycznie zainstalowany runtime; nie sugeruje dostępności na podstawie samego source",
+        "Jeśli rozszerzenie docs/catalog.json wystarcza, osobny registry.json nie powstaje"
       ],
       "depends_on": [
         "ENG-16",
@@ -1781,6 +1779,191 @@
         "ENG-16"
       ],
       "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-19",
+      "priority": "P1",
+      "epic": "Skill Engineering",
+      "type": "governance/domain-review",
+      "title": "Ustalić kontrolowany protokół przeglądu domen po zamknięciu bieżących procesów jakościowych",
+      "rationale": "Jednorazowy przegląd całego katalogu przed zamknięciem bieżących procesów jakościowych tworzyłby szum i duplikowałby pracę. Potrzebny jest powtarzalny, ograniczony WIP sposób oceny zgodności i planowania adopcji/aktualizacji, bez automatycznej zmiany maturity.",
+      "scope": "Rozpocząć dopiero po nadaniu jawnego końcowego statusu aktualnie otwartym procesom/kampaniom jakościowym. Następnie prowadzić jeden przegląd domenowy naraz. Dla każdego istniejącego skill/workflow sprawdzić dokładną rewizję źródła i kanału, odpowiedzialność i granice routingu, zależności, testy i aktualność evidence, security/capabilities, dane prywatne i nieufne wejścia oraz zachowanie w dostępnych runtime. Wynikiem jest decyzja retain/adopt/adapt/update/defer/no-change wraz z proponowanym zakresem, testami, zależnościami i kryteriami akceptacji. Przegląd nie zmienia maturity ani nie autoryzuje publikacji.",
+      "acceptance_criteria": [
+        "Żaden przegląd domenowy nie startuje, dopóki bieżące procesy jakościowe nie mają jawnego statusu końcowego i zachowanego dowodu",
+        "WIP review = 1 domena; kolejność wybierana po zamknięciu jakości na podstawie użycia, ryzyka i zależności, nie przez masowy sweep",
+        "Każdy komponent domeny ma wpis: dokładna wersja/revizja, znane evidence i luki, granice, sąsiednie routing intents, dependencies oraz wynik review",
+        "Każda rekomendacja adopt/adapt/update/defer/no-change ma uzasadnienie, minimalny plan wdrożenia, testy i kryteria akceptacji",
+        "Review nie obniża maturity; ewentualna zmiana statusu wymaga osobnej, jawnej decyzji w istniejącym release lifecycle",
+        "Brak runtime evidence pozostaje jawnie nierozstrzygnięty i prowadzi do planu dalszej weryfikacji, a nie do fikcyjnego PASS"
+      ],
+      "depends_on": [
+        "ENG-01",
+        "ENG-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "DOM-01",
+      "priority": "P2",
+      "epic": "Domain conformity reviews",
+      "type": "domain-review/career",
+      "title": "Przejrzeć domenę Career i przygotować plan adopcji/aktualizacji",
+      "rationale": "Career obejmuje decyzje o rolach i rekrutacji oraz dane osobiste; potrzebuje przeglądu granic routingu, dowodów i side effects na obecnym źródle.",
+      "scope": "Po ENG-19 przejrzeć istniejące skills i workflowy Career. Sprawdzić job discovery/validity evidence, role attractiveness vs interview preparation, CV/profile data handling, granice szkicowania i zewnętrznych działań oraz konflikty z sąsiadami. Wybrać retain/adopt/adapt/update/defer/no-change dla każdego obszaru.",
+      "acceptance_criteria": [
+        "Inventory obejmuje wszystkie aktualne source components i runtime/channel mapping z exact revision",
+        "Routing cases obejmują PL/EN i realistyczne near-miss między job discovery, role evaluation, interview brief i CV tailoring",
+        "Źródła, świeżość, prywatność, external-write boundaries i brakujące runtime evidence są jawne",
+        "Każda rekomendacja ma mały plan zmiany/testów albo uzasadnienie braku zmiany",
+        "Maturity pozostaje bez zmian w ramach review"
+      ],
+      "depends_on": [
+        "ENG-19"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "DOM-02",
+      "priority": "P2",
+      "epic": "Domain conformity reviews",
+      "type": "domain-review/commerce",
+      "title": "Przejrzeć domenę Commerce i przygotować plan adopcji/aktualizacji",
+      "rationale": "Commerce łączy źródła rynkowe, obliczenia, regulatory checks i wrażliwe dane preferencji; review powinno wskazać luki zanim katalog rozszerzy się o kolejne zakupowe flowy.",
+      "scope": "Po ENG-19 przejrzeć istniejące skills i workflowy Commerce: odpowiedzialność względem Consumer, freshness/provenance, claim evidence, scoring, deterministic calculations, prywatny profil, regulatory boundaries i external actions. Odróżnić już zaimplementowane zachowanie od backlogowej intencji.",
+      "acceptance_criteria": [
+        "Inventory obejmuje wszystkie aktualne source components i ich runtime availability",
+        "Realistyczne sąsiednie przypadki rozdzielają Commerce od Consumer i product research",
+        "Ceny, twierdzenia, źródła, daty, założenia i prywatne dane są sprawdzane w aktualnym flow",
+        "Obliczenia i nieufne treści mają przypisany sposób walidacji oraz konkretne testy",
+        "Plan przyjmuje retain/adopt/adapt/update/defer/no-change bez zmiany maturity"
+      ],
+      "depends_on": [
+        "ENG-19"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "DOM-03",
+      "priority": "P2",
+      "epic": "Domain conformity reviews",
+      "type": "domain-review/oaf",
+      "title": "Przejrzeć domenę OAF i przygotować plan adopcji/aktualizacji",
+      "rationale": "OAF ma rozbudowane kompozytowe workflowy; review powinno wykryć powielanie z Strategy, routing collisions, nieudowodnione conclusions i wymagania rendererów.",
+      "scope": "Po ENG-19 przejrzeć istniejące skills/workflowy OAF, kontrakty on_missing, handoffs, evidence gates, wymagane wizualizacje i granice względem Strategy/software architecture. Rozróżnić diagnosis, design i execution oraz odnotować zależności runtime.",
+      "acceptance_criteria": [
+        "Inventory mapuje source skill/workflow do właściciela decyzji i packaged availability",
+        "Testy mają konkretne realistyczne positives, near-misses i granice z Strategy/software",
+        "Wnioski, braki dowodów, unavailable dependency i visual-render status nie są maskowane",
+        "Zduplikowane lub niejasne zakresy otrzymują rekomendację z uzasadnieniem",
+        "Plan zmian ma testy i AC; maturity bez zmian podczas review"
+      ],
+      "depends_on": [
+        "ENG-19"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "DOM-04",
+      "priority": "P2",
+      "epic": "Domain conformity reviews",
+      "type": "domain-review/investing",
+      "title": "Przejrzeć domenę Investing i przygotować plan adopcji/aktualizacji",
+      "rationale": "Investment OS jest domeną decyzyjną o wysokich konsekwencjach; review ma sprawdzić guardraile, routing i deterministyczne podstawy sizing/valuation bez zmiany deklarowanej maturity.",
+      "scope": "Po ENG-19 przejrzeć Investing skills/workflows, Investment OS routing, investment record store, source/as-of discipline, portfolio/one-security boundaries, sizing/valuation calculations, connectors i fallbacki. Zweryfikować szczególnie routing false positives/negatives i relację LLM interpretation vs code calculation.",
+      "acceptance_criteria": [
+        "Inventory obejmuje wszystkie Investing source components, exact version i runtime availability",
+        "Routing suite zawiera granice takie jak top 2/top 20, niepewne tickery (VAT/PIT/NASA), broad portfolio terms oraz PL/EN intents",
+        "Każdy krytyczny sizing/valuation calculation ma jawne wejścia, units, missing-data behavior i plan deterministic testów",
+        "Source freshness, uncertainty, investment policy limits i unauthorized-action boundaries są sprawdzone",
+        "Plan zmian ma evidence i test criteria; maturity bez zmian podczas review"
+      ],
+      "depends_on": [
+        "ENG-19"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "DOM-05",
+      "priority": "P2",
+      "epic": "Domain conformity reviews",
+      "type": "domain-review/meta",
+      "title": "Przejrzeć domenę Meta i przygotować plan adopcji/aktualizacji",
+      "rationale": "Meta skills definiują proces tworzenia, testowania i promocji pozostałych domen; ich kontrakty muszą odzwierciedlać istniejące security, evidence i release mechanisms.",
+      "scope": "Po ENG-19 przejrzeć meta skills oraz skill-development workflow pod kątem lifecycle, evaluator isolation, exact-artifact identity, capability/security evidence, source catalog/registry, release authorization i zgodności z rzeczywistymi CI gates. Wskazać nieaktualne instrukcje zamiast kopiować historyczne wyniki.",
+      "acceptance_criteria": [
+        "Inventory wiąże każdy meta skill z wersją, testami, workflowami i aktualnym runtime evidence",
+        "Meta procedures nie deklarują narzędzia, źródła ani testu, którego trace nie potwierdza",
+        "Rubric isolation, source-build-package-manifest identity i niezależna autoryzacja są sprawdzone",
+        "Instrukcje Meta są zgodne z repo lifecycle, walidatorami i aktualnymi gateami",
+        "Plan zmian/testów jest wersjonowany; review nie zmienia maturity"
+      ],
+      "depends_on": [
+        "ENG-19"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-20",
+      "priority": "P0",
+      "epic": "Skill Engineering",
+      "type": "security/supply-chain",
+      "title": "Utwardzić ochronę gałęzi, CI i łańcuch publikacji",
+      "rationale": "Audyt wskazuje mutable action refs, szerokie permissions w jobach publikujących, branch rules do weryfikacji i zmienne referencje runtime. To są elementy łańcucha wykonania/publikacji, nie tylko higiena dokumentacji.",
+      "scope": "Najpierw potwierdzić aktualną konfigurację GitHub repository/rulesets i rzeczywiste kanały instalacji. Pinować Actions do zweryfikowanych SHA z kontrolowaną ścieżką aktualizacji. Rozdzielić read-only validate/build od izolowanego publisher job z minimalnymi permissions, exact source revision i artifact digest checks; publisher nie wykonuje niezaufanego kodu. Ocenić mutable branch refs vs digest/tagged artifacts i określić rollback. Ustalić lock/hash dla bezpośrednich zależności PEP 723 i workflow dependencies.",
+      "acceptance_criteria": [
+        "Konfiguracja ochrony main/production i required checks jest sprawdzona w GitHub, a brak ustawienia nie jest zgadywany",
+        "Żadna akcja third-party nie jest używana przez nieprzypięty mutable tag; aktualizacje SHA są reviewable",
+        "Build/validation nie dostają write token; publisher jest osobnym, minimalnie uprzywilejowanym jobem z exact revision/digest checks",
+        "Install/runtime reference i rollback opisują immutable identity lub jawnie udokumentowane ograniczenie mutable ref",
+        "Direct tool/runtime dependencies są pinned lub locked z hashami, a reproducibility gate je weryfikuje"
+      ],
+      "depends_on": [
+        "ENG-01"
+      ],
+      "effort": "L",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "ENG-21",
+      "priority": "P1",
+      "epic": "Skill Engineering",
+      "type": "governance/repository",
+      "title": "Ustalić minimalne governance dla publicznego repozytorium",
+      "rationale": "Brak jawnej licencji, kanału zgłaszania podatności i ownership mapy utrudnia bezpieczne użycie oraz obsługę repozytorium; sam publiczny status nie określa praw do użycia.",
+      "scope": "Potwierdzić, czy repo jest open source, reference-only czy ograniczone do prywatnego użytku; nie dodawać licencji bez decyzji właściciela. Dodać SECURITY.md z zakresem i kanałem zgłoszeń oraz CODEOWNERS jako mapę odpowiedzialności. Wymagania review mają odzwierciedlać faktyczną liczbę maintainerów; CODEOWNERS nie udaje niezależnego review, gdy autor jest jedynym maintainerem.",
+      "acceptance_criteria": [
+        "Status licencyjny i prawa do użycia są jawnie zapisane bez nieautoryzowanego nadania licencji",
+        "SECURITY.md wyjaśnia wspierane wersje i bezpieczny kanał zgłaszania",
+        "CODEOWNERS pokrywa krytyczne ścieżki i wskazuje rzeczywistych właścicieli",
+        "Review/approval policy jest możliwa do spełnienia przy rzeczywistym maintainer capacity i nie udaje niezależności"
+      ],
+      "depends_on": [
+        "ENG-01"
+      ],
+      "effort": "M",
       "status": "PROPOSED",
       "owner": "UNASSIGNED",
       "legacy_links": []
@@ -1824,6 +2007,26 @@
       "benchmark_sources": [
         "Shubhamsaboo/awesome-llm-apps agent_skills security/lint/routing/registry patterns",
         "Current aras-2003/ai-skills lifecycle, eval isolation, provenance and release-review controls"
+      ]
+    },
+    {
+      "date_local": "2026-10-06",
+      "decision": "Po zamknięciu bieżących procesów jakościowych uruchomić kontrolowane review zgodności i plan adopcji/aktualizacji jednej istniejącej domeny naraz. Nie zmieniać maturity automatycznie ani nie degradować komponentów w ramach review. Doprecyzować hardening jako rozszerzenie istniejących katalogu/skanera i dodać supply-chain/governance controls; stan źródła po PR #118: e8a22fe06311c202d98be8506e1ae887c9ebc6b8.",
+      "ids": [
+        "ENG-15",
+        "ENG-17",
+        "ENG-19",
+        "DOM-01",
+        "DOM-02",
+        "DOM-03",
+        "DOM-04",
+        "DOM-05",
+        "ENG-20",
+        "ENG-21"
+      ],
+      "benchmark_sources": [
+        "Decyzja użytkownika z 2026-10-06",
+        "Przegląd Claude z 2026-10-06; weryfikacja do backlogu na main e8a22fe"
       ]
     }
   ]
