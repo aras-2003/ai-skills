@@ -257,7 +257,12 @@ def package_runtime_mcp(
         "name": "skills-factory-runtime",
         "kind": "mcp-server",
         "runtime_class": "skills-factory-runtime",
-        "tools": ["route_investment_request", "render_bar_chart", "render_line_chart"],
+        "tools": [
+            "runtime_info",
+            "route_investment_request",
+            "render_bar_chart",
+            "render_line_chart",
+        ],
         "content_sha256": tree_digest,
         "transport": "streamable-http" if mode == "remote" else "stdio",
     }]

@@ -81,6 +81,33 @@ class CloudRuntimeTests(unittest.TestCase):
             result["response_policy"],
         )
 
+    def test_runtime_info_is_explicitly_unattested_without_deployment_identity(self) -> None:
+        with patch.dict("os.environ", {}, clear=True):
+            result = self.server.runtime_info()
+
+        self.assertEqual("unattested", result["attestation_status"])
+        self.assertEqual("unattested", result["release_id"])
+        self.assertEqual("unattested", result["source_revision"])
+
+    def test_runtime_info_verifies_only_when_all_identity_fields_are_present(self) -> None:
+        with patch.dict(
+            "os.environ",
+            {
+                "SKILLS_FACTORY_RELEASE_ID": "0.33.4+abc123",
+                "SKILLS_FACTORY_SOURCE_REVISION": "abc123",
+                "SKILLS_FACTORY_CHANNEL": "lab",
+                "SKILLS_FACTORY_CAPABILITY_CONTRACT_VERSION": "repository-side-v1",
+                "SKILLS_FACTORY_TOOL_SCHEMA_DIGEST": "digest-123",
+                "SKILLS_FACTORY_DEPLOYED_AT": "2026-10-07T12:00:00Z",
+            },
+            clear=True,
+        ):
+            result = self.server.runtime_info()
+
+        self.assertEqual("verified", result["attestation_status"])
+        self.assertEqual("lab", result["channel"])
+        self.assertEqual("digest-123", result["tool_schema_digest"])
+
     def test_unrelated_finance_request_is_not_marked_routed_only(self) -> None:
         result = self.server.route_investment_request(
             "How does a fixed-rate mortgage work?"
@@ -98,6 +125,8 @@ class CloudRuntimeTests(unittest.TestCase):
         self.assertIn("stop", instructions)
         self.assertIn("do not draft policy", instructions)
         self.assertIn("does not execute a", instructions)
+        self.assertIn("runtime_info", instructions)
+        self.assertIn('attestation_status "unattested"', instructions)
 
 
 if __name__ == "__main__":

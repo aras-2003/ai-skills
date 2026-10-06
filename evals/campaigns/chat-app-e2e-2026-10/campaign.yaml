@@ -12,3 +12,8 @@ fallback_cases:
     target: cloud-chat-runtime
     input: evals/chat-apps/explicit-line-chart.input.md
     rubric: evals/chat-apps/explicit-line-chart.rubric.yaml
+  - id: chat-app-runtime-attestation
+    mode: explicit
+    target: cloud-chat-runtime
+    input: evals/chat-apps/runtime-attestation.input.md
+    rubric: evals/chat-apps/runtime-attestation.rubric.yaml
