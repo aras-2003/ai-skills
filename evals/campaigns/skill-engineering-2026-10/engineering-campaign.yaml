@@ -13,7 +13,7 @@ runtime_targets:
       - testdesign-description-only-routing
       - testdesign-live-source-evidence
   skill-evaluation:
-    version: "0.3.1"
+    version: "0.3.2"
     required_cases:
       - evaluation-queued-not-run
       - evaluation-live-browser-blocked

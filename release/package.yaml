@@ -3,7 +3,7 @@ package:
   version: "1.36.0"
 lab:
   name: arek-ai-skills-lab
-  version: "0.33.2"
+  version: "0.33.3"
   draft_test_targets:
     - skill-test-design
     - skill-evaluation
