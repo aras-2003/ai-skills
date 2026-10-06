@@ -103,7 +103,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("d24d954c9ec8c43cfe37d0015c3b9b7714af18c3", lock["behavior_source_revision"])
+            self.assertEqual("a926341c1f0bdb2c3fa08bd0de1d5cd26d4b0ac4", lock["behavior_source_revision"])
             self.assertEqual("skills-factory", lock["packages"]["production"]["name"])
             self.assertEqual("1.36.0", lock["packages"]["production"]["version"])
             self.assertEqual("skills-factory-lab", lock["packages"]["lab"]["name"])
