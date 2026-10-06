@@ -167,6 +167,13 @@ class PackagingTests(unittest.TestCase):
             self.assertEqual("./.mcp.json", compat_manifest["mcpServers"])
 
             capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
+            self.assertEqual("repository-side-v1", capabilities["capability_contract"]["contract_id"])
+            production_skill = next(x for x in capabilities["capabilities"] if x.get("kind") == "skill")
+            self.assertEqual("UNASSESSED", production_skill["capability_assessment"]["status"])
+            self.assertTrue(all(value == "unassessed" for value in production_skill["capability_assessment"]["requirements"].values()))
+            release = json.loads((out / "release-manifest.json").read_text(encoding="utf-8"))
+            release_skill = next(x for x in release["components"] if x.get("kind") == "skill")
+            self.assertEqual(production_skill["capability_assessment"], release_skill["capability_assessment"])
             runtime_tools = {item["name"]: item for item in capabilities["runtime_tools"]}
             self.assertEqual({"arek-chart-renderer", "arek-investment-os"}, set(runtime_tools))
             chart = runtime_tools["arek-chart-renderer"]
@@ -201,6 +208,7 @@ class PackagingTests(unittest.TestCase):
             self.assertEqual(interface, compat_manifest["interface"])
 
             capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
+            self.assertEqual("repository-side-v1", capabilities["capability_contract"]["contract_id"])
             workflows = [x for x in capabilities["capabilities"] if x.get("kind") == "workflow"]
             self.assertTrue(workflows)
             self.assertTrue(all(x.get("version") for x in workflows))
@@ -256,6 +264,13 @@ class PackagingTests(unittest.TestCase):
             capabilities_path.write_text(json.dumps(capabilities, indent=2) + "\n", encoding="utf-8")
             errors = artifact_validation.validate_zips(out)
             self.assertTrue(any("index/capabilities version mismatch" in e for e in errors), errors)
+
+            build_chatgpt_skills.build(ROOT, out, "production")
+            capabilities = json.loads(capabilities_path.read_text(encoding="utf-8"))
+            capabilities["capability_contract"]["contract_id"] = "mutated"
+            capabilities_path.write_text(json.dumps(capabilities, indent=2) + "\n", encoding="utf-8")
+            errors = artifact_validation.validate_zips(out)
+            self.assertTrue(any("capability_contract mismatch" in e for e in errors), errors)
 
             build_chatgpt_skills.build(ROOT, out, "production")
             release_path = out / "release-manifest.json"

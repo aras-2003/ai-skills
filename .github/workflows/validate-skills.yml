@@ -24,17 +24,26 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: python -m pip install -r requirements-dev.txt
-      - name: Skill source security scan
+      - name: Skill and runtime source security scan
         run: |
           mkdir -p .tmp
           python scripts/security/scan_skills.py --report .tmp/skill-security-report.json
           python -m unittest discover -s scripts/security/tests -p 'test_*.py'
+      - name: Validate and report capability declarations
+        run: |
+          python scripts/capabilities/validate_contract.py --report .tmp/capability-assessment-report.json
+          python -m unittest discover -s scripts/capabilities/tests -p 'test_*.py'
+      - name: Generate static routing collision signals
+        run: python scripts/eval/routing_collision_report.py --output .tmp/routing-collision-report.json
       - name: Upload skill security scan receipt
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: skill-security-scan-report
-          path: .tmp/skill-security-report.json
+          name: platform-hardening-static-reports
+          path: |
+            .tmp/skill-security-report.json
+            .tmp/capability-assessment-report.json
+            .tmp/routing-collision-report.json
           if-no-files-found: ignore
           retention-days: 30
       - name: Static validation

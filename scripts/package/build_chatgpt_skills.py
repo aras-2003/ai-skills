@@ -8,6 +8,8 @@ from pathlib import Path
 
 from build_utils import (
     atomic_output,
+    capability_assessment,
+    capability_contract_metadata,
     copy_runtime_support,
     ensure_source_valid,
     package_version,
@@ -98,6 +100,7 @@ def build_skill_bundle(skill_dir: Path, output_dir: Path) -> dict:
         "content_sha256": content_digest,
         "archive_sha256": archive_digest,
         "inventory": sorted(inventory),
+        "capability_assessment": capability_assessment(root, name),
     }
 
 
@@ -120,6 +123,7 @@ def workflow_channel_status(root: Path, maturity: str) -> list[dict]:
                     for x in (deps.get("optional") or [])
                     if isinstance(x, dict) and x.get("name")
                 ],
+                "capability_assessment": capability_assessment(root, str(item.get("name"))),
             }
         )
     return sorted(rows, key=lambda x: x["name"])
@@ -143,6 +147,7 @@ def build(root: Path, output_dir: Path, maturity: str, allow_empty: bool = False
             "channel": "chatgpt-zip",
             "package_version": version,
             "source_revision": revision,
+            "capability_contract": capability_contract_metadata(),
             "maturity": maturity,
             "skills": bundles,
             "workflows": workflows,
@@ -163,6 +168,7 @@ def build(root: Path, output_dir: Path, maturity: str, allow_empty: bool = False
                 "version": version,
                 "channel": "chatgpt-zip",
                 "source_revision": revision,
+                "capability_contract": capability_contract_metadata(),
                 "payload_content_sha256": payload_digest,
                 "component_count": len(bundles),
                 "components": [
@@ -175,6 +181,7 @@ def build(root: Path, output_dir: Path, maturity: str, allow_empty: bool = False
                         "content_sha256": x["content_sha256"],
                         "archive_sha256": x["archive_sha256"],
                         "inventory": x["inventory"],
+                        "capability_assessment": x["capability_assessment"],
                     }
                     for x in bundles
                 ],
@@ -187,6 +194,7 @@ def build(root: Path, output_dir: Path, maturity: str, allow_empty: bool = False
                 "channel": "chatgpt-zip",
                 "package_version": version,
                 "source_revision": revision,
+                "capability_contract": capability_contract_metadata(),
                 "skills": [
                     {
                         "name": x["name"],
@@ -197,6 +205,7 @@ def build(root: Path, output_dir: Path, maturity: str, allow_empty: bool = False
                         "content_sha256": x["content_sha256"],
                         "archive_sha256": x["archive_sha256"],
                         "inventory": x["inventory"],
+                        "capability_assessment": x["capability_assessment"],
                     }
                     for x in bundles
                 ],

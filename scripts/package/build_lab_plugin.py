@@ -7,7 +7,7 @@ from pathlib import Path
 
 import yaml
 
-from build_utils import atomic_output, ensure_source_valid, package_runtime_mcp, package_version, sha256_tree, source_revision, write_json
+from build_utils import atomic_output, capability_assessment, capability_contract_metadata, ensure_source_valid, package_runtime_mcp, package_version, sha256_tree, source_revision, write_json
 from build_plugin import copy_skill, discover_skills
 from workflow_entrypoints import add_workflow_entrypoints, load_registry
 
@@ -175,6 +175,7 @@ def main() -> int:
                         if p.is_file()
                     ),
                     "content_sha256": sha256_tree(final_dir),
+                    "capability_assessment": capability_assessment(root, name),
                 }
             )
 
@@ -246,6 +247,7 @@ def main() -> int:
                 "schema_version": "1.0",
                 "channel": "lab",
                 "source_revision": revision,
+                "capability_contract": capability_contract_metadata(),
                 "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
                 "capabilities": sorted(capabilities, key=lambda x: x["name"]),
                 "runtime_fixture_targets": fixture_status,
@@ -262,6 +264,7 @@ def main() -> int:
                 "version": version,
                 "channel": "lab",
                 "source_revision": revision,
+                "capability_contract": capability_contract_metadata(),
                 "payload_content_sha256": digest,
                 "components": [
                     {
@@ -270,6 +273,7 @@ def main() -> int:
                         "maturity": item.get("maturity"),
                         "version": item.get("version"),
                         "content_sha256": item.get("content_sha256"),
+                        "capability_assessment": item.get("capability_assessment"),
                     }
                     for item in sorted(capabilities, key=lambda x: x["name"])
                 ],

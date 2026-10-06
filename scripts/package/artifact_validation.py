@@ -62,6 +62,8 @@ def validate_manifests(path: Path) -> list[str]:
         c = json.loads(capabilities.read_text(encoding="utf-8"))
         if r.get("source_revision") != c.get("source_revision"):
             errors.append("release/capabilities source_revision mismatch")
+        if r.get("capability_contract") != c.get("capability_contract"):
+            errors.append("release/capabilities capability_contract mismatch")
         if not r.get("release_id"):
             errors.append("release manifest missing immutable release_id")
 
@@ -95,6 +97,18 @@ def validate_manifests(path: Path) -> list[str]:
                 for field in ("kind", "maturity", "version", "content_sha256"):
                     if release_item.get(field) != item.get(field):
                         errors.append(f"{name}: release/capabilities {field} mismatch")
+                if item.get("capability_assessment") != release_item.get("capability_assessment"):
+                    errors.append(f"{name}: release/capabilities capability_assessment mismatch")
+                assessment = item.get("capability_assessment")
+                if assessment is not None:
+                    required_dimensions = {"network", "filesystem", "shell_exec", "credentials", "external_actions"}
+                    requirements = assessment.get("requirements") if isinstance(assessment, dict) else None
+                    if not isinstance(requirements, dict) or set(requirements) != required_dimensions:
+                        errors.append(f"{name}: invalid capability assessment dimensions")
+                    elif assessment.get("status") not in {"DECLARED", "UNASSESSED"}:
+                        errors.append(f"{name}: invalid capability assessment status")
+                    elif assessment.get("status") == "UNASSESSED" and any(value != "unassessed" for value in requirements.values()):
+                        errors.append(f"{name}: UNASSESSED capability requirements must remain explicit")
 
             capability_names = {
                 item.get("name") for item in capability_items if isinstance(item, dict) and item.get("name")
@@ -215,6 +229,9 @@ def validate_zips(path: Path) -> list[str]:
         errors.append("index/capabilities package_version mismatch")
     if index.get("package_version") != release.get("version"):
         errors.append("index/release package version mismatch")
+    contract = index.get("capability_contract")
+    if not isinstance(contract, dict) or contract != capabilities.get("capability_contract") or contract != release.get("capability_contract"):
+        errors.append("index/capabilities/release capability_contract mismatch")
 
     index_by_name = _unique_by_name(index.get("skills") or [], "index", errors)
     capabilities_by_name = _unique_by_name(capabilities.get("skills") or [], "capabilities", errors)
@@ -238,7 +255,7 @@ def validate_zips(path: Path) -> list[str]:
 
         capability = capabilities_by_name.get(name)
         release_item = release_by_name.get(name)
-        identity_fields = ("version", "maturity", "zip", "content_sha256", "archive_sha256", "inventory")
+        identity_fields = ("version", "maturity", "zip", "content_sha256", "archive_sha256", "inventory", "capability_assessment")
         if capability is not None:
             for field in identity_fields:
                 if capability.get(field) != item.get(field):

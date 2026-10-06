@@ -15,7 +15,10 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 CODE_SUFFIXES = {".py", ".sh", ".bash", ".js", ".mjs", ".cjs", ".ts", ".ps1", ".json", ".toml", ".txt"}
 TEXT_SUFFIXES = CODE_SUFFIXES | {".md", ".yaml", ".yml"}
-KNOWN_RULES = {"SEC001", "SEC002", "SEC003", "SEC004", "SEC005", "SEC006", "SEC007", "SEC008", "SEC009"}
+KNOWN_RULES = {"SEC001", "SEC002", "SEC003", "SEC004", "SEC005", "SEC006", "SEC007", "SEC008", "SEC009", "SEC010"}
+SCAN_AREAS = ("skills", "runtime", "scripts", "workflows", "templates", ".github/workflows")
+EXCLUDED_PARTS = {"tests", "__pycache__", ".venv", ".tmp", "node_modules", "evals", ".git"}
+SCANNER_SOURCE = Path("scripts/security/scan_skills.py")
 
 # These are deliberately narrow static indicators. A finding requires review; this
 # scanner does not prove exploitability and never executes inspected files.
@@ -50,14 +53,22 @@ def _fingerprint(rule_id: str, rel_path: str, line: str) -> str:
 
 
 def _source_files(root: Path) -> Iterable[Path]:
-    base = root / "skills"
-    for path in sorted(base.rglob("*")):
-        if "tests" in path.relative_to(base).parts:
+    found: set[Path] = set()
+    for area in SCAN_AREAS:
+        base = root / area
+        if not base.is_dir():
             continue
-        if not path.is_file() and not path.is_symlink():
-            continue
-        if path.suffix.lower() in TEXT_SUFFIXES or path.name == "SKILL.md":
-            yield path
+        for path in base.rglob("*"):
+            rel = path.relative_to(root)
+            if any(part in EXCLUDED_PARTS for part in rel.parts):
+                continue
+            if rel == SCANNER_SOURCE:
+                continue
+            if not path.is_file() and not path.is_symlink():
+                continue
+            if path.is_symlink() or path.suffix.lower() in TEXT_SUFFIXES or path.name in {"SKILL.md", "WORKFLOW.md"}:
+                found.add(path)
+    yield from sorted(found)
 
 
 def _dependency_is_pinned(value: str) -> bool:
@@ -84,7 +95,11 @@ def _scan_file(root: Path, path: Path) -> list[Finding]:
     rel = path.relative_to(root).as_posix()
     lines = text.splitlines()
     findings: list[Finding] = []
+    # Bidi controls can reorder visible text. ZWJ/ZWNJ are intentionally excluded.
+    bidi_controls = {0x061C, 0x200E, 0x200F, 0x202A, 0x202B, 0x202C, 0x202D, 0x202E, 0x2066, 0x2067, 0x2068, 0x2069}
     for number, line in enumerate(lines, 1):
+        if any(ord(char) in bidi_controls or (ord(char) == 0xFEFF and number > 1) for char in line):
+            findings.append(Finding("SEC010", "medium", rel, number, _message("SEC010"), _fingerprint("SEC010", rel, line)))
         for rule_id, severity, pattern in LINE_RULES:
             if pattern.search(line):
                 findings.append(Finding(rule_id, severity, rel, number, _message(rule_id), _fingerprint(rule_id, rel, line)))
@@ -136,6 +151,7 @@ def _message(rule_id: str) -> str:
         "SEC007": "A package install lifecycle hook can execute code during installation.",
         "SEC008": "A skill dependency is not pinned to an exact version.",
         "SEC009": "A source symlink is not scanned because it can escape the skills tree.",
+        "SEC010": "Bidirectional or unexpected invisible Unicode control requires review.",
     }[rule_id]
 
 
@@ -221,6 +237,7 @@ def main() -> int:
     payload = {
         "schema_version": "1.0",
         "scanner": "skill-static-security",
+        "scan_scope": list(SCAN_AREAS),
         "execution": "static-only; scanned code was not executed",
         "findings": [asdict(item) for item in findings],
         "errors": errors,

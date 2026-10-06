@@ -242,3 +242,27 @@ def package_runtime_mcp(root: Path, stage: Path) -> list[dict]:
 
 def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
+
+
+CAPABILITY_DIMENSIONS = ("network", "filesystem", "shell_exec", "credentials", "external_actions")
+
+
+def capability_assessment(root: Path, component: str) -> dict:
+    contract = yaml.safe_load((root / "release/capability-contract.yaml").read_text(encoding="utf-8")) or {}
+    if contract.get("contract_id") != "repository-side-v1" or contract.get("schema_version") != "1.0":
+        raise ValueError("unsupported repository capability contract")
+    declaration = (contract.get("component_declarations") or {}).get(component)
+    if declaration is None:
+        return {"status": "UNASSESSED", "requirements": {name: "unassessed" for name in CAPABILITY_DIMENSIONS}}
+    requirements = declaration.get("requirements") if isinstance(declaration, dict) else None
+    if not isinstance(requirements, dict) or set(requirements) != set(CAPABILITY_DIMENSIONS):
+        raise ValueError(f"{component}: invalid capability contract declaration")
+    dimensions = contract.get("dimensions") or {}
+    for name, value in requirements.items():
+        if value not in dimensions.get(name, []):
+            raise ValueError(f"{component}: invalid {name} capability {value!r}")
+    return {"status": "DECLARED", "requirements": dict(requirements)}
+
+
+def capability_contract_metadata() -> dict:
+    return {"contract_id": "repository-side-v1", "assessment_semantics": "UNASSESSED is not equivalent to no permissions"}

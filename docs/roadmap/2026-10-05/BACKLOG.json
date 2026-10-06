@@ -247,11 +247,19 @@
         "ENG-03"
       ],
       "effort": "M",
-      "status": "PROPOSED",
-      "owner": "UNASSIGNED",
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
       "legacy_links": [
         "AIS-06"
-      ]
+      ],
+      "progress": {
+        "implementation_branch": "p0-platform-hardening",
+        "implementation_commit": "94a4fd4eb6f01d655b0c779e5e0eceafa325f108",
+        "pull_request": "https://github.com/aras-2003/ai-skills/pull/121",
+        "github_actions": "PASS on implementation commit; reruns on backlog evidence update",
+        "runtime_evidence": "NOT_RUN",
+        "remaining": "Capability review of each component and model/runtime routing evidence are still required; no maturity or release status changes."
+      }
     },
     {
       "id": "ENG-11",
@@ -1699,9 +1707,17 @@
         "ENG-01"
       ],
       "effort": "M",
-      "status": "PROPOSED",
-      "owner": "UNASSIGNED",
-      "legacy_links": []
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
+      "legacy_links": [],
+      "progress": {
+        "implementation_branch": "p0-platform-hardening",
+        "implementation_commit": "94a4fd4eb6f01d655b0c779e5e0eceafa325f108",
+        "pull_request": "https://github.com/aras-2003/ai-skills/pull/121",
+        "github_actions": "PASS on implementation commit; reruns on backlog evidence update",
+        "runtime_evidence": "NOT_RUN",
+        "remaining": "Capability review of each component and model/runtime routing evidence are still required; no maturity or release status changes."
+      }
     },
     {
       "id": "ENG-16",
@@ -1724,9 +1740,17 @@
         "ENG-06"
       ],
       "effort": "M",
-      "status": "PROPOSED",
-      "owner": "UNASSIGNED",
-      "legacy_links": []
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
+      "legacy_links": [],
+      "progress": {
+        "implementation_branch": "p0-platform-hardening",
+        "implementation_commit": "94a4fd4eb6f01d655b0c779e5e0eceafa325f108",
+        "pull_request": "https://github.com/aras-2003/ai-skills/pull/121",
+        "github_actions": "PASS on implementation commit; reruns on backlog evidence update",
+        "runtime_evidence": "NOT_RUN",
+        "remaining": "Capability review of each component and model/runtime routing evidence are still required; no maturity or release status changes."
+      }
     },
     {
       "id": "ENG-17",
@@ -1749,9 +1773,17 @@
         "ENG-14"
       ],
       "effort": "M",
-      "status": "PROPOSED",
-      "owner": "UNASSIGNED",
-      "legacy_links": []
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
+      "legacy_links": [],
+      "progress": {
+        "implementation_branch": "p0-platform-hardening",
+        "implementation_commit": "94a4fd4eb6f01d655b0c779e5e0eceafa325f108",
+        "pull_request": "https://github.com/aras-2003/ai-skills/pull/121",
+        "github_actions": "PASS on implementation commit; reruns on backlog evidence update",
+        "runtime_evidence": "NOT_RUN",
+        "remaining": "Capability review of each component and model/runtime routing evidence are still required; no maturity or release status changes."
+      }
     },
     {
       "id": "ENG-18",
