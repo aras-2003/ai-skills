@@ -10,6 +10,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 import sys
+import yaml
 
 HERE = Path(__file__).resolve()
 EVAL_DIR = HERE.parents[1]
@@ -54,6 +55,19 @@ class RuntimeCampaignTests(unittest.TestCase):
             campaign.config().get("retest_focus_case_ids"),
         )
 
+    def test_skill_engineering_campaign_derives_lab_version_from_package_source(self) -> None:
+        cfg = yaml.safe_load(
+            (ROOT / "evals/campaigns/skill-engineering-2026-10/engineering-campaign.yaml").read_text()
+        )
+        package = yaml.safe_load((ROOT / "release/package.yaml").read_text())
+        self.assertEqual("release/package.yaml#lab.version", cfg["package"]["lab_version_source"])
+        self.assertNotIn("lab_version", cfg["package"])
+        self.assertEqual(
+            set(cfg["package"]["required_draft_targets"]),
+            set(package["lab"]["draft_test_targets"]),
+        )
+        self.assertIn("release/package.yaml", campaign.separately_validated_engineering_paths())
+
 
     def test_explicit_fallback_requires_target_name_in_executor_input(self) -> None:
         case = {
@@ -93,7 +107,8 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
             self.assertEqual("1.36.0", lock["packages"]["production"]["version"])
             self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
-            self.assertEqual("0.33.1", lock["packages"]["lab"]["version"])
+            package_cfg = yaml.safe_load((ROOT / "release/package.yaml").read_text())
+            self.assertEqual(package_cfg["lab"]["version"], lock["packages"]["lab"]["version"])
             self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
             self.assertNotIn("organizational-interface-review", lock["expected_catalogs"]["production"])
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
