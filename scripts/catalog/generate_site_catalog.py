@@ -6,6 +6,8 @@ import re
 import subprocess
 from pathlib import Path
 
+import yaml
+
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -43,7 +45,18 @@ def build_catalog(
     markdown: str,
     package_manifest: str,
     source_revision: str,
+    workflow_registry: str = "workflows: []\n",
+    capability_contract: str = "contract_id: repository-side-v1\ncomponent_declarations: {}\n",
 ) -> dict[str, object]:
+    contract = yaml.safe_load(capability_contract) or {}
+    if contract.get("contract_id") not in {None, "repository-side-v1"}:
+        raise ValueError("Unsupported capability contract in site catalog input")
+    declarations = contract.get("component_declarations") or {}
+    if not isinstance(declarations, dict):
+        raise ValueError("Capability contract component_declarations must be a mapping")
+    def assessment(name: str) -> str:
+        return "DECLARED" if name in declarations else "UNASSESSED"
+
     skills: list[dict[str, str]] = []
     for line in markdown.splitlines():
         if not line.lstrip().startswith("|"):
@@ -63,18 +76,53 @@ def build_catalog(
             "version": version,
             "description": description,
             "source": source,
+            "source_status": "present",
+            "capability_assessment": assessment(name),
         })
     if not skills:
         raise ValueError("CATALOG.md did not contain any skill rows")
     revision = source_revision.strip()
     if not revision:
         raise ValueError("Source revision is required for version provenance")
+    registry = yaml.safe_load(workflow_registry) or {}
+    workflows: list[dict[str, object]] = []
+    for item in registry.get("workflows") or []:
+        if not isinstance(item, dict) or not item.get("name"):
+            raise ValueError("Invalid workflow registry entry")
+        workflow_path = str(item.get("workflow") or "")
+        if not workflow_path or workflow_path.startswith("/") or ".." in Path(workflow_path).parts:
+            raise ValueError(f"Unsafe workflow source path for {item.get('name')}")
+        dependencies = item.get("dependencies") or {}
+        workflows.append({
+            "name": str(item["name"]),
+            "source": workflow_path,
+            "maturity": str((item.get("metadata") or {}).get("maturity") or "unknown"),
+            "version": str((item.get("metadata") or {}).get("version") or "unknown"),
+            "description": " ".join(str(item.get("description") or "").split()),
+            "declared_channels": dict(sorted((item.get("channels") or {}).items())),
+            "required_dependencies": sorted(str(x) for x in dependencies.get("required") or []),
+            "optional_dependencies": sorted(
+                str(x.get("name")) for x in dependencies.get("optional") or []
+                if isinstance(x, dict) and x.get("name")
+            ),
+            "capability_assessment": assessment(str(item["name"])),
+        })
+    workflows.sort(key=lambda item: str(item["name"]))
+    statuses = [item["capability_assessment"] for item in skills + workflows]
+    overall_assessment = "UNASSESSED" if not any(status == "DECLARED" for status in statuses) else (
+        "ASSESSED" if all(status == "DECLARED" for status in statuses) else "PARTIALLY_DECLARED"
+    )
     return {
         "metadata": {
             "packages": parse_package_manifest(package_manifest),
             "source_revision": revision[:12],
+            "capability_contract": "repository-side-v1",
+            "capability_assessment": overall_assessment,
+            "runtime_installation": "NOT_OBSERVED",
+            "availability_semantics": "Source maturity and declared channels do not prove package inclusion or installed runtime availability.",
         },
         "skills": skills,
+        "workflows": workflows,
     }
 
 
@@ -100,6 +148,8 @@ def main() -> int:
         source.read_text(encoding="utf-8"),
         package_source.read_text(encoding="utf-8"),
         current_revision(),
+        (ROOT / "workflows" / "runtime-registry.yaml").read_text(encoding="utf-8"),
+        (ROOT / "release" / "capability-contract.yaml").read_text(encoding="utf-8"),
     )
     output.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Generated site catalog with {len(catalog['skills'])} skills")

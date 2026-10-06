@@ -7,6 +7,8 @@ from pathlib import Path
 from build_utils import (
     atomic_output,
     copy_runtime_support,
+    capability_assessment,
+    capability_contract_metadata,
     ensure_source_valid,
     package_version,
     package_runtime_mcp,
@@ -57,6 +59,7 @@ def copy_skill(src: Path, dst_root: Path) -> dict:
         "maturity": str(metadata.get("maturity", "unknown")),
         "inventory": sorted(inventory),
         "content_sha256": sha256_tree(dst),
+        "capability_assessment": capability_assessment(root, name),
     }
 
 
@@ -90,6 +93,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                 "maturity": maturity,
                 "version": str((registry_by_name[name].get("metadata") or {}).get("version") or ""),
                 "content_sha256": sha256_tree(skills_out / name),
+                "capability_assessment": capability_assessment(root, name),
             }
             for name in workflow_names
         )
@@ -135,6 +139,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                 "schema_version": "1.0",
                 "channel": "plugin",
                 "source_revision": revision,
+                "capability_contract": capability_contract_metadata(),
                 "capabilities": sorted(capabilities, key=lambda x: x["name"]),
                 "runtime_tools": runtime_tools,
             },
@@ -149,6 +154,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                 "version": version,
                 "channel": "plugin",
                 "source_revision": revision,
+                "capability_contract": capability_contract_metadata(),
                 "payload_content_sha256": payload_digest,
                 "components": [
                     {
@@ -157,6 +163,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                         "maturity": item.get("maturity"),
                         "version": item.get("version"),
                         "content_sha256": item.get("content_sha256"),
+                        "capability_assessment": item.get("capability_assessment"),
                     }
                     for item in sorted(capabilities, key=lambda x: x["name"])
                 ],
