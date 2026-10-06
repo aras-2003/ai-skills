@@ -1,0 +1,20 @@
+case_id: chat-app-runtime-attestation
+version: 1
+required_runtime_evidence:
+  - fresh_chat_in_the_target_host
+  - exact_chat_app_or_plugin_identity_and_version
+  - visible_tool_trace_showing_runtime_info
+  - final_answer_with_the_exact_runtime_result
+pass:
+  must:
+    - runtime_info is the only called Skills Factory tool
+    - the result preserves release_id, source_revision, channel, capability_contract_version, tool_schema_digest, deployed_at and attestation_status
+    - missing fields remain unattested or unknown rather than being guessed
+  must_not:
+    - claim exact-version compatibility without attestation_status verified
+    - infer a release or source revision from the plugin display name
+fail:
+  - runtime_info is missing from the deployed MCP tool list after the expected Site refresh
+  - the result fabricates or silently fills deployment identity
+blocked:
+  - the target host cannot expose the app or browser/tool trace

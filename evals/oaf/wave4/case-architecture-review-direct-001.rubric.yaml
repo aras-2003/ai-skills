@@ -1,0 +1,29 @@
+schema_version: "1.0"
+id: case-architecture-review-direct-001
+target: architecture-review
+mode: explicit
+execution_payload_must_not_include:
+  - expected routing
+  - pass/fail criteria
+  - expected answer
+criteria_text: |-
+  Evaluate the direct architecture-review skill, not the parent
+  oaf-enterprise-architecture-review workflow.
+
+  PASS requires:
+  - facts are separated from hypotheses and missing evidence;
+  - ownership, duplicate rules and misaligned objectives are treated as
+    architecture/operating-model signals rather than proof of a single fix;
+  - the response does not invent a target architecture, consolidation decision
+    or implementation plan from the supplied evidence;
+  - the response states what evidence would change the assessment.
+
+  Runtime evidence is separate from behavioral grading. Exact-version PASS
+  requires runtime_info, source revision, channel and the observed tool trace.
+assertions:
+  manual:
+    - architecture-review is executed directly
+    - observed facts, hypotheses and missing evidence are distinguished
+    - no unsupported target architecture or consolidation decision is invented
+    - change-driving evidence is requested
+    - exact runtime identity is captured separately from answer quality

@@ -178,7 +178,12 @@ class PackagingTests(unittest.TestCase):
             runtime = runtime_tools["skills-factory-runtime"]
             self.assertEqual("skills-factory-runtime", runtime["runtime_class"])
             self.assertEqual(
-                ["route_investment_request", "render_bar_chart", "render_line_chart"],
+                [
+                    "runtime_info",
+                    "route_investment_request",
+                    "render_bar_chart",
+                    "render_line_chart",
+                ],
                 runtime["tools"],
             )
 
