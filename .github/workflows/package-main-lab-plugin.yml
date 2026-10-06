@@ -3,6 +3,9 @@ name: Package candidate skill lab
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "plugins/arek-ai-skills-lab/**"
+      - "docs/lab-release.json"
 
 permissions:
   contents: read
@@ -41,6 +44,7 @@ jobs:
           path: |
             plugins/arek-ai-skills-lab
             docs/lab-release.json
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 90
       - name: Record candidate identity
