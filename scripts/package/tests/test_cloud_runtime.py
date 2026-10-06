@@ -14,7 +14,7 @@ sys.path.insert(0, str(MCP_DIR))
 
 def load_cloud_server():
     spec = importlib.util.spec_from_file_location(
-        "arek_cloud_server", MCP_DIR / "cloud_server.py"
+        "skills_factory_server", MCP_DIR / "server.py"
     )
     if spec is None or spec.loader is None:
         raise RuntimeError("cannot load cloud server")
@@ -38,9 +38,25 @@ def load_cloud_server():
     fake_renderer.render_line_chart = lambda *_args, **_kwargs: []
 
     module = importlib.util.module_from_spec(spec)
+    fake_investment = types.ModuleType("investment_runtime")
+    def fake_route(request):
+        if "ETF risk policy" in request:
+            return {
+                "is_investment_request": True,
+                "route": "policy",
+                "child_workflow": "investment-policy-design",
+            }
+        return {"is_investment_request": False, "route": "not_applicable"}
+
+    fake_investment.route_investment_request = fake_route
     with patch.dict(
         sys.modules,
-        {"mcp": fake_mcp, "mcp.server": fake_mcp_server, "chart_renderer": fake_renderer},
+        {
+            "mcp": fake_mcp,
+            "mcp.server": fake_mcp_server,
+            "chart_renderer": fake_renderer,
+            "investment_runtime": fake_investment,
+        },
     ):
         spec.loader.exec_module(module)
     return module

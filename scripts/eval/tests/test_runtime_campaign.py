@@ -103,7 +103,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("d24d954c9ec8c43cfe37d0015c3b9b7714af18c3", lock["behavior_source_revision"])
+            self.assertEqual("a926341bb13e9613c0ab4a268cd32443723c3f00", lock["behavior_source_revision"])
             self.assertEqual("skills-factory", lock["packages"]["production"]["name"])
             self.assertEqual("1.36.0", lock["packages"]["production"]["version"])
             self.assertEqual("skills-factory-lab", lock["packages"]["lab"]["name"])
@@ -345,7 +345,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             case,
             {
                 "selected_capabilities": ["investment-os-review"],
-                "tool_calls": ["mcp__skills-factory-investment-os__route_investment_request"],
+                "tool_calls": ["mcp__skills-factory-runtime__route_investment_request"],
             },
         )
         self.assertTrue(any("required child capability absent: investment-portfolio-review" in item for item in missing_child))
@@ -360,7 +360,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             case,
             {
                 "selected_capabilities": ["investment-os-review", "investment-portfolio-review"],
-                "tool_calls": ["mcp__skills-factory-investment-os__route_investment_request"],
+                "tool_calls": ["mcp__skills-factory-runtime__route_investment_request"],
             },
         )
         self.assertEqual([], valid)
@@ -454,7 +454,7 @@ class RuntimeCampaignTests(unittest.TestCase):
                 "provider": "offline-synthetic-provider",
                 "model_id": "offline-synthetic-model",
                 "reasoning": "offline",
-                "available_tools": ["offline-fixture", "mcp__skills-factory-chart-renderer__render_bar_chart", "mcp__skills-factory-chart-renderer__render_line_chart", "mcp__skills-factory-investment-os__route_investment_request"],
+                "available_tools": ["offline-fixture", "mcp__skills-factory-runtime__render_bar_chart", "mcp__skills-factory-runtime__render_line_chart", "mcp__skills-factory-runtime__route_investment_request"],
             },
         }
 

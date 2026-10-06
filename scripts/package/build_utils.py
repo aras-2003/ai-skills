@@ -213,15 +213,16 @@ def package_runtime_mcp(
     config_src = source_dir / "mcp.json"
     renderer_src = source_dir / "chart_renderer.py"
     investment_src = source_dir / "investment_runtime.py"
+    server_src = source_dir / "server.py"
     cloud_src = source_dir / "cloud_server.py"
-    if not all(path.is_file() for path in (config_src, renderer_src, investment_src, cloud_src)):
+    if not all(path.is_file() for path in (config_src, renderer_src, investment_src, server_src, cloud_src)):
         raise ValueError("runtime MCP sources are incomplete")
 
     config = json.loads(config_src.read_text(encoding="utf-8"))
     servers = config.get("mcpServers")
     if not isinstance(servers, dict):
         raise ValueError("runtime/mcp/mcp.json must declare mcpServers")
-    for required in ("skills-factory-chart-renderer", "skills-factory-investment-os"):
+    for required in ("skills-factory-runtime",):
         if required not in servers:
             raise ValueError(f"runtime/mcp/mcp.json must declare {required}")
 
@@ -243,6 +244,7 @@ def package_runtime_mcp(
         mcp_out.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(renderer_src, mcp_out / "chart_renderer.py")
         shutil.copyfile(investment_src, mcp_out / "investment_runtime.py")
+        shutil.copyfile(server_src, mcp_out / "server.py")
         shutil.copyfile(cloud_src, mcp_out / "cloud_server.py")
         write_json(stage / ".mcp.json", {"mcpServers": servers})
 
@@ -251,25 +253,14 @@ def package_runtime_mcp(
         if mcp_out
         else sha256_bytes(json.dumps(servers, sort_keys=True).encode("utf-8"))
     )
-    return [
-        {
-            "name": "skills-factory-chart-renderer",
-            "kind": "mcp-server",
-            "runtime_class": "deterministic-data-chart",
-            "renderer_class": "deterministic-data-chart",
-            "tools": ["render_bar_chart", "render_line_chart"],
-            "content_sha256": tree_digest,
-            "transport": "streamable-http" if mode == "remote" else "stdio",
-        },
-        {
-            "name": "skills-factory-investment-os",
-            "kind": "mcp-server",
-            "runtime_class": "investment-request-router",
-            "tools": ["route_investment_request"],
-            "content_sha256": tree_digest,
-            "transport": "streamable-http" if mode == "remote" else "stdio",
-        },
-    ]
+    return [{
+        "name": "skills-factory-runtime",
+        "kind": "mcp-server",
+        "runtime_class": "skills-factory-runtime",
+        "tools": ["route_investment_request", "render_bar_chart", "render_line_chart"],
+        "content_sha256": tree_digest,
+        "transport": "streamable-http" if mode == "remote" else "stdio",
+    }]
 
 
 def write_json(path: Path, payload: dict) -> None:

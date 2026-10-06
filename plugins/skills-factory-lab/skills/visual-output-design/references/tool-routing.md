@@ -19,7 +19,7 @@ The following do **not** qualify as quantitative chart renderers:
 - text, markdown tables or ASCII/punctuation pseudo-charts.
 
 Known bundled static renderer:
-- MCP server: `skills-factory-chart-renderer`;
+- MCP server: `skills-factory-runtime`;
 - tools: `render_bar_chart`, `render_line_chart`;
 - these tools qualify for ordinary static quantitative visual slots only when exposed by the current runtime.
 - they **do not qualify** for a slot that explicitly requires chat-native interactivity.
@@ -41,7 +41,7 @@ If the user specifically asks for controls but the runtime exposes only a static
 ## Investment shortlist renderer choice
 
 1. Use a real callable interactive component only when its controls and output behavior are documented in the current runtime.
-2. Otherwise use the bundled static `skills-factory-chart-renderer` when exposed. Its `render_line_chart` and `render_bar_chart` tools produce static visuals, not filters or selectors.
+2. Otherwise use the bundled static `skills-factory-runtime` when exposed. Its `render_line_chart` and `render_bar_chart` tools produce static visuals, not filters or selectors.
 3. If no deterministic chart renderer is callable, mark the visual slot `BLOCKED_NO_RENDERER` and give a compact table as diagnostic fallback only.
 
 For the static fallback:
@@ -152,7 +152,7 @@ or evidence-backed process state.
 ## Fallback order
 1. native host `chart` widget for quantitative interactive charts when available;
 2. another qualifying chat-native interactive structured renderer;
-3. static `skills-factory-chart-renderer` only for non-interactive slots or as diagnostic fallback;
+3. static `skills-factory-runtime` only for non-interactive slots or as diagnostic fallback;
 4. for **optional** visuals: static markdown table + concise prose;
 5. for **required visual-floor** slots with no qualifying renderer: `BLOCKED_NO_RENDERER` plus an optional diagnostic table/prose fallback;
 6. external artifact renderer only when the user explicitly requested that artifact class.
