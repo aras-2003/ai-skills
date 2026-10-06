@@ -109,10 +109,14 @@ lab:
             self.assertEqual(manifest[field], receipt[field], field)
         self.assertEqual("lab", receipt["channel"])
 
-    def test_lab_packager_refreshes_the_public_release_receipt(self) -> None:
+    def test_lab_packager_uploads_an_immutable_candidate_without_branch_writes(self) -> None:
         workflow = (ROOT / ".github/workflows/package-main-lab-plugin.yml").read_text(encoding="utf-8")
         self.assertIn("cp plugins/arek-ai-skills-lab/release-manifest.json docs/lab-release.json", workflow)
-        self.assertIn("git add plugins/arek-ai-skills-lab docs/lab-release.json", workflow)
+        self.assertIn("actions/upload-artifact@", workflow)
+        self.assertIn("name: arek-ai-skills-lab-${{ github.sha }}", workflow)
+        self.assertIn("contents: read", workflow)
+        self.assertNotIn("git push", workflow)
+        self.assertNotIn("contents: write", workflow)
 
     def test_page_distinguishes_catalog_revision_from_lab_build_revision(self) -> None:
         page = (ROOT / "docs/index.html").read_text(encoding="utf-8")
