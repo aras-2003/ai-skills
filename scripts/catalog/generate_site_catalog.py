@@ -12,6 +12,42 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def collect_workflow_sources(root: Path) -> dict[str, str]:
+    return {
+        path.relative_to(root).as_posix(): path.read_text(encoding="utf-8")
+        for path in sorted((root / "workflows").rglob("WORKFLOW.md"))
+    }
+
+
+def _workflow_summary(text: str) -> str:
+    lines = text.splitlines()
+    in_purpose = False
+    heading = ""
+    topics: list[str] = []
+    for line in lines:
+        stripped = line.strip()
+        if stripped.casefold() == "## purpose":
+            in_purpose = True
+            continue
+        if in_purpose and stripped.startswith("## "):
+            break
+        if not in_purpose or not stripped:
+            continue
+        if not heading and not stripped.startswith(("#", "-", "*")):
+            heading = " ".join(stripped.split()).rstrip(":")
+        elif stripped.startswith(("-", "*")):
+            topic = stripped[1:].strip()
+            if topic:
+                topics.append(" ".join(topic.split()))
+        elif heading:
+            break
+    if not heading:
+        return ""
+    if topics:
+        return heading + " " + "; ".join(topics) + "."
+    return heading
+
+
 def split_markdown_row(line: str) -> list[str]:
     """Split a pipe table row while keeping escaped pipes inside cells."""
     cells = re.split(r"(?<!\\)\|", line.strip())
@@ -47,6 +83,7 @@ def build_catalog(
     source_revision: str,
     workflow_registry: str = "workflows: []\n",
     capability_contract: str = "contract_id: repository-side-v1\ncomponent_declarations: {}\n",
+    workflow_sources: dict[str, str] | None = None,
 ) -> dict[str, object]:
     contract = yaml.safe_load(capability_contract) or {}
     if contract.get("contract_id") not in {None, "repository-side-v1"}:
@@ -86,16 +123,22 @@ def build_catalog(
         raise ValueError("Source revision is required for version provenance")
     registry = yaml.safe_load(workflow_registry) or {}
     workflows: list[dict[str, object]] = []
+    registered_sources: set[str] = set()
     for item in registry.get("workflows") or []:
         if not isinstance(item, dict) or not item.get("name"):
             raise ValueError("Invalid workflow registry entry")
         workflow_path = str(item.get("workflow") or "")
         if not workflow_path or workflow_path.startswith("/") or ".." in Path(workflow_path).parts:
             raise ValueError(f"Unsafe workflow source path for {item.get('name')}")
+        if workflow_sources is not None and workflow_path not in workflow_sources:
+            raise ValueError(f"Missing workflow source for {item.get('name')}: {workflow_path}")
+        registered_sources.add(workflow_path)
         dependencies = item.get("dependencies") or {}
         workflows.append({
             "name": str(item["name"]),
             "source": workflow_path,
+            "source_status": "present",
+            "runtime_registration": "registered",
             "maturity": str((item.get("metadata") or {}).get("maturity") or "unknown"),
             "version": str((item.get("metadata") or {}).get("version") or "unknown"),
             "description": " ".join(str(item.get("description") or "").split()),
@@ -106,6 +149,25 @@ def build_catalog(
                 if isinstance(x, dict) and x.get("name")
             ),
             "capability_assessment": assessment(str(item["name"])),
+        })
+    for workflow_path, content in sorted((workflow_sources or {}).items()):
+        if workflow_path in registered_sources:
+            continue
+        if not workflow_path.startswith("workflows/") or not workflow_path.endswith("/WORKFLOW.md") or ".." in Path(workflow_path).parts:
+            raise ValueError(f"Unsafe unregistered workflow source path: {workflow_path}")
+        workflow_name = Path(workflow_path).parent.name
+        workflows.append({
+            "name": workflow_name,
+            "source": workflow_path,
+            "source_status": "present",
+            "runtime_registration": "not_registered",
+            "maturity": "unknown",
+            "version": "unknown",
+            "description": _workflow_summary(content),
+            "declared_channels": {},
+            "required_dependencies": [],
+            "optional_dependencies": [],
+            "capability_assessment": assessment(workflow_name),
         })
     workflows.sort(key=lambda item: str(item["name"]))
     statuses = [item["capability_assessment"] for item in skills + workflows]
@@ -120,6 +182,8 @@ def build_catalog(
             "capability_assessment": overall_assessment,
             "runtime_installation": "NOT_OBSERVED",
             "availability_semantics": "Source maturity and declared channels do not prove package inclusion or installed runtime availability.",
+            "source_workflow_count": len(workflows),
+            "registered_workflow_count": sum(item["runtime_registration"] == "registered" for item in workflows),
         },
         "skills": skills,
         "workflows": workflows,
@@ -150,6 +214,7 @@ def main() -> int:
         current_revision(),
         (ROOT / "workflows" / "runtime-registry.yaml").read_text(encoding="utf-8"),
         (ROOT / "release" / "capability-contract.yaml").read_text(encoding="utf-8"),
+        collect_workflow_sources(ROOT),
     )
     output.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Generated site catalog with {len(catalog['skills'])} skills")

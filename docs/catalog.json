@@ -14,7 +14,9 @@
     "capability_contract": "repository-side-v1",
     "capability_assessment": "UNASSESSED",
     "runtime_installation": "NOT_OBSERVED",
-    "availability_semantics": "Source maturity and declared channels do not prove package inclusion or installed runtime availability."
+    "availability_semantics": "Source maturity and declared channels do not prove package inclusion or installed runtime availability.",
+    "source_workflow_count": 17,
+    "registered_workflow_count": 16
   },
   "skills": [
     {
@@ -562,6 +564,8 @@
     {
       "name": "commerce-opportunity-review",
       "source": "workflows/commerce-opportunity-review/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "1.0.0",
       "description": "Orchestrate the minimum evidence-backed path for discovering, screening and selecting e-commerce product opportunities without running the full commerce catalog by default.",
@@ -590,6 +594,8 @@
     {
       "name": "commerce-product-deep-dive",
       "source": "workflows/commerce-product-deep-dive/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "1.0.0",
       "description": "Evaluate one e-commerce product opportunity end-to-end across problem demand, competition, differentiation, economics, sourcing, regulation and acquisition before deciding whether to test, research, defer or kill.",
@@ -618,6 +624,8 @@
     {
       "name": "investment-attention-review",
       "source": "workflows/investment-attention-review/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "0.2.0",
       "description": "Child workflow for Investment OS attention triage. Use when selected by investment-os-review, explicitly requested, or when the user clearly asks whether new company/industry/market information changes existing holdings or theses. Do not use as the default entry point for broad natural investment requests.",
@@ -646,6 +654,8 @@
     {
       "name": "investment-opportunity-hunter",
       "source": "workflows/investment-opportunity-hunter/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "0.5.0",
       "description": "Child workflow for Investment OS opportunity discovery. Use when selected by investment-os-review, explicitly requested, or when the user clearly asks to scan for new securities or research candidates. Do not use as the default entry point for broad natural investment requests.",
@@ -673,6 +683,8 @@
     {
       "name": "investment-os-review",
       "source": "workflows/investment-os-review/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "0.3.0",
       "description": "Default Investment OS front door for natural investment requests. Use when the user asks in ordinary language to observe what changed in their portfolio, review their portfolio risk/structure, assess a stock/security, find investment opportunities, research themes, evaluate whether new market/company information matters, or define portfolio policy/risk limits. Route first, then invoke the matching specialist workflow; use the MCP routing preflight when available and do not answer with generic investment commentary.",
@@ -696,6 +708,8 @@
     {
       "name": "investment-portfolio-observation",
       "source": "workflows/investment-portfolio-observation/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "0.2.0",
       "description": "Lightweight portfolio observation child workflow for natural requests asking what changed, what is happening with holdings, exposure drift or what deserves attention now. It compares canonical state over time, separates observed change from causal attribution, suppresses unchanged noise and does not optimise toward a fixed target allocation.",
@@ -719,6 +733,8 @@
     {
       "name": "investment-portfolio-review",
       "source": "workflows/investment-portfolio-review/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "0.5.0",
       "description": "Child workflow for full portfolio review. Use when selected by investment-os-review, explicitly requested, or when another Investment OS workflow delegates a portfolio-level decision. It performs canonical reads, reconciliation, concentration/diversification analysis, policy/thesis checks, integrated reporting and the visual-floor path. Do not use as the default natural Investment OS entry point; natural portfolio requests should enter through investment-os-review.",
@@ -746,6 +762,8 @@
     {
       "name": "investment-security-review",
       "source": "workflows/investment-security-review/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "0.4.0",
       "description": "Child workflow for one-security review. Use when selected by investment-os-review, explicitly requested, or when a single named security is already the clear decision object. Do not use as the default entry point for broad natural investment requests.",
@@ -773,6 +791,8 @@
     {
       "name": "investment-theme-discovery",
       "source": "workflows/investment-theme-discovery/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "0.2.0",
       "description": "Child workflow for Investment OS theme research. Use when selected by investment-os-review, explicitly requested, or when thematic/value-chain research is already the clear decision object. Do not use as the default entry point for broad natural investment requests.",
@@ -798,6 +818,8 @@
     {
       "name": "oaf-enterprise-architecture-review",
       "source": "workflows/oaf-enterprise-architecture-review/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "1.0.0",
       "description": "Run an evidence-gated OAF enterprise architecture review linking business outcomes, capabilities, operating model, architecture decisions and portfolio implications without inventing technology defects.",
@@ -820,6 +842,8 @@
     {
       "name": "oaf-enterprise-change-review",
       "source": "workflows/oaf-enterprise-change-review/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "1.0.0",
       "description": "Orchestrate the minimum evidence-backed OAF path across multiple domains, reusing specialist findings and producing only the bounded design and mobilisation supported by evidence.",
@@ -851,6 +875,8 @@
     {
       "name": "oaf-governance-redesign",
       "source": "workflows/oaf-governance-redesign/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "1.0.0",
       "description": "Run an OAF governance redesign workflow that starts from material decisions and bottlenecks rather than existing committees.",
@@ -873,6 +899,8 @@
     {
       "name": "oaf-health-check",
       "source": "workflows/oaf-health-check/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "1.5.0",
       "description": "Run the OAF Health Check workflow as a selective cross-domain organisational architecture diagnostic. Use when the user asks for a broad diagnosis spanning strategy execution, operating model, decision rights, enterprise architecture, portfolio/execution or evidence loops. Do not use for a narrow issue that should route directly to one specialist OAF skill.",
@@ -900,6 +928,8 @@
     {
       "name": "oaf-operating-model-redesign",
       "source": "workflows/oaf-operating-model-redesign/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "1.1.0",
       "description": "Run an evidence-gated OAF operating-model redesign workflow from diagnosis through options, decision architecture and bounded transition design.",
@@ -926,6 +956,8 @@
     {
       "name": "oaf-strategy-execution-reset",
       "source": "workflows/oaf-strategy-execution-reset/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "candidate",
       "version": "0.1.0",
       "description": "Run an OAF strategy-execution reset linking strategic outcomes, capabilities, portfolio, decision rights, funding and evidence loops.",
@@ -950,6 +982,8 @@
     {
       "name": "oaf-transformation-design",
       "source": "workflows/oaf-transformation-design/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "registered",
       "maturity": "production",
       "version": "1.0.0",
       "description": "Run an evidence-gated OAF transformation design workflow from validated diagnosis and target direction into bounded workstreams, sequencing, mobilisation and adaptive stage gates.",
@@ -965,6 +999,19 @@
         "report-composer",
         "visual-output-design"
       ],
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "skill-development",
+      "source": "workflows/skill-development/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "not_registered",
+      "maturity": "unknown",
+      "version": "unknown",
+      "description": "Create or materially change a skill using a repeatable engineering process that covers need and scope;; standards research;; behavioral contract;; authoring;; static validation;; routing tests;; behavioral evals;; regression analysis;; security / surprise review;; production readiness..",
+      "declared_channels": {},
+      "required_dependencies": [],
+      "optional_dependencies": [],
       "capability_assessment": "UNASSESSED"
     }
   ]
