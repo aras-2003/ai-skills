@@ -4,7 +4,7 @@ description: >
   Evaluate an Agent Skill's routing and behavior using predeclared representative cases, a no-skill baseline or accepted prior version, and evidence-based regression analysis. Use when asked to evaluate a skill, classify or report test results, determine whether a queued or blocked case actually ran, distinguish test outcome from execution state, compare evidence, or assess release readiness. Use after validation and test design, before production promotion, and after material behavior changes.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.3.2"
+  version: "0.3.3"
   maturity: draft
   risk: medium
   last_reviewed: 2026-10-06
@@ -16,7 +16,7 @@ metadata:
 
 Determine whether the candidate reliably improves the intended task without introducing unacceptable regressions. Evaluation is evidence about a defined scope and runtime; it is not proof of general model quality or authorization to release.
 
-**Hard gate:** An expected PASS is not an observed PASS. If a required case has not executed, its outcome is `null`, its execution state records why, and the overall disposition cannot be PASS.
+**Hard gate:** An expected PASS is not an observed PASS. Resolve execution state before scoring any case. If a required case has not executed, its outcome is `null`, its execution state records why, and the overall disposition is `ITERATE` (or `REJECT` for an independent material reason), never PASS.
 
 Return one disposition:
 - **PASS** — predeclared quality and safety gates are met, with no blocking regression;
@@ -41,6 +41,19 @@ If any precondition is missing, return the exact gap and the smallest action nee
 Record two independent fields for every case:
 - `outcome`: `passed`, `failed`, or `null` when execution did not produce enough evidence for a verdict;
 - `execution_state`: `executed`, `blocked`, `awaiting_runner`, `no_steps`, or `not_executed`.
+
+Apply this precedence table before interpreting candidate output:
+
+| Observed run condition | `execution_state` | `outcome` | `evaluation.status` | Overall disposition when required |
+| --- | --- | --- | --- | --- |
+| No executable steps exist, whether or not a runner is assigned | `no_steps` | `null` | `NOT_RUN` | `ITERATE` |
+| Steps exist, but the job is queued without an assigned runner | `awaiting_runner` | `null` | `NOT_RUN` | `ITERATE` |
+| Execution was prevented by unavailable/denied runtime | `blocked` | `null` | `NOT_RUN` | `ITERATE` |
+| Run was intentionally not attempted for another recorded reason | `not_executed` | `null` | `NOT_RUN` | `ITERATE` |
+| Case actually ran and evidence meets the frozen criterion | `executed` | `passed` | `PASS` | Evaluate all remaining gates |
+| Case actually ran and evidence violates the frozen criterion | `executed` | `failed` | `FAIL` | `ITERATE` or `REJECT` |
+
+**Invalid result invariant:** `execution_state` other than `executed` combined with `outcome: passed/failed`, `evaluation.status: PASS/FAIL`, or an overall PASS is internally contradictory. Mark that evaluation result incorrect; do not preserve its claimed pass as a partial or conditional pass. In particular, “Case outcome: Pass / Execution state: queued or no_steps” must be corrected to `outcome: null`, `NOT_RUN`, and overall `ITERATE` when the case is required. Use the exact enum `no_steps` as the primary state if the job has no executable steps, and record missing runner separately.
 
 Use `outcome: passed` or `outcome: failed` only when `execution_state: executed`. For every non-executed state, leave `outcome` null and record the specific reason and evidence. A queued job with no runner is `awaiting_runner`; a job with no executable steps is `no_steps` and has invalid configuration. If both are true, use `no_steps` as the primary state and record the missing runner as an additional condition. An expected result or queued status is not execution evidence. Never repeat the candidate’s expected result as the case outcome, and never say the overall evaluation “can pass” while required evidence is unobserved.
 

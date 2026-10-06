@@ -13,9 +13,10 @@ runtime_targets:
       - testdesign-description-only-routing
       - testdesign-live-source-evidence
   skill-evaluation:
-    version: "0.3.2"
+    version: "0.3.3"
     required_cases:
       - evaluation-queued-not-run
+      - evaluation-contradictory-no-steps-pass
       - evaluation-live-browser-blocked
 repository_workflow:
   path: workflows/skill-development/WORKFLOW.md

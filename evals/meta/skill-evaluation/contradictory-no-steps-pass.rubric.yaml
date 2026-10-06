@@ -1,0 +1,19 @@
+schema_version: "1.0"
+id: evaluation-contradictory-no-steps-pass
+target: skill-evaluation
+mode: explicit
+source_legacy: evals/meta/skill-evaluation/contradictory-no-steps-pass.input.md
+execution_payload_must_not_include:
+  - evaluator-only expected assertions
+  - pass/fail criteria
+  - rubric contents
+criteria_text: |
+  Correct a proposed evaluation that incorrectly marks an unexecuted no-steps job as passed.
+assertions:
+  manual:
+    - explicitly reject the proposed Pass outcome and the claim that the overall evaluation can pass
+    - use execution_state no_steps as the primary state because the job has no executable steps
+    - record the unassigned runner as an additional condition
+    - set outcome to null and the compatibility evaluation status to NOT_RUN
+    - set overall disposition to ITERATE while this required case remains unobserved
+    - explain that this is not a behavioral failure because no execution occurred
