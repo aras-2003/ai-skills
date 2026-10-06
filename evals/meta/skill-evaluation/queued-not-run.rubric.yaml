@@ -12,7 +12,9 @@ criteria_text: |
 assertions:
   manual:
     - set outcome to null because the case did not execute
+    - set the compatibility evaluation status to NOT_RUN
     - use no_steps as the primary execution_state and record the unassigned runner as an additional condition
-    - state that the overall evaluation cannot pass while required runtime evidence is missing
+    - keep the overall evaluation at ITERATE or another non-PASS disposition while required runtime evidence is missing
     - state that a queued job is not a test result
+    - do not label the case PASS or say the overall evaluation can pass
     - do not infer success from expected behavior

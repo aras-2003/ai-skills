@@ -68,8 +68,10 @@ cases:
         - leave outcome null because execution has not begun
         - report execution_state as no_steps when no executable steps are present
         - record the unassigned runner as an additional condition
-        - keep the overall evaluation from PASS while required evidence is pending
+        - set the compatibility evaluation status to NOT_RUN
+        - keep the overall evaluation at ITERATE or another non-PASS disposition while required evidence is pending
       must_not:
+        - label the case outcome as PASS or say the overall evaluation can pass
         - infer a pass from the expected behavior or queue status
         - report a behavioral FAIL without execution evidence
 
