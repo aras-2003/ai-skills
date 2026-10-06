@@ -5,6 +5,8 @@ profiles. The compatibility path `runtime/mcp/cloud_server.py` delegates to it.
 It exposes these headless tools:
 
 - `runtime_info`
+- `list_skills`
+- `load_skill`
 - `route_investment_request`
 - `render_bar_chart`
 - `render_line_chart`
@@ -15,10 +17,13 @@ Exact-version receipts should include `release_id`, `source_revision`,
 `channel`, `capability_contract_version`, `tool_schema_digest` and `deployed_at`
 before a Lab/Site parity or release decision is marked PASS.
 
-The bundled skills remain the source of workflow instructions. The remote
-server only provides deterministic routing/rendering capabilities; it is not a
-replacement for the skill layer. Routing does not execute the selected
-workflow. For investment requests, the server returns
+The bundled Lab catalog is the source of workflow instructions for both the
+Lab and the MCP profile. `list_skills` exposes the packaged catalog and
+`load_skill` returns the exact packaged `SKILL.md` plus its content digest for
+host-model execution. The MCP server does not independently perform model
+reasoning; it loads the same instructions that the Lab packages, while the
+host model executes them. Routing does not execute the selected workflow. For
+investment requests, the server returns
 `execution_state: routed_only` and `workflow_executed: false`. The host must
 stop without substantive investment output until it actually executes the
 selected workflow. These instructions are model-facing guidance rather than a

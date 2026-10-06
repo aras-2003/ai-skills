@@ -7,6 +7,8 @@ import os
 from chart_renderer import render_bar_chart as _render_bar_chart
 from chart_renderer import render_line_chart as _render_line_chart
 from investment_runtime import route_investment_request as _route_investment_request
+from skill_catalog import list_skills as _list_skills
+from skill_catalog import load_skill as _load_skill
 from mcp.server import MCPServer
 
 SERVER_INSTRUCTIONS = """
@@ -28,6 +30,12 @@ from a routing result alone.
 Use chart tools only with explicit numeric inputs from the user or a completed,
 source-backed workflow. Preserve supplied labels, values and units. Do not
 invent missing observations.
+
+The packaged Lab catalog is the source of truth for skill parity. Use
+list_skills when selecting a packaged capability and load_skill before
+executing that capability. The MCP server loads the same packaged SKILL.md
+instructions as the Lab; the host model executes those instructions. Do not
+claim that the MCP server itself completed model reasoning or external actions.
 """.strip()
 CLOUD_SERVER_INSTRUCTIONS = SERVER_INSTRUCTIONS
 
@@ -72,6 +80,18 @@ def runtime_info() -> dict[str, str]:
         else "unattested"
     )
     return values
+
+
+@mcp.tool()
+def list_skills() -> dict:
+    """List the skills packaged in the same catalog as the active Lab profile."""
+    return _list_skills()
+
+
+@mcp.tool()
+def load_skill(skill_name: str) -> dict:
+    """Load exact packaged skill instructions for host-model execution."""
+    return _load_skill(skill_name)
 
 
 @mcp.tool()
