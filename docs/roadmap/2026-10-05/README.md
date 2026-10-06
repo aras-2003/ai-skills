@@ -43,7 +43,7 @@ These are sequencing controls, not claims that current skills are unsafe or rout
 
 Architecture decision retained from the benchmark: do **not** require every production skill to contain scripts/references/assets merely to satisfy a quality gate. A reasoning procedure may be a valid skill when the reusable method itself creates value; add deterministic code or references only when the task requires them.
 
-Implementation tracking: ENG-10, ENG-15, ENG-16 and ENG-17 are `IN_PROGRESS` on [PR #121](https://github.com/aras-2003/ai-skills/pull/121), stacked on backlog PR #120. The initial implementation passed local suites and PR Actions; a follow-up adds the source-only `skill-development` flow to the generated catalog and is awaiting fresh Actions. Runtime/model-routing evidence remains `NOT_RUN`, and 70 source components still need explicit capability review; these tasks are not complete and no maturity was changed.
+Implementation tracking: ENG-10, ENG-15, ENG-16 and ENG-17 are `IN_PROGRESS` on [PR #121](https://github.com/aras-2003/ai-skills/pull/121), stacked on backlog PR #120. Local suites and PR Actions have passed; the generated catalog lists 17 source workflows and distinguishes the 16 runtime-registered workflows from source-only `skill-development`. Runtime/model-routing evidence remains `NOT_RUN`, and 70 source components still need explicit capability review; these tasks are not complete and no maturity was changed.
 
 
 ## Controlled domain reviews — 2026-10-06
