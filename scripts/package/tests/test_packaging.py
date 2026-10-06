@@ -151,7 +151,7 @@ class PackagingTests(unittest.TestCase):
             self.assertTrue((out / ".mcp.json").is_file())
             self.assertTrue((out / "mcp" / "chart_renderer.py").is_file())
             self.assertTrue((out / "mcp" / "investment_runtime.py").is_file())
-            self.assertTrue((out / "mcp" / "cloud_server.py").is_file())
+            self.assertTrue((out / "mcp" / "server.py").is_file())
 
             plugin_manifest = json.loads((out / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual(
@@ -159,10 +159,8 @@ class PackagingTests(unittest.TestCase):
                 plugin_manifest["$schema"],
             )
             portable_mcp = json.loads((out / "mcp.json").read_text(encoding="utf-8"))
-            self.assertIn("skills-factory-chart-renderer", portable_mcp["mcpServers"])
-            self.assertIn("skills-factory-investment-os", portable_mcp["mcpServers"])
-            self.assertEqual("stdio", portable_mcp["mcpServers"]["skills-factory-chart-renderer"]["type"])
-            self.assertEqual("stdio", portable_mcp["mcpServers"]["skills-factory-investment-os"]["type"])
+            self.assertEqual({"skills-factory-runtime"}, set(portable_mcp["mcpServers"]))
+            self.assertEqual("stdio", portable_mcp["mcpServers"]["skills-factory-runtime"]["type"])
 
             compat_manifest = json.loads((out / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual("./.mcp.json", compat_manifest["mcpServers"])
@@ -176,13 +174,13 @@ class PackagingTests(unittest.TestCase):
             release_skill = next(x for x in release["components"] if x.get("kind") == "skill")
             self.assertEqual(production_skill["capability_assessment"], release_skill["capability_assessment"])
             runtime_tools = {item["name"]: item for item in capabilities["runtime_tools"]}
-            self.assertEqual({"skills-factory-chart-renderer", "skills-factory-investment-os"}, set(runtime_tools))
-            chart = runtime_tools["skills-factory-chart-renderer"]
-            self.assertEqual("deterministic-data-chart", chart["runtime_class"])
-            self.assertEqual(["render_bar_chart", "render_line_chart"], chart["tools"])
-            investment = runtime_tools["skills-factory-investment-os"]
-            self.assertEqual("investment-request-router", investment["runtime_class"])
-            self.assertEqual(["route_investment_request"], investment["tools"])
+            self.assertEqual({"skills-factory-runtime"}, set(runtime_tools))
+            runtime = runtime_tools["skills-factory-runtime"]
+            self.assertEqual("skills-factory-runtime", runtime["runtime_class"])
+            self.assertEqual(
+                ["route_investment_request", "render_bar_chart", "render_line_chart"],
+                runtime["tools"],
+            )
 
     def test_skills_only_profile_has_no_local_mcp_dependency(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
@@ -212,7 +210,7 @@ class PackagingTests(unittest.TestCase):
             mcp = json.loads((out / "mcp.json").read_text(encoding="utf-8"))
             self.assertEqual(
                 {"type": "http", "url": "https://skills.example.test/mcp"},
-                mcp["mcpServers"]["skills-factory-investment-os"],
+                mcp["mcpServers"]["skills-factory-runtime"],
             )
             capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
             self.assertEqual("remote", capabilities["runtime_mode"])

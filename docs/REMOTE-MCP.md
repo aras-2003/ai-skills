@@ -1,7 +1,8 @@
 # Remote MCP deployment contract
 
-`runtime/mcp/cloud_server.py` is the single cloud entrypoint for the remote
-profile. It exposes these headless tools:
+`runtime/mcp/server.py` is the single MCP entrypoint for local and remote
+profiles. The compatibility path `runtime/mcp/cloud_server.py` delegates to it.
+It exposes these headless tools:
 
 - `route_investment_request`
 - `render_bar_chart`
@@ -21,7 +22,7 @@ evaluation that proves routing and stop behavior in a fresh chat.
 
 The chosen host must:
 
-1. expose the ASGI `app` from `runtime/mcp/cloud_server.py`;
+1. expose the ASGI `app` from `runtime/mcp/server.py`;
 2. serve streamable HTTP MCP at a stable HTTPS `/mcp` endpoint;
 3. enforce authentication at the edge when the endpoint is not strictly
    private to the owner;

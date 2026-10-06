@@ -345,7 +345,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             case,
             {
                 "selected_capabilities": ["investment-os-review"],
-                "tool_calls": ["mcp__skills-factory-investment-os__route_investment_request"],
+                "tool_calls": ["mcp__skills-factory-runtime__route_investment_request"],
             },
         )
         self.assertTrue(any("required child capability absent: investment-portfolio-review" in item for item in missing_child))
@@ -360,7 +360,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             case,
             {
                 "selected_capabilities": ["investment-os-review", "investment-portfolio-review"],
-                "tool_calls": ["mcp__skills-factory-investment-os__route_investment_request"],
+                "tool_calls": ["mcp__skills-factory-runtime__route_investment_request"],
             },
         )
         self.assertEqual([], valid)
@@ -454,7 +454,7 @@ class RuntimeCampaignTests(unittest.TestCase):
                 "provider": "offline-synthetic-provider",
                 "model_id": "offline-synthetic-model",
                 "reasoning": "offline",
-                "available_tools": ["offline-fixture", "mcp__skills-factory-chart-renderer__render_bar_chart", "mcp__skills-factory-chart-renderer__render_line_chart", "mcp__skills-factory-investment-os__route_investment_request"],
+                "available_tools": ["offline-fixture", "mcp__skills-factory-runtime__render_bar_chart", "mcp__skills-factory-runtime__render_line_chart", "mcp__skills-factory-runtime__route_investment_request"],
             },
         }
 
