@@ -59,6 +59,8 @@ def main() -> int:
         markdown,
         package_manifest,
         previous_revision or current_revision(),
+        (root / "workflows" / "runtime-registry.yaml").read_text(encoding="utf-8"),
+        (root / "release" / "capability-contract.yaml").read_text(encoding="utf-8"),
     )
     site_path.write_text(
         json.dumps(site_catalog, ensure_ascii=False, indent=2) + "\n",

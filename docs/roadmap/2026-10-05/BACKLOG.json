@@ -247,8 +247,8 @@
         "ENG-03"
       ],
       "effort": "M",
-      "status": "PROPOSED",
-      "owner": "UNASSIGNED",
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
       "legacy_links": [
         "AIS-06"
       ]
@@ -1699,8 +1699,8 @@
         "ENG-01"
       ],
       "effort": "M",
-      "status": "PROPOSED",
-      "owner": "UNASSIGNED",
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
       "legacy_links": []
     },
     {
@@ -1724,8 +1724,8 @@
         "ENG-06"
       ],
       "effort": "M",
-      "status": "PROPOSED",
-      "owner": "UNASSIGNED",
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
       "legacy_links": []
     },
     {
@@ -1749,8 +1749,8 @@
         "ENG-14"
       ],
       "effort": "M",
-      "status": "PROPOSED",
-      "owner": "UNASSIGNED",
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
       "legacy_links": []
     },
     {

@@ -1,0 +1,17 @@
+schema_version: "1.0"
+contract_id: repository-side-v1
+purpose: >-
+  Declare runtime requirements and side effects without adding host-specific fields
+  to portable SKILL.md frontmatter.
+semantics:
+  unassessed: >-
+    Requirements have not been reviewed. This is not equivalent to no permissions
+    or no side effects and must not be used as evidence of runtime compatibility.
+dimensions:
+  network: [none, read, write, unassessed]
+  filesystem: [none, read, write, unassessed]
+  shell_exec: [none, required, unassessed]
+  credentials: [none, named_classes, unassessed]
+  external_actions: [none, approval_required, unassessed]
+availability_states: [supported, unavailable, requiring_approval, unknown]
+component_declarations: {}
