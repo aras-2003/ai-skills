@@ -113,8 +113,11 @@ lab:
         workflow = (ROOT / ".github/workflows/package-main-lab-plugin.yml").read_text(encoding="utf-8")
         self.assertIn("cp plugins/arek-ai-skills-lab/release-manifest.json docs/lab-release.json", workflow)
         self.assertIn("actions/upload-artifact@", workflow)
+        self.assertIn("include-hidden-files: true", workflow)
         self.assertIn("name: arek-ai-skills-lab-${{ github.sha }}", workflow)
         self.assertIn("contents: read", workflow)
+        self.assertIn('"plugins/arek-ai-skills-lab/**"', workflow)
+        self.assertIn('"docs/lab-release.json"', workflow)
         self.assertNotIn("git push", workflow)
         self.assertNotIn("contents: write", workflow)
 
