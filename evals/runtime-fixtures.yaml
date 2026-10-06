@@ -14,6 +14,10 @@ targets:
       mode: explicit
       input: evals/meta/skill-evaluation/queued-not-run.input.md
       rubric: evals/meta/skill-evaluation/queued-not-run.rubric.yaml
+    - id: evaluation-contradictory-no-steps-pass
+      mode: explicit
+      input: evals/meta/skill-evaluation/contradictory-no-steps-pass.input.md
+      rubric: evals/meta/skill-evaluation/contradictory-no-steps-pass.rubric.yaml
     - id: evaluation-live-browser-blocked
       mode: explicit
       input: evals/meta/skill-evaluation/live-browser-blocked.input.md

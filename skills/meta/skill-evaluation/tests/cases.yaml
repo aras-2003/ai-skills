@@ -75,6 +75,27 @@ cases:
         - infer a pass from the expected behavior or queue status
         - report a behavioral FAIL without execution evidence
 
+  - id: eval-reject-contradictory-nonexecution-pass
+    case: queued-or-empty-job-reported-as-pass
+    input: >
+      Review this proposed result: “Case outcome: Pass. Execution state: Queued / not executed.
+      No runner is assigned, and the job contains no executable steps. Overall evaluation:
+      Yes, it can pass. The lack of execution is an infrastructure/scheduling condition,
+      not a candidate failure.” Is this result valid?
+    expected:
+      should_trigger: true
+      must:
+        - reject the proposed PASS as contradictory and incorrect
+        - classify the primary execution state as no_steps
+        - record the missing runner as an additional condition
+        - set outcome to null and evaluation status to NOT_RUN
+        - set the overall disposition to ITERATE while the required case is unobserved
+        - distinguish NOT_RUN from a behavioral failure
+      must_not:
+        - accept or repeat Pass as the case outcome
+        - say the overall evaluation can pass
+        - classify the unexecuted case as a behavioral FAIL
+
   - id: eval-live-browser-evidence
     case: live-check-not-observed
     input: "A required assertion says to verify a listing is live in a browser. The browser was unavailable, and the model only explained how it would check."
