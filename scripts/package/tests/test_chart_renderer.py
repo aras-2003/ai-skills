@@ -9,7 +9,7 @@ RENDERER = ROOT / "runtime" / "mcp" / "chart_renderer.py"
 
 
 def load_renderer():
-    spec = importlib.util.spec_from_file_location("arek_chart_renderer", RENDERER)
+    spec = importlib.util.spec_from_file_location("skills_factory_chart_renderer", RENDERER)
     if spec is None or spec.loader is None:
         raise RuntimeError("cannot load chart renderer")
     module = importlib.util.module_from_spec(spec)
