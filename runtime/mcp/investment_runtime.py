@@ -1,7 +1,7 @@
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
-#   "mcp>=2,<3",
+#   "mcp==2.3.0",
 # ]
 # ///
 

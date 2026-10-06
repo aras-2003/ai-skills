@@ -1,8 +1,8 @@
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
-#   "mcp>=2,<3",
-#   "matplotlib>=3.9,<4",
+#   "mcp==2.3.0",
+#   "matplotlib==3.11.2",
 # ]
 # ///
 
