@@ -159,10 +159,10 @@ class PackagingTests(unittest.TestCase):
                 plugin_manifest["$schema"],
             )
             portable_mcp = json.loads((out / "mcp.json").read_text(encoding="utf-8"))
-            self.assertIn("arek-chart-renderer", portable_mcp["mcpServers"])
-            self.assertIn("arek-investment-os", portable_mcp["mcpServers"])
-            self.assertEqual("stdio", portable_mcp["mcpServers"]["arek-chart-renderer"]["type"])
-            self.assertEqual("stdio", portable_mcp["mcpServers"]["arek-investment-os"]["type"])
+            self.assertIn("skills-factory-chart-renderer", portable_mcp["mcpServers"])
+            self.assertIn("skills-factory-investment-os", portable_mcp["mcpServers"])
+            self.assertEqual("stdio", portable_mcp["mcpServers"]["skills-factory-chart-renderer"]["type"])
+            self.assertEqual("stdio", portable_mcp["mcpServers"]["skills-factory-investment-os"]["type"])
 
             compat_manifest = json.loads((out / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual("./.mcp.json", compat_manifest["mcpServers"])
@@ -176,11 +176,11 @@ class PackagingTests(unittest.TestCase):
             release_skill = next(x for x in release["components"] if x.get("kind") == "skill")
             self.assertEqual(production_skill["capability_assessment"], release_skill["capability_assessment"])
             runtime_tools = {item["name"]: item for item in capabilities["runtime_tools"]}
-            self.assertEqual({"arek-chart-renderer", "arek-investment-os"}, set(runtime_tools))
-            chart = runtime_tools["arek-chart-renderer"]
+            self.assertEqual({"skills-factory-chart-renderer", "skills-factory-investment-os"}, set(runtime_tools))
+            chart = runtime_tools["skills-factory-chart-renderer"]
             self.assertEqual("deterministic-data-chart", chart["runtime_class"])
             self.assertEqual(["render_bar_chart", "render_line_chart"], chart["tools"])
-            investment = runtime_tools["arek-investment-os"]
+            investment = runtime_tools["skills-factory-investment-os"]
             self.assertEqual("investment-request-router", investment["runtime_class"])
             self.assertEqual(["route_investment_request"], investment["tools"])
 
@@ -212,7 +212,7 @@ class PackagingTests(unittest.TestCase):
             mcp = json.loads((out / "mcp.json").read_text(encoding="utf-8"))
             self.assertEqual(
                 {"type": "http", "url": "https://skills.example.test/mcp"},
-                mcp["mcpServers"]["arek-investment-os"],
+                mcp["mcpServers"]["skills-factory-investment-os"],
             )
             capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
             self.assertEqual("remote", capabilities["runtime_mode"])

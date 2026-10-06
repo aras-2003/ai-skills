@@ -164,7 +164,7 @@ def build(root: Path, output_dir: Path, maturity: str, allow_empty: bool = False
             {
                 "schema_version": "1.0",
                 "release_id": f"{version}+{revision[:12]}",
-                "package": "arek-ai-skills",
+                "package": "skills-factory",
                 "version": version,
                 "channel": "chatgpt-zip",
                 "source_revision": revision,

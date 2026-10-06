@@ -1,5 +1,0 @@
-interface:
-  display_name: Skill Release Review
-  short_description: Make an evidence-gated production-readiness decision for an…
-  icon_small: ./assets/arek-ai-domain-icon.svg
-  brand_color: '#94D4B3'

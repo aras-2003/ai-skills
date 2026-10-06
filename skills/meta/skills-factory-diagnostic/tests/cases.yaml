@@ -1,0 +1,17 @@
+cases:
+  - id: diagnostic-001
+    case: explicit-plugin-test
+    input: "Test whether Skills Factory is active."
+    expected:
+      should_trigger: true
+      must:
+        - return SKILLS_FACTORY_ACTIVE
+        - name skills-factory-diagnostic
+
+  - id: diagnostic-002
+    case: unrelated-task
+    input: "Summarize this article."
+    expected:
+      should_trigger: false
+      must_not:
+        - return SKILLS_FACTORY_ACTIVE

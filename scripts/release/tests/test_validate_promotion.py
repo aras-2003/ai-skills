@@ -13,8 +13,8 @@ class ValidatePromotionTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
         for path in (
-            "plugins/arek-ai-skills-lab",
-            "plugins/arek-ai-skills",
+            "plugins/skills-factory-lab",
+            "plugins/skills-factory",
             "dist/chatgpt-skills",
             "docs",
             "release",
@@ -28,9 +28,9 @@ class ValidatePromotionTests(unittest.TestCase):
             "version": "0.33.1",
             "channel": "lab",
         }
-        self._write("plugins/arek-ai-skills-lab/release-manifest.json", lab)
+        self._write("plugins/skills-factory-lab/release-manifest.json", lab)
         self._write("docs/lab-release.json", lab)
-        self._write("plugins/arek-ai-skills/release-manifest.json", {
+        self._write("plugins/skills-factory/release-manifest.json", {
             "source_revision": self.revision, "channel": "plugin"
         })
         self._write("dist/chatgpt-skills/release-manifest.json", {
@@ -42,7 +42,7 @@ class ValidatePromotionTests(unittest.TestCase):
             "lab_payload_content_sha256": lab["payload_content_sha256"],
             "status": "PASS",
             "run_id": "123456",
-            "run_url": "https://github.com/aras-2003/ai-skills/actions/runs/123456",
+            "run_url": "https://github.com/aras-2003/skills-factory/actions/runs/123456",
             "observed_at": "2026-10-06T10:00:00Z",
         })
 
@@ -56,7 +56,7 @@ class ValidatePromotionTests(unittest.TestCase):
         self.assertEqual([], validate_promotion(self.root, require_ancestor=False))
 
     def test_rejects_a_production_package_from_another_source(self) -> None:
-        self._write("plugins/arek-ai-skills/release-manifest.json", {
+        self._write("plugins/skills-factory/release-manifest.json", {
             "source_revision": "c" * 40, "channel": "plugin"
         })
         errors = validate_promotion(self.root, require_ancestor=False)

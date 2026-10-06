@@ -104,9 +104,9 @@ class RuntimeCampaignTests(unittest.TestCase):
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
             self.assertEqual("89db15ef94cf38a35117ec02b8c60928ef72654d", lock["behavior_source_revision"])
-            self.assertEqual("arek-ai-skills", lock["packages"]["production"]["name"])
+            self.assertEqual("skills-factory", lock["packages"]["production"]["name"])
             self.assertEqual("1.36.0", lock["packages"]["production"]["version"])
-            self.assertEqual("arek-ai-skills-lab", lock["packages"]["lab"]["name"])
+            self.assertEqual("skills-factory-lab", lock["packages"]["lab"]["name"])
             package_cfg = yaml.safe_load((ROOT / "release/package.yaml").read_text())
             self.assertEqual(package_cfg["lab"]["version"], lock["packages"]["lab"]["version"])
             self.assertNotIn("strategy-to-execution-diagnostic", lock["expected_catalogs"]["production"])
@@ -345,7 +345,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             case,
             {
                 "selected_capabilities": ["investment-os-review"],
-                "tool_calls": ["mcp__arek-investment-os__route_investment_request"],
+                "tool_calls": ["mcp__skills-factory-investment-os__route_investment_request"],
             },
         )
         self.assertTrue(any("required child capability absent: investment-portfolio-review" in item for item in missing_child))
@@ -360,7 +360,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             case,
             {
                 "selected_capabilities": ["investment-os-review", "investment-portfolio-review"],
-                "tool_calls": ["mcp__arek-investment-os__route_investment_request"],
+                "tool_calls": ["mcp__skills-factory-investment-os__route_investment_request"],
             },
         )
         self.assertEqual([], valid)
@@ -407,15 +407,15 @@ class RuntimeCampaignTests(unittest.TestCase):
     def test_smoke_rejects_simultaneous_production_and_lab(self) -> None:
         lock = {
             "packages": {
-                "production": {"name": "arek-ai-skills", "version": "1.8.0"},
-                "lab": {"name": "arek-ai-skills-lab", "version": "0.3.0"},
+                "production": {"name": "skills-factory", "version": "1.8.0"},
+                "lab": {"name": "skills-factory-lab", "version": "0.3.0"},
             },
             "expected_catalogs": {"production": ["a", "b"], "lab": ["c"]},
         }
         observed = {
             "channel": "production",
-            "package": {"name": "arek-ai-skills", "version": "1.8.0"},
-            "enabled_packages": ["arek-ai-skills", "arek-ai-skills-lab"],
+            "package": {"name": "skills-factory", "version": "1.8.0"},
+            "enabled_packages": ["skills-factory", "skills-factory-lab"],
             "catalog": ["a", "b"],
             "runtime": {
                 "provider": "provider",
@@ -454,7 +454,7 @@ class RuntimeCampaignTests(unittest.TestCase):
                 "provider": "offline-synthetic-provider",
                 "model_id": "offline-synthetic-model",
                 "reasoning": "offline",
-                "available_tools": ["offline-fixture", "mcp__arek-chart-renderer__render_bar_chart", "mcp__arek-chart-renderer__render_line_chart", "mcp__arek-investment-os__route_investment_request"],
+                "available_tools": ["offline-fixture", "mcp__skills-factory-chart-renderer__render_bar_chart", "mcp__skills-factory-chart-renderer__render_line_chart", "mcp__skills-factory-investment-os__route_investment_request"],
             },
         }
 

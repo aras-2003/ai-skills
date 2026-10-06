@@ -1,5 +1,0 @@
-interface:
-  display_name: Supplier Viability Review
-  short_description: Assess whether sourcing, MOQ, lead time, quality, packaging…
-  icon_small: ./assets/arek-ai-domain-icon.svg
-  brand_color: '#FF8B72'

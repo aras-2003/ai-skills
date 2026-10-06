@@ -1,0 +1,5 @@
+interface:
+  display_name: Trend Theme Research
+  short_description: Research an investment trend or market theme by mapping its…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#9588F7'

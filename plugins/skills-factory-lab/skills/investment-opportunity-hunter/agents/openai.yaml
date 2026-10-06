@@ -1,0 +1,5 @@
+interface:
+  display_name: Investment Opportunity Hunter
+  short_description: Child workflow for Investment OS opportunity discovery. Use…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#9588F7'

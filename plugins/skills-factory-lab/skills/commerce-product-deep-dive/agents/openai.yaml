@@ -1,0 +1,5 @@
+interface:
+  display_name: Commerce Product Deep Dive
+  short_description: Evaluate one e-commerce product opportunity end-to-end…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#FF8B72'

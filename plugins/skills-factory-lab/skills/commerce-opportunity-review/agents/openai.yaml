@@ -1,0 +1,5 @@
+interface:
+  display_name: Commerce Opportunity Review
+  short_description: Orchestrate the minimum evidence-backed path for…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#FF8B72'

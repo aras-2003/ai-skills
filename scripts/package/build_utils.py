@@ -221,7 +221,7 @@ def package_runtime_mcp(
     servers = config.get("mcpServers")
     if not isinstance(servers, dict):
         raise ValueError("runtime/mcp/mcp.json must declare mcpServers")
-    for required in ("arek-chart-renderer", "arek-investment-os"):
+    for required in ("skills-factory-chart-renderer", "skills-factory-investment-os"):
         if required not in servers:
             raise ValueError(f"runtime/mcp/mcp.json must declare {required}")
 
@@ -253,7 +253,7 @@ def package_runtime_mcp(
     )
     return [
         {
-            "name": "arek-chart-renderer",
+            "name": "skills-factory-chart-renderer",
             "kind": "mcp-server",
             "runtime_class": "deterministic-data-chart",
             "renderer_class": "deterministic-data-chart",
@@ -262,7 +262,7 @@ def package_runtime_mcp(
             "transport": "streamable-http" if mode == "remote" else "stdio",
         },
         {
-            "name": "arek-investment-os",
+            "name": "skills-factory-investment-os",
             "kind": "mcp-server",
             "runtime_class": "investment-request-router",
             "tools": ["route_investment_request"],

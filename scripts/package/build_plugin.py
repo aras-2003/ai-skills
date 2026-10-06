@@ -20,7 +20,7 @@ from portable import read_frontmatter, render_portable_skill
 from workflow_entrypoints import add_workflow_entrypoints, load_registry
 from skill_interface import repository_root, skill_domain, write_skill_interface
 
-PLUGIN_NAME = "arek-ai-skills"
+PLUGIN_NAME = "skills-factory"
 
 
 def discover_skills(root: Path, maturity: str) -> list[Path]:
@@ -204,7 +204,7 @@ def build(
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--maturity", default="production")
-    parser.add_argument("--output", default="plugins/arek-ai-skills")
+    parser.add_argument("--output", default="plugins/skills-factory")
     parser.add_argument("--allow-empty", action="store_true")
     parser.add_argument(
         "--runtime-mode",

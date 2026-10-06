@@ -1,0 +1,5 @@
+interface:
+  display_name: Architecture Review
+  short_description: Review alignment across business direction, capabilities…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#83A9FF'

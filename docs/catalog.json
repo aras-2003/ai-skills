@@ -2,11 +2,11 @@
   "metadata": {
     "packages": {
       "production": {
-        "name": "arek-ai-skills",
+        "name": "skills-factory",
         "version": "1.36.0"
       },
       "lab": {
-        "name": "arek-ai-skills-lab",
+        "name": "skills-factory-lab",
         "version": "0.33.4"
       }
     },
@@ -320,12 +320,12 @@
       "capability_assessment": "UNASSESSED"
     },
     {
-      "name": "arek-skills-diagnostic",
+      "name": "skills-factory-diagnostic",
       "domain": "meta",
       "maturity": "production",
       "version": "1.0.0",
       "description": "Confirm that the Skills Factory plugin is exposing bundled skills to ChatGPT or Codex. Use when the user explicitly asks to test, verify, diagnose, or confirm whether Skills Factory is active.",
-      "source": "skills/meta/arek-skills-diagnostic/SKILL.md",
+      "source": "skills/meta/skills-factory-diagnostic/SKILL.md",
       "source_status": "present",
       "capability_assessment": "UNASSESSED"
     },

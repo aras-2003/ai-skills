@@ -1,0 +1,5 @@
+interface:
+  display_name: Process Update
+  short_description: Convert new recruitment-process information into a concise…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#FFD18A'

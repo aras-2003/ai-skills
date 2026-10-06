@@ -23,7 +23,7 @@ Therefore the production branch generates both:
 ```
 skills/<domain>/<skill>/
         |
-        +--> plugins/arek-ai-skills/skills/<skill>/   # Work / Codex plugin
+        +--> plugins/skills-factory/skills/<skill>/   # Work / Codex plugin
         |
         +--> dist/chatgpt-skills/<skill>.zip          # native ChatGPT Skill upload
 ```
@@ -55,7 +55,7 @@ feature branch
   -> validation + behavioral eval
   -> promotion to production
   -> package-production-plugin.yml
-  -> plugins/arek-ai-skills/
+  -> plugins/skills-factory/
 
   -> package-chatgpt-skills.yml
   -> dist/chatgpt-skills/*.zip
@@ -89,7 +89,7 @@ For the current career workflow, install at minimum:
 
 The diagnostic skill is useful during setup:
 
-- `arek-skills-diagnostic.zip`
+- `skills-factory-diagnostic.zip`
 
 ## Updating a skill
 
@@ -124,14 +124,14 @@ For a native ordinary-Chat installation, test in a new Chat without selecting Wo
 Diagnostic prompt:
 
 ```
-Use the arek-skills-diagnostic skill.
+Use the skills-factory-diagnostic skill.
 ```
 
 Expected behavior:
 
 ```
-AREK_AI_SKILLS_ACTIVE
-arek-skills-diagnostic
+SKILLS_FACTORY_ACTIVE
+skills-factory-diagnostic
 ```
 
 For `executive-role-evaluator`, the response should begin with its required decision header.

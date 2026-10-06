@@ -12,7 +12,7 @@ from build_plugin import copy_skill, discover_skills
 from workflow_entrypoints import add_workflow_entrypoints, load_registry
 
 
-PLUGIN_NAME = "arek-ai-skills-lab"
+PLUGIN_NAME = "skills-factory-lab"
 PLUGIN_VERSION = "0.2.1"
 
 def discover_draft_test_skills(root: Path) -> list[Path]:
@@ -105,7 +105,7 @@ def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", default="plugins/arek-ai-skills-lab")
+    parser.add_argument("--output", default="plugins/skills-factory-lab")
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parents[2]

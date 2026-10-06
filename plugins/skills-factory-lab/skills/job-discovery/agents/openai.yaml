@@ -1,0 +1,5 @@
+interface:
+  display_name: Job Discovery
+  short_description: Find current senior and executive technology roles from…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#FFD18A'

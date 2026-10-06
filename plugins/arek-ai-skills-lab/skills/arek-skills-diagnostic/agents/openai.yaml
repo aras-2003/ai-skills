@@ -1,5 +1,0 @@
-interface:
-  display_name: Arek Skills Diagnostic
-  short_description: Confirm that the Arek AI Skills plugin is exposing bundled…
-  icon_small: ./assets/arek-ai-domain-icon.svg
-  brand_color: '#94D4B3'

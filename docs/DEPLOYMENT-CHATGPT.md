@@ -33,7 +33,7 @@ feature branch
   -> release review
   -> promotion to production
   -> package-production-plugin.yml
-  -> plugins/arek-ai-skills/
+  -> plugins/skills-factory/
   -> repo marketplace
 ```
 
@@ -55,7 +55,7 @@ skills/career/role-fit-analysis/
 into the plugin format required by OpenAI:
 
 ```
-plugins/arek-ai-skills/skills/role-fit-analysis/
+plugins/skills-factory/skills/role-fit-analysis/
 ```
 
 so every bundled skill is an immediate child of `skills/`.
@@ -105,7 +105,7 @@ codex plugin marketplace upgrade
 or:
 
 ```bash
-codex plugin marketplace upgrade arek-ai-skills
+codex plugin marketplace upgrade skills-factory
 ```
 
 Then restart/refresh the desktop client if needed.

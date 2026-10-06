@@ -1,0 +1,5 @@
+interface:
+  display_name: Investment Portfolio Observation
+  short_description: Lightweight portfolio observation child workflow for natural…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#9588F7'

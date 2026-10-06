@@ -1,0 +1,5 @@
+interface:
+  display_name: Company Context Research
+  short_description: Research factual company context relevant to executive…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#FFD18A'
