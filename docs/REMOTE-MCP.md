@@ -9,7 +9,13 @@ profile. It exposes these headless tools:
 
 The bundled skills remain the source of workflow instructions. The remote
 server only provides deterministic routing/rendering capabilities; it is not a
-replacement for the skill layer.
+replacement for the skill layer. Routing does not execute the selected
+workflow. For investment requests, the server returns
+`execution_state: routed_only` and `workflow_executed: false`. The host must
+stop without substantive investment output until it actually executes the
+selected workflow. These instructions are model-facing guidance rather than a
+technical enforcement boundary, so each supported host still needs a runtime
+evaluation that proves routing and stop behavior in a fresh chat.
 
 ## Required deployment properties
 

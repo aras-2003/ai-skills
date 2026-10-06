@@ -76,6 +76,30 @@ def route_investment_request(user_request: str) -> dict[str, str | bool]:
             "must_invoke_child_workflow": False,
         }
 
+    non_investment_finance = _contains(
+        text,
+        "mortgage", "mortgages", "fixed-rate loan", "fixed rate loan",
+        "bank account", "banking mechanics", "budgeting", "household budget",
+        "tax filing", "tax explanation", "generic accounting",
+        "kredyt hipoteczny", "hipoteka", "konto bankowe", "budżet domowy",
+        "budzet domowy", "rozliczenie podatku", "wyjaśnienie podatku",
+        "wyjasnienie podatku", "księgowość", "ksiegowosc",
+    )
+    explicit_investment_context = _contains(
+        text,
+        "investment", "portfolio", "stock", "stocks", "security", "securities",
+        "etf", "fund", "holdings", "investment policy", "risk limit",
+        "inwestyc", "portfel", "spółk", "spolk", "akcj", "fundusz",
+    )
+    if non_investment_finance and not explicit_investment_context:
+        return {
+            "is_investment_request": False,
+            "route": "not_applicable",
+            "child_workflow": "investment-os-review",
+            "reason": "request concerns personal finance or accounting, not an Investment OS decision",
+            "must_invoke_child_workflow": False,
+        }
+
     policy = _contains(
         text,
         "investment policy", "portfolio policy", "risk limit", "risk limits",

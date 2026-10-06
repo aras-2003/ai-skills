@@ -1,0 +1,88 @@
+from __future__ import annotations
+
+import importlib.util
+import sys
+import types
+import unittest
+from unittest.mock import patch
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[3]
+MCP_DIR = ROOT / "runtime" / "mcp"
+sys.path.insert(0, str(MCP_DIR))
+
+
+def load_cloud_server():
+    spec = importlib.util.spec_from_file_location(
+        "arek_cloud_server", MCP_DIR / "cloud_server.py"
+    )
+    if spec is None or spec.loader is None:
+        raise RuntimeError("cannot load cloud server")
+    class TestMCPServer:
+        def __init__(self, *_args, **_kwargs) -> None:
+            pass
+
+        def tool(self):
+            return lambda function: function
+
+        def streamable_http_app(self):
+            return object()
+
+    fake_mcp = types.ModuleType("mcp")
+    fake_mcp_server = types.ModuleType("mcp.server")
+    fake_mcp_server.MCPServer = TestMCPServer
+    fake_mcp.server = fake_mcp_server
+
+    fake_renderer = types.ModuleType("chart_renderer")
+    fake_renderer.render_bar_chart = lambda *_args, **_kwargs: []
+    fake_renderer.render_line_chart = lambda *_args, **_kwargs: []
+
+    module = importlib.util.module_from_spec(spec)
+    with patch.dict(
+        sys.modules,
+        {"mcp": fake_mcp, "mcp.server": fake_mcp_server, "chart_renderer": fake_renderer},
+    ):
+        spec.loader.exec_module(module)
+    return module
+
+
+class CloudRuntimeTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.server = load_cloud_server()
+
+    def test_route_result_declares_routing_only_as_non_execution(self) -> None:
+        result = self.server.route_investment_request(
+            "Design an ETF risk policy with concentration caps and rebalancing rules."
+        )
+
+        self.assertEqual("policy", result["route"])
+        self.assertEqual("investment-policy-design", result["child_workflow"])
+        self.assertFalse(result["workflow_executed"])
+        self.assertEqual("routed_only", result["execution_state"])
+        self.assertEqual(
+            "stop_without_substantive_investment_output",
+            result["response_policy"],
+        )
+
+    def test_unrelated_finance_request_is_not_marked_routed_only(self) -> None:
+        result = self.server.route_investment_request(
+            "How does a fixed-rate mortgage work?"
+        )
+
+        self.assertFalse(result["is_investment_request"])
+        self.assertNotIn("execution_state", result)
+        self.assertNotIn("response_policy", result)
+
+    def test_cloud_instructions_define_stop_condition_and_no_execution(self) -> None:
+        instructions = " ".join(self.server.CLOUD_SERVER_INSTRUCTIONS.lower().split())
+
+        self.assertIn('execution_state is "routed_only"', instructions)
+        self.assertIn("workflow_executed is false", instructions)
+        self.assertIn("stop", instructions)
+        self.assertIn("do not draft policy", instructions)
+        self.assertIn("does not execute a", instructions)
+
+
+if __name__ == "__main__":
+    unittest.main()

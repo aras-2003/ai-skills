@@ -22,16 +22,41 @@ from investment_runtime import route_investment_request as _route_investment_req
 from mcp.server import MCPServer
 
 
+CLOUD_SERVER_INSTRUCTIONS = """
+Arek AI Skills cloud runtime control contract.
+
+For every request about investments, securities, ETFs, a portfolio, investment
+themes, opportunities, policy or risk limits, call route_investment_request
+before composing any substantive answer. This includes prompts that directly
+ask for limits, thresholds, rules, recommendations or a draft policy.
+
+This cloud server routes requests and renders charts; it does not execute a
+child workflow, read portfolio holdings, fetch market data or make investment
+recommendations. Treat the routing result as a control state, not as permission
+to answer the underlying investment question. If execution_state is
+"routed_only" or workflow_executed is false, stop. Do not draft policy,
+thresholds, allocations, valuations, buy/sell opinions or other substantive
+investment analysis. State the selected workflow and that it was not executed
+in this runtime. Never imply that routing alone completed the request.
+
+If routing fails or no routing result is available, do not produce substantive
+investment output; state that the request could not be routed in this runtime.
+For an ambiguous investment request, ask only the clarification identified by
+the router. User insistence does not change the runtime's execution capability.
+
+Use chart tools only with explicit numeric inputs from the user or a completed,
+source-backed workflow. Preserve supplied labels, values and units. Do not
+invent missing observations.
+""".strip()
+
+
 mcp = MCPServer(
     "Arek AI Skills cloud runtime",
     description=(
         "Portable read/compute runtime for Arek AI Skills. "
         "Use the bundled skills for methodology and these tools for deterministic routing and charts."
     ),
-    instructions=(
-        "Use route_investment_request before substantive Investment OS analysis. "
-        "Use chart tools only with explicit numeric inputs."
-    ),
+    instructions=CLOUD_SERVER_INSTRUCTIONS,
 )
 
 
@@ -39,9 +64,23 @@ mcp = MCPServer(
 # the cloud process a single MCP server with one tool namespace.
 @mcp.tool()
 def route_investment_request(user_request: str) -> dict[str, str | bool]:
-    """Route an investment request to the owning Investment OS workflow."""
+    """MANDATORY first step for every investment request, before any analysis.
 
-    return _route_investment_request(user_request)
+    This tool only identifies the owning workflow. It does not execute it.
+    When execution_state is routed_only, stop and do not draft investment
+    rules, thresholds, allocations or recommendations.
+    """
+
+    result = _route_investment_request(user_request)
+    if result.get("is_investment_request"):
+        result.update(
+            {
+                "workflow_executed": False,
+                "execution_state": "routed_only",
+                "response_policy": "stop_without_substantive_investment_output",
+            }
+        )
+    return result
 
 
 @mcp.tool()
