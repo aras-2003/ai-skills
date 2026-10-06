@@ -1731,7 +1731,7 @@
   ],
   "runtime_tools": [
     {
-      "content_sha256": "9ac97bd0dd40ce171ddb4d79d4b768e854b3c7fd329c245ef08cef9de6680706",
+      "content_sha256": "7c970894831028f07de7b3b6368bef5443d3f2096c816f6ee22d0f13a5e26f3e",
       "kind": "mcp-server",
       "name": "arek-chart-renderer",
       "renderer_class": "deterministic-data-chart",
@@ -1742,7 +1742,7 @@
       ]
     },
     {
-      "content_sha256": "9ac97bd0dd40ce171ddb4d79d4b768e854b3c7fd329c245ef08cef9de6680706",
+      "content_sha256": "7c970894831028f07de7b3b6368bef5443d3f2096c816f6ee22d0f13a5e26f3e",
       "kind": "mcp-server",
       "name": "arek-investment-os",
       "runtime_class": "investment-request-router",
@@ -1753,5 +1753,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "bdda751d878b2e5a22e0e71895aa7ee2be242e23"
+  "source_revision": "56e4eb423913af259e9516d673b9d73107c1c86b"
 }
