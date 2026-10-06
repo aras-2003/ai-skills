@@ -228,9 +228,21 @@ def validate_campaign() -> list[str]:
             errors.append(f"{cid}: must_not assertion drift")
 
     pinned = str(cfg.get("behavior_source_revision") or "")
-    changed = behavior_changes(pinned, require_commit=False)
-    if changed:
-        errors.append("behavior changed after pinned SHA: " + ", ".join(changed))
+    pinned_exists = bool(pinned) and subprocess.run(
+        ["git", "cat-file", "-e", pinned + "^{commit}"],
+        cwd=ROOT, check=False, capture_output=True, text=True,
+    ).returncode == 0
+    if not pinned:
+        errors.append("behavior_source_revision is missing")
+    elif not pinned_exists:
+        errors.append(
+            "behavior_source_revision is unavailable in this checkout; pin a reachable commit "
+            "from the target branch (squash merges can discard PR-only SHAs): " + pinned
+        )
+    else:
+        changed = behavior_changes(pinned, require_commit=False)
+        if changed:
+            errors.append("behavior changed after pinned SHA: " + ", ".join(changed))
     return errors
 
 
