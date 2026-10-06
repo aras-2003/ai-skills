@@ -87,10 +87,10 @@ an unconfigured placeholder endpoint is deployable.
 On a supported ChatGPT desktop/Codex environment, add the Git-backed marketplace:
 
 ```bash
-codex plugin marketplace add aras-2003/ai-skills --ref production
+codex plugin marketplace add aras-2003/skills-factory --ref production
 ```
 
-Then refresh/restart the ChatGPT desktop app and install **Arek AI Skills** from that marketplace if the client still asks for confirmation.
+Then refresh/restart the ChatGPT desktop app and install **Skills Factory** from that marketplace if the client still asks for confirmation.
 
 The marketplace declares `INSTALLED_BY_DEFAULT`. This is useful for supported local/repo marketplace clients, but it is not the same as an account-wide cloud installation policy.
 

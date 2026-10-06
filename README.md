@@ -1,4 +1,4 @@
-# ai-skills
+# Skills Factory
 
 Reusable AI capability library for repeatable work across projects.
 
@@ -15,11 +15,11 @@ Rule: **LLM interprets; code calculates and validates.**
 
 ## Visual catalog
 
-Browse skills by domain and maturity in the [Arek AI Skills catalog](https://aras-2003.github.io/ai-skills/). The catalog is generated from the source metadata in `SKILL.md`.
+Browse skills by domain and maturity in the [Skills Factory catalog](https://aras-2003.github.io/skills-factory/). The catalog is generated from the source metadata in `SKILL.md`.
 
 ## Expansion roadmap
 
-The [AI Skills expansion roadmap](docs/roadmap/2026-10-05/README.md) preserves the architecture analysis, proposed flows and 84-task development backlog. Start there before implementing expansion work; task state is maintained in its `BACKLOG.json`.
+The [Skills Factory expansion roadmap](docs/roadmap/2026-10-05/README.md) preserves the architecture analysis, proposed flows and 84-task development backlog. Start there before implementing expansion work; task state is maintained in its `BACKLOG.json`.
 
 ## Current source domains
 

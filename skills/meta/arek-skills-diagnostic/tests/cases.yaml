@@ -1,7 +1,7 @@
 cases:
   - id: diagnostic-001
     case: explicit-plugin-test
-    input: "Test whether Arek AI Skills is active."
+    input: "Test whether Skills Factory is active."
     expected:
       should_trigger: true
       must:

@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111119">
-  <meta name="description" content="Przejrzysty katalog AI Skills. Znajdź workflow według obszaru, celu i dojrzałości.">
-  <title>AI Skills — katalog workflow</title>
+  <meta name="description" content="Przejrzysty katalog Skills Factory. Znajdź workflow według obszaru, celu i dojrzałości.">
+  <title>Skills Factory — katalog workflow</title>
   <link rel="icon" type="image/svg+xml" href="./assets/brand-mark.svg">
   <style>
     :root{color-scheme:dark;--bg:#111119;--panel:#191923;--panel-2:#20202c;--line:#30303c;--ink:#f4f1f8;--muted:#aaa6b6;--soft:#797586;--accent:#c5baff;--gold:#ffd18a;--coral:#ff8b72;--violet:#9588f7;--green:#94d4b3;--shadow:0 22px 64px #07070b70}
@@ -26,11 +26,11 @@
   <a class="skip" href="#catalog">Przejdź do katalogu</a>
   <div class="shell">
     <header class="topbar">
-      <a class="brand" href="./" aria-label="AI Skills — strona główna">
+      <a class="brand" href="./" aria-label="Skills Factory — strona główna">
         <img src="./assets/brand-mark.svg" alt="" width="38" height="38">
-        <span>AI Skills<small>by Arkadiusz Kamrowski</small></span>
+        <span>Skills Factory<small>by Arkadiusz Kamrowski</small></span>
       </a>
-      <a class="repo-link" href="https://github.com/aras-2003/ai-skills" target="_blank" rel="noopener noreferrer" aria-label="Otwórz repozytorium GitHub">
+      <a class="repo-link" href="https://github.com/aras-2003/skills-factory" target="_blank" rel="noopener noreferrer" aria-label="Otwórz repozytorium GitHub">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.54v-2.1c-3.1.68-3.76-1.32-3.76-1.32-.5-1.29-1.23-1.63-1.23-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.71 2.63 1.21 3.27.92.1-.72.39-1.21.71-1.49-2.47-.28-5.07-1.24-5.07-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.95 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.15 3.05-1.15.61 1.53.23 2.67.11 2.95.72.78 1.15 1.78 1.15 3 0 4.29-2.6 5.23-5.08 5.51.4.35.76 1.02.76 2.06v3.1c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>
         <span>Repozytorium</span>
       </a>
@@ -82,7 +82,7 @@
         <div id="processes" class="pathway-list" aria-live="polite" aria-busy="true"></div>
       </section>
     </main>
-    <footer class="footer"><span>Etykiety są po polsku, a opisy pozostają w języku źródłowym z plików SKILL.md.</span><a href="https://github.com/aras-2003/ai-skills/blob/main/CATALOG.md" target="_blank" rel="noopener noreferrer">Źródłowy katalog ↗</a></footer>
+    <footer class="footer"><span>Etykiety są po polsku, a opisy pozostają w języku źródłowym z plików SKILL.md.</span><a href="https://github.com/aras-2003/skills-factory/blob/main/CATALOG.md" target="_blank" rel="noopener noreferrer">Źródłowy katalog ↗</a></footer>
   </div>
   <dialog id="skill-dialog" aria-labelledby="dialog-title">
     <div class="dialog-inner">
@@ -122,7 +122,7 @@
       document.querySelector("#dialog-title").textContent=skillTitle(skill.name);
       document.querySelector("#dialog-domain").textContent=labelFor[skill.domain]||skill.domain;
       document.querySelector("#dialog-description").textContent=skill.description;
-      document.querySelector("#dialog-source").href=`https://github.com/aras-2003/ai-skills/blob/main/${skill.source}`;
+      document.querySelector("#dialog-source").href=`https://github.com/aras-2003/skills-factory/blob/main/${skill.source}`;
       document.querySelector("#dialog-meta").innerHTML=`<span class="maturity ${escapeHtml(skill.maturity)}">${escapeHtml(maturityNames[skill.maturity]||skill.maturity)}</span><span class="maturity">v${escapeHtml(skill.version||"—")}</span>`;
       dialog.showModal();
     }
@@ -147,7 +147,7 @@
       const packages=state.metadata.packages||{};
       document.querySelector("#source-versions").textContent="Production "+(packages.production?.version||"—")+" · Lab "+(packages.lab?.version||"—");
       const fullRevision=state.metadata.source_revision||"unknown";
-      const revisionLink=document.querySelector("#source-revision");revisionLink.textContent=fullRevision.slice(0,12);revisionLink.href=fullRevision==="unknown"?"https://github.com/aras-2003/ai-skills/commits/main":"https://github.com/aras-2003/ai-skills/commit/"+encodeURIComponent(fullRevision);
+      const revisionLink=document.querySelector("#source-revision");revisionLink.textContent=fullRevision.slice(0,12);revisionLink.href=fullRevision==="unknown"?"https://github.com/aras-2003/skills-factory/commits/main":"https://github.com/aras-2003/skills-factory/commit/"+encodeURIComponent(fullRevision);
       document.querySelector("#total-count").textContent=state.skills.length;
       document.querySelector("#domain-count").textContent=new Set(state.skills.map(s=>s.domain)).size;
       renderFilters();renderCards();renderAreas();renderProcesses();
@@ -155,7 +155,7 @@
 
     fetch("./lab-release.json").then(response=>{if(!response.ok)throw new Error("Lab release receipt unavailable");return response.json()}).then(release=>{
       if(release.channel!=="lab"||!/^\d+\.\d+\.\d+$/.test(release.version||"")||!/^[0-9a-f]{40}$/i.test(release.source_revision||"")||!/^[0-9a-f]{64}$/i.test(release.payload_content_sha256||"")||typeof release.release_id!=="string")throw new Error("invalid Lab release receipt");
-      const link=document.querySelector("#lab-source-revision");link.textContent=release.source_revision.slice(0,12);link.href="https://github.com/aras-2003/ai-skills/commit/"+encodeURIComponent(release.source_revision);link.title="SHA-256: "+release.payload_content_sha256;
+      const link=document.querySelector("#lab-source-revision");link.textContent=release.source_revision.slice(0,12);link.href="https://github.com/aras-2003/skills-factory/commit/"+encodeURIComponent(release.source_revision);link.title="SHA-256: "+release.payload_content_sha256;
       const manifest=document.querySelector("#lab-release-link");manifest.href="./lab-release.json";manifest.title="Release "+release.release_id+" · payload SHA-256: "+release.payload_content_sha256;
     }).catch(()=>{document.querySelector("#lab-provenance").textContent="Lab source: manifest unavailable"});
 
@@ -227,7 +227,7 @@
         const isCandidate=p.maturity==="candidate"||p.lanes.some(l=>l.maturity==="candidate");
         const type=p.basis.includes("Proponowana")?"proposed":isCandidate?"candidate":"production";
         const badge=type==="proposed"?"Ścieżka sugerowana":isCandidate?"Kandydat w Lab":p.runtime.includes("Proces repozytoryjny")?"Proces repozytoryjny":"Workflow z repo";
-        const sourceLinks=(p.sources||[]).map(s=>'<a href="https://github.com/aras-2003/ai-skills/blob/main/'+s.path+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(s.label)+' ↗</a>').join("");
+        const sourceLinks=(p.sources||[]).map(s=>'<a href="https://github.com/aras-2003/skills-factory/blob/main/'+s.path+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(s.label)+' ↗</a>').join("");
         const lanes=p.lanes.map(l=>{
           const steps=l.steps.map(step=>{
             const nodes=[...(step.skills||[]).map(id=>({id,optional:false})),...(step.optionalSkills||[]).map(id=>({id,optional:true}))].map(node=>{
@@ -239,7 +239,7 @@
             }).join("");
             return '<article class="flow-step"><h5>'+escapeHtml(step.title)+'</h5><div class="skill-nodes">'+(nodes||'<span class="lane-entry">Etap decyzyjny</span>')+'</div>'+(step.output?'<p class="step-output">'+escapeHtml(step.output)+'</p>':"")+'</article>';
           }).join("");
-          const source=l.sourcePath?'<a href="https://github.com/aras-2003/ai-skills/blob/main/'+l.sourcePath+'" target="_blank" rel="noopener noreferrer">Otwórz definicję workflow ↗</a>':"";
+          const source=l.sourcePath?'<a href="https://github.com/aras-2003/skills-factory/blob/main/'+l.sourcePath+'" target="_blank" rel="noopener noreferrer">Otwórz definicję workflow ↗</a>':"";
           return '<section class="process-lane"><div class="lane-head"><h4>'+escapeHtml(l.title)+'</h4><span>Wejście: '+escapeHtml(l.entry||"wybierz właściwy etap")+'</span>'+source+(l.summary?'<p>'+escapeHtml(l.summary)+'</p>':"")+'</div><div class="flow-scroll" role="region" aria-label="Etapy ścieżki: '+escapeHtml(l.title)+'" tabindex="0"><div class="flow">'+steps+'</div></div></section>';
         }).join("");
         return '<details class="process-card"><summary class="process-summary"><span class="domain-mark icon-'+escapeHtml(p.domain)+'" aria-hidden="true"></span><span class="process-intro"><span class="process-heading"><h3>'+escapeHtml(p.title)+'</h3><span class="process-badge '+type+'">'+badge+'</span></span><p>'+escapeHtml(p.summary)+' '+escapeHtml(p.runtime)+'</p><span class="process-sources">'+sourceLinks+'</span></span></summary><div class="process-lanes">'+lanes+'</div></details>';

@@ -1,4 +1,4 @@
-# AI Skills Architecture
+# Skills Factory Architecture
 
 ## Objective
 
@@ -22,7 +22,7 @@ The repository is a capability library, not a prompt dump.
 ## Repository layout
 
 ```
-ai-skills/
+skills-factory/
 ├── skills/
 │   ├── career/
 │   ├── commerce/

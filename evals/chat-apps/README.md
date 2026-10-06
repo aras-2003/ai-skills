@@ -5,7 +5,7 @@ isolation. Run each in a fresh chat with the exact app/runtime under test.
 
 ## Investment route-only case
 
-Use `investment-route-only.input.md` in a fresh chat with Arek AI Skills Cloud.
+Use `investment-route-only.input.md` in a fresh chat with the Skills Factory cloud profile.
 Capture the app/version, visible tool trace, final answer and a screenshot or
 saved page excerpt. A tool result saying `workflow_executed: false` is not a
 PASS by itself: the final answer must also stop without substantive investment

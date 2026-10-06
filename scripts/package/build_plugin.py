@@ -114,17 +114,17 @@ def build(
             "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
             "name": PLUGIN_NAME,
             "version": version,
-            "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
+            "description": "Validated production skills for Arkadiusz Kamrowski workflows.",
             "skills": "./skills/",
             "author": {"name": "Arkadiusz Kamrowski"},
-            "repository": "https://github.com/aras-2003/ai-skills",
+            "repository": "https://github.com/aras-2003/skills-factory",
             "keywords": ["skills", "productivity", "career", "strategy", "research"],
             "extensions": {
                 "com.openai": {
                     "interface": {
-                        "displayName": "Arek AI Skills",
-                        "shortDescription": "Validated reusable workflows from the ai-skills production catalog.",
-                        "longDescription": "A governed collection of production-ready reusable AI skills maintained in GitHub and packaged for ChatGPT/Codex."
+                        "displayName": "Skills Factory",
+                        "shortDescription": "Validated reusable workflows from the Skills Factory catalog.",
+                        "longDescription": "A governed collection of production-ready reusable skills maintained in GitHub and packaged for ChatGPT/Codex."
                     }
                 }
             }

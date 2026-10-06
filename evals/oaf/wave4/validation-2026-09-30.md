@@ -2,7 +2,7 @@
 
 ## Runtime
 
-Primary runtime: Arek AI Skills Lab.
+Primary runtime: Skills Factory Lab.
 Primary model: Luna.
 
 Exact packaged fixtures under `references/evals/` were used.

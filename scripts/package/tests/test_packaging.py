@@ -244,7 +244,7 @@ class PackagingTests(unittest.TestCase):
 
             plugin_manifest = json.loads((out / "plugin.json").read_text(encoding="utf-8"))
             interface = plugin_manifest["extensions"]["com.openai"]["interface"]
-            self.assertEqual("https://aras-2003.github.io/ai-skills/", interface["websiteURL"])
+            self.assertEqual("https://aras-2003.github.io/skills-factory/", interface["websiteURL"])
             self.assertEqual("./assets/brand-mark.svg", interface["logo"])
             self.assertEqual("./assets/brand-mark.svg", interface["composerIcon"])
             self.assertEqual("#C6812C", interface["brandColor"])

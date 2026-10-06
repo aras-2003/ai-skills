@@ -16,4 +16,4 @@ The command reads skill versions from SKILL.md and package versions from release
 
 ## Publish with GitHub Pages
 
-In repository Settings → Pages, choose Deploy from a branch, select main and /docs, then save. The site URL is https://aras-2003.github.io/ai-skills/.
+In repository Settings → Pages, choose Deploy from a branch, select main and /docs, then save. The site URL is https://aras-2003.github.io/skills-factory/.

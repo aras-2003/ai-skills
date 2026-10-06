@@ -324,7 +324,7 @@
       "domain": "meta",
       "maturity": "production",
       "version": "1.0.0",
-      "description": "Confirm that the Arek AI Skills plugin is exposing bundled skills to ChatGPT or Codex. Use when the user explicitly asks to test, verify, diagnose, or confirm whether Arek AI Skills is active.",
+      "description": "Confirm that the Skills Factory plugin is exposing bundled skills to ChatGPT or Codex. Use when the user explicitly asks to test, verify, diagnose, or confirm whether Skills Factory is active.",
       "source": "skills/meta/arek-skills-diagnostic/SKILL.md",
       "source_status": "present",
       "capability_assessment": "UNASSESSED"

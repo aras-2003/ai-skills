@@ -23,7 +23,7 @@ from mcp.server import MCPServer
 
 
 CLOUD_SERVER_INSTRUCTIONS = """
-Arek AI Skills cloud runtime control contract.
+Skills Factory cloud runtime control contract.
 
 For every request about investments, securities, ETFs, a portfolio, investment
 themes, opportunities, policy or risk limits, call route_investment_request
@@ -51,9 +51,9 @@ invent missing observations.
 
 
 mcp = MCPServer(
-    "Arek AI Skills cloud runtime",
+    "Skills Factory cloud runtime",
     description=(
-        "Portable read/compute runtime for Arek AI Skills. "
+        "Portable read/compute runtime for Skills Factory. "
         "Use the bundled skills for methodology and these tools for deterministic routing and charts."
     ),
     instructions=CLOUD_SERVER_INSTRUCTIONS,

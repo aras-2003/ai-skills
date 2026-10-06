@@ -1,8 +1,8 @@
 ---
 name: arek-skills-diagnostic
 description: >
-  Confirm that the Arek AI Skills plugin is exposing bundled skills to ChatGPT or Codex.
-  Use when the user explicitly asks to test, verify, diagnose, or confirm whether Arek AI Skills is active.
+  Confirm that the Skills Factory plugin is exposing bundled skills to ChatGPT or Codex.
+  Use when the user explicitly asks to test, verify, diagnose, or confirm whether Skills Factory is active.
 metadata:
   owner: arkadiusz-kamrowski
   version: "1.0.0"
@@ -15,7 +15,7 @@ metadata:
 
 ## Purpose
 
-Verify that the installed Arek AI Skills plugin exposes bundled skills to the runtime.
+Verify that the installed Skills Factory plugin exposes bundled skills to the runtime.
 
 ## Procedure
 

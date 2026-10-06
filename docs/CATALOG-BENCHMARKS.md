@@ -102,7 +102,7 @@ What to borrow later:
 - version tracking;
 - catalog automation.
 
-## Recommendation for ai-skills
+## Recommendation for Skills Factory
 
 Use a hybrid model:
 
