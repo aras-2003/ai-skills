@@ -1,6 +1,6 @@
 schema_version: "1.0"
 campaign: runtime-validation-2026-10-r16
-behavior_source_revision: d24d954c9ec8c43cfe37d0015c3b9b7714af18c3
+behavior_source_revision: b529c889339e930fc5c70cb5d144a9e590348d37
 package:
   name: skills-factory
   version: "1.36.0"
