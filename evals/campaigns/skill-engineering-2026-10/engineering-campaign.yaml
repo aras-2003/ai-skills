@@ -22,7 +22,7 @@ repository_workflow:
   test_cases: workflows/skill-development/tests/cases.yaml
   minimum_cases: 2
 package:
-  lab_version: "0.33.1"
+  lab_version_source: release/package.yaml#lab.version
   required_draft_targets:
     - skill-test-design
     - skill-evaluation

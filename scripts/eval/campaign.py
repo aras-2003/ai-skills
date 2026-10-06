@@ -78,7 +78,9 @@ def separately_validated_engineering_paths() -> set[str]:
     package_cfg = cfg.get("package") or {}
     required_drafts = package_cfg.get("required_draft_targets") or []
     if (
-        lab.get("version") != package_cfg.get("lab_version")
+        package_cfg.get("lab_version_source") != "release/package.yaml#lab.version"
+        or not isinstance(lab.get("version"), str)
+        or not lab.get("version")
         or set(lab.get("draft_test_targets") or []) != set(required_drafts)
     ):
         return set()
