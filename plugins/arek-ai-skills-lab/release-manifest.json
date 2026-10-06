@@ -968,11 +968,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "86dd70ee9f7b554efaf5b76f9f0059626cfda1ddeef56458035bb7f01c3ec8f5",
+      "content_sha256": "bd8b4d2b57c8d17629a907f4a386b7aa9d934bbc73f180f835b7e628a4a7beb9",
       "kind": "skill",
       "maturity": "draft",
       "name": "skill-evaluation",
-      "version": "0.3.1"
+      "version": "0.3.2"
     },
     {
       "capability_assessment": {
@@ -1197,9 +1197,9 @@
     }
   ],
   "package": "arek-ai-skills-lab",
-  "payload_content_sha256": "807335dadf37de715508e0028f35fc33c1cfd5672c9b299131467cc795d5bf4d",
-  "release_id": "0.33.2+b4f51dc6d6c1",
+  "payload_content_sha256": "3f9656c7db04915e49442fea3189f5928e13016027f9f07fcf5a9bf468ab6738",
+  "release_id": "0.33.3+810094c853cd",
   "schema_version": "1.0",
-  "source_revision": "b4f51dc6d6c1b2ed3a3c09167bf26e3943732d2b",
-  "version": "0.33.2"
+  "source_revision": "810094c853cd3c7dc2431d5f11f75e25f4b8d2bc",
+  "version": "0.33.3"
 }
