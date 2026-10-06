@@ -759,7 +759,7 @@
               "title": "Promocja i utrzymanie",
               "skills": [],
               "optionalSkills": [
-                "arek-skills-diagnostic"
+                "skills-factory-diagnostic"
               ],
               "output": "Promocja po przejściu bramek; diagnostyka po wydaniu."
             }
@@ -776,21 +776,21 @@
       "summary": "Krótka ścieżka sprawdzenia, czy skills są widoczne w ChatGPT lub Codex.",
       "sources": [
         {
-          "label": "arek-skills-diagnostic",
-          "path": "skills/meta/arek-skills-diagnostic/SKILL.md"
+          "label": "skills-factory-diagnostic",
+          "path": "skills/meta/skills-factory-diagnostic/SKILL.md"
         }
       ],
       "lanes": [
         {
           "id": "diagnostic",
           "title": "Sprawdzenie instalacji",
-          "entry": "arek-skills-diagnostic",
-          "sourcePath": "skills/meta/arek-skills-diagnostic/SKILL.md",
+          "entry": "skills-factory-diagnostic",
+          "sourcePath": "skills/meta/skills-factory-diagnostic/SKILL.md",
           "steps": [
             {
               "title": "Sprawdź ekspozycję skills",
               "skills": [
-                "arek-skills-diagnostic"
+                "skills-factory-diagnostic"
               ],
               "output": "Potwierdź dostępność w aktywnym runtime."
             }

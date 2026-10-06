@@ -1,0 +1,23 @@
+case_id: chat-app-explicit-line-chart
+version: 1
+required_runtime_evidence:
+  - fresh_chat_in_the_target_host
+  - exact_chat_app_or_plugin_identity_and_version
+  - final_answer_and_visible_chart
+  - accessible_data_table_or_equivalent_exact_data_receipt
+pass:
+  must:
+    - chart title is Skills E2E clean
+    - visible categories are Q1, Q2, Q3 in order
+    - displayed values are exactly 10, 12, 9
+    - accessible labels or equivalent text preserve exact category/value pairs
+    - no additional values are inferred
+  evidence:
+    - screenshot or saved page excerpt shows the rendered chart and values
+    - tool trace identifies the chart renderer when the app claims it used that tool
+review_required:
+  - chart is visible and data is correct but renderer invocation cannot be correlated to the chat
+  - axis or unit formatting changes the meaning or readability of the supplied unit
+fail:
+  - chart is missing or data/categories are incorrect
+  - unsupported values or categories are added

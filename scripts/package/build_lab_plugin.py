@@ -12,7 +12,7 @@ from build_plugin import copy_skill, discover_skills
 from workflow_entrypoints import add_workflow_entrypoints, load_registry
 
 
-PLUGIN_NAME = "arek-ai-skills-lab"
+PLUGIN_NAME = "skills-factory-lab"
 PLUGIN_VERSION = "0.2.1"
 
 def discover_draft_test_skills(root: Path) -> list[Path]:
@@ -105,7 +105,7 @@ def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", default="plugins/arek-ai-skills-lab")
+    parser.add_argument("--output", default="plugins/skills-factory-lab")
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parents[2]
@@ -181,10 +181,10 @@ def main() -> int:
 
         version = package_version(root, "lab")
         interface = {
-            "displayName": "Arek AI Skills Lab",
+            "displayName": "Skills Factory Lab",
             "shortDescription": "Candidate skills for runtime evaluation and discovery.",
             "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing, including only explicitly selected draft test targets. Do not enable it in the same session as the production plugin because duplicate capability names may compete.",
-            "websiteURL": "https://aras-2003.github.io/ai-skills/",
+            "websiteURL": "https://aras-2003.github.io/skills-factory/",
             "brandColor": "#C6812C",
             "brandColorDark": "#F0C982",
             "logo": "./assets/brand-mark.svg",
@@ -197,7 +197,7 @@ def main() -> int:
             "description": "Isolated lab package with candidate targets, explicitly selected draft test targets, and their production dependencies for controlled behavioral testing.",
             "skills": "./skills/",
             "author": {"name": "Arkadiusz Kamrowski"},
-            "repository": "https://github.com/aras-2003/ai-skills",
+            "repository": "https://github.com/aras-2003/skills-factory",
             "keywords": ["skills", "lab", "candidate", "oaf", "career"],
             "extensions": {
                 "com.openai": {

@@ -1,4 +1,4 @@
-# ai-skills
+# Skills Factory
 
 Reusable AI capability library for repeatable work across projects.
 
@@ -15,11 +15,11 @@ Rule: **LLM interprets; code calculates and validates.**
 
 ## Visual catalog
 
-Browse skills by domain and maturity in the [Arek AI Skills catalog](https://aras-2003.github.io/ai-skills/). The catalog is generated from the source metadata in `SKILL.md`.
+Browse skills by domain and maturity in the [Skills Factory catalog](https://aras-2003.github.io/skills-factory/). The catalog is generated from the source metadata in `SKILL.md`.
 
 ## Expansion roadmap
 
-The [AI Skills expansion roadmap](docs/roadmap/2026-10-05/README.md) preserves the architecture analysis, proposed flows and 84-task development backlog. Start there before implementing expansion work; task state is maintained in its `BACKLOG.json`.
+The [Skills Factory expansion roadmap](docs/roadmap/2026-10-05/README.md) preserves the architecture analysis, proposed flows and 84-task development backlog. Start there before implementing expansion work; task state is maintained in its `BACKLOG.json`.
 
 ## Current source domains
 
@@ -54,6 +54,8 @@ Production builders currently support:
 1. **Plugin channel** — production skills plus workflow entrypoints allowed by `workflows/runtime-registry.yaml`.
 2. **Lab channel** — isolated evaluation package containing candidate targets, required production dependencies, executor-only eval inputs, and explicitly allow-listed draft test targets.
 3. **ChatGPT ZIP channel** — individual production skill ZIPs. Workflow availability is declared explicitly in the channel manifest; unsupported workflows are not silently implied.
+4. **Chat/mobile-safe plugin profile** — the same production skills without a bundled MCP server. This is the portable profile for ordinary Chat surfaces where local MCP cannot run.
+5. **Cloud MCP plugin profile** — the same production skills with an externally hosted HTTPS MCP endpoint. This profile is for supported web/desktop/Work surfaces; it is not the mobile runtime.
 
 Runtime packages use an allow-list: `SKILL.md`, required `references/`, `scripts/` and `assets/`. Test definitions, eval summaries and evaluator rubrics stay outside production runtime payloads.
 
@@ -87,9 +89,40 @@ Required PR validation is defined in `.github/workflows/validate-skills.yml` and
 
 Generated artifacts are built atomically and include source provenance.
 
+## Chat, web and mobile portability
+
+The repository treats skills and MCP as separate runtime capabilities:
+
+```
+source skills/workflows
+        │
+        ├── skills-only profile  ── Chat Web / Chat Mobile where plugins or skills are exposed
+        ├── cloud profile        ── Web / Desktop / Work + remote HTTPS MCP
+        └── local profile        ── Desktop / Work + bundled stdio MCP
+```
+
+The mobile-safe profile deliberately contains no `mcp.json`, `.mcp.json` or local
+MCP executable. It can therefore be installed without depending on a local
+machine. MCP Apps are currently web-only in ChatGPT; mobile access must use the
+skill-only path or the separate mobile Work/Codex remote-control experience.
+
+Build examples:
+
+```bash
+python scripts/package/build_plugin.py --runtime-mode skills-only --output .tmp/chat-mobile
+python scripts/package/build_plugin.py --runtime-mode remote \
+  --remote-mcp-url https://<your-host>/mcp --output .tmp/chat-web
+python scripts/package/build_plugin.py --runtime-mode local --output .tmp/desktop
+```
+
+Do not put a local `stdio` MCP server in the mobile-safe artifact. Do not treat
+the presence of a generated package as proof that a ChatGPT account or surface
+has enabled plugins; that remains an installation and product-availability gate.
+
 ## Key docs
 
 - Architecture: `docs/ARCHITECTURE.md`
+- Remote MCP deployment: `docs/REMOTE-MCP.md`
 - Lifecycle: `docs/LIFECYCLE.md`
 - Testing: `docs/TESTING.md`
 - Runtime evals: `docs/RUNTIME-EVALS.md`

@@ -6,7 +6,7 @@ Validate the next OAF specialist layer on Luna before production promotion, then
 
 ## Runtime fixture location
 
-In Arek AI Skills Lab, canonical eval fixtures are packaged into the selected skill/workflow under `references/evals/`. The repository source remains under `evals/`; runtime prompts must use the packaged reference path.
+In Skills Factory Lab, canonical eval fixtures are packaged into the selected skill/workflow under `references/evals/`. The repository source remains under `evals/`; runtime prompts must use the packaged reference path.
 
 ## Test order
 

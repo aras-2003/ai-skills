@@ -151,6 +151,7 @@ class PackagingTests(unittest.TestCase):
             self.assertTrue((out / ".mcp.json").is_file())
             self.assertTrue((out / "mcp" / "chart_renderer.py").is_file())
             self.assertTrue((out / "mcp" / "investment_runtime.py").is_file())
+            self.assertTrue((out / "mcp" / "cloud_server.py").is_file())
 
             plugin_manifest = json.loads((out / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual(
@@ -158,10 +159,10 @@ class PackagingTests(unittest.TestCase):
                 plugin_manifest["$schema"],
             )
             portable_mcp = json.loads((out / "mcp.json").read_text(encoding="utf-8"))
-            self.assertIn("arek-chart-renderer", portable_mcp["mcpServers"])
-            self.assertIn("arek-investment-os", portable_mcp["mcpServers"])
-            self.assertEqual("stdio", portable_mcp["mcpServers"]["arek-chart-renderer"]["type"])
-            self.assertEqual("stdio", portable_mcp["mcpServers"]["arek-investment-os"]["type"])
+            self.assertIn("skills-factory-chart-renderer", portable_mcp["mcpServers"])
+            self.assertIn("skills-factory-investment-os", portable_mcp["mcpServers"])
+            self.assertEqual("stdio", portable_mcp["mcpServers"]["skills-factory-chart-renderer"]["type"])
+            self.assertEqual("stdio", portable_mcp["mcpServers"]["skills-factory-investment-os"]["type"])
 
             compat_manifest = json.loads((out / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual("./.mcp.json", compat_manifest["mcpServers"])
@@ -175,13 +176,58 @@ class PackagingTests(unittest.TestCase):
             release_skill = next(x for x in release["components"] if x.get("kind") == "skill")
             self.assertEqual(production_skill["capability_assessment"], release_skill["capability_assessment"])
             runtime_tools = {item["name"]: item for item in capabilities["runtime_tools"]}
-            self.assertEqual({"arek-chart-renderer", "arek-investment-os"}, set(runtime_tools))
-            chart = runtime_tools["arek-chart-renderer"]
+            self.assertEqual({"skills-factory-chart-renderer", "skills-factory-investment-os"}, set(runtime_tools))
+            chart = runtime_tools["skills-factory-chart-renderer"]
             self.assertEqual("deterministic-data-chart", chart["runtime_class"])
             self.assertEqual(["render_bar_chart", "render_line_chart"], chart["tools"])
-            investment = runtime_tools["arek-investment-os"]
+            investment = runtime_tools["skills-factory-investment-os"]
             self.assertEqual("investment-request-router", investment["runtime_class"])
             self.assertEqual(["route_investment_request"], investment["tools"])
+
+    def test_skills_only_profile_has_no_local_mcp_dependency(self) -> None:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            out = Path(td) / "chat-mobile"
+            build_plugin.build(ROOT, out, "production", runtime_mode="skills-only")
+            self.assertFalse((out / "mcp.json").exists())
+            self.assertFalse((out / ".mcp.json").exists())
+            self.assertFalse((out / "mcp").exists())
+            manifest = json.loads((out / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
+            self.assertNotIn("mcpServers", manifest)
+            capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
+            self.assertEqual("skills-only", capabilities["runtime_mode"])
+            self.assertTrue(capabilities["surface_support"]["chat_mobile"])
+            self.assertEqual([], capabilities["runtime_tools"])
+
+    def test_remote_profile_uses_https_mcp_without_bundling_stdio(self) -> None:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            out = Path(td) / "chat-web"
+            build_plugin.build(
+                ROOT,
+                out,
+                "production",
+                runtime_mode="remote",
+                remote_mcp_url="https://skills.example.test/mcp",
+            )
+            self.assertFalse((out / "mcp").exists())
+            mcp = json.loads((out / "mcp.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                {"type": "http", "url": "https://skills.example.test/mcp"},
+                mcp["mcpServers"]["skills-factory-investment-os"],
+            )
+            capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
+            self.assertEqual("remote", capabilities["runtime_mode"])
+            self.assertFalse(capabilities["surface_support"]["chat_mobile"])
+
+    def test_remote_profile_rejects_non_https_endpoint(self) -> None:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            with self.assertRaisesRegex(ValueError, "HTTPS"):
+                build_plugin.build(
+                    ROOT,
+                    Path(td) / "chat-web",
+                    "production",
+                    runtime_mode="remote",
+                    remote_mcp_url="http://skills.example.test/mcp",
+                )
 
     def test_lab_manifests_match_final_fixture_mutated_artifact(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
@@ -198,7 +244,7 @@ class PackagingTests(unittest.TestCase):
 
             plugin_manifest = json.loads((out / "plugin.json").read_text(encoding="utf-8"))
             interface = plugin_manifest["extensions"]["com.openai"]["interface"]
-            self.assertEqual("https://aras-2003.github.io/ai-skills/", interface["websiteURL"])
+            self.assertEqual("https://aras-2003.github.io/skills-factory/", interface["websiteURL"])
             self.assertEqual("./assets/brand-mark.svg", interface["logo"])
             self.assertEqual("./assets/brand-mark.svg", interface["composerIcon"])
             self.assertEqual("#C6812C", interface["brandColor"])

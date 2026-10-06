@@ -1,4 +1,4 @@
-# Using ai-skills by runtime channel
+# Using Skills Factory by runtime channel
 
 ## Source of truth
 

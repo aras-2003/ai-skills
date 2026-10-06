@@ -3,8 +3,8 @@
 ## Identity
 - campaign: `runtime-validation-2026-10-r16`
 - behavior source: `89db15ef94cf38a35117ec02b8c60928ef72654d`
-- production package source version: `arek-ai-skills 1.36.0`
-- Lab package source version: `arek-ai-skills-lab 0.32.0`
+- production package source version: `skills-factory 1.36.0`
+- Lab package source version: `skills-factory-lab 0.32.0`
 
 R1–R15 remain historical evidence. R16 is pinned to the inline investment visual and bounded research-state persistence changes. Its scope does not evaluate the three explicitly allow-listed draft skill-lifecycle test targets included in Lab 0.32.0.
 

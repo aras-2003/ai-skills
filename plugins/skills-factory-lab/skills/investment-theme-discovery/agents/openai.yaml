@@ -1,0 +1,5 @@
+interface:
+  display_name: Investment Theme Discovery
+  short_description: Child workflow for Investment OS theme research. Use when…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#9588F7'

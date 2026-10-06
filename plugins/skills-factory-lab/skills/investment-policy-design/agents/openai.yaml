@@ -1,0 +1,5 @@
+interface:
+  display_name: Investment Policy Design
+  short_description: Design or revise a personal investment policy from the…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#9588F7'

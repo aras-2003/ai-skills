@@ -1,5 +1,0 @@
-interface:
-  display_name: Investment Portfolio Observation
-  short_description: Lightweight portfolio observation child workflow for natural…
-  icon_small: ./assets/arek-ai-domain-icon.svg
-  brand_color: '#9588F7'

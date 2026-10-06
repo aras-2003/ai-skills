@@ -12,7 +12,7 @@ Wave 4 tests whether the system can:
 
 ## Runtime fixture location
 
-In Arek AI Skills Lab, canonical fixtures are packaged into each selected skill/workflow under `references/evals/`.
+In Skills Factory Lab, canonical fixtures are packaged into each selected skill/workflow under `references/evals/`.
 
 ## Test order
 

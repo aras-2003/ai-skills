@@ -20,10 +20,10 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 def validate_promotion(root: Path, *, require_ancestor: bool = True) -> list[str]:
     errors: list[str] = []
-    lab_path = root / "plugins/arek-ai-skills-lab/release-manifest.json"
+    lab_path = root / "plugins/skills-factory-lab/release-manifest.json"
     lab_copy_path = root / "docs/lab-release.json"
     production_paths = [
-        root / "plugins/arek-ai-skills/release-manifest.json",
+        root / "plugins/skills-factory/release-manifest.json",
         root / "dist/chatgpt-skills/release-manifest.json",
     ]
     try:

@@ -8,11 +8,11 @@ Static CI proves package quality. Runtime evals prove behavior.
 
 ## Lab plugin
 
-`Arek AI Skills Lab` packages:
+`Skills Factory Lab` packages:
 - every skill with `metadata.maturity: candidate` from `main`;
 - selected workflow entrypoints needed for runtime orchestration.
 
-The lab plugin is intentionally separate from `Arek AI Skills` production.
+The lab plugin is intentionally separate from `Skills Factory` production.
 
 ## Recommended evaluation sequence
 

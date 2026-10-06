@@ -1,8 +1,8 @@
 package:
-  name: arek-ai-skills
+  name: skills-factory
   version: "1.36.0"
 lab:
-  name: arek-ai-skills-lab
+  name: skills-factory-lab
   version: "0.33.4"
   draft_test_targets:
     - skill-test-design

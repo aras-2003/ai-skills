@@ -1,5 +1,0 @@
-interface:
-  display_name: Skill Validation
-  short_description: Validate an Agent Skill package for structural correctness…
-  icon_small: ./assets/arek-ai-domain-icon.svg
-  brand_color: '#94D4B3'

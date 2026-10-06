@@ -86,11 +86,11 @@ def write_skill_interface(
         raise ValueError(f"{config_path}: interface must be a YAML mapping")
     interface.setdefault("display_name", display_name(name))
     interface.setdefault("short_description", short_description(description))
-    interface["icon_small"] = "./assets/arek-ai-domain-icon.svg"
+    interface["icon_small"] = "./assets/skills-factory-domain-icon.svg"
     interface["brand_color"] = DOMAIN_COLORS[domain]
     config["interface"] = interface
 
-    icon_relative = "assets/arek-ai-domain-icon.svg"
+    icon_relative = "assets/skills-factory-domain-icon.svg"
     icon_target = skill_dir / icon_relative
     icon_target.parent.mkdir(parents=True, exist_ok=True)
     icon_target.write_bytes(icon_source.read_bytes())

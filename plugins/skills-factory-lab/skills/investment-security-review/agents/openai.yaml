@@ -1,0 +1,5 @@
+interface:
+  display_name: Investment Security Review
+  short_description: Child workflow for one-security review. Use when selected by…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#9588F7'

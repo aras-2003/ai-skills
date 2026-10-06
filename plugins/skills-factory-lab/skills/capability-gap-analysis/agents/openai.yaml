@@ -1,0 +1,5 @@
+interface:
+  display_name: Capability Gap Analysis
+  short_description: Identify material gaps between required business…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#83A9FF'

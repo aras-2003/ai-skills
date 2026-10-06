@@ -1,0 +1,5 @@
+interface:
+  display_name: Investment Attention Review
+  short_description: Child workflow for Investment OS attention triage. Use when…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#9588F7'

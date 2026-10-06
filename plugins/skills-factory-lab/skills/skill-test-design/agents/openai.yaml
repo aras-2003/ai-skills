@@ -1,0 +1,5 @@
+interface:
+  display_name: Skill Test Design
+  short_description: Design and maintain routing, behavioral, edge-case…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#94D4B3'

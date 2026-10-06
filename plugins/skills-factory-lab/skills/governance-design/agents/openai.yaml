@@ -1,0 +1,5 @@
+interface:
+  display_name: Governance Design
+  short_description: Design the minimum governance mechanisms needed for a…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#83A9FF'

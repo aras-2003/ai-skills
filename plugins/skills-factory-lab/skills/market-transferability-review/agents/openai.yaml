@@ -1,0 +1,5 @@
+interface:
+  display_name: Market Transferability Review
+  short_description: Review whether a product or business model proven in one…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#FF8B72'

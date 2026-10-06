@@ -1,0 +1,14 @@
+campaign: chat-app-e2e-2026-10
+routing_registry: evals/routing/registry.yaml
+routing_case_ids: []
+fallback_cases:
+  - id: chat-app-investment-route-only
+    mode: explicit
+    target: cloud-chat-runtime
+    input: evals/chat-apps/investment-route-only.input.md
+    rubric: evals/chat-apps/investment-route-only.rubric.yaml
+  - id: chat-app-explicit-line-chart
+    mode: explicit
+    target: cloud-chat-runtime
+    input: evals/chat-apps/explicit-line-chart.input.md
+    rubric: evals/chat-apps/explicit-line-chart.rubric.yaml

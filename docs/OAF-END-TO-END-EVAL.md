@@ -14,7 +14,7 @@ The test checks whether the runtime:
 
 ## Runtime fixture
 
-In Arek AI Skills Lab:
+In Skills Factory Lab:
 
 `references/evals/case-001-enterprise-change.md`
 

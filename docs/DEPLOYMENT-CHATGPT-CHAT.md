@@ -7,7 +7,12 @@ Keep GitHub as the single source of truth while supporting two independent deliv
 1. **Plugin bundle** for Work / Codex and other plugin-capable surfaces.
 2. **Individual ChatGPT Skills** for ordinary Chat, when the account/surface exposes the native Skills feature.
 
-This avoids relying on local-marketplace plugin skill exposure inside ordinary Chat.
+This avoids relying on local-marketplace plugin skill exposure inside ordinary
+Chat and removes the local MCP dependency from the portable path.
+
+For mobile Chat, use the `skills-only` profile or the individual native skill
+ZIPs. A custom MCP App is not a mobile delivery mechanism: OpenAI currently
+documents MCP Apps as web-only.
 
 ## Why dual deployment
 
@@ -18,7 +23,7 @@ Therefore the production branch generates both:
 ```
 skills/<domain>/<skill>/
         |
-        +--> plugins/arek-ai-skills/skills/<skill>/   # Work / Codex plugin
+        +--> plugins/skills-factory/skills/<skill>/   # Work / Codex plugin
         |
         +--> dist/chatgpt-skills/<skill>.zip          # native ChatGPT Skill upload
 ```
@@ -50,7 +55,7 @@ feature branch
   -> validation + behavioral eval
   -> promotion to production
   -> package-production-plugin.yml
-  -> plugins/arek-ai-skills/
+  -> plugins/skills-factory/
 
   -> package-chatgpt-skills.yml
   -> dist/chatgpt-skills/*.zip
@@ -84,7 +89,7 @@ For the current career workflow, install at minimum:
 
 The diagnostic skill is useful during setup:
 
-- `arek-skills-diagnostic.zip`
+- `skills-factory-diagnostic.zip`
 
 ## Updating a skill
 
@@ -102,7 +107,9 @@ Do not edit the installed ChatGPT copy as the primary source; any emergency UI e
 
 OpenAI currently states that Personal Skills are generally available to ChatGPT Business, Enterprise, Healthcare and Edu users, and that availability varies by workspace, role and product surface.
 
-If the active account does not expose **Plugins -> Skills -> Create -> Upload from your computer**, this repository can still generate valid skill bundles, but it cannot force-enable the native Chat Skills feature.
+If the active account does not expose the relevant plugin/Skills surface, this
+repository can still generate valid skill bundles, but it cannot force-enable a
+ChatGPT product feature or make a custom MCP App available on mobile.
 
 In that case the supported options are:
 
@@ -117,14 +124,14 @@ For a native ordinary-Chat installation, test in a new Chat without selecting Wo
 Diagnostic prompt:
 
 ```
-Use the arek-skills-diagnostic skill.
+Use the skills-factory-diagnostic skill.
 ```
 
 Expected behavior:
 
 ```
-AREK_AI_SKILLS_ACTIVE
-arek-skills-diagnostic
+SKILLS_FACTORY_ACTIVE
+skills-factory-diagnostic
 ```
 
 For `executive-role-evaluator`, the response should begin with its required decision header.

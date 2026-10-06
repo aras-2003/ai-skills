@@ -1,0 +1,1758 @@
+{
+  "capabilities": [
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "144a1044c741b5b9506a15bec6740c0918cc505f6b03d1c7b718835fdab8e9e6",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "acquisition-fit-review",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "a724ff0cc706721691e128e3b1a72ede3a875f1bfed9cde566ee13509a12d2e4",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "architecture-review",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "4b33d5140893b3a2834855f16e4a2412bf91e51edff239841cb1dd4655f7ed98",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skills-factory-diagnostic",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "5781058f885c2fc744d65a0e386770b5e3f13a0f0ee10c651ef4fc69441df925",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/case-capability-gap-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "capability-gap-analysis",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "5fa9e98d530edd1a325be93d96ab8a89a9937ee0b7ebc8ecee77a0b5c3baf546",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/case-capability-map-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "capability-map-review",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "bdedc1c1eceebce2ff48bbe67218f24e6bdd109f95c1b57e26f1189f6c62b757",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-003-viral-regulated.input.md",
+        "references/evals/case-005-false-us-pl-transfer.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "commerce-opportunity-review",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "0e1ba36a3929a38b210d56e6da7584ab45f11db90a662af57ffb89fe32d583a0",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-001-premium-vs-generic.input.md",
+        "references/evals/case-002-good-demand-bad-economics.input.md",
+        "references/evals/case-004-boring-winner.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "commerce-product-deep-dive",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "bba65687915fd7b963fbabbb6cb7a41c6c1ac3bdc8142b3bc4fd133224e2ddc1",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "commerce-regulatory-risk-review",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "70b0e0db5b854bed760d9bc050f979400f485d2bcc42aec76f25017e35da1d92",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "company-context-research",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "59d30001900642faaa925c298bc18b1f3f8f554d9c84887cbbd361e4c06388b2",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "competition-landscape-review",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "582d61b74d28538f2aa2f1c04fc9c2693608989172caf1caa17550d1d9a7cd70",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "cv-gap-analysis",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "33a530b115e86c3a50350d2026ade29973494cc89efaadbc77a5d3b2b283acd7",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "cv-tailoring",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "0e0a50ef45a3d489d99aaa1270fb88e9e88f5b07733d15bcaf8ebacadaf3f9ec",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/case-decision-bottleneck-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-bottleneck-analysis",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "ef06a8b36698b311a68e0b998439e7927f14fd37abb31cb7ca6e0ddf6ad315a3",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-journal-update",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "8bb2d3cd2f92f9371278e96d13e59c65aab28edadcf7e1febf9954c337bdc2e9",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "decision-rights-review",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "838c62beb995a5f7106a01a4a194afa550668cdd176cf712c1d2566551eda057",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "differentiation-review",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "911c6299efab78247ba5a0aa634454ddba605e62a11e7f5d3f8b3789adea0db1",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "evidence-loop-review",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "4d5246a0832852d0a91986de3282c82f3890f0cca3efa6a4f24418dfe5390906",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/candidate-profile-schema.yaml",
+        "references/evaluation-model.md",
+        "references/output-template.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "executive-role-evaluator",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "7ac7b557bc158751d7a6cf9713e9deadb15948e959955dace836f2c16ca23840",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/case-global-local-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "global-local-model-review",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "82ea796cafa97d2441d6ed15b782cda47572376b2a91bea1e00dd4a0a676f996",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/case-governance-design-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "governance-design",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "d1ca71123cdd981a42af127dac75e72eb216d38c84a120d0d6a5a8d3ce7799fa",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "interview-brief",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "f1cd6e675b5fe2cc3a743a2cc2205eddd152803d2d25c287f2fccad35f407a8d",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-006-attention-acn.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-attention-review",
+      "version": "0.2.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "db5017097b07b690c7d63b624a6a3b0a1aa9bc531399d6d0f80eb26c7df8c3a1",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investment-attention-triage",
+      "version": "0.2.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "cb35e668f185a424ddd6507124ea0ba96b0c9bb9b0e0c4c4ac78c9d4c6e8a164",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-001-opportunity-hunter.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-opportunity-hunter",
+      "version": "0.5.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "7f9f963cda8dc1c4540a7762bbcaa655bc19314566ac98a96a193179ec1391a4",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-os-review",
+      "version": "0.3.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "4c118106d14a0e11350a4c7bcf9413bdf88084be26f4976e9b774afdb87bd4e0",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/case-005-policy-learning.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investment-policy-design",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "8698f1467f83663f443eca44a32d638b5eba5a6987d0f8e5d597ae52efee9808",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-portfolio-observation",
+      "version": "0.2.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "abde041cb68899c5b3fb2cfcc854563ed9c058bd48731dfd61f16bfb11fcba43",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-003-portfolio-review.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-portfolio-review",
+      "version": "0.5.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "104a65c068c5485c60aeb758a8248478d401df5ef3dc7e0bdd09816d2fa44edb",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/canonical-schema-governance.md",
+        "references/google-sheets-contract.md",
+        "references/supabase-contract.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investment-record-store",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "fd8ed9b2168b089f14e867fb802b65ac37993acf1f30945a2c4da42340036f2b",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-002-security-sizing.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-security-review",
+      "version": "0.4.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "deeffe48cd6498762900d85fab295b8bce39b76a13dd1f7e2e4f82a581a08603",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-004-theme-discovery.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "investment-theme-discovery",
+      "version": "0.2.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "ed8f6daf478772ce1aa7d8de6bf32b561a36872d4cc450af5b8963f95725d425",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "investor-pattern-research",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "d3343e99ad15e1c7302da1a238ef55ba04eff24f59625f96b3f256649b0e2f0a",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "job-discovery",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "50a680fb14a641e87120e6438602bc06989dda9d5c3cde9d81558f6ca800f97d",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "job-validity-check",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "007718e3a116ae3cea4c944ec8cd904b16aa12c6e4dc9892e42d031ee74a2408",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "kpi-quality-review",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "e525be46f0de6c6e3ffbf033c9ddbd053c6b0ad6450b3eb3a105f529899720fa",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "market-opportunity-scan",
+      "version": "0.3.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "1c8bd9412d226ed49b6662f7e662ffadaed84092b1d8770e1a6391daa7e506dd",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "market-transferability-review",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "3f37f91a9189c7ae2216277dc846a64bde5ac58820c718539a4977c3f2cfeca6",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-enterprise-architecture-review-001.input.md",
+        "references/evals/case-enterprise-architecture-stop-001.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-enterprise-architecture-review",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "319e721bc4fec33cc440c3ff4f05825d1554028b2edbb2b34eec43326250be95",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-001-enterprise-change.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-enterprise-change-review",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "1ad0e0692e8692be97f7e24669de5aee7a6bd3ca147f8d300295ce10c3bcf9a5",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-governance-redesign-001.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-governance-redesign",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "3ff22c531c84cb2c30665b9b673d697e61b722d440f5a818962640f3b964a29f",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-001-enterprise-it.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-health-check",
+      "version": "1.5.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "6b7c152896738fbbcfcfa9fac440d4f6ee4f128c7bf68391c783f7f9620c347c",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-operating-model-redesign-001.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-operating-model-redesign",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "bdc64f498e8faea112073ef8e62f30eeb15225123a0a6450ca5be8c66602c21f",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md"
+      ],
+      "kind": "workflow",
+      "maturity": "candidate",
+      "name": "oaf-strategy-execution-reset",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "b7a9807236dd78e5b00c9b93d0ac30c3e2f7092de028e34eb2713171182860c0",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/WORKFLOW.md",
+        "references/evals/INDEX.md",
+        "references/evals/case-transformation-design-001.input.md"
+      ],
+      "kind": "workflow",
+      "maturity": "production",
+      "name": "oaf-transformation-design",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "a567900108ca48fc5ad0f4d9e1094d36a3815deab9d93afe3ed086f25bec132e",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "operating-model-review",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "e33dcd20c07daecdc192b96b5f6f0f4bd58a70125e6f424b4d212da5a87ba62a",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "organizational-interface-review",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "0f55cfcac2fd2d70eaaba2d0b3cc476b92061dc3bcee0f9f6c764b3aff5fec73",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/case-portfolio-health-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-health-review",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "79c6f4c9b1cfca48d31ba9eedc15878e2ac0235b3f851aaedb45475ad94d244e",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-prioritization",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "f61ef6622c3382603bcf4ba447506701a62047fdbeadfccce4aa92f36e9fe693",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "portfolio-state-review",
+      "version": "0.7.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "e5e6124a04fc2aa2dcce97f113fedd618904fc20f116b521d6fad5ec5fe31045",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "position-sizing-review",
+      "version": "0.3.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "a527060d17e72f633846d0fc7953d9a4f739de5701dd878613b8f8ed5746f1af",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "problem-demand-validation",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "2a4ea54b520eaab85049fae161f714d6796fb1b8395445e9bade8416dcd97e7e",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "process-update",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "7f424e1a452075713f357bd262990b32ff654de9a2af91183bf1d00de838d4c1",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/case-006-product-discovery.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "product-opportunity-discovery",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "ab2c94c3e291a72d1da7b8b90685ac9e479149979b7d5ea92d93078d045e5fdd",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/composition-rules.md",
+        "references/report-profiles.md",
+        "references/report-quality-standard.md",
+        "references/report-state-and-evidence-contract.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "report-composer",
+      "version": "0.11.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "0e3290e3d9a76efd582958a1f9e8a72559b1fd583bb00ae1c64b34a73bc1ba62",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "security-underwriting",
+      "version": "0.5.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "e3b25f2fccfc79aa3b45fc8156179c39c8a1cbbdc0212a86e9d84c9f5a5ad469",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-authoring",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "c147218802763f6e8dc33fa054e0ecfc16a6b05532823338ff9948c520caad8c",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/contradictory-no-steps-pass.input.md",
+        "references/evals/live-browser-blocked.input.md",
+        "references/evals/queued-not-run.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "draft",
+      "name": "skill-evaluation",
+      "version": "0.3.3"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "67c3d9e0ef0aa4933326b5aec6402aacb25a7848fcf92d8effa7266bf9bd9630",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "draft",
+      "name": "skill-release-review",
+      "version": "0.3.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "cd70668b98a4b52b16909174e3b084fa5d08ab7dd448ffce548bab3ee8cc2b1e",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-specification",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "e296560ac4a8f11bda8f080a5621d2c711e18ca277255a6456d530d3b6f41485",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/description-only-routing.input.md",
+        "references/evals/live-source-evidence.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "draft",
+      "name": "skill-test-design",
+      "version": "0.3.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "33da5e14d045f03c9c36df0bb0aecfc916f207d1c13529f4e093c57b24c3a553",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skill-validation",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "78d1503fc0c1e35c83c267005688203f9bd4c1c44e0764750ba195573a850544",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "strategy-to-execution-diagnostic",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "2f3522652af6f2356598d34cccf3671ea8b4dbaaef57fb0c84ac1f38f168460b",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "supplier-viability-review",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "6d7fb19f596e1893521c6fd6de9e7554417baa3e244008049705a819d36a31ba",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "thesis-challenge",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "c6808b461050eef185ed8f69f251d40e5dc656667ced5b1530c4e9433678e418",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "thesis-monitor",
+      "version": "0.3.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "abe7751ff7a13e08beb70ec4d88185c70104ac88a50d4967d42e389b9ef6ae3d",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/evals/INDEX.md",
+        "references/evals/case-transformation-blueprint-001.input.md",
+        "references/evals/case-transformation-blueprint-stop-001.input.md"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "transformation-blueprint",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "e55b1d96457ca089f8dc0b02046a223d793433daa15f56723fa0ab9904d99d11",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "trend-theme-research",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "4eefd3a2526fcfb3f55ec045d99a2cca94abcc218df6b91426c877b38772c4aa",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/input-contract.md",
+        "scripts/calculator.py"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "unit-economics-review",
+      "version": "1.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "15007ce14551b4b3b2e8e4adcc4757a2ed477b8b5422e04f57fae2bee824d538",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "valuation-scenario-review",
+      "version": "0.1.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
+      "content_sha256": "7d12d60be61b15fdc5d56674edd5323d834d411b3412ad92096d3782c67fa69c",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg",
+        "references/design-system.md",
+        "references/tool-routing.md"
+      ],
+      "kind": "skill",
+      "maturity": "candidate",
+      "name": "visual-output-design",
+      "version": "0.12.0"
+    }
+  ],
+  "capability_contract": {
+    "assessment_semantics": "UNASSESSED is not equivalent to no permissions",
+    "contract_id": "repository-side-v1"
+  },
+  "channel": "lab",
+  "runtime_fixture_targets": [
+    {
+      "status": "packaged",
+      "target": "capability-gap-analysis"
+    },
+    {
+      "status": "packaged",
+      "target": "capability-map-review"
+    },
+    {
+      "status": "packaged",
+      "target": "commerce-opportunity-review"
+    },
+    {
+      "status": "packaged",
+      "target": "commerce-product-deep-dive"
+    },
+    {
+      "status": "packaged",
+      "target": "decision-bottleneck-analysis"
+    },
+    {
+      "status": "packaged",
+      "target": "global-local-model-review"
+    },
+    {
+      "status": "packaged",
+      "target": "governance-design"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-attention-review"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-opportunity-hunter"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-policy-design"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-portfolio-review"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-security-review"
+    },
+    {
+      "status": "packaged",
+      "target": "investment-theme-discovery"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-enterprise-architecture-review"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-enterprise-change-review"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-governance-redesign"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-health-check"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-operating-model-redesign"
+    },
+    {
+      "status": "packaged",
+      "target": "oaf-transformation-design"
+    },
+    {
+      "status": "packaged",
+      "target": "portfolio-health-review"
+    },
+    {
+      "status": "packaged",
+      "target": "product-opportunity-discovery"
+    },
+    {
+      "status": "packaged",
+      "target": "skill-evaluation"
+    },
+    {
+      "status": "packaged",
+      "target": "skill-test-design"
+    },
+    {
+      "status": "packaged",
+      "target": "transformation-blueprint"
+    }
+  ],
+  "runtime_tools": [
+    {
+      "content_sha256": "7c970894831028f07de7b3b6368bef5443d3f2096c816f6ee22d0f13a5e26f3e",
+      "kind": "mcp-server",
+      "name": "skills-factory-chart-renderer",
+      "renderer_class": "deterministic-data-chart",
+      "runtime_class": "deterministic-data-chart",
+      "tools": [
+        "render_bar_chart",
+        "render_line_chart"
+      ]
+    },
+    {
+      "content_sha256": "7c970894831028f07de7b3b6368bef5443d3f2096c816f6ee22d0f13a5e26f3e",
+      "kind": "mcp-server",
+      "name": "skills-factory-investment-os",
+      "runtime_class": "investment-request-router",
+      "tools": [
+        "route_investment_request"
+      ]
+    }
+  ],
+  "schema_version": "1.0",
+  "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
+  "source_revision": "716ec20dc83f833e26f4910ff0642aa327d3db00"
+}

@@ -95,6 +95,18 @@ jobs:
         run: python scripts/package/build_plugin.py --maturity production --output .tmp/plugin
       - name: Validate production plugin
         run: python scripts/package/artifact_validation.py .tmp/plugin
+      - name: Build mobile-safe skills-only plugin
+        run: |
+          python scripts/package/build_plugin.py \
+            --runtime-mode skills-only --output .tmp/chat-mobile-plugin
+          python scripts/package/artifact_validation.py .tmp/chat-mobile-plugin
+      - name: Build remote MCP packaging profile
+        run: |
+          python scripts/package/build_plugin.py \
+            --runtime-mode remote \
+            --remote-mcp-url https://mcp.example.invalid/mcp \
+            --output .tmp/chat-web-plugin
+          python scripts/package/artifact_validation.py .tmp/chat-web-plugin
       - name: Build isolated Lab
         run: python scripts/package/build_lab_plugin.py --output .tmp/lab
       - name: Validate Lab and rubric isolation

@@ -1,0 +1,5 @@
+interface:
+  display_name: Security Underwriting
+  short_description: Underwrite one equity or ETF as an investment using…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#9588F7'

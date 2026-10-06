@@ -5,7 +5,7 @@
 Primary runtime:
 - ChatGPT Work
 - Luna
-- candidate skills/workflow from Arek AI Skills Lab
+- candidate skills/workflow from Skills Factory Lab
 
 Comparison runtime:
 - Sol

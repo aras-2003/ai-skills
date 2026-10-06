@@ -558,7 +558,7 @@ def verify_smoke(lock_path: Path, observed_path: Path) -> list[str]:
 
     if expected_package["name"] not in enabled:
         errors.append(f"{channel} package is not enabled")
-    if "arek-ai-skills" in enabled and "arek-ai-skills-lab" in enabled:
+    if "skills-factory" in enabled and "skills-factory-lab" in enabled:
         errors.append("production and Lab are simultaneously enabled")
     if len(catalog) != len(set(catalog)):
         errors.append("observed catalog contains duplicate capability names")

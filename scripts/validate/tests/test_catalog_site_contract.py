@@ -26,8 +26,8 @@ class SiteCatalogContractTests(unittest.TestCase):
         catalog = build_catalog(markdown, package_manifest, "abcdef1234567890", self.workflow_registry(), self.capability_contract(), self.workflow_sources())
 
         self.assertEqual("abcdef123456", catalog["metadata"]["source_revision"])
-        self.assertEqual("arek-ai-skills", catalog["metadata"]["packages"]["production"]["name"])
-        self.assertEqual("arek-ai-skills-lab", catalog["metadata"]["packages"]["lab"]["name"])
+        self.assertEqual("skills-factory", catalog["metadata"]["packages"]["production"]["name"])
+        self.assertEqual("skills-factory-lab", catalog["metadata"]["packages"]["lab"]["name"])
         self.assertTrue(catalog["metadata"]["packages"]["production"]["version"])
         self.assertTrue(catalog["metadata"]["packages"]["lab"]["version"])
         self.assertTrue(catalog["skills"])
@@ -49,10 +49,10 @@ class SiteCatalogContractTests(unittest.TestCase):
 | sample | meta | draft | 0.1.0 | Example | skills/meta/sample/SKILL.md |
 """
         valid_manifest = """package:
-  name: arek-ai-skills
+  name: skills-factory
   version: "1.0.0"
 lab:
-  name: arek-ai-skills-lab
+  name: skills-factory-lab
   version: "0.1.0"
 """
 
@@ -60,7 +60,7 @@ lab:
             build_catalog(markdown, valid_manifest, " ")
         with self.assertRaisesRegex(ValueError, "Missing lab"):
             build_catalog(markdown, """package:
-  name: arek-ai-skills
+  name: skills-factory
   version: "1.0.0"
 """, "abc")
 
@@ -104,19 +104,19 @@ lab:
 
     def test_site_lab_receipt_matches_the_exact_packaged_lab_identity(self) -> None:
         receipt = json.loads((ROOT / "docs/lab-release.json").read_text(encoding="utf-8"))
-        manifest = json.loads((ROOT / "plugins/arek-ai-skills-lab/release-manifest.json").read_text(encoding="utf-8"))
+        manifest = json.loads((ROOT / "plugins/skills-factory-lab/release-manifest.json").read_text(encoding="utf-8"))
         for field in ("channel", "version", "release_id", "source_revision", "payload_content_sha256"):
             self.assertEqual(manifest[field], receipt[field], field)
         self.assertEqual("lab", receipt["channel"])
 
     def test_lab_packager_uploads_an_immutable_candidate_without_branch_writes(self) -> None:
         workflow = (ROOT / ".github/workflows/package-main-lab-plugin.yml").read_text(encoding="utf-8")
-        self.assertIn("cp plugins/arek-ai-skills-lab/release-manifest.json docs/lab-release.json", workflow)
+        self.assertIn("cp plugins/skills-factory-lab/release-manifest.json docs/lab-release.json", workflow)
         self.assertIn("actions/upload-artifact@", workflow)
         self.assertIn("include-hidden-files: true", workflow)
-        self.assertIn("name: arek-ai-skills-lab-${{ github.sha }}", workflow)
+        self.assertIn("name: skills-factory-lab-${{ github.sha }}", workflow)
         self.assertIn("contents: read", workflow)
-        self.assertIn('"plugins/arek-ai-skills-lab/**"', workflow)
+        self.assertIn('"plugins/skills-factory-lab/**"', workflow)
         self.assertIn('"docs/lab-release.json"', workflow)
         self.assertNotIn("git push", workflow)
         self.assertNotIn("contents: write", workflow)

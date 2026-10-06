@@ -1,5 +1,0 @@
-interface:
-  display_name: KPI Quality Review
-  short_description: Review whether a defined KPI set is decision-useful…
-  icon_small: ./assets/arek-ai-domain-icon.svg
-  brand_color: '#83A9FF'

@@ -1,0 +1,5 @@
+interface:
+  display_name: Decision Rights Review
+  short_description: Map and review critical organisational decision rights…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#83A9FF'

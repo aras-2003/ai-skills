@@ -8,7 +8,7 @@ The design layer has a higher promotion threshold because plausible prose is not
 
 ## Runtime fixture location
 
-In Arek AI Skills Lab, canonical eval fixtures are packaged into the selected skill/workflow under `references/evals/`. The repository source remains under `evals/`; runtime prompts must use the packaged reference path.
+In Skills Factory Lab, canonical eval fixtures are packaged into the selected skill/workflow under `references/evals/`. The repository source remains under `evals/`; runtime prompts must use the packaged reference path.
 
 ## Test order
 

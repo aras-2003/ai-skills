@@ -1,5 +1,0 @@
-interface:
-  display_name: OAF Enterprise Architecture Review
-  short_description: Run an evidence-gated OAF enterprise architecture review…
-  icon_small: ./assets/arek-ai-domain-icon.svg
-  brand_color: '#83A9FF'

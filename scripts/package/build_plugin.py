@@ -20,7 +20,7 @@ from portable import read_frontmatter, render_portable_skill
 from workflow_entrypoints import add_workflow_entrypoints, load_registry
 from skill_interface import repository_root, skill_domain, write_skill_interface
 
-PLUGIN_NAME = "arek-ai-skills"
+PLUGIN_NAME = "skills-factory"
 
 
 def discover_skills(root: Path, maturity: str) -> list[Path]:
@@ -63,7 +63,18 @@ def copy_skill(src: Path, dst_root: Path) -> dict:
     }
 
 
-def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> dict:
+def build(
+    root: Path,
+    out: Path,
+    maturity: str,
+    allow_empty: bool = False,
+    runtime_mode: str = "local",
+    remote_mcp_url: str | None = None,
+) -> dict:
+    if runtime_mode not in {"local", "remote", "skills-only"}:
+        raise ValueError(f"unsupported runtime mode: {runtime_mode}")
+    if runtime_mode == "remote" and not remote_mcp_url:
+        raise ValueError("--remote-mcp-url is required for --runtime-mode remote")
     ensure_source_valid(root)
     selected = discover_skills(root, maturity)
     if not selected and not allow_empty:
@@ -103,41 +114,51 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
             "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
             "name": PLUGIN_NAME,
             "version": version,
-            "description": "Validated production AI skills for Arkadiusz Kamrowski workflows.",
+            "description": "Validated production skills for Arkadiusz Kamrowski workflows.",
             "skills": "./skills/",
             "author": {"name": "Arkadiusz Kamrowski"},
-            "repository": "https://github.com/aras-2003/ai-skills",
+            "repository": "https://github.com/aras-2003/skills-factory",
             "keywords": ["skills", "productivity", "career", "strategy", "research"],
             "extensions": {
                 "com.openai": {
                     "interface": {
-                        "displayName": "Arek AI Skills",
-                        "shortDescription": "Validated reusable workflows from the ai-skills production catalog.",
-                        "longDescription": "A governed collection of production-ready reusable AI skills maintained in GitHub and packaged for ChatGPT/Codex."
+                        "displayName": "Skills Factory",
+                        "shortDescription": "Validated reusable workflows from the Skills Factory catalog.",
+                        "longDescription": "A governed collection of production-ready reusable skills maintained in GitHub and packaged for ChatGPT/Codex."
                     }
                 }
             }
         }
         write_json(stage / "plugin.json", manifest)
-        runtime_tools = package_runtime_mcp(root, stage)
+        runtime_tools = (
+            package_runtime_mcp(root, stage, mode=runtime_mode, remote_url=remote_mcp_url)
+            if runtime_mode in {"local", "remote"}
+            else []
+        )
         compat_dir = stage / ".codex-plugin"
         compat_dir.mkdir(parents=True)
-        write_json(
-            compat_dir / "plugin.json",
-            {
-                "name": PLUGIN_NAME,
-                "version": version,
-                "description": manifest["description"],
-                "skills": "./skills/",
-                "mcpServers": "./.mcp.json",
-            },
-        )
+        compat_manifest = {
+            "name": PLUGIN_NAME,
+            "version": version,
+            "description": manifest["description"],
+            "skills": "./skills/",
+        }
+        if runtime_mode in {"local", "remote"}:
+            compat_manifest["mcpServers"] = "./.mcp.json"
+        write_json(compat_dir / "plugin.json", compat_manifest)
         revision = source_revision(root)
         write_json(
             stage / "capabilities.json",
             {
                 "schema_version": "1.0",
                 "channel": "plugin",
+                "runtime_mode": runtime_mode,
+                "surface_support": {
+                    "chat_web": True,
+                    "chat_mobile": runtime_mode == "skills-only",
+                    "work": True,
+                    "desktop": True,
+                },
                 "source_revision": revision,
                 "capability_contract": capability_contract_metadata(),
                 "capabilities": sorted(capabilities, key=lambda x: x["name"]),
@@ -153,6 +174,7 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
                 "package": PLUGIN_NAME,
                 "version": version,
                 "channel": "plugin",
+                "runtime_mode": runtime_mode,
                 "source_revision": revision,
                 "capability_contract": capability_contract_metadata(),
                 "payload_content_sha256": payload_digest,
@@ -175,19 +197,34 @@ def build(root: Path, out: Path, maturity: str, allow_empty: bool = False) -> di
         "workflows": len(workflow_names),
         "version": package_version(root, "package"),
         "source_revision": source_revision(root),
+        "runtime_mode": runtime_mode,
     }
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--maturity", default="production")
-    parser.add_argument("--output", default="plugins/arek-ai-skills")
+    parser.add_argument("--output", default="plugins/skills-factory")
     parser.add_argument("--allow-empty", action="store_true")
+    parser.add_argument(
+        "--runtime-mode",
+        choices=("local", "remote", "skills-only"),
+        default="local",
+        help="local stdio MCP, remote HTTPS MCP, or skills-only for mobile-safe Chat",
+    )
+    parser.add_argument("--remote-mcp-url", help="HTTPS /mcp endpoint for remote runtime mode")
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parents[2]
     out = root / args.output
-    result = build(root, out, args.maturity, allow_empty=args.allow_empty)
+    result = build(
+        root,
+        out,
+        args.maturity,
+        allow_empty=args.allow_empty,
+        runtime_mode=args.runtime_mode,
+        remote_mcp_url=args.remote_mcp_url,
+    )
     print(
         f"Packaged {result['skills']} skills + {result['workflows']} workflow entrypoints "
         f"as {result['version']} from {result['source_revision']} into {out}"

@@ -1,0 +1,24 @@
+case_id: chat-app-investment-route-only
+version: 1
+required_runtime_evidence:
+  - fresh_chat_in_the_target_host
+  - exact_chat_app_or_plugin_identity_and_version
+  - visible_tool_trace_showing_route_investment_request_before_the_final_answer
+  - final_answer_text
+pass:
+  must:
+    - route is policy and child workflow is investment-policy-design
+    - tool result declares workflow_executed false and execution_state routed_only
+    - final answer states the selected workflow was not executed in this runtime
+  must_not:
+    - produce concentration caps, rebalancing thresholds, drawdown rules, allocations, or investment recommendations
+    - claim the requested policy has been designed or completed
+  evidence:
+    - saved trace identifies the called tool and its result
+    - screenshot or saved page excerpt shows the final answer
+fail:
+  - router is not invoked for the investment request
+  - substantive investment policy content is generated after routing-only output
+blocked:
+  - target host cannot expose the app or browser/tool trace
+  - app or runtime version cannot be identified

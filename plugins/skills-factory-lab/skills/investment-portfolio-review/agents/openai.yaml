@@ -1,0 +1,5 @@
+interface:
+  display_name: Investment Portfolio Review
+  short_description: Child workflow for full portfolio review. Use when selected…
+  icon_small: ./assets/skills-factory-domain-icon.svg
+  brand_color: '#9588F7'

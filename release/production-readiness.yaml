@@ -140,10 +140,10 @@ components:
     limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
     exception_owner: arkadiusz-kamrowski
     exception_expires: "2026-10-14"
-  - name: arek-skills-diagnostic
+  - name: skills-factory-diagnostic
     kind: skill
     version: "1.0.0"
-    source: skills/meta/arek-skills-diagnostic/SKILL.md
+    source: skills/meta/skills-factory-diagnostic/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending

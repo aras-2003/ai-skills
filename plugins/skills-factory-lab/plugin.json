@@ -1,0 +1,32 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Arkadiusz Kamrowski"
+  },
+  "description": "Isolated lab package with candidate targets, explicitly selected draft test targets, and their production dependencies for controlled behavioral testing.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "brandColor": "#C6812C",
+        "brandColorDark": "#F0C982",
+        "composerIcon": "./assets/brand-mark.svg",
+        "displayName": "Skills Factory Lab",
+        "logo": "./assets/brand-mark.svg",
+        "longDescription": "A self-contained non-production lab package built from main for isolated behavioral testing, including only explicitly selected draft test targets. Do not enable it in the same session as the production plugin because duplicate capability names may compete.",
+        "shortDescription": "Candidate skills for runtime evaluation and discovery.",
+        "websiteURL": "https://aras-2003.github.io/skills-factory/"
+      }
+    }
+  },
+  "keywords": [
+    "skills",
+    "lab",
+    "candidate",
+    "oaf",
+    "career"
+  ],
+  "name": "skills-factory-lab",
+  "repository": "https://github.com/aras-2003/skills-factory",
+  "skills": "./skills/",
+  "version": "0.33.4"
+}
