@@ -7,7 +7,12 @@ Keep GitHub as the single source of truth while supporting two independent deliv
 1. **Plugin bundle** for Work / Codex and other plugin-capable surfaces.
 2. **Individual ChatGPT Skills** for ordinary Chat, when the account/surface exposes the native Skills feature.
 
-This avoids relying on local-marketplace plugin skill exposure inside ordinary Chat.
+This avoids relying on local-marketplace plugin skill exposure inside ordinary
+Chat and removes the local MCP dependency from the portable path.
+
+For mobile Chat, use the `skills-only` profile or the individual native skill
+ZIPs. A custom MCP App is not a mobile delivery mechanism: OpenAI currently
+documents MCP Apps as web-only.
 
 ## Why dual deployment
 
@@ -102,7 +107,9 @@ Do not edit the installed ChatGPT copy as the primary source; any emergency UI e
 
 OpenAI currently states that Personal Skills are generally available to ChatGPT Business, Enterprise, Healthcare and Edu users, and that availability varies by workspace, role and product surface.
 
-If the active account does not expose **Plugins -> Skills -> Create -> Upload from your computer**, this repository can still generate valid skill bundles, but it cannot force-enable the native Chat Skills feature.
+If the active account does not expose the relevant plugin/Skills surface, this
+repository can still generate valid skill bundles, but it cannot force-enable a
+ChatGPT product feature or make a custom MCP App available on mobile.
 
 In that case the supported options are:
 

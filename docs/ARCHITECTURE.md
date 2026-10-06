@@ -130,6 +130,30 @@ The Lab packages only executor inputs. Evidence receipts record source/component
 
 Every built channel exposes a generated capability manifest and release provenance. Channel support is explicit; functionality absent from a channel is marked unavailable rather than implied.
 
+### Surface profiles
+
+The production package has three intentionally different runtime profiles:
+
+| Profile | MCP transport | Intended surfaces | Mobile Chat |
+|---|---|---|---:|
+| `skills-only` | none | ordinary Chat Web/Mobile where the plugin/skill is exposed | yes, subject to account/surface availability |
+| `remote` | HTTPS MCP | Chat Web, Desktop and Work | no MCP App support |
+| `local` | bundled `stdio` | Desktop and Work with a local runtime | no |
+
+The `skills-only` profile is the portability boundary. Its skills must be
+usable with the model and the tools already provided by the host; they must not
+require `mcp.json`, `.mcp.json`, filesystem access, a local CLI or Ollama.
+
+The `remote` profile is an execution enhancement, not a prerequisite for the
+methodology. It points to a separately deployed HTTPS MCP service and must not
+bundle the local Python server. The `local` profile remains useful for local
+repositories, shell execution and Ollama, but its availability is inherently
+surface-specific.
+
+This distinction prevents an unavailable local capability from making the core
+skills unavailable. It also avoids claiming mobile MCP support that the host
+does not provide.
+
 Build outputs are staged, validated and atomically replaced. ZIP content is deterministic for the same source/content.
 
 ## Lifecycle and maturity

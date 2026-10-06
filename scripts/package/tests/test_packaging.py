@@ -151,6 +151,7 @@ class PackagingTests(unittest.TestCase):
             self.assertTrue((out / ".mcp.json").is_file())
             self.assertTrue((out / "mcp" / "chart_renderer.py").is_file())
             self.assertTrue((out / "mcp" / "investment_runtime.py").is_file())
+            self.assertTrue((out / "mcp" / "cloud_server.py").is_file())
 
             plugin_manifest = json.loads((out / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual(
@@ -182,6 +183,51 @@ class PackagingTests(unittest.TestCase):
             investment = runtime_tools["arek-investment-os"]
             self.assertEqual("investment-request-router", investment["runtime_class"])
             self.assertEqual(["route_investment_request"], investment["tools"])
+
+    def test_skills_only_profile_has_no_local_mcp_dependency(self) -> None:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            out = Path(td) / "chat-mobile"
+            build_plugin.build(ROOT, out, "production", runtime_mode="skills-only")
+            self.assertFalse((out / "mcp.json").exists())
+            self.assertFalse((out / ".mcp.json").exists())
+            self.assertFalse((out / "mcp").exists())
+            manifest = json.loads((out / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
+            self.assertNotIn("mcpServers", manifest)
+            capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
+            self.assertEqual("skills-only", capabilities["runtime_mode"])
+            self.assertTrue(capabilities["surface_support"]["chat_mobile"])
+            self.assertEqual([], capabilities["runtime_tools"])
+
+    def test_remote_profile_uses_https_mcp_without_bundling_stdio(self) -> None:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            out = Path(td) / "chat-web"
+            build_plugin.build(
+                ROOT,
+                out,
+                "production",
+                runtime_mode="remote",
+                remote_mcp_url="https://skills.example.test/mcp",
+            )
+            self.assertFalse((out / "mcp").exists())
+            mcp = json.loads((out / "mcp.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                {"type": "http", "url": "https://skills.example.test/mcp"},
+                mcp["mcpServers"]["arek-investment-os"],
+            )
+            capabilities = json.loads((out / "capabilities.json").read_text(encoding="utf-8"))
+            self.assertEqual("remote", capabilities["runtime_mode"])
+            self.assertFalse(capabilities["surface_support"]["chat_mobile"])
+
+    def test_remote_profile_rejects_non_https_endpoint(self) -> None:
+        with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
+            with self.assertRaisesRegex(ValueError, "HTTPS"):
+                build_plugin.build(
+                    ROOT,
+                    Path(td) / "chat-web",
+                    "production",
+                    runtime_mode="remote",
+                    remote_mcp_url="http://skills.example.test/mcp",
+                )
 
     def test_lab_manifests_match_final_fixture_mutated_artifact(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
