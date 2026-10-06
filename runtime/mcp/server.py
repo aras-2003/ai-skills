@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+
 from chart_renderer import render_bar_chart as _render_bar_chart
 from chart_renderer import render_line_chart as _render_line_chart
 from investment_runtime import route_investment_request as _route_investment_request
@@ -9,6 +11,10 @@ from mcp.server import MCPServer
 
 SERVER_INSTRUCTIONS = """
 Skills Factory runtime contract.
+
+Call runtime_info first when a test, receipt or compatibility decision depends
+on the exact runtime identity. A result with attestation_status "unattested"
+must not be treated as evidence of exact-version compatibility.
 
 For every request about investments, securities, ETFs, a portfolio, investment
 themes, opportunities, policy or risk limits, call route_investment_request
@@ -25,11 +31,47 @@ invent missing observations.
 """.strip()
 CLOUD_SERVER_INSTRUCTIONS = SERVER_INSTRUCTIONS
 
+RUNTIME_FIELDS = (
+    "release_id",
+    "source_revision",
+    "channel",
+    "capability_contract_version",
+    "tool_schema_digest",
+    "deployed_at",
+)
+
+
+def _runtime_value(name: str, default: str = "unattested") -> str:
+    value = os.environ.get(name, "").strip()
+    return value or default
+
 mcp = MCPServer(
     "Skills Factory runtime",
     description="Unified Skills Factory runtime for investment routing and factual chart rendering.",
     instructions=SERVER_INSTRUCTIONS,
 )
+
+
+@mcp.tool()
+def runtime_info() -> dict[str, str]:
+    """Return deployment identity without performing any external action."""
+    values = {
+        "runtime_name": "Skills Factory runtime",
+        "release_id": _runtime_value("SKILLS_FACTORY_RELEASE_ID"),
+        "source_revision": _runtime_value("SKILLS_FACTORY_SOURCE_REVISION"),
+        "channel": _runtime_value("SKILLS_FACTORY_CHANNEL", "unknown"),
+        "capability_contract_version": _runtime_value(
+            "SKILLS_FACTORY_CAPABILITY_CONTRACT_VERSION", "repository-side-v1"
+        ),
+        "tool_schema_digest": _runtime_value("SKILLS_FACTORY_TOOL_SCHEMA_DIGEST"),
+        "deployed_at": _runtime_value("SKILLS_FACTORY_DEPLOYED_AT"),
+    }
+    values["attestation_status"] = (
+        "verified"
+        if all(values[field] not in {"unattested", "unknown"} for field in RUNTIME_FIELDS)
+        else "unattested"
+    )
+    return values
 
 
 @mcp.tool()

@@ -2007,6 +2007,94 @@
       "status": "PROPOSED",
       "owner": "UNASSIGNED",
       "legacy_links": []
+    },
+    {
+      "id": "E2E-01",
+      "priority": "P0",
+      "epic": "Runtime E2E hardening",
+      "type": "runtime/attestation",
+      "title": "Dodać runtime attestation dla Lab i Site MCP",
+      "rationale": "Testy potwierdzają poprawne payloady, ale obecny MCP nie zwraca release_id, source_revision ani digestu kontraktu. Bez tego wynik może pochodzić ze starego deploymentu albo niezgodnego kanału.",
+      "scope": "Dodać read-only runtime_info z jawnym stanem verified/unattested, release_id, source_revision, channel, capability_contract_version, tool_schema_digest i deployed_at. Brak wartości nie może być raportowany jako PASS. Dodać test lokalny oraz browser regression po ponownym opublikowaniu Site.",
+      "acceptance_criteria": [
+        "runtime_info jest dostępne jako narzędzie MCP i nie wykonuje działań zewnętrznych",
+        "Nieuzupełnione pola dają stan unattested, a nie pozornie zweryfikowaną wersję",
+        "Receipt może powiązać wynik z exact source revision i kanałem lab/site",
+        "Test browserowy wykrywa starą rejestrację, gdy runtime_info nie jest dostępne"
+      ],
+      "depends_on": [
+        "ENG-17"
+      ],
+      "effort": "M",
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
+      "legacy_links": []
+    },
+    {
+      "id": "E2E-02",
+      "priority": "P0",
+      "epic": "Runtime E2E hardening",
+      "type": "evals/browser",
+      "title": "Domknąć zestaw testów MCP w przeglądarce z exact-version evidence",
+      "rationale": "Dotychczasowe testy pokryły routing inwestycyjny, capability-gap-analysis, architecture-review i renderer, ale nie wszystkie mają spójny fixture, receipt i kryterium obserwacji w UI.",
+      "scope": "Uzupełnić bezpośredni fixture architecture-review, utrzymać test capability-gap-analysis, uruchomić routing-only i explicit-line-chart w świeżych rozmowach oraz zapisywać status PASS/FAIL/BLOCKED zgodnie z trace i widocznym rezultatem. Payload bez display evidence pozostaje PENDING_CLIENT_VALIDATION.",
+      "acceptance_criteria": [
+        "Każdy test ma input, evaluator-only rubric i wpis w runtime-fixtures lub chat-app campaign",
+        "Bezpośredni architecture-review jest odróżniony od parent workflow",
+        "Wynik zawiera exact runtime identity, tool trace, final answer i — dla grafiki — dowód widocznego renderu",
+        "Brak dowodu nie jest maskowany jako PASS"
+      ],
+      "depends_on": [
+        "E2E-01"
+      ],
+      "effort": "M",
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
+      "legacy_links": []
+    },
+    {
+      "id": "E2E-03",
+      "priority": "P1",
+      "epic": "Runtime E2E hardening",
+      "type": "evals/failure-injection",
+      "title": "Dodać kontrolowane failure flows dla MCP i rendererów",
+      "rationale": "Obecne testy są głównie happy-path. Nie sprawdzają timeoutu, niedostępnego renderera, niezgodnego schematu ani odpowiedzi bez wymaganej provenance.",
+      "scope": "Zaprojektować izolowane przypadki failure injection w local/Lab, bez dotykania produkcji: missing dependency, malformed renderer response, timeout, incompatible tool schema i denied connector. Każdy przypadek ma oczekiwany stop/blocked state i rozróżnia błąd wykonania od braku możliwości testu.",
+      "acceptance_criteria": [
+        "Każdy injected failure kończy się deterministycznym stanem i komunikatem bez udawania sukcesu",
+        "Testy nie wymagają uszkadzania Site ani produkcyjnego pluginu",
+        "Raport rozróżnia observed failure, blocked execution i missing evidence"
+      ],
+      "depends_on": [
+        "E2E-01",
+        "E2E-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "E2E-04",
+      "priority": "P1",
+      "epic": "Runtime E2E hardening",
+      "type": "release/parity",
+      "title": "Wymusić parity między Work Lab i Site MCP",
+      "rationale": "Lab i Site są osobnymi kanałami; obecnie można mieć poprawny wynik w Work i starą lub ograniczoną wersję w Site bez automatycznego wykrycia.",
+      "scope": "Porównać runtime_info, tool schema digest, capability registry i wybrane kontrakty wejście/wyjście. Rozbieżność oznacza BLOCKED/FAIL zależnie od testu i blokuje deklarację zgodności, ale nie wymusza redeploy produkcji.",
+      "acceptance_criteria": [
+        "Parity check używa exact release/source identity, a nie samej nazwy pluginu",
+        "Rozbieżność Lab/Site jest widoczna w receipt i backlogu",
+        "Test porównuje te same reprezentatywne flowy: routing, architecture-review i chart rendering"
+      ],
+      "depends_on": [
+        "E2E-01",
+        "E2E-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
     }
   ],
   "change_log": [
@@ -2067,6 +2155,21 @@
       "benchmark_sources": [
         "Decyzja użytkownika z 2026-10-06",
         "Przegląd Claude z 2026-10-06; weryfikacja do backlogu na main e8a22fe"
+      ]
+    },
+    {
+      "date_local": "2026-10-07",
+      "decision": "Browser E2E campaign exposed missing runtime identity, absent direct architecture-review fixture, unproven Site/Work parity and chart display evidence gap; add bounded backlog and regression work before any production promotion.",
+      "ids": [
+        "E2E-01",
+        "E2E-02",
+        "E2E-03",
+        "E2E-04"
+      ],
+      "evidence": [
+        "ChatGPT Work MCP trace for route_investment_request, architecture-review, capability-gap-analysis and render_line_chart",
+        "evals/campaigns/chat-app-e2e-2026-10/campaign.yaml",
+        "evals/campaigns/runtime-validation-2026-10-r16/RUNBOOK.md"
       ]
     }
   ]

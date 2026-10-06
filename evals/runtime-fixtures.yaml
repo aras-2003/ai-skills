@@ -81,6 +81,11 @@ targets:
       mode: explicit
       input: evals/oaf/wave4/case-capability-gap-001.input.md
       rubric: evals/oaf/wave4/case-capability-gap-001.rubric.yaml
+  architecture-review:
+    - id: case-architecture-review-direct-001
+      mode: explicit
+      input: evals/oaf/wave4/case-architecture-review-direct-001.input.md
+      rubric: evals/oaf/wave4/case-architecture-review-direct-001.rubric.yaml
   oaf-enterprise-architecture-review:
     - id: case-enterprise-architecture-review-001
       mode: explicit

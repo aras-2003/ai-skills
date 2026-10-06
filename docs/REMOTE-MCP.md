@@ -4,9 +4,16 @@
 profiles. The compatibility path `runtime/mcp/cloud_server.py` delegates to it.
 It exposes these headless tools:
 
+- `runtime_info`
 - `route_investment_request`
 - `render_bar_chart`
 - `render_line_chart`
+
+`runtime_info` is read-only and reports deployment identity. Missing identity
+is returned as `attestation_status: unattested`, never as a compatible release.
+Exact-version receipts should include `release_id`, `source_revision`,
+`channel`, `capability_contract_version`, `tool_schema_digest` and `deployed_at`
+before a Lab/Site parity or release decision is marked PASS.
 
 The bundled skills remain the source of workflow instructions. The remote
 server only provides deterministic routing/rendering capabilities; it is not a
