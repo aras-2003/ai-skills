@@ -2,7 +2,7 @@ schema_version: "1.0"
 campaign: runtime-validation-2026-10-r15
 behavior_source_revision: 9c66f5987afbd5717047d0a5107383c0b75df73d
 package:
-  name: arek-ai-skills
+  name: skills-factory
   version: "1.33.0"
   channel: plugin
 commerce_case_ids:

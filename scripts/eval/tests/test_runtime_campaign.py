@@ -301,9 +301,9 @@ class RuntimeCampaignTests(unittest.TestCase):
                 "selected_capabilities": [
                     "investment-os-review",
                     "investment-portfolio-review",
-                    "mcp__arek_investment_os__route_investment_request",
+                    "mcp__skills-factory-runtime__route_investment_request",
                 ],
-                "tool_calls": ["mcp__arek_investment_os__route_investment_request"],
+                "tool_calls": ["mcp__skills-factory-runtime__route_investment_request"],
             }
         )
         self.assertTrue(
@@ -322,8 +322,8 @@ class RuntimeCampaignTests(unittest.TestCase):
                     "visual-output-design",
                 ],
                 "tool_calls": [
-                    "mcp__arek_investment_os__route_investment_request",
-                    "mcp__arek_chart_renderer__render_bar_chart",
+                    "mcp__skills-factory-runtime__route_investment_request",
+                    "mcp__skills-factory-runtime__render_bar_chart",
                 ],
             }
         )
