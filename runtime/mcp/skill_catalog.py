@@ -61,7 +61,7 @@ def _entry(skill_dir: Path) -> dict[str, Any]:
     name = str(metadata.get("name") or skill_dir.name)
     return {
         "name": name,
-        "directory": skill_dir.name,
+        "directory": skill_dir.relative_to(skills_root()).as_posix(),
         "domain": skill_dir.parent.name,
         "kind": "skill",
         "description": str(metadata.get("description") or ""),
