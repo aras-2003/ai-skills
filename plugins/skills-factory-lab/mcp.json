@@ -1,21 +1,12 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
   "mcpServers": {
-    "skills-factory-chart-renderer": {
+    "skills-factory-runtime": {
       "type": "stdio",
       "command": "uv",
       "args": [
         "run",
-        "${PLUGIN_ROOT}/mcp/chart_renderer.py"
-      ],
-      "cwd": "${PLUGIN_ROOT}"
-    },
-    "skills-factory-investment-os": {
-      "type": "stdio",
-      "command": "uv",
-      "args": [
-        "run",
-        "${PLUGIN_ROOT}/mcp/investment_runtime.py"
+        "${PLUGIN_ROOT}/mcp/server.py"
       ],
       "cwd": "${PLUGIN_ROOT}"
     }

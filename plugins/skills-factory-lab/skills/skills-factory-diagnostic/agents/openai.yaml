@@ -1,5 +1,5 @@
 interface:
-  display_name: Arek Skills Diagnostic
+  display_name: Skills Factory Diagnostic
   short_description: Confirm that the Skills Factory plugin is exposing bundled…
   icon_small: ./assets/skills-factory-domain-icon.svg
   brand_color: '#94D4B3'

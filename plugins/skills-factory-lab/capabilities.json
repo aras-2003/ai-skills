@@ -55,28 +55,6 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "4b33d5140893b3a2834855f16e4a2412bf91e51edff239841cb1dd4655f7ed98",
-      "inventory": [
-        "SKILL.md",
-        "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg"
-      ],
-      "kind": "skill",
-      "maturity": "production",
-      "name": "skills-factory-diagnostic",
-      "version": "1.0.0"
-    },
-    {
-      "capability_assessment": {
-        "requirements": {
-          "credentials": "unassessed",
-          "external_actions": "unassessed",
-          "filesystem": "unassessed",
-          "network": "unassessed",
-          "shell_exec": "unassessed"
-        },
-        "status": "UNASSESSED"
-      },
       "content_sha256": "5781058f885c2fc744d65a0e386770b5e3f13a0f0ee10c651ef4fc69441df925",
       "inventory": [
         "SKILL.md",
@@ -1432,6 +1410,28 @@
         },
         "status": "UNASSESSED"
       },
+      "content_sha256": "08698cec3dfd62a93401b8e2baccc79fcd7b34afc777cb333db78f94eedaf5e9",
+      "inventory": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/skills-factory-domain-icon.svg"
+      ],
+      "kind": "skill",
+      "maturity": "production",
+      "name": "skills-factory-diagnostic",
+      "version": "1.0.0"
+    },
+    {
+      "capability_assessment": {
+        "requirements": {
+          "credentials": "unassessed",
+          "external_actions": "unassessed",
+          "filesystem": "unassessed",
+          "network": "unassessed",
+          "shell_exec": "unassessed"
+        },
+        "status": "UNASSESSED"
+      },
       "content_sha256": "78d1503fc0c1e35c83c267005688203f9bd4c1c44e0764750ba195573a850544",
       "inventory": [
         "SKILL.md",
@@ -1613,7 +1613,7 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "7d12d60be61b15fdc5d56674edd5323d834d411b3412ad92096d3782c67fa69c",
+      "content_sha256": "76a1bd66e7c34d1c34841767e44ce31d43742fb1db678f451939d5ab14535860",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
@@ -1732,27 +1732,19 @@
   ],
   "runtime_tools": [
     {
-      "content_sha256": "7c970894831028f07de7b3b6368bef5443d3f2096c816f6ee22d0f13a5e26f3e",
+      "content_sha256": "1d0bc5d82f5f31b4ac4a32105c62aa14dd8a16195b554cfc6879849f97573811",
       "kind": "mcp-server",
-      "name": "skills-factory-chart-renderer",
-      "renderer_class": "deterministic-data-chart",
-      "runtime_class": "deterministic-data-chart",
+      "name": "skills-factory-runtime",
+      "runtime_class": "skills-factory-runtime",
       "tools": [
+        "route_investment_request",
         "render_bar_chart",
         "render_line_chart"
-      ]
-    },
-    {
-      "content_sha256": "7c970894831028f07de7b3b6368bef5443d3f2096c816f6ee22d0f13a5e26f3e",
-      "kind": "mcp-server",
-      "name": "skills-factory-investment-os",
-      "runtime_class": "investment-request-router",
-      "tools": [
-        "route_investment_request"
-      ]
+      ],
+      "transport": "stdio"
     }
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "716ec20dc83f833e26f4910ff0642aa327d3db00"
+  "source_revision": "a926341bb13e9613c0ab4a268cd32443723c3f00"
 }
