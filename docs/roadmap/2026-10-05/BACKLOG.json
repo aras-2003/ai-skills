@@ -253,12 +253,12 @@
         "AIS-06"
       ],
       "progress": {
-        "implementation_branch": "p0-platform-hardening",
-        "implementation_commit": "94a4fd4eb6f01d655b0c779e5e0eceafa325f108",
-        "pull_request": "https://github.com/aras-2003/ai-skills/pull/121",
-        "github_actions": "PASS on implementation commit; reruns on backlog evidence update",
+        "implementation_branch": "main",
+        "implementation_commit": "bdda751d878b2e5a22e0e71895aa7ee2be242e23",
+        "pull_request": "https://github.com/aras-2003/ai-skills/pull/122",
+        "github_actions": "PASS on exact PR head; main validation and Lab package workflow passed",
         "runtime_evidence": "NOT_RUN",
-        "remaining": "Capability review of each component and model/runtime routing evidence are still required; no maturity or release status changes."
+        "remaining": "Model/runtime routing evidence and per-component capability assessment remain required; no maturity or release status changes."
       }
     },
     {
@@ -1711,12 +1711,12 @@
       "owner": "Codex",
       "legacy_links": [],
       "progress": {
-        "implementation_branch": "p0-platform-hardening",
-        "implementation_commit": "94a4fd4eb6f01d655b0c779e5e0eceafa325f108",
-        "pull_request": "https://github.com/aras-2003/ai-skills/pull/121",
-        "github_actions": "PASS on implementation commit; reruns on backlog evidence update",
+        "implementation_branch": "main",
+        "implementation_commit": "bdda751d878b2e5a22e0e71895aa7ee2be242e23",
+        "pull_request": "https://github.com/aras-2003/ai-skills/pull/122",
+        "github_actions": "PASS on exact PR head; main validation and Lab package workflow passed",
         "runtime_evidence": "NOT_RUN",
-        "remaining": "Capability review of each component and model/runtime routing evidence are still required; no maturity or release status changes."
+        "remaining": "Model/runtime routing evidence and per-component capability assessment remain required; no maturity or release status changes."
       }
     },
     {
@@ -1744,12 +1744,12 @@
       "owner": "Codex",
       "legacy_links": [],
       "progress": {
-        "implementation_branch": "p0-platform-hardening",
-        "implementation_commit": "94a4fd4eb6f01d655b0c779e5e0eceafa325f108",
-        "pull_request": "https://github.com/aras-2003/ai-skills/pull/121",
-        "github_actions": "PASS on implementation commit; reruns on backlog evidence update",
+        "implementation_branch": "main",
+        "implementation_commit": "bdda751d878b2e5a22e0e71895aa7ee2be242e23",
+        "pull_request": "https://github.com/aras-2003/ai-skills/pull/122",
+        "github_actions": "PASS on exact PR head; main validation and Lab package workflow passed",
         "runtime_evidence": "NOT_RUN",
-        "remaining": "Capability review of each component and model/runtime routing evidence are still required; no maturity or release status changes."
+        "remaining": "Model/runtime routing evidence and per-component capability assessment remain required; no maturity or release status changes."
       }
     },
     {
@@ -1777,12 +1777,12 @@
       "owner": "Codex",
       "legacy_links": [],
       "progress": {
-        "implementation_branch": "p0-platform-hardening",
-        "implementation_commit": "94a4fd4eb6f01d655b0c779e5e0eceafa325f108",
-        "pull_request": "https://github.com/aras-2003/ai-skills/pull/121",
-        "github_actions": "PASS on implementation commit; reruns on backlog evidence update",
+        "implementation_branch": "main",
+        "implementation_commit": "bdda751d878b2e5a22e0e71895aa7ee2be242e23",
+        "pull_request": "https://github.com/aras-2003/ai-skills/pull/122",
+        "github_actions": "PASS on exact PR head; main validation and Lab package workflow passed",
         "runtime_evidence": "NOT_RUN",
-        "remaining": "Capability review of each component and model/runtime routing evidence are still required; no maturity or release status changes."
+        "remaining": "Model/runtime routing evidence and per-component capability assessment remain required; no maturity or release status changes."
       }
     },
     {
@@ -1974,9 +1974,17 @@
         "ENG-01"
       ],
       "effort": "L",
-      "status": "PROPOSED",
-      "owner": "UNASSIGNED",
-      "legacy_links": []
+      "status": "IN_PROGRESS",
+      "owner": "Codex",
+      "legacy_links": [],
+      "progress": {
+        "reviewed_at": "2026-10-06",
+        "branch_protection": "GitHub API returned Branch not protected for main and production; no protection settings inferred or changed.",
+        "actions": "All current GitHub Actions refs pinned to verified full commit SHAs.",
+        "dependencies": "requirements-dev.lock generated with SHA-256 hashes; runtime PEP 723 direct dependencies pinned to exact versions.",
+        "implementation_branch": "eng20-supply-chain",
+        "remaining": "Separate least-privilege publisher jobs with artifact-digest verification and exact-runtime compatibility validation remain. Existing publishing workflows were preserved pending explicit approval for this high-impact workflow change."
+      }
     },
     {
       "id": "ENG-21",
