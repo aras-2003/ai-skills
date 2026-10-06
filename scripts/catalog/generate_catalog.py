@@ -6,7 +6,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "validate"))
 from common import repo_root_from, split_frontmatter  # noqa: E402
-from generate_site_catalog import build_catalog, current_revision  # noqa: E402
+from generate_site_catalog import build_catalog, collect_workflow_sources, current_revision  # noqa: E402
 
 
 def main() -> int:
@@ -61,6 +61,7 @@ def main() -> int:
         previous_revision or current_revision(),
         (root / "workflows" / "runtime-registry.yaml").read_text(encoding="utf-8"),
         (root / "release" / "capability-contract.yaml").read_text(encoding="utf-8"),
+        collect_workflow_sources(root),
     )
     site_path.write_text(
         json.dumps(site_catalog, ensure_ascii=False, indent=2) + "\n",

@@ -7,7 +7,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
-from scripts.catalog.generate_site_catalog import build_catalog  # noqa: E402
+from scripts.catalog.generate_site_catalog import build_catalog, collect_workflow_sources  # noqa: E402
 
 
 class SiteCatalogContractTests(unittest.TestCase):
@@ -17,10 +17,13 @@ class SiteCatalogContractTests(unittest.TestCase):
     def capability_contract(self) -> str:
         return (ROOT / "release/capability-contract.yaml").read_text(encoding="utf-8")
 
+    def workflow_sources(self) -> dict[str, str]:
+        return collect_workflow_sources(ROOT)
+
     def test_generated_catalog_carries_package_versions_and_source_identity(self) -> None:
         markdown = (ROOT / "CATALOG.md").read_text(encoding="utf-8")
         package_manifest = (ROOT / "release/package.yaml").read_text(encoding="utf-8")
-        catalog = build_catalog(markdown, package_manifest, "abcdef1234567890", self.workflow_registry(), self.capability_contract())
+        catalog = build_catalog(markdown, package_manifest, "abcdef1234567890", self.workflow_registry(), self.capability_contract(), self.workflow_sources())
 
         self.assertEqual("abcdef123456", catalog["metadata"]["source_revision"])
         self.assertEqual("arek-ai-skills", catalog["metadata"]["packages"]["production"]["name"])
@@ -29,9 +32,15 @@ class SiteCatalogContractTests(unittest.TestCase):
         self.assertTrue(catalog["metadata"]["packages"]["lab"]["version"])
         self.assertTrue(catalog["skills"])
         self.assertTrue(catalog["workflows"])
+        self.assertEqual(17, catalog["metadata"]["source_workflow_count"])
+        self.assertEqual(16, catalog["metadata"]["registered_workflow_count"])
+        skill_development = next(item for item in catalog["workflows"] if item["name"] == "skill-development")
+        self.assertEqual("not_registered", skill_development["runtime_registration"])
+        self.assertEqual("unknown", skill_development["maturity"])
         self.assertEqual("UNASSESSED", catalog["metadata"]["capability_assessment"])
         self.assertTrue(all(item["capability_assessment"] == "UNASSESSED" for item in catalog["skills"]))
-        self.assertTrue(all(item["declared_channels"] for item in catalog["workflows"]))
+        self.assertTrue(all(item["declared_channels"] for item in catalog["workflows"] if item["runtime_registration"] == "registered"))
+        self.assertEqual({}, skill_development["declared_channels"])
         self.assertEqual("NOT_OBSERVED", catalog["metadata"]["runtime_installation"])
 
     def test_catalog_rejects_missing_package_or_revision_provenance(self) -> None:
@@ -58,7 +67,7 @@ lab:
     def test_published_catalog_versions_match_package_source(self) -> None:
         markdown = (ROOT / "CATALOG.md").read_text(encoding="utf-8")
         package_manifest = (ROOT / "release/package.yaml").read_text(encoding="utf-8")
-        source_catalog = build_catalog(markdown, package_manifest, "revision", self.workflow_registry(), self.capability_contract())
+        source_catalog = build_catalog(markdown, package_manifest, "revision", self.workflow_registry(), self.capability_contract(), self.workflow_sources())
         published = json.loads((ROOT / "docs/catalog.json").read_text(encoding="utf-8"))
 
         self.assertEqual(source_catalog["metadata"]["packages"], published["metadata"]["packages"])

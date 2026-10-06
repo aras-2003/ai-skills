@@ -4,7 +4,7 @@
 
 `release/capability-contract.yaml` is the repository-side contract. It stays outside portable `SKILL.md` frontmatter. Package and release manifests carry a per-component assessment in addition to the packaged runtime-tool inventory.
 
-`UNASSESSED` means the permissions and side effects have not been reviewed. It does not mean the component needs no permissions, is safe, or is available in a runtime. Runtime tools describe what the package contains; host connector availability and approval state remain runtime-dependent. The generated site catalog exposes the same review state and derives workflow details from `workflows/runtime-registry.yaml`.
+`UNASSESSED` means the permissions and side effects have not been reviewed. It does not mean the component needs no permissions, is safe, or is available in a runtime. Runtime tools describe what the package contains; host connector availability and approval state remain runtime-dependent. The generated site catalog derives source workflows from their files and uses `workflows/runtime-registry.yaml` to distinguish registered runtime workflows from source-only workflows.
 
 ## Security scan
 
