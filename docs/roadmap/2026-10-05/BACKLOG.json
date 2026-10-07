@@ -1916,10 +1916,11 @@
       "type": "domain-review/investing",
       "title": "Przejrzeć domenę Investing i przygotować plan adopcji/aktualizacji",
       "rationale": "Investment OS jest domeną decyzyjną o wysokich konsekwencjach; review ma sprawdzić guardraile, routing i deterministyczne podstawy sizing/valuation bez zmiany deklarowanej maturity.",
-      "scope": "Po ENG-19 przejrzeć Investing skills/workflows, Investment OS routing, investment record store, source/as-of discipline, portfolio/one-security boundaries, sizing/valuation calculations, connectors i fallbacki. Zweryfikować szczególnie routing false positives/negatives i relację LLM interpretation vs code calculation.",
+      "scope": "Po ENG-19 przejrzeć Investing skills/workflows, Investment OS routing, investment record store, source/as-of discipline, portfolio/one-security boundaries, sizing/valuation calculations, connectors i fallbacki. Zweryfikować szczególnie routing false positives/negatives i relację LLM interpretation vs code calculation. Zaobserwowano false positive: pojedyncza spółka + decyzja o dodaniu pozycji jako procentu portfela została skierowana do investment-portfolio-review; wymagany osobny regression case.",
       "acceptance_criteria": [
         "Inventory obejmuje wszystkie Investing source components, exact version i runtime availability",
         "Routing suite zawiera granice takie jak top 2/top 20, niepewne tickery (VAT/PIT/NASA), broad portfolio terms oraz PL/EN intents",
+        "Pojedynczy nazwany instrument z pytaniem o sizing/portfolio fit trafia do investment-security-review, a agregatowe ryzyko i koncentracja wielu pozycji pozostają w investment-portfolio-review",
         "Każdy krytyczny sizing/valuation calculation ma jawne wejścia, units, missing-data behavior i plan deterministic testów",
         "Source freshness, uncertainty, investment policy limits i unauthorized-action boundaries są sprawdzone",
         "Plan zmian ma evidence i test criteria; maturity bez zmian podczas review"

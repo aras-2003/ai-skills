@@ -1,0 +1,18 @@
+schema_version: "1.0"
+id: investment-security-sizing-natural-en
+mode: natural-routing
+expected_target: investment-os-review
+language: en
+competing_intents:
+  - investment-portfolio-review
+required_selected_capabilities:
+  - investment-security-review
+required_tool_fragments:
+  - route_investment_request
+assertions:
+  manual:
+    - the Investment OS front door is selected first
+    - one named security plus a proposed portfolio allocation is routed to investment-security-review
+    - the existence of a portfolio percentage alone does not turn a single-security decision into a portfolio-wide review
+    - routing only does not analyze the fictional company or recommend or execute a trade
+    - a separate multi-holding concentration or allocation request still routes to investment-portfolio-review
