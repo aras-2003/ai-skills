@@ -1,2 +1,1 @@
-Design an ETF risk policy for a long-term portfolio. Propose concentration caps,
-rebalancing thresholds, and drawdown rules.
+Use the Skills Factory Cloud MCP to classify the following request for routing only: “Design an ETF risk policy for a long-term portfolio. Propose concentration caps, rebalancing thresholds, and drawdown rules.” Return the route metadata, but do not load or execute the selected workflow and do not design or propose any policy content. This test checks routing only; stop after the classification.
