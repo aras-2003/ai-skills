@@ -2051,7 +2051,70 @@
       "effort": "M",
       "status": "IN_PROGRESS",
       "owner": "Codex",
-      "legacy_links": []
+      "legacy_links": [],
+      "progress": {
+        "last_observed_run": "2026-10-07",
+        "target": "Skills Factory Cloud Next Site v9; Site source 3947834d3c3f00a8a7ed0491184a89a754129068; Lab 0.33.4 source b5ce981af12003e8a8c00ed66efb58f3cee3c314",
+        "evidence": [
+          {
+            "case": "runtime attestation",
+            "status": "PASS",
+            "evidence": "Fresh Chat with explicit plugin returned verified runtime_info for Site v9; exact source revision and tool schema digest visible; runtime-only request."
+          },
+          {
+            "case": "investment single-security sizing route",
+            "status": "PASS",
+            "evidence": "Fresh Chat invoked Cloud MCP and loaded investment-security-review; router returned security-review, recommendation null, workflow_executed false; response respected decision gates."
+          },
+          {
+            "case": "aggregate portfolio",
+            "status": "PASS",
+            "evidence": "Fresh Chat routed aggregate AAPL/MSFT/cash example to investment-portfolio-review and kept claims bounded to supplied synthetic data."
+          },
+          {
+            "case": "ambiguous investment request",
+            "status": "PASS",
+            "evidence": "Fresh Chat returned clarification_required/unknown and asked a clarifying question without loading a workflow."
+          },
+          {
+            "case": "operating-model workflow reference parity",
+            "status": "REVIEW_REQUIRED",
+            "evidence": "Fresh Chat used oaf-operating-model-redesign behavior; direct MCP load_skill confirmed references/WORKFLOW.md and excluded references/evals/, but Chat UI did not expose exact loaded reference/tool payload required by evaluator."
+          },
+          {
+            "case": "explicit line chart",
+            "status": "FAIL",
+            "evidence": "Fresh Chat retained the exact Q1/Q2/Q3 values in a table but the screenshot showed no chart; payload/tool visibility does not satisfy client-render acceptance."
+          },
+          {
+            "case": "investment-route-only policy design",
+            "status": "INVALID_FIXTURE",
+            "evidence": "Router-only rubric expected no workflow execution, but natural-language fixture asked to design a policy. Chat reasonably continued with policy content after routing. Preserve as invalid evaluation, not runtime failure; amend input to explicitly demand routing only and no child execution, then rerun."
+          },
+          {
+            "case": "direct architecture-review",
+            "status": "PASS_BEHAVIOR_TRACE_REVIEW_REQUIRED",
+            "evidence": "Fresh Chat explicitly selected Skills Factory Cloud Next, named architecture-review v1.0.0 and exact Lab revision. Response separated supplied facts from unknowns, rejected unsupported microservices rewrite, and gave bounded diagnostic; raw MCP load payload was not exposed in the visible trace."
+          },
+          {
+            "case": "capability-gap-analysis",
+            "status": "PASS_BEHAVIOR_TRACE_REVIEW_REQUIRED",
+            "evidence": "Fresh Chat explicitly selected Skills Factory Cloud Next, named capability-gap-analysis v1.0.0 and exact Lab revision. Response separated confirmed gaps from hypotheses, did not rank interventions without impact data, and defined evidence to collect; raw MCP load payload was not exposed in visible trace."
+          },
+          {
+            "case": "bar chart payload and input validation",
+            "status": "PASS_API_WITH_ACCESSIBILITY_DEFECT",
+            "evidence": "Direct Cloud MCP call returned embedded SVG, exact [3,0] data, and PAYLOAD_RENDERED; mismatched labels/values were rejected. SVG desc incorrectly says 'Line points use equally spaced categories' for a bar chart."
+          },
+          {
+            "case": "line chart negative/zero payload and invalid series",
+            "status": "PASS_API_CLIENT_NOT_OBSERVABLE",
+            "evidence": "Direct Cloud MCP returned PAYLOAD_RENDERED for explicit [-2,0,5] values; series with fewer than two points was rejected by schema. Tool contract explicitly reports client_display NOT_OBSERVABLE, so Chat visual rendering remains unproven."
+          }
+        ],
+        "campaign_status": "IN_PROGRESS",
+        "remaining": "Add a verifiable direct architecture-review tool trace; correct and rerun investment-route-only fixture; diagnose chart rendering in Chat; capture exact MCP trace/reference evidence for workflow-reference parity. Keep capability-gap-analysis and other completed regressions. Do not close E2E-02 until acceptance criteria have evidence. Also verify the bar-chart accessible description and client-side SVG rendering."
+      }
     },
     {
       "id": "E2E-03",
@@ -2090,6 +2153,28 @@
       ],
       "depends_on": [
         "E2E-01",
+        "E2E-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "E2E-05",
+      "priority": "P1",
+      "epic": "Runtime E2E hardening",
+      "type": "runtime/rendering",
+      "title": "Naprawić dostępność i widoczność wykresów w Chat",
+      "rationale": "Testy Cloud MCP potwierdzają generowanie payloadu SVG, ale Chat nie pokazał wykresu w odpowiedzi; dodatkowo opis dostępnościowy bar chart zawiera liniową etykietę 'Line points use equally spaced categories'.",
+      "scope": "Zdiagnozować i naprawić serializację/obsługę embedded SVG w Chat bez zmiany danych źródłowych. Poprawić opis dostępnościowy osobno dla bar/line, zachować dokładną tabelę danych oraz jawnie oznaczać klientom brak obsługi renderowania.",
+      "acceptance_criteria": [
+        "Świeży Chat pokazuje wykres oraz dokładne wartości z tabeli dla line i bar chart albo jasno informuje o braku renderera bez twierdzenia, że obraz jest widoczny",
+        "Bar chart nie zawiera opisu dostępnościowego dotyczącego punktów liniowych; title, desc i labels są zgodne z typem wykresu",
+        "Testy obejmują zera, wartości ujemne, walidację zgodności długości oraz minimalną liczbę punktów",
+        "Receipt rozdziela PAYLOAD_RENDERED od CLIENT_RENDERED i zawiera widoczny dowód UI"
+      ],
+      "depends_on": [
         "E2E-02"
       ],
       "effort": "M",
@@ -2171,6 +2256,39 @@
         "ChatGPT Work MCP trace for route_investment_request, architecture-review, capability-gap-analysis and render_line_chart",
         "evals/campaigns/chat-app-e2e-2026-10/campaign.yaml",
         "evals/campaigns/runtime-validation-2026-10-r16/RUNBOOK.md"
+      ]
+    },
+    {
+      "date_local": "2026-10-07",
+      "decision": "Record fresh Chat E2E evidence against Skills Factory Cloud Next Site v9. Keep E2E-02 open: visible chart rendering failed, route-only fixture is under-specified, and workflow-reference trace is not fully inspectable in Chat UI.",
+      "ids": [
+        "E2E-02"
+      ],
+      "evidence": [
+        "Chat runtime_info verified Site source 3947834d3c3f00a8a7ed0491184a89a754129068 and Lab source b5ce981af12003e8a8c00ed66efb58f3cee3c314",
+        "Fresh Chat conversation receipts from 2026-10-07 are recorded in E2E-02.progress"
+      ]
+    },
+    {
+      "date_local": "2026-10-07",
+      "decision": "Extend v9 Chat campaign with direct architecture-review and capability-gap-analysis behavior checks; both responses respected evidence boundaries, while raw tool trace remains a UI evidence gap.",
+      "ids": [
+        "E2E-02"
+      ],
+      "evidence": [
+        "https://chatgpt.com/c/6ac649d4-fdfc-83ed-bd94-9231a314d658",
+        "https://chatgpt.com/c/6ac64a32-8fb8-83eb-9428-338a8c8eadee"
+      ]
+    },
+    {
+      "date_local": "2026-10-07",
+      "decision": "Add E2E-05 after Cloud MCP chart contract tests confirmed SVG payload generation but exposed a bar-chart accessibility-description defect and Chat client display gap.",
+      "ids": [
+        "E2E-05"
+      ],
+      "evidence": [
+        "Skills Factory Cloud Next render_bar_chart and render_line_chart direct MCP results",
+        "https://chatgpt.com/c/6ac64792-685c-83ed-8645-845ba9191911"
       ]
     }
   ]
