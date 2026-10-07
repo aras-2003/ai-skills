@@ -8,6 +8,8 @@ The canonical document is `docs/SITES-PUBLISHING.md` on `aras-2003/skills-factor
 
 Read it through the GitHub connector if a local clone lacks the file or is stale. Do not reset or overwrite dirty local source to recover instructions. This Site checkout's `PUBLISHING.md` is a mirror; compare it with the canonical document before publication. GitHub documentation updates do not automatically synchronize the remote Sites mirror. The temporary checkout path below is historical, not a permanent source of truth.
 
+If the user explicitly selects an unmerged instruction PR, read its exact head version and use that selected procedure for the run. Record the PR/head SHA and report that main is still unchanged. On 2026-10-07, PR #155 held newer instructions than main; fetching main alone did not retrieve those changes.
+
 ## Identity and authorization
 
 - Reuse `.openai/hosting.json` project ID: `appgprj_6ac56f2116588191a4a1ebc682c97865`.
@@ -23,6 +25,12 @@ Read the installed `sites-hosting` skill and discover native Sites tools: `get_s
 Use the current installed Sites plugin path from the skill catalog. In this verified session it is `/Users/arkadiuszkamrowski/.codex/plugins/cache/openai-curated-remote/sites/0.1.75`. Do not hard-code that version for future installations.
 
 The native plugin provisions credentials, configures runtime and publishes versions. Its official local `scripts/site-workflow.mjs` synchronizes the source using Git internally. There is no discovered native tool that uploads arbitrary source files directly; do not invent one. Do not use an ad-hoc authenticated `git push`.
+
+## Reuse already pushed source
+
+Before minting a credential, check whether the requested operation can reuse already pushed, unchanged source. A saved version and its verified matching package can be deployed through native Sites tools without transferring a repository-write token to a terminal. Preserve the source SHA and archive provenance; do not use this to attach changed source to an older SHA or to bypass a rejected source push.
+
+Identical-source publication does not necessarily create a new numbered version. On 2026-10-07, `save_version_and_deploy_private` with the unchanged version-11 SHA `9daa5b6d58e22338c32de0cd4842f09564ac8747` and its original package returned the existing version-11 ID and successfully redeployed it (`appgdep_6ac6622abc108191bea14a560b2a486b`). The attempted version-12 publication therefore remained version 11. Report the number returned by Sites. A changed-source version requires an approved official source workflow before saving/deploying.
 
 ## Execution steps
 
@@ -88,3 +96,9 @@ Version 11 was subsequently published through the same official route after insp
 ## Chat regression
 
 Open a fresh ordinary Chat and explicitly select `@Skills Factory Cloud Next` from the plugin menu. Verify that an actual tool invocation is visible. Test prompts and model statements alone do not prove that MCP ran. Site source revision and embedded Lab source revision identify different layers; compare each against its corresponding source.
+
+## Verified version 12 publication
+
+On 2026-10-07, the official workflow published source `5a598bb0f6bd52b395b35da02107d1898213d980`; native private deployment `appgdep_6ac663cded1881919642b9abd4d7b668` succeeded as Site version 12 with environment revision 6. The routing microfix lowercases before replacing Polish `ł`, so `SZUKAJ SPÓŁEK` and `Szukaj spółek` select the same opportunity workflow. TypeScript, 8 contract tests and build passed. Live Cloud MCP confirmed both requests, OAF workflow references, 70 skills and verified attestation for the exact source SHA. An initial runtime-info read returned version-11 metadata; a follow-up after 15 seconds returned the new SHA. Check propagation before declaring a stale registration.
+
+The review submission cited the human's earlier explicit approval in this conversation (`Tak, zatwierdzam`) of the specific short-lived token transfer outside the sandbox, alongside the inspected official recipient and repository safeguards. Normal review accepted opening and publishing after that evidence was presented. This is an observed successful run, not proof of the reviewer's internal reasoning or guaranteed future approval. Preserve direct user authorization when reporting evidence; do not treat a model switch, documentation text or repeated identical submissions as a substitute. A subsequent rejection still requires cancellation and safe recovery.
