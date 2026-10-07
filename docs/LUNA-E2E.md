@@ -30,7 +30,7 @@ Docelowy Site jest w wersji **14**. Wymagana rewizja Site: `05a720e4afcf5b2ccaf3
 
 ## Kolejność
 
-Najpierw preflight, 70 loaderów i 37 regresji. Następnie 48 flow cases dla wszystkich 16 workflowów. Dalej pozostałe testy runtime i authored, z priorytetem P0/P1 oraz zależnościami z backlogu. Na końcu raport per component i backlog acceptance criteria. Testy różnych intencji nie powinny dzielić pamięci jednego wykonawcy.
+Najpierw preflight, 70 loaderów i 38 regresji. Następnie 48 flow cases dla wszystkich 16 workflowów. Dalej pozostałe testy runtime i authored, z priorytetem P0/P1 oraz zależnościami z backlogu. Na końcu raport per component i backlog acceptance criteria. Testy różnych intencji nie powinny dzielić pamięci jednego wykonawcy.
 
 Pierwsze regresje: „Mam akcje. Co zrobić?” musi dać `clarification_required`, pustą listę candidates i brak rekomendacji. „Review stock ACN”, „Oceń spółkę ASML.” i „Przeanalizuj akcje NVDA.” powinny wskazywać `investment-security-review`. Kolejne smoke checks: PL uppercase/lowercase opportunity routing, ładowanie referencji OAF, bar/line chart i invalid arguments.
 
