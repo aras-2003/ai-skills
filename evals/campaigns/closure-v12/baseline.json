@@ -1,0 +1,673 @@
+{
+  "observed_at": "2026-10-07",
+  "site_version": 12,
+  "repository_revision": "434922cd05216eec56f7fa766ca1569c0b637668",
+  "runtime": {
+    "repository": "https://github.com/aras-2003/skills-factory",
+    "routing_contract": "workflows/investment-os-review/WORKFLOW.md",
+    "routing_contract_blob_sha": "87fc606f4b157c4d35be753fe1d8a6696778c6cd",
+    "verified_on": "2026-10-06",
+    "channel": "site",
+    "synchronization": "embedded from the exact Skills Factory Lab artifact built from main",
+    "lab_release": {
+      "channel": "lab",
+      "version": "0.33.4",
+      "source_revision": "b5ce981af12003e8a8c00ed66efb58f3cee3c314",
+      "skill_count": 70
+    },
+    "release_id": "5a598bb0f6bd52b395b35da02107d1898213d980",
+    "source_revision": "5a598bb0f6bd52b395b35da02107d1898213d980",
+    "capability_contract_version": "site-mcp-v1",
+    "tool_schema_digest": "sha256:d0a9033873c4cce8a2644465091d71d77b71050a782b07f38faea4ecff87a798",
+    "deployed_at": "2026-10-07T15:22:40.493Z",
+    "attestation_status": "verified",
+    "identity_source": "site_environment",
+    "capabilities": [
+      "runtime_info",
+      "list_skills",
+      "load_skill",
+      "route_investment_request",
+      "render_bar_chart",
+      "render_line_chart"
+    ],
+    "execution_mode": "host_model_executes_loaded_instructions"
+  },
+  "catalog": {
+    "channel": "lab",
+    "version": "0.33.4",
+    "source_revision": "b5ce981af12003e8a8c00ed66efb58f3cee3c314",
+    "skill_count": 70,
+    "skills": [
+      {
+        "name": "acquisition-fit-review",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Assess whether a product is suitable for paid social and other direct-response",
+        "content_sha256": "144a1044c741b5b9506a15bec6740c0918cc505f6b03d1c7b718835fdab8e9e6",
+        "instruction_sha256": "d57612f34a77d70e1f151a2768cd91a9e24ec76368edbb53556c210359267b6b"
+      },
+      {
+        "name": "architecture-review",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Review alignment across business direction, capabilities, organisational",
+        "content_sha256": "4d99c32f48462eeb0a7469a381a7227326cfb17e2d673dc35792c2e6b8138605",
+        "instruction_sha256": "a3bda4064f30364c24a1d0ca9050576f5d5cb989a8683a47ca3f65f09c5e7a9d"
+      },
+      {
+        "name": "capability-gap-analysis",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Identify material gaps between required business capabilities and current",
+        "content_sha256": "5781058f885c2fc744d65a0e386770b5e3f13a0f0ee10c651ef4fc69441df925",
+        "instruction_sha256": "e3f8d7418580d3716120c54dd41e4d7c17b7b33f9d44656f868b3ede929eb1d1"
+      },
+      {
+        "name": "capability-map-review",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Assess whether a business capability map is coherent and decision-useful,",
+        "content_sha256": "5fa9e98d530edd1a325be93d96ab8a89a9937ee0b7ebc8ecee77a0b5c3baf546",
+        "instruction_sha256": "56bb7476b9d8ca73c0ddc3c4120c324d2b586197013bbfe8fa404e0d3c23c874"
+      },
+      {
+        "name": "commerce-opportunity-review",
+        "kind": "workflow",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Orchestrate the minimum evidence-backed path for discovering, screening",
+        "content_sha256": "bdedc1c1eceebce2ff48bbe67218f24e6bdd109f95c1b57e26f1189f6c62b757",
+        "instruction_sha256": "a20ebcdf374057603f8d288c72905ebb9b5634537491fa16b3b1d2290c739186"
+      },
+      {
+        "name": "commerce-product-deep-dive",
+        "kind": "workflow",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Evaluate one e-commerce product opportunity end-to-end across problem",
+        "content_sha256": "0e1ba36a3929a38b210d56e6da7584ab45f11db90a662af57ffb89fe32d583a0",
+        "instruction_sha256": "53396c1a514fad4eb5f3bef9710fe708f6d7f159c652a7e11fa9f8a23b74b18f"
+      },
+      {
+        "name": "commerce-regulatory-risk-review",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Triage regulatory, claims, safety and compliance risk for consumer e-commerce",
+        "content_sha256": "bba65687915fd7b963fbabbb6cb7a41c6c1ac3bdc8142b3bc4fd133224e2ddc1",
+        "instruction_sha256": "e6c6ece8281248bd5c0e000efcd57277a53d23b7af55e4afc1b2075ab5076300"
+      },
+      {
+        "name": "company-context-research",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Research factual company context relevant to executive technology opportunities,",
+        "content_sha256": "70b0e0db5b854bed760d9bc050f979400f485d2bcc42aec76f25017e35da1d92",
+        "instruction_sha256": "03f5c6efbc01e6e0159a94b9608134fa7f85793a5480ebcdb3b1f644aaa18af5"
+      },
+      {
+        "name": "competition-landscape-review",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Review competition around an e-commerce opportunity across product,",
+        "content_sha256": "59d30001900642faaa925c298bc18b1f3f8f554d9c84887cbbd361e4c06388b2",
+        "instruction_sha256": "e6e00aff30b7eeb20a8e564497bc78aa9c649dba08b76e9d64af839ff829ad25"
+      },
+      {
+        "name": "cv-gap-analysis",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "candidate",
+        "description": "Compare an approved mastery CV with a target executive technology role",
+        "content_sha256": "582d61b74d28538f2aa2f1c04fc9c2693608989172caf1caa17550d1d9a7cd70",
+        "instruction_sha256": "f10aa31af2b9905cae28a569cfcaad7d023412fa7d39e7941992355567d63658"
+      },
+      {
+        "name": "cv-tailoring",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "candidate",
+        "description": "Tailor an approved mastery CV to one specific executive technology role",
+        "content_sha256": "33a530b115e86c3a50350d2026ade29973494cc89efaadbc77a5d3b2b283acd7",
+        "instruction_sha256": "82af407661ea11ddd43c431c1423895f723449546b6f023fd721bbdac07e2483"
+      },
+      {
+        "name": "decision-bottleneck-analysis",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Diagnose why a specific material decision class is slow, repeatedly",
+        "content_sha256": "0e0a50ef45a3d489d99aaa1270fb88e9e88f5b07733d15bcaf8ebacadaf3f9ec",
+        "instruction_sha256": "a480027eed8180b50cce11b24801f1944669610efbae139519a65a61a546d881"
+      },
+      {
+        "name": "decision-journal-update",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "production",
+        "description": "Append a structured investment decision record capturing what was known,",
+        "content_sha256": "ef06a8b36698b311a68e0b998439e7927f14fd37abb31cb7ca6e0ddf6ad315a3",
+        "instruction_sha256": "38ba3ba66a5fb8e984c1f3beedbea60f3cc382055afd4f455a1abc95486dd019"
+      },
+      {
+        "name": "decision-rights-review",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Map and review critical organisational decision rights, including who",
+        "content_sha256": "8bb2d3cd2f92f9371278e96d13e59c65aab28edadcf7e1febf9954c337bdc2e9",
+        "instruction_sha256": "9c712aea7077b8e8d20a4ba9cec261637a40375f5b63e48ed493fbb4da6a49b4"
+      },
+      {
+        "name": "differentiation-review",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Test whether an e-commerce offer has a credible reason to win versus",
+        "content_sha256": "838c62beb995a5f7106a01a4a194afa550668cdd176cf712c1d2566551eda057",
+        "instruction_sha256": "59c4295230aa23307009a7716a812c0b43387a71198915b5a82a83ba6fb4054d"
+      },
+      {
+        "name": "evidence-loop-review",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Review whether organisational KPIs, outcomes, reviews and feedback loops",
+        "content_sha256": "911c6299efab78247ba5a0aa634454ddba605e62a11e7f5d3f8b3789adea0db1",
+        "instruction_sha256": "843bea231d3f5722e43e5d08600ca297fb0043ab78c02f26335e0329fabcd01d"
+      },
+      {
+        "name": "executive-role-evaluator",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Evaluate senior and executive technology job opportunities based on",
+        "content_sha256": "4d5246a0832852d0a91986de3282c82f3890f0cca3efa6a4f24418dfe5390906",
+        "instruction_sha256": "2d23b2afd61d71416d336289b66706548c5c5bbb4994e7d9a9f00c68ed4b00d6"
+      },
+      {
+        "name": "global-local-model-review",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Review how responsibilities, standards, capabilities and decisions are",
+        "content_sha256": "7ac7b557bc158751d7a6cf9713e9deadb15948e959955dace836f2c16ca23840",
+        "instruction_sha256": "8c19878d8399b2e329ad275e61bec830c28ac146cefc81482b9a7ada643a9036"
+      },
+      {
+        "name": "governance-design",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Design the minimum governance mechanisms needed for a defined set of",
+        "content_sha256": "82ea796cafa97d2441d6ed15b782cda47572376b2a91bea1e00dd4a0a676f996",
+        "instruction_sha256": "f14d46a4d9b1bcf2084c7588c419f036d73b212d4452d8564878b28e951f44ad"
+      },
+      {
+        "name": "interview-brief",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "candidate",
+        "description": "Prepare a concise executive interview brief from an evaluated role,",
+        "content_sha256": "d1ca71123cdd981a42af127dac75e72eb216d38c84a120d0d6a5a8d3ce7799fa",
+        "instruction_sha256": "c62f2f3f8c0875a5e03c6326a621726d22856349d029a0bced1d906fe3d6cb77"
+      },
+      {
+        "name": "investment-attention-review",
+        "kind": "workflow",
+        "version": "0.2.0",
+        "maturity": "production",
+        "description": "Child workflow for Investment OS attention triage. Use when selected",
+        "content_sha256": "f1cd6e675b5fe2cc3a743a2cc2205eddd152803d2d25c287f2fccad35f407a8d",
+        "instruction_sha256": "7506a53006c16579018a8e432f5eedfefbcd6034fa0c8b90ed4a1dc85d7a8799"
+      },
+      {
+        "name": "investment-attention-triage",
+        "kind": "skill",
+        "version": "0.2.0",
+        "maturity": "production",
+        "description": "Triage new market, company, industry and portfolio information into",
+        "content_sha256": "db5017097b07b690c7d63b624a6a3b0a1aa9bc531399d6d0f80eb26c7df8c3a1",
+        "instruction_sha256": "c457e8dd34ccad4e27fa710d4b652958a9ec16dad0b676f4beb3a59ec86eb648"
+      },
+      {
+        "name": "investment-opportunity-hunter",
+        "kind": "workflow",
+        "version": "0.5.0",
+        "maturity": "production",
+        "description": "Child workflow for Investment OS opportunity discovery. Use when selected",
+        "content_sha256": "cb35e668f185a424ddd6507124ea0ba96b0c9bb9b0e0c4c4ac78c9d4c6e8a164",
+        "instruction_sha256": "e75659fea08f91544e6faf21ceb130791d708b0f5b8c51c696eafdc5eaac861f"
+      },
+      {
+        "name": "investment-os-review",
+        "kind": "workflow",
+        "version": "0.3.0",
+        "maturity": "production",
+        "description": "Default Investment OS front door for natural investment requests. Use",
+        "content_sha256": "7f9f963cda8dc1c4540a7762bbcaa655bc19314566ac98a96a193179ec1391a4",
+        "instruction_sha256": "f515e1e92dbe34ca48e8326c5a62f3765bfc066c8e11b5a6455b2a4439d4f282"
+      },
+      {
+        "name": "investment-policy-design",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "production",
+        "description": "Design or revise a personal investment policy from the investor''s goals,",
+        "content_sha256": "4c118106d14a0e11350a4c7bcf9413bdf88084be26f4976e9b774afdb87bd4e0",
+        "instruction_sha256": "7f0e644f63993081024daa2fe65c1ffb49174816e954708327a24560e383f33e"
+      },
+      {
+        "name": "investment-portfolio-observation",
+        "kind": "workflow",
+        "version": "0.2.0",
+        "maturity": "production",
+        "description": "Lightweight portfolio observation child workflow for natural requests",
+        "content_sha256": "8698f1467f83663f443eca44a32d638b5eba5a6987d0f8e5d597ae52efee9808",
+        "instruction_sha256": "ac20c2900eb4ae9ba8248d264ae40e808e7ef217043f644087c4c66e2685f2de"
+      },
+      {
+        "name": "investment-portfolio-review",
+        "kind": "workflow",
+        "version": "0.5.0",
+        "maturity": "production",
+        "description": "Child workflow for full portfolio review. Use when selected by investment-os-review,",
+        "content_sha256": "abde041cb68899c5b3fb2cfcc854563ed9c058bd48731dfd61f16bfb11fcba43",
+        "instruction_sha256": "5c6a03646adf89e38abfcc4a93a77b7166266d4c46b61cd418effe08109b792f"
+      },
+      {
+        "name": "investment-record-store",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Read and persist canonical Investment OS records in Supabase/Postgres,",
+        "content_sha256": "104a65c068c5485c60aeb758a8248478d401df5ef3dc7e0bdd09816d2fa44edb",
+        "instruction_sha256": "bf325a5b0eed2915fde494fc626e14e5e3a996ceb1c57802da5e6938653eee67"
+      },
+      {
+        "name": "investment-security-review",
+        "kind": "workflow",
+        "version": "0.4.0",
+        "maturity": "production",
+        "description": "Child workflow for one-security review. Use when selected by investment-os-review,",
+        "content_sha256": "fd8ed9b2168b089f14e867fb802b65ac37993acf1f30945a2c4da42340036f2b",
+        "instruction_sha256": "c7309bf1a3e1989ec5d5346710a790a2610cf51de97853741127ca7db7fdaca1"
+      },
+      {
+        "name": "investment-theme-discovery",
+        "kind": "workflow",
+        "version": "0.2.0",
+        "maturity": "production",
+        "description": "Child workflow for Investment OS theme research. Use when selected by",
+        "content_sha256": "deeffe48cd6498762900d85fab295b8bce39b76a13dd1f7e2e4f82a581a08603",
+        "instruction_sha256": "2cb7f9ac715628b39892266729d42e8210b3888f065f4cf1d2acbdb451e20cd3"
+      },
+      {
+        "name": "investor-pattern-research",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "production",
+        "description": "Research how credible investors or investment organizations make decisions",
+        "content_sha256": "ed8f6daf478772ce1aa7d8de6bf32b561a36872d4cc450af5b8963f95725d425",
+        "instruction_sha256": "56c14785ecfc6069a809c0bcf124b1a4e3ea4bb1ff07be550a540ea68741dd17"
+      },
+      {
+        "name": "job-discovery",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "candidate",
+        "description": "Find current senior and executive technology roles from approved sources",
+        "content_sha256": "d3343e99ad15e1c7302da1a238ef55ba04eff24f59625f96b3f256649b0e2f0a",
+        "instruction_sha256": "a718916cf43412c5cc1fd11aa4a7f1279a0302364d7e33be5b8e292d6d913a84"
+      },
+      {
+        "name": "job-validity-check",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "candidate",
+        "description": "Verify whether a known job opportunity is still active, current, unique",
+        "content_sha256": "50a680fb14a641e87120e6438602bc06989dda9d5c3cde9d81558f6ca800f97d",
+        "instruction_sha256": "c699ea00f9a622a373f095655265c26eb19ecd892f4cc737de49818c363c1e3c"
+      },
+      {
+        "name": "kpi-quality-review",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "candidate",
+        "description": "Review whether a defined KPI set is decision-useful, interpretable and",
+        "content_sha256": "007718e3a116ae3cea4c944ec8cd904b16aa12c6e4dc9892e42d031ee74a2408",
+        "instruction_sha256": "d8c33fa38a869bc5afa2325ebc92d13633fef56b4bb44a574e764aa7941929f1"
+      },
+      {
+        "name": "market-opportunity-scan",
+        "kind": "skill",
+        "version": "0.3.0",
+        "maturity": "production",
+        "description": "Screen the XTB-investable equity and ETF universe for research candidates",
+        "content_sha256": "e525be46f0de6c6e3ffbf033c9ddbd053c6b0ad6450b3eb3a105f529899720fa",
+        "instruction_sha256": "b1606904b42b2d8830621ddf0acae1e2b1d8c8b37819d3440deb6c6fa478cd59"
+      },
+      {
+        "name": "market-transferability-review",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Review whether a product or business model proven in one market is plausibly",
+        "content_sha256": "1c8bd9412d226ed49b6662f7e662ffadaed84092b1d8770e1a6391daa7e506dd",
+        "instruction_sha256": "3e21619b25900dbfcd841f4797a14e43eafb5cf1f4e40798b374cbf130647416"
+      },
+      {
+        "name": "oaf-enterprise-architecture-review",
+        "kind": "workflow",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Run an evidence-gated OAF enterprise architecture review linking business",
+        "content_sha256": "3f37f91a9189c7ae2216277dc846a64bde5ac58820c718539a4977c3f2cfeca6",
+        "instruction_sha256": "ec15b5e8e73b185efb1f378f4e5c45918596d6bbf26dc828e1f1677aaca05259"
+      },
+      {
+        "name": "oaf-enterprise-change-review",
+        "kind": "workflow",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Orchestrate the minimum evidence-backed OAF path across multiple domains,",
+        "content_sha256": "319e721bc4fec33cc440c3ff4f05825d1554028b2edbb2b34eec43326250be95",
+        "instruction_sha256": "dca7debe386e27466c35b5b31201514e49447af2b0dd9510ce60a5afe5ddb645"
+      },
+      {
+        "name": "oaf-governance-redesign",
+        "kind": "workflow",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Run an OAF governance redesign workflow that starts from material decisions",
+        "content_sha256": "1ad0e0692e8692be97f7e24669de5aee7a6bd3ca147f8d300295ce10c3bcf9a5",
+        "instruction_sha256": "2c86cc702d4e3c46d9fd1625bf4ee09f1e3ceecf90e04297d63e167c0af2f0c4"
+      },
+      {
+        "name": "oaf-health-check",
+        "kind": "workflow",
+        "version": "1.5.0",
+        "maturity": "production",
+        "description": "Run the OAF Health Check workflow as a selective cross-domain organisational",
+        "content_sha256": "3ff22c531c84cb2c30665b9b673d697e61b722d440f5a818962640f3b964a29f",
+        "instruction_sha256": "ebf685431ed15efb4dde594378475e521a1d1a42225d7b327aeac97402d4e2b1"
+      },
+      {
+        "name": "oaf-operating-model-redesign",
+        "kind": "workflow",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Run an evidence-gated OAF operating-model redesign workflow from diagnosis",
+        "content_sha256": "6b7c152896738fbbcfcfa9fac440d4f6ee4f128c7bf68391c783f7f9620c347c",
+        "instruction_sha256": "c2c0a96a715dd9d397431e4a6179f78827f2f85cc0892b9713148d9824528b75"
+      },
+      {
+        "name": "oaf-strategy-execution-reset",
+        "kind": "workflow",
+        "version": "0.1.0",
+        "maturity": "candidate",
+        "description": "Run an OAF strategy-execution reset linking strategic outcomes, capabilities,",
+        "content_sha256": "bdc64f498e8faea112073ef8e62f30eeb15225123a0a6450ca5be8c66602c21f",
+        "instruction_sha256": "4784006c8b1f1563fa0634c4764c29427c3def7fc309aab5f47a43f588196425"
+      },
+      {
+        "name": "oaf-transformation-design",
+        "kind": "workflow",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Run an evidence-gated OAF transformation design workflow from validated",
+        "content_sha256": "b7a9807236dd78e5b00c9b93d0ac30c3e2f7092de028e34eb2713171182860c0",
+        "instruction_sha256": "8b051a7bff76f7fd82566cd87c96e1a04e6e346b784dd70761efc298f6fb3137"
+      },
+      {
+        "name": "operating-model-review",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Review an operating model for role clarity, interfaces, accountability,",
+        "content_sha256": "a567900108ca48fc5ad0f4d9e1094d36a3815deab9d93afe3ed086f25bec132e",
+        "instruction_sha256": "57f18eda8886ae76dc5029532bf6326e28edb646ed395299547c900eead2c231"
+      },
+      {
+        "name": "organizational-interface-review",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "candidate",
+        "description": "Review critical organisational interfaces where ownership, work, information,",
+        "content_sha256": "e33dcd20c07daecdc192b96b5f6f0f4bd58a70125e6f424b4d212da5a87ba62a",
+        "instruction_sha256": "84ab54973c06901aaf6e496f4a1f97ffe6097df7f0e1e6195ae5d64f5530b6d3"
+      },
+      {
+        "name": "portfolio-health-review",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Review whether an initiative portfolio is coherent, affordable, capacity-feasible,",
+        "content_sha256": "0f55cfcac2fd2d70eaaba2d0b3cc476b92061dc3bcee0f9f6c764b3aff5fec73",
+        "instruction_sha256": "05f8c2d6141fea171c68b92f783845928ee318778f451cc1a6694346d5595e60"
+      },
+      {
+        "name": "portfolio-prioritization",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Structure transparent prioritisation of initiatives using agreed strategic,",
+        "content_sha256": "79c6f4c9b1cfca48d31ba9eedc15878e2ac0235b3f851aaedb45475ad94d244e",
+        "instruction_sha256": "793014110e3aee5d8a761da6e21cf9fa0baf1f8c0f0ab8e3d9bb9d76c90944f4"
+      },
+      {
+        "name": "portfolio-state-review",
+        "kind": "skill",
+        "version": "0.7.0",
+        "maturity": "production",
+        "description": "Reconstruct and review the current investment portfolio plus historical",
+        "content_sha256": "f61ef6622c3382603bcf4ba447506701a62047fdbeadfccce4aa92f36e9fe693",
+        "instruction_sha256": "6b9aabef784753fd0344b7605e8cfb3b8982c67b653ae154ef28300cf0ed20a8"
+      },
+      {
+        "name": "position-sizing-review",
+        "kind": "skill",
+        "version": "0.3.0",
+        "maturity": "production",
+        "description": "Determine a decision-support position-size band from investment policy,",
+        "content_sha256": "e5e6124a04fc2aa2dcce97f113fedd618904fc20f116b521d6fad5ec5fe31045",
+        "instruction_sha256": "3fa49d35863a7f679444bbe8b9a0152309bbdd623f8e161c63e9933e5597ea14"
+      },
+      {
+        "name": "problem-demand-validation",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Validate whether a target customer problem is frequent, painful and",
+        "content_sha256": "a527060d17e72f633846d0fc7953d9a4f739de5701dd878613b8f8ed5746f1af",
+        "instruction_sha256": "92d05ea7faef1fabbea28880f3ea63e5698009449f35103045e271eab4dc4b22"
+      },
+      {
+        "name": "process-update",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "candidate",
+        "description": "Convert new recruitment-process information into a concise structured",
+        "content_sha256": "2a4ea54b520eaab85049fae161f714d6796fb1b8395445e9bade8416dcd97e7e",
+        "instruction_sha256": "bc7925e837b7dba89486b006b4df93d1418789f97ec385474393e8094aef5317"
+      },
+      {
+        "name": "product-opportunity-discovery",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Discover product opportunity hypotheses from customer problems, category",
+        "content_sha256": "7f424e1a452075713f357bd262990b32ff654de9a2af91183bf1d00de838d4c1",
+        "instruction_sha256": "5d41c2a5f0fd4d12ff11c2501a81e29a51a7748b8eb199e908dc9f83c998342e"
+      },
+      {
+        "name": "report-composer",
+        "kind": "skill",
+        "version": "0.11.0",
+        "maturity": "candidate",
+        "description": "Compose one integrated decision report from an already-supported workflow",
+        "content_sha256": "ab2c94c3e291a72d1da7b8b90685ac9e479149979b7d5ea92d93078d045e5fdd",
+        "instruction_sha256": "e1843bdeadcd5d1c1bed7df398b3a26f02e6f73ccec18be270e9b7faafee1f71"
+      },
+      {
+        "name": "security-underwriting",
+        "kind": "skill",
+        "version": "0.5.0",
+        "maturity": "production",
+        "description": "Underwrite one equity or ETF as an investment using structured equity",
+        "content_sha256": "0e3290e3d9a76efd582958a1f9e8a72559b1fd583bb00ae1c64b34a73bc1ba62",
+        "instruction_sha256": "f4337b445210296afeb33dadbf48bf2122f1c6cd7bab7832e099c384dfe9c329"
+      },
+      {
+        "name": "skill-authoring",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Create or refactor an Agent Skill package from an approved skill specification.",
+        "content_sha256": "e3b25f2fccfc79aa3b45fc8156179c39c8a1cbbdc0212a86e9d84c9f5a5ad469",
+        "instruction_sha256": "4c926cf728af417919f17bfbcdc44dfc64466ee80b78abbf992177aa422dc153"
+      },
+      {
+        "name": "skill-evaluation",
+        "kind": "skill",
+        "version": "0.3.3",
+        "maturity": "draft",
+        "description": "Evaluate an Agent Skill''s routing and behavior using predeclared representative",
+        "content_sha256": "c147218802763f6e8dc33fa054e0ecfc16a6b05532823338ff9948c520caad8c",
+        "instruction_sha256": "51e7627c30508077b51ed753337c7db143978c39b1be5b9972a071e8599cb5b0"
+      },
+      {
+        "name": "skill-release-review",
+        "kind": "skill",
+        "version": "0.3.0",
+        "maturity": "draft",
+        "description": "Make an evidence-gated production-readiness decision for an Agent Skill",
+        "content_sha256": "67c3d9e0ef0aa4933326b5aec6402aacb25a7848fcf92d8effa7266bf9bd9630",
+        "instruction_sha256": "d507992178869aaa8a66dcb3c10d666f680d8a647cfc011a0f7a563bd8f6e8f3"
+      },
+      {
+        "name": "skill-specification",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Decide whether a repeatable task should become an Agent Skill and define",
+        "content_sha256": "cd70668b98a4b52b16909174e3b084fa5d08ab7dd448ffce548bab3ee8cc2b1e",
+        "instruction_sha256": "14f901ff7e5959121be610bc26993d1f662c7c7f86666b1aae91198a26061da0"
+      },
+      {
+        "name": "skill-test-design",
+        "kind": "skill",
+        "version": "0.3.0",
+        "maturity": "draft",
+        "description": "Design and maintain routing, behavioral, edge-case, adversarial, and",
+        "content_sha256": "e296560ac4a8f11bda8f080a5621d2c711e18ca277255a6456d530d3b6f41485",
+        "instruction_sha256": "951213a75ae951b659145666b4f3e9130c6d558a67c3c9215fb3caffad5b3152"
+      },
+      {
+        "name": "skill-validation",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Validate an Agent Skill package for structural correctness, routing",
+        "content_sha256": "33da5e14d045f03c9c36df0bb0aecfc916f207d1c13529f4e093c57b24c3a553",
+        "instruction_sha256": "afa7ee3bcc169b9257b9aacdcc030b2f8f9a4a5b4ced63ab4e3df84ffea9b570"
+      },
+      {
+        "name": "skills-factory-diagnostic",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Confirm that the Skills Factory plugin is exposing bundled skills to",
+        "content_sha256": "08698cec3dfd62a93401b8e2baccc79fcd7b34afc777cb333db78f94eedaf5e9",
+        "instruction_sha256": "b111433280fe99d4cba6f57cfe2fed9d35a6df7740b39387bcca86aa9bc9da4d"
+      },
+      {
+        "name": "strategy-to-execution-diagnostic",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "candidate",
+        "description": "Diagnose whether strategic intent is translated into explicit priorities,",
+        "content_sha256": "78d1503fc0c1e35c83c267005688203f9bd4c1c44e0764750ba195573a850544",
+        "instruction_sha256": "9c5f2b15a4f7531ba5bf0664f2439a1c07c13aa6fa853ff65055923a45b41b99"
+      },
+      {
+        "name": "supplier-viability-review",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Assess whether sourcing, MOQ, lead time, quality, packaging and supplier",
+        "content_sha256": "2f3522652af6f2356598d34cccf3671ea8b4dbaaef57fb0c84ac1f38f168460b",
+        "instruction_sha256": "46d858b459ae353d7c827917100d72254ef7da9f9bb05d41d6d3a09f61f6b448"
+      },
+      {
+        "name": "thesis-challenge",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "production",
+        "description": "Stress-test an existing investment thesis by seeking contradictory evidence,",
+        "content_sha256": "6d7fb19f596e1893521c6fd6de9e7554417baa3e244008049705a819d36a31ba",
+        "instruction_sha256": "650b93c4f597179d26ad55c99819c4d438410228f28a57fc5c2941f9702b07e6"
+      },
+      {
+        "name": "thesis-monitor",
+        "kind": "skill",
+        "version": "0.3.0",
+        "maturity": "production",
+        "description": "Monitor an existing investment thesis against new earnings, guidance,",
+        "content_sha256": "c6808b461050eef185ed8f69f251d40e5dc656667ced5b1530c4e9433678e418",
+        "instruction_sha256": "4406ef1a7276b06ede7b6da7665d477692f9b7d02d468a9cb89e688e3e19751a"
+      },
+      {
+        "name": "transformation-blueprint",
+        "kind": "skill",
+        "version": "1.0.0",
+        "maturity": "production",
+        "description": "Convert an approved organisational diagnosis and target direction into",
+        "content_sha256": "abe7751ff7a13e08beb70ec4d88185c70104ac88a50d4967d42e389b9ef6ae3d",
+        "instruction_sha256": "f666fdc17b4a0ab252f64ce7566603cf1810ed07787b0307d9f8d9825b8abb75"
+      },
+      {
+        "name": "trend-theme-research",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "production",
+        "description": "Research an investment trend or market theme by mapping its economic",
+        "content_sha256": "e55b1d96457ca089f8dc0b02046a223d793433daa15f56723fa0ab9904d99d11",
+        "instruction_sha256": "2fef309d2ce46d9db82205deb97bbc09d1f92b2460a6b2bfbc6b3d602816d12e"
+      },
+      {
+        "name": "unit-economics-review",
+        "kind": "skill",
+        "version": "1.1.0",
+        "maturity": "production",
+        "description": "Evaluate e-commerce unit economics including VAT, COGS, freight, fulfilment,",
+        "content_sha256": "4eefd3a2526fcfb3f55ec045d99a2cca94abcc218df6b91426c877b38772c4aa",
+        "instruction_sha256": "3b0dbf3aa33cfa928ff9ba910b8cf9377f370b7fc44acee17814df2862702273"
+      },
+      {
+        "name": "valuation-scenario-review",
+        "kind": "skill",
+        "version": "0.1.0",
+        "maturity": "production",
+        "description": "Build bear, base and bull valuation scenarios for one security using",
+        "content_sha256": "15007ce14551b4b3b2e8e4adcc4757a2ed477b8b5422e04f57fae2bee824d538",
+        "instruction_sha256": "103111cb3d03ec1fb40ca38c919541cd94911f157952db7ce3826c1707d7187d"
+      },
+      {
+        "name": "visual-output-design",
+        "kind": "skill",
+        "version": "0.12.0",
+        "maturity": "candidate",
+        "description": "Convert an already-supported analysis or workflow result into a professional",
+        "content_sha256": "76a1bd66e7c34d1c34841767e44ce31d43742fb1db678f451939d5ab14535860",
+        "instruction_sha256": "385bcfd7fde71d1be9d98a43fe46bebcf70b6910062fba7a6d82802ded9b5aca"
+      }
+    ]
+  }
+}

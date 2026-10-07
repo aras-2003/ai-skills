@@ -9,4 +9,6 @@ cases:
   - id: oaf-decision-rights-natural-pl
     input: evals/routing/supplemental/oaf-decision-rights-natural-pl.input.md
     rubric: evals/routing/supplemental/oaf-decision-rights-natural-pl.rubric.yaml
-
+  - id: investment-ambiguous-shares-pl
+    input: evals/routing/supplemental/investment-ambiguous-shares-pl.input.md
+    rubric: evals/routing/supplemental/investment-ambiguous-shares-pl.rubric.yaml

@@ -50,6 +50,23 @@ class InvestmentRuntimeTests(unittest.TestCase):
             "investment-security-review",
         )
 
+    def test_ambiguous_share_ownership_requests_front_door_clarification(self) -> None:
+        for prompt in (
+            "Mam akcje. Co zrobić?",
+            "Mam akcje kilku spółek. Co powinienem z nimi zrobić?",
+            "I own some shares. What should I do?",
+        ):
+            with self.subTest(prompt=prompt):
+                result = self.runtime.route_investment_request(prompt)
+                self.assertTrue(result["is_investment_request"])
+                self.assertEqual("unknown", result["route"])
+                self.assertEqual("investment-os-review", result["child_workflow"])
+                self.assertIn("ambiguous", result["reason"])
+                self.assertTrue(result["must_invoke_child_workflow"])
+
+    def test_direct_stock_review_still_routes(self) -> None:
+        self.assert_route("Review stock ACN", "security", "investment-security-review")
+
     def test_routes_opportunity_discovery(self) -> None:
         self.assert_route(
             "Chcę znaleźć kilka nowych spółek do dalszego researchu. Nie mam konkretnego tickera.",

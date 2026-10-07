@@ -1,0 +1,69 @@
+# Concrete replacement fixtures for legacy generic positive/evidence-boundary cases.
+schema_version: '1.0'
+fixtures:
+  cv-gap-analysis:
+    input: 'Master CV: zespół 12 osób, budżet 2 mln PLN, CRM. Rola wymaga 200 osób, P&L i SAP; nie ma dowodów tych doświadczeń. Porównaj wymagania z dowodami.'
+    must: ['requirement-to-evidence gap table', 'adjacent experience not direct SAP/P&L experience', 'wording gap distinguished from missing capability']
+  cv-tailoring:
+    input: 'Master CV: 12 osób, 2 mln PLN, migracja CRM; target: executive IT, 200 osób, P&L, SAP. Dopasuj summary i bullets bez zapisywania pliku.'
+    must: ['exact factual scope retained', 'change log with rationale', 'no fabricated SAP/P&L or inflated team size']
+  interview-brief:
+    input: 'Rozmowa jutro z hiring managerem o roli Head IT. Znane: 40 osób, owner budżetu nieznany, raportowanie CEO niepotwierdzone. Kandydat: 12 osób i CRM. Przygotuj brief.'
+    must: ['questions target actual mandate, budget and authority', 'proof points only from supplied candidate evidence', 'uncertain reporting line remains uncertain']
+  job-discovery:
+    input: 'Screen fixture, bez wyszukiwania live: oferta A Director of Digital Operations, 40 osób, Poland remote, mandat IT niejasny; B Sales Specialist bez zespołu. Filtr: senior leadership IT w Polsce. Daj shortlist do weryfikacji.'
+    must: ['borderline unconventional A title not rejected automatically', 'B non-leadership sales excluded', 'fixture shortlist not claimed current live search']
+  job-validity-check:
+    input: 'Fixture: ATS requisition R42 aktywna dziś, agregator zamknięty; drugi link agregatora ma tę samą R42. Nie mamy URL. Oceń co jest potwierdzone i co wymaga sprawdzenia.'
+    must: ['ATS priority over aggregator described', 'same requisition not counted twice', 'actual live status not asserted without URL/retrieval']
+  process-update:
+    input: 'Wcześniej: Head IT raportuje CEO, budżet 5 mln. Dzisiejszy mail recruitera: raportowanie CFO, budżet niepotwierdzony, następna rozmowa 10 października, owner recruiter. Aktualizuj status bez zapisów.'
+    must: ['contradictory prior facts preserved with changed assumptions', 'stage/owner/date/next action provided', 'material mandate change triggers evaluator refresh']
+  problem-demand-validation:
+    input: '12 rozmów: 10 osób zna problem plączących się kabli, 4 codziennie korzystają z taśmy, 0 kupiło proponowany organizer za 149 PLN. Brak price test. Oceń demand.'
+    must: ['workaround/frequency separated from purchase and price evidence', 'no willingness-to-pay inferred from interest', 'smallest decision-relevant validation stated']
+  decision-bottleneck-analysis:
+    input: '3 decyzje fundingowe: praca 1 dzień, kolejka u doradcy 8 dni, rework 2 dni z brakujących danych. Formalny owner znany; doradca faktycznie blokuje progres. Zdiagnozuj latency.'
+    must: ['active work vs queue vs rework separated', 'de facto gate identified without assuming authority cause', 'validation experiment discriminates missing evidence and shadow veto']
+  decision-rights-review:
+    input: 'Funding: formalny owner CFO, realnie program czeka na zgodę architekta. Architekt formalnie doradza. Nieznany mandat do veto. Sprawdź prawa decyzji.'
+    must: ['formal vs actual authority separated', 'advice not approval by default', 'unknown veto mandate retained; no new owner invented']
+  governance-design:
+    input: 'Owner fundingowy CFO potwierdzony, compliance dostarcza obowiązkowy dowód, architekt doradza. Dwie rady powtarzają tę samą dyskusję, nie wykazano powodu powtórzenia. Zaproponuj ograniczony mechanizm.'
+    must: ['decision purpose and authority explicit', 'consider direct/asynchronous mechanism and remove/narrow before adding forum', 'preserve compliance control and unresolved duplicate-review evidence']
+  strategy-to-execution-diagnostic:
+    input: 'Cel onboarding 4 dni. 10 projektów w roadmapie bez rezultatów; delivery ownerzy znani, outcome owner nieznany. Raport zawiera tylko ukończone taski. Funding niebadany. Zdiagnozuj traceability.'
+    must: ['activity not outcome evidence', 'outcome owner and execution mechanism unknowns explicit', 'roadmap defect not proof of enterprise-wide funding failure']
+  architecture-review:
+    input: 'Outcome: interoperacyjna walidacja danych. Dwie aplikacje regionalne, owner standardu bez wpływu na funding. Koszt integracji i zależności nieznane. Zdiagnozuj architectural decision boundary.'
+    must: ['organizational/governance vs technology issues separated', 'unknown technology debt remains unknown', 'minimum evidence before target-state design; no consolidation assumption']
+  capability-gap-analysis:
+    input: 'Outcome onboarding 4 dni wymaga weryfikacji danych w 1 dzień. Dziś 3 dni; proces istnieje, owner znany, queue rośnie, brak capacity measurements. Oceń lukę.'
+    must: ['required outcome/current evidence/gap dimension/confidence explicit', 'capacity vs maturity vs integration distinguished', 'no automatic new platform or unsupported maturity scores']
+  capability-map-review:
+    input: 'Mapa: „CRM”, „Finance Department”, „Weryfikacja klienta”. Decyzja: czy inwestycje wspierają customer onboarding. Brak relacji aplikacja–inwestycja; ownership nieznany. Oceń użyteczność mapy.'
+    must: ['system/org-unit labels distinguished from capabilities', 'decision usefulness over complete taxonomy rewrite', 'missing relationships block duplicate-investment conclusion, not capability validity']
+  evidence-loop-review:
+    input: 'Raport miesiąca pokazuje completion 90%, outcome onboarding 8 zamiast 4 dni. Owner raportu znany, nikt nie ma progu działania ani śladu decyzji po raporcie. Oceń loop.'
+    must: ['report-to-action gap distinct from metric-quality hypothesis', 'owner/cadence/threshold/response mechanism assessed', 'no generic KPI catalog instead of diagnosis']
+  kpi-quality-review:
+    input: 'KPI: liczba ukończonych tasków 100. Cel: onboarding 4 dni. Definicja tasku zmienna, owner PMO, cadence monthly, threshold i action nieustalone. Oceń jakość KPI.'
+    must: ['activity metric not outcome proxy', 'definition/decision/owner/cadence/threshold/action evaluated', 'no invented target value']
+  global-local-model-review:
+    input: 'Standard danych globalny, delivery lokalne. Region A ma wymóg regulacyjny i używa workaround; brak oceny kosztu enterprise. Outcome interoperacyjność. Oceń podział odpowiedzialności.'
+    must: ['global consistency not necessarily one implementation', 'local regulatory need and enterprise externality separated', 'workaround not automatically noncompliance']
+  operating-model-review:
+    input: 'Interface ma 8 zwrotów na 10, accountabilities dublowane, resource authority rozdzielona od outcome ownera. Nie wyizolowano konkretnej klasy decyzji ani latency. Oceń operating model, nie org chart.'
+    must: ['mixed interface/accountability/capacity symptoms remain operating-model diagnosis', 'authority/accountability/resources aligned analytically', 'no automatic centralization or invented target model']
+  organizational-interface-review:
+    input: 'Sales przekazuje onboarding bez wymaganych danych w 8/10 przypadków; delivery odsyła. Ownerzy znani, prawa i capacity bez konfliktu. Oceń tylko interface.'
+    must: ['input/output/sender/receiver/friction/consequence specified', 'smallest handoff improvement rather than new forum', 'no authority or capacity root cause invented']
+  portfolio-health-review:
+    input: '5 projektów zielonych lokalnie; wszystkie potrzebują tych samych 2 analityków przez 6 tygodni. Capacity 12 person-weeks, demand 30; mandatory compliance zajmuje 4. Oceń portfolio health.'
+    must: ['system capacity bottleneck visible despite green projects', 'mandatory work separates discretionary capacity', 'diagnosis before ranking and no new owner invented']
+  portfolio-prioritization:
+    input: 'A regulatory mandatory, 4 person-weeks; B szacuje value high bez dowodów; C potwierdzone 20% krótsze onboarding, wymaga B. Capacity 8 person-weeks, brak uzgodnionych wag. Przygotuj decision posture.'
+    must: ['mandatory work separate from value score', 'dependencies/capacity constrain selection', 'no invented weights or scores; normalize evidence before ranking']
+  transformation-blueprint:
+    input: 'Diagnoza i kierunek zatwierdzone: wspólne handoff criteria, pilot 1 regionu. 2 osoby przez 6 tygodni. Nieznany permanent owner, nie zatwierdzono migracji platform. Zrób 90-day mobilisation.'
+    must: ['bounded workstreams tied to diagnosis and capacity', 'owner-to-confirm where authority unknown', 'stage gates and reversible pilot; no committed unresolved platform migration']

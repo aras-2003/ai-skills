@@ -1,0 +1,12 @@
+id: investment-ambiguous-shares-pl
+mode: natural-routing
+expected_target: investment-os-review
+expected_status: clarification_required
+assertions:
+  must:
+    - Ask whether the user wants portfolio observation, portfolio risk review, review of one named security, or investment policy help.
+    - Do not select a single-security workflow when no security is named and no single-security decision is specified.
+    - Do not execute a workflow or provide investment recommendations.
+  must_not:
+    - Route to investment-security-review solely because the prompt contains the Polish word akcje.
+    - Invent holdings, weights, goals, or risk preferences.
