@@ -45,6 +45,14 @@ The native plugin provisions credentials, configures runtime and publishes versi
 
 ## Credential review and recovery
 
+### Evidence-based review for the official local workflow
+
+Before requesting local network-capable execution, inspect the currently installed `site-workflow.mjs` rather than treating an arbitrary terminal as a trusted recipient. In plugin 0.1.75 the verified safeguards are: Site manifest ID validation, native credential HTTPS destination, rejection of Git URL rewriting, disabled HTTP redirects and Git tracing, no persistent credential configuration, and no credential in preparation-command environments. Authentication is scoped to the connector-returned repository URL for Git network operations. These are observed implementation facts, not a blanket safety guarantee for future plugin versions.
+
+State the complete requested operation in the execution justification: the user-authorized private publication, exact Site ID, official script path, sandbox DNS failure, fresh repo-scoped credential delivered through hidden stdin, and the inspected safeguards. Keep terminal launch and subsequent credential delivery subject to their own review. Do not simply change model or resend a rejected credential. New verified evidence can support normal re-evaluation of the same official route; it cannot override a refusal. If rejected again, cancel and preserve source as described below.
+
+On 2026-10-07, after this script inspection and complete execution justification, normal review accepted both terminal launch and hidden-stdin credential delivery; opening the existing source succeeded. This does not establish why the earlier review differed and does not prove a Luna/Sol permission difference. Use this evidence-based procedure with either model.
+
 Approval to start a terminal or reach the host does not imply permission to deliver a secret to that process. `write_stdin` can be reviewed separately. Hidden input prevents display, but is not a permission mechanism. A model switch or previous successful run does not override a current rejection.
 
 If credential delivery is rejected, cancel the waiting workflow without sending a token, discard the credential from orchestration memory and preserve source edits. Do not resend it through another process, wrapper, file, environment variable or connector. Do not mint repeated credentials to retry the rejected transfer. Continue independent local preparation.
