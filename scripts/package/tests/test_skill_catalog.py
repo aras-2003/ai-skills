@@ -62,6 +62,55 @@ class SkillCatalogTests(unittest.TestCase):
                 else:
                     os.environ["SKILLS_FACTORY_SKILLS_ROOT"] = previous
 
+    def test_load_skill_includes_safe_references_but_excludes_eval_fixtures(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "skills"
+            skill = root / "example"
+            references = skill / "references"
+            (references / "evals").mkdir(parents=True)
+            skill.mkdir(parents=True, exist_ok=True)
+            (skill / "SKILL.md").write_text(
+                "---\nname: example\ndescription: Example\n---\n\n# Example\n",
+                encoding="utf-8",
+            )
+            (references / "WORKFLOW.md").write_text("# Workflow\nDo the work.\n", encoding="utf-8")
+            (references / "evals" / "secret.md").write_text("hidden rubric", encoding="utf-8")
+            (references / "binary.bin").write_bytes(b"not text")
+            previous = os.environ.get("SKILLS_FACTORY_SKILLS_ROOT")
+            os.environ["SKILLS_FACTORY_SKILLS_ROOT"] = str(root)
+            try:
+                result = self.catalog.load_skill("example")
+            finally:
+                if previous is None:
+                    os.environ.pop("SKILLS_FACTORY_SKILLS_ROOT", None)
+                else:
+                    os.environ["SKILLS_FACTORY_SKILLS_ROOT"] = previous
+            self.assertEqual(
+                [{"path": "references/WORKFLOW.md", "content": "# Workflow\nDo the work.\n"}],
+                result["reference_files"],
+            )
+
+    def test_reference_symlinks_are_not_followed(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "skills"
+            skill = root / "example"
+            references = skill / "references"
+            references.mkdir(parents=True)
+            (skill / "SKILL.md").write_text("---\nname: example\n---\nbody\n", encoding="utf-8")
+            outside = Path(temp_dir) / "outside.md"
+            outside.write_text("not packaged", encoding="utf-8")
+            (references / "linked.md").symlink_to(outside)
+            previous = os.environ.get("SKILLS_FACTORY_SKILLS_ROOT")
+            os.environ["SKILLS_FACTORY_SKILLS_ROOT"] = str(root)
+            try:
+                result = self.catalog.load_skill("example")
+            finally:
+                if previous is None:
+                    os.environ.pop("SKILLS_FACTORY_SKILLS_ROOT", None)
+                else:
+                    os.environ["SKILLS_FACTORY_SKILLS_ROOT"] = previous
+            self.assertEqual([], result["reference_files"])
+
 
 if __name__ == "__main__":
     unittest.main()

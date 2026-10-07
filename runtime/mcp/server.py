@@ -90,7 +90,7 @@ def list_skills() -> dict:
 
 @mcp.tool()
 def load_skill(skill_name: str) -> dict:
-    """Load exact packaged skill instructions for host-model execution."""
+    """Load packaged skill instructions and safe textual references for host-model execution."""
     return _load_skill(skill_name)
 
 

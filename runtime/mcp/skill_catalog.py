@@ -12,6 +12,7 @@ import yaml
 
 
 _SAFE_NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
+_REFERENCE_SUFFIXES = {".md", ".txt", ".yaml", ".yml", ".json", ".csv"}
 
 
 def _plugin_root() -> Path:
@@ -109,9 +110,27 @@ def load_skill(skill_name: str) -> dict[str, Any]:
     item = matches[0]
     skill_dir = skills_root() / item["directory"]
     _, instructions = _frontmatter(skill_dir / "SKILL.md")
+    references = []
+    reference_root = skill_dir / "references"
+    if reference_root.is_dir() and not reference_root.is_symlink():
+        for path in sorted(reference_root.rglob("*")):
+            if (
+                not path.is_file()
+                or path.is_symlink()
+                or path.suffix.lower() not in _REFERENCE_SUFFIXES
+                or "evals" in path.relative_to(reference_root).parts
+            ):
+                continue
+            references.append(
+                {
+                    "path": path.relative_to(skill_dir).as_posix(),
+                    "content": path.read_text(encoding="utf-8"),
+                }
+            )
     return {
         **{key: value for key, value in item.items() if key != "directory"},
         "execution_mode": "host_model_executes_loaded_instructions",
         "instructions": instructions,
+        "reference_files": references,
         "source_revision": os.environ.get("SKILLS_FACTORY_SOURCE_REVISION", "unattested"),
     }
