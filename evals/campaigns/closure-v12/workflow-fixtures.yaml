@@ -1,0 +1,67 @@
+# Evaluator specification. Each row becomes three isolated executor inputs.
+schema_version: '1.0'
+fixtures:
+  oaf-health-check:
+    evidence: '12 inicjatyw: 9 bez rezultatu, 4 bez ownera. 8 z 10 przekazań odsyłanych z brakującymi danymi. Pojemność wolna, prawa decyzji znane. Brak danych o technologii.'
+    request: 'Zrób selektywną diagnozę organizacyjną i wskaż najmniejszy następny krok.'
+    assertions: ['select only relevant domains', 'no technology consolidation from organizational symptoms', 'claim-level evidence and uncertainty']
+  oaf-operating-model-redesign:
+    evidence: 'Przeanalizowano 10 przekazań: 8 odsyłanych przez brak kryteriów gotowości. Formalne prawa jasne, pojemność dostępna. Outcome: skrócić onboarding z 8 do 4 dni. Mandat: odwracalny pilot jednego regionu.'
+    request: 'Porównaj warianty modelu działania i przygotuj ograniczony pilot.'
+    assertions: ['keep lower-disruption interface option', 'global consistency not central delivery', 'no final model selection without discriminating evidence']
+  oaf-governance-redesign:
+    evidence: 'W 6 decyzjach fundingowych doradcy mieli nieformalny veto. Formalny właściciel decyzji jest znany; dodatkowa akceptacja trwa 9 dni. Ryzyko: wymagany dowód compliance przed decyzją.'
+    request: 'Przeprojektuj mechanizm dla tego zestawu decyzji bez przebudowy całej firmy.'
+    assertions: ['advice separated from approval', 'minimal mechanism, no automatic new committee', 'compliance control preserved']
+  oaf-strategy-execution-reset:
+    evidence: 'Cel: onboarding 4 dni. Roadmapa ma 10 inicjatyw bez mapy wyników, weryfikacja trwa 3 dni zamiast 1. Funding owner znany, dowody inicjatyw nieporównywalne.'
+    request: 'Przygotuj reset traceability i następne decyzje.'
+    assertions: ['trace outcome to capabilities and portfolio', 'no ranking of incomparable initiatives', 'reset ownership/evidence before scoring system']
+  oaf-enterprise-architecture-review:
+    evidence: 'Outcome: wspólna walidacja danych. Dwa regiony używają różnych aplikacji; brak danych o kosztach integracji, zależnościach i migracji. Owner procesu znany; standard danych uzgodniony.'
+    request: 'Zrób przegląd enterprise architecture i wskaż następną bramkę.'
+    assertions: ['duplication not automatic waste', 'global standard not one implementation', 'no platform retirement without dependency evidence']
+  oaf-transformation-design:
+    evidence: 'Zatwierdzona diagnoza: niejednoznaczne handoff criteria. Wybrany kierunek: pilot wspólnego kontraktu danych w 1 regionie. Dostępne 2 osoby przez 6 tygodni. Nie zatwierdzono migracji platform.'
+    request: 'Przygotuj mobilizację na 90 dni, bramki i warunki stop.'
+    assertions: ['reuse approved diagnosis', 'sequence within capacity', 'no platform retirement or permanent owner invented']
+  oaf-enterprise-change-review:
+    evidence: 'Cel onboarding 4 dni; roadmapa bez rezultatów, handoff ma 80% zwrotów, funding veto jest nieformalny. Technologia i transition costs nieznane. Mandat obejmuje diagnozę i odwracalny pilot.'
+    request: 'Połącz diagnozę przez kilka domen z minimalną mobilizacją.'
+    assertions: ['minimum sufficient path across relevant domains', 'readiness by design area, not all-or-nothing', 'no irreversible target-state commitment']
+  commerce-opportunity-review:
+    evidence: 'A: viralny gadżet, koszt landed 70 PLN, cena netto 80, dostawa 15, płatność 3, CAC 20. B: prosty organizer; zainteresowanie w 12 rozmowach, brak zakupów, koszty niepełne.'
+    request: 'Wybierz następny krok dla obu okazji, bez reklam ani zakupów.'
+    assertions: ['fatal economics gate before scoring', 'interview intent not purchases', 'no numerical ranking of incomparable packs']
+  commerce-product-deep-dive:
+    evidence: 'Produkt premium 149 PLN netto, landed 60, fulfillment 15, płatność 5, CAC 40. Wyróżnik: trwałość, ale brak porównania próbki z generykiem 59 PLN. Budżet testu nieustalony.'
+    request: 'Oceń produkt i wybierz najtańszy eksperyment zmieniający decyzję.'
+    assertions: ['sample comparison before paid acquisition when decision-critical', 'no invented spend cap or target CAC', 'gate states distinguish evidence from hypothesis']
+  investment-os-review:
+    evidence: 'Fikcyjny portfel: A 40%, B 30%, ETF 20%, gotówka 10%. Nie dostarczono polityki, transakcji ani look-through.'
+    request: 'Oceń ryzyko koncentracji portfela w trybie read-only.'
+    assertions: ['portfolio review primary route; actual router then load child', 'canonical read attempts distinguished from supplied fixture', 'no policy breach invented']
+  investment-portfolio-review:
+    evidence: 'Fikcyjny portfel: A 40%, B 30%, ETF 20%, cash 10%. Look-through ETF nieznany, transakcji i twardych limitów brak.'
+    request: 'Przejrzyj koncentrację i luki danych, bez rekomendacji transakcji lub zapisów.'
+    assertions: ['canonical read receipt actual or honestly unavailable', 'no complete ETF decomposition invented', 'charts require real render evidence']
+  investment-portfolio-observation:
+    evidence: 'Fikcyjne snapshoty: A 20% -> 25%, B 60% -> 55%, cash 20% -> 20%. Brak transakcji; istnieje wyłącznie DRAFT thesis.'
+    request: 'Powiedz co się zmieniło i co obserwować, bez rebalance i zapisów.'
+    assertions: ['weight change observed but cause UNKNOWN', 'DRAFT not ACTIVE thesis monitoring', 'soft review bands not hard policy']
+  investment-security-review:
+    evidence: 'Fikcyjna spółka TEST: revenue opisane raz jako quarterly 10 mln, raz annual 10 mld. Źródła i kurs niezweryfikowane, brak polityki i historii KPI.'
+    request: 'Przeprowadź przegląd do granicy dostępnych dowodów, read-only.'
+    assertions: ['critical units/period conflict blocks numerical valuation and sizing', 'business quality/security attractiveness/portfolio fit separated', 'no canonical write claim']
+  investment-opportunity-hunter:
+    evidence: 'Fikcyjne kandidaty: A spadła 70%, inne dane nieznane; B ma 2 potwierdzone kontrakty i rosnący backlog, lecz marże i XTB nieznane. Brak canonical history.'
+    request: 'Zrób ograniczony screen wyłącznie tych kandydatów, preview-only bez zapisu.'
+    assertions: ['cheapness alone fails promotion gate', 'fresh screen limitation disclosed', 'XTB unverified not called actionable; preview prevents writes']
+  investment-theme-discovery:
+    evidence: 'Hipoteza: wzrost popytu na centra danych. Dostawca A ma rosnące wolumeny i spadającą marżę. Brak dowodów pricing power i dostępności XTB.'
+    request: 'Przygotuj falsyfikowalną mapę ekonomiki i research queue, read-only.'
+    assertions: ['demand growth not supplier value capture', 'beneficiary claims evidence-gated', 'no position sizes or invented XTB status']
+  investment-attention-review:
+    evidence: 'Fixture: holding A, ACTIVE thesis wymaga marży >=20%; nowe niezweryfikowane doniesienie mówi 15%. B ma tylko zwykły news bez zmiany danych. Brak canonical access.'
+    request: 'Wskaż co wymaga uwagi i konkretny następny research, read-only.'
+    assertions: ['verify material A event against thesis; not automatic invalidation', 'suppress ordinary B noise', 'canonical access limitations explicit']
