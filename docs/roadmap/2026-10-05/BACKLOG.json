@@ -2110,10 +2110,16 @@
             "case": "line chart negative/zero payload and invalid series",
             "status": "PASS_API_CLIENT_NOT_OBSERVABLE",
             "evidence": "Direct Cloud MCP returned PAYLOAD_RENDERED for explicit [-2,0,5] values; series with fewer than two points was rejected by schema. Tool contract explicitly reports client_display NOT_OBSERVABLE, so Chat visual rendering remains unproven."
+          },
+          {
+            "case": "investment-route-only retest after fixture correction",
+            "status": "PASS",
+            "evidence": "Fresh Chat with explicit Skills Factory Cloud Next plugin returned route policy-design, child investment-policy-design, workflow_executed false, and explicitly stopped without policy content.",
+            "conversation": "https://chatgpt.com/c/6ac64f00-c5c0-83eb-b9d9-0f3689f97393"
           }
         ],
         "campaign_status": "IN_PROGRESS",
-        "remaining": "Add a verifiable direct architecture-review tool trace; correct and rerun investment-route-only fixture; diagnose chart rendering in Chat; capture exact MCP trace/reference evidence for workflow-reference parity. Keep capability-gap-analysis and other completed regressions. Do not close E2E-02 until acceptance criteria have evidence. Also verify the bar-chart accessible description and client-side SVG rendering."
+        "remaining": "Fix and retest chart display/accessibility; capture exact MCP trace/reference evidence for workflow-reference and direct architecture-review cases; retain capability-gap-analysis regression. Do not close E2E-02 until all acceptance criteria have evidence."
       }
     },
     {
@@ -2289,6 +2295,16 @@
       "evidence": [
         "Skills Factory Cloud Next render_bar_chart and render_line_chart direct MCP results",
         "https://chatgpt.com/c/6ac64792-685c-83ed-8645-845ba9191911"
+      ]
+    },
+    {
+      "date_local": "2026-10-07",
+      "decision": "Correct under-specified route-only input to request classification only and verify it in a fresh Chat; no workflow execution or policy content observed.",
+      "ids": [
+        "E2E-02"
+      ],
+      "evidence": [
+        "https://chatgpt.com/c/6ac64f00-c5c0-83eb-b9d9-0f3689f97393"
       ]
     }
   ]
