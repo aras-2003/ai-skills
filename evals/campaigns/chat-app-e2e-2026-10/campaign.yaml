@@ -2,6 +2,11 @@ campaign: chat-app-e2e-2026-10
 routing_registry: evals/routing/registry.yaml
 routing_case_ids: []
 fallback_cases:
+  - id: chat-app-workflow-reference-parity
+    mode: explicit
+    target: cloud-chat-runtime
+    input: evals/chat-apps/workflow-reference-parity.input.md
+    rubric: evals/chat-apps/workflow-reference-parity.rubric.yaml
   - id: chat-app-investment-route-only
     mode: explicit
     target: cloud-chat-runtime

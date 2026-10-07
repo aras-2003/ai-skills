@@ -1,0 +1,24 @@
+case_id: chat-app-workflow-reference-parity
+version: 1
+required_runtime_evidence:
+  - fresh_chat_in_chat_mode
+  - exact_site_mcp_identity_and_runtime_version
+  - visible_tool_trace_for_load_skill
+  - exact_loaded_skill_result_showing_references_WORKFLOW_md
+  - final_answer_from_executed_workflow
+pass:
+  must:
+    - select oaf-operating-model-redesign or a clearly justified equivalent workflow
+    - load the packaged capability before executing it
+    - load_skill result includes references/WORKFLOW.md content, not merely a path
+    - final response follows the workflow's substantive stages and separates prompt facts from assumptions
+    - no unsupported claims that external research, company data or implementation actions occurred
+  must_not:
+    - claim PASS from a local package build or a tool schema alone
+    - expose evaluator fixtures or rubrics to the executor
+fail:
+  - load_skill omits required workflow reference content
+  - the host reports only a route/skill name and does not execute the requested workflow
+  - material workflow steps are skipped without explanation
+blocked:
+  - exact Site MCP version or tool trace is unavailable
