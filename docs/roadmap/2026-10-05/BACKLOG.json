@@ -2051,7 +2051,50 @@
       "effort": "M",
       "status": "IN_PROGRESS",
       "owner": "Codex",
-      "legacy_links": []
+      "legacy_links": [],
+      "progress": {
+        "last_observed_run": "2026-10-07",
+        "target": "Skills Factory Cloud Next Site v9; Site source 3947834d3c3f00a8a7ed0491184a89a754129068; Lab 0.33.4 source b5ce981af12003e8a8c00ed66efb58f3cee3c314",
+        "evidence": [
+          {
+            "case": "runtime attestation",
+            "status": "PASS",
+            "evidence": "Fresh Chat with explicit plugin returned verified runtime_info for Site v9; exact source revision and tool schema digest visible; runtime-only request."
+          },
+          {
+            "case": "investment single-security sizing route",
+            "status": "PASS",
+            "evidence": "Fresh Chat invoked Cloud MCP and loaded investment-security-review; router returned security-review, recommendation null, workflow_executed false; response respected decision gates."
+          },
+          {
+            "case": "aggregate portfolio",
+            "status": "PASS",
+            "evidence": "Fresh Chat routed aggregate AAPL/MSFT/cash example to investment-portfolio-review and kept claims bounded to supplied synthetic data."
+          },
+          {
+            "case": "ambiguous investment request",
+            "status": "PASS",
+            "evidence": "Fresh Chat returned clarification_required/unknown and asked a clarifying question without loading a workflow."
+          },
+          {
+            "case": "operating-model workflow reference parity",
+            "status": "REVIEW_REQUIRED",
+            "evidence": "Fresh Chat used oaf-operating-model-redesign behavior; direct MCP load_skill confirmed references/WORKFLOW.md and excluded references/evals/, but Chat UI did not expose exact loaded reference/tool payload required by evaluator."
+          },
+          {
+            "case": "explicit line chart",
+            "status": "FAIL",
+            "evidence": "Fresh Chat retained the exact Q1/Q2/Q3 values in a table but the screenshot showed no chart; payload/tool visibility does not satisfy client-render acceptance."
+          },
+          {
+            "case": "investment-route-only policy design",
+            "status": "INVALID_FIXTURE",
+            "evidence": "Router-only rubric expected no workflow execution, but natural-language fixture asked to design a policy. Chat reasonably continued with policy content after routing. Preserve as invalid evaluation, not runtime failure; amend input to explicitly demand routing only and no child execution, then rerun."
+          }
+        ],
+        "campaign_status": "IN_PROGRESS",
+        "remaining": "Add an explicit direct architecture-review case and keep capability-gap-analysis regression; correct and rerun investment-route-only fixture; diagnose chart rendering in Chat; capture exact MCP trace/reference evidence for workflow-reference parity. Do not close E2E-02 until all acceptance criteria have evidence."
+      }
     },
     {
       "id": "E2E-03",
@@ -2171,6 +2214,17 @@
         "ChatGPT Work MCP trace for route_investment_request, architecture-review, capability-gap-analysis and render_line_chart",
         "evals/campaigns/chat-app-e2e-2026-10/campaign.yaml",
         "evals/campaigns/runtime-validation-2026-10-r16/RUNBOOK.md"
+      ]
+    },
+    {
+      "date_local": "2026-10-07",
+      "decision": "Record fresh Chat E2E evidence against Skills Factory Cloud Next Site v9. Keep E2E-02 open: visible chart rendering failed, route-only fixture is under-specified, and workflow-reference trace is not fully inspectable in Chat UI.",
+      "ids": [
+        "E2E-02"
+      ],
+      "evidence": [
+        "Chat runtime_info verified Site source 3947834d3c3f00a8a7ed0491184a89a754129068 and Lab source b5ce981af12003e8a8c00ed66efb58f3cee3c314",
+        "Fresh Chat conversation receipts from 2026-10-07 are recorded in E2E-02.progress"
       ]
     }
   ]
