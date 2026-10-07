@@ -37,7 +37,7 @@ Wynik zawiera:
 - `summary.json`: kontrolne liczby; nie zawiera runtime PASS.
 - `orchestrator-handoff.zip`: całość do przekazania Lunie-orchestratorowi; **nie** przekazuj tego archiwum niezależnemu executorowi.
 
-Pakiet obejmuje wszystkie 245 przypadków źródłowych (240 skills, 5 repo workflows), 88 par runtime input/rubric, 48 nowych przypadków całych workflowów, 36 regresji i testów granic (w tym brakujące negative cases meta/Career) i 70 testów ładowania/parytetu. To **487 definicji**, nie 487 wykonanych testów. Nie dodawaj tych kategorii do historycznej liczby R16.
+Pakiet obejmuje wszystkie 245 przypadków źródłowych (240 skills, 5 repo workflows), 89 par runtime input/rubric, 48 nowych przypadków całych workflowów, 37 regresji i testów granic (w tym brakujące negative cases meta/Career oraz regresję niejednoznacznego posiadania akcji) i 70 testów ładowania/parytetu. To **489 definicji**, nie 489 wykonanych testów. Nie dodawaj tych kategorii do historycznej liczby R16.
 
 38 ogólnych fixture'ów dostało w tym nowym pakiecie konkretne dane i obserwowalne kryteria z `skill-refinements.yaml`; oryginałów nie zmieniono. Zachowano ich pochodzenie i hash oryginalnego inputu. Dwa historyczne fallbacki zakładały brak specjalisty w produkcyjnym katalogu; overlay v12 sprawdza użycie faktycznie dostępnego specjalisty. Wyników overlay **nie przypisuj staremu R16**. Historyczne wyniki i piny pozostają nietknięte.
 

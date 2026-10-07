@@ -6,6 +6,12 @@ cases:
     must: ['route_investment_request invoked with the original Polish uppercase request', 'opportunity route; no substantive investment analysis']
     must_not: ['claim that classification executed the child workflow']
     backlog: [ENG-10, E2E-02]
+  - id: v12-ambiguous-shares
+    target: investment-os-review
+    input: 'Mam akcje. Co zrobić?'
+    must: ['clarification_required because neither the security nor the decision object is clear', 'candidates empty; child workflow investment-os-review', 'workflow_executed false']
+    must_not: ['route to investment-security-review solely from the word akcje', 'provide recommendations']
+    backlog: [ENG-10, E2E-02]
   - id: v12-lowercase-pl
     target: investment-os-review
     input: 'Tylko sklasyfikuj prośbę „Szukaj spółek”, bez analizy ani zapisywania czegokolwiek.'
