@@ -1,5 +1,11 @@
 schema_version: '1.0'
 cases:
+  - id: v14-polish-direct-security-review
+    target: investment-os-review
+    input: 'Tylko sklasyfikuj trzy prośby: „Oceń spółkę ASML.”, „Przeanalizuj akcje NVDA.” i „Review stock ACN”. Nie wykonuj analizy ani zapisu.'
+    must: ['actual routing calls for each request; all select investment-security-review', 'workflow_executed false and no recommendations']
+    must_not: ['clarification_required for these explicit analysis requests', 'execute a security workflow instead of classifying']
+    backlog: [ENG-10, E2E-02]
   - id: v12-uppercase-pl
     target: investment-os-review
     input: 'Tylko sklasyfikuj prośbę „SZUKAJ SPÓŁEK”, bez analizy ani zapisywania czegokolwiek.'

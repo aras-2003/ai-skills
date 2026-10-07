@@ -6,7 +6,7 @@ import unittest
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from prepare_closure import assemble, prepare, validate
+from prepare_closure import ROOT, assemble, prepare, validate
 
 
 class ClosurePackTests(unittest.TestCase):
@@ -82,6 +82,34 @@ class ClosurePackTests(unittest.TestCase):
         self.assertTrue(all(c['writes'] == 'forbidden-in-real-systems' for c in q))
         guarded = [c for c in q if 'investment' in c['target'] or c['target'] == 'decision-journal-update']
         self.assertTrue(all(c['integration_write_gate'] == 'isolated-test-store-required' for c in guarded))
+
+    def test_new_site_baseline_preserves_historical_snapshot(self):
+        historical = ROOT / 'evals/campaigns/closure-v12/baseline.json'
+        original = historical.read_bytes()
+        baseline = json.loads(original)
+        baseline['site_version'] = 13
+        baseline['runtime']['release_id'] = 'a' * 40
+        baseline['runtime']['source_revision'] = 'a' * 40
+        selected = Path(self.temp.name) / 'v13.json'
+        selected.write_text(json.dumps(baseline))
+        output = Path(self.temp.name) / 'v13'
+        prepare(output, baseline_path=selected)
+        self.assertEqual(json.loads((output / 'queue.json').read_text())['baseline']['source_revision'], 'a' * 40)
+        self.assertEqual(json.loads((output / 'baseline.json').read_text())['site_version'], 13)
+        self.assertEqual(historical.read_bytes(), original)
+
+    def test_selected_baseline_rejects_unverified_and_mixed_identity(self):
+        baseline = json.loads((ROOT / 'evals/campaigns/closure-v12/baseline.json').read_text())
+        selected = Path(self.temp.name) / 'bad.json'
+        baseline['runtime']['attestation_status'] = 'unattested'
+        selected.write_text(json.dumps(baseline))
+        with self.assertRaisesRegex(ValueError, 'must be verified'):
+            assemble(baseline_path=selected)
+        baseline['runtime']['attestation_status'] = 'verified'
+        baseline['catalog']['source_revision'] = 'b' * 40
+        selected.write_text(json.dumps(baseline))
+        with self.assertRaisesRegex(ValueError, 'catalog/Lab source mismatch'):
+            assemble(baseline_path=selected)
 
 
 if __name__ == '__main__':

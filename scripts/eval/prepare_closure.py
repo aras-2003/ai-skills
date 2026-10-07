@@ -1,4 +1,4 @@
-"""Assemble, never execute, the additive Site-v12 closure campaign.
+"""Assemble, never execute, the additive closure campaign with a selected Site baseline.
 
 Artifacts are reproducible and contain no credentials. Existing campaigns and
 backlog statuses remain untouched. Run with --output outside tracked sources.
@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import zipfile
 
@@ -44,8 +45,18 @@ def component_sources(root=ROOT):
     return result
 
 
-def assemble(root=ROOT):
-    baseline = json.loads((root / 'evals/campaigns/closure-v12/baseline.json').read_text())
+def assemble(root=ROOT, baseline_path=None):
+    baseline = json.loads((baseline_path or root / 'evals/campaigns/closure-v12/baseline.json').read_text())
+    if baseline_path is not None:
+        runtime = baseline['runtime']
+        if runtime.get('attestation_status') != 'verified':
+            raise ValueError('selected runtime baseline must be verified')
+        if not re.fullmatch(r'[0-9a-f]{40}', runtime.get('source_revision', '')):
+            raise ValueError('selected runtime must have a full source revision')
+        if runtime.get('release_id') != runtime.get('source_revision'):
+            raise ValueError('selected runtime release/source mismatch')
+        if baseline['catalog'].get('source_revision') != runtime['lab_release']['source_revision']:
+            raise ValueError('selected catalog/Lab source mismatch')
     sources = component_sources(root)
     observed = {x['name'] for x in baseline['catalog']['skills']}
     if observed != set(sources):
@@ -163,11 +174,11 @@ def assemble(root=ROOT):
     return baseline, sources, cases
 
 
-def prepare(output: Path, root=ROOT):
+def prepare(output: Path, root=ROOT, baseline_path=None, instructions_path=None):
     # Never overwrite prior receipts on rerun.
     if output.exists() and any(output.iterdir()):
         raise ValueError('output must be a new/empty directory; preserve previous evidence')
-    baseline, sources, cases = assemble(root)
+    baseline, sources, cases = assemble(root, baseline_path)
     output.mkdir(parents=True, exist_ok=True)
     queue = []
     for i, case in enumerate(cases, 1):
@@ -186,6 +197,7 @@ def prepare(output: Path, root=ROOT):
                       'scope': 'repository-workflow' if case['target'] == 'skill-development' else 'Cloud-MCP/host-model',
                       'integration_write_gate': 'isolated-test-store-required' if 'investment' in case['target'] or case['target'] == 'decision-journal-update' else None})
     write_json(output / 'queue.json', {'schema_version': '1.0', 'baseline': baseline['runtime'], 'cases': queue})
+    write_json(output / 'baseline.json', baseline)
     coverage = []
     for target, path in sorted(sources.items()):
         relevant = [c for c in queue if c['target'] == target]
@@ -222,11 +234,11 @@ def prepare(output: Path, root=ROOT):
                'runtime_tests_executed': 0, 'statuses_changed': 0,
                'by_lane': {lane: sum(c['lane'] == lane for c in queue) for lane in sorted({c['lane'] for c in queue})}}
     write_json(output / 'summary.json', summary)
-    (output / 'LUNA-INSTRUCTIONS.md').write_bytes((root / 'docs/LUNA-CLOSURE-V12.md').read_bytes())
+    (output / 'LUNA-INSTRUCTIONS.md').write_bytes((instructions_path or root / 'docs/LUNA-CLOSURE-V12.md').read_bytes())
     # This archive is for the orchestrator, never the independent executor.
     with zipfile.ZipFile(output / 'orchestrator-handoff.zip', 'w', zipfile.ZIP_DEFLATED) as z:
         paths = [output / name for name in ('queue.json', 'coverage.json', 'BACKLOG.md',
-                 'backlog-snapshot.json', 'summary.json', 'LUNA-INSTRUCTIONS.md', 'executor-inputs.zip')]
+                 'backlog-snapshot.json', 'summary.json', 'baseline.json', 'LUNA-INSTRUCTIONS.md', 'executor-inputs.zip')]
         paths.extend(sorted((output / 'evaluator').glob('*.rubric.json')))
         for path in paths:
             info = zipfile.ZipInfo(path.relative_to(output).as_posix(), date_time=(2026, 10, 7, 0, 0, 0))
@@ -264,9 +276,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--validate', action='store_true')
+    parser.add_argument('--baseline', type=Path, help='fresh verified runtime/catalog snapshot; preserve historical baselines')
+    parser.add_argument('--instructions', type=Path, help='instructions for the selected live Site campaign')
     args = parser.parse_args()
     if args.validate:
         validate(args.output)
         print('closure artifacts validated; no runtime execution claimed')
     else:
-        print(json.dumps(prepare(args.output), indent=2))
+        print(json.dumps(prepare(args.output, baseline_path=args.baseline, instructions_path=args.instructions), indent=2))
