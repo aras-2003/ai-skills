@@ -2090,10 +2090,20 @@
             "case": "investment-route-only policy design",
             "status": "INVALID_FIXTURE",
             "evidence": "Router-only rubric expected no workflow execution, but natural-language fixture asked to design a policy. Chat reasonably continued with policy content after routing. Preserve as invalid evaluation, not runtime failure; amend input to explicitly demand routing only and no child execution, then rerun."
+          },
+          {
+            "case": "direct architecture-review",
+            "status": "PASS_BEHAVIOR_TRACE_REVIEW_REQUIRED",
+            "evidence": "Fresh Chat explicitly selected Skills Factory Cloud Next, named architecture-review v1.0.0 and exact Lab revision. Response separated supplied facts from unknowns, rejected unsupported microservices rewrite, and gave bounded diagnostic; raw MCP load payload was not exposed in the visible trace."
+          },
+          {
+            "case": "capability-gap-analysis",
+            "status": "PASS_BEHAVIOR_TRACE_REVIEW_REQUIRED",
+            "evidence": "Fresh Chat explicitly selected Skills Factory Cloud Next, named capability-gap-analysis v1.0.0 and exact Lab revision. Response separated confirmed gaps from hypotheses, did not rank interventions without impact data, and defined evidence to collect; raw MCP load payload was not exposed in visible trace."
           }
         ],
         "campaign_status": "IN_PROGRESS",
-        "remaining": "Add an explicit direct architecture-review case and keep capability-gap-analysis regression; correct and rerun investment-route-only fixture; diagnose chart rendering in Chat; capture exact MCP trace/reference evidence for workflow-reference parity. Do not close E2E-02 until all acceptance criteria have evidence."
+        "remaining": "Add a verifiable direct architecture-review tool trace; correct and rerun investment-route-only fixture; diagnose chart rendering in Chat; capture exact MCP trace/reference evidence for workflow-reference parity. Keep capability-gap-analysis and other completed regressions. Do not close E2E-02 until acceptance criteria have evidence."
       }
     },
     {
@@ -2225,6 +2235,17 @@
       "evidence": [
         "Chat runtime_info verified Site source 3947834d3c3f00a8a7ed0491184a89a754129068 and Lab source b5ce981af12003e8a8c00ed66efb58f3cee3c314",
         "Fresh Chat conversation receipts from 2026-10-07 are recorded in E2E-02.progress"
+      ]
+    },
+    {
+      "date_local": "2026-10-07",
+      "decision": "Extend v9 Chat campaign with direct architecture-review and capability-gap-analysis behavior checks; both responses respected evidence boundaries, while raw tool trace remains a UI evidence gap.",
+      "ids": [
+        "E2E-02"
+      ],
+      "evidence": [
+        "https://chatgpt.com/c/6ac649d4-fdfc-83ed-bd94-9231a314d658",
+        "https://chatgpt.com/c/6ac64a32-8fb8-83eb-9428-338a8c8eadee"
       ]
     }
   ]
