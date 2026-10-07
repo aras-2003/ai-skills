@@ -2100,10 +2100,20 @@
             "case": "capability-gap-analysis",
             "status": "PASS_BEHAVIOR_TRACE_REVIEW_REQUIRED",
             "evidence": "Fresh Chat explicitly selected Skills Factory Cloud Next, named capability-gap-analysis v1.0.0 and exact Lab revision. Response separated confirmed gaps from hypotheses, did not rank interventions without impact data, and defined evidence to collect; raw MCP load payload was not exposed in visible trace."
+          },
+          {
+            "case": "bar chart payload and input validation",
+            "status": "PASS_API_WITH_ACCESSIBILITY_DEFECT",
+            "evidence": "Direct Cloud MCP call returned embedded SVG, exact [3,0] data, and PAYLOAD_RENDERED; mismatched labels/values were rejected. SVG desc incorrectly says 'Line points use equally spaced categories' for a bar chart."
+          },
+          {
+            "case": "line chart negative/zero payload and invalid series",
+            "status": "PASS_API_CLIENT_NOT_OBSERVABLE",
+            "evidence": "Direct Cloud MCP returned PAYLOAD_RENDERED for explicit [-2,0,5] values; series with fewer than two points was rejected by schema. Tool contract explicitly reports client_display NOT_OBSERVABLE, so Chat visual rendering remains unproven."
           }
         ],
         "campaign_status": "IN_PROGRESS",
-        "remaining": "Add a verifiable direct architecture-review tool trace; correct and rerun investment-route-only fixture; diagnose chart rendering in Chat; capture exact MCP trace/reference evidence for workflow-reference parity. Keep capability-gap-analysis and other completed regressions. Do not close E2E-02 until acceptance criteria have evidence."
+        "remaining": "Add a verifiable direct architecture-review tool trace; correct and rerun investment-route-only fixture; diagnose chart rendering in Chat; capture exact MCP trace/reference evidence for workflow-reference parity. Keep capability-gap-analysis and other completed regressions. Do not close E2E-02 until acceptance criteria have evidence. Also verify the bar-chart accessible description and client-side SVG rendering."
       }
     },
     {
@@ -2143,6 +2153,28 @@
       ],
       "depends_on": [
         "E2E-01",
+        "E2E-02"
+      ],
+      "effort": "M",
+      "status": "PROPOSED",
+      "owner": "UNASSIGNED",
+      "legacy_links": []
+    },
+    {
+      "id": "E2E-05",
+      "priority": "P1",
+      "epic": "Runtime E2E hardening",
+      "type": "runtime/rendering",
+      "title": "Naprawić dostępność i widoczność wykresów w Chat",
+      "rationale": "Testy Cloud MCP potwierdzają generowanie payloadu SVG, ale Chat nie pokazał wykresu w odpowiedzi; dodatkowo opis dostępnościowy bar chart zawiera liniową etykietę 'Line points use equally spaced categories'.",
+      "scope": "Zdiagnozować i naprawić serializację/obsługę embedded SVG w Chat bez zmiany danych źródłowych. Poprawić opis dostępnościowy osobno dla bar/line, zachować dokładną tabelę danych oraz jawnie oznaczać klientom brak obsługi renderowania.",
+      "acceptance_criteria": [
+        "Świeży Chat pokazuje wykres oraz dokładne wartości z tabeli dla line i bar chart albo jasno informuje o braku renderera bez twierdzenia, że obraz jest widoczny",
+        "Bar chart nie zawiera opisu dostępnościowego dotyczącego punktów liniowych; title, desc i labels są zgodne z typem wykresu",
+        "Testy obejmują zera, wartości ujemne, walidację zgodności długości oraz minimalną liczbę punktów",
+        "Receipt rozdziela PAYLOAD_RENDERED od CLIENT_RENDERED i zawiera widoczny dowód UI"
+      ],
+      "depends_on": [
         "E2E-02"
       ],
       "effort": "M",
@@ -2246,6 +2278,17 @@
       "evidence": [
         "https://chatgpt.com/c/6ac649d4-fdfc-83ed-bd94-9231a314d658",
         "https://chatgpt.com/c/6ac64a32-8fb8-83eb-9428-338a8c8eadee"
+      ]
+    },
+    {
+      "date_local": "2026-10-07",
+      "decision": "Add E2E-05 after Cloud MCP chart contract tests confirmed SVG payload generation but exposed a bar-chart accessibility-description defect and Chat client display gap.",
+      "ids": [
+        "E2E-05"
+      ],
+      "evidence": [
+        "Skills Factory Cloud Next render_bar_chart and render_line_chart direct MCP results",
+        "https://chatgpt.com/c/6ac64792-685c-83ed-8645-845ba9191911"
       ]
     }
   ]
