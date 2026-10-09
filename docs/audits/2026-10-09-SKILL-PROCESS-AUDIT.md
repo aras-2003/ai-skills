@@ -38,6 +38,30 @@ python scripts/validate/validate_all.py
 
 On CI, the full **54-row per-skill JSON report** is preserved in the `skills-factory-lifecycle-audit` artifact attached to the PR workflow run. **The machine-readable report is the item-by-item record.** `STATIC_CHECKS_OK` means the deterministic signals found no flagged gaps, but `semantic_review: REQUIRED` still holds. `REVIEW_REQUIRED` demands a human or dedicated source inspection. `STATIC_BLOCKER` means structure/coverage is insufficient and the local source gate blocks.
 
+## Verified exact-branch static result (CI)
+
+After fixing a depth-limited discovery bug (the first audit scanned only 30 source skills), the re-run inspected **all 54** recursively. The final source-head `f040781391f48db5d1ec3a97086674b333a3171f` passed [Validate Skills](https://github.com/aras-2003/skills-factory/actions/runs/37997307546) and [Domain Integrity](https://github.com/aras-2003/skills-factory/actions/runs/37997307565).
+
+- **54/54 inventoried** with both positive and negative fixtures; every suite now has at least two of each type.
+- **0 deterministic structural blockers**.
+- **29 `STATIC_CHECKS_OK`** (only means the source checks emitted no warning).
+- **25 `REVIEW_REQUIRED`** (source/test quality signals need a reviewer).
+- Finding signals (some may overlap): **20** heuristic robustness/edge-coverage flags; **3** routing-description trigger cues; **3** nonstandard procedural headings; **1** nonstandard purpose heading; **2** progressive-disclosure warnings. These are not 29 or 25 model quality PASS/FAIL verdicts.
+- `runtime_evidence = NOT_RUN` for every row; `semantic_review = REQUIRED` for **all** 54.
+
+### Exact named review queue from CI
+
+| Review type | Skill names / next action |
+|---|---|
+| Description routing cues (3) | `investment-attention-triage`, `thesis-monitor`, `capability-map-review` — review trigger clarity and preserve scope boundaries before editing source. |
+| Progressive disclosure (2) | `report-composer`, `visual-output-design` — move conditional material only with unchanged safety hard stops, see AUD-03. |
+| Nonstandard headings (3 procedure, 1 purpose) | `skill-authoring`, `skill-release-review`, `skill-test-design` — verify semantic equivalence of `Current authoring principles`, `Review procedure`, `Design procedure`; treat heading mismatch as a **heuristic review**, not a defect by itself. |
+| Robustness-case heuristic (20) | Refer to the complete JSON per-skill report from CI; triage severity by external tool/action risk, not simple keyword counts. |
+
+Full 25-source review queue: `company-context-research`, `cv-gap-analysis`, `executive-role-evaluator`, `interview-brief`, `job-discovery`, `process-update`, `problem-demand-validation`, `acquisition-fit-review`, `supplier-viability-review`, `decision-journal-update`, `investment-attention-triage`, `investment-policy-design`, `investor-pattern-research`, `thesis-challenge`, `thesis-monitor`, `trend-theme-research`, `valuation-scenario-review`, `report-composer`, `skill-authoring`, `skill-release-review`, `skill-specification`, `skill-test-design`, `skills-factory-diagnostic`, `visual-output-design`, `capability-map-review`.
+
+**High-severity related finding:** `thesis-monitor` source contained a canonical-store append instruction without a sufficiently explicit authorization gate. Separate [P0 Issue #291](https://github.com/aras-2003/skills-factory/issues/291) and [draft PR #292](https://github.com/aras-2003/skills-factory/pull/292) contain a source-level guard, but the old E2E campaign source-SHA pin intentionally blocks that PR from merging until an independently versioned campaign executes. Do **not** rewrite the historical baseline to green the check.
+
 ## Separate follow-up after the source PR
 
 - Source review: risk-specific adversarial/tool-failure examples, meaningful competitor coverage and the difference between a shared domain term and a true user-goal collision.
