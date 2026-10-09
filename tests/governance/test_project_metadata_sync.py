@@ -53,6 +53,11 @@ class MappingTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             mod.values("[ENG-03] review", "Project status: In Progress", ["status:blocked"])
 
+    def test_project_valid_stages(self):
+        for stage in ("Discovery", "Validation", "In review"):
+            with self.subTest(stage=stage):
+                self.assertEqual(mod.values("[ENG-03] review", "Project status: " + stage, [])["Status"], stage)
+
 
 if __name__ == "__main__":
     unittest.main()

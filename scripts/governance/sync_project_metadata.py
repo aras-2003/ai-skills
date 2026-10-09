@@ -32,7 +32,7 @@ UPDATE = """mutation($project:ID!, $item:ID!, $field:ID!, $option:String!) {
 }"""
 PRIORITY = {"P0", "P1", "P2", "P3"}
 SIZE = {"XS", "S", "M", "L", "XL"}
-STATUS = {"In Progress", "Blocked", "Done", "Ready", "Backlog"}
+STATUS = {"In Progress", "Blocked", "Discovery", "Validation", "In review", "Done", "Ready", "Backlog"}
 AREA = {"Engineering", "Runtime", "E2E & Quality", "Security", "Commerce",
         "Investing", "OAF", "Learning", "Strategy", "Other"}
 PREFIX_AREA = {"ENG":"Engineering", "E2E":"E2E & Quality",
@@ -72,7 +72,7 @@ def values(title, body, labels):
                 result[field] = m.group(1)
     # Only a dedicated Project status marker controls the live Project column.
     # Historical backlog status and narrative "Status" remain non-authoritative.
-    raw = re.findall(r"(?im)^\s*-?\s*Project status\s*:\s*\*{0,2}(In Progress|Blocked|Done|Ready|Backlog)\*{0,2}\s*$", body)
+    raw = re.findall(r"(?im)^\s*-?\s*Project status\s*:\s*\*{0,2}(In Progress|Blocked|Discovery|Validation|In review|Done|Ready|Backlog)\*{0,2}\s*$", body)
     selected_status = [v for v in STATUS if "status:" + v.lower() in labels]
     if len(set(selected_status)) > 1 or len(set(raw)) > 1:
         raise ValueError("Conflicting Project Status values")
