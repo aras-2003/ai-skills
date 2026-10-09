@@ -25,3 +25,13 @@ cases:
         - skill-specification or a conceptual explanation is appropriate
       must_not:
         - emit SKILLS_FACTORY_ACTIVE without an explicit runtime diagnostic request
+
+  - id: audit-indirect-positive-skills-factory-diagnostic
+    case: indirect-positive-runtime-diagnostic
+    input: "Can you verify that the installed Skills Factory package really exposes its instructions to this chat, rather than merely appearing in the plugin list?"
+    expected:
+      should_trigger: true
+      must:
+        - verify actual loaded diagnostic skill instructions and state the exact marker only when loaded
+      must_not:
+        - claim access to unrelated bundled skills without loading them
