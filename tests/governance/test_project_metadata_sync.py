@@ -14,6 +14,16 @@ class MappingTest(unittest.TestCase):
         result = mod.values("[ENG-18] skill improvement", "- historical priority: **P1**; epic: Foo; historical status: PROPOSED; size: L", [])
         self.assertEqual(result, {"Priority": "P1", "Size": "L", "Area": "Engineering"})
 
+    def test_real_migrated_issue_header(self):
+        header = ("## Legacy backlog source\\n- ID: `PRO-05`; historical priority: "
+                  "**P2**; epic: Professional work; historical status: PROPOSED; size: M")
+        self.assertEqual(mod.values("[PRO-05] AI review", header, []),
+                         {"Priority": "P2", "Size": "M", "Area": "Other"})
+
+    def test_header_without_metadata_does_not_infer_priority(self):
+        self.assertEqual(mod.values("[ENG-18] anything", "Priority should be decided", []),
+                         {"Area": "Engineering"})
+
     def test_explicit_labels(self):
         result = mod.values("Some new issue", "", ["priority:P0", "area:Commerce", "size:XS"])
         self.assertEqual(result, {"Priority": "P0", "Area": "Commerce", "Size": "XS"})
