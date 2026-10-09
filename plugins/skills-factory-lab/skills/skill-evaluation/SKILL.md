@@ -116,11 +116,3 @@ Return a compact report:
 - smallest next changes and the exact cases to rerun.
 
 A new skill is not justified merely because it produces a good answer; it should add consistent, decision-relevant value relative to a fair baseline for its intended task.
-
-## Lab runtime eval inputs
-
-When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
-
-- `references/evals/queued-not-run.input.md`
-- `references/evals/contradictory-no-steps-pass.input.md`
-- `references/evals/live-browser-blocked.input.md`

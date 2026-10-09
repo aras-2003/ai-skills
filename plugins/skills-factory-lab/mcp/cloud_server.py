@@ -4,6 +4,7 @@ from server import (
     SERVER_INSTRUCTIONS as CLOUD_SERVER_INSTRUCTIONS,
     app,
     mcp,
+    runtime_info,
     render_bar_chart,
     render_line_chart,
     route_investment_request,

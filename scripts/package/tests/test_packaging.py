@@ -247,6 +247,19 @@ class PackagingTests(unittest.TestCase):
             errors = artifact_validation.validate_tree(out, allow_lab_evals=True)
             self.assertEqual([], errors)
 
+            index_path = out / "executor-inputs.json"
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+            original_index = json.dumps(index, ensure_ascii=False, indent=2) + "\n"
+            index["cases"][0]["input_sha256"] = "0" * 64
+            index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            errors = artifact_validation.validate_tree(out, allow_lab_evals=True)
+            self.assertTrue(any("digest mismatch" in error for error in errors), errors)
+            index["cases"][0]["input"] = "executor-inputs/../../outside.input.md"
+            index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            errors = artifact_validation.validate_tree(out, allow_lab_evals=True)
+            self.assertTrue(any("unsafe or duplicate input path" in error for error in errors), errors)
+            index_path.write_text(original_index, encoding="utf-8")
+
             plugin_manifest = json.loads((out / "plugin.json").read_text(encoding="utf-8"))
             interface = plugin_manifest["extensions"]["com.openai"]["interface"]
             self.assertEqual("https://aras-2003.github.io/skills-factory/", interface["websiteURL"])
@@ -273,9 +286,22 @@ class PackagingTests(unittest.TestCase):
             self.assertEqual(draft_targets, set(draft_components))
             self.assertTrue(all((out / "skills" / name / "SKILL.md").is_file() for name in draft_targets))
 
+            eval_index = json.loads((out / "executor-inputs.json").read_text(encoding="utf-8"))
+            self.assertEqual("1.0", eval_index["schema_version"])
+            self.assertTrue(eval_index["cases"])
+            self.assertTrue(all((out / item["input"]).is_file() for item in eval_index["cases"]))
+            self.assertTrue(all(len(item["input_sha256"]) == 64 for item in eval_index["cases"]))
+            self.assertTrue(all("rubric" not in item for item in eval_index["cases"]))
+            self.assertTrue((out / "executor-inputs").is_dir())
+            self.assertFalse(any((out / "skills").rglob("evals")))
+            for skill_file in (out / "skills").rglob("SKILL.md"):
+                text = skill_file.read_text(encoding="utf-8")
+                self.assertNotIn("references/evals/", text, skill_file)
+                self.assertNotIn("## Lab runtime eval inputs", text, skill_file)
+
             fixture_component = next(
                 x for x in capabilities["capabilities"]
-                if (out / "skills" / x["name"] / "references" / "evals").is_dir()
+                if x.get("kind") == "skill" and x["name"] in {item["target"] for item in eval_index["cases"]}
             )
             skill_md = out / "skills" / fixture_component["name"] / "SKILL.md"
             skill_md.write_text(skill_md.read_text(encoding="utf-8") + "\nmutation\n", encoding="utf-8")

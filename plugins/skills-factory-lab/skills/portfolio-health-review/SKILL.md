@@ -62,9 +62,3 @@ Fast may be adequate with structured portfolio data. Escalate for contested stra
 - [ ] Mandatory work explicit.
 - [ ] Dependency/shared-resource bottlenecks explicit.
 - [ ] Readiness for prioritisation explicit.
-
-## Lab runtime eval inputs
-
-When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
-
-- `references/evals/case-portfolio-health-001.input.md`

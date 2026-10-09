@@ -14,6 +14,14 @@ Static CI proves package quality. Runtime evals prove behavior.
 
 The lab plugin is intentionally separate from `Skills Factory` production.
 
+Executor input fixtures are stored at the Lab package root under
+`executor-inputs/<target>/`, indexed by `executor-inputs.json`. They are not
+placed under a skill's `references/` directory and their paths are not appended
+to model-loadable `SKILL.md` instructions. Rubrics remain evaluator-side and
+must not enter the Lab package. `load_skill` filters legacy eval appendices and
+does not include files from eval/test directories in its public reference
+inventory or content digest.
+
 ## Recommended evaluation sequence
 
 ### 1. Explicit skill execution
@@ -56,6 +64,16 @@ Compare observable output on:
 - concision/context cost.
 
 Do not promote a cheaper model class merely because it produces plausible prose.
+
+MCP receipts distinguish tool execution from workflow execution. A
+`tool_receipt.execution_state: executed` records that the MCP tool returned a
+result; it does not imply that the routed workflow was executed. Routing
+results preserve `execution_state: routed_only` for compatibility and also
+report `workflow_execution_state: not_executed`, `workflow_executed: false`,
+`outcome: null`, and a reason. Chart receipts may establish that a PNG payload
+was rendered and hashed, but `client_display_state: not_observable` means they
+do not prove that the host displayed it. Receipts are unsigned integrity records,
+not cryptographic deployment attestations.
 
 ## Promotion rule
 

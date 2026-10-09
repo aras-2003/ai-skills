@@ -111,6 +111,23 @@ class SkillCatalogTests(unittest.TestCase):
                     os.environ["SKILLS_FACTORY_SKILLS_ROOT"] = previous
             self.assertEqual([], result["reference_files"])
 
+    def test_public_digest_excludes_eval_and_test_files(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            skill = Path(temp_dir) / "example"
+            (skill / "references" / "evals").mkdir(parents=True)
+            (skill / "tests").mkdir()
+            (skill / "SKILL.md").write_text("# Example\nPublic instructions.\n", encoding="utf-8")
+            (skill / "references" / "evals" / "case.input.md").write_text("one", encoding="utf-8")
+            (skill / "tests" / "cases.yaml").write_text("one", encoding="utf-8")
+            initial = self.catalog._tree_digest(skill)
+            (skill / "references" / "evals" / "case.input.md").write_text("two", encoding="utf-8")
+            (skill / "tests" / "cases.yaml").write_text("two", encoding="utf-8")
+            self.assertEqual(initial, self.catalog._tree_digest(skill))
+
+    def test_legacy_eval_appendix_is_removed_from_loaded_instructions(self) -> None:
+        instructions = "# Example\nPublic text.\n\n## Lab runtime eval inputs\n- `references/evals/case.input.md`\n"
+        self.assertEqual("# Example\nPublic text.", self.catalog._public_instructions(instructions))
+
 
 if __name__ == "__main__":
     unittest.main()

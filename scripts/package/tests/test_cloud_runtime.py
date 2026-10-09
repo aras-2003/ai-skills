@@ -32,6 +32,11 @@ def load_cloud_server():
     fake_mcp_server = types.ModuleType("mcp.server")
     fake_mcp_server.MCPServer = TestMCPServer
     fake_mcp.server = fake_mcp_server
+    fake_mcpserver = types.ModuleType("mcp.server.mcpserver")
+    fake_exceptions = types.ModuleType("mcp.server.mcpserver.exceptions")
+    class TestToolError(Exception):
+        pass
+    fake_exceptions.ToolError = TestToolError
 
     fake_renderer = types.ModuleType("chart_renderer")
     fake_renderer.render_bar_chart = lambda *_args, **_kwargs: []
@@ -54,6 +59,8 @@ def load_cloud_server():
         {
             "mcp": fake_mcp,
             "mcp.server": fake_mcp_server,
+            "mcp.server.mcpserver": fake_mcpserver,
+            "mcp.server.mcpserver.exceptions": fake_exceptions,
             "chart_renderer": fake_renderer,
             "investment_runtime": fake_investment,
         },
@@ -88,6 +95,7 @@ class CloudRuntimeTests(unittest.TestCase):
         self.assertEqual("unattested", result["attestation_status"])
         self.assertEqual("unattested", result["release_id"])
         self.assertEqual("unattested", result["source_revision"])
+        self.assertEqual("runtime_info", result["tool_receipt"]["tool_name"])
 
     def test_runtime_info_verifies_only_when_all_identity_fields_are_present(self) -> None:
         with patch.dict(
@@ -127,6 +135,23 @@ class CloudRuntimeTests(unittest.TestCase):
         self.assertIn("does not execute a", instructions)
         self.assertIn("runtime_info", instructions)
         self.assertIn('attestation_status "unattested"', instructions)
+
+    def test_chart_receipt_distinguishes_rendered_artifact_from_client_display(self) -> None:
+        result = self.server.render_bar_chart(["A"], [1.0])
+        receipt_text = next(item for item in result if isinstance(item, str) and item.startswith("MCP_TOOL_RECEIPT "))
+        self.assertIn('"artifact_state": "rendered"', receipt_text)
+        self.assertIn('"client_display_state": "not_observable"', receipt_text)
+
+    def test_chart_renderer_error_has_explicit_failure_receipt(self) -> None:
+        with patch.object(self.server, "_render_bar_chart", side_effect=RuntimeError("renderer unavailable")):
+            with self.assertRaisesRegex(Exception, '"artifact_state": "FAIL_RENDERER_INVOCATION"'):
+                self.server.render_bar_chart(["A"], [1.0])
+
+    def test_route_receipt_distinguishes_routing_from_child_execution(self) -> None:
+        result = self.server.route_investment_request("ETF risk policy")
+        self.assertEqual("not_executed", result["workflow_execution_state"])
+        self.assertIsNone(result["outcome"])
+        self.assertEqual("route_investment_request", result["tool_receipt"]["tool_name"])
 
 
 if __name__ == "__main__":

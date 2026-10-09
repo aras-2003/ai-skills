@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import math
 from pathlib import Path
 import unittest
 
@@ -57,6 +58,18 @@ class ChartRendererTests(unittest.TestCase):
             self.renderer.render_bar_chart(
                 labels=["A", "B"],
                 values=[1.0],
+            )
+
+    def test_non_finite_and_boolean_chart_values_fail_closed(self) -> None:
+        for value in (math.nan, math.inf, -math.inf, True):
+            with self.subTest(value=value):
+                with self.assertRaises(Exception):
+                    self.renderer.render_bar_chart(labels=["A"], values=[value])
+        with self.assertRaises(Exception):
+            self.renderer.render_line_chart(
+                x_labels=["2026-01"],
+                series_names=["Portfolio"],
+                series_values=[[math.nan]],
             )
 
 

@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0",
+  "purpose": "executor input index; evaluator rubrics are not packaged",
+  "cases": [
+    {
+      "target": "architecture-review",
+      "case_id": "case-architecture-review-direct-001",
+      "mode": "explicit",
+      "input": "executor-inputs/architecture-review/case-architecture-review-direct-001.input.md",
+      "input_sha256": "4b1263b6276c3cfcb6d0b1d4341eaf5b716a32c5baecd7d3aa0befb6b2f267e3"
+    },
+    {
+      "target": "capability-gap-analysis",
+      "case_id": "case-capability-gap-001",
+      "mode": "explicit",
+      "input": "executor-inputs/capability-gap-analysis/case-capability-gap-001.input.md",
+      "input_sha256": "f189b99973cf89efb77b2479020be07b806b291dd8d792c553c00913f0c013d8"
+    },
+    {
+      "target": "capability-map-review",
+      "case_id": "case-capability-map-001",
+      "mode": "explicit",
+      "input": "executor-inputs/capability-map-review/case-capability-map-001.input.md",
+      "input_sha256": "ec47aefcd9ceb8cdefbac4a6b1fb899469d103292c29647a154f7ee30d0c0ece"
+    },
+    {
+      "target": "commerce-opportunity-review",
+      "case_id": "case-003-viral-regulated",
+      "mode": "explicit",
+      "input": "executor-inputs/commerce-opportunity-review/case-003-viral-regulated.input.md",
+      "input_sha256": "bec3e3cda32e51ec7d163b3f80240e5104a5b6849f1b327e89f9f9516c783df7"
+    },
+    {
+      "target": "commerce-opportunity-review",
+      "case_id": "case-005-false-us-pl-transfer",
+      "mode": "explicit",
+      "input": "executor-inputs/commerce-opportunity-review/case-005-false-us-pl-transfer.input.md",
+      "input_sha256": "dd51eab58ad0162ee2df1a5fe1544bc5b7dd9e2d5533cc91e020472f0662f4d1"
+    },
+    {
+      "target": "commerce-product-deep-dive",
+      "case_id": "case-001-premium-vs-generic",
+      "mode": "explicit",
+      "input": "executor-inputs/commerce-product-deep-dive/case-001-premium-vs-generic.input.md",
+      "input_sha256": "70213c5614ae7d11cce3997e9c8039d57e796dd3370821bb00ba84415847daba"
+    },
+    {
+      "target": "commerce-product-deep-dive",
+      "case_id": "case-002-good-demand-bad-economics",
+      "mode": "explicit",
+      "input": "executor-inputs/commerce-product-deep-dive/case-002-good-demand-bad-economics.input.md",
+      "input_sha256": "f0206eba0acfb107466fba08dd97d7f6d7ff09d989d08a1f94ec430dbfd97e95"
+    },
+    {
+      "target": "commerce-product-deep-dive",
+      "case_id": "case-004-boring-winner",
+      "mode": "explicit",
+      "input": "executor-inputs/commerce-product-deep-dive/case-004-boring-winner.input.md",
+      "input_sha256": "a01c1667f1fe39dd97f4d3a4e016c9b71c6b00f9ad46cd500f0bc1ac906e7dbc"
+    },
+    {
+      "target": "decision-bottleneck-analysis",
+      "case_id": "case-decision-bottleneck-001",
+      "mode": "explicit",
+      "input": "executor-inputs/decision-bottleneck-analysis/case-decision-bottleneck-001.input.md",
+      "input_sha256": "1e3e92389d234258f4346c32f76054037177323522b3767e3314e1eb99dd593e"
+    },
+    {
+      "target": "global-local-model-review",
+      "case_id": "case-global-local-001",
+      "mode": "explicit",
+      "input": "executor-inputs/global-local-model-review/case-global-local-001.input.md",
+      "input_sha256": "ebdc61d5c619611381eac3aa816626eae00e501e0e988b5950de69a68cd67642"
+    },
+    {
+      "target": "governance-design",
+      "case_id": "case-governance-design-001",
+      "mode": "explicit",
+      "input": "executor-inputs/governance-design/case-governance-design-001.input.md",
+      "input_sha256": "152e4efe81e6c4f44553361c58bc5f5bfaad70780d17cbb4196d7da177081afe"
+    },
+    {
+      "target": "investment-attention-review",
+      "case_id": "case-006-attention-acn",
+      "mode": "explicit",
+      "input": "executor-inputs/investment-attention-review/case-006-attention-acn.input.md",
+      "input_sha256": "37cacadfbca6b505bbb28bedb5f8bd031c458481ae1a55e71d8589f5c7335a66"
+    },
+    {
+      "target": "investment-opportunity-hunter",
+      "case_id": "case-001-opportunity-hunter",
+      "mode": "explicit",
+      "input": "executor-inputs/investment-opportunity-hunter/case-001-opportunity-hunter.input.md",
+      "input_sha256": "ed459fb5b22711b95cf17220bc0d91baa915e2f9b29c8acd30cb31786100ca33"
+    },
+    {
+      "target": "investment-policy-design",
+      "case_id": "case-005-policy-learning",
+      "mode": "explicit",
+      "input": "executor-inputs/investment-policy-design/case-005-policy-learning.input.md",
+      "input_sha256": "6766368ce448ff26f257da0d7a331b83e536cd81337ce1420aed432c0296f27b"
+    },
+    {
+      "target": "investment-portfolio-review",
+      "case_id": "case-003-portfolio-review",
+      "mode": "explicit",
+      "input": "executor-inputs/investment-portfolio-review/case-003-portfolio-review.input.md",
+      "input_sha256": "43036c250453d2aa82f1fe53fe465879a37669cd6e51b3755c96afe04d4d7648"
+    },
+    {
+      "target": "investment-security-review",
+      "case_id": "case-002-security-sizing",
+      "mode": "explicit",
+      "input": "executor-inputs/investment-security-review/case-002-security-sizing.input.md",
+      "input_sha256": "20ff0409ec932135906bce661bb2d443419166f82db8625088a092b437599ccf"
+    },
+    {
+      "target": "investment-theme-discovery",
+      "case_id": "case-004-theme-discovery",
+      "mode": "explicit",
+      "input": "executor-inputs/investment-theme-discovery/case-004-theme-discovery.input.md",
+      "input_sha256": "5b87e8f9bebf43c409f70adcc0cde04ae9af8cce71a1c8935d540621e8d96f16"
+    },
+    {
+      "target": "oaf-enterprise-architecture-review",
+      "case_id": "case-enterprise-architecture-review-001",
+      "mode": "explicit",
+      "input": "executor-inputs/oaf-enterprise-architecture-review/case-enterprise-architecture-review-001.input.md",
+      "input_sha256": "54d62ccf36d6d7360ed18841d4da18034654b395d759b18c5a2a402986968d0b"
+    },
+    {
+      "target": "oaf-enterprise-architecture-review",
+      "case_id": "case-enterprise-architecture-stop-001",
+      "mode": "explicit",
+      "input": "executor-inputs/oaf-enterprise-architecture-review/case-enterprise-architecture-stop-001.input.md",
+      "input_sha256": "6e661bd4e16b0d851478064951f64af0961da1cf120aa5d50b8ca088176c3b78"
+    },
+    {
+      "target": "oaf-enterprise-change-review",
+      "case_id": "case-001-enterprise-change",
+      "mode": "explicit",
+      "input": "executor-inputs/oaf-enterprise-change-review/case-001-enterprise-change.input.md",
+      "input_sha256": "bc3f7608b1fc7956a025b8fd13b9b266e0987c47088f94f3994a48cc1bcde03e"
+    },
+    {
+      "target": "oaf-governance-redesign",
+      "case_id": "case-governance-redesign-001",
+      "mode": "explicit",
+      "input": "executor-inputs/oaf-governance-redesign/case-governance-redesign-001.input.md",
+      "input_sha256": "d555eb0ad37b1b1e27de535bffc34b837eaf0ec3c686dedeb9c82abe0ddc4d2c"
+    },
+    {
+      "target": "oaf-health-check",
+      "case_id": "case-001-enterprise-it",
+      "mode": "explicit",
+      "input": "executor-inputs/oaf-health-check/case-001-enterprise-it.input.md",
+      "input_sha256": "7789a62a1763ccce189f83a5a4230941c5ac4c5c731333d19741f9acb4dc9e19"
+    },
+    {
+      "target": "oaf-operating-model-redesign",
+      "case_id": "case-operating-model-redesign-001",
+      "mode": "explicit",
+      "input": "executor-inputs/oaf-operating-model-redesign/case-operating-model-redesign-001.input.md",
+      "input_sha256": "5fb07e8497f64195bc38f33a2b79e9c6c7ee662c120894bc629b8e5b27b084a2"
+    },
+    {
+      "target": "oaf-transformation-design",
+      "case_id": "case-transformation-design-001",
+      "mode": "explicit",
+      "input": "executor-inputs/oaf-transformation-design/case-transformation-design-001.input.md",
+      "input_sha256": "321d56bfb0ccbf67f0bc0a88bf0e4aa263fe69ba914514f429a8fc669f0a6d82"
+    },
+    {
+      "target": "portfolio-health-review",
+      "case_id": "case-portfolio-health-001",
+      "mode": "explicit",
+      "input": "executor-inputs/portfolio-health-review/case-portfolio-health-001.input.md",
+      "input_sha256": "85f214ef7ace18d78bdcacb2df28a5ec49e1379fc6dc98aee86b164cfaf262f7"
+    },
+    {
+      "target": "product-opportunity-discovery",
+      "case_id": "case-006-product-discovery",
+      "mode": "explicit",
+      "input": "executor-inputs/product-opportunity-discovery/case-006-product-discovery.input.md",
+      "input_sha256": "ee939bf8b1e1e08af09354606912e349cc0f405e2cb0de3216790d4be5783aac"
+    },
+    {
+      "target": "skill-evaluation",
+      "case_id": "evaluation-contradictory-no-steps-pass",
+      "mode": "explicit",
+      "input": "executor-inputs/skill-evaluation/contradictory-no-steps-pass.input.md",
+      "input_sha256": "ff5eba523f3b127db6ae075a33283edd68cb394f13e1fad7a198d17c72cdd8ed"
+    },
+    {
+      "target": "skill-evaluation",
+      "case_id": "evaluation-live-browser-blocked",
+      "mode": "explicit",
+      "input": "executor-inputs/skill-evaluation/live-browser-blocked.input.md",
+      "input_sha256": "1e5ae348377eafddd2e38846436ae574e1dd41152bb4b2a79e08d495938a5e06"
+    },
+    {
+      "target": "skill-evaluation",
+      "case_id": "evaluation-queued-not-run",
+      "mode": "explicit",
+      "input": "executor-inputs/skill-evaluation/queued-not-run.input.md",
+      "input_sha256": "58cf5eca1ed2351b38d3407a23bfbc79b3f8000aec728af18197dee818b3e6de"
+    },
+    {
+      "target": "skill-test-design",
+      "case_id": "testdesign-description-only-routing",
+      "mode": "explicit",
+      "input": "executor-inputs/skill-test-design/description-only-routing.input.md",
+      "input_sha256": "f84385090cea39c22b6c9550ec69f793b29f86d53a85d3a992ef790fb1bcf254"
+    },
+    {
+      "target": "skill-test-design",
+      "case_id": "testdesign-live-source-evidence",
+      "mode": "explicit",
+      "input": "executor-inputs/skill-test-design/live-source-evidence.input.md",
+      "input_sha256": "51aec1f8ffb42eec7f50f691c38ca15723c0756a8e0a6229585cc7ed530ca2a7"
+    },
+    {
+      "target": "transformation-blueprint",
+      "case_id": "case-transformation-blueprint-001",
+      "mode": "explicit",
+      "input": "executor-inputs/transformation-blueprint/case-transformation-blueprint-001.input.md",
+      "input_sha256": "8dbb3b52695ed4bbe0539cb16e3fb429832dd13358575c1af55cb355197d4895"
+    },
+    {
+      "target": "transformation-blueprint",
+      "case_id": "case-transformation-blueprint-stop-001",
+      "mode": "explicit",
+      "input": "executor-inputs/transformation-blueprint/case-transformation-blueprint-stop-001.input.md",
+      "input_sha256": "c1bfa958cf456f903c924132bee97e0816cb78fccfe1a289bd455cae323af653"
+    }
+  ]
+}

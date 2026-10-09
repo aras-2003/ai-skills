@@ -8,6 +8,7 @@
 
 from __future__ import annotations
 
+import math
 from hashlib import sha256
 from io import BytesIO
 from typing import Sequence
@@ -35,6 +36,13 @@ def _validate_parallel(labels: Sequence[str], values: Sequence[float]) -> None:
         raise ToolError("labels and values must have equal length")
     if len(labels) > 80:
         raise ToolError("maximum 80 data points per chart")
+    if any(
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not math.isfinite(value)
+        for value in values
+    ):
+        raise ToolError("values must contain only finite numbers")
 
 
 def _png(fig) -> list[str | Image]:
@@ -120,6 +128,13 @@ def render_line_chart(
     for values in series_values:
         if len(values) != len(x_labels):
             raise ToolError("every series must match x_labels length")
+        if any(
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+            for value in values
+        ):
+            raise ToolError("series_values must contain only finite numbers")
 
     fig, ax = plt.subplots(figsize=(8.5, 4.8))
     x = list(range(len(x_labels)))
