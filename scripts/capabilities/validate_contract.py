@@ -30,6 +30,16 @@ def validate(root: Path) -> tuple[dict, list[str]]:
     declarations = contract["component_declarations"]
     for name in sorted(set(declarations) - known):
         errors.append(f"declaration references unknown component: {name}")
+    for name in sorted(known):
+        declaration = declarations.get(name)
+        if not isinstance(declaration, dict):
+            errors.append(f"{name}: missing explicit source inventory declaration")
+            continue
+        source = declaration.get("source")
+        if not isinstance(source, str) or source.startswith("/") or ".." in Path(source).parts or not (root / source).is_file():
+            errors.append(f"{name}: declaration must point to an existing repository source")
+        if declaration.get("review_state") != "STATIC_PARTIAL":
+            errors.append(f"{name}: source review_state must be STATIC_PARTIAL pending runtime verification")
     rows = []
     for name in sorted(known):
         try:
