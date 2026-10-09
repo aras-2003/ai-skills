@@ -32,6 +32,7 @@ UPDATE = """mutation($project:ID!, $item:ID!, $field:ID!, $option:String!) {
 }"""
 PRIORITY = {"P0", "P1", "P2", "P3"}
 SIZE = {"XS", "S", "M", "L", "XL"}
+STATUS = {"In Progress", "Blocked", "Done", "Ready", "Backlog"}
 AREA = {"Engineering", "Runtime", "E2E & Quality", "Security", "Commerce",
         "Investing", "OAF", "Learning", "Strategy", "Other"}
 PREFIX_AREA = {"ENG":"Engineering", "E2E":"E2E & Quality",
@@ -69,6 +70,16 @@ def values(title, body, labels):
             m = re.search(pattern, body)
             if m:
                 result[field] = m.group(1)
+    # Only a dedicated Project status marker controls the live Project column.
+    # Historical backlog status and narrative "Status" remain non-authoritative.
+    raw = re.findall(r"(?im)^\\s*-?\\s*Project status\\s*:\\s*\\*{0,2}(In Progress|Blocked|Done|Ready|Backlog)\\*{0,2}\\s*$", body)
+    selected_status = [v for v in STATUS if "status:" + v.lower() in labels]
+    if len(set(selected_status)) > 1 or len(set(raw)) > 1:
+        raise ValueError("Conflicting Project Status values")
+    if selected_status and raw and selected_status[0].casefold() != raw[0].casefold():
+        raise ValueError("Conflicting Project Status label and body")
+    if selected_status or raw:
+        result["Status"] = selected_status[0] if selected_status else raw[0]
     if "Area" not in result:
         m = re.match(r"^\[([A-Z][A-Z0-9]*)-\d+\]", title)
         if m:
@@ -102,6 +113,7 @@ def main():
     if not target:
         print("No explicit metadata; no changes")
         return
+    updates = []
     for name, value in target.items():
         f = fields.get(name)
         if not f or "options" not in f:
@@ -109,8 +121,10 @@ def main():
         options = [o["id"] for o in f["options"] if o["name"].casefold()==value.casefold()]
         if len(options)!=1:
             raise RuntimeError(f"Option {value} missing/ambiguous for {name}")
+        updates.append((name, value, f["id"], options[0]))
+    for name, value, field_id, option in updates:
         gql(UPDATE, {"project":project["id"],"item":items[0]["id"],
-                     "field":f["id"],"option":options[0]})
+                     "field":field_id,"option":option})
         print(f"Set {name}={value} on Project #{number} Issue #{issue}")
 
 if __name__ == "__main__":
