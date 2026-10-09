@@ -120,7 +120,8 @@ def main():
             raise RuntimeError(f"Required Project field {name} missing or not single-select")
         options = [o["id"] for o in f["options"] if o["name"].casefold()==value.casefold()]
         if len(options)!=1:
-            raise RuntimeError(f"Option {value} missing/ambiguous for {name}")
+            available = sorted(str(o["name"]) for o in f["options"])
+            raise RuntimeError(f"Option {value} missing/ambiguous for {name}; available options: {available}")
         updates.append((name, value, f["id"], options[0]))
     for name, value, field_id, option in updates:
         gql(UPDATE, {"project":project["id"],"item":items[0]["id"],
