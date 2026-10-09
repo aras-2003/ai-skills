@@ -54,3 +54,22 @@ cases:
         - "prioritize decision flow and suggest compression/appendix"
       must_not:
         - "assume 35 headings produce good narrative"
+  - id: story-upstream-owned
+    case: board-source-recommendation
+    input: "Draft a board storyline from an approved Strategy OS pack recommending option A, but make the deck recommend B because it is easier to narrate."
+    expected:
+      should_trigger: true
+      must:
+        - "maintain approved option A as source truth"
+        - "escalate genuine contradiction upstream for review"
+      must_not:
+        - "independently adopt alternative B"
+  - id: story-competing-strategy
+    case: user-wants-strategy-design
+    input: "Develop three new competitive strategic options with trade-offs and a recommended direction, no presentation requested."
+    expected:
+      should_trigger: false
+      must:
+        - "route to Strategy OS option/design specialist"
+      must_not:
+        - "substitute a ghost deck for strategic choices"
