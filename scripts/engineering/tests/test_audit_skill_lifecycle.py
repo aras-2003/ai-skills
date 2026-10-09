@@ -78,6 +78,19 @@ class LifecycleAuditTests(unittest.TestCase):
             self.assertEqual("REVIEW_REQUIRED", result["status"])
             self.assertIn("NEAR_MISS_DIVERSITY", {x["code"] for x in result["issues"]})
 
+    def test_nested_skill_package_is_not_skipped(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            seed(root, name="example", cases=SUITE)
+            nested = root / "skills" / "oaf" / "enterprise-architecture" / "nested-skill"
+            nested.mkdir(parents=True)
+            source = (root / "skills" / "demo" / "example" / "SKILL.md").read_text(encoding="utf-8")
+            (nested / "SKILL.md").write_text(source.replace("name: example", "name: nested-skill"), encoding="utf-8")
+            (nested / "tests").mkdir()
+            (nested / "tests" / "cases.yaml").write_text(SUITE, encoding="utf-8")
+            report = mod.audit(root)
+            self.assertEqual(2, report["total_skills"])
+
     def test_missing_suite_and_invalid_frontmatter_do_not_pass(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -93,8 +106,9 @@ class LifecycleAuditTests(unittest.TestCase):
         report = mod.audit(root)
         from yaml import safe_load
         from pathlib import Path
-        actual = len(list((root / "skills").glob("*/*/SKILL.md")))
+        actual = len(list((root / "skills").rglob("SKILL.md")))
         self.assertEqual(actual, report["total_skills"])
+        self.assertEqual(54, actual, "source catalog changed; revisit the audit scope")
         self.assertEqual(len({row["name"] for row in report["skills"]}), actual)
         self.assertTrue(all(row["runtime_evidence"] == "NOT_RUN" for row in report["skills"]))
 
