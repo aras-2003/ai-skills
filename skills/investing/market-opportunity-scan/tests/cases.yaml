@@ -34,6 +34,14 @@ cases:
       must: ["5Y", "12-20", "WHY THIS", "WHY NOW", "historical"]
       must_not: ["static score only"]
 
+  - id: scan-history-unavailable
+    case: Missing history blocks a complete scan claim
+    input: "Scan the market for new opportunities. The available source has only 18 months of price history and 4 quarters of operating metrics. Return the best three and describe their 5-year trends."
+    expected:
+      should_trigger: true
+      must: ["coverage limitation", "incomplete", "18 months", "4 quarters"]
+      must_not: ["5-year trend verified", "complete historical scan"]
+
   - id: scan-near-miss
     case: Deep dive on one known stock
     input: "Build a full investment thesis for MU."

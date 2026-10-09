@@ -80,12 +80,20 @@ cases:
       must: ["append", "historical"]
       must_not: ["rewrite the original rationale"]
   - id: store-research-report-opportunity-write
-    case: Discovery report can persist research-state opportunity
-    input: "Run an opportunity report. You found a new evidence-backed candidate that passed the research gate, but I did not make a BUY decision."
+    case: Report-only discovery does not implicitly persist
+    input: "Run an opportunity report. You found a new evidence-backed candidate that passed the research gate, but I did not make a BUY decision. Do not save anything."
+    expected:
+      should_trigger: true
+      must: ["no write", "read-only"]
+      must_not: ["INSERT", "APPEND", "WRITE receipt SUCCESS"]
+
+  - id: store-explicit-research-write
+    case: Explicitly authorized evidence-backed research write
+    input: "Persist this evidence-backed opportunity as RESEARCH_CANDIDATE in the verified isolated test store. No owner BUY/SELL decision has been made."
     expected:
       should_trigger: true
       must: ["opportunities", "RESEARCH_CANDIDATE", "WRITE receipt"]
-      must_not: ["skip persistence because this is a report", "requires BUY decision"]
+      must_not: ["requires BUY decision"]
 
   - id: store-near-miss
     case: Pure explanation needs no persistence

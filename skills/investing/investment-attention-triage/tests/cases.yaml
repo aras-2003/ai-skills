@@ -12,6 +12,7 @@ cases:
     expected:
       should_trigger: true
       must: ["NOISE", "MONITOR", "REVIEW", "ESCALATE"]
+      must_not: ["alternate materiality label"]
   - id: attention-near-miss
     case: Full initial underwriting belongs elsewhere
     input: "I have never researched ServiceNow. Build a full investment thesis and valuation."

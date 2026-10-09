@@ -21,6 +21,18 @@ cases:
         - keep exact arithmetic unresolved until price basis and VAT convention are explicit
       must_not:
         - assume 23 percent VAT
+  - id: economics-post-cac-reconciliation
+    case: Contribution after CAC reconciliation
+    input: |
+      Gross price 123 PLN/order, VAT 23% recoverable, net COGS 20 PLN/order, net fulfilment 10 PLN/order, expected return loss 5 PLN/order, CAC 20 PLN. Calculate contribution before and after CAC.
+    expected:
+      should_trigger: true
+      must:
+        - pre-CAC contribution 65 PLN
+        - after-CAC contribution 45 PLN
+        - after-CAC equals pre-CAC minus CAC
+      must_not:
+        - internally inconsistent after-CAC values
   - id: economics-003
     case: near-miss-supplier
     input: |

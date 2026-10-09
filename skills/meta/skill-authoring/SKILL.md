@@ -4,10 +4,10 @@ description: >
   Create or refactor an Agent Skill package from an approved skill specification. Use when writing SKILL.md, splitting instructions into references/scripts/assets, improving progressive disclosure, or aligning a skill with repository and current Agent Skills authoring conventions.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.0.1"
   maturity: production
   risk: medium
-  last_reviewed: 2026-09-30
+  last_reviewed: "2026-10-09"
 ---
 
 # Skill Authoring
@@ -24,6 +24,7 @@ Require an approved specification or reconstruct one with `skill-specification` 
 2. Frontmatter must contain at least:
    - `name`;
    - `description`.
+   Parse and validate the final frontmatter; a body heading or generated catalog entry does not substitute for either field.
 3. Treat `description` as routing metadata:
    - state what the skill does;
    - state when it should be used;

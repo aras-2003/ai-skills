@@ -103,9 +103,9 @@ class RuntimeCampaignTests(unittest.TestCase):
             out = Path(td) / "campaign"
             campaign.prepare(out, require_pinned_commit=False)
             lock = json.loads((out / "lock.json").read_text(encoding="utf-8"))
-            self.assertEqual("70c3da0122a0614589fda8f41fa63fbda31d38c6", lock["behavior_source_revision"])
+            self.assertEqual("4bd9ae737bdd1919b1827750a1197737ec031b12", lock["behavior_source_revision"])
             self.assertEqual("skills-factory", lock["packages"]["production"]["name"])
-            self.assertEqual("1.36.0", lock["packages"]["production"]["version"])
+            self.assertEqual("1.37.0", lock["packages"]["production"]["version"])
             self.assertEqual("skills-factory-lab", lock["packages"]["lab"]["name"])
             package_cfg = yaml.safe_load((ROOT / "release/package.yaml").read_text())
             self.assertEqual(package_cfg["lab"]["version"], lock["packages"]["lab"]["version"])
@@ -118,6 +118,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertEqual("production", lock["case_channels"]["fallback-interface-explicit-production-002"])
             self.assertEqual("production", lock["case_channels"]["oaf-interface-natural-pl"])
             self.assertEqual(44, lock["core_case_count"])
+
             self.assertEqual(
                 [
                     "oaf-decision-bottleneck-natural-pl",
@@ -132,13 +133,18 @@ class RuntimeCampaignTests(unittest.TestCase):
             components = {(item["channel"], item["name"]): item for item in lock["components"]}
             self.assertEqual("1.5.0", components[("production", "oaf-health-check")]["version"])
             self.assertEqual("1.1.0", components[("production", "operating-model-review")]["version"])
-            self.assertEqual("1.1.0", components[("production", "decision-bottleneck-analysis")]["version"])
+            self.assertEqual("1.1.1", components[("production", "decision-bottleneck-analysis")]["version"])
             self.assertEqual("1.1.0", components[("production", "decision-rights-review")]["version"])
             strategy = definitions["fallback-strategy-production-002"]
             self.assertEqual("explicit", strategy["mode"])
             self.assertEqual("oaf-health-check", strategy["target"])
             self.assertEqual(64, len(strategy["input_sha256"]))
             self.assertEqual(64, len(strategy["rubric_sha256"]))
+
+    def test_domain_retest_manifest_covers_all_69_v14_domain_cases(self) -> None:
+        case_ids = campaign.config().get("domain_retest_case_ids") or []
+        self.assertEqual(69, len(case_ids))
+        self.assertEqual(69, len(set(case_ids)))
 
     def test_revised_fallback_identities_do_not_rewrite_historical_001_cases(self) -> None:
         active = load_campaign_cases(ROOT, campaign.config()["campaign"])

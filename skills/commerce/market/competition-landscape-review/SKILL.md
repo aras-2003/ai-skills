@@ -4,15 +4,17 @@ description: >
   Review competition around an e-commerce opportunity across product, price, brand, distribution and acquisition. Use before calling a market empty or saturated.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.1.0"
+  version: "1.1.1"
   maturity: production
   risk: low
-  last_reviewed: 2026-09-30
+  last_reviewed: "2026-10-09"
   execution:
     default_model_class: fast
 ---
 
 # Competition Landscape Review
+
+Keep every competitor, price, unit cost, fee, market, and sourcing figure bound to the active case and cited source. Never reuse another case's numeric assumptions. If no source establishes a value, label it `UNKNOWN`/`UNVERIFIED`; do not use it in comparative economics or rankings.
 
 ## Purpose
 Understand how customers currently solve the problem and where competitive pressure actually sits.

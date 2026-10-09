@@ -8,10 +8,10 @@ description: >
   means for a specific role; in that case hand off to executive-role-evaluator.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.0.1"
   maturity: production
   risk: low
-  last_reviewed: 2026-09-30
+  last_reviewed: "2026-10-09"
 ---
 
 # Company Context Research
@@ -60,7 +60,7 @@ When those questions are explicit, route to the relevant specialist skill.
 
 5. **Stop at the research boundary**
    - Summarize what the facts establish.
-   - Do not append unsolicited judgments about whether a role is good, whether the candidate fits, or what recruitment action to take.
+   - Do not infer or append an individual's CTO/technology authority, reporting line, organizational mandate, role fit, or recruitment action unless an authoritative source explicitly establishes it. Keep company facts separate from role evaluation; route an explicitly requested role/mandate assessment to `executive-role-evaluator`.
    - If the user explicitly asks what these facts mean for a specific role, invoke/handoff to `executive-role-evaluator`.
 
 ## Output contract

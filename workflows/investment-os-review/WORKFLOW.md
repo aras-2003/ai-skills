@@ -67,6 +67,8 @@ Use `investment-policy-design` when the decision is about portfolio rules, risk 
 1. Run the runtime routing preflight when available; otherwise use the routing matrix.
 2. Select the primary route before doing substantive analysis.
 3. Invoke the selected child workflow/skill and follow its evidence/canonical rules.
+   - Count the child as executed only when a runtime execution receipt identifies the child workflow, execution status, and correlated run. A selected route, planned invocation, or prose claim is not proof that the child ran.
+   - If routing succeeded but no child execution mechanism/receipt is available, return a blocked/not-run state and the missing runtime evidence; do not synthesize the child result.
 4. Do not duplicate the child workflow with a generic answer before or after invocation.
 5. If the portfolio route is selected:
    - canonical reads must be attempted by the child workflow;

@@ -4,10 +4,10 @@ description: >
   Find current senior and executive technology roles from approved sources using explicit career filters, remove obvious mismatches and duplicates, and return a shortlist for validity checking. Use for role discovery, not deep role evaluation or company research.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: "0.1.1"
   maturity: candidate
   risk: low
-  last_reviewed: 2026-09-30
+  last_reviewed: "2026-10-09"
   execution:
     default_model_class: fast
 ---
@@ -24,6 +24,8 @@ Find plausible senior/executive technology opportunities efficiently without doi
 ## Do not use when
 - The user asks whether one specific role is worth pursuing.
 - The task is only to confirm whether an already-known vacancy is still active.
+- The user asks whether a known vacancy is current/active; route to `job-validity-check`.
+- The user asks for company background only; route to `company-context-research`.
 
 ## Inputs
 ### Required
@@ -69,4 +71,3 @@ Escalate only when search results are highly ambiguous, titles require nuanced e
 - [ ] Duplicates removed.
 - [ ] Every role has a source.
 - [ ] No deep fit verdict was smuggled into discovery.
-

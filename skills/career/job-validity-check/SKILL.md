@@ -4,10 +4,10 @@ description: >
   Verify whether a known job opportunity is still active, current, unique and materially unchanged across employer, ATS and aggregator sources. Use before spending time on role evaluation, company research or CV tailoring.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: "0.1.1"
   maturity: candidate
   risk: low
-  last_reviewed: 2026-09-30
+  last_reviewed: "2026-10-09"
   execution:
     default_model_class: fast
 ---
@@ -24,6 +24,8 @@ Prevent wasted effort on stale, withdrawn, duplicated or materially changed vaca
 ## Do not use when
 - The user wants new roles discovered.
 - The user wants a fit/career decision.
+- The user asks to find a new set of roles; route to `job-discovery`.
+- The user asks only for factual company research; route to `company-context-research`.
 
 ## Inputs
 ### Required
@@ -53,4 +55,3 @@ Default model class: **fast**. Escalation normally unnecessary unless sources co
 - [ ] Duplicate/repost risk assessed.
 - [ ] Status and confidence explicit.
 - [ ] No role-fit decision added.
-
