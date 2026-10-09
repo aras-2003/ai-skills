@@ -199,7 +199,7 @@ component_declarations:
     source: workflows/investment-attention-review/WORKFLOW.md
     review_state: STATIC_PARTIAL
     requirements:
-      network: unassessed
+      network: write
       filesystem: unassessed
       shell_exec: unassessed
       credentials: unassessed
@@ -208,7 +208,7 @@ component_declarations:
     source: skills/investing/investment-attention-triage/SKILL.md
     review_state: STATIC_PARTIAL
     requirements:
-      network: unassessed
+      network: write
       filesystem: unassessed
       shell_exec: unassessed
       credentials: unassessed
@@ -244,7 +244,7 @@ component_declarations:
     source: workflows/investment-portfolio-observation/WORKFLOW.md
     review_state: STATIC_PARTIAL
     requirements:
-      network: unassessed
+      network: write
       filesystem: unassessed
       shell_exec: unassessed
       credentials: unassessed
@@ -253,7 +253,7 @@ component_declarations:
     source: workflows/investment-portfolio-review/WORKFLOW.md
     review_state: STATIC_PARTIAL
     requirements:
-      network: unassessed
+      network: write
       filesystem: unassessed
       shell_exec: unassessed
       credentials: unassessed
@@ -271,7 +271,7 @@ component_declarations:
     source: workflows/investment-security-review/WORKFLOW.md
     review_state: STATIC_PARTIAL
     requirements:
-      network: unassessed
+      network: write
       filesystem: unassessed
       shell_exec: unassessed
       credentials: unassessed
@@ -280,7 +280,7 @@ component_declarations:
     source: workflows/investment-theme-discovery/WORKFLOW.md
     review_state: STATIC_PARTIAL
     requirements:
-      network: unassessed
+      network: write
       filesystem: unassessed
       shell_exec: unassessed
       credentials: unassessed
@@ -442,7 +442,7 @@ component_declarations:
     source: skills/investing/portfolio-state-review/SKILL.md
     review_state: STATIC_PARTIAL
     requirements:
-      network: unassessed
+      network: write
       filesystem: unassessed
       shell_exec: unassessed
       credentials: unassessed
