@@ -19,3 +19,16 @@ cases:
     expected:
       should_trigger: false
       must_not: ["attention queue", "materiality triage"]
+  - id: attention-missing-inputs
+    case: New information is mentioned without a ticker, event facts, or prior thesis
+    input: "Pojawiły się nowe informacje o jednej z moich spółek i chcę sprawdzić, czy rzeczywiście zmieniają tezę inwestycyjną albo wymagają głębszej analizy. Nie chcę od razu pełnego valuacji każdej pozycji."
+    expected:
+      should_trigger: true
+      must:
+        - "provisional decision rule"
+        - "relevant materiality dimensions"
+        - "minimum missing inputs"
+        - "materiality separate from direction"
+      must_not:
+        - "intake form only"
+        - "claim that materiality was assessed without event facts"
