@@ -55,3 +55,22 @@ cases:
         - "mark unsupported claim and verification limitation"
       must_not:
         - "invent chart data"
+  - id: evidence-source-fidelity
+    case: misstated-option-id
+    input: "Slide 7 maps a PROPOSED option to an approved Strategy recommendation. Fix evidence provenance."
+    expected:
+      should_trigger: true
+      must:
+        - "preserve source decision status and finding or option IDs"
+        - "flag source-to-slide mismatch"
+      must_not:
+        - "promote proposed option to approved"
+  - id: evidence-domain-delegation
+    case: deep-market-strategy-research
+    input: "Conduct a complete industry structure, competitive positioning and option design exercise; no presentation is requested."
+    expected:
+      should_trigger: false
+      must:
+        - "route to Strategy OS rather than slide evidence check"
+      must_not:
+        - "run a duplicate strategy-research pipeline"
