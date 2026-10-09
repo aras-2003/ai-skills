@@ -584,7 +584,7 @@
       "domain": "presentations",
       "maturity": "draft",
       "version": "0.1.0",
-      "description": "Review factual claims and source sufficiency for a planned or existing presentation, including bounded research, citations, conflicting evidence and chart inputs. Use when presentation assertions or exhibits need fact checking; do not replace the full research domain or invent missing client data.",
+      "description": "Check source-to-slide fidelity, citations, claim sufficiency, conflicting evidence and chart inputs in presentations. Use when slide assertions/exhibits need source mapping; delegate substantive new strategy research and analysis to their domain/shared owners.",
       "source": "skills/presentations/presentation-evidence-review/SKILL.md",
       "source_status": "present",
       "capability_assessment": "UNASSESSED"
@@ -624,7 +624,7 @@
       "domain": "presentations",
       "maturity": "draft",
       "version": "0.1.0",
-      "description": "Design and stress-test a slide deck's audience-specific argument, narrative order and action-title ghost deck before visual authoring. Use when a presentation brief or draft deck needs story structure, executive flow, persuasive narrative or decision logic; do not use only to lay out a given chart.",
+      "description": "Design and stress-test a slide deck's audience-specific argument, narrative order and action-title ghost deck before visual authoring. Use when a presentation brief or draft deck needs story structure, executive flow, persuasive narrative that communicates supplied or domain-supported conclusions; do not design business strategy or just a chart.",
       "source": "skills/presentations/presentation-storyline/SKILL.md",
       "source_status": "present",
       "capability_assessment": "UNASSESSED"
