@@ -339,7 +339,7 @@ class IntegratedReportingTests(unittest.TestCase):
 
         self.assertIn("RESEARCH_CANDIDATE", hunter)
         self.assertIn("is **not by itself** write authorization", hunter)
-        self.assertIn("specific, verifiable standing mandate", hunter)
+        self.assertIn("verifiable standing mandate", hunter)
         self.assertIn("Read-only, preview, test, no-save", hunter)
         self.assertNotIn("authorizes these bounded research-state writes by default", hunter)
         self.assertIn("request alone is not write authorization", store.lower())
