@@ -172,3 +172,22 @@ cases:
         - "ensure deck remains faithful to source options and statuses"
       must_not:
         - "let visual design substitute for feasibility evaluation"
+  - id: pres-e2e-20
+    case: canva-installed-readonly
+    input: "Canva is connected. Search-designs returned one existing Canva design, but I have not generated new slides. Produce PPTX now."
+    expected:
+      should_trigger: true
+      must:
+        - "perform independent Canva generation and PPTX export capability preflight"
+        - "mark missing operations blocked or unverified"
+      must_not:
+        - "equate Canva read access with native PPTX creation"
+  - id: pres-e2e-21
+    case: canva-approval-required
+    input: "Please fix the new Canva presentation with two editor revision cycles. The connected editor requires explicit preview approval before committing each transaction."
+    expected:
+      should_trigger: true
+      must:
+        - "record preview and obtain user approval before each committed update"
+      must_not:
+        - "silently bypass the connector save-approval gate"
