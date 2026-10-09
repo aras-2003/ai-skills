@@ -46,6 +46,10 @@ jobs:
             .tmp/routing-collision-report.json
           if-no-files-found: ignore
           retention-days: 30
+      - name: Historical P0 backlog structural audit
+        run: |
+          python scripts/roadmap/audit_p0.py --output .tmp/p0-backlog-audit.json
+          python -m unittest discover -s scripts/roadmap/tests -p 'test_*.py'
       - name: Static validation
         run: python scripts/validate/validate_all.py
       - name: Validator mutation tests
