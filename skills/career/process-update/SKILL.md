@@ -4,10 +4,10 @@ description: >
   Convert new recruitment-process information into a concise structured status update with current stage, evidence, next action, owner/date and changes to prior assumptions. Use after recruiter calls, interviews, emails or offer updates.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.1.0"
+  version: "0.1.1"
   maturity: candidate
   risk: low
-  last_reviewed: 2026-09-30
+  last_reviewed: "2026-10-09"
   execution:
     default_model_class: fast
 ---
@@ -24,6 +24,7 @@ Keep recruitment tracking current without re-running full analysis.
 ## Do not use when
 - The new information materially changes role attractiveness and needs full re-evaluation first.
 - The user asks for company research or CV tailoring.
+- The user asks only to draft a recruiter email/message and did not ask to update a recruitment tracker; draft the message directly without invoking a tracker update.
 
 ## Inputs
 ### Required
@@ -56,4 +57,3 @@ Escalate only if the update materially changes the career decision or evidence i
 - [ ] Only changed fields updated.
 - [ ] Next action explicit.
 - [ ] Re-evaluation trigger assessed.
-

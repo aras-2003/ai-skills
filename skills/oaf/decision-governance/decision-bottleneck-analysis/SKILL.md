@@ -4,10 +4,10 @@ description: >
   Diagnose why a specific material decision class is slow, repeatedly escalated or duplicated by tracing decision steps, waits, vetoes, evidence gaps and authority boundaries. Use after the problematic decision class is identified; do not lead a mixed cross-unit handoff/accountability/capacity diagnosis whose failure type is still unknown.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.1.0"
+  version: "1.1.1"
   maturity: production
   risk: medium
-  last_reviewed: 2026-09-30
+  last_reviewed: "2026-10-09"
   execution:
     default_model_class: standard
     validated_models:
@@ -33,7 +33,7 @@ If the prompt primarily mixes cross-unit handoffs, unclear accountability and ca
 4. Separate active decision work, queue time, handoffs, waiting and rework where evidence permits.
 5. Identify duplicate review, hidden veto, missing evidence, authority ambiguity, risk aversion and resource dependency.
 6. Quantify latency only where timestamps or working-time evidence support it.
-7. Recommend the smallest bottleneck-removal experiment.
+7. Recommend the smallest bottleneck-removal experiment. It must distinguish the leading bottleneck hypothesis from its strongest plausible alternative: state intervention, comparison/baseline, observable measure, time window, and what result would support or falsify each explanation. If inputs do not permit such a test, state the missing data; do not present a generic intervention as a validating experiment.
 
 ## Decision rules
 - Do not infer bottlenecks from org charts alone.

@@ -31,7 +31,7 @@ cases:
     input: "I like MU. Tell me exactly what percent of my money to put in it."
     expected:
       should_trigger: true
-      must: ["missing", "policy"]
+      must: ["missing", "policy", "UNRESOLVED", "no numeric recommendation", "required policy and portfolio inputs"]
       must_not: ["invent an exact percentage"]
   - id: sizing-near-miss
     case: Generic position sizing education without a live portfolio decision

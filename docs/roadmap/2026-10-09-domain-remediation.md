@@ -1,0 +1,45 @@
+# Luna v14 domain failure remediation
+
+**Campaign baseline:** 490 cases; 346 PASS / 144 FAIL. This remediation covers the 56 authored-skill and 13 workflow-lane cases previously classified as domain/behavioral candidates. The binary FAIL label is not evidence that all 69 are confirmed behavior defects: the workflow subset is predominantly missing exact-runtime identity/execution evidence.
+
+**Target source packages:** `skills-factory` 1.36.1; `skills-factory-lab` 0.33.6. Behavioral skill versions are individually incremented. These source changes are not runtime proof; the packaged Site MCP must be redeployed and the affected cases rerun against its attested identity before any case can be called PASS.
+
+## Domain findings and source changes
+
+| v14 case IDs | Failure mode | Remediation in source | Closure evidence |
+|---|---|---|---|
+| 0002, 0029, 0032, 0035 | Unsolicited role/authority inference and false-positive routing between company facts, job discovery/validity, and process updates | Tightened boundaries in career skills; factual company research cannot infer CTO authority/mandate, known-role validity routes separately, and email drafting alone does not update a tracker | Rerun positive, near-miss and competing-route cases |
+| 0040 | Inconsistent contribution-after-CAC arithmetic in the generated answer | Added calculator reconciliation regression: after-CAC must equal pre-CAC minus CAC; calculator remains the deterministic arithmetic source | Unit test passes; rerun original exact prompt and verify emitted figures reconcile |
+| 0048, 0060, 0063 | Cross-case numeric/product contamination and unsupported differentiation claim | Competition, differentiation and regulatory reviews now bind claims and values to the active product/case and require provenance or `UNKNOWN`/`UNVERIFIED` | Rerun isolated paired-case fixtures with conflicting inputs |
+| 0064, 0073–0084 | Canonical writes without an explicit safe write boundary; persistence/bootstrap/receipt gaps | Store contract now blocks implicit report writes, controlled-test writes, previews and unknown targets; explicit authorized research writes remain allowed without a BUY/SELL decision. Portfolio review and decision journal use the same authorization boundary. Store cases distinguish no-save from explicit isolated-store write | Rerun with before/after isolated-store receipts; confirm canonical production remains unchanged |
+| 0068 | Triage output omitted or changed the allowed materiality enum | Required verbatim enum: `NOISE`, `MONITOR`, `REVIEW`, `ESCALATE` | Rerun enum-coverage case |
+| 0088 | Investor holdings turned into a copy-trading list | Holdings are dated behavioral evidence only; separate any user-requested underwriting | Rerun holdings near-miss |
+| 0089–0093 | Incomplete market/history coverage treated as complete; unsupported candidate promotion | Require actual coverage disclosure and block promotion where missing history is decision-critical; do not treat missing history as zero change | Rerun with short-history fixture plus complete-history comparator |
+| 0096, 0098 | Portfolio output omitted holdings detail or overstated prior-period comparison | Require row-level available holdings fields; missing snapshots block comparison and missing fields are named | Rerun with complete and missing-history canonical fixtures |
+| 0105, 0107 | Unsupported numeric position recommendation, including zero placeholder | Missing decision-critical policy/portfolio/risk evidence now produces `UNRESOLVED`/`BLOCKED`; no numeric placeholder or ADD/TRIM recommendation | Rerun missing-context and verified-context cases |
+| 0114, 0119 | Unresolved underwriting event not surfaced; thesis challenge lacked a valid baseline/state | Underwriting keeps unresolved decision-critical events as blockers; thesis challenge requires an existing thesis and returns explicit revised-state enum | Rerun with conflicting event evidence and absent/active thesis baselines |
+| 0122, 0123 | Draft thesis monitored as active or generic kill criteria substituted for recorded baseline | Monitoring stops with `BLOCKED_THESIS_NOT_ACTIVE`, `outcome not run`, and activation requirement absent an ACTIVE baseline | Rerun DRAFT-only and ACTIVE controls |
+| 0130, 0134, 0135 | Incorrect horizon, overbuilt response to narrow ask, and visual slots described without output evidence | Report composer now preserves narrow request depth; visual renderer hard stops and slot contracts already require actual payload/explicit blocked state | Rerun horizon, narrow-answer and missing-renderer cases; verify returned artifact payload |
+| 0136 | Skill authoring omitted valid frontmatter/routing contract | Authoring requires parseable `name`/`description` frontmatter; routing description remains explicit | Rerun authoring fixture and package validation |
+| 0140, 0142, 0145, 0147 | Weak comparator, reviewer disagreement, and non-executed cases misreported as outcomes/compatibility | Evaluation now requires comparator/near-miss evidence for one-example claims and `compatibility_status: NOT_RUN` for non-executed cases; the existing execution-state contract is retained | Static evaluation/campaign validation plus exact runtime receipt reruns |
+| 0150, 0151, 0154 | Release identity/channel/value decision did not match the release contract | Current release-review source already requires exact candidate/channel/artifact identity and `ITERATE` for missing channel/value; no wording change was needed | Rerun against current Lab package and capture source→build→manifest identity |
+| 0162 | Skill specification omitted trigger/non-trigger detail | Specification now requires an explicit user-goal signal and a named realistic competing/no-skill near-miss | Rerun specification case |
+| 0178 | Diagnostic omitted the required exact marker or loaded-skill identity | Diagnostic now defines the exact three-line output | Rerun in the installed runtime, not a source-only simulation |
+| 0181–0189 | Unsupported org relationships, data/presentation mixing, missing renderer preflight, and incorrect STATIC/HOVER/CONTROLLED labels | Visual output contract now requires evidence-only relationships, payload/provenance separation, `capability_preflight`, exact interaction classification, and verified-control behavior | Rerun with renderer-capability fixtures and inspect actual native payload; client display remains separately unobservable |
+| 0190 | Bottleneck experiment did not discriminate competing causes | Experiment must state intervention, baseline, measure, window, and results supporting/falsifying competing explanations | Rerun discriminating-cause fixture |
+| 0241 | OAF confidence not tied clearly to evidence strength/scope | Health-check confidence is claim-specific and calibrated to evidence quality, representativeness and alternatives; high confidence remains permitted when justified | Rerun the evidence-backed and missing-evidence pair |
+| 0243, 0244 | Skill-development tests lacked realistic routing discrimination or treated queued/no-step status as PASS | Development workflow now requires executable positive/negative/competing examples and `outcome:null`/`NOT_RUN`/specific execution state for unexecuted cases | Rerun against a queued/no-steps case and a positive/near-miss pair |
+
+## Workflow-lane cases
+
+| Case IDs | v14 limitation | Source disposition | Required closeout |
+|---|---|---|---|
+| 0335, 0336, 0339, 0342, 0344, 0345, 0348, 0351, 0354, 0356, 0357, 0360 | v14 did not prove current runtime identity and/or actual child workflow execution. These are not established domain-behavior defects from the available receipts. | P0/P1 runtime receipt hardening is present in the source branch; no content-only edit can attest the hosted service | Redeploy Lab MCP, obtain `runtime_info` for exact source/package, then rerun each workflow with correlated route/child execution receipts. Leave these cases pending until that evidence exists. |
+| 0362 | Investment OS route was described/selected without proof that the child workflow executed | Added a hard requirement for a correlated child execution receipt; route classification or prose is not execution | Rerun the exact natural-language prompt and verify route tool + child execution receipt |
+
+## Current validation state
+
+- Commerce unit-economics calculator: **12 tests pass**, including the new arithmetic reconciliation check.
+- Full repository validation: **not yet run successfully**; the active Python environment lacks `PyYAML` and `jsonschema` required by repository CI. The locked dependencies need to be installed in an isolated environment before CI can be considered green.
+- Exact-version cloud/MCP reruns: **pending redeployment**; no source edit alone closes them.
+- No claim is made that the 69 campaign cases now pass. Source fixes and local tests are not substitutes for the original Chat-mode runtime evidence.

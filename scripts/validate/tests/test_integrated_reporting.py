@@ -332,15 +332,18 @@ class IntegratedReportingTests(unittest.TestCase):
         self.assertIn("concrete, callable renderer", composer)
         self.assertIn("best concrete renderer available", renderer)
 
-    def test_discovery_report_persists_research_candidates_without_owner_decision(self) -> None:
+    def test_discovery_write_authority_respects_no_save_and_test_boundaries(self) -> None:
         hunter = (ROOT / "workflows/investment-opportunity-hunter/WORKFLOW.md").read_text(encoding="utf-8")
         store = (ROOT / "skills/investing/investment-record-store/SKILL.md").read_text(encoding="utf-8")
         cases = (ROOT / "skills/investing/investment-record-store/tests/cases.yaml").read_text(encoding="utf-8")
 
         self.assertIn("RESEARCH_CANDIDATE", hunter)
         self.assertIn("research-state writes", hunter)
-        self.assertIn("research/report/discovery request is sufficient authority", store.lower())
+        self.assertIn("direct user request to run discovery", hunter.lower())
+        self.assertIn("request alone is not write authorization", store.lower())
+        self.assertIn("never write to a canonical production backend during evaluation", store.lower())
         self.assertIn("store-research-report-opportunity-write", cases)
+        self.assertIn("store-explicit-research-write", cases)
 
     def test_evidence_contract_requires_reproducibility_and_contradiction_check(self) -> None:
         contract = (ROOT / "skills/meta/report-composer/references/report-state-and-evidence-contract.md").read_text(encoding="utf-8")

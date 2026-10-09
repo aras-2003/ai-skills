@@ -149,6 +149,8 @@ Minimum suite for a new production candidate:
 7. conflicting or stale evidence case when relevant;
 8. known regression case once defects exist.
 
+Each case must include a self-contained prompt, required fixture, observable expected behavior, forbidden behavior, and a named competing route or explicit no-skill outcome where relevant. Generic positive examples do not establish routing quality; require at least one realistic near-miss and one plausible competitor. For an existing production skill, preserve this discrimination floor even when the overall regression suite is risk-scoped.
+
 Create assertions on behavior, not exact prose.
 
 Gate S5:
@@ -172,6 +174,7 @@ Gate S6:
 - no severe routing regression;
 - no new high-severity failure mode;
 - every required case has an execution state: `NOT_RUN` for queued/not-started, `BLOCKED` / `NOT TESTABLE` for unavailable prerequisites, and `PASS` / `FAIL` only after observation;
+- every non-executed case has `outcome: null`, `evaluation.status: NOT_RUN`, and a specific `execution_state` (`no_steps`, `awaiting_runner`, `blocked`, or `not_executed`); compatibility remains `NOT_RUN` unless separately executed;
 - a required unobserved case cannot be counted as a pass.
 
 ## Stage 7 — revision loop

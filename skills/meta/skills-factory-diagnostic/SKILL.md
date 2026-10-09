@@ -5,10 +5,10 @@ description: >
   Use when the user explicitly asks to test, verify, diagnose, or confirm whether Skills Factory is active.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.0"
+  version: "1.0.1"
   maturity: production
   risk: low
-  last_reviewed: 2026-09-30
+  last_reviewed: "2026-10-09"
 ---
 
 # Arek Skills Diagnostic
@@ -29,6 +29,10 @@ When invoked for an explicit plugin/skill availability test:
 ## Output contract
 
 Keep the response to at most three short lines.
+Use this exact three-line shape:
+`SKILLS_FACTORY_ACTIVE`
+`Loaded skill: skills-factory-diagnostic`
+`Skill instructions loaded successfully.`
 
 ## Quality checks
 

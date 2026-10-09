@@ -37,6 +37,14 @@ class CalculatorTests(unittest.TestCase):
         self.assertEqual("45.00", result["contribution"]["after_cac"])
         self.assertEqual("50.00", result["contribution"]["target_cac_from_required_contribution"])
 
+    def test_contribution_after_cac_reconciles_to_pre_cac(self) -> None:
+        result = calculator.calculate(base())
+        pre_cac = calculator.D(result["contribution"]["pre_cac"], "pre_cac")
+        cac = calculator.D(result["contribution"]["cac"], "cac")
+        after_cac = calculator.D(result["contribution"]["after_cac"], "after_cac")
+        self.assertEqual(pre_cac - cac, after_cac)
+        self.assertEqual("45.00", result["contribution"]["after_cac"])
+
     def test_nonrecoverable_gross_cost_stays_gross(self) -> None:
         data = base()
         data["vat"]["recoverable"] = False

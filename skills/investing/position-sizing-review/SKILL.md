@@ -6,10 +6,10 @@ description: >
   deciding starter, build, hold or reduction sizing. Do not use without portfolio context and policy constraints.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "0.3.0"
+  version: "0.3.1"
   maturity: production
   risk: high
-  last_reviewed: 2026-10-02
+  last_reviewed: "2026-10-09"
   execution:
     default_model_class: strong
 ---
@@ -43,6 +43,8 @@ Separate the decision to own an asset from the decision of how much risk to allo
 - Strong momentum is not permission to add.
 - A surviving business thesis does not imply attractive security valuation.
 - Without policy or portfolio state, return requirements instead of inventing a percentage.
+- When required policy, portfolio, or risk inputs are missing, return `UNRESOLVED`/`BLOCKED` and the specific inputs needed. Do not emit `0%`, `0.0%`, or another numeric placeholder as a position recommendation; zero is a substantive recommendation, not a missing-data marker.
+- Do not recommend ADD/TRIM or an exact numeric band from a case with missing decision-critical evidence.
 - Without a verified valuation/priced-in assessment, do not recommend adding to an already-large position.
 
 ## Output contract

@@ -16,7 +16,7 @@ cases:
     input: "I have a DRAFT thesis for MU but no ACTIVE thesis. Monitor whether the thesis strengthened after earnings."
     expected:
       should_trigger: true
-      must: ["blocked", "DRAFT", "ACTIVE", "activation"]
+      must: ["BLOCKED_THESIS_NOT_ACTIVE", "DRAFT", "ACTIVE", "activation", "outcome not run"]
       must_not: ["STRENGTHENS", "WEAKENS", "thesis health"]
 
   - id: monitor-near-miss
