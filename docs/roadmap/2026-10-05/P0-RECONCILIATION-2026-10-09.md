@@ -44,3 +44,47 @@ PR, CI receipt and runtime receipt justify a more specific disposition.
 
 Open review-required Issues must not be closed because this report exists.
 Do not modify E2E baseline, queue, receipts or claim a deployed Site.
+
+## Verified source snapshot and outstanding P0 evidence
+
+This reconciliation was inspected against `main` SHA
+`a66f7cf40adbbfce31248c6f806016a4f27e93cb`, **not** the historical
+`ai-skills` repository identifier embedded in BACKLOG.json.
+
+- Source inventory from recursive GitHub tree: **54** `skills/**/SKILL.md`,
+  **17** `workflows/*/WORKFLOW.md`.
+- Checked-in `docs/lab-release.json`: Lab **0.33.5**, source
+  `99e41a56993b198a36be07ab8c247db1aa33c575`, **70** components
+  (54 skills + 16 workflow entrypoints). Lab identity is **not** current
+  main identity and does not prove the current Site deployment.
+- `release/capability-contract.yaml` has an empty
+  `component_declarations` map: **70/70 UNASSESSED** in the source
+  validator. This is a material residual ENG-16/17 gate.
+- GitHub rulesets readback returned an empty list. Branch protection
+  reads for main and production returned HTTP 403 (integration lacks
+  permission); do **not** infer protected or unprotected state.
+- `.github/workflows/package-main-lab-plugin.yml` creates artifacts with
+  read-only repository permissions. This is not the missing separately
+  authorized deployment publisher.
+
+### Per-P0 evidence-bound disposition (not closures)
+
+| ID | Observed implementation evidence | Residual / gating evidence |
+|---|---|---|
+| ENG-01 | Source tree + Lab manifest counts confirmed above | Historical AIS/RT item-by-item reconciliation not verified |
+| ENG-02 | Lifecycle, release review and readiness include pending evidence/personal-beta gates | Exact-version policy scenario tests and full reconciliation |
+| ENG-03 | `skill-test-design` draft + eval fixtures exist | Independent runtime evidence for candidate maturity |
+| ENG-04 | `skill-evaluation`, isolation tools and receipts exist | Baseline/previous-version comparable live evidence |
+| ENG-05 | `skill-release-review` and isolated campaign exist | Positive/missing/high failure runtime decisions |
+| ENG-06 | Existing `skill-development` change classification and scoped testing | End-to-end handoff/early test design evidence |
+| ENG-08 | `scripts/eval/receipt.py` and `campaign.py` exist | Controller-only one-command, idempotent CLI/Desktop receipts |
+| ENG-10 | Static collision report and routing tests in CI | Natural model routing and margin evidence |
+| ENG-15 | Runtime/skill security scanner and mutation tests in CI | Confirm comprehensive packaged runtime scanner coverage |
+| ENG-16 | Capability dimensions schema and report exist | 70 unassessed component declarations; no compatibility PASS |
+| ENG-17 | Generated catalog and package manifest exist | Registry/contract assessment parity and current channel identity |
+| ENG-20 | SHA refs + hashed dev lock; immutable action-ref CI guard in this PR | Admin ruleset/protection verification, publisher isolation/rollback |
+| E2E-01 | Read-only `runtime_info` in MCP source and tests | Exact deployed Lab/Site identity and stale-registration proof |
+| E2E-02 | Runtime E2E fixtures, receipts and historical tests | Browser/UI chart visibility, full tool trace and exact-version closures |
+
+**No P0 row above is marked DONE.** Outstanding runtime and GitHub-admin
+requirements cannot be inferred from source files, PR metadata, or this audit.
