@@ -98,9 +98,3 @@ Escalate to strong for politically contested executive authority, cross-enterpri
 - [ ] Escalation explicit.
 - [ ] Decision latency considered.
 - [ ] Effectiveness evidence defined.
-
-## Lab runtime eval inputs
-
-When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
-
-- `references/evals/case-governance-design-001.input.md`

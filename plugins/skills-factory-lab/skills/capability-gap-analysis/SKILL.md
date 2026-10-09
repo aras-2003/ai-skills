@@ -81,9 +81,3 @@ Escalate for complex cross-domain capability design or contested target-state ca
 - [ ] Capacity vs maturity separated.
 - [ ] Evidence/hypothesis/unknown separated.
 - [ ] No automatic technology solution.
-
-## Lab runtime eval inputs
-
-When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
-
-- `references/evals/case-capability-gap-001.input.md`

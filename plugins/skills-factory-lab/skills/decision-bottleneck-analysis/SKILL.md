@@ -61,9 +61,3 @@ Fast may be adequate for clean, structured decision logs. Escalate where executi
 - [ ] Adviser vs de facto gate distinction tested.
 - [ ] Duplicate review remains evidence-based.
 - [ ] Smallest experiment targets the strongest confirmed bottleneck.
-
-## Lab runtime eval inputs
-
-When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
-
-- `references/evals/case-decision-bottleneck-001.input.md`

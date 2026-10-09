@@ -59,9 +59,3 @@ Escalate for multi-country target-model selection, highly contested sovereignty/
 - [ ] Mandatory/configurable/advisory distinction considered.
 - [ ] Structural problem separated from implementation problem.
 - [ ] Design implication separated from final redesign.
-
-## Lab runtime eval inputs
-
-When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
-
-- `references/evals/case-global-local-001.input.md`

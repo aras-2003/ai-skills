@@ -72,9 +72,3 @@ Escalate to standard when capability boundaries require complex domain interpret
 - [ ] Process/org/system contamination checked.
 - [ ] No invented maturity or owners.
 - [ ] Corrections prioritised by decision impact.
-
-## Lab runtime eval inputs
-
-When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
-
-- `references/evals/case-capability-map-001.input.md`

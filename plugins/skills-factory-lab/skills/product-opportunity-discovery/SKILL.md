@@ -52,9 +52,3 @@ Also state deliberate rejects/defers and why. No numerical ranking.
 - [ ] Signals and purchase evidence are separated.
 - [ ] Regulatory/logistics/commodity risks can remove ideas early.
 - [ ] Next validation is cheapest decision-changing evidence, not paid ads by default.
-
-## Lab runtime eval inputs
-
-When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
-
-- `references/evals/case-006-product-discovery.input.md`

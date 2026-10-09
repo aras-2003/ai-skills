@@ -91,10 +91,3 @@ Return:
 - the smallest additional test needed, if a material gap remains.
 
 Tests represent the intended contract, not whichever current implementation is easiest to pass.
-
-## Lab runtime eval inputs
-
-When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.
-
-- `references/evals/description-only-routing.input.md`
-- `references/evals/live-source-evidence.input.md`

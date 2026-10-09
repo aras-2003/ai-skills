@@ -55,13 +55,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "5781058f885c2fc744d65a0e386770b5e3f13a0f0ee10c651ef4fc69441df925",
+      "content_sha256": "1ec6f68bfccd7829fccdf24c42f98696d4c384785187bf606f1b08a13b750ded",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/case-capability-gap-001.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -79,13 +77,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "5fa9e98d530edd1a325be93d96ab8a89a9937ee0b7ebc8ecee77a0b5c3baf546",
+      "content_sha256": "28c4a4cffa2551c934a83e6a3717da3ffd786116dd49e99ef8580f44db85d8f1",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/case-capability-map-001.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -103,15 +99,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "bdedc1c1eceebce2ff48bbe67218f24e6bdd109f95c1b57e26f1189f6c62b757",
+      "content_sha256": "8f1ec1672a587d0ccba49c862303428dfbfceb60339ab2b164cc5450d34bd2b0",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-003-viral-regulated.input.md",
-        "references/evals/case-005-false-us-pl-transfer.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -129,16 +122,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "0e1ba36a3929a38b210d56e6da7584ab45f11db90a662af57ffb89fe32d583a0",
+      "content_sha256": "6d0c02d5a04f7d58675da461b8d58f81c93381b24fd1e2d29e72aa0bf2d93411",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-001-premium-vs-generic.input.md",
-        "references/evals/case-002-good-demand-bad-economics.input.md",
-        "references/evals/case-004-boring-winner.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -266,13 +255,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "0e0a50ef45a3d489d99aaa1270fb88e9e88f5b07733d15bcaf8ebacadaf3f9ec",
+      "content_sha256": "b02f9ceb51caa92dadf2150c3877e4bae097893c8b3a586d476409616d7475c2",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/case-decision-bottleneck-001.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -403,13 +390,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "7ac7b557bc158751d7a6cf9713e9deadb15948e959955dace836f2c16ca23840",
+      "content_sha256": "5077d1c71e2eea87204bf6ee958571f45ea5f5ee82e58875104fa9bcf6b85549",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/case-global-local-001.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -427,13 +412,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "82ea796cafa97d2441d6ed15b782cda47572376b2a91bea1e00dd4a0a676f996",
+      "content_sha256": "65d24850f831722d63984e974ccf618d224efa7e682284163a705cde4d45cc84",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/case-governance-design-001.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -473,14 +456,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "f1cd6e675b5fe2cc3a743a2cc2205eddd152803d2d25c287f2fccad35f407a8d",
+      "content_sha256": "ac435778b8c8a63dfc815499db9ecb541db01e4c0551271bc6ae14f905735067",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-006-attention-acn.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -520,14 +501,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "cb35e668f185a424ddd6507124ea0ba96b0c9bb9b0e0c4c4ac78c9d4c6e8a164",
+      "content_sha256": "b87ee72e75109a7dd28836f0d8587e9b0eeaa735a09d4e9c531a767340794654",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-001-opportunity-hunter.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -568,13 +547,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "4c118106d14a0e11350a4c7bcf9413bdf88084be26f4976e9b774afdb87bd4e0",
+      "content_sha256": "69bddc3d5c9d30075d95e6bf56bd33fb15662e8c17a31530ef5611bf49f0b62a",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/case-005-policy-learning.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -615,14 +592,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "abde041cb68899c5b3fb2cfcc854563ed9c058bd48731dfd61f16bfb11fcba43",
+      "content_sha256": "8bd2bc65c3c4bc06fdac67dc1def344be2a313dd72be645eed8f4a9461507ddb",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-003-portfolio-review.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -665,14 +640,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "fd8ed9b2168b089f14e867fb802b65ac37993acf1f30945a2c4da42340036f2b",
+      "content_sha256": "4545db92e4b5bffdee7f3520a55ad55cf5c19cc64c85a8f6c5312109989da65f",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-002-security-sizing.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -690,14 +663,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "deeffe48cd6498762900d85fab295b8bce39b76a13dd1f7e2e4f82a581a08603",
+      "content_sha256": "4cc512ac23d1a8dd409637779829619b81763d1b706c4a34905fd01be2568950",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-004-theme-discovery.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -847,15 +818,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "3f37f91a9189c7ae2216277dc846a64bde5ac58820c718539a4977c3f2cfeca6",
+      "content_sha256": "57457e5b7f3bf6116bff6a936eba9de269b98097d433ba6fbbdbe76021aca97c",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-enterprise-architecture-review-001.input.md",
-        "references/evals/case-enterprise-architecture-stop-001.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -873,14 +841,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "319e721bc4fec33cc440c3ff4f05825d1554028b2edbb2b34eec43326250be95",
+      "content_sha256": "70b4d45e0353b0b885cdc6a5040fc94a270e23a71c0c5ce9b9219db73d8cf1b9",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-001-enterprise-change.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -898,14 +864,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "1ad0e0692e8692be97f7e24669de5aee7a6bd3ca147f8d300295ce10c3bcf9a5",
+      "content_sha256": "b8a9105ea4f83c998759a69d32a3782279fc50afa1547cfabd22d876f7b60311",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-governance-redesign-001.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -923,14 +887,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "3ff22c531c84cb2c30665b9b673d697e61b722d440f5a818962640f3b964a29f",
+      "content_sha256": "2ceb09f413772babe2c5a1f9a55854b029443df32dc25e03748de4e16211a0f3",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-001-enterprise-it.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -948,14 +910,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "6b7c152896738fbbcfcfa9fac440d4f6ee4f128c7bf68391c783f7f9620c347c",
+      "content_sha256": "79c0d9c3bdc816620ef5a91f74fee29e95a2cbaac530ad5ed75eab12e8869e4c",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-operating-model-redesign-001.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -996,14 +956,12 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "b7a9807236dd78e5b00c9b93d0ac30c3e2f7092de028e34eb2713171182860c0",
+      "content_sha256": "c06a9bcf8469ead367fbada3e6f23be8b5a7f7648d92ed968bf6ca55b1d3b5ce",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
         "assets/skills-factory-domain-icon.svg",
-        "references/WORKFLOW.md",
-        "references/evals/INDEX.md",
-        "references/evals/case-transformation-design-001.input.md"
+        "references/WORKFLOW.md"
       ],
       "kind": "workflow",
       "maturity": "production",
@@ -1065,13 +1023,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "0f55cfcac2fd2d70eaaba2d0b3cc476b92061dc3bcee0f9f6c764b3aff5fec73",
+      "content_sha256": "b92f761702aaf97558704e4e8f5b4095441814a72e5710e88d4a3325164a31cd",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/case-portfolio-health-001.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -1199,13 +1155,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "7f424e1a452075713f357bd262990b32ff654de9a2af91183bf1d00de838d4c1",
+      "content_sha256": "91288064a7762d791a9651e5a416f2d7de83cc1f4c10f62f28b0eccf0bb0c47f",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/case-006-product-discovery.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -1293,15 +1247,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "c147218802763f6e8dc33fa054e0ecfc16a6b05532823338ff9948c520caad8c",
+      "content_sha256": "4a20e6df5713e58fc7833bf5b4eeda04e8694d599df769f21b2495c6f407adff",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/contradictory-no-steps-pass.input.md",
-        "references/evals/live-browser-blocked.input.md",
-        "references/evals/queued-not-run.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "draft",
@@ -1363,14 +1313,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "e296560ac4a8f11bda8f080a5621d2c711e18ca277255a6456d530d3b6f41485",
+      "content_sha256": "ec8418ffd6f16829b19b1388fc834c64b465f86e9044b4796d0d869878de1dda",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/description-only-routing.input.md",
-        "references/evals/live-source-evidence.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "draft",
@@ -1520,14 +1467,11 @@
         },
         "status": "UNASSESSED"
       },
-      "content_sha256": "abe7751ff7a13e08beb70ec4d88185c70104ac88a50d4967d42e389b9ef6ae3d",
+      "content_sha256": "bb1d8d6dd08b5b50719c2578e1cd925edbcead5044b81f2689c07f240b5cb8a2",
       "inventory": [
         "SKILL.md",
         "agents/openai.yaml",
-        "assets/skills-factory-domain-icon.svg",
-        "references/evals/INDEX.md",
-        "references/evals/case-transformation-blueprint-001.input.md",
-        "references/evals/case-transformation-blueprint-stop-001.input.md"
+        "assets/skills-factory-domain-icon.svg"
       ],
       "kind": "skill",
       "maturity": "production",
@@ -1635,6 +1579,10 @@
   "runtime_fixture_targets": [
     {
       "status": "packaged",
+      "target": "architecture-review"
+    },
+    {
+      "status": "packaged",
       "target": "capability-gap-analysis"
     },
     {
@@ -1732,11 +1680,14 @@
   ],
   "runtime_tools": [
     {
-      "content_sha256": "1d0bc5d82f5f31b4ac4a32105c62aa14dd8a16195b554cfc6879849f97573811",
+      "content_sha256": "ad3b65f1cec814242acde0f2292c7c879faaf522a1dd12c5ed0a744fe9ece687",
       "kind": "mcp-server",
       "name": "skills-factory-runtime",
       "runtime_class": "skills-factory-runtime",
       "tools": [
+        "runtime_info",
+        "list_skills",
+        "load_skill",
         "route_investment_request",
         "render_bar_chart",
         "render_line_chart"
@@ -1746,5 +1697,5 @@
   ],
   "schema_version": "1.0",
   "session_rule": "Use this isolated Lab without the production plugin in the same runtime session.",
-  "source_revision": "a926341bb13e9613c0ab4a268cd32443723c3f00"
+  "source_revision": "99e41a56993b198a36be07ab8c247db1aa33c575"
 }
