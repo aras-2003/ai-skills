@@ -30,7 +30,13 @@ def audit(data):
                 errors.append(f"{key}: unknown dependency {dep!r}")
             elif dep == key:
                 errors.append(f"{key}: self dependency")
-    graph = {}\n    for key, item in by_id.items():\n        deps = item.get("depends_on", [])\n        if not isinstance(deps, list):\n            errors.append(f"{key}: depends_on is not a list")\n            deps = []\n        graph[key] = deps
+    graph = {}
+    for key, item in by_id.items():
+        deps = item.get("depends_on", [])
+        if not isinstance(deps, list):
+            errors.append(f"{key}: depends_on is not a list")
+            deps = []
+        graph[key] = deps
     state = {}
     def visit(node, trail):
         if state.get(node) == 1:
@@ -62,7 +68,8 @@ def main():
     result = {"source": str(args.backlog), "p0_count": len(p0), "p0": p0,
               "structural_errors": errors,
               "note": "Historical status only. No implementation/runtime PASS inferred."}
-    output = json.dumps(result, indent=2, ensure_ascii=False) + "\n"
+    output = json.dumps(result, indent=2, ensure_ascii=False) + "
+"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(output, encoding="utf-8")
