@@ -57,8 +57,8 @@ def values(title, body, labels):
     labels = {x.lower() for x in labels}
     result = {}
     for field, valid, pattern in (
-        ("Priority", PRIORITY, r"(?mi)^-?\s*(?:historical )?priority\s*:\s*\*{0,2}(P[0-3])\b"),
-        ("Size", SIZE, r"(?mi)^-?\s*(?:size|effort)\s*:\s*\*{0,2}(XS|S|M|L|XL)\b"),
+        ("Priority", PRIORITY, r"(?im)(?:^\s*-?\s*|;)\s*(?:historical )?priority\s*:\s*\*{0,2}(P[0-3])\b"),
+        ("Size", SIZE, r"(?im)(?:^\s*-?\s*|;)\s*(?:size|effort)\s*:\s*\*{0,2}(XS|S|M|L|XL)\b"),
         ("Area", AREA, None)):
         selected = [v for v in valid if f"{field.lower()}:{v.lower()}" in labels]
         if len(selected) > 1:
@@ -70,7 +70,7 @@ def values(title, body, labels):
             if m:
                 result[field] = m.group(1)
     if "Area" not in result:
-        m = re.match(r"^\[([A-Z]+)-\d+\]", title)
+        m = re.match(r"^\[([A-Z][A-Z0-9]*)-\d+\]", title)
         if m:
             result["Area"] = PREFIX_AREA.get(m.group(1), "Other")
     return result
