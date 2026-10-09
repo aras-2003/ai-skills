@@ -15,7 +15,7 @@
     "capability_assessment": "UNASSESSED",
     "runtime_installation": "NOT_OBSERVED",
     "availability_semantics": "Source maturity and declared channels do not prove package inclusion or installed runtime availability.",
-    "source_workflow_count": 17,
+    "source_workflow_count": 18,
     "registered_workflow_count": 16
   },
   "skills": [
@@ -558,6 +558,36 @@
       "source": "skills/oaf/portfolio-execution/transformation-blueprint/SKILL.md",
       "source_status": "present",
       "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "report-document-architecture",
+      "domain": "reports",
+      "maturity": "draft",
+      "version": "0.1.0",
+      "description": "Plan the section hierarchy and evidence-backed reading flow for a substantial written report or technical document before DOCX/PDF production. Use when a long-form analytical document needs a coherent chapter outline, section arguments, exhibits, appendix and citation plan; do not design slide storylines or redo domain research.",
+      "source": "skills/reports/report-document-architecture/SKILL.md",
+      "source_status": "present",
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "report-document-authoring",
+      "domain": "reports",
+      "maturity": "draft",
+      "version": "0.1.0",
+      "description": "Turn an approved long-form report model into a real editable and professionally typeset DOCX, Google Doc or paginated PDF using available document tools. Use when an external report document with headings, citations, figures and page layout is explicitly requested; do not claim exported files from chat prose or create presentation slides.",
+      "source": "skills/reports/report-document-authoring/SKILL.md",
+      "source_status": "present",
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "report-document-review",
+      "domain": "reports",
+      "maturity": "draft",
+      "version": "0.1.0",
+      "description": "Critique and verify actual long-form DOCX/PDF report artifacts page by page for content fidelity, citations, style, pagination, tables, links, editability and export parity. Use for quality review or regression checks of generated written documents; do not replace Strategy/OAF analysis reviews or certify a report without rendered pages.",
+      "source": "skills/reports/report-document-review/SKILL.md",
+      "source_status": "present",
+      "capability_assessment": "UNASSESSED"
     }
   ],
   "workflows": [
@@ -999,6 +1029,19 @@
         "report-composer",
         "visual-output-design"
       ],
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "report-production",
+      "source": "workflows/report-production/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "not_registered",
+      "maturity": "unknown",
+      "version": "unknown",
+      "description": "Produce an **audience-specific, source-faithful, professionally authored long-form document** when the user explicitly requests a report file or an external editable/paginated document. This workflow owns orchestration; it delegates subject analysis, report semantics, exhibits and actual file actions.",
+      "declared_channels": {},
+      "required_dependencies": [],
+      "optional_dependencies": [],
       "capability_assessment": "UNASSESSED"
     },
     {
