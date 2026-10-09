@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "commerce-supplier-en",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "target": "supplier-viability-review",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e0f1-0f5c-83eb-9a88-ab7ca25bf628",
+    "conversation_url": "https://chatgpt.com/c/6ac8e0f1-0f5c-83eb-9a88-ab7ca25bf628",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "supplier-viability-review v1.1.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser",
+    "routed_skill": "supplier-viability-review v1.1.0",
+    "routing_evidence": "Transcript visibly labels Supplier Viability Review, v1.1.0, Lab 0.33.6, Runtime verified."
+  },
+  "input_sha256": "c511ed17100bc5f18fba97c5676587a6b7f24c54b946a16b34cd4a445dafcfdf",
+  "rubric_sha256": "dd14a1a6827ff8c945d1af93d88c3323973be425fac619fad6416539689fc141",
+  "output_sha256": "052f5d6e1cac5ea1ad3e146fd23e2e6d019a3b19eacd4dc0027eb571e2848856",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 is the SHA-256 of the full accessibility-tree snapshot captured from the transcript; the rendered transcript remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8e12c-9448-83eb-ad4b-4c11f99627ff",
+    "conversation_url": "https://chatgpt.com/c/6ac8e12c-9448-83eb-ad4b-4c11f99627ff",
+    "basis": "Separate evaluator ChatGPT Chat assessed the stated rubric against executor evidence summary.",
+    "summary": "Supplier viability routing explicitly confirmed; missing landed costs, unconfirmed MOQ and sample-versus-scale uncertainty preserved; bulk order deferred."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "No supplier contact, purchase, or external write occurred."
+}

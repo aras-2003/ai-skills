@@ -1,0 +1,40 @@
+{
+  "campaign": "runtime-validation-2026-10-r17",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "schema_version": "1.0",
+  "case_id": "investment-opportunity-natural-pl",
+  "target": "investment-os-review",
+  "status": "FAIL",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e6b5-4000-83ed-a41c-6453a2463f1c",
+    "conversation_url": "https://chatgpt.com/c/6ac8e6b5-4000-83ed-a41c-6453a2463f1c",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "verified; explicit Lab 0.33.6 in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "investment-portfolio-review v0.5.0 (incorrect destination)"
+  },
+  "input_sha256": "d39b52ac84835af6b1f438ff10eb44789f8861c77ad3d1f5744b43867c61add6",
+  "rubric_sha256": "dd395eb2022a392c389b9f54055a1eb16867a9f1c423c27e4a9bb524c6d9f50f",
+  "output_sha256": "0e94b38ed14bd3d87c29d5ec5fdf3cc4d0826d6513d9770ca9c60a89979f5833",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "FAIL",
+    "score": "0/3",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed case-specific assertions against the captured Lab executor response.",
+    "summary": "FAIL: requested new-company discovery routed to investment-portfolio-review; opportunity-hunter was not invoked and discovery was not performed. Honest error detection does not satisfy the routing assertions."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ChatGPT Chat via Codex in-app browser. No Production inference."
+}

@@ -1,0 +1,40 @@
+{
+  "campaign": "runtime-validation-2026-10-r17",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "schema_version": "1.0",
+  "case_id": "oaf-portfolio-health-en",
+  "target": "portfolio-health-review",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e9e3-a724-83ed-bd0f-17408a16501f",
+    "conversation_url": "https://chatgpt.com/c/6ac8e9e3-a724-83ed-bd0f-17408a16501f",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "verified; Lab 0.33.6 explicitly reported in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "portfolio-health-review"
+  },
+  "input_sha256": "576aec664c7af81eb5e7a922e509458e1063ae45988acff483a34a93e335a701",
+  "rubric_sha256": "ec401f8aaa00217989b503d93f2870cc74d1447c8562fe5587eb4aaeb1a55b32",
+  "output_sha256": "959f23c45d6de06a4fadc2e912fe66dbe2207a5c9702d5d904e882e474f35b10",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed supplied transcript evidence against case expectations.",
+    "summary": "Portfolio Health Review diagnoses RED/not ready to rank due priority dilution, shared specialist overload and incompatible benefit cases; defers ranking and does not claim all initiatives fail or are unaffordable."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ChatGPT Chat via Codex in-app browser. No Production inference."
+}

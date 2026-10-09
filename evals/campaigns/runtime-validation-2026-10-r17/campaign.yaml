@@ -2,9 +2,10 @@ schema_version: "1.0"
 campaign: runtime-validation-2026-10-r17
 behavior_source_revision: 4bd9ae737bdd1919b1827750a1197737ec031b12
 package:
-  name: skills-factory
-  version: "1.37.0"
-  channel: plugin
+  name: skills-factory-lab
+  version: "0.33.6"
+  channel: lab
+execution_channel: lab
 commerce_case_ids:
   - case-001-premium-vs-generic
   - case-002-good-demand-bad-economics
@@ -53,7 +54,7 @@ executive_case_ids:
   - executive-role-012
   - executive-role-013
   - executive-role-014
-fallback_cases:
+excluded_production_only_cases:
   - id: fallback-strategy-production-002
     mode: explicit
     target: oaf-health-check
@@ -77,7 +78,6 @@ retest_focus_case_ids:
   - case-006-attention-acn
 execution_order:
   - commerce
-  - production-fallback
   - routing
   - executive-role
 required_runtime_tool_fragments:

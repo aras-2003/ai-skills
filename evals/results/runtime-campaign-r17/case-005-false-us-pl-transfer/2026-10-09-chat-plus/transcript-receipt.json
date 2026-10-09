@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "case-005-false-us-pl-transfer",
+  "suite": "commerce",
+  "mode": "explicit",
+  "target": "commerce-opportunity-review",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e0cb-f23c-83eb-89b1-e83c7aa2813f",
+    "conversation_url": "https://chatgpt.com/c/6ac8e0cb-f23c-83eb-89b1-e83c7aa2813f",
+    "timestamp_local": "2026-10-09",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "commerce-opportunity-review v1.0.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser"
+  },
+  "input_sha256": "dd51eab58ad0162ee2df1a5fe1544bc5b7dd9e2d5533cc91e020472f0662f4d1",
+  "rubric_sha256": "862e16be92db483b547a877490031a31e3bf479fd60da9dfd726bf774af78268",
+  "output_sha256": "724c3ab3376f22c54e269e73eb2ee1a97b82bfcc7e93d0f33f824b1e28ca2d3c",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "5/5",
+    "conversation_id": "6ac8e128-8eac-83eb-a1aa-1d4f7a8db76c",
+    "conversation_url": "https://chatgpt.com/c/6ac8e128-8eac-83eb-a1aa-1d4f7a8db76c",
+    "basis": "Separate evaluator Chat assessed an evidence summary of the visible executor transcript.",
+    "summary": "All five criteria passed: correct transferability review, universal vs US-specific context separated, bulky freight and local price alternatives identified, US reviews excluded as Polish purchase evidence, and bounded sequential local validation proposed."
+  },
+  "notes": "Rerun in Lab after campaign scope was corrected; supersedes the stale PENDING receipt inherited from the Production-pinned campaign interpretation. Executor visible output states Cloud Next Lab 0.33.6, attestation verified. No external market research, inventory purchase or paid campaign was executed.",
+  "expected_channel": "lab",
+  "actual_channel": "lab"
+}

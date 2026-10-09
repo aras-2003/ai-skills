@@ -10,15 +10,15 @@ policy:
 components:
   - name: company-context-research
     kind: skill
-    version: "1.0.1"
+    version: "1.0.2"
     source: skills/career/company-context-research/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: lab-candidate-pending-runtime-validation
     candidate_channel: lab
-    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
-    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R18 is pending."
+    limitation: "Lab-only candidate; exact R18 runtime validation is required before any production promotion."
   - name: executive-role-evaluator
     kind: skill
     version: "1.1.0"
@@ -183,27 +183,26 @@ components:
     exception_expires: "2026-10-14"
   - name: decision-bottleneck-analysis
     kind: skill
-    version: "1.1.1"
+    version: "1.1.2"
     source: skills/oaf/decision-governance/decision-bottleneck-analysis/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
     maturity_disposition: lab-candidate-pending-runtime-validation
     candidate_channel: lab
-    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
-    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R18 is pending."
+    limitation: "Lab-only candidate; exact R18 runtime validation is required before any production promotion."
   - name: decision-rights-review
     kind: skill
-    version: "1.1.0"
+    version: "1.1.1"
     source: skills/oaf/decision-governance/decision-rights-review/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
-    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R18 is pending."
+    limitation: "Lab-only candidate; exact R18 runtime validation is required before any production promotion."
   - name: governance-design
     kind: skill
     version: "1.0.0"
@@ -581,16 +580,15 @@ components:
 
   - name: investment-os-review
     kind: workflow
-    version: "0.3.0"
+    version: "0.3.1"
     source: workflows/investment-os-review/WORKFLOW.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "MCP-backed front-door routing has static/package coverage; exact-version unassisted runtime routing evidence is pending."
-    limitation: "Use as the natural Investment OS entry point; child workflow execution remains subject to each child's evidence and runtime contracts."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R18 is pending."
+    limitation: "Lab-only candidate; exact R18 runtime validation is required before any production promotion."
 
   - name: investment-attention-review
     kind: workflow
@@ -646,16 +644,15 @@ components:
 
   - name: investment-portfolio-review
     kind: workflow
-    version: "0.5.0"
+    version: "0.5.1"
     source: workflows/investment-portfolio-review/WORKFLOW.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
-    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R18 is pending."
+    limitation: "Lab-only candidate; exact R18 runtime validation is required before any production promotion."
 
   - name: investment-theme-discovery
     kind: workflow

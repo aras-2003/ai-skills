@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "career-cv-gaps-en",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "target": "cv-gap-analysis",
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "browser": "Codex in-app browser",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8d1f1-fb7c-83ed-87e9-e1ff275c4b62",
+    "conversation_url": "https://chatgpt.com/c/6ac8d1f1-fb7c-83ed-87e9-e1ff275c4b62",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "routed_skill": "cv-gap-analysis v0.1.0",
+    "routing_evidence": "Assistant transcript visibly labeled “Skills Factory · cv-gap-analysis v0.1.0”."
+  },
+  "input_sha256": "c2b1eb7ba9d1eb8d7967d47a1dc9644d5b527e9f8b4c3cf7aeaf0e8e1bfbd495",
+  "rubric_sha256": "e6dd5bd6a907e80e27ac45f77bf9860686b3554a5ab84a58498005a9297717b5",
+  "output_sha256": "3a7a5a157d3412c8930c85cf211521a6c947593338bca5907e315d5ecfcea379",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "summary": "Gap analysis selected without rewriting; 500-person target requirement not fabricated as candidate experience."
+  },
+  "isolation_observation": "Executor referenced stored CV/technology documents not present in the prompt. Evaluator judged this an isolation/provenance concern, not a failure under the two stated rubric assertions."
+}

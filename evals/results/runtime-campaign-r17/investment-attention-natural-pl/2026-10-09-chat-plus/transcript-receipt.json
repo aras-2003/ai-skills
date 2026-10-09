@@ -1,0 +1,40 @@
+{
+  "campaign": "runtime-validation-2026-10-r17",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "schema_version": "1.0",
+  "case_id": "investment-attention-natural-pl",
+  "target": "investment-os-review",
+  "status": "FAIL",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e6b5-ebdc-83eb-8e90-1b6797ab853e",
+    "conversation_url": "https://chatgpt.com/c/6ac8e6b5-ebdc-83eb-8e90-1b6797ab853e",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "verified; explicit Lab 0.33.6 in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "investment-attention-review v0.2.0"
+  },
+  "input_sha256": "3f90cbb937668f3c68a6d0c4505ceefe3f6b165337a8658e1f42829cdfe8438c",
+  "rubric_sha256": "9e934abb4f2cdc957fe11638595dd1cd7f0e872b494ca165ad1a8762778bf6ae",
+  "output_sha256": "1fd62d1f5f0210180a1d2adc1b1b9b1263c45a4200bd2e8d80f93c9d93b6fedf",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "FAIL",
+    "score": "2/3",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed case-specific assertions against the captured Lab executor response.",
+    "summary": "FAIL: correct attention-triage specialist, materiality filter and no full valuation; mandatory Investment OS front-door invocation/sequence is not evidenced in the transcript. This is an evidence failure, not proof the front door was bypassed."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ChatGPT Chat via Codex in-app browser. No Production inference."
+}

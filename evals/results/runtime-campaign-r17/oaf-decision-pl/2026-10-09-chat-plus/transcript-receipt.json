@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "oaf-decision-pl",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "target": "decision-bottleneck-analysis",
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "status": "FAIL",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "browser": "Codex in-app browser",
+    "conversation_id": "6ac8e935-1c44-83ed-9ee6-10057946e0ec",
+    "conversation_url": "https://chatgpt.com/c/6ac8e935-1c44-83ed-9ee6-10057946e0ec",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "verified; explicit Lab 0.33.6 in transcript",
+    "routed_skill": "decision-bottleneck-analysis v1.1.1"
+  },
+  "input_sha256": "78bb608d01f48862b6a54b3fb6133f3893cc45b10aa121dbad9408c76ff77be0",
+  "rubric_sha256": "bacd8044a8909185b05d7e63ece3508e1cd9a30e373d117d09b344e78bc1a952",
+  "output_sha256": "e9c5bfedc983ee44a7955020eecfec0aed9492e7231c82840d289c1e52ea0c85",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "FAIL",
+    "score": "1/2 rubric criteria fully satisfied; expected specialist selection failed",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat re-evaluated against the exact expected_target and manual assertion after the first permissive score.",
+    "summary": "FAIL: exact expected target decision-rights-review; actual decision-bottleneck-analysis v1.1.1. The assistant diagnosed unclear authority before governance design and requested decision class, but related analysis does not satisfy the exact routing rubric."
+  },
+  "notes": "Assistant provided related decision bottleneck analysis but selected the wrong specialist for the explicit decision-rights routing rubric. Lab only; no Production inference."
+}

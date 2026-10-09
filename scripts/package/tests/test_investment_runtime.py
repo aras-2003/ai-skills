@@ -28,12 +28,18 @@ class InvestmentRuntimeTests(unittest.TestCase):
         self.assertEqual(route, result["route"])
         self.assertEqual(child, result["child_workflow"])
         self.assertTrue(result["must_invoke_child_workflow"])
+        self.assertEqual(
+            f"ROUTE={route}; CHILD={child}; NEXT_ACTION=load_skill({child})",
+            result["routing_receipt"],
+        )
 
     def test_server_instructions_require_pre_analysis_routing(self) -> None:
         instructions = self.runtime.SERVER_INSTRUCTIONS
         self.assertIn("Before substantive investment analysis", instructions)
         self.assertIn("route_investment_request", instructions)
         self.assertIn("investment-portfolio-review", instructions)
+        self.assertIn("auditable front-door routing receipt", instructions)
+        self.assertIn("Do not silently substitute another specialist", instructions)
         self.assertIn("Do not replace", instructions)
 
     def test_routes_portfolio_weights(self) -> None:
@@ -69,9 +75,23 @@ class InvestmentRuntimeTests(unittest.TestCase):
 
     def test_routes_opportunity_discovery(self) -> None:
         self.assert_route(
-            "Chcę znaleźć kilka nowych spółek do dalszego researchu. Nie mam konkretnego tickera.",
+            "Chcę znaleźć kilka nowych spółek dostępnych przez mojego brokera, które warto teraz dalej zbadać. Nie mam jeszcze konkretnego tickera. Zrób selekcję kandydatów do researchu, a nie analizę mojego obecnego portfela.",
             "opportunity",
             "investment-opportunity-hunter",
+        )
+
+    def test_negative_portfolio_mention_does_not_override_opportunity_discovery(self) -> None:
+        self.assert_route(
+            "Find a few new stocks worth researching, not a review of my current portfolio.",
+            "opportunity",
+            "investment-opportunity-hunter",
+        )
+
+    def test_positive_holdings_request_survives_negative_portfolio_comparison(self) -> None:
+        self.assert_route(
+            "Review these holdings and weights, not a generic portfolio overview: ACN 25%, IUIT 20%.",
+            "portfolio",
+            "investment-portfolio-review",
         )
 
     def test_routes_theme_research(self) -> None:
@@ -80,6 +100,22 @@ class InvestmentRuntimeTests(unittest.TestCase):
             "theme",
             "investment-theme-discovery",
         )
+
+    def test_exact_natural_routing_regressions(self) -> None:
+        cases = {
+            "portfolio-natural-en": ("portfolio", "investment-portfolio-review"),
+            "portfolio-observation-natural-pl": ("portfolio_observation", "investment-portfolio-observation"),
+            "security-natural-en": ("security", "investment-security-review"),
+            "security-sizing-natural-en": ("security", "investment-security-review"),
+            "opportunity-natural-pl": ("opportunity", "investment-opportunity-hunter"),
+            "theme-natural-en": ("theme", "investment-theme-discovery"),
+            "attention-natural-pl": ("attention", "investment-attention-review"),
+            "policy-natural-pl": ("policy", "investment-policy-design"),
+        }
+        for case, (route, child) in cases.items():
+            with self.subTest(case=case):
+                prompt = (ROOT / "evals/routing" / f"investment-{case}.input.md").read_text()
+                self.assert_route(prompt, route, child)
 
     def test_routes_attention_triage(self) -> None:
         self.assert_route(

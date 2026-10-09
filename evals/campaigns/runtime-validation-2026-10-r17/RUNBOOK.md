@@ -3,13 +3,13 @@
 ## Identity
 - campaign: `runtime-validation-2026-10-r17`
 - behavior source: `4bd9ae737bdd1919b1827750a1197737ec031b12`
-- production package source version: `skills-factory 1.37.0`
+- execution channel: `Lab` only
 - Lab package source version: `skills-factory-lab 0.33.6`
 
-R1–R16 remain historical evidence. R17 binds the domain remediations to the exact source revision/package versions above. Historical v14 results remain FAIL until each exact case is rerun in the redeployed Cloud MCP and independently evaluated. The 56 authored cases and 13 workflow cases are enumerated in `campaign.yaml`; workflow cases whose original failure was missing runtime identity/trace remain pending until the required receipt is captured.
+R1–R16 remain historical evidence. R17 retests behaviors against the exact Lab artifact. All 42 active core cases and 3 supplemental routing cases must run through Lab, even when a capability also exists in Production. Historical v14 results remain FAIL until each in-scope case is rerun in the redeployed Cloud MCP and independently evaluated. Production-only fallback checks are excluded from R17 because Lab availability cannot establish Production catalog behavior; they remain identified in `excluded_production_only_cases` for a future Production campaign.
 
 ## Purpose
-Retest the domain failure set after redeployment of the exact Lab MCP candidate. Preserve R16 visual-delivery checks and all earlier runtime requirements as regression coverage.
+Retest the domain failure set after redeployment of the exact Lab MCP candidate. Preserve R16 visual-delivery checks and all earlier runtime requirements as regression coverage. Do not execute Production-pinned cases or score a Lab run as evidence about Production.
 
 ## Required behavioral checks
 1. A portfolio review with three or more meaningful positions includes a real inline composition or concentration visual when supported data and a renderer are available.

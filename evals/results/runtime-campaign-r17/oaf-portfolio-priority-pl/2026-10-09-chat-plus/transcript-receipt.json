@@ -1,0 +1,40 @@
+{
+  "campaign": "runtime-validation-2026-10-r17",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "schema_version": "1.0",
+  "case_id": "oaf-portfolio-priority-pl",
+  "target": "portfolio-prioritization",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8ea0f-a074-83eb-94f2-b46a9c721dfc",
+    "conversation_url": "https://chatgpt.com/c/6ac8ea0f-a074-83eb-94f2-b46a9c721dfc",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "verified; Lab 0.33.6 explicitly reported in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "portfolio-prioritization"
+  },
+  "input_sha256": "fdac7a0a5c451ce80e0d24569fd53127614ebdb097cea4421315c50069bca2b7",
+  "rubric_sha256": "ef0be05fe1845d438e848fd62178443990dabe3ba616137407a1e93d624bed35",
+  "output_sha256": "c1b03782935d8648d88096845469a4f3ebfbac388a5485008cd27aee400ee040",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed supplied transcript evidence against case expectations.",
+    "summary": "Portfolio Prioritization v1.0.0 selected. Requests actual values and objective instead of inventing order; supplies explicit trade-off framework appropriate to comparable evidence."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ChatGPT Chat via Codex in-app browser. No Production inference."
+}

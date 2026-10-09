@@ -1,0 +1,40 @@
+{
+  "campaign": "runtime-validation-2026-10-r17",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "schema_version": "1.0",
+  "case_id": "oaf-evidence-loop-pl",
+  "target": "evidence-loop-review",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e958-95fc-83eb-a39c-3f635c7948ad",
+    "conversation_url": "https://chatgpt.com/c/6ac8e958-95fc-83eb-a39c-3f635c7948ad",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "verified; Lab 0.33.6 explicitly reported in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "evidence-loop-review"
+  },
+  "input_sha256": "82d320780d12ddcb6ee5fe6b568292ca9ddbdbeb551250c9737ecc2b884520af",
+  "rubric_sha256": "ec235cc9ccfc3b860478dc6df7c62ff6705d9082944863b47ce52e515325cb3d",
+  "output_sha256": "cccb5ac927c8ed9e176f2b352d0369de428bbaff558bd3119e6bff01030749a0",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed supplied transcript evidence against case expectations.",
+    "summary": "Evidence Loop Review v1.0.0, Lab 0.33.6 verified. Separates reporting from decision governance, keeps root cause provisional and proposes tracing past review decisions plus a bounded experiment."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ChatGPT Chat via Codex in-app browser. No Production inference."
+}

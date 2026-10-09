@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "commerce-discovery-pl",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "target": "product-opportunity-discovery",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e2c9-1a70-83ed-a0e5-510c62190ba8",
+    "conversation_url": "https://chatgpt.com/c/6ac8e2c9-1a70-83ed-a0e5-510c62190ba8",
+    "timestamp_local": "2026-10-09",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "commerce-opportunity-review v1.0.0 → product-opportunity-discovery v1.1.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser"
+  },
+  "input_sha256": "9be2a8f71ea805ed4aab428d7043066fee9236661e9c1fc195912db764c4d019",
+  "rubric_sha256": "7299f5aaf18bcd72be3a9bae40098ed8e70f332a966f23256f90345278ba9795",
+  "output_sha256": "2216cc2c09dc24e091eb0b4c65bc4a9a2cbe70321e6cf1380bd2862eb690140d",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8e32b-1704-83ed-a303-e92462181c4c",
+    "conversation_url": "https://chatgpt.com/c/6ac8e32b-1704-83ed-a303-e92462181c4c",
+    "basis": "Separate evaluator Chat reviewed observed routing transcript summary.",
+    "summary": "Both criteria passed: product-opportunity-discovery v1.1.0 executed as child of the commerce-opportunity-review orchestrator; shortlist narrowed to three hypotheses without a final investment verdict."
+  },
+  "notes": "Natural-routing case. Parent commerce-opportunity-review orchestrated the run, and the expected discovery skill executed explicitly as a child step; evaluator judged this acceptable. Partial evidence caveat remains, with no verified purchases/CAC/margins.",
+  "expected_channel": "lab",
+  "actual_channel": "lab"
+}

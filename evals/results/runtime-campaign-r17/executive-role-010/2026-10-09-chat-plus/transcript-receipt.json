@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "executive-role-010",
+  "suite": "executive-role",
+  "mode": "natural-routing",
+  "target": "executive-role-evaluator",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e561-495c-83eb-b8ce-d0bf984a5fee",
+    "conversation_url": "https://chatgpt.com/c/6ac8e561-495c-83eb-b8ce-d0bf984a5fee",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "executive-role-evaluator v1.1.0",
+    "runtime_attestation": "Lab 0.33.6 visible in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "executive-role-evaluator v1.1.0"
+  },
+  "input_sha256": "bc1d5ef82192e99df293ad9f9a2718f0d1b3891409ea2ca1622c62becfd9e59a",
+  "rubric_sha256": "54002c2f461c45964cddf82a0be6f8b366c501effcccb1ce1847427a3ce12594",
+  "output_sha256": "23077845e089b8b24c2a7d26046f0e443aa7a7db9122b1450aef90d196f5877e",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a transcript evidence excerpt captured from the rendered response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "4/4",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed each case independently against the case-specific rubric from supplied executor transcript evidence.",
+    "summary": "PASS: explicitly interpreted global technology leadership in relation to local CTO; decision INVESTIGATE, confidence LOW, authority and reporting unknowns preserved."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ordinary ChatGPT Chat execution in the Codex in-app browser. Independent rubric scoring is in a separate Chat. No Production inference."
+}

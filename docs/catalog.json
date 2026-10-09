@@ -7,7 +7,7 @@
       },
       "lab": {
         "name": "skills-factory-lab",
-        "version": "0.33.6"
+        "version": "0.33.7"
       }
     },
     "source_revision": "89db15ef94cf",
@@ -23,7 +23,7 @@
       "name": "company-context-research",
       "domain": "career",
       "maturity": "production",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Research factual company context relevant to executive technology opportunities, including scale, revenue, headcount, ownership, leadership, transactions, strategy and technology organization. Use when the user asks for company facts or organizational context. Do not evaluate role attractiveness, candidate fit, career value, mandate quality or recommended recruitment actions unless the user explicitly asks what the company context means for a specific role; in that case hand off to executive-role-evaluator.",
       "source": "skills/career/company-context-research/SKILL.md",
       "source_status": "present",
@@ -43,7 +43,7 @@
       "name": "cv-tailoring",
       "domain": "career",
       "maturity": "candidate",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "description": "Tailor an approved mastery CV to one specific executive technology role while preserving factual accuracy, seniority and evidence. Use after cv-gap-analysis; do not invent experience, inflate scope or optimize for keywords at the expense of credibility.",
       "source": "skills/career/cv-tailoring/SKILL.md",
       "source_status": "present",
@@ -413,8 +413,8 @@
       "name": "decision-bottleneck-analysis",
       "domain": "oaf",
       "maturity": "production",
-      "version": "1.1.1",
-      "description": "Diagnose why a specific material decision class is slow, repeatedly escalated or duplicated by tracing decision steps, waits, vetoes, evidence gaps and authority boundaries. Use after the problematic decision class is identified; do not lead a mixed cross-unit handoff/accountability/capacity diagnosis whose failure type is still unknown.",
+      "version": "1.1.2",
+      "description": "Diagnose why a specific material decision class is slow, repeatedly escalated or duplicated by tracing decision steps, waits, vetoes, evidence gaps and authority boundaries. Use after the problematic decision class and its decision owner/path are sufficiently identified; when the core unknown is who has final authority, lead with decision-rights-review. Do not lead a mixed cross-unit handoff/accountability/capacity diagnosis whose failure type is still unknown.",
       "source": "skills/oaf/decision-governance/decision-bottleneck-analysis/SKILL.md",
       "source_status": "present",
       "capability_assessment": "UNASSESSED"
@@ -423,8 +423,8 @@
       "name": "decision-rights-review",
       "domain": "oaf",
       "maturity": "production",
-      "version": "1.1.0",
-      "description": "Map and review critical organisational decision rights, including who proposes, decides, executes, advises and escalates. Use when the primary question concerns ownership or authority for identified material decisions. Do not lead a mixed cross-unit handoff/accountability/capacity diagnosis before the decision problem is isolated, and do not use merely to create a generic RACI.",
+      "version": "1.1.1",
+      "description": "Map and review critical organisational decision rights, including who proposes, decides, executes, advises and escalates. Use when the primary question concerns ownership or authority for identified material decisions. Repeated escalation, decision circulation and uncertainty about who has final authority are decision-rights signals, even when latency is also present. Do not lead a mixed cross-unit handoff/accountability/capacity diagnosis before the decision problem is isolated, and do not use merely to create a generic RACI.",
       "source": "skills/oaf/decision-governance/decision-rights-review/SKILL.md",
       "source_status": "present",
       "capability_assessment": "UNASSESSED"
@@ -686,7 +686,7 @@
       "source_status": "present",
       "runtime_registration": "registered",
       "maturity": "production",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Default Investment OS front door for natural investment requests. Use when the user asks in ordinary language to observe what changed in their portfolio, review their portfolio risk/structure, assess a stock/security, find investment opportunities, research themes, evaluate whether new market/company information matters, or define portfolio policy/risk limits. Route first, then invoke the matching specialist workflow; use the MCP routing preflight when available and do not answer with generic investment commentary.",
       "declared_channels": {
         "chatgpt-zip": "unavailable",
@@ -736,7 +736,7 @@
       "source_status": "present",
       "runtime_registration": "registered",
       "maturity": "production",
-      "version": "0.5.0",
+      "version": "0.5.1",
       "description": "Child workflow for full portfolio review. Use when selected by investment-os-review, explicitly requested, or when another Investment OS workflow delegates a portfolio-level decision. It performs canonical reads, reconciliation, concentration/diversification analysis, policy/thesis checks, integrated reporting and the visual-floor path. Do not use as the default natural Investment OS entry point; natural portfolio requests should enter through investment-os-review.",
       "declared_channels": {
         "chatgpt-zip": "unavailable",

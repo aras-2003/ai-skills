@@ -1,0 +1,40 @@
+{
+  "campaign": "runtime-validation-2026-10-r17",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "schema_version": "1.0",
+  "case_id": "oaf-architecture-workflow-pl",
+  "target": "oaf-enterprise-architecture-review",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e801-ab80-83ed-99b8-b0dcf96c7f90",
+    "conversation_url": "https://chatgpt.com/c/6ac8e801-ab80-83ed-99b8-b0dcf96c7f90",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "verified; explicit Lab 0.33.6 in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "oaf-enterprise-architecture-review"
+  },
+  "input_sha256": "5f47e1e57b6ecc639f4017d5d4e275f022694057eaec44e761649d53351afa87",
+  "rubric_sha256": "83c617773cda7c5a8e5fc69ee7cb22ad9e65b0b79203e9902c9c8cb7cd226d51",
+  "output_sha256": "90e12e01e7b2cc03a4cc303f2af6b9f49228dea3142f5ba113d3707310e549b7",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "4/4",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat scored transcript summaries against the case expectations.",
+    "summary": "OAF Enterprise Architecture Review v1.0.0, Lab 0.33.6; integrates outcomes, capabilities, data, integration, local systems, operating model and migration portfolio; nests specialist review; defers product selection."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ChatGPT Chat via Codex in-app browser. No Production inference."
+}

@@ -1,0 +1,40 @@
+{
+  "campaign": "runtime-validation-2026-10-r17",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "schema_version": "1.0",
+  "case_id": "investment-policy-natural-pl",
+  "target": "investment-policy-design",
+  "status": "FAIL",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e71b-5030-83ed-ba70-293c046009bf",
+    "conversation_url": "https://chatgpt.com/c/6ac8e71b-5030-83ed-ba70-293c046009bf",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "verified; explicit Lab 0.33.6 in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "investment-policy-design"
+  },
+  "input_sha256": "1a9a4bdb24361132b16a6aa6a081353b0cc33bf8af69124f4fbb5be43c383718",
+  "rubric_sha256": "67b4a521fd0f0c0fa36929f4f8fa168130432b72003ec80244b6320ea6d6aba1",
+  "output_sha256": "951ecaab6ca51bc81adf7b3060de25d73472511900c89300bcc03166f1b35fe6",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "FAIL",
+    "score": "2/3",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed case-specific assertions against captured Lab executor evidence.",
+    "summary": "No ordered Investment OS front-door invocation is evidenced; correct policy-design child selected, provisional limits/rebalancing/risk rules delivered, and no holdings review invented."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ChatGPT Chat via Codex in-app browser. No Production inference."
+}

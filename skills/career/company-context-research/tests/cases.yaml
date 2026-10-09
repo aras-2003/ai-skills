@@ -24,6 +24,7 @@ cases:
       must_not:
         - append unsolicited CTO role evaluation
         - discuss career value
+        - recommend recruitment actions based on historical role context
 
   - id: company-context-003
     case: explicit-role-implication

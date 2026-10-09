@@ -1,0 +1,89 @@
+diff --git a/lib/cloud-tools.ts b/lib/cloud-tools.ts
+index 51b027f..309834d 100644
+--- a/lib/cloud-tools.ts
++++ b/lib/cloud-tools.ts
+@@ -35,7 +35,7 @@ export const TOOLS = [
+   { name: "runtime_info", description: "Return this Site Worker's deployment attestation and the embedded Skills Factory Lab release. Missing platform identity is reported as unattested. Read-only; does not execute a skill.", inputSchema: { type: "object", properties: {}, additionalProperties: false }, annotations },
+   { name: "list_skills", description: "List every skill packaged in the exact Skills Factory Lab artifact used by this Site, including kind, version, maturity and content digests. Read-only; does not execute a skill.", inputSchema: { type: "object", properties: {}, additionalProperties: false }, annotations },
+   { name: "load_skill", description: "Load the exact packaged SKILL.md instructions and allow-listed supporting references for one Lab skill by name. Eval fixtures are excluded. The host model executes the loaded instructions; this MCP does not claim to perform model reasoning itself.", inputSchema: { type: "object", properties: { skill_name: { type: "string", minLength: 1, maxLength: 160 } }, required: ["skill_name"], additionalProperties: false }, annotations },
+-  { name: "route_investment_request", description: "Classify a Polish or English request into an Investment OS workflow. Routing only: never gives investment recommendations, executes workflows, reads portfolio data or trades. Ambiguous requests return clarification_required. Load and execute the selected workflow separately.", inputSchema: { type: "object", properties: { user_request: { type: "string", minLength: 1, maxLength: 8000 } }, required: ["user_request"], additionalProperties: false }, annotations },
++  { name: "route_investment_request", description: "Call before substantive investment analysis to route a Polish or English request through Investment OS. Preserve the returned routing_receipt, then call load_skill for the exact child_workflow and execute its instructions. Routing alone does not execute a workflow, read portfolio data, trade or provide recommendations. Ambiguous requests return clarification_required; do not silently substitute another specialist.", inputSchema: { type: "object", properties: { user_request: { type: "string", minLength: 1, maxLength: 8000 } }, required: ["user_request"], additionalProperties: false }, annotations },
+   { name: "render_bar_chart", description: "Render an SVG bar chart exclusively from explicitly supplied finite JSON numbers, including zero and negatives. labels and values must match. No fetching, inference, totals, advice or persistence. Returns an embedded SVG resource and the exact supplied data; client display is not verified.", inputSchema: { type: "object", properties: { labels: labelsSchema(1, 60), values: numbersSchema(1, 60), title: str, unit: { type: "string", maxLength: 30 }, horizontal: { type: "boolean" } }, required: ["labels", "values", "title", "unit", "horizontal"], additionalProperties: false }, annotations },
+   { name: "render_line_chart", description: "Render an SVG line chart exclusively from supplied finite JSON numbers. series_values is series-major: one numeric array for each series_name, each matching x_labels. At least two points. x_labels are categorical, equally spaced, with no date interpretation. No missing-value inference, fetching, advice or persistence. Client display is not verified.", inputSchema: { type: "object", properties: { x_labels: labelsSchema(2, 100), series_names: labelsSchema(1, 8), series_values: { type: "array", minItems: 1, maxItems: 8, items: numbersSchema(2, 100) }, title: str, unit: { type: "string", maxLength: 30 } }, required: ["x_labels", "series_names", "series_values", "title", "unit"], additionalProperties: false }, annotations },
+ ];
+@@ -89,7 +89,8 @@ export function loadSkill(skillName: string) {
+ }
+ const routes = ["investment-portfolio-observation", "investment-portfolio-review", "investment-security-review", "investment-opportunity-hunter", "investment-theme-discovery", "investment-attention-review", "investment-policy-design"] as const;
+ export function routeInvestment(userRequest: string) {
+-  const s = userRequest.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/ł/g, "l");
++  const s = userRequest.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/ł/g, "l")
++    .replace(/\b(?:do not|don't|not|without|nie)\b[^.!?;,\n]*/g, "");
+   const explicit = routes.filter(r => s.includes(r));
+   const portfolio = /portfel|portfolio|holdings|pozycj|positions|allocat|alokac|udzial|weights/.test(s);
+   const risk = /ryzyk|risk|koncentrac|concentrat|dywers|diversif|overlap|naklad|rebalans|rebalanc|restruktur|restructur|strukture|structure/.test(s);
+@@ -97,8 +98,10 @@ export function routeInvestment(userRequest: string) {
+   const observation = /zmien|zmian|changed|happening|dzieje|obserw|watch|monitor|drift|dryf/.test(s);
+   const event = /news|wiadomosc|wydarzen|event|informacj|wynik|earnings/.test(s) && /wplyw|impact|matter|znaczen|tez|thes|holdings|portfel|zmienia/.test(s);
+   const opportunity = /okazj|opportunit|kandydat|candidates|research next|badac dalej|szukaj spolek|znajdz spolk|find.*(stocks|securities)/.test(s);
++  const explicitCandidateDiscovery = /(?:find|scan|discover|screen|szukaj|znajd|znalez|selekcj).{0,100}(?:stocks|securities|spolk|kandydat|candidates)/.test(s);
+   const theme = /temat.*inwest|investment theme|trend|value chain|lancuch wartosc|beneficjen|second.order/.test(s);
+-  const tickerCount = (userRequest.match(/\b[A-Z]{2,5}\b/g) || []).length;
++  const nonTickers = new Set(["AI", "ETF", "ETFS", "USD", "PLN", "EUR", "CEO", "CIO", "CTO", "EPS", "FCF", "DCF", "ROIC", "TAM", "CAGR"]);
++  const tickerCount = new Set((userRequest.match(/\b[A-Z]{2,5}\b/g) || []).filter(token => !nonTickers.has(token))).size;
+   const security = /spolk|stock|security|akcj|etf|wycen|valuation|underwrit|ticker|thesis|teza|issuer|company case/.test(s) || (tickerCount === 1 && /review|ocen|analiz|kup|buy|sell|sprzed|investment|add|increase/.test(s));
+   const singleSecurityIntent = security && /thesis|thes|underwrit|valuation|wycen|review.{0,24}(stock|security|ticker)|analy[sz].{0,24}(stock|security|ticker)|assess.{0,24}(stock|security|ticker)|(ocen|analiz).{0,24}(spolke|akcje|instrument|papier)|stock review|security review|good investment|fit.*portfolio|portfolio fit|position|sizing|size|add|increase|reduce|trim|buy|sell|kup|dodaj|zwieksz|zmniejsz|sprzed|pozycj|teza/.test(s);
+   const aggregatePortfolioReview = portfolio && risk && !singleSecurityIntent;
+@@ -107,15 +110,17 @@ export function routeInvestment(userRequest: string) {
+   else if (policy && /defini|ustal|zaprojekt|design|define|create|regul|zasad|limits|limity/.test(s)) { candidates = [routes[6]]; reason = "The decision object is investment rules or risk limits."; }
+   else if (aggregatePortfolioReview) { candidates = [routes[1]]; reason = "Portfolio holdings or structure with a risk, concentration or allocation review."; }
+   else if (event) { candidates = [routes[5]]; reason = "New information is being assessed against holdings or theses."; }
++  else if (theme && !explicitCandidateDiscovery) { candidates = [routes[4]]; reason = "Thematic or value-chain research is the primary decision object; beneficiary opportunities are part of that research."; }
++  else if (opportunity) { candidates = [routes[3]]; reason = "Discovery of new research candidates; incidental or excluded portfolio mentions do not change the decision object."; }
+   else if (singleSecurityIntent) { candidates = [routes[2]]; reason = "A named security is the decision object, including its thesis, valuation, portfolio fit or sizing."; }
+   else if (portfolio && observation) { candidates = [routes[0]]; reason = "Observation of changes or monitoring of existing holdings."; }
+   else if (portfolio) { candidates = [routes[1]]; reason = "A portfolio-level review is the decision object."; }
+-  else if (opportunity && theme) { candidates = [routes[3], routes[4]]; reason = "The request mixes candidate discovery and thematic research."; }
+-  else if (opportunity) { candidates = [routes[3]]; reason = "Discovery of new research candidates."; }
+   else if (theme) { candidates = [routes[4]]; reason = "Thematic or value-chain research."; }
+   else if (policy) { candidates = [routes[6]]; reason = "Investment policy or limits are the decision object."; }
+   const specific = candidates.length === 1;
+-  return { route: specific ? candidates[0].replace("investment-", "") : "unknown", child_workflow: specific ? candidates[0] : "investment-os-review", status: specific ? "routed" : "clarification_required", candidates, reason, method: "deterministic bilingual rules; no semantic model", clarification: specific ? null : "Czy chodzi o obserwację portfela, jego ryzyko, konkretny instrument, nowe okazje, temat, news czy zasady inwestowania?", recommendation: null, workflow_executed: false, execution_state: "routed_only", workflow_execution_state: "not_executed", execution_state_reason: "router selected a workflow but did not execute it", outcome: null, response_policy: "stop_without_substantive_investment_output", source: SOURCE };
++  const route = specific ? candidates[0].replace("investment-", "") : "unknown";
++  const child = specific ? candidates[0] : "investment-os-review";
++  return { route, child_workflow: child, routing_receipt: `ROUTE=${route}; CHILD=${child}; NEXT_ACTION=load_skill(${child})`, status: specific ? "routed" : "clarification_required", candidates, reason, method: "deterministic bilingual rules; no semantic model", clarification: specific ? null : "Czy chodzi o obserwację portfela, jego ryzyko, konkretny instrument, nowe okazje, temat, news czy zasady inwestowania?", recommendation: null, workflow_executed: false, execution_state: "routed_only", workflow_execution_state: "not_executed", execution_state_reason: "router selected a workflow but did not execute it", outcome: null, response_policy: "stop_without_substantive_investment_output", source: SOURCE };
+ }
+ const escape = (s: string) => s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" }[c]!));
+ const short = (s: string, max = 22) => escape(s.length > max ? s.slice(0, max - 1) + "…" : s);
+diff --git a/tests/contracts.test.ts b/tests/contracts.test.ts
+index e83a822..e400edf 100644
+--- a/tests/contracts.test.ts
++++ b/tests/contracts.test.ts
+@@ -10,22 +10,27 @@ test("all seven source routing paths, PL/EN and unknown", () => {
+   const cases = [
+     ["Co zmieniło się w moim portfelu?", "investment-portfolio-observation"],
+     ["What is happening with my portfolio?", "investment-portfolio-observation"],
++    ["Co się teraz dzieje z moim portfelem? Sprawdź, co zmieniło się od poprzedniego poprawnego snapshotu i powiedz mi tylko, co naprawdę warto obserwować. Nie chcę jeszcze ustalać docelowej struktury portfela ani robić rebalancingu.", "investment-portfolio-observation"],
+     ["ACN 25%, IUIT 22%: review portfolio concentration risk", "investment-portfolio-review"],
+     ["Oceń ryzyko i nakładanie ETF w portfelu", "investment-portfolio-review"],
+     ["XYZ Technologies is a good investment; should I add 5% of my portfolio?", "investment-security-review"],
+     ["Review Micron's thesis, valuation and portfolio fit after its position drifted to 9.5%", "investment-security-review"],
+     ["Review my portfolio allocation, concentration and overlap across holdings", "investment-portfolio-review"],
+     ["Review stock ACN", "investment-security-review"],
++    ["I hold Micron and want an end-to-end review of the stock. Reassess the thesis, valuation, downside, catalysts and whether the position still fits my portfolio. Do not scan for unrelated ideas.", "investment-security-review"],
+     ["Znajdź nowe okazje inwestycyjne", "investment-opportunity-hunter"],
+     ["Szukaj spółek", "investment-opportunity-hunter"],
+     ["SZUKAJ SPÓŁEK", "investment-opportunity-hunter"],
+     ["What should I research next?", "investment-opportunity-hunter"],
++    ["Chcę znaleźć kilka nowych spółek dostępnych przez mojego brokera, które warto teraz dalej zbadać. Nie mam jeszcze konkretnego tickera. Zrób selekcję kandydatów do researchu, a nie analizę mojego obecnego portfela.", "investment-opportunity-hunter"],
++    ["Find new stocks worth researching, not an analysis of my portfolio.", "investment-opportunity-hunter"],
+     ["Research investment themes and value chains", "investment-theme-discovery"],
++    ["Research investment themes that could benefit from AI infrastructure spending over the next few years. I want value-chain and second-order opportunities, not an immediate buy list.", "investment-theme-discovery"],
+     ["Does this news matter for my holdings?", "investment-attention-review"],
+     ["Pomóż ustalić limity ryzyka i politykę inwestycyjną", "investment-policy-design"],
+     ["What does GPT mean?", "investment-os-review"], ["hello", "investment-os-review"],
+   ];
+-  for (const [request, expected] of cases) { const r = routeInvestment(request); assert.equal(r.child_workflow, expected, request); assert.equal(r.recommendation, null); assert.equal(r.workflow_executed, false); }
++  for (const [request, expected] of cases) { const r = routeInvestment(request); assert.equal(r.child_workflow, expected, request); assert.match(r.routing_receipt, new RegExp(`CHILD=${expected};`)); assert.equal(r.recommendation, null); assert.equal(r.workflow_executed, false); }
+   assert.equal(routeInvestment("investment-security-review and investment-portfolio-review").status, "clarification_required");
+ });
+ test("ambiguous share ownership requests ask for clarification, while a direct stock review still routes", () => {
