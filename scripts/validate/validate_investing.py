@@ -186,7 +186,16 @@ def main() -> int:
             problems.append(f"position-sizing-review missing guardrail: {required}")
 
     attention = (skill_root / "investment-attention-triage" / "SKILL.md").read_text(encoding="utf-8")
-    for required in ("NOISE", "MONITOR", "REVIEW", "ESCALATE", "next research question"):
+    for required in (
+        "NOISE",
+        "MONITOR",
+        "REVIEW",
+        "ESCALATE",
+        "next research question",
+        "provisional decision rule",
+        "minimum missing inputs",
+        "decision assumption",
+    ):
         if required.lower() not in attention.lower():
             problems.append(f"investment-attention-triage missing materiality/escalation guardrail: {required}")
 

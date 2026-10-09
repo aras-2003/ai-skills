@@ -15,3 +15,5 @@ assertions:
     - the Investment OS front door is selected first
     - new-information triage is selected before a full security review
     - the workflow suppresses non-material noise
+    - when ticker/event/prior-thesis inputs are absent, the response gives a provisional decision rule and asks only for the minimum missing inputs instead of returning only an intake form
+    - the decision rule names relevant materiality dimensions and separates materiality from evidence direction
