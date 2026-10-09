@@ -92,7 +92,13 @@ def build_catalog(
     if not isinstance(declarations, dict):
         raise ValueError("Capability contract component_declarations must be a mapping")
     def assessment(name: str) -> str:
-        return "DECLARED" if name in declarations else "UNASSESSED"
+        item = declarations.get(name)
+        if not isinstance(item, dict):
+            return "UNASSESSED"
+        requirements = item.get("requirements")
+        if not isinstance(requirements, dict) or set(requirements) != {"network", "filesystem", "shell_exec", "credentials", "external_actions"}:
+            return "UNASSESSED"
+        return "UNASSESSED" if "unassessed" in requirements.values() else "DECLARED"
 
     skills: list[dict[str, str]] = []
     for line in markdown.splitlines():
