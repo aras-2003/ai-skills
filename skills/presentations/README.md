@@ -13,6 +13,8 @@ Seven narrowly routed skills:
 
 Orchestration: [presentation-production](../../workflows/presentation-production/WORKFLOW.md).
 
+**Integration with planned Strategy OS:** Strategy owns strategic evidence, alternatives, recommended choices and approval status; Presentation owns audience-specific story, design and native delivery. Handoffs follow STR-16 proposal, preserve finding/option IDs and must be validated against its eventual released schema. STR-12–STR-15 supply semantic analysis/report profiles, not deck rendering. STR-17 measures Strategy quality independently of Presentation OS deck benchmarks. When Strategy workflows are not actually available in the runtime, report that missing capability instead of substituting presentation persuasion for strategy development.
+
 Delivery checklist to move from draft to candidate/production:
 1. Run repo structural/static + global routing/collision/security checks.
 2. Validate cases individually and end-to-end against no-skill and vendor-generic baselines.
