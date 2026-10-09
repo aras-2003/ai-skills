@@ -68,8 +68,7 @@ def main():
     result = {"source": str(args.backlog), "p0_count": len(p0), "p0": p0,
               "structural_errors": errors,
               "note": "Historical status only. No implementation/runtime PASS inferred."}
-    output = json.dumps(result, indent=2, ensure_ascii=False) + "
-"
+    output = json.dumps(result, indent=2, ensure_ascii=False) + chr(10)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(output, encoding="utf-8")
