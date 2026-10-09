@@ -203,7 +203,7 @@
       "name": "investment-attention-triage",
       "domain": "investing",
       "maturity": "production",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Triage new market, company, industry and portfolio information into a short attention queue based on materiality, thesis impact, valuation/expectations and decision relevance. Use structured research plugins for breadth, Firecrawl/primary sources for verification, and canonical Investment OS history for change detection.",
       "source": "skills/investing/investment-attention-triage/SKILL.md",
       "source_status": "present",
