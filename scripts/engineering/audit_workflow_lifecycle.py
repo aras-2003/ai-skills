@@ -18,6 +18,9 @@ def audit(root: Path) -> dict:
     if not isinstance(items, list):
         raise ValueError("runtime registry must have a workflows list")
 
+    fixture_path = root / "evals" / "runtime-fixtures.yaml"
+    fixture_data = yaml.safe_load(fixture_path.read_text(encoding="utf-8")) or {} if fixture_path.is_file() else {}
+    central_targets = fixture_data.get("targets") or {}
     seen: set[str] = set()
     rows = []
     for item in items:
@@ -63,12 +66,15 @@ def audit(root: Path) -> dict:
         if not isinstance(channels, dict) or not channels:
             errors.append("channel availability contract missing")
         local_tests = (root / rel.parent / "tests" / "cases.yaml").is_file()
-        if not local_tests:
-            warnings.append("NO_LOCAL_WORKFLOW_SUITE_CHECK_ALTERNATIVE_EVAL_FIXTURES")
+        central_cases = central_targets.get(name) or []
+        central_count = len(central_cases) if isinstance(central_cases, list) else 0
+        if not local_tests and not central_count:
+            warnings.append("NO_LOCAL_OR_CENTRAL_WORKFLOW_SUITE_CHECK_ALTERNATE_CAMPAIGNS")
         rows.append({
             "name": name, "source": source,
             "maturity": metadata.get("maturity") if isinstance(metadata, dict) else None,
             "local_test_suite_present": local_tests,
+            "central_eval_case_count": central_count,
             "status": "STATIC_BLOCKER" if errors else "REVIEW_REQUIRED" if warnings else "STATIC_CHECKS_OK",
             "errors": errors, "review_signals": warnings,
             "semantic_review": "REQUIRED", "runtime_outcome": None, "runtime_evidence": "NOT_RUN",
