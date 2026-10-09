@@ -88,3 +88,29 @@ This reconciliation was inspected against `main` SHA
 
 **No P0 row above is marked DONE.** Outstanding runtime and GitHub-admin
 requirements cannot be inferred from source files, PR metadata, or this audit.
+
+## GitHub Issues execution status — 2026-10-09
+
+The **14 historical P0 IDs** have been individually updated in the matching
+GitHub Issue bodies, preserving original scope, dependencies and the P0
+priority. This document does not overwrite immutable historical backlog source
+or treat completion as inferred from CI.
+
+| Status | Issues | Count |
+|---|---|---:|
+| IN_PROGRESS | [ENG-01 #234](https://github.com/aras-2003/skills-factory/issues/234), [ENG-02 #235](https://github.com/aras-2003/skills-factory/issues/235), [ENG-06 #239](https://github.com/aras-2003/skills-factory/issues/239), [ENG-08 #240](https://github.com/aras-2003/skills-factory/issues/240), [ENG-10 #241](https://github.com/aras-2003/skills-factory/issues/241), [ENG-15 #245](https://github.com/aras-2003/skills-factory/issues/245), [ENG-17 #247](https://github.com/aras-2003/skills-factory/issues/247), [E2E-01 #250](https://github.com/aras-2003/skills-factory/issues/250) | 8 |
+| BLOCKED | [ENG-03 #236](https://github.com/aras-2003/skills-factory/issues/236), [ENG-04 #237](https://github.com/aras-2003/skills-factory/issues/237), [ENG-05 #238](https://github.com/aras-2003/skills-factory/issues/238), [ENG-16 #246](https://github.com/aras-2003/skills-factory/issues/246), [ENG-20 #248](https://github.com/aras-2003/skills-factory/issues/248), [E2E-02 #251](https://github.com/aras-2003/skills-factory/issues/251) | 6 |
+| DONE | None — no end-to-end acceptance claim | 0 |
+
+`BLOCKED` here means at least one essential evidence/environment/control
+precondition for closure is absent, **not** that source work cannot be done.
+GitHub Project board custom Status fields were not changed by these Issue
+body updates; use Issue descriptions as the verified execution disposition
+until the connected Project field can be updated and read back.
+
+CI evidence for commit `ae1d7e3286e7e2a446763b1d54debc51c4c2055c`:
+- [Validate Skills PASS](https://github.com/aras-2003/skills-factory/actions/runs/37975442668)
+- [Domain Integrity PASS](https://github.com/aras-2003/skills-factory/actions/runs/37975442644)
+
+Neither workflow is proof of external browser display, GitHub branch
+protection, or skill runtime-model candidate promotion.
