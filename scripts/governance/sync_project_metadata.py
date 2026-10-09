@@ -5,8 +5,7 @@ import os
 import re
 import sys
 import time
-import urllib.error
-import urllib.request
+import subprocess
 
 PROJECT = """query($owner:String!, $project:Int!, $repo:String!, $issue:Int!) {
   user(login:$owner) {
@@ -41,22 +40,17 @@ PREFIX_AREA = {"ENG":"Engineering", "E2E":"E2E & Quality",
                "CORE":"Engineering", "EXI":"Engineering"}
 
 def gql(query, variables):
-    req = urllib.request.Request(
-        "https://api.github.com/graphql",
-        data=json.dumps({"query":query, "variables":variables}).encode(),
-        headers={"Authorization":"Bearer " + os.environ["PROJECTS_TOKEN"],
-                 "Accept":"application/vnd.github+json",
-                 "Content-Type":"application/json",
-                 "X-GitHub-Api-Version":"2022-11-28"},
-        method="POST")
-    try:
-        with urllib.request.urlopen(req, timeout=25) as response:
-            result = json.load(response)
-    except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"GraphQL HTTP {exc.code}") from exc
-    if result.get("errors"):
-        raise RuntimeError("GitHub GraphQL error: " + json.dumps(result["errors"]))
-    return result["data"]
+    """Use GitHub CLI for authenticated transport; never handle credentials here."""
+    payload = json.dumps({"query":query, "variables":variables})
+    result = subprocess.run(
+        ["gh", "api", "graphql", "--input", "-"],
+        input=payload, text=True, capture_output=True, check=False, timeout=30)
+    if result.returncode:
+        raise RuntimeError(f"GitHub CLI GraphQL request failed (exit {result.returncode})")
+    data = json.loads(result.stdout)
+    if data.get("errors"):
+        raise RuntimeError("GitHub GraphQL error: " + json.dumps(data["errors"]))
+    return data["data"]
 
 def values(title, body, labels):
     """Strict fields from labels, or legacy exact key syntax. Never guess missing values."""
@@ -121,6 +115,6 @@ def main():
 
 if __name__ == "__main__":
     try: main()
-    except (ValueError, RuntimeError, KeyError, urllib.error.URLError) as error:
+    except (ValueError, RuntimeError, KeyError, subprocess.TimeoutExpired, json.JSONDecodeError) as error:
         print(f"::error::{error}",file=sys.stderr)
         sys.exit(1)
