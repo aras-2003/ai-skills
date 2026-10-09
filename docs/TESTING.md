@@ -48,6 +48,16 @@ Record execution state per case, separately from the overall evaluation decision
 
 For live-browser/API requirements, a passing case needs the actual tool trace, source URL or resource, check time and observed status. A plan or narrative claim does not prove the check. Required NOT_RUN/BLOCKED evidence blocks an overall PASS.
 
+MCP tool receipts use a separate execution scope from the case/workflow state.
+`tool_receipt.execution_state: executed` means that the MCP tool produced a
+result. A routing result must still identify the child workflow as
+`workflow_execution_state: not_executed`, with `workflow_executed: false`,
+`outcome: null`, and a reason until the host actually runs it. For charts,
+`artifact_state: rendered` records a returned, hashed payload;
+`client_display_state: not_observable` must remain explicit unless the host
+provides independent display evidence. Receipts contain unsigned SHA-256
+digests for canonical inputs and outputs and are integrity aids, not signatures.
+
 ## 4. Suggested test-case format
 
 ```yaml

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 from pathlib import Path
@@ -31,7 +32,7 @@ def discover_draft_test_skills(root: Path) -> list[Path]:
     return [drafts[name] for name in targets]
 
 
-def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
+def add_runtime_eval_fixtures(root: Path, package_root: Path) -> int:
     registry = root / "evals" / "runtime-fixtures.yaml"
     if not registry.exists():
         return 0
@@ -42,20 +43,12 @@ def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
         raise ValueError("evals/runtime-fixtures.yaml: targets must be a mapping")
 
     copied = 0
+    manifest: list[dict[str, str]] = []
+    inputs_root = package_root / "executor-inputs"
     for target, cases in targets.items():
-        target_dir = skills_out / target
+        target_dir = package_root / "skills" / target
         if not target_dir.exists():
             continue
-
-        refs = target_dir / "references" / "evals"
-        refs.mkdir(parents=True, exist_ok=True)
-        lines = [
-            "# Runtime Eval Inputs",
-            "",
-            "Only executor inputs are packaged here. Rubrics remain repository-side and must never be loaded into the executor context.",
-            "",
-        ]
-        packaged_names: list[str] = []
         for case in cases or []:
             if not isinstance(case, dict):
                 raise ValueError(f"evals/runtime-fixtures.yaml: {target} entries must be mappings")
@@ -77,29 +70,34 @@ def add_runtime_eval_fixtures(root: Path, skills_out: Path) -> int:
             if not rubric.name.endswith(".rubric.yaml"):
                 raise ValueError(f"Runtime eval rubric must use .rubric.yaml suffix: {rubric}")
 
-            dst = refs / src.name
+            dst = inputs_root / target / src.name
+            dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
             copied += 1
-            packaged_names.append(src.name)
-            lines.append(f"- `{src.name}` — case: `{case_id}`, mode: `{mode}`")
-
-        (refs / "INDEX.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-        skill_md = target_dir / "SKILL.md"
-        if skill_md.exists() and packaged_names:
-            appendix = [
-                "",
-                "## Lab runtime eval inputs",
-                "",
-                "When the user explicitly asks to run one of the exact lab eval cases below, load only the corresponding input file from `references/evals/`. The evaluator rubric is intentionally unavailable to the executor.",
-                "",
-            ]
-            appendix.extend(f"- `references/evals/{name}`" for name in packaged_names)
-            appendix.append("")
-            skill_md.write_text(
-                skill_md.read_text(encoding="utf-8").rstrip() + "\n" + "\n".join(appendix),
-                encoding="utf-8",
+            manifest.append(
+                {
+                    "target": target,
+                    "case_id": case_id,
+                    "mode": mode,
+                    "input": dst.relative_to(package_root).as_posix(),
+                    "input_sha256": hashlib.sha256(dst.read_bytes()).hexdigest(),
+                }
             )
+    if manifest:
+        # Keep the runner index beside, not inside, model-loadable skill content.
+        (package_root / "executor-inputs.json").write_text(
+            json.dumps(
+                {
+                    "schema_version": "1.0",
+                    "purpose": "executor input index; evaluator rubrics are not packaged",
+                    "cases": sorted(manifest, key=lambda item: (item["target"], item["case_id"])),
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
     return copied
 
 
@@ -137,7 +135,7 @@ def main() -> int:
         )
         workflow_names = candidate_workflows + production_workflows
 
-        runtime_eval_fixtures = add_runtime_eval_fixtures(root, skills_out)
+        runtime_eval_fixtures = add_runtime_eval_fixtures(root, stage)
 
         registry_by_name = {
             str(item.get("name")): item

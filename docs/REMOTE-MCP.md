@@ -30,6 +30,16 @@ selected workflow. These instructions are model-facing guidance rather than a
 technical enforcement boundary, so each supported host still needs a runtime
 evaluation that proves routing and stop behavior in a fresh chat.
 
+Lab executor inputs are stored outside the `skills/` tree in `executor-inputs/`
+and indexed by `executor-inputs.json`; they are not returned by `load_skill`.
+Evaluator rubrics remain repository-side. Legacy Lab-only eval appendices are
+stripped by the loader. Each MCP tool response includes an unsigned
+`tool_receipt` with canonical input/output SHA-256 digests and source revision.
+Receipts record tool execution only; they are not signatures or deployment
+attestations. Chart receipts report `artifact_state: rendered` and
+`client_display_state: not_observable`. Renderer failures include a failure
+receipt with the error type and digest, without exposing raw error text.
+
 ## Required deployment properties
 
 The chosen host must:

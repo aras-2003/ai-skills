@@ -48,12 +48,34 @@ def _frontmatter(path: Path) -> tuple[dict[str, Any], str]:
 def _tree_digest(path: Path) -> str:
     digest = hashlib.sha256()
     for item in sorted(p for p in path.rglob("*") if p.is_file()):
-        relative = item.relative_to(path).as_posix().encode("utf-8")
+        relative_path = item.relative_to(path)
+        # This digest describes the host-loadable skill surface, not isolated
+        # executor fixtures or repository-side evaluator material.
+        if {"evals", "tests"}.intersection(relative_path.parts):
+            continue
+        relative = relative_path.as_posix().encode("utf-8")
         digest.update(relative)
         digest.update(b"\0")
-        digest.update(item.read_bytes())
+        content = (
+            _public_instructions(item.read_text(encoding="utf-8")).encode("utf-8")
+            if relative_path.name == "SKILL.md"
+            else item.read_bytes()
+        )
+        digest.update(content)
         digest.update(b"\0")
     return digest.hexdigest()
+
+
+def _public_instructions(text: str) -> str:
+    """Strip Lab-only fixture indexes from legacy packaged skill text."""
+    lines: list[str] = []
+    for line in text.splitlines():
+        if line.strip().casefold() == "## lab runtime eval inputs":
+            break
+        if "references/evals/" in line.casefold():
+            continue
+        lines.append(line)
+    return "\n".join(lines).rstrip()
 
 
 def _entry(skill_dir: Path) -> dict[str, Any]:
@@ -110,6 +132,7 @@ def load_skill(skill_name: str) -> dict[str, Any]:
     item = matches[0]
     skill_dir = skills_root() / item["directory"]
     _, instructions = _frontmatter(skill_dir / "SKILL.md")
+    instructions = _public_instructions(instructions)
     references = []
     reference_root = skill_dir / "references"
     if reference_root.is_dir() and not reference_root.is_symlink():
@@ -132,5 +155,6 @@ def load_skill(skill_name: str) -> dict[str, Any]:
         "execution_mode": "host_model_executes_loaded_instructions",
         "instructions": instructions,
         "reference_files": references,
+        "content_sha256": item["content_sha256"],
         "source_revision": os.environ.get("SKILLS_FACTORY_SOURCE_REVISION", "unattested"),
     }

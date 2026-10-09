@@ -140,7 +140,72 @@ def validate_tree(path: Path, allow_lab_evals: bool = False) -> list[str]:
         if file.name.endswith(".rubric.yaml"):
             errors.append(f"rubric leaked into runtime artifact: {rel}")
         if file.name == "SKILL.md":
-            errors.extend(validate_skill_text(file.read_text(encoding="utf-8"), str(rel)))
+            skill_text = file.read_text(encoding="utf-8")
+            errors.extend(validate_skill_text(skill_text, str(rel)))
+            if allow_lab_evals and "references/evals/" in skill_text.casefold():
+                errors.append(f"{rel}: executor fixture paths must not appear in model-loadable skill text")
+        if allow_lab_evals and file.name.endswith(".input.md") and "skills" in rel.parts:
+            errors.append(f"{rel}: executor input must be stored outside model-loadable skills")
+    if allow_lab_evals:
+        index_path = path / "executor-inputs.json"
+        if not index_path.is_file():
+            errors.append("Lab artifact missing executor-inputs.json")
+        else:
+            try:
+                index = json.loads(index_path.read_text(encoding="utf-8"))
+            except Exception as exc:
+                errors.append(f"executor-inputs.json: invalid JSON: {exc}")
+                index = {}
+            cases = index.get("cases") if isinstance(index, dict) else None
+            if (
+                not isinstance(index, dict)
+                or index.get("schema_version") != "1.0"
+                or not isinstance(cases, list)
+            ):
+                errors.append("executor-inputs.json: unsupported schema or missing cases")
+                cases = []
+            indexed_inputs: set[str] = set()
+            for item in cases:
+                if not isinstance(item, dict):
+                    errors.append("executor-inputs.json: case must be an object")
+                    continue
+                rel_input = item.get("input")
+                if (
+                    not isinstance(rel_input, str)
+                    or not rel_input.startswith("executor-inputs/")
+                    or ".." in PurePosixPath(rel_input).parts
+                    or "\\" in rel_input
+                    or not rel_input.endswith(".input.md")
+                    or rel_input in indexed_inputs
+                ):
+                    errors.append(f"executor-inputs.json: unsafe or duplicate input path {rel_input!r}")
+                    continue
+                indexed_inputs.add(rel_input)
+                input_path = path / rel_input
+                input_root = path / "executor-inputs"
+                traversed = [input_path, input_root, *input_path.parents]
+                if any(parent.is_symlink() for parent in traversed if parent != path):
+                    errors.append(f"executor-inputs.json: symlinked executor path {rel_input}")
+                    continue
+                try:
+                    input_path.resolve().relative_to(path.resolve())
+                except ValueError:
+                    errors.append(f"executor-inputs.json: executor path escapes artifact {rel_input}")
+                    continue
+                if not input_path.is_file():
+                    errors.append(f"executor-inputs.json: missing executor input {rel_input}")
+                    continue
+                actual_digest = hashlib.sha256(input_path.read_bytes()).hexdigest()
+                if item.get("input_sha256") != actual_digest:
+                    errors.append(f"executor-inputs.json: digest mismatch for {rel_input}")
+                if "rubric" in item:
+                    errors.append(f"executor-inputs.json: rubric path is forbidden for {rel_input}")
+            actual_inputs = {
+                file.relative_to(path).as_posix()
+                for file in (path / "executor-inputs").rglob("*.input.md")
+            } if (path / "executor-inputs").is_dir() else set()
+            if actual_inputs != indexed_inputs:
+                errors.append("executor-inputs.json: indexed inputs do not match packaged executor inputs")
     return errors
 
 
@@ -323,7 +388,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("path", type=Path)
     parser.add_argument("--zips", action="store_true")
-    parser.add_argument("--lab", action="store_true", help="allow executor-only references/evals/*.input.md in isolated Lab")
+    parser.add_argument("--lab", action="store_true", help="allow isolated executor-inputs/*.input.md in the Lab package")
     args = parser.parse_args()
     errors = validate_zips(args.path) if args.zips else validate_tree(args.path, allow_lab_evals=args.lab)
     for error in errors:
