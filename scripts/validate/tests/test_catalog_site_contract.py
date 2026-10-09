@@ -38,9 +38,6 @@ class SiteCatalogContractTests(unittest.TestCase):
         self.assertEqual("not_registered", skill_development["runtime_registration"])
         self.assertEqual("unknown", skill_development["maturity"])
         self.assertEqual("UNASSESSED", catalog["metadata"]["capability_assessment"])
-        invalid_contract = contract.replace("external_actions: none", "unexpected_dimension: none")
-        invalid = build_catalog(markdown, manifest, "revision", capability_contract=invalid_contract)
-        self.assertEqual("UNASSESSED", invalid["skills"][0]["capability_assessment"])
         self.assertTrue(all(item["capability_assessment"] == "UNASSESSED" for item in catalog["skills"]))
         self.assertTrue(all(item["declared_channels"] for item in catalog["workflows"] if item["runtime_registration"] == "registered"))
         self.assertEqual({}, skill_development["declared_channels"])
@@ -61,6 +58,10 @@ class SiteCatalogContractTests(unittest.TestCase):
         catalog = build_catalog(markdown, manifest, "revision", capability_contract=contract)
         self.assertEqual("UNASSESSED", catalog["skills"][0]["capability_assessment"])
         self.assertEqual("UNASSESSED", catalog["metadata"]["capability_assessment"])
+
+        invalid_contract = contract.replace("external_actions: none", "unexpected_dimension: none")
+        invalid = build_catalog(markdown, manifest, "revision", capability_contract=invalid_contract)
+        self.assertEqual("UNASSESSED", invalid["skills"][0]["capability_assessment"])
 
     def test_catalog_rejects_missing_package_or_revision_provenance(self) -> None:
         markdown = """| Skill | Domain | Maturity | Version | Description | Source |
