@@ -15,7 +15,7 @@
     "capability_assessment": "UNASSESSED",
     "runtime_installation": "NOT_OBSERVED",
     "availability_semantics": "Source maturity and declared channels do not prove package inclusion or installed runtime availability.",
-    "source_workflow_count": 17,
+    "source_workflow_count": 18,
     "registered_workflow_count": 16
   },
   "skills": [
@@ -558,6 +558,76 @@
       "source": "skills/oaf/portfolio-execution/transformation-blueprint/SKILL.md",
       "source_status": "present",
       "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "presentation-brief",
+      "domain": "presentations",
+      "maturity": "draft",
+      "version": "0.1.0",
+      "description": "Establish the audience, communication objective, intended decision or behavior and constraints before producing a slide deck. Use when someone asks to prepare a presentation from a topic, idea, notes, brief or source documents; do not use for a narrow request to edit a known slide.",
+      "source": "skills/presentations/presentation-brief/SKILL.md",
+      "source_status": "present",
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "presentation-deck-review",
+      "domain": "presentations",
+      "maturity": "draft",
+      "version": "0.1.0",
+      "description": "Critique a real or draft presentation for strategy, audience fit, evidence integrity, narrative and visual craft; rank specific defects and guide targeted revision. Use before final delivery or after deck changes; do not confuse an opinion score with verified rendered output.",
+      "source": "skills/presentations/presentation-deck-review/SKILL.md",
+      "source_status": "present",
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "presentation-evidence-review",
+      "domain": "presentations",
+      "maturity": "draft",
+      "version": "0.1.0",
+      "description": "Review factual claims and source sufficiency for a planned or existing presentation, including bounded research, citations, conflicting evidence and chart inputs. Use when presentation assertions or exhibits need fact checking; do not replace the full research domain or invent missing client data.",
+      "source": "skills/presentations/presentation-evidence-review/SKILL.md",
+      "source_status": "present",
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "presentation-exhibit-design",
+      "domain": "presentations",
+      "maturity": "draft",
+      "version": "0.1.0",
+      "description": "Choose data-faithful charts, diagrams and presentation exhibits for an approved slide claim and audience, delegating actual rendering to existing visual-output-design and deterministic tools. Use after storyline/evidence planning; do not use for decorative image prompts alone.",
+      "source": "skills/presentations/presentation-exhibit-design/SKILL.md",
+      "source_status": "present",
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "presentation-export-verification",
+      "domain": "presentations",
+      "maturity": "draft",
+      "version": "0.1.0",
+      "description": "Verify a presentation's actual rendered slides, delivery format, PowerPoint/PDF round-trip behavior, editability, fonts and animation limitations. Use when a deck exists and the user needs final deliverable QA; do not treat a planned export or tool invocation as successful delivery.",
+      "source": "skills/presentations/presentation-export-verification/SKILL.md",
+      "source_status": "present",
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "presentation-slide-authoring",
+      "domain": "presentations",
+      "maturity": "draft",
+      "version": "0.1.0",
+      "description": "Create or revise an editable presentation in a supported Figma Slides or Canva runtime from a validated storyboard and exhibit plan. Use when a user requests actual native slides or deck edits; do not claim a deck exists from specifications, images or unsupported connector actions.",
+      "source": "skills/presentations/presentation-slide-authoring/SKILL.md",
+      "source_status": "present",
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "presentation-storyline",
+      "domain": "presentations",
+      "maturity": "draft",
+      "version": "0.1.0",
+      "description": "Design and stress-test a slide deck's audience-specific argument, narrative order and action-title ghost deck before visual authoring. Use when a presentation brief or draft deck needs story structure, executive flow, persuasive narrative or decision logic; do not use only to lay out a given chart.",
+      "source": "skills/presentations/presentation-storyline/SKILL.md",
+      "source_status": "present",
+      "capability_assessment": "UNASSESSED"
     }
   ],
   "workflows": [
@@ -999,6 +1069,19 @@
         "report-composer",
         "visual-output-design"
       ],
+      "capability_assessment": "UNASSESSED"
+    },
+    {
+      "name": "presentation-production",
+      "source": "workflows/presentation-production/WORKFLOW.md",
+      "source_status": "present",
+      "runtime_registration": "not_registered",
+      "maturity": "unknown",
+      "version": "unknown",
+      "description": "",
+      "declared_channels": {},
+      "required_dependencies": [],
+      "optional_dependencies": [],
       "capability_assessment": "UNASSESSED"
     },
     {
