@@ -1078,7 +1078,7 @@
       "runtime_registration": "not_registered",
       "maturity": "unknown",
       "version": "unknown",
-      "description": "Produce an audience-specific, evidence-backed **presentation artifact** in Figma Slides or Canva, when explicitly requested. This workflow owns orchestration and stage gates, not all specialist reasoning/rendering.",
+      "description": "Produce an audience-specific, evidence-backed, professionally designed **presentation artifact** in Figma Slides or Canva, when explicitly requested. This workflow owns orchestration and stage gates, not all specialist reasoning/rendering.",
       "declared_channels": {},
       "required_dependencies": [],
       "optional_dependencies": [],
