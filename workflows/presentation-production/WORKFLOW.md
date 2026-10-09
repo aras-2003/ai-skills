@@ -7,7 +7,7 @@ Produce an audience-specific, evidence-backed, professionally designed **present
 
 **Entry:** User requests a new presentation/deck or major rebuild of a deck from topic, idea, notes, document or analysis. For a local slide edit, individual chart, source verification or story-only outline, route to the matching specialist and stop. Do not create external artifacts for ordinary explanations or reports that do not request a presentation.
 
-**Source status:** draft, not registered or production-enabled until validation. Read `references/artifact-contract.md` and `references/quality-standard.md` only when needed.
+**Source status:** draft, not registered or production-enabled until validation. Read `references/artifact-contract.md` and `references/quality-standard.md` only when needed. For Canva provider actions, permissions and export restrictions read `references/canva-connector-contract.md`.
 
 ## Stage 0 — Capability and privacy preflight
 Check what is actually supported by the current runtime: content/Drive/doc retrieval, research, deterministic chart rendering, Figma Slides create/edit, Canva create/edit, deck screenshots, export, reopen/render and file output. Log `AVAILABLE / UNAVAILABLE / UNKNOWN` separately per capability and destination. Do not infer integration from brand name or marketing page. If the user's requested final medium is unsupported, surface the blocker and offer a verified alternative; no phantom deliverables.
@@ -54,7 +54,7 @@ Map claim to best information encoding; reuse STR-12–STR-15 domain semantic ex
 **Gate V — Integrity:** exhibit proves the point; chart values, units and dates trace; no artificial hierarchy or data. If a required renderer absent mark `BLOCKED_NO_RENDERER`, not satisfied by table or generated drawing.
 
 ## Stage 5 — Actual slide authoring (`presentation-slide-authoring`)
-Route to Figma Slides or Canva based on user selection and **observed connector capability**. Author native editable slides with semantic slide IDs, readable source lines, citations, speaker notes where meaningful, accessibility and systematic variants. Keep external tool receipts and created file URL. Never call a specification, visual moodboard or export plan a finished presentation.
+Route to Figma Slides or Canva based on user selection and **observed connector capability**. Canva read-only search success is not proof of create/export; creation requires completed design job and the editor approval gate applies to each subsequent saved transaction. Direct PPTX export is not guaranteed by the connected Canva app. Author native editable slides with semantic slide IDs, readable source lines, citations, speaker notes where meaningful, accessibility and systematic variants. Keep external tool receipts and created file URL. Never call a specification, visual moodboard or export plan a finished presentation.
 
 **Gate A — Native artifact:** URL or file reference from an actual creation action, inspectable deck and explicit editability by component. If blocked, stop with missing capability and user-action requirement; do not assert completion.
 
