@@ -2,7 +2,7 @@
 
 **Campaign baseline:** 490 cases; 346 PASS / 144 FAIL. This remediation covers the 56 authored-skill and 13 workflow-lane cases previously classified as domain/behavioral candidates. The binary FAIL label is not evidence that all 69 are confirmed behavior defects: the workflow subset is predominantly missing exact-runtime identity/execution evidence.
 
-**Target source packages:** `skills-factory` 1.36.1; `skills-factory-lab` 0.33.6. Behavioral skill versions are individually incremented. These source changes are not runtime proof; the packaged Site MCP must be redeployed and the affected cases rerun against its attested identity before any case can be called PASS.
+**Target source packages:** `skills-factory` 1.37.0; `skills-factory-lab` 0.33.6. Behavioral skill versions are individually incremented. These source changes are not runtime proof; the packaged Site MCP must be redeployed and the affected cases rerun against its attested identity before any case can be called PASS.
 
 ## Domain findings and source changes
 
@@ -40,6 +40,6 @@
 ## Current validation state
 
 - Commerce unit-economics calculator: **12 tests pass**, including the new arithmetic reconciliation check.
-- Full repository validation: **not yet run successfully**; the active Python environment lacks `PyYAML` and `jsonschema` required by repository CI. The locked dependencies need to be installed in an isolated environment before CI can be considered green.
+- Full local CI sequence: **PASS** using the repository's hash-pinned dependencies, including security, validation, evaluation, packaging, readiness, artifact-isolation, and deterministic ZIP rebuild gates. The historical R16 campaign remains untouched; R17 is pinned to the remediation source and inventories all 69 domain cases. The new versions are marked Lab-only pending exact runtime receipts; this does not promote or deploy them to production.
 - Exact-version cloud/MCP reruns: **pending redeployment**; no source edit alone closes them.
 - No claim is made that the 69 campaign cases now pass. Source fixes and local tests are not substitutes for the original Chat-mode runtime evidence.

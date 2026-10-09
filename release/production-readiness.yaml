@@ -3,23 +3,22 @@ generated_for: "AIS-21"
 owner: arkadiusz-kamrowski
 review_by: "2026-10-14"
 policy:
-  note: "This record reviews existing production maturity; it does not promote components."
+  note: "Lab candidates pending runtime validation are not production-ready and cannot be promoted without exact current-version runtime evidence."
   current_runtime_receipt_required: true
   historical_summary_is_not_current_receipt: true
   no_exception_for_known_high_severity_failure: true
 components:
   - name: company-context-research
     kind: skill
-    version: "1.0.0"
+    version: "1.0.1"
     source: skills/career/company-context-research/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
-    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
   - name: executive-role-evaluator
     kind: skill
     version: "1.1.0"
@@ -70,16 +69,15 @@ components:
     exception_expires: "2026-10-14"
   - name: competition-landscape-review
     kind: skill
-    version: "1.1.0"
+    version: "1.1.1"
     source: skills/commerce/market/competition-landscape-review/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
-    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
   - name: supplier-viability-review
     kind: skill
     version: "1.1.0"
@@ -118,64 +116,59 @@ components:
     exception_expires: "2026-10-14"
   - name: differentiation-review
     kind: skill
-    version: "1.1.0"
+    version: "1.1.1"
     source: skills/commerce/product/differentiation-review/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
-    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
   - name: commerce-regulatory-risk-review
     kind: skill
-    version: "1.1.0"
+    version: "1.1.1"
     source: skills/commerce/risk/commerce-regulatory-risk-review/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
-    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
   - name: skills-factory-diagnostic
     kind: skill
-    version: "1.0.0"
+    version: "1.0.1"
     source: skills/meta/skills-factory-diagnostic/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
-    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
   - name: skill-authoring
     kind: skill
-    version: "1.0.0"
+    version: "1.0.1"
     source: skills/meta/skill-authoring/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
-    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
   - name: skill-specification
     kind: skill
-    version: "1.0.0"
+    version: "1.0.1"
     source: skills/meta/skill-specification/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
-    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
   - name: skill-validation
     kind: skill
     version: "1.0.0"
@@ -190,16 +183,15 @@ components:
     exception_expires: "2026-10-14"
   - name: decision-bottleneck-analysis
     kind: skill
-    version: "1.1.0"
+    version: "1.1.1"
     source: skills/oaf/decision-governance/decision-bottleneck-analysis/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "No exact-version unassisted runtime receipt is recorded after AIS-20 isolation."
-    limitation: "Do not treat historical narrative PASS/PASS++ as current-version proof."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
   - name: decision-rights-review
     kind: skill
     version: "1.1.0"
@@ -430,29 +422,27 @@ components:
     exception_expires: "2026-10-14"
   - name: decision-journal-update
     kind: skill
-    version: "0.1.0"
+    version: "0.1.1"
     source: skills/investing/decision-journal-update/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
-    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
 
   - name: investment-attention-triage
     kind: skill
-    version: "0.2.0"
+    version: "0.2.1"
     source: skills/investing/investment-attention-triage/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
-    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
 
   - name: investment-policy-design
     kind: skill
@@ -469,107 +459,99 @@ components:
 
   - name: investment-record-store
     kind: skill
-    version: "1.0.0"
+    version: "1.0.1"
     source: skills/investing/investment-record-store/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
-    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
 
   - name: investor-pattern-research
     kind: skill
-    version: "0.1.0"
+    version: "0.1.1"
     source: skills/investing/investor-pattern-research/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
-    evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
-    limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
+    evidence_gap: "Exact deployed-runtime receipt for remediation campaign R17 is pending."
+    limitation: "Lab-only candidate; exact R17 runtime validation is required before any production promotion."
 
   - name: market-opportunity-scan
     kind: skill
-    version: "0.3.0"
+    version: "0.3.1"
     source: skills/investing/market-opportunity-scan/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
     evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
 
   - name: portfolio-state-review
     kind: skill
-    version: "0.7.0"
+    version: "0.7.1"
     source: skills/investing/portfolio-state-review/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
     evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
 
   - name: position-sizing-review
     kind: skill
-    version: "0.3.0"
+    version: "0.3.1"
     source: skills/investing/position-sizing-review/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
     evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
 
   - name: security-underwriting
     kind: skill
-    version: "0.5.0"
+    version: "0.5.1"
     source: skills/investing/security-underwriting/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
     evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
 
   - name: thesis-challenge
     kind: skill
-    version: "0.1.0"
+    version: "0.1.1"
     source: skills/investing/thesis-challenge/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
     evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
 
   - name: thesis-monitor
     kind: skill
-    version: "0.3.0"
+    version: "0.3.1"
     source: skills/investing/thesis-monitor/SKILL.md
     declared_maturity: production
     static_contract: present
     current_runtime_receipt: pending
-    maturity_disposition: retain-existing-pending-evidence-review
+    maturity_disposition: lab-candidate-pending-runtime-validation
+    candidate_channel: lab
     evidence_gap: "Personal-beta static/package coverage exists; R10 exact-version runtime retest is pending after datastore/research-tooling migration."
     limitation: "Use as personal-beta decision support; treat outputs as reviewable and keep runtime evidence status explicit."
-    exception_owner: arkadiusz-kamrowski
-    exception_expires: "2026-10-14"
 
   - name: trend-theme-research
     kind: skill

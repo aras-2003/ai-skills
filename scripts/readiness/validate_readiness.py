@@ -125,19 +125,31 @@ def validate_record(
             errors.append(f"{name}: verified must not rely on an exception")
 
     elif status == "pending":
-        for field in ("evidence_gap", "limitation", "exception_owner", "exception_expires"):
+        for field in ("evidence_gap", "limitation"):
             if not rec.get(field):
                 errors.append(f"{name}: pending evidence requires {field}")
-        if rec.get("maturity_disposition") != "retain-existing-pending-evidence-review":
-            errors.append(f"{name}: pending may only retain existing maturity pending evidence review")
-        expiry = _date(rec.get("exception_expires"), f"{name}: exception_expires", errors)
-        if expiry is not None:
-            if expiry < today:
-                errors.append(f"{name}: pending exception expired on {expiry.isoformat()}")
-            if expiry > review_by:
-                errors.append(f"{name}: exception_expires must not exceed review_by")
-            if (expiry - today).days > MAX_EXCEPTION_DAYS:
-                errors.append(f"{name}: pending exception exceeds {MAX_EXCEPTION_DAYS}-day limit")
+        disposition = rec.get("maturity_disposition")
+        if disposition == "retain-existing-pending-evidence-review":
+            for field in ("exception_owner", "exception_expires"):
+                if not rec.get(field):
+                    errors.append(f"{name}: pending evidence requires {field}")
+            expiry = _date(rec.get("exception_expires"), f"{name}: exception_expires", errors)
+            if expiry is not None:
+                if expiry < today:
+                    errors.append(f"{name}: pending exception expired on {expiry.isoformat()}")
+                if expiry > review_by:
+                    errors.append(f"{name}: exception_expires must not exceed review_by")
+                if (expiry - today).days > MAX_EXCEPTION_DAYS:
+                    errors.append(f"{name}: pending exception exceeds {MAX_EXCEPTION_DAYS}-day limit")
+        elif disposition == "lab-candidate-pending-runtime-validation":
+            if rec.get("candidate_channel") != "lab":
+                errors.append(f"{name}: Lab candidate must set candidate_channel=lab")
+            if rec.get("exception_owner") or rec.get("exception_expires"):
+                errors.append(f"{name}: Lab candidate must not rely on an exception")
+            if rec.get("receipt"):
+                errors.append(f"{name}: pending Lab candidate must not claim a runtime receipt")
+        else:
+            errors.append(f"{name}: pending has unsupported maturity_disposition")
     elif status == "not-required":
         if not rec.get("not_required_reason"):
             errors.append(f"{name}: not-required requires not_required_reason")

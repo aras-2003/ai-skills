@@ -85,6 +85,39 @@ class ReadinessPolicyTests(unittest.TestCase):
             )
         self.assertTrue(any("high-severity" in e for e in errors))
 
+    def test_lab_candidate_can_wait_for_runtime_without_exception(self) -> None:
+        rec = {
+            "current_runtime_receipt": "pending",
+            "maturity_disposition": "lab-candidate-pending-runtime-validation",
+            "candidate_channel": "lab",
+            "evidence_gap": "Exact deployed runtime receipt is pending.",
+            "limitation": "Lab candidate only; not eligible for production promotion.",
+        }
+        with tempfile.TemporaryDirectory() as td:
+            errors = validate_readiness.validate_record(
+                Path(td), "demo", "1.0.0", rec,
+                review_by=self.review_by, today=self.today,
+            )
+        self.assertEqual([], errors)
+
+    def test_lab_candidate_cannot_claim_exception_or_wrong_channel(self) -> None:
+        rec = {
+            "current_runtime_receipt": "pending",
+            "maturity_disposition": "lab-candidate-pending-runtime-validation",
+            "candidate_channel": "production",
+            "evidence_gap": "Exact deployed runtime receipt is pending.",
+            "limitation": "Lab candidate only.",
+            "exception_owner": "owner",
+            "exception_expires": "2026-10-14",
+        }
+        with tempfile.TemporaryDirectory() as td:
+            errors = validate_readiness.validate_record(
+                Path(td), "demo", "1.0.0", rec,
+                review_by=self.review_by, today=self.today,
+            )
+        self.assertTrue(any("candidate_channel=lab" in e for e in errors))
+        self.assertTrue(any("must not rely on an exception" in e for e in errors))
+
     def test_verified_cannot_cover_known_high_severity_failure(self) -> None:
         rec = {
             "current_runtime_receipt": "verified",
