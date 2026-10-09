@@ -70,7 +70,7 @@ def values(title, body, labels):
             if m:
                 result[field] = m.group(1)
     if "Area" not in result:
-        m = re.match(r"^\[([A-Z]+)-\d+\]", title)
+        m = re.match(r"^\[([A-Z][A-Z0-9]*)-\d+\]", title)
         if m:
             result["Area"] = PREFIX_AREA.get(m.group(1), "Other")
     return result
