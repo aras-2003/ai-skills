@@ -158,6 +158,14 @@ def main() -> int:
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(rendered, encoding="utf-8")
+        print("Lifecycle audit: %s skills; counts=%s; findings=%s" % (
+            report["total_skills"], report["result_counts"], report["finding_counts"]
+        ))
+        for row in report["skills"]:
+            found = ",".join(issue["code"] for issue in row["issues"]) or "none"
+            print("SKILL %s: %s; pos=%s, neg=%s; signals=%s; runtime=NOT_RUN" % (
+                row["name"], row["status"], row["positive_cases"], row["negative_cases"], found
+            ))
     else:
         print(rendered, end="")
     bad = report["result_counts"].get("STATIC_BLOCKER", 0) > 0
