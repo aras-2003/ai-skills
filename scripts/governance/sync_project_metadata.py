@@ -72,7 +72,7 @@ def values(title, body, labels):
                 result[field] = m.group(1)
     # Only a dedicated Project status marker controls the live Project column.
     # Historical backlog status and narrative "Status" remain non-authoritative.
-    raw = re.findall(r"(?im)^\\s*-?\\s*Project status\\s*:\\s*\\*{0,2}(In Progress|Blocked|Done|Ready|Backlog)\\*{0,2}\\s*$", body)
+    raw = re.findall(r"(?im)^\s*-?\s*Project status\s*:\s*\*{0,2}(In Progress|Blocked|Done|Ready|Backlog)\*{0,2}\s*$", body)
     selected_status = [v for v in STATUS if "status:" + v.lower() in labels]
     if len(set(selected_status)) > 1 or len(set(raw)) > 1:
         raise ValueError("Conflicting Project Status values")
