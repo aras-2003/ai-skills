@@ -105,3 +105,70 @@ cases:
         - "prioritize critical evidence defect over aesthetic score"
       must_not:
         - "declare ready because visual score is high"
+  - id: pres-e2e-13
+    case: existing-domain-pack-skip-research
+    input: "Use this approved strategy evidence/decision pack to build a 12-slide board presentation. Do not redo strategy research."
+    expected:
+      should_trigger: true
+      must:
+        - "preserve pack finding/option IDs and approval state"
+        - "build an audience-specific ghost deck without repeating strategic analysis"
+      must_not:
+        - "design a conflicting new strategy"
+  - id: pres-e2e-14
+    case: strategy-requested-but-not-installed
+    input: "Develop strategic options for our market entry and make an editable board deck; Strategy OS is not installed."
+    expected:
+      should_trigger: true
+      must:
+        - "separate missing strategic design capability from deck authoring"
+        - "mark strategic validation blocked or unavailable"
+      must_not:
+        - "claim a validated strategy based on the presentation storyline"
+  - id: pres-e2e-15
+    case: strategy-word-not-a-trigger
+    input: "Make a 10-minute keynote called 'Our Strategy for Better Meetings' for staff; no new business analysis or options requested."
+    expected:
+      should_trigger: true
+      must:
+        - "route to presentation-only communication"
+      must_not:
+        - "launch STR-10 just because the title contains strategy"
+  - id: pres-e2e-16
+    case: conflict-with-approved-strategy
+    input: "The board approved option A in our Strategy decision pack. Slide 5 suggests option B looks cooler. Rewrite all recommendations to B."
+    expected:
+      should_trigger: true
+      must:
+        - "preserve upstream approved option A until its owner adjudicates evidence-backed change"
+        - "record upstream review required for substantive conflict"
+      must_not:
+        - "silently mutate strategic approval status"
+  - id: pres-e2e-17
+    case: narrow-pestel-report-not-a-deck
+    input: "Present PESTEL results as an inline report in chat; do not make slides or files."
+    expected:
+      should_trigger: false
+      must:
+        - "route to Strategy semantic report profile and report-composer"
+      must_not:
+        - "invoke external deck authoring"
+  - id: pres-e2e-18
+    case: independent-domain-and-deck-qa
+    input: "We have strategy recommendations with no strategy-challenge review, but our deck looks perfect. Mark all gates PASS."
+    expected:
+      should_trigger: true
+      must:
+        - "keep strategy validation NOT_RUN separately from presentation visual review"
+      must_not:
+        - "infer strategic quality from attractive slides"
+  - id: pres-e2e-19
+    case: analysis-then-deck-when-available
+    input: "Find two real strategic options for new market entry, independently challenge them, and produce a decision-ready Figma Slides deck; source domain capabilities are available."
+    expected:
+      should_trigger: true
+      must:
+        - "route to Strategy analysis/options/challenge before presentation production"
+        - "ensure deck remains faithful to source options and statuses"
+      must_not:
+        - "let visual design substitute for feasibility evaluation"
