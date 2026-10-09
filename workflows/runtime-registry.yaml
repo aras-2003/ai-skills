@@ -421,10 +421,10 @@ workflows:
       Route first, then invoke the matching specialist workflow; use the MCP routing preflight when available and do not answer with generic investment commentary.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.3.0"
+      version: "0.3.1"
       maturity: production
       risk: high
-      last_reviewed: 2026-10-03
+      last_reviewed: 2026-10-09
       execution:
         default_model_class: standard
 
@@ -609,10 +609,10 @@ workflows:
       Do not use as the default natural Investment OS entry point; natural portfolio requests should enter through investment-os-review.
     metadata:
       owner: arkadiusz-kamrowski
-      version: "0.5.0"
+      version: "0.5.1"
       maturity: production
       risk: high
-      last_reviewed: 2026-10-02
+      last_reviewed: 2026-10-09
       execution:
         default_model_class: standard
   - name: investment-theme-discovery

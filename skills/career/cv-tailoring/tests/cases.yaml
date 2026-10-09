@@ -23,3 +23,17 @@ cases:
       should_trigger: true
       must:
         - follow the skill boundary and output contract
+  - id: cv-tailoring-004-source-precedence
+    case: source_integrity
+    input: |
+      Approved mastery CV: I managed a team of 12 and oversaw a portfolio; it gives no project count and no organization-wide headcount.
+      An older tailored draft says I led a 300-person organization and oversaw 60 projects.
+      Tailor my CV for a Deputy CIO role using the mastery CV.
+    expected:
+      should_trigger: true
+      must:
+        - use the approved mastery CV as the only source of candidate facts
+        - not repeat 300-person organization or 60-project claims from the older draft
+        - preserve the supported team size of 12 and distinguish it from portfolio scope
+        - mark missing scale claims as omitted or awaiting confirmation
+        - include a concise source check and change log

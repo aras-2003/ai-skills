@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "oaf-kpi-quality-en",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "target": "kpi-quality-review",
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "browser": "Codex in-app browser",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8d8d6-0f84-83eb-94ce-eebb4615dc3d",
+    "conversation_url": "https://chatgpt.com/c/6ac8d8d6-0f84-83eb-94ce-eebb4615dc3d",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "routed_skill": "kpi-quality-review v0.1.0",
+    "routing_evidence": "Assistant transcript visibly labeled Skills Factory · kpi-quality-review v0.1.0."
+  },
+  "input_sha256": "158edee3fade3536820ce63ed5ce3113a22cfcfa9be12c87dc59294f727cdf26",
+  "rubric_sha256": "4805362ead72ca0a3372a67a57ce88514907d722b021c9eea10fab13ce3f3055",
+  "output_sha256": "f14d681d455ce927503a1b8fb5a4329162314bfd87ee9a06cdccb5201dfe1f2e",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "summary": "Both rubric assertions passed: all four KPI definitions assessed directly; no full evidence-loop redesign. Independent assessment distinguishes visible UI routing and Lab Candidate provenance from content behavior."
+  },
+  "limitations": "No existing KPI definition cards or operational data were supplied, so the test assessed definition quality and decision usefulness conceptually rather than validating actual metric data."
+}

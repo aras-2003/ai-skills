@@ -1,10 +1,10 @@
 ---
 name: decision-bottleneck-analysis
 description: >
-  Diagnose why a specific material decision class is slow, repeatedly escalated or duplicated by tracing decision steps, waits, vetoes, evidence gaps and authority boundaries. Use after the problematic decision class is identified; do not lead a mixed cross-unit handoff/accountability/capacity diagnosis whose failure type is still unknown.
+  Diagnose why a specific material decision class is slow, repeatedly escalated or duplicated by tracing decision steps, waits, vetoes, evidence gaps and authority boundaries. Use after the problematic decision class and its decision owner/path are sufficiently identified; when the core unknown is who has final authority, lead with decision-rights-review. Do not lead a mixed cross-unit handoff/accountability/capacity diagnosis whose failure type is still unknown.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.1.1"
+  version: "1.1.2"
   maturity: production
   risk: medium
   last_reviewed: "2026-10-09"
@@ -23,6 +23,8 @@ metadata:
 
 ## Purpose
 Find the actual source of latency for an identified decision class rather than assuming governance is too heavy.
+
+If the user says decisions circulate or escalate because nobody knows who has final decision authority, route first to `decision-rights-review`. Use this workflow later only if the owner/path is clear enough to investigate elapsed time, waits, repeated gates or rework.
 
 If the prompt primarily mixes cross-unit handoffs, unclear accountability and capacity/funding authority without naming a decision class, first use the operating-model diagnostic to classify the failure.
 

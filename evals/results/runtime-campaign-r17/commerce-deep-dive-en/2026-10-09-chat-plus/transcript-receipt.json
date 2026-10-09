@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "commerce-deep-dive-en",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "target": "commerce-product-deep-dive",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e230-4184-83eb-9f61-5d8594e96d81",
+    "conversation_url": "https://chatgpt.com/c/6ac8e230-4184-83eb-9f61-5d8594e96d81",
+    "timestamp_local": "2026-10-09",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "commerce-product-deep-dive v1.0.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser"
+  },
+  "input_sha256": "cd432738933a97c164d30fe28f16977932b15c1a5c7d622b89b49fbc12480b48",
+  "rubric_sha256": "9f577c422f71fe1f4388c4564a9d0531b6e67f046afd0f2a1736edf7d0b99c9d",
+  "output_sha256": "cd697580d1d60924840388ea509a24966a5a3eee5d916193eb5bc2fdc563dc95",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8e276-16f4-83ed-af67-5a35e6d1ae81",
+    "conversation_url": "https://chatgpt.com/c/6ac8e276-16f4-83ed-af67-5a35e6d1ae81",
+    "basis": "Separate evaluator Chat reviewed the observed executor routing summary.",
+    "summary": "Both routing criteria passed: selected commerce-product-deep-dive v1.0.0 for a concrete offer and explicitly excluded product discovery; the evaluator judged evidence-based deferral appropriate."
+  },
+  "notes": "This case evaluates routing only. Executor correctly noted the prompt did not actually provide product identity or numeric assumptions and deferred the commercial decision without inventing product ideas. Lab runtime attestation visible in transcript.",
+  "expected_channel": "lab",
+  "actual_channel": "lab"
+}

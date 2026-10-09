@@ -1,0 +1,40 @@
+{
+  "campaign": "runtime-validation-2026-10-r17",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "schema_version": "1.0",
+  "case_id": "investment-portfolio-natural-en",
+  "target": "investment-portfolio-review",
+  "status": "FAIL",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e71b-8050-83eb-9bb8-611680a1680f",
+    "conversation_url": "https://chatgpt.com/c/6ac8e71b-8050-83eb-9bb8-611680a1680f",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "verified; explicit Lab 0.33.6 in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "investment-portfolio-review"
+  },
+  "input_sha256": "138af61afcb62bfcf7ae4ef6c99f4fc743c772221e7847ad1902a5f7f021a109",
+  "rubric_sha256": "6405da71b75bcec8cf5213ae3488100100ccb41eb405692aeef6ceda2d399321",
+  "output_sha256": "fd32222ca18db512f3498ea9aa21eec2b449e950fceef4ea7dc40491a378996e",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "FAIL",
+    "score": "3/5",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed case-specific assertions against captured Lab executor evidence.",
+    "summary": "Canonical read succeeded; supplied weights were reconciled with the Oct 2 snapshot and later transactions flagged; chart and action table included. Ordered front-door-to-child sequence and integrated visual-floor execution not established."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ChatGPT Chat via Codex in-app browser. No Production inference."
+}

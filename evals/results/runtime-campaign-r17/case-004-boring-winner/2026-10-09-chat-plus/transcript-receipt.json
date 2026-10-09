@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "case-004-boring-winner",
+  "suite": "commerce",
+  "mode": "explicit",
+  "target": "commerce-product-deep-dive",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e05f-4dcc-83eb-9f82-a18fb565ca5e",
+    "conversation_url": "https://chatgpt.com/c/6ac8e05f-4dcc-83eb-9f82-a18fb565ca5e",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "commerce-product-deep-dive v1.0.0",
+    "runtime_attestation": "verified"
+  },
+  "input_sha256": "a01c1667f1fe39dd97f4d3a4e016c9b71c6b00f9ad46cd500f0bc1ac906e7dbc",
+  "rubric_sha256": "da046f44744b3fadb97603511da90eb824f96527875c496b3b45054d12312768",
+  "output_sha256": "27ccde58cb534356cb8ef996f498998abc388708e170031518c73a8ea78b3466",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "4/4",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator ChatGPT Chat assessed the completed executor transcript summary and checked economics.",
+    "summary": "PASS 4/4: no viral trend is not negative; logistics/economics/demo fit and uncertainties recognized; CAC unknown; bounded sample-then-paid test with spend/inventory limits."
+  },
+  "notes": "Fresh ordinary Chat run via Cloud Next, Lab 0.33.6. Independent evaluator completed PASS 4/4. Contribution 28.10 PLN; break-even CAC is correctly framed as ceiling, not target.",
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "output_hash_basis": "Accessible assistant transcript excerpt with AX line indices removed; SHA-256."
+}

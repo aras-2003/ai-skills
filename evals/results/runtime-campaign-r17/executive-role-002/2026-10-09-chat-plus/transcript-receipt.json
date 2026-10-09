@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "executive-role-002",
+  "suite": "executive-role",
+  "mode": "natural-routing",
+  "target": "executive-role-evaluator",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e1ce-3324-83eb-9692-ab10d2ab6d3e",
+    "conversation_url": "https://chatgpt.com/c/6ac8e1ce-3324-83eb-9692-ab10d2ab6d3e",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "executive-role-evaluator v1.1.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser",
+    "routed_skill": "executive-role-evaluator v1.1.0",
+    "routing_evidence": "Transcript visibly labels executive-role-evaluator v1.1.0, Lab 0.33.6, Runtime verified."
+  },
+  "input_sha256": "db8d224037d0683d4ef6d0ce0ba520a8d59d1861cc336b47dddae5085668c172",
+  "rubric_sha256": "6bb714766b7f0a16d826fb9c12224c604e1347e1b3491b5290cc3dcad23e2647",
+  "output_sha256": "5636cd28a6d0ef649d73a97f9abee6f5df479c2709561215d788ebd723e3a356",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; output_sha256 is the SHA-256 of the full accessibility-tree snapshot captured from the transcript.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "3/3",
+    "conversation_id": "6ac8e32c-8594-83ed-b869-af30c2010b5c",
+    "conversation_url": "https://chatgpt.com/c/6ac8e32c-8594-83ed-b869-af30c2010b5c",
+    "basis": "Separate evaluator ChatGPT Chat assessed each case against its own rubric from summarized executor evidence.",
+    "summary": "Recognizes bridge potential and Group CIO exposure; distinguishes organizational scale from direct span; missing infrastructure operations is not treated as a weakness."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh executor Chat; case input contained no evaluator assertions. Runtime attestation and loaded workflow version are visible in transcript."
+}

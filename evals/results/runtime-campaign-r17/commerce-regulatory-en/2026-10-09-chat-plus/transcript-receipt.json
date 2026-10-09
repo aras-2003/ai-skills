@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "commerce-regulatory-en",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "target": "commerce-regulatory-risk-review",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e3ff-6154-83ed-942c-11c0601526b4",
+    "conversation_url": "https://chatgpt.com/c/6ac8e3ff-6154-83ed-942c-11c0601526b4",
+    "timestamp_local": "2026-10-09",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "commerce-regulatory-risk-review v1.1.1",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser"
+  },
+  "input_sha256": "38f52e2582fe3d5aa2924e51cd566855af547cb2e9ff5452081b9c13d26e5250",
+  "rubric_sha256": "0a35c98729fc5c0e3370ba0c198f1a1f947dbc8b2a0d8776f83826d3e35432e1",
+  "output_sha256": "a41ca733832593102b897ae8af52d94a679c7d3885e2ee82009d4ee1255c2a61",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8e457-900c-83eb-861c-0cbbb4ef479c",
+    "conversation_url": "https://chatgpt.com/c/6ac8e457-900c-83eb-861c-0cbbb4ef479c",
+    "basis": "Separate evaluator Chat assessed the observed executor transcript summary.",
+    "summary": "Both criteria passed: commerce-regulatory-risk-review v1.1.1 was selected, and the result clearly remains unresolved screening rather than product-specific legal clearance; launch was deferred."
+  },
+  "notes": "This routing case tested regulatory triage and avoiding invented clearance, not correctness of every regulatory citation. Executor explicitly states the assessment is not legal authorization and lists missing formulation/claims needed for product-specific review.",
+  "expected_channel": "lab",
+  "actual_channel": "lab"
+}

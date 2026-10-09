@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "career-role-eval-en",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "target": "executive-role-evaluator",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e2a1-3b3c-83ed-bbdf-dbd7d81135f5",
+    "conversation_url": "https://chatgpt.com/c/6ac8e2a1-3b3c-83ed-bbdf-dbd7d81135f5",
+    "timestamp_local": "2026-10-09",
+    "lab_version": "0.33.6",
+    "packaged_component": "executive-role-evaluator v1.1.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser"
+  },
+  "input_sha256": "b64351f13994ab0f5fa6247ef3853fe7f8ccfe9290794720e9275c7a5168d9ee",
+  "rubric_sha256": "622a015ad3d270cdb630b5528caf559f49811f4681234be9e25ba7a71aad5ab3",
+  "output_sha256": "56217c198bebbeb84311cb5639c494999fd9645ef381517b48903157fdbcb8cb",
+  "output_hash_basis": "Accessible assistant transcript excerpt with AX line indices removed; SHA-256.",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed the transcript summary against both assertions.",
+    "summary": "PASS 2/2: selected role evaluation; preserved unknowns about strategy, budget, vendor decision rights, governance, hiring plan and executive authority; did not infer authority from COO reporting."
+  },
+  "notes": "Fresh natural-language routing run in Chat via Cloud Next, Lab 0.33.6, verified.",
+  "expected_channel": "lab",
+  "actual_channel": "lab"
+}

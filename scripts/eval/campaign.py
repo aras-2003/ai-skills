@@ -155,12 +155,22 @@ def validate_campaign() -> list[str]:
     errors = []
     cfg = config()
     cases = load_campaign_cases(ROOT, config()["campaign"])
-    expected = {"commerce": 6, "routing": 22, "executive-role": 14, "production-fallback": 2}
+    expected = {"commerce": 6, "routing": 22, "executive-role": 14}
     counts = {k: 0 for k in expected}
     known = validate_routing.known_capability_names(ROOT)
 
-    if len(cases) != 44:
-        errors.append(f"expected 44 campaign cases, got {len(cases)}")
+    if len(cases) != 42:
+        errors.append(f"expected 42 Lab core cases, got {len(cases)}")
+
+    if cfg.get("execution_channel") != "lab":
+        errors.append("R17 execution_channel must be lab")
+    excluded = {str(item.get("id")) for item in cfg.get("excluded_production_only_cases") or [] if isinstance(item, dict)}
+    active_production_fallbacks = {cid for cid, case in cases.items() if case.get("suite") == "production-fallback"}
+    if active_production_fallbacks:
+        errors.append("Production-only fallback cases cannot run in the Lab campaign: " + ", ".join(sorted(active_production_fallbacks)))
+    expected_excluded = {"fallback-strategy-production-002", "fallback-interface-explicit-production-002"}
+    if excluded != expected_excluded:
+        errors.append("R17 must preserve both Production-only fallback IDs in excluded_production_only_cases")
 
     for cid, case in cases.items():
         suite = str(case.get("suite") or "")
@@ -345,6 +355,15 @@ def validate_lock_data(lock: dict, root: Path = ROOT) -> list[str]:
         errors.append("lock campaign identity mismatch")
     if lock.get("behavior_source_revision") != cfg.get("behavior_source_revision"):
         errors.append("lock behavior source mismatch")
+    if lock.get("execution_channel") != cfg.get("execution_channel"):
+        errors.append("lock execution channel mismatch")
+    expected_excluded = sorted(
+        str(item.get("id"))
+        for item in cfg.get("excluded_production_only_cases") or []
+        if isinstance(item, dict) and item.get("id")
+    )
+    if lock.get("excluded_production_only_cases") != expected_excluded:
+        errors.append("lock Production-only exclusions mismatch")
 
     expected_campaign_digest = sha256_file(root / CONFIG_REL)
     if lock.get("campaign_definition_sha256") != expected_campaign_digest:
@@ -411,6 +430,16 @@ def validate_lock_data(lock: dict, root: Path = ROOT) -> list[str]:
                 errors.append("lock case_channels missing cases: " + ", ".join(missing_channels))
             if unknown_channels:
                 errors.append("lock case_channels contains unknown cases: " + ", ".join(unknown_channels))
+        required_channel = cfg.get("execution_channel")
+        if required_channel and any(channel != required_channel for channel in channels.values()):
+            errors.append(f"lock contains cases outside required {required_channel} channel")
+        if required_channel in ("lab", "production"):
+            catalog = lock.get("expected_catalogs", {}).get(required_channel, [])
+            for item in raw_defs:
+                if isinstance(item, dict) and item.get("target") not in catalog:
+                    errors.append(
+                        f"lock case {item.get('id')} target is absent from {required_channel} catalog"
+                    )
 
     return errors
 
@@ -487,15 +516,23 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
                 "content_sha256": item.get("content_sha256"),
             })
 
-    for unavailable in ("strategy-to-execution-diagnostic", "organizational-interface-review"):
-        if unavailable in catalogs["production"]:
-            raise ValueError(f"fallback campaign precondition changed: {unavailable} is now in production")
+    if config().get("execution_channel") != "lab":
+        for unavailable in ("strategy-to-execution-diagnostic", "organizational-interface-review"):
+            if unavailable in catalogs["production"]:
+                raise ValueError(f"fallback campaign precondition changed: {unavailable} is now in production")
 
     all_cases = {**load_campaign_cases(ROOT, config()["campaign"]), **load_supplemental_cases(ROOT, config()["campaign"])}
     case_channels = {}
+    execution_channel = config().get("execution_channel")
+    if execution_channel not in (None, "lab", "production"):
+        raise ValueError(f"unsupported execution_channel: {execution_channel}")
     for case in all_cases.values():
         target = case["target"]
-        if target in catalogs["production"]:
+        if execution_channel:
+            if target not in catalogs[execution_channel]:
+                raise ValueError(f"{case['id']} target {target} is absent from {execution_channel} catalog")
+            case_channels[case["id"]] = execution_channel
+        elif target in catalogs["production"]:
             case_channels[case["id"]] = "production"
         elif target in catalogs["lab"]:
             case_channels[case["id"]] = "lab"
@@ -509,6 +546,10 @@ def prepare(out: Path, *, require_pinned_commit: bool = True) -> None:
         "campaign": cfg["campaign"],
         "campaign_definition_sha256": sha256_file(CONFIG),
         "behavior_source_revision": pinned,
+        "execution_channel": config().get("execution_channel"),
+        "excluded_production_only_cases": sorted(
+            item.get("id") for item in config().get("excluded_production_only_cases") or []
+        ),
         "packages": packages,
         "expected_catalogs": {name: sorted(items) for name, items in catalogs.items()},
         "case_channels": case_channels,

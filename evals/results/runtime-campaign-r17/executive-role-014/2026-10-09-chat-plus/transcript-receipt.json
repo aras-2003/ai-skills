@@ -1,0 +1,40 @@
+{
+  "campaign": "runtime-validation-2026-10-r17",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "schema_version": "1.0",
+  "case_id": "executive-role-014",
+  "target": "executive-role-evaluator",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e6b5-81b4-83eb-8bea-bcbc563cae08",
+    "conversation_url": "https://chatgpt.com/c/6ac8e6b5-81b4-83eb-8bea-bcbc563cae08",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6 (exact version text not surfaced in compact response)",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "Cloud Next invocation observed; compact response did not surface runtime attestation",
+    "browser": "Codex in-app browser",
+    "routed_skill": "executive-role-evaluator v1.1.0"
+  },
+  "input_sha256": "971068e7a8244d4530fded340308c5a516dd752bb5a43459a085bf69534c9d13",
+  "rubric_sha256": "81157bc5ee5c327da829bd9672bf3268cfb2734fccf80bff75d5ac8611137406",
+  "output_sha256": "1a5c6940f65b347b61e5995239950224886f19a5db652783ad45f4cfec7922c3",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "6/6",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed case-specific assertions against the captured Lab executor response.",
+    "summary": "PASS: five-row table preserved requested response format; INVESTIGATE and LOW explicit; material authority risk and critical unknown present; no irrelevant prose or invented numeric score."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ChatGPT Chat via Codex in-app browser. No Production inference."
+}

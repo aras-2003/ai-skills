@@ -44,4 +44,14 @@ cases:
       should_trigger: false
       must_not:
         - lead with decision-rights review before the mixed operating-model problem is scoped
+  - id: decision-rights-review-006-unknown-final-authority
+    case: natural-routing
+    input: |
+      The same investment decisions circulate among several directors and are repeatedly escalated because nobody knows who has final decision authority. Diagnose the problem before we design governance.
+    expected:
+      should_trigger: true
+      must:
+        - select decision-rights-review before decision-bottleneck-analysis or governance design
+        - treat escalation as context while final authority remains unknown
+        - distinguish a missing/unclear owner from elapsed-time bottlenecks
 

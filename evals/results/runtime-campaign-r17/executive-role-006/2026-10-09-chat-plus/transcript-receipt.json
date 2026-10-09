@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "executive-role-006",
+  "suite": "executive-role",
+  "mode": "natural-routing",
+  "target": "executive-role-evaluator",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 2,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e3ab-db04-83eb-9aae-bd07b930cd6f",
+    "conversation_url": "https://chatgpt.com/c/6ac8e3ab-db04-83eb-9aae-bd07b930cd6f",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "executive-role-evaluator v1.1.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser",
+    "routed_skill": "executive-role-evaluator v1.1.0",
+    "routing_evidence": "Executor transcript visibly labels Skills Factory Cloud Next, executive-role-evaluator v1.1.0, Lab 0.33.6, Runtime verified."
+  },
+  "input_sha256": "af58d17eb52dc11a62447f2cd2f31648e68d025a1f7d8053663a60d2a73ba2f6",
+  "rubric_sha256": "79067b47662bb0ae8c305e685498d8f2859cbe7522664036ce32a15404f1a3ff",
+  "output_sha256": "87fa7aed2a5448c15c3e6bb6b1bf7da2f88186767ee5f38817de158a556362c7",
+  "output_storage": "ChatGPT transcript is referenced by conversation_id. output_sha256 is for the captured accessibility-tree delta containing the final response evidence, not a full-transcript snapshot; the complete rendered transcript remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "4/4",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator ChatGPT Chat assessed all four rubric assertions against the executor transcript evidence.",
+    "summary": "All 4 assertions PASS: unsupported role dimensions remain UNKNOWN; LOW confidence; decision-critical qualification questions; no invented title, scope, decision rights or authority. One brief recruiter qualification exchange is recommended before a full process."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ordinary Chat run in the Codex in-app browser. No Production behavior inferred."
+}

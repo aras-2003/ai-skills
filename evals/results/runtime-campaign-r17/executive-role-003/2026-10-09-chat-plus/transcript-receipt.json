@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "executive-role-003",
+  "suite": "executive-role",
+  "mode": "natural-routing",
+  "target": "executive-role-evaluator",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e246-5160-83ed-9ce2-f378b01ca87c",
+    "conversation_url": "https://chatgpt.com/c/6ac8e246-5160-83ed-9ce2-f378b01ca87c",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "executive-role-evaluator v1.1.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser",
+    "routed_skill": "executive-role-evaluator v1.1.0",
+    "routing_evidence": "Transcript visibly labels executive-role-evaluator v1.1.0, Lab 0.33.6, Runtime verified."
+  },
+  "input_sha256": "e934a645ce50d388a3b45c7bfd4fd3afd6c864f2126374da9f61ef07c8a450b2",
+  "rubric_sha256": "ac69980706c393b84f0dcdc2d6e3682040edd152eea5a085947376a5fc12569b",
+  "output_sha256": "45da2e182914da36458ab1da2b912d396155a723fa6f38cf7620cfc8c3515ace",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; output_sha256 is the SHA-256 of the full accessibility-tree snapshot captured from the transcript.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8e32c-8594-83ed-b869-af30c2010b5c",
+    "conversation_url": "https://chatgpt.com/c/6ac8e32c-8594-83ed-b869-af30c2010b5c",
+    "basis": "Separate evaluator ChatGPT Chat assessed each case against its own rubric from summarized executor evidence.",
+    "summary": "Separates 30% compensation premium from low career value; flags narrow platform scope and risk to executive trajectory."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh executor Chat; case input contained no evaluator assertions. Runtime attestation and loaded workflow version are visible in transcript."
+}

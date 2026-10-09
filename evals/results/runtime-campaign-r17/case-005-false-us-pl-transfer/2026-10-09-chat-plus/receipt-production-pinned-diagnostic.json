@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "case-005-false-us-pl-transfer",
+  "suite": "commerce",
+  "mode": "explicit",
+  "target": "commerce-opportunity-review",
+  "status": "PENDING",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8cf02-4948-83eb-9f58-73eacf04efbb",
+    "conversation_url": "https://chatgpt.com/c/6ac8cf02-4948-83eb-9f58-73eacf04efbb",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "commerce-opportunity-review v1.0.0",
+    "runtime_attestation": "verified"
+  },
+  "input_sha256": "dd51eab58ad0162ee2df1a5fe1544bc5b7dd9e2d5533cc91e020472f0662f4d1",
+  "rubric_sha256": "862e16be92db483b547a877490031a31e3bf479fd60da9dfd726bf774af78268",
+  "output_sha256": "aa2027ae07aedf6a22ddc2b952ff61ec0c0d245ee37e2501cdb9d4c978b19c25",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "5/5",
+    "conversation_id": "6ac8ccf3-9d4c-83eb-9dc3-ca6b34e15e67",
+    "conversation_url": "https://chatgpt.com/c/6ac8ccf3-9d4c-83eb-9dc3-ca6b34e15e67",
+    "basis": "Separate evaluator Chat assessed executor evidence summary.",
+    "summary": "Selected transferability review; separated universal need from US lifestyle assumptions; flagged freight and local substitutes/pricing; treated US reviews as non-transferable; proposed staged bounded local validation."
+  },
+  "notes": "Diagnostic result from the earlier Production-pinned interpretation, preserved for history. This was not a valid R17 result because it ran in Lab while expected channel was then Production. The case was subsequently reassigned to Lab by the campaign lock and rerun in conversation 6ac8e0cb-f23c-83eb-89b1-e83c7aa2813f.",
+  "expected_channel": "production",
+  "actual_channel": "lab",
+  "pending_reason": "ChatGPT plugin picker exposed only Skills Factory Cloud Next, whose runtime attestation was Lab 0.33.6. Case was pinned to Production in earlier campaign interpretation. The run and independent evaluation are retained as diagnostic evidence, not as an R17 Production result.",
+  "deferred_action": "The campaign has since been re-scoped to Lab; use the current receipt.json for the valid Lab run."
+}

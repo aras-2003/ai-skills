@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "executive-role-007",
+  "suite": "executive-role",
+  "mode": "natural-routing",
+  "target": "executive-role-evaluator",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 2,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e45f-3874-83eb-b6f6-87bdd70b592f",
+    "conversation_url": "https://chatgpt.com/c/6ac8e45f-3874-83eb-b6f6-87bdd70b592f",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "executive-role-evaluator v1.1.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser",
+    "routed_skill": "executive-role-evaluator v1.1.0; delegated company-context-research v1.0.1",
+    "routing_evidence": "Transcript explicitly states executive-role-evaluator excluded standalone company research and company-context-research was the correct workflow."
+  },
+  "input_sha256": "ff8357d239c0cd3f565cdde47db1f5f5dce766ac76ac08d14ebada6d339388d8",
+  "rubric_sha256": "a1e28d8899b58204d4e27a52995fff5c29a55dfaef41fd30f89675e5b0fc23e8",
+  "output_sha256": "6bdaa8095a7d4267773bc00275d667fda40278cf42079cab7049e78456c57a63",
+  "output_storage": "ChatGPT transcript is referenced by conversation_id. output_sha256 hashes the captured transcript excerpt containing the routing conclusion and explicit no-role-assessment boundary, not the full transcript. The full rendered conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "1/1 negative assertion",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator ChatGPT Chat scored the negative trigger assertion against the supplied transcript evidence.",
+    "summary": "PASS: company research only; no role-fit, career-fit, or pursue/skip assessment. The executive-role workflow explicitly excluded the standalone research request and delegated to company-context-research v1.0.1."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ordinary Chat run, Lab 0.33.6 verified. Factual accuracy was outside this routing/scope rubric; no Production inference."
+}

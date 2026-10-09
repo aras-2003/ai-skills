@@ -8,7 +8,7 @@ description: >
   means for a specific role; in that case hand off to executive-role-evaluator.
 metadata:
   owner: arkadiusz-kamrowski
-  version: "1.0.1"
+  version: "1.0.2"
   maturity: production
   risk: low
   last_reviewed: "2026-10-09"
@@ -62,6 +62,7 @@ When those questions are explicit, route to the relevant specialist skill.
    - Summarize what the facts establish.
    - Do not infer or append an individual's CTO/technology authority, reporting line, organizational mandate, role fit, or recruitment action unless an authoritative source explicitly establishes it. Keep company facts separate from role evaluation; route an explicitly requested role/mandate assessment to `executive-role-evaluator`.
    - If the user explicitly asks what these facts mean for a specific role, invoke/handoff to `executive-role-evaluator`.
+   - A prior role discussion, stored candidate profile, or a company name shared with an earlier job search does not imply permission to resume role-fit, career-value, mandate, or recruitment analysis. Treat the current request as standalone unless the user explicitly asks for role implications in this turn.
 
 ## Output contract
 
@@ -87,3 +88,4 @@ Do not include:
 - [ ] Fact and inference are distinguished.
 - [ ] No unsolicited role evaluation or career advice is added.
 - [ ] Explicit role-impact questions are routed to `executive-role-evaluator`.
+- [ ] Historical role context did not expand a factual company-research request.

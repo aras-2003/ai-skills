@@ -1,0 +1,40 @@
+{
+  "campaign": "runtime-validation-2026-10-r17",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "schema_version": "1.0",
+  "case_id": "investment-theme-natural-en",
+  "target": "investment-theme-discovery",
+  "status": "FAIL",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 5,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e74e-1440-83eb-9e47-287604405002",
+    "conversation_url": "https://chatgpt.com/c/6ac8e74e-1440-83eb-9e47-287604405002",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "runtime_attestation": "verified; explicit Lab 0.33.6 in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "investment-theme-discovery"
+  },
+  "input_sha256": "f001fa0332960b93494f792a329af98af5a558c061abcb0befdd8ba9e7725c25",
+  "rubric_sha256": "56bd695bd9dc9edda2c1952e8aa96221b5504091db5a8ecb28123c191846ae5d",
+  "output_sha256": "0db06a6f4a9898a148b8f4844867e356a3b5d6a097b74282b10ba5700ed1dad3",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a captured transcript excerpt summarizing the observed response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "FAIL",
+    "score": "1/3",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed case-specific assertions against captured Lab executor evidence.",
+    "summary": "Thematic map and no-buy-list constraint satisfied, but final workflow status reports security-review routing despite thematic request; no verified theme child execution or ordered Investment OS front door."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ChatGPT Chat via Codex in-app browser. No Production inference."
+}

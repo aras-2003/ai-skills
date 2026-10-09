@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "executive-role-013",
+  "suite": "executive-role",
+  "mode": "natural-routing",
+  "target": "executive-role-evaluator",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e5d9-faf8-83eb-b392-d6cf56afd7c6",
+    "conversation_url": "https://chatgpt.com/c/6ac8e5d9-faf8-83eb-b392-d6cf56afd7c6",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "executive-role-evaluator v1.1.0",
+    "runtime_attestation": "Lab 0.33.6 visible in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "executive-role-evaluator v1.1.0"
+  },
+  "input_sha256": "b793e547fcb49b15d05d0445bfad5d6fb73fea5a44fbd409a61104691f3ecdb3",
+  "rubric_sha256": "109f90c9a06e87713925ac2405ad26aee72e827165a7561601036586ff1234f8",
+  "output_sha256": "0f3720d06d1bd29e4c54e4474a61e4c0bc021954d6840df156864cb4368ee7da",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a transcript evidence excerpt captured from the rendered response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "6/6",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed each case independently against the case-specific rubric from supplied executor transcript evidence.",
+    "summary": "PASS: explicit INVESTIGATE, LOW confidence, HIGH risk; authority/team uncertainty preserved; no numeric total; all added qualification sections relevant."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ordinary ChatGPT Chat execution in the Codex in-app browser. Independent rubric scoring is in a separate Chat. No Production inference."
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "fallback-interface-explicit-production-002",
+  "suite": "production-fallback",
+  "mode": "explicit",
+  "target": "oaf-operating-model-redesign",
+  "expected_channel": "production",
+  "status": "PENDING",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "browser": "Codex in-app browser",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "actual_channel": "Lab",
+    "conversation_id": "6ac8d02e-a10c-83ed-93bd-5a1bc14c4cde",
+    "conversation_url": "https://chatgpt.com/c/6ac8d02e-a10c-83ed-93bd-5a1bc14c4cde",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "oaf-operating-model-redesign v1.1.0",
+    "candidate_specialist": "organizational-interface-review v0.1.0",
+    "runtime_attestation": "verified"
+  },
+  "input_sha256": "195f6c08d96ad45cab3362d3b531455f6b388b84fd8c51c843c4fb40b3f75e89",
+  "rubric_sha256": "e098a820254b95fdaafe19f2eb6642407dcc52b8fce18b70ddca88a7cc84312f",
+  "output_sha256": "69939c917722f396a7e8d5306c8b673a17678e959dafdf5aad254f021e2b211c",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "FAIL_PRODUCTION_CONTRACT",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator ChatGPT Chat applied the exact production-fallback rubric and was informed that execution ran in Lab 0.33.6.",
+    "failed_assertions": [
+      "Did not disclose organizational-interface-review unavailable in production catalog; instead said candidate Lab specialist was loaded and available.",
+      "Used a Lab candidate specialist in a case whose expected channel is production; the available ChatGPT plugin picker exposed only Skills Factory Cloud Next/Lab."
+    ],
+    "passed_assertions": [
+      "Explicitly executed requested workflow.",
+      "Recognized interface failure as material.",
+      "Kept actual causes provisional absent representative handoffs.",
+      "Preserved low-disruption interface repair option.",
+      "Required handoff/decision evidence before target-model selection."
+    ],
+    "qualification": "This FAIL is against the production-fallback rubric; because actual runtime was Lab, do not count as a valid production-channel result."
+  },
+  "notes": "The selected browser plugin exposes the attested Lab artifact, while lock.json assigns this case to production. Output correctly identifies candidate maturity and lack of case evidence, but the execution channel did not match the expected channel.",
+  "actual_channel": "lab",
+  "pending_reason": "ChatGPT plugin picker exposes only Skills Factory Cloud Next, whose runtime attestation is Lab 0.33.6. This case is pinned to production in the campaign. The captured output and independent rubric evaluation are retained as diagnostic evidence, but cannot be counted as an R17 production result.",
+  "deferred_action": "Do not rerun in Lab. Retry only when the Production connector/runtime is available."
+}

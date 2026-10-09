@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "executive-role-005",
+  "suite": "executive-role",
+  "mode": "natural-routing",
+  "target": "executive-role-evaluator",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e2e5-7a88-83ed-9931-a98f5e108af8",
+    "conversation_url": "https://chatgpt.com/c/6ac8e2e5-7a88-83ed-9931-a98f5e108af8",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "executive-role-evaluator v1.1.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser",
+    "routed_skill": "executive-role-evaluator v1.1.0",
+    "routing_evidence": "Transcript visibly labels executive-role-evaluator v1.1.0, Lab 0.33.6, Runtime verified."
+  },
+  "input_sha256": "2764160353f34b7a6939f5ba30419f84f51abd915511788490331f1a3141c109",
+  "rubric_sha256": "14b7c9c1922200425f4a554b6f42251903e44c38ff83d32b3e0ee019a8346210",
+  "output_sha256": "42d090f94edb19d6d3a095d812050fafc50e4fc036c8c4a873e43a8470af1e65",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; output_sha256 is the SHA-256 of the full accessibility-tree snapshot captured from the transcript.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "3/3",
+    "conversation_id": "6ac8e32c-8594-83ed-b869-af30c2010b5c",
+    "conversation_url": "https://chatgpt.com/c/6ac8e32c-8594-83ed-b869-af30c2010b5c",
+    "basis": "Separate evaluator ChatGPT Chat assessed each case against its own rubric from summarized executor evidence.",
+    "summary": "Identifies structural accountability-authority mismatch and asks about decision rights, investment authority, cross-functional prioritization, escalation and outcome ownership."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh executor Chat; case input contained no evaluator assertions. Runtime attestation and loaded workflow version are visible in transcript."
+}

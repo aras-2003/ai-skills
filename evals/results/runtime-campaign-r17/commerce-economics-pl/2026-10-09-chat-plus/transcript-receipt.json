@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "commerce-economics-pl",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "target": "unit-economics-review",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e376-ae70-83eb-8e24-52ffcaf4d1f5",
+    "conversation_url": "https://chatgpt.com/c/6ac8e376-ae70-83eb-8e24-52ffcaf4d1f5",
+    "timestamp_local": "2026-10-09",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "unit-economics-review v1.1.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser"
+  },
+  "input_sha256": "90f2ee8e89026c510077f0d7dfb6c95d359d764940efac2ef0cc5d280d502ee3",
+  "rubric_sha256": "34f0bebab547d095ed047d471b9d3f56a0c401ea72e7b230c8f8ee53139da194",
+  "output_sha256": "96fd9679368f1ff43eefbfd1f717004c37ec4e9fe52e2388d8deffbe2e0f5ab8",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8e3bd-3e80-83ed-b1bd-32325e117ac4",
+    "conversation_url": "https://chatgpt.com/c/6ac8e3bd-3e80-83ed-b1bd-32325e117ac4",
+    "basis": "Separate evaluator Chat assessed routing and checked arithmetic as an additional non-scored sanity check. Evaluator corrected an initial arithmetic-table inconsistency after reconciliation.",
+    "summary": "Both routing criteria passed: unit-economics-review v1.1.0 executed; order quantity, VAT, net COGS/order fulfillment and gross-price fee basis were explicit. Arithmetic was confirmed correct: net revenue 161.79 PLN; contribution/break-even CAC 73.81 PLN; after CAC 35, contribution 38.81 PLN."
+  },
+  "notes": "Arithmetic independently recomputed using unrounded values: 199/1.23 - 60 - 15 - 4.975 - 8 = 73.8136, rounded to 73.81 PLN. The independent evaluator first mistakenly listed 73.82, then corrected that table and confirmed no numerical error. Executor appropriately labels the result conditional and lists omitted costs.",
+  "expected_channel": "lab",
+  "actual_channel": "lab"
+}

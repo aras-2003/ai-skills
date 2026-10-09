@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "executive-role-009",
+  "suite": "executive-role",
+  "mode": "natural-routing",
+  "target": "executive-role-evaluator",
+  "status": "FAIL",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 4,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e56d-1360-83ed-9956-2cbc41a1d171",
+    "conversation_url": "https://chatgpt.com/c/6ac8e56d-1360-83ed-9956-2cbc41a1d171",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "company-context-research behavior with executive-role context expansion; version not surfaced in transcript",
+    "runtime_attestation": "Cloud Next processing and Skills Factory workflow discovery visible; exact Lab version not surfaced in transcript",
+    "browser": "Codex in-app browser",
+    "routed_skill": "company-context-research behavior with executive-role context expansion; version not surfaced in transcript"
+  },
+  "input_sha256": "24d1addb95a4613bc5feff086f632bc17df0db7c27de4df10688fa3c0d083a44",
+  "rubric_sha256": "29a54f042dd878c6b8ce43febd0ddbb36a30aa4bb88620f44e4cd6cc9110fa83",
+  "output_sha256": "002d4e34b3a3a317cc63c2cb9acd079709533fd2056b836d80b23171d2384beb",
+  "output_storage": "ChatGPT transcript referenced by conversation_id. output_sha256 hashes a transcript evidence excerpt captured from the rendered response, not the full transcript. Full conversation remains available in ChatGPT.",
+  "independent_evaluation": {
+    "status": "FAIL",
+    "score": "2/4 negative assertions",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed each case independently against the case-specific rubric from supplied executor transcript evidence.",
+    "summary": "FAIL: despite answering the requested company facts, it resumed prior CTO mandate analysis and recommended diagnostic-only recruitment continuation; violated the scope boundary on career value and recruitment actions."
+  },
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "notes": "Fresh ordinary ChatGPT Chat execution in the Codex in-app browser. Independent rubric scoring is in a separate Chat. No Production inference."
+}

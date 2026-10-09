@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "case-003-viral-regulated",
+  "suite": "commerce",
+  "mode": "explicit",
+  "target": "commerce-opportunity-review",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8dfa4-f4bc-83eb-8e17-ad47520d2b8e",
+    "conversation_url": "https://chatgpt.com/c/6ac8dfa4-f4bc-83eb-8e17-ad47520d2b8e",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "commerce-opportunity-review v1.0.0",
+    "specialist_component": "commerce-regulatory-risk-review v1.1.1",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser"
+  },
+  "input_sha256": "bec3e3cda32e51ec7d163b3f80240e5104a5b6849f1b327e89f9f9516c783df7",
+  "rubric_sha256": "97dc784e414e5213a97c5c42dd1f74c7397ac6444eeaafbafa322264a8f1f021",
+  "output_sha256": "fff4946b2239bec263e217e40729df3f7a9e287a557b1603590c2eeb723306e2",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; accessible transcript excerpt hashed for this receipt.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "5/5",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate ChatGPT evaluator assessed executor evidence summary against five frozen assertions.",
+    "summary": "All five assertions PASS. Regulatory specialist selected early; unknown compliance not described as illegality; compliance is a pre-launch gate; commercial upside does not override it; next step is bounded product dossier and qualified PL/EU review."
+  },
+  "notes": "Run through Skills Factory Cloud Next in ordinary Chat mode; Lab 0.33.6 attestation verified. The executor explicitly stated it did not perform SKU-specific regulatory research and did not provide legal clearance.",
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "output_hash_basis": "SHA-256 of the accessible assistant transcript excerpt from the Codex in-app browser, with AX indices removed."
+}

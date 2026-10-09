@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "career-company-facts-pl",
+  "suite": "routing",
+  "mode": "natural-routing",
+  "target": "company-context-research",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e143-48e0-83ed-870b-df67c2932377",
+    "conversation_url": "https://chatgpt.com/c/6ac8e143-48e0-83ed-870b-df67c2932377",
+    "timestamp_local": "2026-10-09",
+    "lab_version": "0.33.6",
+    "packaged_component": "company-context-research v1.0.1",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser"
+  },
+  "input_sha256": "ee91c1f250310719964581f89ffd93f289dbb4689faf60dfbf3facd72a1ba3ad",
+  "rubric_sha256": "157592325a72a9b1031f082dc3792a31ab2c08c77287ece52f23592ab4d4704d",
+  "output_sha256": "05a5d2543d48f22373bfcb470907de11ecc2842b83ea840c1c41d30775baca82",
+  "output_hash_basis": "Accessible assistant transcript excerpt with AX line indices removed; SHA-256.",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "2/2",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate evaluator Chat assessed the visible transcript summary against both manual assertions.",
+    "summary": "PASS 2/2: routed to factual company research, addressed revenue/employment/ownership/recent transactions, and explicitly avoided any role/career evaluation."
+  },
+  "notes": "Fresh natural-language routing run in Chat via Cloud Next, Lab context checked. Report distinguished global vs Polish-entity data and proposed vs completed transaction status.",
+  "expected_channel": "lab",
+  "actual_channel": "lab"
+}

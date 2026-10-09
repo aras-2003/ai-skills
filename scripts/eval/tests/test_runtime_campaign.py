@@ -30,12 +30,12 @@ class RuntimeCampaignTests(unittest.TestCase):
     def test_campaign_resolves_exact_scope_and_isolation(self) -> None:
         self.assertEqual([], campaign.validate_campaign())
         cases = load_campaign_cases(ROOT, campaign.config()["campaign"])
-        self.assertEqual(44, len(cases))
+        self.assertEqual(42, len(cases))
         counts = {}
         for case in cases.values():
             counts[case["suite"]] = counts.get(case["suite"], 0) + 1
         self.assertEqual(
-            {"commerce": 6, "routing": 22, "executive-role": 14, "production-fallback": 2},
+            {"commerce": 6, "routing": 22, "executive-role": 14},
             counts,
         )
         supplemental = load_supplemental_cases(ROOT, campaign.config()["campaign"])
@@ -91,12 +91,12 @@ class RuntimeCampaignTests(unittest.TestCase):
         )
 
 
-    def test_generated_queue_uses_current_explicit_strategy_input(self) -> None:
+    def test_generated_queue_excludes_production_only_inputs(self) -> None:
         queue = campaign.queue_text(include_supplemental=True)
-        self.assertIn(
-            "Uruchom workflow oaf-health-check dla tej sytuacji.",
-            queue,
-        )
+        self.assertNotIn("fallback-strategy-production-002", queue)
+        self.assertNotIn("fallback-interface-explicit-production-002", queue)
+        self.assertIn("oaf-decision-rights-natural-pl", queue)
+        self.assertIn("kto naprawdę proponuje, decyduje", queue)
 
     def test_prepare_locks_package_catalog_components_and_fallback_absence(self) -> None:
         with tempfile.TemporaryDirectory(dir=(ROOT / ".tmp")) as td:
@@ -114,10 +114,10 @@ class RuntimeCampaignTests(unittest.TestCase):
             self.assertIn("organizational-interface-review", lock["expected_catalogs"]["lab"])
             self.assertTrue(lock["components"])
             self.assertTrue(all(x.get("version") and x.get("content_sha256") for x in lock["components"]))
-            self.assertEqual("production", lock["case_channels"]["fallback-strategy-production-002"])
-            self.assertEqual("production", lock["case_channels"]["fallback-interface-explicit-production-002"])
-            self.assertEqual("production", lock["case_channels"]["oaf-interface-natural-pl"])
-            self.assertEqual(44, lock["core_case_count"])
+            self.assertTrue(lock["case_channels"])
+            self.assertEqual({"lab"}, set(lock["case_channels"].values()))
+            self.assertEqual("lab", lock["case_channels"]["oaf-interface-natural-pl"])
+            self.assertEqual(42, lock["core_case_count"])
 
             self.assertEqual(
                 [
@@ -129,17 +129,14 @@ class RuntimeCampaignTests(unittest.TestCase):
             )
             self.assertEqual(64, len(lock["campaign_definition_sha256"]))
             definitions = {item["id"]: item for item in lock["case_definitions"]}
-            self.assertEqual(47, len(definitions))
+            self.assertEqual(45, len(definitions))
             components = {(item["channel"], item["name"]): item for item in lock["components"]}
             self.assertEqual("1.5.0", components[("production", "oaf-health-check")]["version"])
             self.assertEqual("1.1.0", components[("production", "operating-model-review")]["version"])
-            self.assertEqual("1.1.1", components[("production", "decision-bottleneck-analysis")]["version"])
-            self.assertEqual("1.1.0", components[("production", "decision-rights-review")]["version"])
-            strategy = definitions["fallback-strategy-production-002"]
-            self.assertEqual("explicit", strategy["mode"])
-            self.assertEqual("oaf-health-check", strategy["target"])
-            self.assertEqual(64, len(strategy["input_sha256"]))
-            self.assertEqual(64, len(strategy["rubric_sha256"]))
+            self.assertEqual("1.1.2", components[("production", "decision-bottleneck-analysis")]["version"])
+            self.assertEqual("1.1.1", components[("production", "decision-rights-review")]["version"])
+            self.assertNotIn("fallback-strategy-production-002", definitions)
+            self.assertNotIn("fallback-interface-explicit-production-002", definitions)
 
     def test_domain_retest_manifest_covers_all_69_v14_domain_cases(self) -> None:
         case_ids = campaign.config().get("domain_retest_case_ids") or []
@@ -148,8 +145,12 @@ class RuntimeCampaignTests(unittest.TestCase):
 
     def test_revised_fallback_identities_do_not_rewrite_historical_001_cases(self) -> None:
         active = load_campaign_cases(ROOT, campaign.config()["campaign"])
-        self.assertIn("fallback-strategy-production-002", active)
-        self.assertIn("fallback-interface-explicit-production-002", active)
+        self.assertNotIn("fallback-strategy-production-002", active)
+        self.assertNotIn("fallback-interface-explicit-production-002", active)
+        self.assertEqual(
+            {"fallback-strategy-production-002", "fallback-interface-explicit-production-002"},
+            {item["id"] for item in campaign.config().get("excluded_production_only_cases", [])},
+        )
         self.assertNotIn("fallback-strategy-production-001", active)
         self.assertNotIn("fallback-interface-production-001", active)
         historical_strategy = receipt.find_case(ROOT, "fallback-strategy-production-001")
@@ -581,7 +582,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             good_lock_path = prepared / "lock.json"
             good_lock = json.loads(good_lock_path.read_text(encoding="utf-8"))
 
-            case_id = "fallback-strategy-production-002"
+            case_id = "career-cv-gaps-en"
             channel = good_lock["case_channels"][case_id]
             observed = self._observed_smoke(good_lock, channel)
             smoke_path = td_path / "smoke.json"
@@ -590,7 +591,7 @@ class RuntimeCampaignTests(unittest.TestCase):
             trace = td_path / "trace.json"
             output.write_text("Synthetic offline lock-validation output.\n", encoding="utf-8")
             trace.write_text(
-                json.dumps({"selected_capabilities": ["oaf-health-check"], "tool_calls": []}),
+                json.dumps({"selected_capabilities": ["cv-gap-analysis"], "tool_calls": []}),
                 encoding="utf-8",
             )
 

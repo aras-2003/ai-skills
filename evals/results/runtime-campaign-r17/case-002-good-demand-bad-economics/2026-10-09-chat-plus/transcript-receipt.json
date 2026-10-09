@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "case-002-good-demand-bad-economics",
+  "suite": "commerce",
+  "mode": "explicit",
+  "target": "commerce-product-deep-dive",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8de8d-7698-83ed-ac98-e5db65fa3da8",
+    "conversation_url": "https://chatgpt.com/c/6ac8de8d-7698-83ed-ac98-e5db65fa3da8",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "commerce-product-deep-dive v1.0.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser"
+  },
+  "input_sha256": "f0206eba0acfb107466fba08dd97d7f6d7ff09d989d08a1f94ec430dbfd97e95",
+  "rubric_sha256": "e0baafc35ee037fb7ba0e61779879f8693279b0ce967b75b7c066d7d46e782fe",
+  "output_sha256": "a1c5fb5264c339aa40cb2c9b13f6f23868a3a58454dd0acf428077a7f79bde21",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; accessible transcript excerpt hashed for this receipt.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "4/4",
+    "conversation_id": "6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "conversation_url": "https://chatgpt.com/c/6ac8cfe3-6290-83ed-8f5e-ed45d65d7b6e",
+    "basis": "Separate ChatGPT evaluator assessed the full case summary and checked the arithmetic from stated inputs.",
+    "summary": "All four assertions PASS. Contribution/break-even CAC 22.09 PLN vs CAC 70–110; zero-return sensitivity still loses 2.91 PLN at CAC 70; MOQ landed stock exposure 41,100 PLN separately stated; KILL current offer, no market test."
+  },
+  "notes": "Run through Skills Factory Cloud Next in ordinary Chat mode; Lab 0.33.6 attestation verified. No orders, ads, or live supplier actions were performed.",
+  "expected_channel": "lab",
+  "actual_channel": "lab",
+  "output_hash_basis": "SHA-256 of the accessible assistant transcript excerpt from the Codex in-app browser, with AX indices removed."
+}

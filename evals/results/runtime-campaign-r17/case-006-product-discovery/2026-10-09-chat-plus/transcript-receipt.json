@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign": "runtime-validation-2026-10-r17",
+  "case_id": "case-006-product-discovery",
+  "suite": "commerce",
+  "mode": "explicit",
+  "target": "product-opportunity-discovery",
+  "status": "PASS",
+  "execution": {
+    "product": "ChatGPT Chat",
+    "account_tier": "Plus",
+    "mode_confirmed": "Chat",
+    "tabs_open_max": 1,
+    "plugin": "Skills Factory Cloud Next",
+    "conversation_id": "6ac8e16a-18e4-83ed-861f-54feb22454cd",
+    "conversation_url": "https://chatgpt.com/c/6ac8e16a-18e4-83ed-861f-54feb22454cd",
+    "timestamp_local": "2026-10-09",
+    "behavior_source_revision": "4bd9ae737bdd1919b1827750a1197737ec031b12",
+    "site_source_revision": "bc94902ba6e500a99030253c50bfa2345605daf2",
+    "lab_version": "0.33.6",
+    "lab_source_revision": "1363c616d92df9046864bd8a5882058e3446a8d7",
+    "packaged_component": "product-opportunity-discovery v1.1.0",
+    "runtime_attestation": "verified",
+    "browser": "Codex in-app browser"
+  },
+  "input_sha256": "ee939bf8b1e1e08af09354606912e349cc0f405e2cb0de3216790d4be5783aac",
+  "rubric_sha256": "ad2208fed47740d8eab9602443d60855c5cd528ad36c03c91b1891a02f9b9c2a",
+  "output_sha256": "63fe7b2736a22fddf85546de1ea03d7200afa6b5b4db495348e7ae7aea3efdd2",
+  "output_storage": "ChatGPT transcript referenced by conversation_id; raw transcript not copied into repository.",
+  "independent_evaluation": {
+    "status": "PASS",
+    "score": "10/10",
+    "conversation_id": "6ac8e1d3-980c-83eb-8b32-c01f04af499f",
+    "conversation_url": "https://chatgpt.com/c/6ac8e1d3-980c-83eb-8b32-c01f04af499f",
+    "basis": "Separate evaluator Chat assessed a structured summary of the full executor transcript.",
+    "summary": "All ten criteria passed. Four candidates were selected; the crevice tool was strongest. Weighted blankets were not overweighted, ingestibles deferred for compliance, US traction separated from Polish demand, cable clip commodity risk flagged, and low-cost validation precedes any paid/transaction test."
+  },
+  "notes": "Executor returned four non-ranked hypotheses and explicitly distinguished signals from evidence of Polish purchases. It included web product-image links as examples; no claims were based on them. Evaluator noted manageability and validation detail were qualitative, adequate for discovery but not investment approval.",
+  "expected_channel": "lab",
+  "actual_channel": "lab"
+}
