@@ -39,7 +39,7 @@ class MappingTest(unittest.TestCase):
         self.assertEqual(mod.values("[E2E-05] rendering", "", [])["Area"], "E2E & Quality")
 
     def test_explicit_project_status_body(self):
-        result = mod.values("[ENG-01] review", "Historical status: PROPOSED\\nProject status: In Progress", [])
+        result = mod.values("[ENG-01] review", "Historical status: PROPOSED\nProject status: In Progress", [])
         self.assertEqual(result["Status"], "In Progress")
 
     def test_explicit_project_status_label(self):
