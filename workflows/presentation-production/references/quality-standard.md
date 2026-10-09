@@ -24,8 +24,14 @@ Benchmark **transferable craft**, not vendor logos or proprietary slide template
 - Motion/video only when it explains sequence, system or emotion better than a static view; include a static fallback and format-specific validation.
 - Illustrative generated images are not suitable to encode actual numeric series, product performance, real people or client org truth.
 
+## Distinct strategy vs communication quality
+
+Strategy OS owns option substance, economic/organizational feasibility, independent challenge and approval of strategic recommendations (STR-06/07/09/10; STR-17 evaluates this). Presentation OS owns truthful **communication** of those findings, audience narrative, design, slides and artifact/export quality (PRES-01 evaluates this). Keep their review states separate: a polished deck cannot pass an unrun strategy review, and an excellent strategy may still be communicated badly. Do not require Strategy OS for keynotes, training or local slide editing unless the user's actual intent requires new strategic choices.
+
+STR-12–STR-15 supply domain-specific semantic models and report/exhibit profiles for PESTEL, Porter, SWOT/TOWS and competition/strategy outputs. They must not become a second Canva/Figma deck engine. The shared `visual-output-design` renders individual exhibits; `report-composer` assembles chat-native reports; Presentation OS builds explicit decks when requested.
+
 ## Two-layer review checklist
-**Partner/editorial:** business question answered; audience-specific ask; thesis vs evidence; strongest counterargument; options/disconfirmers; causal assertions; numerical provenance and comparator; stakeholder objections; logical transitions; right level of detail.
+**Partner/editorial:** communication question answered, audience ask, fidelity to source domain findings/options, unsupported claims escalated to source owner, numerical provenance, audience objections, transitions and detail. The domain's strategic-option challenge and substantive thesis validation are independent from this presentation review.
 **Art director/production:** montage coherence; each slide readable in context; overflow/clipping; tables/charts labels; hierarchy; alignment/grid; contrast; density; typography and fonts; consistent source lines; native object editability; asset license; animation/export parity.
 
 Classify issues `CRITICAL` (fabricated/misleading/secret/major blocking output), `MAJOR` (unsupported decisive claim, broken story, unreadable exhibit, wrong artifact), `MINOR` (cosmetic or local polish). A single critical/major open defect blocks release; **do not average defects into a pass**. Independent blind review is recommended for benchmarking, not assumed.
