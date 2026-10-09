@@ -1,7 +1,9 @@
 # Presentation Production — Audience-to-Decision Deck Workflow
 
-## Mission and scope
+## Purpose
 Produce an audience-specific, evidence-backed, professionally designed **presentation artifact** in Figma Slides or Canva, when explicitly requested. This workflow owns orchestration and stage gates, not all specialist reasoning/rendering.
+
+## Entry and scope
 
 **Entry:** User requests a new presentation/deck or major rebuild of a deck from topic, idea, notes, document or analysis. For a local slide edit, individual chart, source verification or story-only outline, route to the matching specialist and stop. Do not create external artifacts for ordinary explanations or reports that do not request a presentation.
 
