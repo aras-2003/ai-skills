@@ -1,6 +1,6 @@
 # R18 — Lab 0.33.7 regression campaign
 
-Behavior source: `1d4ccfbe7d799bcaf08db4a5de2579552d37dc9c`. This is the first fixes commit; later commits may only change campaign/test/deployment documentation without changing this behavior pin.
+Behavior source: `e51df8120031726a59f6f2acabf1bf7c021c94a4`. This commit adds the investment-attention materiality fix; later commits may only change campaign/test/deployment documentation without changing this behavior pin.
 
 Execute the same 45 Lab cases and unchanged rubrics as R17, using the exact merged-main Lab 0.33.7 CI artifact. Keep both Production-only fallback cases excluded. Execute in ordinary Chat, maximum four tabs, with independent evaluation in another Chat. Start with the nine historical failures listed in `evals/results/runtime-campaign-r17/SUMMARY.md`, then run remaining cases.
 
