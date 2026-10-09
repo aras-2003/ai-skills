@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'aras-2003/skills-factory'
     env:
-      PROJECTS_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
+      GH_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
       GH_REPOSITORY: ${{ github.repository }}
       ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue_number }}
       PROJECT_OWNER: aras-2003
@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Sync project metadata (fail closed if token missing)
         run: |
-          if [ -z "$PROJECTS_TOKEN" ]; then
+          if [ -z "$GH_TOKEN" ]; then
             echo "::error::PROJECTS_TOKEN secret missing. Configure a scoped GitHub App token or fine-grained PAT with Projects write permission."
             exit 1
           fi
