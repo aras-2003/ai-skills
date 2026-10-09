@@ -50,17 +50,17 @@ class WorkflowProcessAuditTests(unittest.TestCase):
             source = root / "workflows" / "demo" / "WORKFLOW.md"
             source.parent.mkdir(parents=True)
             source.write_text(
-                "# Demo\\n\\n## Purpose\\nReview requests.\\n\\n## Sequence\\n"
-                "Validate.\\n\\n## Output contract\\nGive a summary.\\n"
-                "## Stop conditions\\nStop without evidence.\\n",
+                "# Demo\n\n## Purpose\nReview requests.\n\n## Sequence\n"
+                "Validate.\n\n## Output contract\nGive a summary.\n"
+                "## Stop conditions\nStop without evidence.\n",
                 encoding="utf-8",
             )
             (root / "workflows" / "runtime-registry.yaml").write_text(
-                'workflows:\\n  - name: demo\\n    workflow: workflows/demo/WORKFLOW.md\\n'
-                '    description: "Use this workflow to review a bounded request."\\n'
-                '    metadata: {owner: team, version: "1.0", maturity: draft, risk: low, last_reviewed: "2026-10-09"}\\n'
-                '    channels: {plugin: supported}\\n'
-                '    dependencies: {required: [], optional: []}\\n', encoding="utf-8",
+                'workflows:\n  - name: demo\n    workflow: workflows/demo/WORKFLOW.md\n'
+                '    description: "Use this workflow to review a bounded request."\n'
+                '    metadata: {owner: team, version: "1.0", maturity: draft, risk: low, last_reviewed: "2026-10-09"}\n'
+                '    channels: {plugin: supported}\n'
+                '    dependencies: {required: [], optional: []}\n', encoding="utf-8",
             )
             row = mod.audit(root)["workflows"][0]
             self.assertFalse(row["local_test_suite_present"])
