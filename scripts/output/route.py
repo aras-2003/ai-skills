@@ -140,7 +140,9 @@ def plan_outputs(raw: Mapping[str, Any]) -> dict[str, Any]:
     delegations = []
     for item in outputs:
         output_kind, fmt = item["kind"], item["format"]
-        cap_key = f"{output_kind}:{fmt}"
+        # Edit availability is a different capability from create/export availability.
+        cap_key = (f"edit:{output_kind}:{fmt}" if kind == "EDIT_EXISTING"
+                   else f"{output_kind}:{fmt}")
         capability = "AVAILABLE" if output_kind == "chat" and fmt == "text" else capabilities.get(cap_key, "UNKNOWN")
         state = "READY_TO_DELEGATE"
         reason = "Validated policy route; no workflow or provider was executed."
