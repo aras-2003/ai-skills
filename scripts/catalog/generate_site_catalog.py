@@ -96,9 +96,12 @@ def build_catalog(
         if not isinstance(item, dict):
             return "UNASSESSED"
         requirements = item.get("requirements")
-        if not isinstance(requirements, dict) or set(requirements) != {"network", "filesystem", "shell_exec", "credentials", "external_actions"}:
+        expected = {"network", "filesystem", "shell_exec", "credentials", "external_actions"}
+        if not isinstance(requirements, dict) or set(requirements) != expected:
             return "UNASSESSED"
-        return "UNASSESSED" if "unassessed" in requirements.values() else "DECLARED"
+        if any(not isinstance(value, str) or value == "unassessed" for value in requirements.values()):
+            return "UNASSESSED"
+        return "DECLARED"
 
     skills: list[dict[str, str]] = []
     for line in markdown.splitlines():
