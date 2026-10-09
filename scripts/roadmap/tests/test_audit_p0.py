@@ -32,3 +32,10 @@ class AuditP0Tests(unittest.TestCase):
             {"id": "A", "priority": "P0", "depends_on": []}]})
         self.assertTrue(any("duplicate id" in x for x in errors))
         self.assertTrue(any("self dependency" in x for x in errors))
+
+    def test_malformed_transitive_dependency_is_reported(self):
+        errors, rows = audit_p0.audit({"items": [
+            {"id": "A", "priority": "P0", "depends_on": ["B"]},
+            {"id": "B", "priority": "P1", "depends_on": "not-a-list"}]})
+        self.assertEqual(len(rows), 1)
+        self.assertTrue(any("depends_on is not a list" in x for x in errors))
