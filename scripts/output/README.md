@@ -40,7 +40,7 @@ Supply JSON to `python -m scripts.output.route` on stdin. Here is a **planning e
 - `requested_outputs`: explicit `kind`/`format` pairs, preserving order; duplicates removed. Chat-only analysis with no requested file produces only `chat:text`. When the user explicitly asks for both DOCX/PDF it returns two format entries, but the same content-domain report owner.
 - `source_result`: stable `result_id, revision, domain` only. The eventual OUT-01 contract expands this to claims/evidence/option IDs; this v0.1 implementation does **not** validate source authenticity or domain correctness.
 - `analysis_state` when source missing: `NOT_STARTED|IN_PROGRESS|UNAVAILABLE|UNKNOWN`. No implicit domain execution. Incomplete source → `WAITING_FOR_SOURCE/UPSTREAM` or `BLOCKED_UPSTREAM`.
-- `capabilities` keys `kind:format`, values `AVAILABLE|UNAVAILABLE|UNKNOWN`. No key = `UNKNOWN`. `AVAILABLE` means a concrete target operation exists, **not** that a deliverable was created or delivered.
+- `capabilities` keys `kind:format` for create/export and `edit:kind:format` for `EDIT_EXISTING`, values `AVAILABLE|UNAVAILABLE|UNKNOWN`. No key = `UNKNOWN`. **Generation/read/export capability does not establish edit capability.** `AVAILABLE` means the specific operation is available, **not** that a deliverable was created or delivered.
 - Spreadsheet: deliberately `DEFERRED_PRODUCT` despite any generic XLSX connector capability. P2 discovery / P3 optional.
 - Hosted web: separately requires `publish_requested=true` and `publish_authorized=true`, and **still** returns a plan only. No deployment is executed.
 
