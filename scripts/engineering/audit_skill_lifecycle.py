@@ -120,7 +120,7 @@ def examine(skill_file: Path, root: Path) -> dict:
 
 
 def audit(root: Path) -> dict:
-    skills = sorted((root / "skills").glob("*/*/SKILL.md"))
+    skills = sorted((root / "skills").rglob("SKILL.md"))
     rows = [examine(path, root) for path in skills]
     counts = Counter(row["status"] for row in rows)
     signals = Counter(item["code"] for row in rows for item in row["issues"])
