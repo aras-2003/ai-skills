@@ -30,7 +30,7 @@ def audit(data):
                 errors.append(f"{key}: unknown dependency {dep!r}")
             elif dep == key:
                 errors.append(f"{key}: self dependency")
-    graph = {k: v.get("depends_on", []) for k, v in by_id.items()}
+    graph = {}\n    for key, item in by_id.items():\n        deps = item.get("depends_on", [])\n        if not isinstance(deps, list):\n            errors.append(f"{key}: depends_on is not a list")\n            deps = []\n        graph[key] = deps
     state = {}
     def visit(node, trail):
         if state.get(node) == 1:
