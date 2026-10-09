@@ -44,16 +44,16 @@ class SiteCatalogContractTests(unittest.TestCase):
         self.assertEqual("NOT_OBSERVED", catalog["metadata"]["runtime_installation"])
 
     def test_site_catalog_does_not_promote_partial_capability_declaration(self) -> None:
-        markdown = ("| Skill | Domain | Maturity | Version | Description | Source |\\n"
-                    "|---|---|---|---|---|---|\\n"
-                    "| example | meta | draft | 0.1.0 | Example | skills/meta/example/SKILL.md |\\n")
-        manifest = 'package:\\n  name: skills-factory\\n  version: "1.0"\\nlab:\\n  name: skills-factory-lab\\n  version: "1.0"\\n'
+        markdown = ("| Skill | Domain | Maturity | Version | Description | Source |\n"
+                    "|---|---|---|---|---|---|\n"
+                    "| example | meta | draft | 0.1.0 | Example | skills/meta/example/SKILL.md |\n")
+        manifest = 'package:\n  name: skills-factory\n  version: "1.0"\nlab:\n  name: skills-factory-lab\n  version: "1.0"\n'
         contract = (
-            "contract_id: repository-side-v1\\n"
-            "component_declarations:\\n  example:\\n    requirements:\\n"
-            "      network: none\\n      filesystem: none\\n"
-            "      shell_exec: none\\n      credentials: unassessed\\n"
-            "      external_actions: none\\n"
+            "contract_id: repository-side-v1\n"
+            "component_declarations:\n  example:\n    requirements:\n"
+            "      network: none\n      filesystem: none\n"
+            "      shell_exec: none\n      credentials: unassessed\n"
+            "      external_actions: none\n"
         )
         catalog = build_catalog(markdown, manifest, "revision", capability_contract=contract)
         self.assertEqual("UNASSESSED", catalog["skills"][0]["capability_assessment"])
