@@ -34,6 +34,40 @@ class CapabilityContractTests(unittest.TestCase):
         self.assertEqual("write", result["requirements"]["network"])
         self.assertEqual("approval_required", result["requirements"]["external_actions"])
 
+    def test_partial_capability_declaration_is_not_reported_as_assessed(self) -> None:
+        contract = load_contract(ROOT)
+        partial = dict(contract)
+        partial["component_declarations"] = {
+            "example": {
+                "requirements": {
+                    "network": "read",
+                    "filesystem": "none",
+                    "shell_exec": "none",
+                    "credentials": "unassessed",
+                    "external_actions": "none",
+                }
+            }
+        }
+        result = assessment_for(partial, "example")
+        self.assertEqual("UNASSESSED", result["status"])
+
+    def test_fully_reviewed_declaration_remains_declared(self) -> None:
+        contract = load_contract(ROOT)
+        reviewed = dict(contract)
+        reviewed["component_declarations"] = {
+            "example": {
+                "requirements": {
+                    "network": "read",
+                    "filesystem": "none",
+                    "shell_exec": "none",
+                    "credentials": "none",
+                    "external_actions": "approval_required",
+                }
+            }
+        }
+        result = assessment_for(reviewed, "example")
+        self.assertEqual("DECLARED", result["status"])
+
     def test_report_covers_skills_and_workflows_without_claiming_runtime_support(self) -> None:
         report, errors = validate(ROOT)
         self.assertFalse(errors)
