@@ -32,3 +32,13 @@ cases:
       must_not:
         - "intake form only"
         - "claim that materiality was assessed without event facts"
+
+  - id: audit-near-miss-investment-attention-triage
+    case: second-competing-skill-negative
+    input: "I need an initial full investment thesis for an unresearched company, including business quality, valuation and bear case; this isn't an update to an existing thesis."
+    expected:
+      should_trigger: false
+      must:
+        - security-underwriting builds initial company underwriting
+      must_not:
+        - treat an unresearched issuer as an update to a previous thesis
