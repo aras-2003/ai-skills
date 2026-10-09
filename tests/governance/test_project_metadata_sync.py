@@ -38,6 +38,21 @@ class MappingTest(unittest.TestCase):
     def test_e2e_prefix(self):
         self.assertEqual(mod.values("[E2E-05] rendering", "", [])["Area"], "E2E & Quality")
 
+    def test_explicit_project_status_body(self):
+        result = mod.values("[ENG-01] review", "Historical status: PROPOSED\\nProject status: In Progress", [])
+        self.assertEqual(result["Status"], "In Progress")
+
+    def test_explicit_project_status_label(self):
+        result = mod.values("[ENG-03] review", "", ["status:blocked"])
+        self.assertEqual(result["Status"], "Blocked")
+
+    def test_historical_status_not_taken_as_live_status(self):
+        self.assertNotIn("Status", mod.values("[ENG-03] review", "historical status: PROPOSED", []))
+
+    def test_conflicting_project_status_refuses_write(self):
+        with self.assertRaises(ValueError):
+            mod.values("[ENG-03] review", "Project status: In Progress", ["status:blocked"])
+
 
 if __name__ == "__main__":
     unittest.main()
