@@ -24,6 +24,23 @@ class WorkflowProcessAuditTests(unittest.TestCase):
         self.assertTrue(all(x["runtime_evidence"] == "NOT_RUN" and x["runtime_outcome"] is None
                             for x in report["workflows"]))
 
+    def test_central_fixture_coverage_is_not_misreported_as_absent(self):
+        root = SCRIPT.parents[2]
+        report = mod.audit(root)
+        rows = {x["name"]: x for x in report["workflows"]}
+        self.assertGreater(rows["commerce-product-deep-dive"]["central_eval_case_count"], 0)
+        self.assertNotIn(
+            "NO_LOCAL_OR_CENTRAL_WORKFLOW_SUITE_CHECK_ALTERNATE_CAMPAIGNS",
+            rows["commerce-product-deep-dive"]["review_signals"],
+        )
+        for name in ("oaf-strategy-execution-reset", "investment-os-review", "investment-portfolio-observation"):
+            with self.subTest(workflow=name):
+                self.assertEqual(0, rows[name]["central_eval_case_count"])
+                self.assertIn(
+                    "NO_LOCAL_OR_CENTRAL_WORKFLOW_SUITE_CHECK_ALTERNATE_CAMPAIGNS",
+                    rows[name]["review_signals"],
+                )
+
     def test_invalid_missing_path_or_metadata_blocks(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
