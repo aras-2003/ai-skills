@@ -30,7 +30,7 @@ Evaluate what changed versus the recorded thesis rather than summarizing news fr
 5. Update valuation/expectations context separately from business-thesis state.
 6. Compare market reaction with fundamental change only as interpretation.
 7. Detect portfolio implications such as position drift but route sizing decisions to position-sizing-review.
-8. Prepare a proposed monitoring event. Persist it through investment-record-store **only** when the user explicitly requested saving it, or when an existing, verifiable standing authorization covers this exact monitoring write. Before any write, check that the canonical store is available and the event will append rather than rewrite history. If authorization is absent, return the analysis and mark persistence `NOT_WRITTEN`; never imply a write or invent a receipt. If a write fails, report `WRITE_FAILED` with the actual tool evidence; do not claim it was saved.
+8. Append a monitoring record as a new canonical research/monitoring event through investment-record-store **only** when the user explicitly requested saving it or a verifiable standing authorization covers the exact write; never rewrite thesis history. First prepare the event and confirm the canonical store is available. If write authority is absent, return analysis with persistence `NOT_WRITTEN` instead of making an external change. Report `SAVED` only with an observed successful tool receipt; on a real failure report `WRITE_FAILED` with evidence. Never invent a receipt.
 9. Escalate only when evidence justifies deeper work.
 
 ## Decision rules
