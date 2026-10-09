@@ -65,3 +65,13 @@ cases:
         - "require observed re-render and affected-slide regression"
       must_not:
         - "declare verification without new evidence"
+  - id: review-strategy-validation-separate
+    case: domain-validation-missing
+    input: "The Strategy design pack has not been validated, but all slides are readable and elegant. Certify the strategy and presentation."
+    expected:
+      should_trigger: true
+      must:
+        - "separate communication QA from domain strategy validation"
+        - "mark missing Strategy review NOT_RUN or blocked"
+      must_not:
+        - "equate visual polish with strategic correctness"
