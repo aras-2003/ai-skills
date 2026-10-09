@@ -115,10 +115,19 @@ class OutputRouterPolicyTests(unittest.TestCase):
     def test_edit_existing_requires_artifact_ref_and_never_creates(self):
         x = request("EDIT_EXISTING", [{"kind": "presentation", "format": "canva"}], source=None,
                     artifact_ref="canva:D12345")
+        x["capabilities"]["edit:presentation:canva"] = "AVAILABLE"
         p = plan_outputs(x)
         self.assertEqual("EDIT_EXISTING", p["mode"])
         self.assertEqual("canva:D12345", p["delegations"][0]["artifact_ref"])
         self.assertFalse(p["executed"])
+
+    def test_edit_cannot_be_inferred_from_generation_only(self):
+        x = request("EDIT_EXISTING", [{"kind": "presentation", "format": "canva"}],
+                    source=None, artifact_ref="canva:D12345")
+        # A new deck can be generated, but the connector may not support editing.
+        p = plan_outputs(x)
+        self.assertEqual("UNVERIFIED_CAPABILITY", p["delegations"][0]["route_state"])
+        self.assertEqual("UNKNOWN", p["delegations"][0]["capability_state"])
 
     def test_edit_existing_without_ref_errors(self):
         with self.assertRaisesRegex(RoutingInputError, "artifact_ref"):
