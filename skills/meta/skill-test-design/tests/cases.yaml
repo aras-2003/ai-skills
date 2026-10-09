@@ -84,6 +84,7 @@ cases:
       must:
         - define a browser/tool receipt with source URL, check time and observed status as the pass evidence
         - classify unavailable browser access as BLOCKED or NOT TESTABLE
+        - distinguish NOT_RUN (not executed), BLOCKED/NOT TESTABLE (prerequisite unavailable), and UNVERIFIED (run but evidence insufficient)
       must_not:
         - accept a plan or self-reported check as proof of execution
 

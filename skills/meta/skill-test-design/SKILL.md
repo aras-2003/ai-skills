@@ -47,8 +47,9 @@ If the contract is not agreed, clarify or flag that gap before encoding assumpti
 
 Design assertions so execution state cannot be mistaken for outcome:
 - `NOT_RUN`: execution has not started, including a queued job with no runner/steps.
-- `BLOCKED` / `NOT TESTABLE`: execution cannot test the criterion because a required runtime, tool or fixture is unavailable.
-- `PASS` / `FAIL`: use only after observing the criterion in an execution that actually ran.
+- `BLOCKED` / `NOT TESTABLE`: execution cannot test the criterion because a required runtime, tool or fixture is unavailable. Record which prerequisite is unavailable.
+- `UNVERIFIED`: execution ran, but its evidence does not establish the criterion or the required status; name the missing/ambiguous evidence. Do not use this to describe a browser that was unavailable.
+- `PASS` / `FAIL`: use only after observing sufficient evidence in an execution that actually ran. A listing status can be PASS/FAIL only after the page was inspected and an observed status was compared with the expected one.
 - If a criterion explicitly requires checking a live source, a model explanation or stated plan cannot satisfy it. Define the trace, source/URL, check time and observed value needed to pass.
 
 ## Minimum production-candidate coverage
