@@ -16,10 +16,10 @@ Zakres i dokładne head SHA PR-ów: `bundle.json`. Ta paczka integruje 19 PR-ów
 Po commicie całej paczki, na czystym checkoutcie:
 
 ```sh
-python scripts/package/build_lab_plugin.py --output ../lab-0.34.0
-python scripts/package/artifact_validation.py ../lab-0.34.0 --lab
-python scripts/eval/validate_isolation.py --artifact ../lab-0.34.0
-python scripts/eval/release_bundle.py prepare --lab ../lab-0.34.0 --output ../campaign-release-2026-10-10
+python scripts/package/build_lab_plugin.py --output .tmp/lab-0.34.0
+python scripts/package/artifact_validation.py .tmp/lab-0.34.0 --lab
+python scripts/eval/validate_isolation.py --artifact .tmp/lab-0.34.0
+python scripts/eval/release_bundle.py prepare --lab .tmp/lab-0.34.0 --output ../campaign-release-2026-10-10
 python scripts/eval/release_bundle.py validate --output ../campaign-release-2026-10-10
 ```
 
