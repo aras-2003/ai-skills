@@ -646,3 +646,93 @@ component_declarations:
       credentials: unassessed
       external_actions: unassessed
 
+  presentation-brief:
+    source: skills/presentations/presentation-brief/SKILL.md
+    review_state: STATIC_PARTIAL
+    requirements:
+      network: unassessed
+      filesystem: unassessed
+      shell_exec: unassessed
+      credentials: unassessed
+      external_actions: unassessed
+  presentation-deck-review:
+    source: skills/presentations/presentation-deck-review/SKILL.md
+    review_state: STATIC_PARTIAL
+    requirements:
+      network: unassessed
+      filesystem: unassessed
+      shell_exec: unassessed
+      credentials: unassessed
+      external_actions: unassessed
+  presentation-evidence-review:
+    source: skills/presentations/presentation-evidence-review/SKILL.md
+    review_state: STATIC_PARTIAL
+    requirements:
+      network: unassessed
+      filesystem: unassessed
+      shell_exec: unassessed
+      credentials: unassessed
+      external_actions: unassessed
+  presentation-exhibit-design:
+    source: skills/presentations/presentation-exhibit-design/SKILL.md
+    review_state: STATIC_PARTIAL
+    requirements:
+      network: unassessed
+      filesystem: unassessed
+      shell_exec: unassessed
+      credentials: unassessed
+      external_actions: unassessed
+  presentation-export-verification:
+    source: skills/presentations/presentation-export-verification/SKILL.md
+    review_state: STATIC_PARTIAL
+    requirements:
+      network: unassessed
+      filesystem: unassessed
+      shell_exec: unassessed
+      credentials: unassessed
+      external_actions: unassessed
+  presentation-slide-authoring:
+    source: skills/presentations/presentation-slide-authoring/SKILL.md
+    review_state: STATIC_PARTIAL
+    requirements:
+      network: unassessed
+      filesystem: unassessed
+      shell_exec: unassessed
+      credentials: unassessed
+      external_actions: unassessed
+  presentation-storyline:
+    source: skills/presentations/presentation-storyline/SKILL.md
+    review_state: STATIC_PARTIAL
+    requirements:
+      network: unassessed
+      filesystem: unassessed
+      shell_exec: unassessed
+      credentials: unassessed
+      external_actions: unassessed
+  report-document-architecture:
+    source: skills/reports/report-document-architecture/SKILL.md
+    review_state: STATIC_PARTIAL
+    requirements:
+      network: unassessed
+      filesystem: unassessed
+      shell_exec: unassessed
+      credentials: unassessed
+      external_actions: unassessed
+  report-document-authoring:
+    source: skills/reports/report-document-authoring/SKILL.md
+    review_state: STATIC_PARTIAL
+    requirements:
+      network: unassessed
+      filesystem: unassessed
+      shell_exec: unassessed
+      credentials: unassessed
+      external_actions: unassessed
+  report-document-review:
+    source: skills/reports/report-document-review/SKILL.md
+    review_state: STATIC_PARTIAL
+    requirements:
+      network: unassessed
+      filesystem: unassessed
+      shell_exec: unassessed
+      credentials: unassessed
+      external_actions: unassessed

@@ -7,7 +7,7 @@
       },
       "lab": {
         "name": "skills-factory-lab",
-        "version": "0.33.7"
+        "version": "0.34.0"
       }
     },
     "source_revision": "89db15ef94cf",
@@ -727,7 +727,7 @@
       "source_status": "present",
       "runtime_registration": "registered",
       "maturity": "production",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "description": "Child workflow for Investment OS attention triage. Use when selected by investment-os-review, explicitly requested, or when the user clearly asks whether new company/industry/market information changes existing holdings or theses. Do not use as the default entry point for broad natural investment requests.",
       "declared_channels": {
         "chatgpt-zip": "unavailable",
@@ -757,7 +757,7 @@
       "source_status": "present",
       "runtime_registration": "registered",
       "maturity": "production",
-      "version": "0.5.0",
+      "version": "0.5.1",
       "description": "Child workflow for Investment OS opportunity discovery. Use when selected by investment-os-review, explicitly requested, or when the user clearly asks to scan for new securities or research candidates. Do not use as the default entry point for broad natural investment requests.",
       "declared_channels": {
         "chatgpt-zip": "unavailable",
@@ -811,7 +811,7 @@
       "source_status": "present",
       "runtime_registration": "registered",
       "maturity": "production",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "description": "Lightweight portfolio observation child workflow for natural requests asking what changed, what is happening with holdings, exposure drift or what deserves attention now. It compares canonical state over time, separates observed change from causal attribution, suppresses unchanged noise and does not optimise toward a fixed target allocation.",
       "declared_channels": {
         "chatgpt-zip": "unavailable",

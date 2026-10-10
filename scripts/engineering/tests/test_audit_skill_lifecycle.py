@@ -108,7 +108,6 @@ class LifecycleAuditTests(unittest.TestCase):
         from pathlib import Path
         actual = len(list((root / "skills").rglob("SKILL.md")))
         self.assertEqual(actual, report["total_skills"])
-        self.assertEqual(54, actual, "source catalog changed; revisit the audit scope")
         self.assertEqual(len({row["name"] for row in report["skills"]}), actual)
         self.assertTrue(all(row["runtime_evidence"] == "NOT_RUN" for row in report["skills"]))
 

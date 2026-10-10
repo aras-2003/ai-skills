@@ -21,7 +21,9 @@ class CapabilityContractTests(unittest.TestCase):
     def test_registered_components_have_explicit_source_provenance(self) -> None:
         contract = load_contract(ROOT)
         declarations = contract["component_declarations"]
-        self.assertEqual(70, len(declarations))
+        report, errors = validate(ROOT)
+        self.assertEqual([], errors)
+        self.assertEqual(report["component_count"], len(declarations))
         for name, item in declarations.items():
             with self.subTest(component=name):
                 self.assertEqual("STATIC_PARTIAL", item["review_state"])
